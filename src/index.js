@@ -1,5 +1,7 @@
-import Test from './components/Test';
+import Checkbox from './components/Checkbox';
+import Radio from './components/Radio';
 
 module.exports = {
-  Test,
+  Checkbox,
+  Radio,
 };

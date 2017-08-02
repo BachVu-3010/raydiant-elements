@@ -17,7 +17,7 @@ npm install --save react react-dom
 
 ## Component Usage
 Example:
-```jsx
+```jsx static
 import React from 'react';
 import { Button } from 'mira-elements';
 

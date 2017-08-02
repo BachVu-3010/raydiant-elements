@@ -1,0 +1,1 @@
+Collect text from the user. A little or a lot, these controls have you covered.

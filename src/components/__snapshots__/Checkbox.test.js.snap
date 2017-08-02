@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+<label>
+  <input
+    checked={true}
+    disabled={false}
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <span>
+    Yes or no
+  </span>
+</label>
+`;
