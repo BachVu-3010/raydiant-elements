@@ -1,0 +1,13 @@
+- type: serial
+  steps:
+  - type: parallel
+    service: elements
+    steps:
+      - command: npm run lint
+      - command: npm run test
+      - command: bash -c "echo $FOO"
+  - type: serial
+    tag: ^(master)
+    service: elements
+    steps:
+      - command: bash publish.bash
