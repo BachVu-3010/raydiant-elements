@@ -1,5 +1,3 @@
-# $TITLE
-
 Description, in detail.
 
 ## Checklist

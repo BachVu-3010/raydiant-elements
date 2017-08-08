@@ -2,9 +2,9 @@ Static:
 ```
 <div>
   <Radio checked>I'm checked</Radio>
-  <Radio checked={true}>I'm checked too</Radio>
+  <Radio checked={true}><em>I'm</em> checked too</Radio>
   <Radio checked={false}>I'm not checked</Radio>
-  <Radio>I'm not checked either</Radio>
+  <Radio><em>I'm</em> not checked either</Radio>
 </div>
 ```
 
@@ -21,4 +21,12 @@ const onChange = (e) => { setState({selected: e.target.value}); };
 Disabled:
 ```
 <Radio checked disabled>Clicking on me won't do anything</Radio>
+
+```
+
+Narrow:
+```
+<div style={{maxWidth: '300px', border: '1px dashed #999'}}>
+  <Radio checked>Here's a fairly long label in a space that's not very wide.</Radio>
+</div>
 ```

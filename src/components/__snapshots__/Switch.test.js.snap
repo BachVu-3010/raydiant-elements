@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot 1`] = `
+<label
+  className="MuiFormControlLabel-root-1 MuiFormControlLabel-hasLabel-3"
+>
+  <div
+    className="MuiSwitch-root-5"
+  >
+    <span
+      className="MuiButtonBase-root-22 MuiIconButton-root-13 MuiSwitchBase-root-11 MuiSwitch-default-8 MuiSwitch-default-8 MuiSwitch-checked-9 MuiSwitch-checked-9"
+      disabled={false}
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      role={undefined}
+      tabIndex={null}
+    >
+      <span
+        className="MuiIconButton-label-19"
+      >
+        <div
+          className="MuiSwitch-icon-7"
+        />
+        <input
+          checked={true}
+          className="MuiSwitchBase-input-12"
+          disabled={false}
+          name={undefined}
+          onChange={[Function]}
+          tabIndex={undefined}
+          type="checkbox"
+          value={undefined}
+        />
+      </span>
+      <span
+        className="MuiTouchRipple-root-24"
+      />
+    </span>
+    <div
+      className="MuiSwitch-bar-6"
+    />
+  </div>
+  <span
+    className="MuiFormControlLabel-label-4"
+  >
+    Yes or no
+  </span>
+</label>
+`;

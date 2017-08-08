@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormControlLabel } from 'material-ui/Form';
+import MUIRadio from 'material-ui/Radio';
 
-/** hey */
 
 const propTypes = {
   /** Child elements are used as the checkbox label. */
@@ -27,16 +28,16 @@ const defaultProps = {
 };
 
 /**
- * Use this to select a value from several valid options. See also: <a href="#checkbox">checkbox</a>, <a href="#select">select</a>.
+ * Use this to select a value from several valid options.
+ * See also: <a href="#checkbox">checkbox</a>, <a href="#select">select</a>.
  */
 const Radio = ({ children, checked, disabled, name, onChange, value }) =>
-  <label>
-    <input
-      type="radio"
-      {...{ checked, disabled, name, onChange, value }}
-    />
-    <span>{children}</span>
-  </label>;
+  <FormControlLabel
+    control={<MUIRadio {...{ onChange }} />}
+    label={children}
+    {...{ checked, disabled, name, value }}
+  />;
+
 
 Radio.propTypes = propTypes;
 Radio.defaultProps = defaultProps;

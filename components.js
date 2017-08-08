@@ -1,4 +1,4 @@
-const TOGGLE = 'Toggles';
+const TOGGLE = 'Selection Controls';
 const TEXTINPUT = 'Text Inputs';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
@@ -6,5 +6,6 @@ module.exports = {
   components: {
     Checkbox: { categories: [TOGGLE] },
     Radio: { categories: [TOGGLE] },
+    Switch: { categories: [TOGGLE] },
   },
 };

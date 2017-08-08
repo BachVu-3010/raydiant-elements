@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormControlLabel } from 'material-ui/Form';
-import MUICheckbox from 'material-ui/Checkbox';
-
+import MUISwitch from 'material-ui/Switch';
 
 const propTypes = {
-  /** Child elements are used as the checkbox label. */
+  /** Child elements are used as the switch label. */
   children: PropTypes.node,
-  /** Whether the checkbox is checked or not. */
+  /** Whether the switch is on or off. */
   checked: PropTypes.bool,
-  /** Whether the checkbox is disabled or not. */
+  /** Whether the switch is disabled or not. */
   disabled: PropTypes.bool,
   /** Called when the user clicks the control. */
   onChange: PropTypes.func,
@@ -22,16 +21,16 @@ const defaultProps = {
 };
 
 /**
- * Use for independent `true` or `false` values.
+ * Use for `true` or `false` settings.
  */
-const Checkbox = ({ children, checked, disabled, onChange }) =>
+const Switch = ({ children, checked, disabled, onChange }) =>
   <FormControlLabel
-    control={<MUICheckbox {...{ checked, disabled, onChange }} />}
+    control={<MUISwitch {...{ checked, disabled, onChange }} />}
     disabled={disabled}
     label={children}
   />;
 
-Checkbox.propTypes = propTypes;
-Checkbox.defaultProps = defaultProps;
+Switch.propTypes = propTypes;
+Switch.defaultProps = defaultProps;
 
-export default Checkbox;
+export default Switch;
