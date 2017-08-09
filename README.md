@@ -1,6 +1,9 @@
 ## About
 Mira Elements is a component library used for Mira's frontend code.
 
+## Demo
+https://mirainc.github.io/mira-elements/
+
 ## Prerequisites
 
 ### Install Node

@@ -1,13 +1,13 @@
 - type: serial
+  exclude: gh-pages
   steps:
   - type: parallel
     service: elements
     steps:
-      - command: npm run lint
-      - command: npm run test
-      - command: bash -c "echo $FOO"
+      - command: yarn lint
+      - command: yarn test
   - type: serial
     tag: ^(master)
     service: elements
     steps:
-      - command: bash publish.bash
+      - command: yarn gh-pages

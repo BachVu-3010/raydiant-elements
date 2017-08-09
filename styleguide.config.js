@@ -41,6 +41,7 @@ module.exports = {
   theme: {
     fontFamily: { base: ['Roboto', 'sans-serif'] },
   },
+  styleguideDir: './dist',
   webpackConfig: {
     module: {
       loaders: [
@@ -48,14 +49,14 @@ module.exports = {
         {
           test: /\.jsx?$/,
           exclude: /node_modules/,
-          loader: 'babel-loader'
+          loader: 'babel-loader',
         },
         // Other loaders that are needed for your components
         {
           test: /\.css$/,
-          loader: 'style-loader!css-loader?modules'
-        }
-      ]
-    }
-  }
+          loader: 'style-loader!css-loader?modules',
+        },
+      ],
+    },
+  },
 };

@@ -36,7 +36,9 @@
     },
     "overrides": [
       {
-        "files": [ "*.test.js" ],
+        "files": [
+          "*.test.js"
+        ],
         "env": {
           "jest": true
         }
@@ -51,7 +53,16 @@
     "react-dom": "^15.6.1"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/test_helpers/"
+    ]
+  },
+  "codeship": {
+    "projectId": "237328",
+    "encryptedFiles": [
+      "deploy.env"
+    ]
   },
   "devDependencies": {
     "babel-core": "^6.25.0",
@@ -65,8 +76,9 @@
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
+    "gh-pages": "^1.0.0",
     "jest": "^20.0.4",
     "react-styleguidist": "^6.0.2",
     "react-test-renderer": "^15.6.1",
@@ -76,9 +88,12 @@
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "lint": "eslint src/**/*.js",
-    "prepublish": "npm run build",
+    "prepublish": "yarn build",
     "styleguide": "styleguidist server",
     "styleguide:build": "styleguidist build",
-    "test": "jest"
+    "test": "jest",
+    "encrypt": "scripts/codeship.js encrypt",
+    "decrypt": "scripts/codeship.js decrypt",
+    "gh-pages": "gh-pages -d dist -m \"Demo & doc update [skip ci]\""
   }
 }
