@@ -90,7 +90,7 @@
     "lint": "eslint src/**/*.js",
     "prepublish": "yarn build",
     "styleguide": "styleguidist server",
-    "styleguide:build": "styleguidist build",
+    "styleguide:build": "NODE_ENV=production styleguidist build",
     "test": "jest",
     "encrypt": "scripts/codeship.js encrypt",
     "decrypt": "scripts/codeship.js decrypt",

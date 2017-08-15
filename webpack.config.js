@@ -1,6 +1,18 @@
 const path = require('path');
+const webpack = require('webpack');
+
+const environment = process.env.NODE_ENV;
+const isProd = environment === 'production';
+const plugins = isProd ? [] : [
+  new webpack.LoaderOptionsPlugin({
+    debug: true,
+  }),
+];
+const devtool = isProd ? false : 'source-map';
 
 module.exports = () => ({
+  plugins,
+  devtool,
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),

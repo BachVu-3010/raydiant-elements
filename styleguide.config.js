@@ -1,14 +1,15 @@
+const path = require('path');
 const pkg = require('./package.json');
 const components = require('./components.js');
 
 const componentMap = {};
-for (const c in components.components) {
+Object.keys(components.components).forEach(c => {
   const comp = components.components[c];
   comp.categories.forEach(cat => {
     componentMap[cat] = componentMap[cat] || [];
     componentMap[cat].push(`./src/components/${c}.js`);
   });
-}
+});
 
 let sections = [
   {
@@ -38,25 +39,9 @@ module.exports = {
   // require: ['./styleguide/styles.css'],
   title: `Mira Elements v${pkg.version}`,
   getExampleFilename: f => f.replace(/\.jsx?$/, '.md'),
-  theme: {
-    fontFamily: { base: ['Roboto', 'sans-serif'] },
+  styleguideComponents: {
+    StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide'),
+    Wrapper: path.join(__dirname, 'styleguide/components/Wrapper'),
   },
   styleguideDir: './dist',
-  webpackConfig: {
-    module: {
-      loaders: [
-        // Babel loader, will use your project’s .babelrc
-        {
-          test: /\.jsx?$/,
-          exclude: /node_modules/,
-          loader: 'babel-loader',
-        },
-        // Other loaders that are needed for your components
-        {
-          test: /\.css$/,
-          loader: 'style-loader!css-loader?modules',
-        },
-      ],
-    },
-  },
 };

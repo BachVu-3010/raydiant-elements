@@ -1,10 +1,20 @@
 Static:
-```
+```jsx
 <div>
+  <h2>Choose some things horizontal style</h2>
   <Checkbox checked>I'm checked</Checkbox>
   <Checkbox checked={true}><em>I'm</em> checked too</Checkbox>
   <Checkbox checked={false}>I'm not checked</Checkbox>
   <Checkbox><em>I'm</em> not checked either</Checkbox>
+</div>
+```
+```jsx
+<div>
+  <h2>Choose some things vertical style</h2>
+  <div><Checkbox checked>I'm checked</Checkbox></div>
+  <div><Checkbox checked={true}><em>I'm</em> checked too</Checkbox></div>
+  <div><Checkbox checked={false}>I'm not checked</Checkbox></div>
+  <div><Checkbox><em>I'm</em> not checked either</Checkbox></div>
 </div>
 ```
 
