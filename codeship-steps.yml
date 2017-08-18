@@ -10,4 +10,4 @@
     tag: ^(master)
     service: elements
     steps:
-      - command: yarn gh-pages
+      - command: bash deploy-gh-pages.bash
