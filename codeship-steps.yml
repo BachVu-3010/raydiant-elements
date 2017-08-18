@@ -10,4 +10,5 @@
     tag: ^(master)
     service: elements
     steps:
+      - command: bash deploy-npm.bash
       - command: bash deploy-gh-pages.bash

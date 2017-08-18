@@ -71,7 +71,7 @@ const encrypt = () => {
   promptForKey();
   encryptedFiles.forEach(f => {
     console.log(`Encrypting ${f}`);
-    spawnSync(`jet encrypt ${f} ${f}.encrypted`);
+    spawnSync('jet', ['encrypt', `${f}`, `${f}.encrypted`]);
   });
 };
 
@@ -79,7 +79,7 @@ const decrypt = () => {
   promptForKey();
   encryptedFiles.forEach(f => {
     console.log(`Decrypting ${f}.encrypted`);
-    spawnSync(`jet decrypt ${f}.encrypted ${f}`);
+    spawnSync('jet', ['decrypt', `${f}.encrypted`, `${f}`]);
   });
 };
 
