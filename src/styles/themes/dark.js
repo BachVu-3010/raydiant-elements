@@ -1,7 +1,4 @@
-import { createMuiTheme, createPalette } from 'material-ui/styles';
+import { createMuiTheme } from 'material-ui/styles';
+import commonStyles from './_common';
 
-export default createMuiTheme({
-  palette: createPalette({
-    type: 'dark', // Switching the dark mode on is a single property value change.
-  }),
-});
+export default createMuiTheme(commonStyles('dark'));

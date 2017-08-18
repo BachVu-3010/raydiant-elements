@@ -3,13 +3,21 @@ const pkg = require('./package.json');
 const components = require('./components.js');
 
 const componentMap = {};
-Object.keys(components.components).forEach(c => {
-  const comp = components.components[c];
-  comp.categories.forEach(cat => {
-    componentMap[cat] = componentMap[cat] || [];
-    componentMap[cat].push(`./src/components/${c}.js`);
+const mapComponents = (comps, rel = '') => {
+  Object.keys(comps).forEach(c => {
+    const comp = comps[c];
+    if (!comp.categories) {
+      // Nested component
+      mapComponents(comp, `${c}/`);
+      return;
+    }
+    comp.categories.forEach(cat => {
+      componentMap[cat] = componentMap[cat] || [];
+      componentMap[cat].push(`./src/components/${rel}${c}.js`);
+    });
   });
-});
+};
+mapComponents(components.components);
 
 let sections = [
   {
@@ -40,8 +48,35 @@ module.exports = {
   title: `Mira Elements v${pkg.version}`,
   getExampleFilename: f => f.replace(/\.jsx?$/, '.md'),
   styleguideComponents: {
-    StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuide'),
+    StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer'),
     Wrapper: path.join(__dirname, 'styleguide/components/Wrapper'),
   },
   styleguideDir: './dist',
+  template: path.join(__dirname, 'styleguide/index.html'),
+  theme: {
+    color: {
+      link: '#0683d4',
+    },
+    fontFamily: {
+      base: 'Roboto,Noto,sans-serif',
+    },
+    fontSize: {
+      base: 14,
+      text: 14,
+      small: 12,
+      h1: 48,
+      h2: 36,
+      h3: 24,
+      h4: 18,
+      h5: 16,
+      h6: 16,
+    },
+  },
+  styles: {
+    Playground: {
+      preview: {
+        padding: 0,
+      },
+    },
+  },
 };

@@ -43,31 +43,35 @@ const Button = ({ children, classes, color, disabled, icon, onClick }) => {
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
 
-const getButtonStyle = (theme, palette) => ({
-  color: theme.palette.getContrastText(palette[500]),
-  borderColor: palette[500],
-  backgroundColor: palette[500],
-  '&:hover': {
-    backgroundColor: palette[700],
-    // Reset on mouse devices
-    '@media (hover: none)': {
-      backgroundColor: palette[500],
+const getButtonStyle = (theme, palette) => {
+  if (!palette) {
+    return {};
+  }
+  return {
+    color: theme.palette.getContrastText(palette[500]),
+    borderColor: palette[500],
+    backgroundColor: palette[500],
+    '&:hover': {
+      backgroundColor: palette[700],
+      // Reset on mouse devices
+      '@media (hover: none)': {
+        backgroundColor: palette[500],
+      },
+      '&:disabled': {
+        backgroundColor: palette[500],
+      },
     },
     '&:disabled': {
       backgroundColor: palette[500],
     },
-  },
-  '&:disabled': {
-    opacity: 0.5,
-    backgroundColor: palette[500],
-  },
-});
+  };
+};
 
 const styleSheet = createStyleSheet(theme => ({
   default: {},
   primary: getButtonStyle(theme, theme.palette.primary),
-  destructive: getButtonStyle(theme, theme.destructive),
-  progress: getButtonStyle(theme, theme.progress),
+  destructive: getButtonStyle(theme, theme.palette.destructive),
+  progress: getButtonStyle(theme, theme.palette.progress),
 }));
 
 export default withStyles(styleSheet)(Button);

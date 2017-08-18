@@ -81,26 +81,28 @@ export function StyleGuideRenderer({
   toc,
   hasSidebar,
 }) {
-  const sidebar = hasSidebar ? <div className={classes.sidebar}><div>{title}</div>{toc}</div> : null;
+  const sidebar = hasSidebar ?
+    <div className={classes.sidebar}><div>{title}</div>{toc}</div> :
+    null;
   return (
-    <ThemeProvider className={classes.root} theme="light">
+    <ThemeProvider theme="light">
       <div>
-      {sidebar}
-      <header className={classes.header}>
-        <div className={classes.content}>
-          <div className={classes.bar}>
-            <nav className={classes.nav}>
-              <a className={classes.headerLink} href="https://github.com/mirainc/mira-elements">GitHub</a>
-            </nav>
+        {sidebar}
+        <header className={classes.header}>
+          <div className={classes.content}>
+            <div className={classes.bar}>
+              <nav className={classes.nav}>
+                <a className={classes.headerLink} href="https://github.com/mirainc/mira-elements">GitHub</a>
+              </nav>
+            </div>
           </div>
-        </div>
-      </header>
-      <main className={`${classes.content} ${classes.sidebarSpace}`}>
-        {children}
-        <footer className={classes.footer}>
-          <div>&copy; Mira</div>
-        </footer>
-      </main>
+        </header>
+        <main className={`${classes.content} ${classes.sidebarSpace}`}>
+          {children}
+          <footer className={classes.footer}>
+            <div>&copy; Mira</div>
+          </footer>
+        </main>
       </div>
     </ThemeProvider>
   );
