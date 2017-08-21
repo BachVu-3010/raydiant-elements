@@ -40,10 +40,40 @@ const rows = ['none', 'top', 'bottom', 'all'].map((br, i) =>
 <div>{rows}</div>
 ```
 
-## Alignment
+## Justify Content 
 ```jsx
-const rows = ['left', 'right', 'center'].map((a) =>
-  <Row key={a} color="global" justifyContent={a} size="dynamic-padded-dense">{a}</Row>
+const flexValues = [
+  'center',
+  'flex-start',
+  'flex-end',
+  'space-between',
+  'space-around',
+  'space-evenly',
+];
+
+const rows = flexValues.map((a) =>
+  <Row key={a} color="global" justifyContent={a} border="all" size="dynamic-padded-dense">
+    <div>{a}</div>
+    <div>Child</div>
+    <div>Child</div>
+  </Row>
+);
+<div>{rows}</div>
+```
+## Align Items
+```jsx
+const flexValues = [
+  'center',
+  'flex-start',
+  'flex-end',
+];
+
+const rows = flexValues.map((a) =>
+  <Row key={a} color="global" alignItems={a} justifyContent="center" border="all" size="dynamic-padded-dense">
+    <div style={{color: 'black', backgroundColor: 'white', padding: '5px'}}>{a}</div>
+    <div style={{backgroundColor: 'white', padding: '10px'}}>Child 2</div>
+    <div style={{backgroundColor: 'white', padding: '20px'}}>Child 3</div>
+  </Row>
 );
 <div>{rows}</div>
 ```
