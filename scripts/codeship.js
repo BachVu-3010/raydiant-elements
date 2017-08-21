@@ -37,6 +37,16 @@ const environmentVariables = {
   repo: 'CI_REPO_NAME',
 };
 
+const spawnSyncAndBailOnError = (cmd, ...args) => {
+  const res = spawnSync(cmd, ...args);
+  if (res.error) {
+    console.error(`Command "${cmd}" failed.`);
+    console.error(res.error);
+    process.exit(1);
+  }
+  return res;
+}
+
 // Throws if key file isn't found
 const readKey = () => fs.readFileSync(aesKeyPath, { encoding: keyEncoding });
 const writeKey = k => fs.writeFileSync(aesKeyPath, k, { encoding: keyEncoding });
@@ -71,7 +81,7 @@ const encrypt = () => {
   promptForKey();
   encryptedFiles.forEach(f => {
     console.log(`Encrypting ${f}`);
-    spawnSync('jet', ['encrypt', `${f}`, `${f}.encrypted`]);
+    spawnSyncAndBailOnError('jet', ['encrypt', `${f}`, `${f}.encrypted`]);
   });
 };
 
@@ -79,7 +89,7 @@ const decrypt = () => {
   promptForKey();
   encryptedFiles.forEach(f => {
     console.log(`Decrypting ${f}.encrypted`);
-    spawnSync('jet', ['decrypt', `${f}.encrypted`, `${f}`]);
+    spawnSyncAndBailOnError('jet', ['decrypt', `${f}.encrypted`, `${f}`]);
   });
 };
 
