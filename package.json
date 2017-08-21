@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./dist/mira-elements.js",
@@ -83,7 +83,7 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "jest": "^20.0.4",
-    "react-styleguidist": "^6.0.2",
+    "react-styleguidist": "^6.0.15",
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.4.1",
     "webpack": "^3.4.1"

@@ -3,9 +3,10 @@ const TOGGLE = 'Selection Controls';
 const BUTTON = 'Buttons';
 const TEXTINPUT = 'Text Inputs';
 const TYPOGRAPHY = 'Typography';
+const LAYOUT = 'Layout';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
-  categories: [TOGGLE, BUTTON, TEXTINPUT, TYPOGRAPHY, COLORS],
+  categories: [TOGGLE, BUTTON, TEXTINPUT, TYPOGRAPHY, LAYOUT, COLORS],
   components: {
     Checkbox: { categories: [TOGGLE] },
     Radio: { categories: [TOGGLE] },
@@ -20,5 +21,6 @@ module.exports = {
       Note: { categories: [TYPOGRAPHY] },
       Anchor: { categories: [TYPOGRAPHY] },
     },
+    Row: { categories: [LAYOUT] },
   },
 };

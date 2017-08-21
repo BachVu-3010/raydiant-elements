@@ -1578,7 +1578,7 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
-codemirror@^5.18.2, codemirror@^5.28.0:
+codemirror@5.28.0, codemirror@^5.28.0:
   version "5.28.0"
   resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.28.0.tgz#2978d9280d671351a4f5737d06bbd681a0fd6f83"
 
@@ -1793,7 +1793,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.6.0:
+create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -4111,7 +4111,7 @@ jss-global@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/jss-global/-/jss-global-2.0.0.tgz#a162f822f17e5d760151d908bdb41d7f2824c28f"
 
-jss-isolate@^4.0.0:
+jss-isolate@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jss-isolate/-/jss-isolate-4.0.0.tgz#b33eb4f60f6e66fb8fd85f02dc25515c7b271302"
 
@@ -4266,10 +4266,6 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.yarnpkg.com/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.debounce@^4.0.8:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-
 lodash.defaults@^4.0.1:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
@@ -4289,10 +4285,6 @@ lodash.foreach@^4.3.0:
 lodash.get@^4.4.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
 
 lodash.map@^4.4.0:
   version "4.6.0"
@@ -5562,16 +5554,11 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-codemirror@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-codemirror/-/react-codemirror-1.0.0.tgz#91467b53b1f5d80d916a2fd0b4c7adb85a9001ba"
+react-codemirror2@0.0.13:
+  version "0.0.13"
+  resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-0.0.13.tgz#7007b0c12961fb463183a7cdce2cf8ceadfed6de"
   dependencies:
-    classnames "^2.2.5"
-    codemirror "^5.18.2"
-    create-react-class "^15.5.1"
-    lodash.debounce "^4.0.8"
-    lodash.isequal "^4.5.0"
-    prop-types "^15.5.4"
+    codemirror "5.28.0"
 
 react-dev-utils@^3.0.2:
   version "3.0.2"
@@ -5668,9 +5655,9 @@ react-scrollbar-size@^2.0.0:
     prop-types "^15.5.10"
     react-event-listener "^0.4.5"
 
-react-styleguidist@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-6.0.2.tgz#3d3b5fac1dd822ee60650c513116af92c6af3958"
+react-styleguidist@^6.0.15:
+  version "6.0.15"
+  resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-6.0.15.tgz#4a76f9ae0d78a94ce7ce83647db89ffc07ee0d72"
   dependencies:
     ast-types "^0.9.12"
     buble "^0.15.2"
@@ -5700,7 +5687,7 @@ react-styleguidist@^6.0.2:
     jss-compose "^4.0.0"
     jss-default-unit "^7.0.0"
     jss-global "^2.0.0"
-    jss-isolate "^4.0.0"
+    jss-isolate "4.0.0"
     jss-nested "^5.0.0"
     leven "^2.1.0"
     listify "^1.0.0"
@@ -5710,7 +5697,7 @@ react-styleguidist@^6.0.2:
     minimist "^1.2.0"
     pretty-format "^20.0.3"
     prop-types "^15.5.10"
-    react-codemirror "^1.0.0"
+    react-codemirror2 "0.0.13"
     react-dev-utils "^3.0.2"
     react-docgen "^3.0.0-beta5"
     react-docgen-displayname-handler "^1.0.0"
