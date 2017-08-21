@@ -1,5 +1,7 @@
 ```jsx
-const {Title, Heading1, Heading2, Heading3, Heading4, Note, Anchor} = require('../../../src/components/Typography');
+const { Typography } = require('../../../src');
+const {Title, Heading1, Heading2, Heading3, Heading4, Note, Anchor} = Typography;
+
 <div>
   <Title>Title</Title>
   <Heading1>Heading1</Heading1>
