@@ -40,7 +40,6 @@ const propTypes = {
   classes: PropTypes.object.isRequired,
 };
 const defaultProps = {
-  alert: false,
   className: '',
   disabled: false,
   error: false,

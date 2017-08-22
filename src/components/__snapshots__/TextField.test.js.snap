@@ -2,7 +2,6 @@
 
 exports[`Snapshot 1`] = `
 <TextField
-  alert={false}
   className=""
   classes={
     Object {
