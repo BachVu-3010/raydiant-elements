@@ -1,0 +1,2 @@
+# Project lint config expects all line endings to be LF, not CRLF, regardless of platform.
+* text eol=lf

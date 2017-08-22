@@ -12,6 +12,7 @@ module.exports = {
     Radio: { categories: [TOGGLE] },
     Switch: { categories: [TOGGLE] },
     Button: { categories: [BUTTON] },
+    TextField: {categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },
       Heading1: { categories: [TYPOGRAPHY] },

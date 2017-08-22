@@ -7,6 +7,9 @@ import green from '../colors/green';
 // WIP: style radio/checkbox controls per Zeplin
 // const selectionControlSize = 20;
 
+const inputVSpace = 6;
+const inputHSpace = 10;
+
 export default (type = 'light') => {
   const fontFamily = 'Roboto,Noto,sans-serif';
 
@@ -149,6 +152,43 @@ export default (type = 'light') => {
           // WIP: style radio/checkbox controls per Zeplin
           // marginLeft: 0,
           // marginRight: spacing.unit,
+        },
+      },
+      MuiInput: {
+        root: {
+          background: (type === 'dark') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+        },
+        input: {
+          padding: `${inputVSpace}px ${inputHSpace}px`,
+          lineHeight: '18px',
+          boxSizing: 'border-box',
+        },
+        inputSingleline: {
+          height: 'auto',
+        },
+        multiline: {
+          padding: `${inputVSpace}px ${inputHSpace}px`,
+        },
+        formControl: {
+          'label + &': {
+            marginTop: 0,
+          },
+          'label + & > input, label + & > div': {
+            marginTop: `${inputVSpace * 2}px`,
+          },
+        },
+      },
+      // The animated labels for TextFields
+      MuiInputLabel: {
+        formControl: {
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          transform: `translate(0, ${inputVSpace * 3}px) scale(1)`,
+        },
+        shrink: {
+          transform: 'translate(0, 4px) scale(0.75)',
+          transformOrigin: 'top left',
         },
       },
     },
