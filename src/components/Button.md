@@ -16,6 +16,20 @@ const buttons = ['default', 'primary', 'destructive', 'progress'].map(
 </div>
 ```
 
+### Full width
+
+```jsx
+<div style={{
+  width: '300px',
+  padding: '10px',
+  border: '1px solid #999',
+  background: 'white',
+  color: '#333'}}>
+  <p>A deal you can't refuse!</p>
+  <Button fullWidth color="primary">Sign up now!</Button>
+</div>
+```
+
 ### Text and Icons
 
 ### Icons

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'material-ui/Icon';
 import MUIButton from 'material-ui/Button';
+import classnames from 'classnames';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
 
 const propTypes = {
@@ -9,8 +10,10 @@ const propTypes = {
   children: PropTypes.node,
   /** Style of the button. */
   color: PropTypes.oneOf(['default', 'destructive', 'primary', 'progress']),
-  /** Whether the button is disabled or not. */
+  /** Disable the button? */
   disabled: PropTypes.bool,
+  /** Fill the entire width of its container? */
+  fullWidth: PropTypes.bool,
   /** An icon. */
   icon: PropTypes.string,
   /** Called when the user clicks the control. */
@@ -22,6 +25,7 @@ const defaultProps = {
   children: null,
   color: 'default',
   disabled: false,
+  fullWidth: false,
   icon: null,
   onClick: () => {},
 };
@@ -30,12 +34,16 @@ const defaultProps = {
  * A clickable thing to click on.
  * Buttons may have text, imagery, or both.
  */
-const Button = ({ children, classes, color, disabled, icon, onClick }) => {
+const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick }) => {
   let ic = null;
   if (icon) {
     ic = <Icon>{icon}</Icon>;
   }
-  return <MUIButton {...{ className: classes[color], disabled, onClick, raised: true }}>
+  return <MUIButton
+    {...{ disabled, onClick }}
+    className={classnames(classes[color], { [classes.fullWidth]: fullWidth })}
+    raised
+  >
     {ic}{children}
   </MUIButton>;
 };
@@ -68,6 +76,7 @@ const getButtonStyle = (theme, palette) => {
 };
 
 const styleSheet = createStyleSheet(theme => ({
+  fullWidth: { width: '100%' },
   default: {},
   primary: getButtonStyle(theme, theme.palette.primary),
   destructive: getButtonStyle(theme, theme.palette.destructive),
