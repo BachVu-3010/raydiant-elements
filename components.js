@@ -13,7 +13,7 @@ module.exports = {
     Radio: { categories: [TOGGLE] },
     Switch: { categories: [TOGGLE] },
     Button: { categories: [BUTTON] },
-    TextField: {categories: [TEXTINPUT] },
+    TextField: { categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },
       Heading1: { categories: [TYPOGRAPHY] },
@@ -24,6 +24,8 @@ module.exports = {
       Anchor: { categories: [TYPOGRAPHY] },
     },
     App: { categories: [STARTUP, LAYOUT] },
+    Flex: { categories: [LAYOUT] },
+    Column: { categories: [LAYOUT] },
     Row: { categories: [LAYOUT] },
   },
 };

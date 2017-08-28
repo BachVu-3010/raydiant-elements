@@ -5655,6 +5655,12 @@ react-scrollbar-size@^2.0.0:
     prop-types "^15.5.10"
     react-event-listener "^0.4.5"
 
+react-style-proptype@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-style-proptype/-/react-style-proptype-3.0.0.tgz#89e0b646f266c656abb0f0dd8202dbd5036c31e6"
+  dependencies:
+    prop-types "^15.5.4"
+
 react-styleguidist@^6.0.15:
   version "6.0.15"
   resolved "https://registry.yarnpkg.com/react-styleguidist/-/react-styleguidist-6.0.15.tgz#4a76f9ae0d78a94ce7ce83647db89ffc07ee0d72"

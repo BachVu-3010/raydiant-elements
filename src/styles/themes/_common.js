@@ -144,6 +144,12 @@ export default (type = 'light') => {
         //   width: selectionControlSize,
         // },
       },
+      MuiFormControl: {
+        fullWidth: {
+          display: 'block',
+          width: 'auto',
+        },
+      },
       MuiFormControlLabel: {
         root: {
           fontSize: 14,
@@ -156,6 +162,7 @@ export default (type = 'light') => {
       },
       MuiInput: {
         root: {
+          width: '100%',
           background: (type === 'dark') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
         },
         input: {

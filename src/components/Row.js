@@ -2,75 +2,57 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { createStyleSheet, withStyles } from 'material-ui/styles';
-
-const alignItemsValues = ['center', 'flex-start', 'flex-end'];
-const justifyContentValues = [
-  ...alignItemsValues,
-  'space-between',
-  'space-around',
-  'space-evenly',
-];
+import Flex, { propTypes as flexPropTypes, defaultProps as flexDefaultProps } from './Flex';
 
 const propTypes = {
   /** Border */
   border: PropTypes.oneOf(['top', 'bottom', 'all', 'none']),
   /** Border radius */
   borderRadius: PropTypes.oneOf(['top', 'bottom', 'all', 'none']),
-  /** Child elements are used as the button text. */
-  children: PropTypes.node,
   /** Color of the row. */
   color: PropTypes.oneOf(['default', 'global', 'primary', 'management']),
-  /** Child space distribution along main flex axis */
-  justifyContent: PropTypes.oneOf(justifyContentValues),
-  /** Child space distribution along cross flex axis */
-  alignItems: PropTypes.oneOf(alignItemsValues),
   /** The size and padding of the row */
   size: PropTypes.oneOf([
     'tall',
-    'tall-padded',
+    'tall-wide',
     'dynamic',
     'dynamic-padded',
     'dynamic-padded-dense',
   ]),
-  /** @ignore injected by withStyles */
-  classes: PropTypes.object.isRequired,
+  ...flexPropTypes,
 };
 const defaultProps = {
   border: 'none',
   borderRadius: 'none',
-  children: null,
   color: 'default',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
   size: 'dynamic',
+  ...flexDefaultProps,
 };
 
 /**
- * A row to hold things.
+ * A row to hold things.  
+ * See [Flex](#flex) for property information.
  */
 const Row = ({
   border,
   borderRadius,
-  children,
   classes,
+  className,
   color,
-  justifyContent,
-  alignItems,
   size,
+  ...rest
 }) =>
-  <div
+  <Flex
     className={classnames(
       classes.root,
       classes[`color-${color}`],
       classes[`size-${size}`],
       classes[`border-${border}`],
       classes[`borderRadius-${borderRadius}`],
-      classes[`justifyContent-${justifyContent}`],
-      classes[`alignItems-${alignItems}`],
+      className,
     )}
-  >
-    {children}
-  </div>;
+    {...rest}
+  />;
 Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 
@@ -79,32 +61,9 @@ const styleSheet = createStyleSheet(theme => {
   const border = `1px solid ${borderColor}`;
   const borderRadius = '4px';
 
-  const alignItems = alignItemsValues.reduce(
-    (acc, val) => ({
-      ...acc,
-      [`alignItems-${val}`]: { alignItems: val },
-    }),
-    {},
-  );
-
-  const justifyContent = justifyContentValues.reduce(
-    (acc, val) => ({
-      ...acc,
-      [`justifyContent-${val}`]: { justifyContent: val },
-    }),
-    {},
-  );
-
   return {
     root: {
-      display: 'flex',
-      verticalAlign: 'middle',
-      '& > *': {
-        marginLeft: theme.spacing.unit * 2,
-      },
-      '& > *:first-child': {
-        marginLeft: 0,
-      },
+      flexDirection: 'row',
     },
     'border-none': {},
     'border-top': { borderTop: border },
@@ -129,13 +88,11 @@ const styleSheet = createStyleSheet(theme => {
       backgroundColor: 'white',
       color: theme.palette.getContrastText('white'),
     },
-    ...justifyContent,
-    ...alignItems,
     'size-dynamic': {},
-    'size-tall': { height: '68px', padding: '0 16px' },
-    'size-tall-wide': { height: '68px', padding: '0 32px' },
-    'size-dynamic-padded': { padding: '16px' },
-    'size-dynamic-padded-dense': { padding: '8px 16px' },
+    'size-tall': { height: '68px', padding: `0 ${theme.spacing.unit}px` },
+    'size-tall-wide': { height: '68px', padding: `0 ${theme.spacing.unit * 3}px` },
+    'size-dynamic-padded': { padding: `${theme.spacing.unit}px` },
+    'size-dynamic-padded-dense': { padding: `0 ${theme.spacing.unit}px` },
   };
 });
 

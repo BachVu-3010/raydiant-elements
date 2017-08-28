@@ -1,43 +1,53 @@
 ## Child spacing and alignment
 ```jsx
+const Column = require('./Column').default;
+
 <Row color="global" size="dynamic-padded-dense">
-  <span>first</span>
+  <span style={{background: 'rgba(255,255,255,0.3)'}}>first<br/>item</span>
   <span style={{
-      padding: '8px',
-      display: 'inline-block',
-      background: 'rgba(255,255,255,0.3)'}}>second</span>
-  <span>third</span>
+    padding: '16px',
+    display: 'inline-block',
+    background: 'rgba(255,255,255,0.3)'}}>second (padded)</span>
+  <span style={{background: 'rgba(255,255,255,0.3)'}}>third</span>
 </Row>
 ```
 
 ## Colors
 ```jsx
 const rows = ['default', 'global', 'primary', 'management'].map((c, i) =>
-  <div key={c} style={{marginTop: i === 0 ? 0 : '16px'}}>
-    <Row color={c} border="all" size="dynamic-padded">{c}</Row>
-  </div>
+  <Row key={c} color={c} border="all" size="dynamic-padded"><span>{c}</span></Row>
 );
-<div>{rows}</div>
+<Column>{rows}</Column>
+```
+
+## Sizes
+```jsx
+const rows = [
+  'tall',
+  'tall-wide',
+  'dynamic',
+  'dynamic-padded',
+  'dynamic-padded-dense',
+].map((s, i) =>
+  <Row key={s} size={s} color="global" borderRadius="all"><span>{s}</span></Row>
+);
+<Column>{rows}</Column>
 ```
 
 ## Borders
 ```jsx
 const rows = ['none', 'top', 'bottom', 'all'].map((b, i) =>
-  <div key={b} style={{marginTop: i === 0 ? 0 : '16px'}}>
-    <Row border={b} size="dynamic-padded-dense">{b}</Row>
-  </div>
+  <Row key={b} border={b} size="dynamic-padded-dense"><span>{b}</span></Row>
 );
-<div>{rows}</div>
+<Column>{rows}</Column>
 ```
 
 ## Border radius
 ```jsx
 const rows = ['none', 'top', 'bottom', 'all'].map((br, i) =>
-  <div key={br} style={{marginTop: i === 0 ? 0 : '16px'}}>
-    <Row color="global" borderRadius={br} size="dynamic-padded-dense">{br}</Row>
-  </div>
+  <Row key={br} color="global" borderRadius={br} size="dynamic-padded-dense"><span>{br}</span></Row>
 );
-<div>{rows}</div>
+<Column>{rows}</Column>
 ```
 
 ## Justify Content 
@@ -58,7 +68,7 @@ const rows = flexValues.map((a) =>
     <div>Child</div>
   </Row>
 );
-<div>{rows}</div>
+<Column>{rows}</Column>
 ```
 ## Align Items
 ```jsx
@@ -66,6 +76,7 @@ const flexValues = [
   'center',
   'flex-start',
   'flex-end',
+  'stretch',
 ];
 
 const rows = flexValues.map((a) =>
@@ -75,5 +86,5 @@ const rows = flexValues.map((a) =>
     <div style={{backgroundColor: 'white', padding: '20px'}}>Child 3</div>
   </Row>
 );
-<div>{rows}</div>
+<Column>{rows}</Column>
 ```
