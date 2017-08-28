@@ -42,7 +42,7 @@ const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick }
   return <MUIButton
     {...{ disabled, onClick }}
     className={classnames(classes[color], { [classes.fullWidth]: fullWidth })}
-    raised
+    raised={color !== 'default'}
   >
     {ic}{children}
   </MUIButton>;
@@ -61,6 +61,7 @@ const getButtonStyle = (theme, palette) => {
     backgroundColor: palette[500],
     '&:hover': {
       backgroundColor: palette[700],
+      borderColor: palette[700],
       // Reset on mouse devices
       '@media (hover: none)': {
         backgroundColor: palette[500],

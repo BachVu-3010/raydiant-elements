@@ -109,8 +109,8 @@ export default (type = 'light') => {
           borderWidth: '1px',
           borderColor: palette.text.divider,
           color: palette.text.primary,
-          padding: '11px 16px',
-          lineHeight: '15px',
+          padding: '12px 16px', /* 40px high -> 14px text + 2*12 padding + 2*1px border */
+          lineHeight: '1',
         },
         raised: {
           color: palette.text.primary,
