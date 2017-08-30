@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Flex, { propTypes as flexPropTypes, defaultProps as flexDefaultProps } from './Flex';
 
 const propTypes = {
@@ -56,7 +56,7 @@ const Row = ({
 Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 
-const styleSheet = createStyleSheet(theme => {
+const styles = theme => {
   const borderColor = theme.palette.text.divider;
   const border = `1px solid ${borderColor}`;
   const borderRadius = '4px';
@@ -94,6 +94,6 @@ const styleSheet = createStyleSheet(theme => {
     'size-dynamic-padded': { padding: `${theme.spacing.unit}px` },
     'size-dynamic-padded-dense': { padding: `0 ${theme.spacing.unit}px` },
   };
-});
+};
 
-export default withStyles(styleSheet)(Row);
+export default withStyles(styles)(Row);

@@ -8,6 +8,10 @@ import * as Typography from './components/Typography';
 import Flex from './components/Flex';
 import Column from './components/Column';
 import Row from './components/Row';
+import Dialog from './components/Dialog';
+import DialogContent from './components/DialogContent';
+import DialogTitle from './components/DialogTitle';
+import DialogActions from './components/DialogActions';
 
 module.exports = {
   App,
@@ -20,4 +24,8 @@ module.exports = {
   Flex,
   Column,
   Row,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
 };

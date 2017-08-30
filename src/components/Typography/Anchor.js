@@ -1,8 +1,8 @@
 import React from 'react';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import { propTypes, defaultProps } from './shared';
 
-export const styleSheet = createStyleSheet('MeAnchor', theme => ({
+export const styles = theme => ({
   link: {
     color: theme.palette.primary[300],
     textDecoration: 'none',
@@ -10,7 +10,7 @@ export const styleSheet = createStyleSheet('MeAnchor', theme => ({
       textDecoration: 'underline',
     },
   },
-}));
+});
 
 /**
  * A link
@@ -20,4 +20,4 @@ const Anchor = ({ classes, children, ...rest }) =>
 Anchor.propTypes = propTypes;
 Anchor.defaultProps = defaultProps;
 
-export default withStyles(styleSheet)(Anchor);
+export default withStyles(styles)(Anchor);

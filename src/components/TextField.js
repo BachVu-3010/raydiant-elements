@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MUITextField from 'material-ui/TextField';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
 const propTypes = {
@@ -89,7 +89,7 @@ const TextField = ({
 TextField.propTypes = propTypes;
 TextField.defaultProps = defaultProps;
 
-const styleSheet = createStyleSheet(() => ({
+const styles = {
   root: {
     '& label': {
       left: '10px',
@@ -104,6 +104,6 @@ const styleSheet = createStyleSheet(() => ({
       transform: 'scaleX(1)', // alert is always underlined in yellow
     },
   },
-}));
+};
 
-export default withStyles(styleSheet)(TextField);
+export default withStyles(styles)(TextField);

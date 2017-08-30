@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import Flex, { propTypes as flexPropTypes, defaultProps as flexDefaultProps } from './Flex';
 
 const propTypes = {
@@ -20,10 +20,10 @@ const Column = ({ classes, className, ...pass }) =>
 Column.propTypes = propTypes;
 Column.defaultProps = defaultProps;
 
-const styleSheet = createStyleSheet(() => ({
+const styles = {
   root: {
     flexDirection: 'column',
   },
-}));
+};
 
-export default withStyles(styleSheet)(Column);
+export default withStyles(styles)(Column);

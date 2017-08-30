@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import stylePropType from 'react-style-proptype';
 import classnames from 'classnames';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 const alignItemsValues = ['center', 'flex-start', 'flex-end', 'stretch'];
 const justifyContentValues = [
@@ -81,7 +81,7 @@ const Flex = ({
 Flex.propTypes = propTypes;
 Flex.defaultProps = defaultProps;
 
-const styleSheet = createStyleSheet(theme => {
+const styles = theme => {
   const alignItems = alignItemsValues.reduce(
     (acc, val) => ({
       ...acc,
@@ -115,7 +115,7 @@ const styleSheet = createStyleSheet(theme => {
     ...justifyContent,
     ...alignItems,
   };
-});
+};
 
-export default withStyles(styleSheet)(Flex);
+export default withStyles(styles)(Flex);
 export { propTypes, defaultProps };

@@ -1,4 +1,4 @@
-import { createPalette, createTypography } from 'material-ui/styles';
+import { createPalette, createTypography, createBreakpoints } from 'material-ui/styles';
 import spacing from 'material-ui/styles/spacing';
 import purple from '../colors/purple';
 import orange from '../colors/orange';
@@ -9,6 +9,17 @@ import green from '../colors/green';
 
 const inputVSpace = 6;
 const inputHSpace = 10;
+
+const breakpointsDfn = {
+  breakpointsMap: {
+    xs: 480, /* mobile */
+    sm: 768, /* mobile landscape */
+    md: 960, /* tablet */
+    lg: 1280, /* desktop */
+    xl: 1900, /* wide desktop */
+  },
+};
+const breakpoints = createBreakpoints(breakpointsDfn.breakpointsMap);
 
 export default (type = 'light') => {
   const fontFamily = 'Roboto,Noto,sans-serif';
@@ -22,12 +33,13 @@ export default (type = 'light') => {
     fontSize: 14,
   });
   return {
+    breakpoints,
+    spacing,
     palette: {
       ...palette,
       destructive: orange,
       progress: green,
     },
-    spacing,
     typography: {
       ...typography,
       display4: {
@@ -104,6 +116,8 @@ export default (type = 'light') => {
     overrides: {
       MuiButton: {
         root: {
+          boxSizing: 'border-box',
+          minHeight: '40px',
           minWidth: '92px',
           borderStyle: 'solid',
           borderWidth: '1px',
@@ -196,6 +210,15 @@ export default (type = 'light') => {
         shrink: {
           transform: 'translate(0, 4px) scale(0.75)',
           transformOrigin: 'top left',
+        },
+      },
+      MuiDialog: {
+        paper: {
+          margin: `${spacing.unit * 3}px`,
+          maxHeight: '680px',
+          [breakpoints.down('sm')]: {
+            margin: `${spacing.unit * 2}px`,
+          },
         },
       },
     },

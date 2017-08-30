@@ -5,9 +5,10 @@ const BUTTON = 'Buttons';
 const TEXTINPUT = 'Text Inputs';
 const TYPOGRAPHY = 'Typography';
 const LAYOUT = 'Layout';
+const MODALS = 'Modals';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
-  categories: [STARTUP, TOGGLE, BUTTON, TEXTINPUT, TYPOGRAPHY, LAYOUT, COLORS],
+  categories: [STARTUP, TOGGLE, BUTTON, TEXTINPUT, MODALS, TYPOGRAPHY, LAYOUT, COLORS],
   components: {
     Checkbox: { categories: [TOGGLE] },
     Radio: { categories: [TOGGLE] },
@@ -27,5 +28,9 @@ module.exports = {
     Flex: { categories: [LAYOUT] },
     Column: { categories: [LAYOUT] },
     Row: { categories: [LAYOUT] },
+    Dialog: { categories: [MODALS] },
+    DialogContent: { categories: [MODALS] },
+    DialogTitle: { categories: [MODALS] },
+    DialogActions: { categories: [MODALS] },
   },
 };

@@ -8,7 +8,7 @@ exports[`Snapshot 1`] = `
     className="MuiSwitch-root-5"
   >
     <span
-      className="MuiButtonBase-root-22 MuiIconButton-root-13 MuiSwitchBase-root-11 MuiSwitch-default-8 MuiSwitch-default-8 MuiSwitch-checked-9 MuiSwitch-checked-9"
+      className="MuiButtonBase-root-25 MuiIconButton-root-16 MuiSwitchBase-root-11 MuiSwitchBase-default-13 MuiSwitch-default-8 MuiSwitchBase-checked-14 MuiSwitch-checked-9"
       disabled={false}
       onBlur={[Function]}
       onFocus={[Function]}
@@ -23,7 +23,7 @@ exports[`Snapshot 1`] = `
       tabIndex={null}
     >
       <span
-        className="MuiIconButton-label-19"
+        className="MuiIconButton-label-22"
       >
         <div
           className="MuiSwitch-icon-7"
@@ -40,17 +40,17 @@ exports[`Snapshot 1`] = `
         />
       </span>
       <span
-        className="MuiTouchRipple-root-24"
+        className="MuiTouchRipple-root-27"
       />
     </span>
     <div
       className="MuiSwitch-bar-6"
     />
   </div>
-  <span
-    className="MuiFormControlLabel-label-4"
+  <p
+    className="MuiTypography-root-34 MuiTypography-body1-43 MuiFormControlLabel-label-4"
   >
     Yes or no
-  </span>
+  </p>
 </label>
 `;

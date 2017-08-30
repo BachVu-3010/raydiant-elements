@@ -1,9 +1,8 @@
 import PropTypes from 'prop-types';
-import { createStyleSheet } from 'material-ui/styles';
 
-export const styleSheet = createStyleSheet('MiraElements-Typography', theme => ({
+export const styleSheet = theme => ({
   ...theme.typography,
-}));
+});
 
 const propTypes = {
   /** Child elements are used as the component's text. */

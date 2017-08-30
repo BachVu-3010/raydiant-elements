@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Icon from 'material-ui/Icon';
 import MUIButton from 'material-ui/Button';
 import classnames from 'classnames';
-import { createStyleSheet, withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 const propTypes = {
   /** Child elements are used as the button text. */
@@ -39,13 +39,15 @@ const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick }
   if (icon) {
     ic = <Icon>{icon}</Icon>;
   }
-  return <MUIButton
-    {...{ disabled, onClick }}
-    className={classnames(classes[color], { [classes.fullWidth]: fullWidth })}
-    raised={color !== 'default'}
-  >
-    {ic}{children}
-  </MUIButton>;
+  return <span className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}>
+    <MUIButton
+      {...{ disabled, onClick }}
+      className={classnames(classes.button, classes[color])}
+      raised={color !== 'default'}
+    >
+      {ic}{children}
+    </MUIButton>
+  </span>;
 };
 
 Button.propTypes = propTypes;
@@ -76,12 +78,14 @@ const getButtonStyle = (theme, palette) => {
   };
 };
 
-const styleSheet = createStyleSheet(theme => ({
-  fullWidth: { width: '100%' },
+const styles = theme => ({
+  root: { display: 'inline-block' },
+  button: { width: '100%' },
+  fullWidth: { display: 'block' },
   default: {},
   primary: getButtonStyle(theme, theme.palette.primary),
   destructive: getButtonStyle(theme, theme.palette.destructive),
   progress: getButtonStyle(theme, theme.palette.progress),
-}));
+});
 
-export default withStyles(styleSheet)(Button);
+export default withStyles(styles)(Button);

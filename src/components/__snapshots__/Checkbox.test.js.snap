@@ -5,7 +5,7 @@ exports[`Snapshot 1`] = `
   className="MuiFormControlLabel-root-1 MuiFormControlLabel-hasLabel-3"
 >
   <span
-    className="MuiButtonBase-root-19 MuiIconButton-root-10 MuiSwitchBase-root-8 MuiCheckbox-default-5 MuiCheckbox-checked-6"
+    className="MuiButtonBase-root-22 MuiIconButton-root-13 MuiSwitchBase-root-8 MuiSwitchBase-default-10 MuiCheckbox-default-5 MuiSwitchBase-checked-11 MuiCheckbox-checked-6"
     disabled={false}
     onBlur={[Function]}
     onFocus={[Function]}
@@ -20,11 +20,11 @@ exports[`Snapshot 1`] = `
     tabIndex={null}
   >
     <span
-      className="MuiIconButton-label-16"
+      className="MuiIconButton-label-19"
     >
       <svg
         aria-hidden="true"
-        className="MuiSvgIcon-root-21"
+        className="MuiSvgIcon-root-24"
         focusable={false}
         viewBox="0 0 24 24"
       >
@@ -44,13 +44,13 @@ exports[`Snapshot 1`] = `
       />
     </span>
     <span
-      className="MuiTouchRipple-root-22"
+      className="MuiTouchRipple-root-25"
     />
   </span>
-  <span
-    className="MuiFormControlLabel-label-4"
+  <p
+    className="MuiTypography-root-32 MuiTypography-body1-41 MuiFormControlLabel-label-4"
   >
     Yes or no
-  </span>
+  </p>
 </label>
 `;
