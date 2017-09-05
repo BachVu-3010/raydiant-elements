@@ -18,6 +18,8 @@ const propTypes = {
   icon: PropTypes.string,
   /** Called when the user clicks the control. */
   onClick: PropTypes.func,
+  /** Button type. Usually you want the default `button`, but you may want a `submit` button. */
+  type: PropTypes.oneOf(['button', 'submit', 'reset', 'menu']),
   /** @ignore injected by withStyles */
   classes: PropTypes.object.isRequired,
 };
@@ -28,20 +30,21 @@ const defaultProps = {
   fullWidth: false,
   icon: null,
   onClick: () => {},
+  type: 'button',
 };
 
 /**
  * A clickable thing to click on.
  * Buttons may have text, imagery, or both.
  */
-const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick }) => {
+const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick, type }) => {
   let ic = null;
   if (icon) {
     ic = <Icon>{icon}</Icon>;
   }
   return <span className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}>
     <MUIButton
-      {...{ disabled, onClick }}
+      {...{ disabled, onClick, type }}
       className={classnames(classes.button, classes[color])}
       raised={color !== 'default'}
     >

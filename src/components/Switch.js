@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControlLabel } from 'material-ui/Form';
-import MUISwitch from 'material-ui/Switch';
+import FormControlLabel from './FormControlLabel';
+import SwitchInput from './SwitchInput';
 
 const propTypes = {
   /** Child elements are used as the switch label. */
@@ -25,7 +25,7 @@ const defaultProps = {
  */
 const Switch = ({ children, checked, disabled, onChange }) =>
   <FormControlLabel
-    control={<MUISwitch {...{ checked, disabled, onChange }} />}
+    control={<SwitchInput {...{ checked, disabled, onChange }} />}
     disabled={disabled}
     label={children}
   />;

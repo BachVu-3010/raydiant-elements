@@ -8,11 +8,11 @@ class Wrapper extends React.Component {
     this.setState({ theme: (this.state.theme === 'light') ? 'dark' : 'light' });
   }
   render = () =>
-    <div>
-      <div>
+    <App theme={this.state.theme}>
+      <div style={{ padding: '10px' }}>
         <Switch checked={this.state.theme === 'dark'} onChange={this.toggleTheme}>Dark</Switch>
       </div>
-      <App theme={this.state.theme}><div style={{ padding: '10px' }}>{this.props.children}</div></App>
-    </div>;
+      <div style={{ padding: '10px' }}>{this.props.children}</div>
+    </App>;
 }
 export default Wrapper;

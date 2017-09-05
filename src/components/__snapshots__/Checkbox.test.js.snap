@@ -2,10 +2,10 @@
 
 exports[`Snapshot 1`] = `
 <label
-  className="MuiFormControlLabel-root-1 MuiFormControlLabel-hasLabel-3"
+  className="FormControlLabel-root-1"
 >
   <span
-    className="MuiButtonBase-root-22 MuiIconButton-root-13 MuiSwitchBase-root-8 MuiSwitchBase-default-10 MuiCheckbox-default-5 MuiSwitchBase-checked-11 MuiCheckbox-checked-6"
+    className="MuiButtonBase-root-11 SwitchBase-checkbox-root-4 SwitchBase-checkbox-default-6 SwitchBase-checkbox-checked-7"
     disabled={false}
     onBlur={[Function]}
     onFocus={[Function]}
@@ -19,38 +19,23 @@ exports[`Snapshot 1`] = `
     role={undefined}
     tabIndex={null}
   >
+    <input
+      checked={true}
+      className="SwitchBase-checkbox-input-5"
+      disabled={false}
+      name=""
+      onChange={[Function]}
+      type="checkbox"
+      value=""
+    />
     <span
-      className="MuiIconButton-label-19"
-    >
-      <svg
-        aria-hidden="true"
-        className="MuiSvgIcon-root-24"
-        focusable={false}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
-        />
-      </svg>
-      <input
-        checked={true}
-        className="MuiSwitchBase-input-9"
-        disabled={false}
-        name={undefined}
-        onChange={[Function]}
-        tabIndex={undefined}
-        type="checkbox"
-        value={undefined}
-      />
-    </span>
-    <span
-      className="MuiTouchRipple-root-25"
+      className="MuiTouchRipple-root-13"
     />
   </span>
-  <p
-    className="MuiTypography-root-32 MuiTypography-body1-41 MuiFormControlLabel-label-4"
+  <span
+    className="FormControlLabel-label-3"
   >
     Yes or no
-  </p>
+  </span>
 </label>
 `;

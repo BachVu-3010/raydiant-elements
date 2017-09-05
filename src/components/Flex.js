@@ -62,6 +62,7 @@ const Flex = ({
   justifyContent,
   noSpace,
   style,
+  ...rest
 }) =>
   <div
     style={style}
@@ -75,6 +76,7 @@ const Flex = ({
       },
       className,
     )}
+    {...rest}
   >
     {children}
   </div>;

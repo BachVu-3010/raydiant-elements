@@ -11,6 +11,8 @@ const propTypes = {
   borderRadius: PropTypes.oneOf(['top', 'bottom', 'all', 'none']),
   /** Color of the row. */
   color: PropTypes.oneOf(['default', 'global', 'primary', 'management']),
+  /** Give the row a negative offset to make the row's items align with outside content. */
+  flush: PropTypes.bool,
   /** The size and padding of the row */
   size: PropTypes.oneOf([
     'tall',
@@ -25,6 +27,7 @@ const defaultProps = {
   border: 'none',
   borderRadius: 'none',
   color: 'default',
+  flush: false,
   size: 'dynamic',
   ...flexDefaultProps,
 };
@@ -39,6 +42,7 @@ const Row = ({
   classes,
   className,
   color,
+  flush,
   size,
   ...rest
 }) =>
@@ -49,6 +53,7 @@ const Row = ({
       classes[`size-${size}`],
       classes[`border-${border}`],
       classes[`borderRadius-${borderRadius}`],
+      { [classes.flush]: flush },
       className,
     )}
     {...rest}
@@ -93,6 +98,8 @@ const styles = theme => {
     'size-tall-wide': { height: '68px', padding: `0 ${theme.spacing.unit * 3}px` },
     'size-dynamic-padded': { padding: `${theme.spacing.unit}px` },
     'size-dynamic-padded-dense': { padding: `0 ${theme.spacing.unit}px` },
+    // Counteract the spacing
+    flush: { marginLeft: `-${theme.spacing.unit}px`, marginRight: `-${theme.spacing.unit}px` },
   };
 };
 

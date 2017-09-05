@@ -2,13 +2,16 @@
 
 exports[`Snapshot 1`] = `
 <label
-  className="MuiFormControlLabel-root-1 MuiFormControlLabel-hasLabel-3"
+  className="FormControlLabel-root-1"
 >
   <div
-    className="MuiSwitch-root-5"
+    className="SwitchInput-root-4"
   >
+    <div
+      className="SwitchInput-bar-5 SwitchInput-barChecked-6"
+    />
     <span
-      className="MuiButtonBase-root-25 MuiIconButton-root-16 MuiSwitchBase-root-11 MuiSwitchBase-default-13 MuiSwitch-default-8 MuiSwitchBase-checked-14 MuiSwitch-checked-9"
+      className="MuiButtonBase-root-14 SwitchBase-switch-root-8 SwitchBase-switch-default-10 SwitchBase-switch-checked-11"
       disabled={false}
       onBlur={[Function]}
       onFocus={[Function]}
@@ -22,35 +25,24 @@ exports[`Snapshot 1`] = `
       role={undefined}
       tabIndex={null}
     >
+      <input
+        checked={true}
+        className="SwitchBase-switch-input-9"
+        disabled={false}
+        name=""
+        onChange={[Function]}
+        type="checkbox"
+        value=""
+      />
       <span
-        className="MuiIconButton-label-22"
-      >
-        <div
-          className="MuiSwitch-icon-7"
-        />
-        <input
-          checked={true}
-          className="MuiSwitchBase-input-12"
-          disabled={false}
-          name={undefined}
-          onChange={[Function]}
-          tabIndex={undefined}
-          type="checkbox"
-          value={undefined}
-        />
-      </span>
-      <span
-        className="MuiTouchRipple-root-27"
+        className="MuiTouchRipple-root-16"
       />
     </span>
-    <div
-      className="MuiSwitch-bar-6"
-    />
   </div>
-  <p
-    className="MuiTypography-root-34 MuiTypography-body1-43 MuiFormControlLabel-label-4"
+  <span
+    className="FormControlLabel-label-3"
   >
     Yes or no
-  </p>
+  </span>
 </label>
 `;

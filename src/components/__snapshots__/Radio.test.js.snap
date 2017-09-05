@@ -2,10 +2,10 @@
 
 exports[`Snapshot 1`] = `
 <label
-  className="MuiFormControlLabel-root-1 MuiFormControlLabel-hasLabel-3"
+  className="FormControlLabel-root-1"
 >
   <span
-    className="MuiButtonBase-root-22 MuiIconButton-root-13 MuiSwitchBase-root-8 MuiSwitchBase-default-10 MuiRadio-default-5 MuiSwitchBase-checked-11 MuiRadio-checked-6"
+    className="MuiButtonBase-root-10 SwitchBase-radio-root-4 SwitchBase-radio-default-6 SwitchBase-radio-checked-7"
     disabled={false}
     onBlur={[Function]}
     onFocus={[Function]}
@@ -19,38 +19,23 @@ exports[`Snapshot 1`] = `
     role={undefined}
     tabIndex={null}
   >
+    <input
+      checked={true}
+      className="SwitchBase-radio-input-5"
+      disabled={false}
+      name=""
+      onChange={[Function]}
+      type="radio"
+      value=""
+    />
     <span
-      className="MuiIconButton-label-19"
-    >
-      <svg
-        aria-hidden="true"
-        className="MuiSvgIcon-root-24"
-        focusable={false}
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0-5C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
-        />
-      </svg>
-      <input
-        checked={true}
-        className="MuiSwitchBase-input-9"
-        disabled={false}
-        name=""
-        onChange={[Function]}
-        tabIndex={undefined}
-        type="radio"
-        value=""
-      />
-    </span>
-    <span
-      className="MuiTouchRipple-root-25"
+      className="MuiTouchRipple-root-12"
     />
   </span>
-  <p
-    className="MuiTypography-root-32 MuiTypography-body1-41 MuiFormControlLabel-label-4"
+  <span
+    className="FormControlLabel-label-3"
   >
     Yes or no
-  </p>
+  </span>
 </label>
 `;

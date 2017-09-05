@@ -1,3 +1,7 @@
+[Zeplin](https://zpl.io/blrOgGV)
+
+[material.io](https://material.io/guidelines/style/typography.html#typography-typeface)
+
 ```jsx
 const { Typography } = require('../../../src');
 const {Title, Heading1, Heading2, Heading3, Heading4, Note, Anchor} = Typography;

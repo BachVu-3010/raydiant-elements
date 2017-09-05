@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormControlLabel } from 'material-ui/Form';
-import MUIRadio from 'material-ui/Radio';
+import FormControlLabel from './FormControlLabel';
+import RadioInput from './RadioInput';
 
 
 const propTypes = {
@@ -33,9 +33,9 @@ const defaultProps = {
  */
 const Radio = ({ children, checked, disabled, name, onChange, value }) =>
   <FormControlLabel
-    control={<MUIRadio {...{ onChange }} />}
+    {...{ disabled }}
+    control={<RadioInput {...{ checked, disabled, name, onChange, value }} />}
     label={children}
-    {...{ checked, disabled, name, value }}
   />;
 
 

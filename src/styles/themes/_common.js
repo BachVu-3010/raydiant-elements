@@ -32,6 +32,26 @@ export default (type = 'light') => {
     fontFamily,
     fontSize: 14,
   });
+  const checkboxPalette = type === 'light' ?
+    {
+      background: 'white',
+      backgroundChecked: purple['500'],
+      colorChecked: 'white',
+    } :
+    {
+      background: 'rgba(255, 255, 255, 0.15)',
+      backgroundChecked: 'white',
+      colorChecked: purple['500'],
+    };
+  const switchPalette = type === 'light' ?
+    {
+      bar: 'rgba(0, 0, 0, 0.2)',
+      barChecked: green['500'],
+    } :
+    {
+      bar: 'rgba(255, 255, 255, 0.2)',
+      barChecked: green['500'],
+    };
   return {
     breakpoints,
     spacing,
@@ -39,6 +59,8 @@ export default (type = 'light') => {
       ...palette,
       destructive: orange,
       progress: green,
+      checkbox: checkboxPalette,
+      switch: switchPalette,
     },
     typography: {
       ...typography,
@@ -151,27 +173,10 @@ export default (type = 'light') => {
         //   height: 40,
         // },
       },
-      MuiSwitchBase: {
-        // WIP: style radio/checkbox controls per Zeplin
-        // input: {
-        //   height: selectionControlSize,
-        //   width: selectionControlSize,
-        // },
-      },
       MuiFormControl: {
         fullWidth: {
           display: 'block',
           width: 'auto',
-        },
-      },
-      MuiFormControlLabel: {
-        root: {
-          fontSize: 14,
-        },
-        hasLabel: {
-          // WIP: style radio/checkbox controls per Zeplin
-          // marginLeft: 0,
-          // marginRight: spacing.unit,
         },
       },
       MuiInput: {

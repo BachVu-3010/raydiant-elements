@@ -88,3 +88,12 @@ const rows = flexValues.map((a) =>
 );
 <Column>{rows}</Column>
 ```
+
+## Flush
+```jsx
+<div style={{borderLeft: '2px solid #999'}}>
+  <div>Here's some text</div>
+  <Row><span>Here's a regular row</span></Row>
+  <Row flush><span>Here's a flush row</span></Row>
+</div>
+```

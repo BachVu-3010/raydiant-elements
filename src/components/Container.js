@@ -6,7 +6,7 @@ import stylePropType from 'react-style-proptype';
 
 export const styles = theme => ({
   root: {
-    ...theme.typography.body1,
+    ...theme.typography.body2,
     backgroundColor: theme.palette.background.default,
   },
 });
