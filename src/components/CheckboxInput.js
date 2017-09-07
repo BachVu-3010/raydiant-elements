@@ -2,7 +2,10 @@ import SwitchBase from './SwitchBase';
 
 const styles = theme => ({
   default: {
-    color: theme.palette.checkbox ? theme.palette.checkbox.backgroundChecked : '', // ripple
+    color: theme.palette.checkbox
+      ? theme.palette.checkbox.backgroundChecked
+      : '', // ripple
+    verticalAlign: 'middle',
     '&:before': {
       display: 'block',
       boxSizing: 'border-box',
@@ -11,7 +14,9 @@ const styles = theme => ({
       width: '20px',
       borderRadius: '3px',
       border: `1px solid ${theme.palette.text.primary}`,
-      backgroundColor: theme.palette.checkbox ? theme.palette.checkbox.background : '',
+      backgroundColor: theme.palette.checkbox
+        ? theme.palette.checkbox.background
+        : '',
       transition: 'background-color 0.2s ease-out',
     },
     '&:after': {
@@ -26,7 +31,9 @@ const styles = theme => ({
       top: '11px',
       transform: 'rotate(-45deg)',
       transformOrigin: 'top left', // Make sure our width/height animations start from 0,0
-      borderColor: theme.palette.checkbox ? theme.palette.checkbox.colorChecked : '',
+      borderColor: theme.palette.checkbox
+        ? theme.palette.checkbox.colorChecked
+        : '',
       borderWidth: '2px',
       borderLeftStyle: 'solid',
       borderBottomStyle: 'solid',
@@ -37,7 +44,9 @@ const styles = theme => ({
   },
   checked: {
     '&:before': {
-      backgroundColor: theme.palette.checkbox ? theme.palette.checkbox.backgroundChecked : '',
+      backgroundColor: theme.palette.checkbox
+        ? theme.palette.checkbox.backgroundChecked
+        : '',
     },
     '&:after': {
       opacity: 1,
@@ -62,6 +71,10 @@ const styles = theme => ({
   },
 });
 
-const CheckboxInput = SwitchBase({ type: 'checkbox', styles, inputType: 'checkbox' });
+const CheckboxInput = SwitchBase({
+  type: 'checkbox',
+  styles,
+  inputType: 'checkbox',
+});
 
 export default CheckboxInput;

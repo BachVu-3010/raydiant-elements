@@ -48,11 +48,18 @@ const FormControlLabel = ({
   disabled,
   inputRef,
   label,
-}) =>
-  <label className={classnames(classes.root, { [classes.disabled]: disabled }, className)}>
-    {React.cloneElement(control, { inputRef })}
+}) => (
+  <label
+    className={classnames(
+      classes.root,
+      { [classes.disabled]: disabled },
+      className,
+    )}
+  >
+    <span>{React.cloneElement(control, { inputRef })}</span>
     <span className={classes.label}>{label}</span>
-  </label>;
+  </label>
+);
 
 FormControlLabel.propTypes = propTypes;
 FormControlLabel.defaultProps = defaultProps;

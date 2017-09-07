@@ -31,7 +31,7 @@ const innerStyles = theme => ({
 });
 const styles = theme => ({
   root: {
-    alignSelf: 'center', // Control should align to top if label text wraps
+    verticalAlign: 'middle',
     display: 'inline-block',
     position: 'relative',
     height: '20px',
@@ -49,23 +49,32 @@ const styles = theme => ({
     backgroundColor: theme.palette.switch ? theme.palette.switch.bar : '',
   },
   barChecked: {
-    backgroundColor: theme.palette.switch ? theme.palette.switch.barChecked : '',
+    backgroundColor: theme.palette.switch
+      ? theme.palette.switch.barChecked
+      : '',
   },
   barDisabled: {
     backgroundColor: theme.palette.text.primary,
   },
 });
 
-const Base = SwitchBase({ type: 'switch', styles: innerStyles, inputType: 'checkbox' });
+const Base = SwitchBase({
+  type: 'switch',
+  styles: innerStyles,
+  inputType: 'checkbox',
+});
 
-const SwitchInput = ({ classes, checked, disabled, ...rest }) => <div className={classes.root}>
-  <div
-    className={
-      classnames(classes.bar, { [classes.barChecked]: checked, [classes.barDisabled]: disabled })
-    }
-  />
-  <Base {...{ checked, disabled, ...rest }} />
-</div>;
+const SwitchInput = ({ classes, checked, disabled, ...rest }) => (
+  <div className={classes.root}>
+    <div
+      className={classnames(classes.bar, {
+        [classes.barChecked]: checked,
+        [classes.barDisabled]: disabled,
+      })}
+    />
+    <Base {...{ checked, disabled, ...rest }} />
+  </div>
+);
 SwitchInput.propTypes = {
   checked: PropTypes.bool,
   disabled: PropTypes.bool,

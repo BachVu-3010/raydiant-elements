@@ -2,34 +2,38 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
-import Flex, { propTypes as flexPropTypes, defaultProps as flexDefaultProps } from './Flex';
+import Flex, {
+  propTypes as flexPropTypes,
+  defaultProps as flexDefaultProps,
+} from './Flex';
 
 const propTypes = {
+  ...flexPropTypes,
+  /** @ignore */
+  alignContent: flexPropTypes.alignContent,
   /** Border */
   border: PropTypes.oneOf(['top', 'bottom', 'all', 'none']),
   /** Border radius */
   borderRadius: PropTypes.oneOf(['top', 'bottom', 'all', 'none']),
   /** Color of the row. */
   color: PropTypes.oneOf(['default', 'global', 'primary', 'management']),
-  /** Give the row a negative offset to make the row's items align with outside content. */
-  flush: PropTypes.bool,
   /** The size and padding of the row */
   size: PropTypes.oneOf([
+    'content',
     'tall',
     'tall-wide',
     'dynamic',
     'dynamic-padded',
     'dynamic-padded-dense',
   ]),
-  ...flexPropTypes,
 };
 const defaultProps = {
+  ...flexDefaultProps,
+  alignContent: undefined,
   border: 'none',
   borderRadius: 'none',
   color: 'default',
-  flush: false,
-  size: 'dynamic',
-  ...flexDefaultProps,
+  size: 'content',
 };
 
 /**
@@ -37,27 +41,30 @@ const defaultProps = {
  * See [Flex](#flex) for property information.
  */
 const Row = ({
+  alignContent,
   border,
   borderRadius,
   classes,
   className,
   color,
-  flush,
   size,
   ...rest
-}) =>
+}) => (
   <Flex
+    alignContent={
+      alignContent === undefined ? size === 'content' : alignContent
+    }
     className={classnames(
       classes.root,
       classes[`color-${color}`],
       classes[`size-${size}`],
       classes[`border-${border}`],
       classes[`borderRadius-${borderRadius}`],
-      { [classes.flush]: flush },
       className,
     )}
     {...rest}
-  />;
+  />
+);
 Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 
@@ -95,11 +102,12 @@ const styles = theme => {
     },
     'size-dynamic': {},
     'size-tall': { height: '68px', padding: `0 ${theme.spacing.unit}px` },
-    'size-tall-wide': { height: '68px', padding: `0 ${theme.spacing.unit * 3}px` },
+    'size-tall-wide': {
+      height: '68px',
+      padding: `0 ${theme.spacing.unit * 3}px`,
+    },
     'size-dynamic-padded': { padding: `${theme.spacing.unit}px` },
     'size-dynamic-padded-dense': { padding: `0 ${theme.spacing.unit}px` },
-    // Counteract the spacing
-    flush: { marginLeft: `-${theme.spacing.unit}px`, marginRight: `-${theme.spacing.unit}px` },
   };
 };
 

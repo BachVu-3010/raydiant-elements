@@ -4,8 +4,9 @@ import stylePropType from 'react-style-proptype';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 
-const alignItemsValues = ['center', 'flex-start', 'flex-end', 'stretch'];
+const alignItemsValues = ['', 'center', 'flex-start', 'flex-end', 'stretch'];
 const justifyContentValues = [
+  '',
   'center',
   'flex-start',
   'flex-end',
@@ -15,6 +16,19 @@ const justifyContentValues = [
 ];
 
 const propTypes = {
+  /**
+   * Align the Flex's content with outside content.
+   * 
+   * A negative margin will be applied to the Flex element to account for the space
+   * between child elements, so child elements will be horizonatally/vertically aligned
+   * with content outside the Flex.
+   * 
+   * This is useful to keep content in nested Flexes (e.g., <Column><Row>...</Row><Column>)
+   * from getting indented too far.
+   */
+  alignContent: PropTypes.bool,
+  /** Child space distribution along cross flex axis. */
+  alignItems: PropTypes.oneOf(alignItemsValues),
   /**
    * Child elements are used as the content.  
    * For spacing to be correct, `children` must be one or more elements
@@ -27,23 +41,19 @@ const propTypes = {
   children: PropTypes.node,
   /** Apply a class. */
   className: PropTypes.string,
-  /** Grow child items to fill available space */
-  growItems: PropTypes.bool,
   /** Child space distribution along main flex axis. */
   justifyContent: PropTypes.oneOf(justifyContentValues),
-  /** Child space distribution along cross flex axis. */
-  alignItems: PropTypes.oneOf(alignItemsValues),
   /** Provide space between the child elements. */
   noSpace: PropTypes.bool,
   /** Apply a style. */
   style: stylePropType,
 };
 const defaultProps = {
-  alignItems: 'center',
+  alignContent: true,
+  alignItems: '',
   children: null,
   className: '',
-  growItems: false,
-  justifyContent: 'flex-start',
+  justifyContent: '',
   noSpace: false,
   style: null,
 };
@@ -58,28 +68,29 @@ const Flex = ({
   children,
   classes,
   className,
-  growItems,
+  alignContent,
   justifyContent,
   noSpace,
   style,
   ...rest
-}) =>
+}) => (
   <div
     style={style}
     className={classnames(
       classes.root,
-      classes[`justifyContent-${justifyContent}`],
-      classes[`alignItems-${alignItems}`],
+      justifyContent ? classes[`justifyContent-${justifyContent}`] : null,
+      alignItems ? classes[`alignItems-${alignItems}`] : null,
       {
         [classes.space]: !noSpace,
-        [classes.growItems]: growItems,
+        [classes.alignContent]: alignContent,
       },
       className,
     )}
     {...rest}
   >
     {children}
-  </div>;
+  </div>
+);
 Flex.propTypes = propTypes;
 Flex.defaultProps = defaultProps;
 
@@ -105,15 +116,25 @@ const styles = theme => {
       display: 'flex',
     },
     space: {
+      // Surround all children with a margin of 1/2 the desired space
+      // between elements.
       '& > *': {
         margin: theme.spacing.unit,
       },
-    },
-    growItems: {
-      '& > *': {
-        flex: '1 auto',
+      // If we're aligning our content with the outside world, apply
+      // a negative margin to ourselves to make up for the positive
+      // margin we're applying to our children.
+      '&$alignContent': {
+        margin: -theme.spacing.unit,
+        // For nested flex containers with negative margin applied,
+        // we want both the +ve margin and -ve margin applied...
+        // which nets out to 0.
+        '& > &$alignContent': {
+          margin: 0,
+        },
       },
     },
+    alignContent: {},
     ...justifyContent,
     ...alignItems,
   };

@@ -2,6 +2,7 @@ import SwitchBase from './SwitchBase';
 
 const styles = theme => ({
   default: {
+    verticalAlign: 'middle',
     '&:before': {
       display: 'block',
       boxSizing: 'border-box',
@@ -10,7 +11,9 @@ const styles = theme => ({
       width: '20px',
       borderRadius: '10px',
       border: `1px solid ${theme.palette.text.primary}`,
-      backgroundColor: theme.palette.checkbox ? theme.palette.checkbox.background : '',
+      backgroundColor: theme.palette.checkbox
+        ? theme.palette.checkbox.background
+        : '',
     },
     '&:after': {
       position: 'absolute',
@@ -24,7 +27,9 @@ const styles = theme => ({
       borderRadius: '5px',
       left: '5px',
       top: '5px',
-      backgroundColor: theme.palette.checkbox ? theme.palette.checkbox.backgroundChecked : '',
+      backgroundColor: theme.palette.checkbox
+        ? theme.palette.checkbox.backgroundChecked
+        : '',
       transition: 'transform 0.1s ease-out',
     },
     '&:hover:before': {

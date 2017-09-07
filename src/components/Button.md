@@ -9,8 +9,8 @@ const buttons = ['default', 'primary', 'destructive', 'progress'].map(
   <Button key={b} disabled={state.disabled} color={b}>{`${b.charAt(0).toUpperCase()}${b.slice(1)}`}</Button>
 );
 <Column>
-  <Row flush>{buttons}</Row>
-  <Row flush><Checkbox onChange={toggleDisable} checked={state.disabled}>Disable buttons</Checkbox></Row>
+  <Row>{buttons}</Row>
+  <Row><Checkbox onChange={toggleDisable} checked={state.disabled}>Disable buttons</Checkbox></Row>
 </Column>
 ```
 
