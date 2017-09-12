@@ -1,8 +1,16 @@
-import { createPalette, createTypography, createBreakpoints } from 'material-ui/styles';
+import {
+  createPalette,
+  createTypography,
+  createBreakpoints,
+} from 'material-ui/styles';
 import spacing from 'material-ui/styles/spacing';
 import purple from '../colors/purple';
 import orange from '../colors/orange';
 import green from '../colors/green';
+
+// A specific green for Switch that doesn't quite line up
+// with the green palette.
+const switchGreen = '#4ab559';
 
 // WIP: style radio/checkbox controls per Zeplin
 // const selectionControlSize = 20;
@@ -12,11 +20,11 @@ const inputHSpace = 10;
 
 const breakpointsDfn = {
   breakpointsMap: {
-    xs: 480, /* mobile */
-    sm: 768, /* mobile landscape */
-    md: 960, /* tablet */
-    lg: 1280, /* desktop */
-    xl: 1900, /* wide desktop */
+    xs: 480 /* mobile */,
+    sm: 768 /* mobile landscape */,
+    md: 960 /* tablet */,
+    lg: 1280 /* desktop */,
+    xl: 1900 /* wide desktop */,
   },
 };
 const breakpoints = createBreakpoints(breakpointsDfn.breakpointsMap);
@@ -32,26 +40,28 @@ export default (type = 'light') => {
     fontFamily,
     fontSize: 14,
   });
-  const checkboxPalette = type === 'light' ?
-    {
-      background: 'white',
-      backgroundChecked: purple['500'],
-      colorChecked: 'white',
-    } :
-    {
-      background: 'rgba(255, 255, 255, 0.15)',
-      backgroundChecked: 'white',
-      colorChecked: purple['500'],
-    };
-  const switchPalette = type === 'light' ?
-    {
-      bar: 'rgba(0, 0, 0, 0.2)',
-      barChecked: green['500'],
-    } :
-    {
-      bar: 'rgba(255, 255, 255, 0.2)',
-      barChecked: green['500'],
-    };
+  const checkboxPalette =
+    type === 'light'
+      ? {
+          background: 'white',
+          backgroundChecked: purple['500'],
+          colorChecked: 'white',
+        }
+      : {
+          background: 'rgba(255, 255, 255, 0.15)',
+          backgroundChecked: 'white',
+          colorChecked: purple['500'],
+        };
+  const switchPalette =
+    type === 'light'
+      ? {
+          bar: 'rgba(0, 0, 0, 0.2)',
+          barChecked: switchGreen,
+        }
+      : {
+          bar: 'rgba(255, 255, 255, 0.2)',
+          barChecked: switchGreen,
+        };
   return {
     breakpoints,
     spacing,
@@ -145,7 +155,8 @@ export default (type = 'light') => {
           borderWidth: '1px',
           borderColor: palette.text.divider,
           color: palette.text.primary,
-          padding: '12px 16px', /* 40px high -> 14px text + 2*12 padding + 2*1px border */
+          padding:
+            '12px 16px' /* 40px high -> 14px text + 2*12 padding + 2*1px border */,
           lineHeight: '1',
         },
         raised: {
@@ -182,7 +193,8 @@ export default (type = 'light') => {
       MuiInput: {
         root: {
           width: '100%',
-          background: (type === 'dark') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+          background:
+            type === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
         },
         input: {
           padding: `${inputVSpace}px ${inputHSpace}px`,
