@@ -13,7 +13,7 @@
 ## Colors
 ```jsx
 const rows = ['default', 'global', 'primary', 'management'].map((c, i) =>
-  <div key={c}><Row color={c} border="all" size="dynamic-padded"><span>{c}</span></Row></div>
+  <div key={c}><Row color={c} border="all" alignItems="center" justifyContent="space-between" size="dynamic-padded-dense"><span>{c}</span><Button>Button</Button></Row></div>
 );
 <Column>{rows}</Column>
 ```

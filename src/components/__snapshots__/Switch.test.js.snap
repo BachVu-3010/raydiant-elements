@@ -27,10 +27,11 @@ exports[`Snapshot 1`] = `
         tabIndex={null}
       >
         <input
+          aria-labelledby={null}
           checked={true}
           className="SwitchBase-switch-input-9"
           disabled={false}
-          name=""
+          name={null}
           onChange={[Function]}
           type="checkbox"
           value=""

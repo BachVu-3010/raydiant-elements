@@ -45,6 +45,7 @@ const propTypes = {
   disabled: PropTypes.bool,
   disabledClassName: PropTypes.string,
   inputRef: PropTypes.func,
+  labelledBy: PropTypes.string,
   name: PropTypes.string,
   onChange: PropTypes.func,
   value: PropTypes.string,
@@ -57,7 +58,8 @@ const defaultProps = {
   disabled: false,
   disabledClassName: '',
   inputRef: null,
-  name: '',
+  labelledBy: null,
+  name: null,
   onChange: () => {},
   value: '',
   variant: null,
@@ -67,7 +69,7 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
   class SwitchBase extends React.Component {
     static propTypes = propTypes;
     static defaultProps = defaultProps;
-    static displayName = `SwitchBase-${type}`
+    static displayName = `SwitchBase-${type}`;
 
     input = null;
     button = null;
@@ -85,6 +87,7 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
         disabled,
         disabledClassName,
         inputRef,
+        labelledBy,
         name,
         onChange,
         value,
@@ -92,10 +95,16 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
         ...other
       } = this.props;
 
-      const className = classNames(classes.root, classes.default, classes[variant], classNameProp, {
-        [classNames(classes.checked, checkedClassName)]: checked,
-        [classNames(classes.disabled, disabledClassName)]: disabled,
-      });
+      const className = classNames(
+        classes.root,
+        classes.default,
+        classes[variant],
+        classNameProp,
+        {
+          [classNames(classes.checked, checkedClassName)]: checked,
+          [classNames(classes.disabled, disabledClassName)]: disabled,
+        },
+      );
 
       return (
         <ButtonBase
@@ -107,7 +116,9 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
           keyboardFocusedClassName={classes.focus}
           role={undefined}
           tabIndex={null}
-          ref={node => { this.buttonBase = node; }}
+          ref={node => {
+            this.buttonBase = node;
+          }}
           {...other}
         >
           <input
@@ -118,7 +129,13 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
               }
             }}
             type={inputType}
-            {...{ name, checked, disabled, value }}
+            {...{
+              name,
+              checked,
+              disabled,
+              value,
+              'aria-labelledby': labelledBy,
+            }}
             onChange={this.handleInputChange}
             className={classes.input}
           />
@@ -127,5 +144,7 @@ export default function createSwitch({ type, inputType, styles: inStyles }) {
     }
   }
 
-  return withStyles(theme => ({ ...styles(theme), ...inStyles(theme) }))(SwitchBase);
+  return withStyles(theme => ({ ...styles(theme), ...inStyles(theme) }))(
+    SwitchBase,
+  );
 }

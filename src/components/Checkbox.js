@@ -10,16 +10,24 @@ const propTypes = {
   checked: PropTypes.bool,
   /** Whether the checkbox is disabled or not. */
   disabled: PropTypes.bool,
+  /**
+   * The ID of an element that labels this control.
+   * Useful if this control is separated from its text.
+  */
+  labelledBy: PropTypes.string,
+  /** The name of the checkbox */
   name: PropTypes.string,
   /** Called when the user clicks the control. */
   onChange: PropTypes.func,
+  /** The value of the checkbox */
   value: PropTypes.string,
 };
 const defaultProps = {
   children: null,
   checked: false,
   disabled: false,
-  name: '',
+  labelledBy: null,
+  name: null,
   onChange: () => {},
   value: '',
 };
@@ -30,12 +38,26 @@ const defaultProps = {
  * Checkboxes without labels will be rendered as round, and are intended for selecting items
  * in a grid.
  */
-const Checkbox = ({ children, checked, disabled, name, onChange, value }) =>
+const Checkbox = ({
+  children,
+  checked,
+  disabled,
+  labelledBy,
+  name,
+  onChange,
+  value,
+}) => (
   <FormControlLabel
     {...{ disabled }}
-    control={<CheckboxInput {...{ checked, disabled, name, onChange, value }} variant={children ? null : 'round'} />}
+    control={
+      <CheckboxInput
+        {...{ checked, disabled, labelledBy, name, onChange, value }}
+        variant={children || labelledBy ? null : 'round'}
+      />
+    }
     label={children}
-  />;
+  />
+);
 
 Checkbox.propTypes = propTypes;
 Checkbox.defaultProps = defaultProps;

@@ -6,6 +6,7 @@ import Flex, {
   propTypes as flexPropTypes,
   defaultProps as flexDefaultProps,
 } from './Flex';
+import ThemeProvider from '../styles/ThemeProvider';
 
 const propTypes = {
   ...flexPropTypes,
@@ -49,22 +50,34 @@ const Row = ({
   color,
   size,
   ...rest
-}) => (
-  <Flex
-    alignContent={
-      alignContent === undefined ? size === 'content' : alignContent
-    }
-    className={classnames(
-      classes.root,
-      classes[`color-${color}`],
-      classes[`size-${size}`],
-      classes[`border-${border}`],
-      classes[`borderRadius-${borderRadius}`],
-      className,
-    )}
-    {...rest}
-  />
-);
+}) => {
+  const flex = (
+    <Flex
+      alignContent={
+        alignContent === undefined ? size === 'content' : alignContent
+      }
+      className={classnames(
+        classes.root,
+        classes[`color-${color}`],
+        classes[`size-${size}`],
+        classes[`border-${border}`],
+        classes[`borderRadius-${borderRadius}`],
+        className,
+      )}
+      {...rest}
+    />
+  );
+  let theme;
+  if (color === 'primary') {
+    theme = 'light';
+  } else if (color === 'management' || color === 'global') {
+    theme = 'dark';
+  }
+  if (theme) {
+    return <ThemeProvider theme={theme}>{flex}</ThemeProvider>;
+  }
+  return flex;
+};
 Row.propTypes = propTypes;
 Row.defaultProps = defaultProps;
 

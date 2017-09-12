@@ -1,13 +1,16 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
 import testRenderer from 'react-test-renderer';
-import sinon from 'sinon';
 
 module.exports = Component => {
   test('Children passed through', () => {
     let component = render(<Component>Yes or no</Component>);
     expect(component.text()).toEqual('Yes or no');
-    component = render(<Component><span>Yes</span> or <span>no</span></Component>);
+    component = render(
+      <Component>
+        <span>Yes</span> or <span>no</span>
+      </Component>,
+    );
     expect(component.text()).toEqual('Yes or no');
   });
 
@@ -27,14 +30,21 @@ module.exports = Component => {
   });
 
   test('onChange', () => {
-    const onChange = sinon.spy();
+    const onChange = jest.fn();
     const component = mount(<Component onChange={onChange}>Changes</Component>);
     component.find('input').simulate('change');
-    expect(onChange.callCount).toEqual(1);
+    expect(onChange.mock.calls.length).toEqual(1);
+  });
+
+  test('labelledBy', () => {
+    const component = render(<Component labelledBy="foo" />);
+    expect(component.find('input').prop('aria-labelledby')).toEqual('foo');
   });
 
   test('Snapshot', () => {
-    const component = testRenderer.create(<Component checked>Yes or no</Component>);
+    const component = testRenderer.create(
+      <Component checked>Yes or no</Component>,
+    );
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

@@ -21,10 +21,11 @@ exports[`Snapshot 1`] = `
       tabIndex={null}
     >
       <input
+        aria-labelledby={null}
         checked={true}
         className="SwitchBase-radio-input-5"
         disabled={false}
-        name=""
+        name={null}
         onChange={[Function]}
         type="radio"
         value=""

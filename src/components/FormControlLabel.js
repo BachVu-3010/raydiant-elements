@@ -37,7 +37,7 @@ const defaultProps = {
   className: '',
   disabled: false,
   inputRef: null,
-  label: '',
+  label: null,
   onChange: () => {},
 };
 
@@ -57,7 +57,7 @@ const FormControlLabel = ({
     )}
   >
     <span>{React.cloneElement(control, { inputRef })}</span>
-    <span className={classes.label}>{label}</span>
+    {label && <span className={classes.label}>{label}</span>}
   </label>
 );
 

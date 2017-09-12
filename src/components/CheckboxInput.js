@@ -4,7 +4,7 @@ const styles = theme => ({
   default: {
     color: theme.palette.checkbox
       ? theme.palette.checkbox.backgroundChecked
-      : '', // ripple
+      : '', // border, ripple
     verticalAlign: 'middle',
     '&:before': {
       display: 'block',
@@ -44,15 +44,17 @@ const styles = theme => ({
   },
   checked: {
     '&:before': {
-      backgroundColor: theme.palette.checkbox
-        ? theme.palette.checkbox.backgroundChecked
-        : '',
+      backgroundColor: 'currentcolor',
+      borderColor: 'currentcolor',
     },
     '&:after': {
       opacity: 1,
       width: '10px',
       height: '5px',
       transition: 'height 0.1s 0.1s, width 0.1s 0.2s',
+    },
+    '&:hover:before': {
+      boxShadow: '0 0 0 1px currentcolor',
     },
   },
   disabled: {
