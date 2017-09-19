@@ -58,23 +58,32 @@ const defaultProps = {
 /**
  * Text field
  */
-const TextField = ({
-  classes,
-  className, disabled, error, helperText, label, multiline, name, placeholder, type, value,
-  onBlur, onChange, onFocus }) => {
-  let multilineOpts = {};
-  if (multiline) {
-    multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
-  }
-  return <MUITextField
-    fullWidth
-    {...multilineOpts}
-    className={classnames(className, classes.root, { [classes.alert]: error === 'alert' })}
-    {...{
+class TextField extends React.Component {
+  componentWillUpdate = () => {
+    // Note the current cursor and input length.
+    // Transforming the text in onChange will lose the cursor position.
+    this.cursorIdx = this.input.selectionStart;
+    this.cursorLength = this.input.value.length;
+  };
+  componentDidUpdate = () => {
+    // Reset the cursor after the data's been updated.
+    const cursorIdx =
+      this.cursorIdx + (this.input.value.length - this.cursorLength);
+    this.input.selectionStart = cursorIdx;
+    this.input.selectionEnd = cursorIdx;
+  };
+  inputRef = node => {
+    this.input = node;
+  };
+  render() {
+    const {
+      classes,
+      className,
       disabled,
       error,
       helperText,
       label,
+      multiline,
       name,
       placeholder,
       type,
@@ -82,9 +91,36 @@ const TextField = ({
       onBlur,
       onChange,
       onFocus,
-    }}
-  />;
-};
+    } = this.props;
+    let multilineOpts = {};
+    if (multiline) {
+      multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
+    }
+    return (
+      <MUITextField
+        fullWidth
+        {...multilineOpts}
+        className={classnames(className, classes.root, {
+          [classes.alert]: error === 'alert',
+        })}
+        {...{
+          disabled,
+          error,
+          helperText,
+          label,
+          name,
+          placeholder,
+          type,
+          value,
+          onBlur,
+          onChange,
+          onFocus,
+        }}
+        inputRef={this.inputRef}
+      />
+    );
+  }
+}
 
 TextField.propTypes = propTypes;
 TextField.defaultProps = defaultProps;

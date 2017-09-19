@@ -76,3 +76,20 @@ const aLotOfText = area => `When you have a bunch of ${area} text in a narrow ar
   <TextField error value="" label="Long error text" helperText={aLotOfText('error')} />
 </Column>
 ```
+
+## Text transformation
+
+```jsx
+initialState = {capsValue: '', numsValue: ''};
+const onCaps = (e) => {
+  setState({capsValue: e.target.value.toUpperCase()});
+};
+const numsOnly = (e) => {
+  setState({numsValue: e.target.value.replace(/[^0-9]/, '')});
+};
+
+<Column>
+  <TextField value={state.capsValue} label="Shout something here" onChange={onCaps} />
+  <TextField value={state.numsValue} label="Numbers only" onChange={numsOnly} />
+</Column>
+```
