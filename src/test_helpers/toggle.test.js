@@ -1,6 +1,5 @@
 import React from 'react';
 import { render, mount } from 'enzyme';
-import testRenderer from 'react-test-renderer';
 
 module.exports = Component => {
   test('Children passed through', () => {
@@ -39,13 +38,5 @@ module.exports = Component => {
   test('labelledBy', () => {
     const component = render(<Component labelledBy="foo" />);
     expect(component.find('input').prop('aria-labelledby')).toEqual('foo');
-  });
-
-  test('Snapshot', () => {
-    const component = testRenderer.create(
-      <Component checked>Yes or no</Component>,
-    );
-    const tree = component.toJSON();
-    expect(tree).toMatchSnapshot();
   });
 };

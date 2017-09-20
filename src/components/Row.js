@@ -110,8 +110,8 @@ const styles = theme => {
       color: theme.palette.getContrastText(theme.palette.primary[800]),
     },
     'color-primary': {
-      backgroundColor: 'white',
-      color: theme.palette.getContrastText('white'),
+      backgroundColor: '#ffffff',
+      color: theme.palette.getContrastText('#ffffff'),
     },
     'size-dynamic': {},
     'size-tall': { height: '68px', padding: `0 ${theme.spacing.unit}px` },

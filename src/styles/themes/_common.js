@@ -1,24 +1,81 @@
-import {
-  createPalette,
-  createTypography,
-  createBreakpoints,
-} from 'material-ui/styles';
-import spacing from 'material-ui/styles/spacing';
 import purple from '../colors/purple';
 import orange from '../colors/orange';
 import green from '../colors/green';
+
+const spacing = { unit: 8 };
+
+export const light = {
+  text: {
+    primary: 'rgba(41, 40, 52, 1)',
+    secondary: 'rgba(41, 40, 52, 0.7)',
+    disabled: 'rgba(41, 40, 52, 0.5)',
+    hint: 'rgba(41, 40, 52, 0.6)',
+    icon: 'rgba(41, 40, 52, 0.7)',
+    divider: 'rgba(41, 40, 52, 0.2)',
+    lightDivider: 'rgba(0, 0, 0, 0.1)',
+  },
+  input: {
+    bottomLine: 'rgba(41, 40, 52, 1)',
+    helperText: 'rgba(41, 40, 52, 0.7)',
+    labelText: 'rgba(41, 40, 52, 0.7)',
+    inputText: 'rgba(41, 40, 52, 1)',
+    disabled: 'rgba(41, 40, 52, 0.7)',
+  },
+  action: {
+    active: 'rgba(41, 40, 52, 0.7)',
+    disabled: 'rgba(41, 40, 52, 0.7)',
+  },
+  background: {
+    default: '#f3f4f6',
+    paper: '#ffffff',
+    appBar: '#d8d8d8',
+    contentFrame: '#d8d8d8',
+  },
+};
+
+export const dark = {
+  text: {
+    primary: 'rgba(255, 255, 255, 1)',
+    secondary: 'rgba(255, 255, 255, 0.7)',
+    disabled: 'rgba(255, 255, 255, 1)',
+    hint: 'rgba(255, 255, 255, 0.5)',
+    icon: 'rgba(255, 255, 255, 0.5)',
+    divider: 'rgba(255, 255, 255, 0.2)',
+    lightDivider: 'rgba(255, 255, 255, 0.1)',
+  },
+  input: {
+    bottomLine: 'rgba(255, 255, 255, 1)',
+    helperText: 'rgba(255, 255, 255, 0.7)',
+    labelText: 'rgba(255, 255, 255, 0.7)',
+    inputText: 'rgba(255, 255, 255, 1)',
+    disabled: 'rgba(255, 255, 255, 0.5)',
+  },
+  action: {
+    active: 'rgba(255, 255, 255, 1)',
+    disabled: 'rgba(255, 255, 255, 1)',
+  },
+  background: {
+    default: '#303141',
+    paper: '#4A4B5B',
+    appBar: '#171828',
+    contentFrame: '#171828',
+  },
+};
+
+export const fontWeight = {
+  light: 300,
+  regular: 400,
+  medium: 500,
+};
 
 // A specific green for Switch that doesn't quite line up
 // with the green palette.
 const switchGreen = '#4ab559';
 
-// WIP: style radio/checkbox controls per Zeplin
-// const selectionControlSize = 20;
-
 const inputVSpace = 6;
 const inputHSpace = 10;
 
-const breakpointsDfn = {
+const breakpoints = {
   breakpointsMap: {
     xs: 480 /* mobile */,
     sm: 768 /* mobile landscape */,
@@ -27,29 +84,21 @@ const breakpointsDfn = {
     xl: 1900 /* wide desktop */,
   },
 };
-const breakpoints = createBreakpoints(breakpointsDfn.breakpointsMap);
 
 export default (type = 'light') => {
   const fontFamily = 'Roboto,Noto,sans-serif';
+  const palette = type === 'light' ? light : dark;
 
-  const palette = createPalette({
-    type,
-    primary: purple,
-  });
-  const typography = createTypography(palette, {
-    fontFamily,
-    fontSize: 14,
-  });
   const checkboxPalette =
     type === 'light'
       ? {
-          background: 'white',
+          background: '#ffffff',
           backgroundChecked: purple['500'],
-          colorChecked: 'white',
+          colorChecked: '#ffffff',
         }
       : {
           background: 'rgba(255, 255, 255, 0.15)',
-          backgroundChecked: 'white',
+          backgroundChecked: '#ffffff',
           colorChecked: purple['500'],
         };
   const switchPalette =
@@ -66,47 +115,51 @@ export default (type = 'light') => {
     breakpoints,
     spacing,
     palette: {
+      type,
       ...palette,
+      primary: purple,
+      accent: green,
       destructive: orange,
       progress: green,
       checkbox: checkboxPalette,
       switch: switchPalette,
     },
     typography: {
-      ...typography,
+      fontFamily,
+      fontSize: 14,
       display4: {
         fontFamily,
         fontSize: '36px',
         lineHeight: '52px',
-        fontWeight: typography.fontWeightLight,
+        fontWeight: fontWeight.light,
         color: palette.text.secondary,
       },
       display3: {
         fontFamily,
         fontSize: '18px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightMedium,
+        fontWeight: fontWeight.medium,
         color: palette.text.secondary,
       },
       display2: {
         fontFamily,
         fontSize: '16px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightRegular,
+        fontWeight: fontWeight.regular,
         color: palette.text.secondary,
       },
       display1: {
         fontFamily,
         fontSize: '14px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightRegular,
+        fontWeight: fontWeight.regular,
         color: palette.text.secondary,
       },
       headline: {
         fontFamily,
         fontSize: '12px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightMedium,
+        fontWeight: fontWeight.medium,
         textTransform: 'uppercase',
         color: palette.text.primary,
       },
@@ -114,7 +167,7 @@ export default (type = 'light') => {
         fontFamily,
         fontSize: '12px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightMedium,
+        fontWeight: fontWeight.medium,
         textTransform: 'uppercase',
         color: palette.text.primary,
       },
@@ -123,14 +176,14 @@ export default (type = 'light') => {
         fontFamily,
         fontSize: '14px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightRegular,
+        fontWeight: fontWeight.regular,
         color: palette.text.primary,
       },
       body1: {
         fontFamily,
         fontSize: '12px',
         lineHeight: 1.5,
-        fontWeight: typography.fontWeightRegular,
+        fontWeight: fontWeight.regular,
         color: palette.text.primary,
       },
       caption: {
@@ -140,9 +193,9 @@ export default (type = 'light') => {
         olor: palette.text.secondary,
       },
       button: {
+        fontFamily,
         fontSize: 14,
         fontWeight: 500,
-        fontFamily: typography.fontFamily,
       },
     },
     overrides: {
@@ -158,6 +211,7 @@ export default (type = 'light') => {
           padding:
             '12px 16px' /* 40px high -> 14px text + 2*12 padding + 2*1px border */,
           lineHeight: '1',
+          textTransform: 'none',
         },
         raised: {
           color: palette.text.primary,
@@ -177,13 +231,6 @@ export default (type = 'light') => {
           opacity: 0.5,
         },
       },
-      MuiIconButton: {
-        // WIP: style radio/checkbox controls per Zeplin
-        // root: {
-        //   width: 40,
-        //   height: 40,
-        // },
-      },
       MuiFormControl: {
         fullWidth: {
           display: 'block',
@@ -193,13 +240,13 @@ export default (type = 'light') => {
       MuiInput: {
         root: {
           width: '100%',
+          boxSizing: 'border-box',
+          lineHeight: '18px',
           background:
             type === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
         },
         input: {
           padding: `${inputVSpace}px ${inputHSpace}px`,
-          lineHeight: '18px',
-          boxSizing: 'border-box',
         },
         inputSingleline: {
           height: 'auto',
@@ -233,7 +280,7 @@ export default (type = 'light') => {
         paper: {
           margin: `${spacing.unit * 3}px`,
           maxHeight: '680px',
-          [breakpoints.down('sm')]: {
+          [`@media (max-width:${breakpoints.sm}px)`]: {
             margin: `${spacing.unit * 2}px`,
           },
         },

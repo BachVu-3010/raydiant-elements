@@ -37,7 +37,7 @@ const propTypes = {
   /** Called when the user focuses the text field. */
   onFocus: PropTypes.func,
   /** @ignore injected by withStyles */
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 const defaultProps = {
   className: '',

@@ -33,7 +33,9 @@ const styles = theme => ({
       transition: 'transform 0.1s ease-out',
     },
     '&:hover:before': {
-      boxShadow: `0 0 0 1px ${theme.palette.text.primary}`,
+      boxShadow: `0 0 0 1px ${theme.palette.checkbox
+        ? theme.palette.checkbox.backgroundChecked
+        : ''}`,
     },
   },
   checked: {

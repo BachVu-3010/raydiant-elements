@@ -21,7 +21,7 @@ const propTypes = {
   /** Button type. Usually you want the default `button`, but you may want a `submit` button. */
   type: PropTypes.oneOf(['button', 'submit', 'reset', 'menu']),
   /** @ignore injected by withStyles */
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 const defaultProps = {
   children: null,
@@ -37,20 +37,34 @@ const defaultProps = {
  * A clickable thing to click on.
  * Buttons may have text, imagery, or both.
  */
-const Button = ({ children, classes, color, disabled, fullWidth, icon, onClick, type }) => {
+const Button = ({
+  children,
+  classes,
+  color,
+  disabled,
+  fullWidth,
+  icon,
+  onClick,
+  type,
+}) => {
   let ic = null;
   if (icon) {
     ic = <Icon>{icon}</Icon>;
   }
-  return <span className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}>
-    <MUIButton
-      {...{ disabled, onClick, type }}
-      className={classnames(classes.button, classes[color])}
-      raised={color !== 'default'}
+  return (
+    <span
+      className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}
     >
-      {ic}{children}
-    </MUIButton>
-  </span>;
+      <MUIButton
+        {...{ disabled, onClick, type }}
+        className={classnames(classes.button, classes[color])}
+        raised={color !== 'default'}
+      >
+        {ic}
+        {children}
+      </MUIButton>
+    </span>
+  );
 };
 
 Button.propTypes = propTypes;
