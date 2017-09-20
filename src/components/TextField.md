@@ -5,6 +5,7 @@ initialState = {
   city: "San Francisco",
   zip: "",
   password: '',
+  email: '',
   verifyPassword: '',
   passwordError: false
 };
@@ -28,6 +29,7 @@ const PASSWORD_ERROR = `The "Password" and "Verify Password" fields must match.`
 
 <Column>
   <TextField name="city" onChange={onChange} value={state.city} label="City" />
+  <TextField type="email" name="email" onChange={onChange} value={state.email} label="Email" />
   <TextField name="zip" onChange={onZipChange} value={state.zip} placeholder="90210" label="ZIP Code" helperText="Your 5-digit ZIP code. Enter 00000 for non-U.S. addresses." />
   <TextField name="password" type="password" onChange={onPassChange} value={state.password} placeholder="Password" label="Password" error={state.passwordError} />
   <TextField name="verifyPassword" type="password" onChange={onPassChange} value={state.verifyPassword} placeholder="Password, again" label="Verify Password" error={state.passwordError} helperText={state.passwordError ? PASSWORD_ERROR : ''} />

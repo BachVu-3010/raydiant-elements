@@ -55,23 +55,32 @@ const defaultProps = {
   onFocus: () => {},
 };
 
+const isAllowedSelectionType = type => {
+  const allowedSelectionTypes = ['text', 'search', 'password', 'tel', 'url'];
+  return allowedSelectionTypes.indexOf(type) >= 0;
+};
+
 /**
  * Text field
  */
 class TextField extends React.Component {
-  componentWillUpdate = () => {
-    // Note the current cursor and input length.
-    // Transforming the text in onChange will lose the cursor position.
-    this.cursorIdx = this.input.selectionStart;
-    this.cursorLength = this.input.value.length;
-  };
-  componentDidUpdate = () => {
-    // Reset the cursor after the data's been updated.
-    const cursorIdx =
-      this.cursorIdx + (this.input.value.length - this.cursorLength);
-    this.input.selectionStart = cursorIdx;
-    this.input.selectionEnd = cursorIdx;
-  };
+  componentWillUpdate() {
+    if (isAllowedSelectionType(this.props.type)) {
+      // Note the current cursor and input length.
+      // Transforming the text in onChange will lose the cursor position.
+      this.cursorIdx = this.input.selectionStart;
+      this.cursorLength = this.input.value.length;
+    }
+  }
+  componentDidUpdate() {
+    if (isAllowedSelectionType(this.props.type)) {
+      // Reset the cursor after the data's been updated.
+      const cursorIdx =
+        this.cursorIdx + (this.input.value.length - this.cursorLength);
+      this.input.selectionStart = cursorIdx;
+      this.input.selectionEnd = cursorIdx;
+    }
+  }
   inputRef = node => {
     this.input = node;
   };
