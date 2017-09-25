@@ -12,6 +12,7 @@ import Dialog from './components/Dialog';
 import DialogContent from './components/DialogContent';
 import DialogTitle from './components/DialogTitle';
 import DialogActions from './components/DialogActions';
+import NumberField from './components/NumberField';
 
 module.exports = {
   App,
@@ -28,4 +29,5 @@ module.exports = {
   DialogContent,
   DialogTitle,
   DialogActions,
+  NumberField,
 };

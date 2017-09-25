@@ -8,13 +8,23 @@ const LAYOUT = 'Layout';
 const MODALS = 'Modals';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
-  categories: [STARTUP, TOGGLE, BUTTON, TEXTINPUT, MODALS, TYPOGRAPHY, LAYOUT, COLORS],
+  categories: [
+    STARTUP,
+    TOGGLE,
+    BUTTON,
+    TEXTINPUT,
+    MODALS,
+    TYPOGRAPHY,
+    LAYOUT,
+    COLORS,
+  ],
   components: {
     Checkbox: { categories: [TOGGLE] },
     Radio: { categories: [TOGGLE] },
     Switch: { categories: [TOGGLE] },
     Button: { categories: [BUTTON] },
     TextField: { categories: [TEXTINPUT] },
+    NumberField: { categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },
       Heading1: { categories: [TYPOGRAPHY] },

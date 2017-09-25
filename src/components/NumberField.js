@@ -4,10 +4,12 @@ import MUITextField from 'material-ui/TextField';
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
+import { styles } from './TextField';
+
 const propTypes = {
   /** Class name(s) */
   className: PropTypes.string,
-  /** Whether the button is disabled or not. */
+  /** Whether the input is disabled or not. */
   disabled: PropTypes.bool,
   /** Input should be in an error state.  
    * Pass `true` or `'error'` for an error state.  
@@ -16,20 +18,18 @@ const propTypes = {
   error: PropTypes.oneOf(['alert', 'error', true, false]),
   /** Additional information to help the user fill the field. */
   helperText: PropTypes.string,
-  /** Icon associated with the input. */
-  // icon: PropTypes.node,
   /** The description for the input field. */
   label: PropTypes.string.isRequired,
-  /** Has multiple lines */
-  multiline: PropTypes.bool,
   /** Name */
   name: PropTypes.string,
-  /** A valid HTML5 input type. */
-  type: PropTypes.string,
   /** Ghosted text to display if the input field is empty. */
   placeholder: PropTypes.string,
   /** The value of the input field. */
-  value: PropTypes.string,
+  value: PropTypes.number,
+  /** The value of the input field. */
+  min: PropTypes.number,
+  /** The value of the input field. */
+  max: PropTypes.number,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */
@@ -44,45 +44,40 @@ const defaultProps = {
   disabled: false,
   error: false,
   helperText: '',
-  // icon: null,
-  multiline: false,
   name: '',
   placeholder: '',
-  type: 'text',
-  value: '',
+  value: 0,
+  min: undefined,
+  max: undefined,
   onBlur: () => {},
   onChange: () => {},
   onFocus: () => {},
 };
 
-const isAllowedSelectionType = type => {
-  const allowedSelectionTypes = ['text', 'search', 'password', 'tel', 'url'];
-  return allowedSelectionTypes.indexOf(type) >= 0;
-};
-
 /**
- * Text field
+ * Number field
  */
-class TextField extends React.Component {
-  componentWillUpdate() {
-    if (isAllowedSelectionType(this.props.type)) {
-      // Note the current cursor and input length.
-      // Transforming the text in onChange will lose the cursor position.
-      this.cursorIdx = this.input.selectionStart;
-      this.cursorLength = this.input.value.length;
+class NumberField extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const { min, max } = this.props;
+
+    if (min !== nextProps.min) {
+      this.input.setAttribute('min', nextProps.min);
     }
-  }
-  componentDidUpdate() {
-    if (isAllowedSelectionType(this.props.type)) {
-      // Reset the cursor after the data's been updated.
-      const cursorIdx =
-        this.cursorIdx + (this.input.value.length - this.cursorLength);
-      this.input.selectionStart = cursorIdx;
-      this.input.selectionEnd = cursorIdx;
+
+    if (max !== nextProps.max) {
+      this.input.setAttribute('max', nextProps.max);
     }
   }
   inputRef = node => {
+    const { min, max } = this.props;
+
     this.input = node;
+
+    if (node) {
+      this.input.setAttribute('min', min);
+      this.input.setAttribute('max', max);
+    }
   };
   render() {
     const {
@@ -92,23 +87,20 @@ class TextField extends React.Component {
       error,
       helperText,
       label,
-      multiline,
       name,
       placeholder,
-      type,
       value,
-      onBlur,
+      min,
+      max,
       onChange,
+      onBlur,
       onFocus,
     } = this.props;
-    let multilineOpts = {};
-    if (multiline) {
-      multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
-    }
+
     return (
       <MUITextField
+        type="number"
         fullWidth
-        {...multilineOpts}
         className={classnames(className, classes.root, {
           [classes.alert]: error === 'alert',
         })}
@@ -119,8 +111,9 @@ class TextField extends React.Component {
           label,
           name,
           placeholder,
-          type,
           value,
+          min,
+          max,
           onBlur,
           onChange,
           onFocus,
@@ -131,24 +124,7 @@ class TextField extends React.Component {
   }
 }
 
-TextField.propTypes = propTypes;
-TextField.defaultProps = defaultProps;
+NumberField.propTypes = propTypes;
+NumberField.defaultProps = defaultProps;
 
-export const styles = {
-  root: {
-    '& label': {
-      left: '10px',
-    },
-  },
-  alert: {
-    '& label': {
-      color: '#f8b91c',
-    },
-    '& > div:after': {
-      backgroundColor: '#f8b91c',
-      transform: 'scaleX(1)', // alert is always underlined in yellow
-    },
-  },
-};
-
-export default withStyles(styles)(TextField);
+export default withStyles(styles)(NumberField);
