@@ -285,6 +285,16 @@ export default (type = 'light') => {
           },
         },
       },
+      MuiSelect: {
+        root: {
+          padding: `0px ${inputHSpace}px`,
+        },
+        select: {
+          '&:focus': {
+            background: 'transparent',
+          },
+        },
+      },
     },
   };
 };

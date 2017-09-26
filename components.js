@@ -25,6 +25,7 @@ module.exports = {
     Button: { categories: [BUTTON] },
     TextField: { categories: [TEXTINPUT] },
     NumberField: { categories: [TEXTINPUT] },
+    SelectField: { categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },
       Heading1: { categories: [TYPOGRAPHY] },
