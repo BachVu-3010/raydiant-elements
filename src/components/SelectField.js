@@ -17,7 +17,7 @@ const propTypes = {
   /** The description for the input field. */
   label: PropTypes.string.isRequired,
   /** The input value */
-  value: PropTypes.oneOf([
+  value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number,
     PropTypes.arrayOf(PropTypes.string),

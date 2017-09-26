@@ -21,17 +21,17 @@ const countries = [
 <Column>
   <SelectField name="country1" onChange={onChange} value={state.country1} label="Country">
     {countries.map(c =>
-      <option key={c.value} value={c.code}>{c.name}</option>
+      <option key={c.code} value={c.code}>{c.name}</option>
     )}
   </SelectField>
   <SelectField disabled name="country2" onChange={onChange} value={state.country2} label="Country">
     {countries.map(c =>
-      <option key={c.value} value={c.code}>{c.name}</option>
+      <option key={c.code} value={c.code}>{c.name}</option>
     )}
   </SelectField>
   <SelectField error name="country3" onChange={onChange} value={state.country3} label="Country" helperText="Select a country">
     {countries.map(c =>
-      <option key={c.value} value={c.code}>{c.name}</option>
+      <option key={c.code} value={c.code}>{c.name}</option>
     )}
   </SelectField>
 </Column>
