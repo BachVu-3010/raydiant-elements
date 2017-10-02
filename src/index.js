@@ -15,6 +15,7 @@ import DialogActions from './components/DialogActions';
 import NumberField from './components/NumberField';
 import SelectField from './components/SelectField';
 import FileField from './components/FileField';
+import ThemeProvider from './styles/ThemeProvider';
 
 module.exports = {
   App,
@@ -34,4 +35,5 @@ module.exports = {
   NumberField,
   SelectField,
   FileField,
+  ThemeProvider,
 };
