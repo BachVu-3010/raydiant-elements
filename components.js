@@ -6,6 +6,7 @@ const TEXTINPUT = 'Text Inputs';
 const TYPOGRAPHY = 'Typography';
 const LAYOUT = 'Layout';
 const MODALS = 'Modals';
+const PROGRESS = 'Progress';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
   categories: [
@@ -14,6 +15,7 @@ module.exports = {
     BUTTON,
     TEXTINPUT,
     MODALS,
+    PROGRESS,
     TYPOGRAPHY,
     LAYOUT,
     COLORS,
@@ -44,5 +46,6 @@ module.exports = {
     DialogContent: { categories: [MODALS] },
     DialogTitle: { categories: [MODALS] },
     DialogActions: { categories: [MODALS] },
+    CircularProgress: { categories: [PROGRESS] },
   },
 };
