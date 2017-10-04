@@ -15,6 +15,7 @@ import DialogActions from './components/DialogActions';
 import NumberField from './components/NumberField';
 import SelectField from './components/SelectField';
 import FileField from './components/FileField';
+import CircularProgress from './components/CircularProgress';
 import ThemeProvider from './styles/ThemeProvider';
 
 module.exports = {
@@ -36,4 +37,5 @@ module.exports = {
   SelectField,
   FileField,
   ThemeProvider,
+  CircularProgress,
 };
