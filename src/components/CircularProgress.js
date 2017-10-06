@@ -8,7 +8,7 @@ const propTypes = {
   /** Class name(s) */
   className: PropTypes.string,
   /** Style of the progress. */
-  color: PropTypes.oneOf(['primary', 'progress', 'destructive']),
+  color: PropTypes.oneOf(['default', 'primary', 'progress', 'destructive']),
   /** The size of the circle. */
   size: PropTypes.number,
   /* The mode of show your progress. Indeterminate for when there is no value for progress. 
@@ -26,7 +26,7 @@ const propTypes = {
 
 const defaultProps = {
   className: '',
-  color: 'primary',
+  color: 'default',
   size: 40,
   mode: 'indeterminate',
   max: 100,
@@ -51,6 +51,9 @@ const CircularProgress = ({
 );
 
 const styles = theme => ({
+  default: {
+    color: theme.palette.circularProgress.color,
+  },
   primary: {
     color: theme.palette.primary[500],
   },

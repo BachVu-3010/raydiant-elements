@@ -111,6 +111,15 @@ export default (type = 'light') => {
           bar: 'rgba(255, 255, 255, 0.2)',
           barChecked: switchGreen,
         };
+  const circularProgressPalette =
+    type === 'light'
+      ? {
+          color: purple['500'],
+        }
+      : {
+          color: '#ffffff',
+        };
+
   return {
     breakpoints,
     spacing,
@@ -123,6 +132,7 @@ export default (type = 'light') => {
       progress: green,
       checkbox: checkboxPalette,
       switch: switchPalette,
+      circularProgress: circularProgressPalette,
     },
     typography: {
       fontFamily,
