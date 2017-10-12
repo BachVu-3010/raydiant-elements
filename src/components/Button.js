@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { Children } from 'react';
 import PropTypes from 'prop-types';
-import Icon from 'material-ui/Icon';
 import MUIButton from 'material-ui/Button';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
@@ -14,12 +13,12 @@ const propTypes = {
   disabled: PropTypes.bool,
   /** Fill the entire width of its container? */
   fullWidth: PropTypes.bool,
-  /** An icon. */
-  icon: PropTypes.string,
   /** Called when the user clicks the control. */
   onClick: PropTypes.func,
   /** Button type. Usually you want the default `button`, but you may want a `submit` button. */
   type: PropTypes.oneOf(['button', 'submit', 'reset', 'menu']),
+  /** Pass true to ignore min-width */
+  shrinkwrap: PropTypes.bool,
   /** @ignore injected by withStyles */
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
@@ -29,6 +28,8 @@ const defaultProps = {
   disabled: false,
   fullWidth: false,
   icon: null,
+  label: null,
+  shrinkwrap: false,
   onClick: () => {},
   type: 'button',
 };
@@ -43,29 +44,26 @@ const Button = ({
   color,
   disabled,
   fullWidth,
-  icon,
   onClick,
   type,
-}) => {
-  let ic = null;
-  if (icon) {
-    ic = <Icon>{icon}</Icon>;
-  }
-  return (
-    <span
-      className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}
+  shrinkwrap,
+}) => (
+  <span
+    className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}
+  >
+    <MUIButton
+      {...{ disabled, onClick, type }}
+      className={classnames(
+        classes.button,
+        classes[color],
+        shrinkwrap && classes.shrinkwrap,
+      )}
+      raised={color !== 'default'}
     >
-      <MUIButton
-        {...{ disabled, onClick, type }}
-        className={classnames(classes.button, classes[color])}
-        raised={color !== 'default'}
-      >
-        {ic}
-        {children}
-      </MUIButton>
-    </span>
-  );
-};
+      {Children.map(children, child => <span>{child}</span>)}
+    </MUIButton>
+  </span>
+);
 
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
@@ -99,6 +97,7 @@ const styles = theme => ({
   root: { display: 'inline-block' },
   button: { width: '100%' },
   fullWidth: { display: 'block' },
+  shrinkwrap: { minWidth: 0 },
   default: {},
   primary: getButtonStyle(theme, theme.palette.primary),
   destructive: getButtonStyle(theme, theme.palette.destructive),

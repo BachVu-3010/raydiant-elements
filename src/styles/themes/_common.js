@@ -1,6 +1,7 @@
 import purple from '../colors/purple';
 import orange from '../colors/orange';
 import green from '../colors/green';
+import yellow from '../colors/yellow';
 
 const spacing = { unit: 8 };
 
@@ -130,6 +131,7 @@ export default (type = 'light') => {
       accent: green,
       destructive: orange,
       progress: green,
+      warning: yellow,
       checkbox: checkboxPalette,
       switch: switchPalette,
       circularProgress: circularProgressPalette,
@@ -218,10 +220,15 @@ export default (type = 'light') => {
           borderWidth: '1px',
           borderColor: palette.text.divider,
           color: palette.text.primary,
-          padding:
-            '12px 16px' /* 40px high -> 14px text + 2*12 padding + 2*1px border */,
+          // children are automatically vertically aligned so we don't need vertical padding
+          // this allows icons to align with text
+          padding: '0 16px',
           lineHeight: '1',
           textTransform: 'none',
+        },
+        label: {
+          '& > *': { marginLeft: `${spacing.unit}px` },
+          '& > *:first-child': { marginLeft: '0px' },
         },
         raised: {
           color: palette.text.primary,

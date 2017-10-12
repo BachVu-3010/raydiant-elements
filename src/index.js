@@ -17,6 +17,8 @@ import SelectField from './components/SelectField';
 import FileField from './components/FileField';
 import CircularProgress from './components/CircularProgress';
 import ThemeProvider from './styles/ThemeProvider';
+import SvgIcon from './components/SvgIcon';
+import Icon from './components/Icon';
 
 module.exports = {
   App,
@@ -38,4 +40,6 @@ module.exports = {
   FileField,
   ThemeProvider,
   CircularProgress,
+  SvgIcon,
+  Icon,
 };

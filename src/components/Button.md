@@ -29,5 +29,12 @@ const buttons = ['default', 'primary', 'destructive', 'progress'].map(
 ```
 
 ### Text and Icons
+```jsx
+<Button><Icon icon="add" />Add Content</Button>
+```
 
 ### Icons
+```jsx
+<Button shrinkwrap><Icon icon="add" /></Button>
+```
+
