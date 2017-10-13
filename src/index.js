@@ -19,6 +19,8 @@ import CircularProgress from './components/CircularProgress';
 import ThemeProvider from './styles/ThemeProvider';
 import SvgIcon from './components/SvgIcon';
 import Icon from './components/Icon';
+import AlertIcon from './components/AlertIcon';
+import SuccessIcon from './components/SuccessIcon';
 
 module.exports = {
   App,
@@ -42,4 +44,6 @@ module.exports = {
   CircularProgress,
   SvgIcon,
   Icon,
+  AlertIcon,
+  SuccessIcon,
 };
