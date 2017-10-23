@@ -50,9 +50,9 @@ const defaultProps = {
   placeholder: '',
   type: 'text',
   value: '',
-  onBlur: () => {},
-  onChange: () => {},
-  onFocus: () => {},
+  onBlur: null,
+  onChange: null,
+  onFocus: null,
 };
 
 const isAllowedSelectionType = type => {
@@ -64,23 +64,38 @@ const isAllowedSelectionType = type => {
  * Text field
  */
 class TextField extends React.Component {
-  componentWillUpdate() {
-    if (isAllowedSelectionType(this.props.type)) {
-      // Note the current cursor and input length.
-      // Transforming the text in onChange will lose the cursor position.
-      this.cursorIdx = this.input.selectionStart;
-      this.cursorLength = this.input.value.length;
-    }
-  }
   componentDidUpdate() {
-    if (isAllowedSelectionType(this.props.type)) {
-      // Reset the cursor after the data's been updated.
+    if (this.userInputValue === undefined) {
+      // If we have no user input value defined, the user wasn't interacting with
+      // this field. We can bail.
+      return;
+    }
+    // If we can set selection AND the value was modified in onChange, we can
+    // do some cursor magic to prevent it from moving to the end of the input.
+    if (
+      isAllowedSelectionType(this.props.type) &&
+      this.input.value !== this.userInputValue
+    ) {
       const cursorIdx =
-        this.cursorIdx + (this.input.value.length - this.cursorLength);
+        this.cursorIdx + (this.input.value.length - this.userInputValue.length);
       this.input.selectionStart = cursorIdx;
       this.input.selectionEnd = cursorIdx;
     }
+    // Clean up the old value
+    delete this.userInputValue;
   }
+  onChange = evt => {
+    const { type, onChange } = this.props;
+    // Make note of the current cursor location in case we need to fix it later
+    // (see componentDidUpdate)
+    if (isAllowedSelectionType(type)) {
+      this.userInputValue = evt.target.value;
+      this.cursorIdx = this.input.selectionStart;
+    }
+    if (onChange) {
+      onChange(evt);
+    }
+  };
   inputRef = node => {
     this.input = node;
   };
@@ -98,7 +113,6 @@ class TextField extends React.Component {
       type,
       value,
       onBlur,
-      onChange,
       onFocus,
     } = this.props;
     let multilineOpts = {};
@@ -122,9 +136,9 @@ class TextField extends React.Component {
           type,
           value,
           onBlur,
-          onChange,
           onFocus,
         }}
+        onChange={this.onChange}
         inputRef={this.inputRef}
       />
     );
