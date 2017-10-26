@@ -1,9 +1,9 @@
 ```jsx
 const icons = [
   ['add', 'alert', 'defaultContent', 'checkmark'], 
-  ['edit', 'horizontalScreen', 'publish', 'remove'], 
-  ['repeat', 'scheduledContent', 'screenSettings', 'search'],
-  ['verticalScreen']
+  ['edit', 'endDate', 'horizontalScreen', 'publish'], 
+  ['remove', 'repeat', 'time', 'scheduledContent'],
+  ['screenSettings', 'search', 'startDate', 'verticalScreen']
 ];
 
 <Column>
