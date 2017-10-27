@@ -4,6 +4,11 @@ import Radio from './components/Radio';
 import Switch from './components/Switch';
 import Button from './components/Button';
 import TextField from './components/TextField';
+import NumberField from './components/NumberField';
+import SelectField from './components/SelectField';
+import FileField from './components/FileField';
+import DatePicker from './components/DatePicker';
+import TimePicker from './components/TimePicker';
 import * as Typography from './components/Typography';
 import Flex from './components/Flex';
 import Column from './components/Column';
@@ -12,9 +17,6 @@ import Dialog from './components/Dialog';
 import DialogContent from './components/DialogContent';
 import DialogTitle from './components/DialogTitle';
 import DialogActions from './components/DialogActions';
-import NumberField from './components/NumberField';
-import SelectField from './components/SelectField';
-import FileField from './components/FileField';
 import CircularProgress from './components/CircularProgress';
 import ThemeProvider from './styles/ThemeProvider';
 import SvgIcon from './components/SvgIcon';
@@ -30,6 +32,11 @@ module.exports = {
   Button,
   Typography,
   TextField,
+  NumberField,
+  SelectField,
+  FileField,
+  DatePicker,
+  TimePicker,
   Flex,
   Column,
   Row,
@@ -37,9 +44,6 @@ module.exports = {
   DialogContent,
   DialogTitle,
   DialogActions,
-  NumberField,
-  SelectField,
-  FileField,
   ThemeProvider,
   CircularProgress,
   SvgIcon,

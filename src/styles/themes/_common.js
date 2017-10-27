@@ -73,7 +73,7 @@ export const fontWeight = {
 // with the green palette.
 const switchGreen = '#4ab559';
 
-const inputVSpace = 6;
+// Horizontal margins for text input fields
 const inputHSpace = 10;
 
 const breakpoints = {
@@ -258,25 +258,25 @@ export default (type = 'light') => {
         root: {
           width: '100%',
           boxSizing: 'border-box',
-          lineHeight: '18px',
           background:
             type === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+          cursor: 'text',
         },
         input: {
-          padding: `${inputVSpace}px ${inputHSpace}px`,
+          lineHeight: '18px',
+          boxSizing: 'border-box',
+          padding: `18px ${inputHSpace}px 4px ${inputHSpace}px`,
         },
         inputSingleline: {
           height: 'auto',
         },
-        multiline: {
-          padding: `${inputVSpace}px ${inputHSpace}px`,
+        multiline: { padding: '18px 0 2px 0' },
+        inputMultiline: {
+          padding: `0 ${inputHSpace}px 2px ${inputHSpace}px`,
         },
         formControl: {
           'label + &': {
             marginTop: 0,
-          },
-          'label + & > input, label + & > div': {
-            marginTop: `${inputVSpace * 2}px`,
           },
         },
       },
@@ -284,12 +284,15 @@ export default (type = 'light') => {
       MuiInputLabel: {
         formControl: {
           position: 'absolute',
-          left: 0,
           top: 0,
-          transform: `translate(0, ${inputVSpace * 3}px) scale(1)`,
+          left: `${inputHSpace}px`,
+          lineHeight: '18px',
+          transform: 'translate(0, 18px) scale(1)',
+          zIndex: 1,
+          pointerEvents: 'none',
         },
         shrink: {
-          transform: 'translate(0, 4px) scale(0.75)',
+          transform: 'translate(0, 2px) scale(0.75)',
           transformOrigin: 'top left',
         },
       },
@@ -304,12 +307,25 @@ export default (type = 'light') => {
       },
       MuiSelect: {
         root: {
-          padding: `0px ${inputHSpace}px`,
+          lineHeight: '18px',
+          boxSizing: 'border-box',
         },
         select: {
+          width: '100%',
+          height: 'auto',
+          padding: `18px ${inputHSpace}px 4px ${inputHSpace}px`,
           '&:focus': {
             background: 'transparent',
           },
+        },
+        icon: {
+          top: '50%',
+          marginTop: '-12px',
+        },
+      },
+      MuiSvgIcon: {
+        root: {
+          verticalAlign: 'middle',
         },
       },
     },

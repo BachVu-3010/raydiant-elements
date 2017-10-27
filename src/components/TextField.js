@@ -5,6 +5,8 @@ import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
 const propTypes = {
+  /** Autocomplete hint */
+  autoComplete: PropTypes.string,
   /** Class name(s) */
   className: PropTypes.string,
   /** Whether the button is disabled or not. */
@@ -16,8 +18,12 @@ const propTypes = {
   error: PropTypes.oneOf(['alert', 'error', true, false]),
   /** Additional information to help the user fill the field. */
   helperText: PropTypes.string,
+  /** ID */
+  id: PropTypes.string,
   /** Icon associated with the input. */
   // icon: PropTypes.node,
+  /** Get a reference to the underlying input field. */
+  inputRef: PropTypes.func,
   /** The description for the input field. */
   label: PropTypes.string.isRequired,
   /** Has multiple lines */
@@ -40,11 +46,14 @@ const propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 const defaultProps = {
+  autoComplete: null,
   className: '',
   disabled: false,
   error: false,
   helperText: '',
   // icon: null,
+  id: null,
+  inputRef: null,
   multiline: false,
   name: '',
   placeholder: '',
@@ -52,6 +61,7 @@ const defaultProps = {
   value: '',
   onBlur: null,
   onChange: null,
+  onClick: null,
   onFocus: null,
 };
 
@@ -96,25 +106,16 @@ class TextField extends React.Component {
       onChange(evt);
     }
   };
-  inputRef = node => {
-    this.input = node;
-  };
   render() {
     const {
       classes,
       className,
-      disabled,
       error,
-      helperText,
-      label,
       multiline,
-      name,
-      placeholder,
-      type,
-      value,
-      onBlur,
-      onFocus,
+      onChange,
+      ...inputProps
     } = this.props;
+
     let multilineOpts = {};
     if (multiline) {
       multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
@@ -123,23 +124,31 @@ class TextField extends React.Component {
       <MUITextField
         fullWidth
         {...multilineOpts}
-        className={classnames(className, classes.root, {
+        {...inputProps}
+        className={classnames(className, {
           [classes.alert]: error === 'alert',
         })}
-        {...{
-          disabled,
-          error,
-          helperText,
-          label,
-          name,
-          placeholder,
-          type,
-          value,
-          onBlur,
-          onFocus,
+        error={error}
+        inputRef={node => {
+          this.input = node;
+          if (this.props.inputRef) {
+            this.props.inputRef(node);
+          }
+        }}
+        ref={node => {
+          this.root = node;
         }}
         onChange={this.onChange}
-        inputRef={this.inputRef}
+        InputProps={{
+          onMouseDown: evt => {
+            // Hack to allow clicks on TextArea "header" piece to focus the
+            // actual TextArea.
+            if (evt.target !== this.input) {
+              evt.preventDefault();
+              this.input.focus();
+            }
+          },
+        }}
       />
     );
   }
@@ -149,11 +158,6 @@ TextField.propTypes = propTypes;
 TextField.defaultProps = defaultProps;
 
 export const styles = {
-  root: {
-    '& label': {
-      left: '10px',
-    },
-  },
   alert: {
     '& label': {
       color: '#f8b91c',

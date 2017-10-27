@@ -34,21 +34,24 @@ let sections = [
   },
 ];
 // Build the component sections based on components.json
-sections = sections.concat(
-  components.categories.map(cat => ({
-    name: cat,
-    content: `./styleguide/docs/sections/${cat}.md`,
-    components: () => componentMap[cat] || [],
-  }))
-);
+const mappedCategories = components.categories.map(cat => ({
+  name: cat,
+  content: `./styleguide/docs/sections/${cat}.md`,
+  components: () => componentMap[cat] || [],
+}));
+sections = sections.concat(mappedCategories);
 
 module.exports = {
   sections,
   // require: ['./styleguide/styles.css'],
+  require: ['moment'],
   title: `Mira Elements v${pkg.version}`,
   getExampleFilename: f => f.replace(/\.jsx?$/, '.md'),
   styleguideComponents: {
-    StyleGuideRenderer: path.join(__dirname, 'styleguide/components/StyleGuideRenderer'),
+    StyleGuideRenderer: path.join(
+      __dirname,
+      'styleguide/components/StyleGuideRenderer'
+    ),
     Wrapper: path.join(__dirname, 'styleguide/components/Wrapper'),
   },
   styleguideDir: './dist',

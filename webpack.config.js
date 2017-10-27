@@ -3,11 +3,13 @@ const webpack = require('webpack');
 
 const environment = process.env.NODE_ENV;
 const isProd = environment === 'production';
-const plugins = isProd ? [] : [
-  new webpack.LoaderOptionsPlugin({
-    debug: true,
-  }),
-];
+const plugins = isProd
+  ? []
+  : [
+      new webpack.LoaderOptionsPlugin({
+        debug: true,
+      }),
+    ];
 const devtool = isProd ? false : 'source-map';
 
 module.exports = () => ({
@@ -22,6 +24,7 @@ module.exports = () => ({
   externals: {
     react: 'react',
     'react-dom': 'react-dom',
+    moment: 'moment',
   },
   module: {
     rules: [
@@ -37,9 +40,13 @@ module.exports = () => ({
           },
         ],
       },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
   devServer: {
     disableHostCheck: true,
-  }
+  },
 });

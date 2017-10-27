@@ -95,3 +95,19 @@ const numsOnly = (e) => {
   <TextField value={state.numsValue} label="Numbers only" onChange={numsOnly} />
 </Column>
 ```
+
+## Autofill
+
+```jsx
+initialState = {firstName: '', lastName: '', email: ''};
+const onChangeFn = field => e => { setState({[field]: e.target.value}) };
+
+<form>
+  <p>Try typing your first name in the First Name field.</p>
+  <Column>
+    <TextField onChange={onChangeFn('firstName')} name="fname" value={state.firstName} label="First name" autoComplete="given-name" id="firstname"/>
+    <TextField onChange={onChangeFn('lastName')} name="lname" value={state.lastName} label="Last name" autoComplete="family-name"/>
+    <TextField onChange={onChangeFn('email')} name="email" type="email" value={state.email} label="Email" autoComplete="email"/>
+  </Column>
+</form>
+```
