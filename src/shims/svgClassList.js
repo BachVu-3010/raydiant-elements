@@ -1,7 +1,7 @@
 /* globals SVGElement */
 // Shim required for react-datepicker
 export default () => {
-  if (!('classList' in SVGElement.prototype)) {
+  if (SVGElement && !('classList' in SVGElement.prototype)) {
     Object.defineProperty(SVGElement.prototype, 'classList', {
       get() {
         return {
