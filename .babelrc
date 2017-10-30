@@ -1,11 +1,5 @@
 {
-  "presets": [
-    ["env", {"modules": false}],
-    "es2015",
-    "stage-1",
-    "react"
-  ],
-  "plugins": [
-    "transform-runtime"
-  ]
+  // This file is used only by Jest in a test environment.
+  // The full Babel config for build/deploy is in webpack.config.
+  "presets": ["es2015", "stage-1", "react"]
 }

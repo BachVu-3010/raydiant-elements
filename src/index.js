@@ -1,3 +1,4 @@
+import svgClassListShim from './shims/svgClassList';
 import App from './components/App';
 import Checkbox from './components/Checkbox';
 import Radio from './components/Radio';
@@ -23,6 +24,8 @@ import SvgIcon from './components/SvgIcon';
 import Icon from './components/Icon';
 import AlertIcon from './components/AlertIcon';
 import SuccessIcon from './components/SuccessIcon';
+
+svgClassListShim();
 
 module.exports = {
   App,

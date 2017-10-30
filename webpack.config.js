@@ -30,12 +30,27 @@ module.exports = () => ({
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: /node_modules/,
+        exclude: modulePath =>
+          /node_modules/.test(modulePath) &&
+          !/node_modules\/react-onclickoutside/.test(modulePath),
         use: [
           {
             loader: 'babel-loader',
             options: {
               cacheDirectory: true,
+              presets: [
+                [
+                  'env',
+                  {
+                    modules: false,
+                  },
+                ],
+                'es2015',
+                'react',
+                'stage-1',
+              ],
+              plugins: ['transform-runtime'],
+              babelrc: false,
             },
           },
         ],
