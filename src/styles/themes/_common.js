@@ -214,7 +214,7 @@ export default (type = 'light') => {
       MuiButton: {
         root: {
           boxSizing: 'border-box',
-          minHeight: '40px',
+          height: '40px',
           minWidth: '92px',
           borderStyle: 'solid',
           borderWidth: '1px',
