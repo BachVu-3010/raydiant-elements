@@ -8,6 +8,7 @@ const LAYOUT = 'Layout';
 const MODALS = 'Modals';
 const PROGRESS = 'Progress';
 const ICONS = 'Icons';
+const POPOVERS = 'Popovers';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
   categories: [
@@ -16,6 +17,7 @@ module.exports = {
     BUTTON,
     TEXTINPUT,
     MODALS,
+    POPOVERS,
     PROGRESS,
     TYPOGRAPHY,
     ICONS,
@@ -50,6 +52,8 @@ module.exports = {
     DialogContent: { categories: [MODALS] },
     DialogTitle: { categories: [MODALS] },
     DialogActions: { categories: [MODALS] },
+    Popover: { categories: [POPOVERS] },
+    PopoverAnchor: { categories: [POPOVERS] },
     CircularProgress: { categories: [PROGRESS] },
     Icon: { categories: [ICONS] },
     AlertIcon: { categories: [ICONS] },

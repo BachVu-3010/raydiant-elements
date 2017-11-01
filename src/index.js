@@ -24,6 +24,8 @@ import SvgIcon from './components/SvgIcon';
 import Icon from './components/Icon';
 import AlertIcon from './components/AlertIcon';
 import SuccessIcon from './components/SuccessIcon';
+import PopoverAnchor from './components/PopoverAnchor';
+import Popover from './components/Popover';
 
 svgClassListShim();
 
@@ -53,4 +55,6 @@ module.exports = {
   Icon,
   AlertIcon,
   SuccessIcon,
+  PopoverAnchor,
+  Popover,
 };
