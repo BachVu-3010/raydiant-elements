@@ -72,6 +72,7 @@ class DatePicker extends React.Component {
     return (
       <div>
         <ReactDatePicker
+          popperPlacement="auto-start"
           showMonthDropdown
           showYearDropdown
           dropdownMode="scroll"
