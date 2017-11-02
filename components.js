@@ -22,7 +22,7 @@ module.exports = {
     TYPOGRAPHY,
     ICONS,
     LAYOUT,
-    COLORS,
+    // COLORS,
   ],
   components: {
     Checkbox: { categories: [TOGGLE] },

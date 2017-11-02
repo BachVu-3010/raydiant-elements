@@ -13,6 +13,7 @@ const justifyContentValues = [
   'space-between',
   'space-around',
   'space-evenly',
+  'stretch',
 ];
 
 const propTypes = {
@@ -84,7 +85,7 @@ const Flex = ({
         [classes.space]: !noSpace,
         [classes.alignContent]: alignContent,
       },
-      className,
+      className
     )}
     {...rest}
   >
@@ -100,7 +101,7 @@ const styles = theme => {
       ...acc,
       [`alignItems-${val}`]: { alignItems: val },
     }),
-    {},
+    {}
   );
 
   const justifyContent = justifyContentValues.reduce(
@@ -108,7 +109,7 @@ const styles = theme => {
       ...acc,
       [`justifyContent-${val}`]: { justifyContent: val },
     }),
-    {},
+    {}
   );
 
   return {

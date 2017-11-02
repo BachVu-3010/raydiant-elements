@@ -10,12 +10,16 @@ import { Note } from './Typography';
 
 export const propTypes = {
   ...tfPropTypes,
+  /** Where the popup should go. By default, will appear above or below
+   * (depending on space) and aligned with the left */
+  popupPlacement: PropTypes.string,
   /** Function that's called when the value changes and the control's blurred */
   onDateChange: PropTypes.func.isRequired,
   /** a date string in format YYYY-MM-DD. Passing a falsy value means "today" */
   value: PropTypes.string,
 };
 export const defaultProps = {
+  popupPlacement: 'bottom-start',
   value: null,
 };
 
@@ -66,13 +70,14 @@ class DatePicker extends React.Component {
       helperText,
       label,
       placeholder,
+      popupPlacement,
       value,
       ...inputProps
     } = this.props;
     return (
       <div>
         <ReactDatePicker
-          popperPlacement="auto-start"
+          popperPlacement={popupPlacement}
           showMonthDropdown
           showYearDropdown
           dropdownMode="scroll"
@@ -96,5 +101,5 @@ class DatePicker extends React.Component {
   }
 }
 DatePicker.propTypes = propTypes;
-DatePicker.defaultProps = propTypes;
+DatePicker.defaultProps = defaultProps;
 export default DatePicker;
