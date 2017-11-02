@@ -90,6 +90,9 @@ export default (type = 'light') => {
   const fontFamily = 'Roboto,Noto,sans-serif';
   const palette = type === 'light' ? light : dark;
 
+  const defaultButtonBG =
+    type === 'light' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
+  const defaultButtonBorder = type === 'light' ? '#c6cedc' : '#666666';
   const checkboxPalette =
     type === 'light'
       ? {
@@ -218,8 +221,18 @@ export default (type = 'light') => {
           minWidth: '92px',
           borderStyle: 'solid',
           borderWidth: '1px',
-          borderColor: palette.text.divider,
+          borderColor: defaultButtonBorder,
           color: palette.text.primary,
+          backgroundColor: defaultButtonBG,
+          '&:disabled': {
+            backgroundColor: defaultButtonBG,
+          },
+          '&:hover': {
+            backgroundColor: palette.text.divider,
+            '&:disabled': {
+              backgroundColor: defaultButtonBG,
+            },
+          },
           // children are automatically vertically aligned so we don't need vertical padding
           // this allows icons to align with text
           padding: '0 16px',
@@ -229,19 +242,6 @@ export default (type = 'light') => {
         label: {
           '& > *': { marginLeft: `${spacing.unit}px` },
           '& > *:first-child': { marginLeft: '0px' },
-        },
-        raised: {
-          color: palette.text.primary,
-          backgroundColor: 'transparent',
-          '&:disabled': {
-            backgroundColor: 'transparent',
-          },
-          '&:hover': {
-            backgroundColor: palette.text.divider,
-            '&:disabled': {
-              backgroundColor: 'transparent',
-            },
-          },
         },
         disabled: {
           color: palette.text.primary,
