@@ -5,64 +5,6 @@ import yellow from '../colors/yellow';
 
 const spacing = { unit: 8 };
 
-export const light = {
-  text: {
-    primary: 'rgba(41, 40, 52, 1)',
-    secondary: 'rgba(41, 40, 52, 0.7)',
-    disabled: 'rgba(41, 40, 52, 0.5)',
-    hint: 'rgba(41, 40, 52, 0.6)',
-    icon: 'rgba(41, 40, 52, 0.7)',
-    divider: 'rgba(41, 40, 52, 0.2)',
-    lightDivider: 'rgba(0, 0, 0, 0.1)',
-  },
-  input: {
-    bottomLine: 'rgba(41, 40, 52, 1)',
-    helperText: 'rgba(41, 40, 52, 0.7)',
-    labelText: 'rgba(41, 40, 52, 0.7)',
-    inputText: 'rgba(41, 40, 52, 1)',
-    disabled: 'rgba(41, 40, 52, 0.7)',
-  },
-  action: {
-    active: 'rgba(41, 40, 52, 0.7)',
-    disabled: 'rgba(41, 40, 52, 0.7)',
-  },
-  background: {
-    default: '#f3f4f6',
-    paper: '#ffffff',
-    appBar: '#d8d8d8',
-    contentFrame: '#d8d8d8',
-  },
-};
-
-export const dark = {
-  text: {
-    primary: 'rgba(255, 255, 255, 1)',
-    secondary: 'rgba(255, 255, 255, 0.7)',
-    disabled: 'rgba(255, 255, 255, 1)',
-    hint: 'rgba(255, 255, 255, 0.5)',
-    icon: 'rgba(255, 255, 255, 0.5)',
-    divider: 'rgba(255, 255, 255, 0.2)',
-    lightDivider: 'rgba(255, 255, 255, 0.1)',
-  },
-  input: {
-    bottomLine: 'rgba(255, 255, 255, 1)',
-    helperText: 'rgba(255, 255, 255, 0.7)',
-    labelText: 'rgba(255, 255, 255, 0.7)',
-    inputText: 'rgba(255, 255, 255, 1)',
-    disabled: 'rgba(255, 255, 255, 0.5)',
-  },
-  action: {
-    active: 'rgba(255, 255, 255, 1)',
-    disabled: 'rgba(255, 255, 255, 1)',
-  },
-  background: {
-    default: '#303141',
-    paper: '#4A4B5B',
-    appBar: '#171828',
-    contentFrame: '#171828',
-  },
-};
-
 export const fontWeight = {
   light: 300,
   regular: 400,
@@ -86,9 +28,8 @@ const breakpoints = {
   },
 };
 
-export default (type = 'light') => {
+export default (type = 'light', palette) => {
   const fontFamily = 'Roboto,Noto,sans-serif';
-  const palette = type === 'light' ? light : dark;
 
   const defaultButtonBG =
     type === 'light' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
@@ -254,6 +195,10 @@ export default (type = 'light') => {
           width: 'auto',
         },
       },
+      MuiFormLabel: {
+        // Don't change label color on focus
+        focused: { color: palette.input.labelText },
+      },
       MuiInput: {
         root: {
           width: '100%',
@@ -261,6 +206,32 @@ export default (type = 'light') => {
           background:
             type === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
           cursor: 'text',
+        },
+        inkbar: {
+          // Add a splash of color on focus
+          '&:after': {
+            display: 'block',
+            backgroundColor: type === 'light' ? purple['200'] : purple['500'],
+            left: 0,
+            bottom: 0,
+            // Doing the other way around crash on IE11 "''" https://github.com/cssinjs/jss/issues/242
+            content: '""',
+            height: 2,
+            position: 'absolute',
+            right: 0,
+            pointerEvent: 'none', // Transparent to the hover style.
+            opacity: 1,
+            transform: 'scaleX(0)',
+            transition: 'transform 0.2s ease-out, opacity 0.5s ease-in', // 'transform 0.2s ease-out, opacity 1s ease-out',
+          },
+          '&$focused:after': {
+            opacity: 0,
+            transform: 'scaleX(1)',
+          },
+          '&$focused:before': {
+            backgroundColor: type === 'light' ? '#20202a' : '#ffffff',
+            height: 2,
+          },
         },
         input: {
           lineHeight: '18px',
@@ -287,12 +258,12 @@ export default (type = 'light') => {
           top: 0,
           left: `${inputHSpace}px`,
           lineHeight: '18px',
-          transform: 'translate(0, 18px) scale(1)',
+          transform: 'translate(0, 11px) scale(1)',
           zIndex: 1,
           pointerEvents: 'none',
         },
         shrink: {
-          transform: 'translate(0, 2px) scale(0.75)',
+          transform: 'translate(0, 2px) scale(0.8)',
           transformOrigin: 'top left',
         },
       },

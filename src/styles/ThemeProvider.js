@@ -5,7 +5,7 @@ import themes from './themes';
 
 const propTypes = {
   /** The theme to use. */
-  theme: PropTypes.oneOf(['light', 'dark']),
+  theme: PropTypes.oneOf(['light', 'dark', 'gray']),
   children: PropTypes.node,
 };
 const defaultProps = {
@@ -13,9 +13,11 @@ const defaultProps = {
   children: null,
 };
 
-const ThemeProvider = ({ theme, children }) => <MuiThemeProvider
-  theme={themes[theme] || themes.default}
->{children}</MuiThemeProvider>;
+const ThemeProvider = ({ theme, children }) => (
+  <MuiThemeProvider theme={themes[theme] || themes.default}>
+    {children}
+  </MuiThemeProvider>
+);
 ThemeProvider.propTypes = propTypes;
 ThemeProvider.defaultProps = defaultProps;
 
