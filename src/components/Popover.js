@@ -115,10 +115,7 @@ const Popover = ({
         style={{
           [toPt[0]]: -2, // should have a 2px buffer
           [toPt[1]]: 0,
-          transform: `translate(
-            ${translate[0]}%,
-            ${translate[1]}%
-          )`,
+          transform: `translate(${translate[0]}%, ${translate[1]}%)`,
         }}
       >
         {children}
