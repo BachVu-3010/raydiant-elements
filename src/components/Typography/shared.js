@@ -5,12 +5,15 @@ export const styleSheet = theme => ({
 });
 
 const propTypes = {
+  /** Class name(s) */
+  className: PropTypes.string,
   /** Child elements are used as the component's text. */
   children: PropTypes.node,
   /** @ignore injected by withStyles */
   classes: PropTypes.object.isRequired,
 };
 const defaultProps = {
+  className: '',
   children: null,
 };
 

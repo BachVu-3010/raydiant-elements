@@ -10,6 +10,7 @@ export const palette = {
     icon: 'rgba(41, 40, 52, 0.7)',
     divider: 'rgba(41, 40, 52, 0.2)',
     lightDivider: 'rgba(0, 0, 0, 0.1)',
+    anchor: '#0683d4',
   },
   input: {
     bottomLine: 'rgba(41, 40, 52, 1)',

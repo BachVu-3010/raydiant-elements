@@ -146,12 +146,15 @@ export default (type = 'light', palette) => {
         fontFamily,
         fontSize: '11px',
         lineHeight: '15px',
-        olor: palette.text.secondary,
+        color: palette.text.secondary,
       },
       button: {
         fontFamily,
         fontSize: 14,
         fontWeight: 500,
+      },
+      anchor: {
+        color: palette.text.anchor,
       },
     },
     overrides: {

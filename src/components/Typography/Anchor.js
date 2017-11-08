@@ -1,10 +1,11 @@
 import React from 'react';
+import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import { propTypes, defaultProps } from './shared';
 
 export const styles = theme => ({
   link: {
-    color: theme.palette.primary[300],
+    color: theme.typography.anchor.color,
     textDecoration: 'none',
     '&:hover, &:focus': {
       textDecoration: 'underline',
@@ -15,8 +16,11 @@ export const styles = theme => ({
 /**
  * A link
  */
-const Anchor = ({ classes, children, ...rest }) =>
-  <a className={classes.link} {...rest}>{children}</a>;
+const Anchor = ({ classes, className, children, ...rest }) => (
+  <a className={classnames(classes.link, className)} {...rest}>
+    {children}
+  </a>
+);
 Anchor.propTypes = propTypes;
 Anchor.defaultProps = defaultProps;
 
