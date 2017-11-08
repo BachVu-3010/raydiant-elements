@@ -1,11 +1,16 @@
-import React, { Children } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import MUIButton from 'material-ui/Button';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
+import Icon from './Icon';
 
 const propTypes = {
-  /** Child elements are used as the button text. */
+  /** Icon of the button */
+  icon: PropTypes.string,
+  /** Text of the button */
+  label: PropTypes.string,
+  /** Child elements are used as the button text if label is not provided. */
   children: PropTypes.node,
   /** Style of the button. */
   color: PropTypes.oneOf(['default', 'destructive', 'primary', 'progress']),
@@ -23,12 +28,12 @@ const propTypes = {
   classes: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
 };
 const defaultProps = {
+  icon: null,
+  label: null,
   children: null,
   color: 'default',
   disabled: false,
   fullWidth: false,
-  icon: null,
-  label: null,
   shrinkwrap: false,
   onClick: () => {},
   type: 'button',
@@ -39,6 +44,8 @@ const defaultProps = {
  * Buttons may have text, imagery, or both.
  */
 const Button = ({
+  icon,
+  label,
   children,
   classes,
   color,
@@ -47,23 +54,36 @@ const Button = ({
   onClick,
   type,
   shrinkwrap,
-}) => (
-  <span
-    className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}
-  >
-    <MUIButton
-      {...{ disabled, onClick, type }}
-      className={classnames(
-        classes.button,
-        classes[color],
-        shrinkwrap && classes.shrinkwrap,
-      )}
-      raised={color !== 'default'}
+}) => {
+  const isIconButton = icon && !label;
+  const isIconTextButton = icon && label;
+  const shouldShrinkwrap = isIconButton || shrinkwrap;
+  return (
+    <span
+      className={classnames(classes.root, { [classes.fullWidth]: fullWidth })}
     >
-      {Children.map(children, child => <span>{child}</span>)}
-    </MUIButton>
-  </span>
-);
+      <MUIButton
+        {...{ disabled, onClick, type }}
+        className={classnames(
+          classes.button,
+          classes[color],
+          shouldShrinkwrap && classes.shrinkwrap,
+          isIconTextButton && classes.iconText
+        )}
+        raised={color !== 'default'}
+      >
+        {icon && (
+          <Icon
+            className={classnames(!isIconButton && classes.icon)}
+            icon={icon}
+          />
+        )}
+        {label && <span className={classes.label}>{label}</span>}
+        {!label && children}
+      </MUIButton>
+    </span>
+  );
+};
 
 Button.propTypes = propTypes;
 Button.defaultProps = defaultProps;
@@ -94,6 +114,9 @@ const getButtonStyle = (theme, palette) => {
 };
 
 const styles = theme => ({
+  icon: { marginRight: `${theme.spacing.unit}px` },
+  label: { whiteSpace: 'nowrap' },
+  iconText: { paddingLeft: '12px' },
   root: { display: 'inline-block' },
   button: { width: '100%' },
   fullWidth: { display: 'block' },

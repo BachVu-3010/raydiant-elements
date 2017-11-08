@@ -183,10 +183,6 @@ export default (type = 'light', palette) => {
           lineHeight: '1',
           textTransform: 'none',
         },
-        label: {
-          '& > *': { marginLeft: `${spacing.unit}px` },
-          '& > *:first-child': { marginLeft: '0px' },
-        },
         disabled: {
           color: palette.text.primary,
           opacity: 0.5,

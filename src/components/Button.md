@@ -6,7 +6,7 @@ initialState = {disabled: false};
 const toggleDisable = (e) => { setState({disabled: !state.disabled}); };
 const buttons = ['default', 'primary', 'destructive', 'progress'].map(
   b => 
-  <Button key={b} disabled={state.disabled} color={b}>{`${b.charAt(0).toUpperCase()}${b.slice(1)}`}</Button>
+  <Button key={b} disabled={state.disabled} color={b} label={`${b.charAt(0).toUpperCase()}${b.slice(1)}`} />
 );
 <Column>
   <Row>{buttons}</Row>
@@ -24,17 +24,17 @@ const buttons = ['default', 'primary', 'destructive', 'progress'].map(
   background: 'white',
   color: '#333'}}>
   <p>A deal you can't refuse!</p>
-  <Button fullWidth color="primary">Sign up now!</Button>
+  <Button fullWidth color="primary" label="Sign up now!" />
 </div>
 ```
 
 ### Text and Icons
 ```jsx
-<Button><Icon icon="add" />Add Content</Button>
+<Button icon="add" label="Add Content" />
 ```
 
 ### Icons
 ```jsx
-<Button shrinkwrap><Icon icon="add" /></Button>
+<Button icon="add" />
 ```
 
