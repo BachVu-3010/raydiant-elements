@@ -5,7 +5,7 @@ import { propTypes, defaultProps } from './shared';
 
 export const styles = theme => ({
   link: {
-    color: theme.typography.anchor.color,
+    color: theme.typography.anchor ? theme.typography.anchor.color : '',
     textDecoration: 'none',
     '&:hover, &:focus': {
       textDecoration: 'underline',
