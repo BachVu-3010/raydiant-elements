@@ -88,7 +88,7 @@ export default (type = 'light', palette) => {
         fontSize: '36px',
         lineHeight: '52px',
         fontWeight: fontWeight.light,
-        color: palette.text.secondary,
+        color: palette.text.primary,
       },
       display3: {
         fontFamily,
