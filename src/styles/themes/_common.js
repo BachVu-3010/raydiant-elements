@@ -206,6 +206,7 @@ export default (type = 'light', palette) => {
           background:
             type === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
           cursor: 'text',
+          borderRadius: 2,
         },
         inkbar: {
           // Add a splash of color on focus
@@ -219,10 +220,17 @@ export default (type = 'light', palette) => {
             height: 2,
             position: 'absolute',
             right: 0,
-            pointerEvent: 'none', // Transparent to the hover style.
+            pointerEvents: 'none', // Transparent to the hover style.
             opacity: 1,
             transform: 'scaleX(0)',
             transition: 'transform 0.2s ease-out, opacity 0.5s ease-in', // 'transform 0.2s ease-out, opacity 1s ease-out',
+            borderBottomLeftRadius: 2,
+            borderBottomRightRadius: 2,
+          },
+          '&:before': {
+            pointerEvents: 'none',
+            borderBottomLeftRadius: 2,
+            borderBottomRightRadius: 2,
           },
           '&$focused:after': {
             opacity: 0,

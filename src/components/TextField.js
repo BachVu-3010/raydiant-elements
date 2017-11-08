@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MUITextField from 'material-ui/TextField';
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
+import Icon from './Icon';
 
 const propTypes = {
   /** Autocomplete hint */
@@ -21,7 +22,7 @@ const propTypes = {
   /** ID */
   id: PropTypes.string,
   /** Icon associated with the input. */
-  // icon: PropTypes.node,
+  icon: PropTypes.string,
   /** Get a reference to the underlying input field. */
   inputRef: PropTypes.func,
   /** The description for the input field. */
@@ -51,7 +52,7 @@ const defaultProps = {
   disabled: false,
   error: false,
   helperText: '',
-  // icon: null,
+  icon: null,
   id: null,
   inputRef: null,
   multiline: false,
@@ -113,6 +114,7 @@ class TextField extends React.Component {
       error,
       multiline,
       onChange,
+      icon,
       ...inputProps
     } = this.props;
 
@@ -120,7 +122,8 @@ class TextField extends React.Component {
     if (multiline) {
       multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
     }
-    return (
+
+    const textField = (
       <MUITextField
         fullWidth
         {...multilineOpts}
@@ -128,6 +131,7 @@ class TextField extends React.Component {
         className={classnames(className, {
           [classes.alert]: error === 'alert',
         })}
+        InputClassName={classnames(icon && classes.inputPaddingRight)}
         error={error}
         inputRef={node => {
           this.input = node;
@@ -151,13 +155,35 @@ class TextField extends React.Component {
         }}
       />
     );
+
+    return icon ? (
+      <div className={classes.container}>
+        <Icon className={classes.icon} icon={icon} />
+        {textField}
+      </div>
+    ) : (
+      textField
+    );
   }
 }
 
 TextField.propTypes = propTypes;
 TextField.defaultProps = defaultProps;
 
-export const styles = {
+export const styles = theme => ({
+  container: {
+    position: 'relative',
+    display: 'block',
+  },
+  icon: {
+    position: 'absolute',
+    right: 10,
+    top: 10,
+    fill: theme.palette.input.labelText,
+  },
+  inputPaddingRight: {
+    paddingRight: 30,
+  },
   alert: {
     '& label': {
       color: '#f8b91c',
@@ -167,6 +193,6 @@ export const styles = {
       transform: 'scaleX(1)', // alert is always underlined in yellow
     },
   },
-};
+});
 
 export default withStyles(styles)(TextField);

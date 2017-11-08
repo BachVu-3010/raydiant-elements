@@ -111,3 +111,19 @@ const onChangeFn = field => e => { setState({[field]: e.target.value}) };
   </Column>
 </form>
 ```
+
+## Icons
+
+```jsx
+initialState = { search: '' };
+const onChange = e => { setState({ search: e.target.value }) };
+
+<Column>
+  <div style={{ width: 200 }}>
+    <TextField icon="search" label="Search..." value={state.search} onChange={onChange} />
+  </div>
+  <div style={{ width: 200 }}>
+    <TextField multiline icon="search" label="Multiline Search..." value={state.search} onChange={onChange} />
+  </div>
+</Column>
+```
