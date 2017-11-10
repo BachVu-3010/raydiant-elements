@@ -34,6 +34,8 @@ export default (type = 'light', palette) => {
   const defaultButtonBG =
     type === 'light' ? 'rgba(255,255,255,0.5)' : 'rgba(0,0,0,0.5)';
   const defaultButtonBorder = type === 'light' ? '#c6cedc' : '#666666';
+  const defaultButtonHoverBG =
+    type === 'light' ? 'rgba(41, 40, 52, 0.2)' : 'rgba(0, 0, 0, 0.8)';
   const checkboxPalette =
     type === 'light'
       ? {
@@ -172,7 +174,7 @@ export default (type = 'light', palette) => {
             backgroundColor: defaultButtonBG,
           },
           '&:hover': {
-            backgroundColor: palette.text.divider,
+            backgroundColor: defaultButtonHoverBG,
             '&:disabled': {
               backgroundColor: defaultButtonBG,
             },
