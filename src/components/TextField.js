@@ -158,8 +158,8 @@ class TextField extends React.Component {
 
     return icon ? (
       <div className={classes.container}>
-        <Icon className={classes.icon} icon={icon} />
         {textField}
+        <Icon className={classes.icon} icon={icon} />
       </div>
     ) : (
       textField
