@@ -11,7 +11,7 @@ const propTypes = {
   color: PropTypes.oneOf(['default', 'primary', 'progress', 'destructive']),
   /** The size of the circle. */
   size: PropTypes.number,
-  /* The mode of show your progress. Indeterminate for when there is no value for progress. 
+  /* The mode of show your progress. Indeterminate for when there is no value for progress.
   Determinate for controlled progress value. */
   mode: PropTypes.oneOf(['determinate', 'indeterminate']),
   /** The max value of progress in determinate mode. */

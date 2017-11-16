@@ -12,8 +12,8 @@ const propTypes = {
   className: PropTypes.string,
   /** Whether the button is disabled or not. */
   disabled: PropTypes.bool,
-  /** Input should be in an error state.  
-   * Pass `true` or `'error'` for an error state.  
+  /** Input should be in an error state.
+   * Pass `true` or `'error'` for an error state.
    * Pass `'alert'` for an alert state.
   */
   error: PropTypes.oneOf(['alert', 'error', true, false]),

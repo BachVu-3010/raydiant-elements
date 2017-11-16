@@ -29,7 +29,7 @@ const defaultProps = {
 };
 
 /**
- * A column to hold things.  
+ * A column to hold things.
  * See [Flex](#flex) for property information.
  */
 const Column = ({ alignContent, classes, className, size, ...pass }) => (

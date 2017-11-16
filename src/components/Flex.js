@@ -19,11 +19,11 @@ const justifyContentValues = [
 const propTypes = {
   /**
    * Align the Flex's content with outside content.
-   * 
+   *
    * A negative margin will be applied to the Flex element to account for the space
    * between child elements, so child elements will be horizonatally/vertically aligned
    * with content outside the Flex.
-   * 
+   *
    * This is useful to keep content in nested Flexes (e.g., <Column><Row>...</Row><Column>)
    * from getting indented too far.
    */
@@ -31,11 +31,11 @@ const propTypes = {
   /** Child space distribution along cross flex axis. */
   alignItems: PropTypes.oneOf(alignItemsValues),
   /**
-   * Child elements are used as the content.  
+   * Child elements are used as the content.
    * For spacing to be correct, `children` must be one or more elements
    * (e.g., `<Flex><span>some content</span></Flex>`)
    * rather than plain text (e.g., `<Flex>some content</Flex>`).
-   * 
+   *
    * Assign flex layout CSS (`flex`, `flex-grow`, `flex-shrink`, and `flex-basis`)
    * to the children to customize the layout.
    */
@@ -60,8 +60,8 @@ const defaultProps = {
 };
 
 /**
- * A container to hold things.  
- * You probably want to use one of [Row](#row) or [Column](#column) 
+ * A container to hold things.
+ * You probably want to use one of [Row](#row) or [Column](#column)
  * rather than using `Flex` directly.
  */
 const Flex = ({

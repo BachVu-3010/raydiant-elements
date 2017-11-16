@@ -9,8 +9,8 @@ const propTypes = {
   className: PropTypes.string,
   /** Style of the icon. */
   color: PropTypes.oneOf(['default', 'soft', 'white']),
-  /** Provides a human-readable title for the element that contains it. 
-   * https://www.w3.org/TR/SVG-access/#Equivalent 
+  /** Provides a human-readable title for the element that contains it.
+   * https://www.w3.org/TR/SVG-access/#Equivalent
    */
   titleAccess: PropTypes.string,
   /** @ignore injected by withStyles */
@@ -24,7 +24,7 @@ const defaultProps = {
 };
 
 /**
- * The AlertIcon component wraps the Icon component with the default styling for 
+ * The AlertIcon component wraps the Icon component with the default styling for
  * various alert types.
  */
 const AlertIcon = ({ className, color, titleAccess, classes }) => (

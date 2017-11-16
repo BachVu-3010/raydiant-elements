@@ -7,8 +7,8 @@ const propTypes = {
   className: PropTypes.string,
   /** The icon name */
   icon: PropTypes.string.isRequired,
-  /** Provides a human-readable title for the element that contains it. 
-   * https://www.w3.org/TR/SVG-access/#Equivalent 
+  /** Provides a human-readable title for the element that contains it.
+   * https://www.w3.org/TR/SVG-access/#Equivalent
    */
   titleAccess: PropTypes.string,
 };
@@ -107,8 +107,8 @@ const icons = {
 };
 
 /**
- * The Icon component contains the default icon library. It accepts the name of the icon 
- * to render and the resulting icon can be used as is, or included as a child for other 
+ * The Icon component contains the default icon library. It accepts the name of the icon
+ * to render and the resulting icon can be used as is, or included as a child for other
  * components.
  */
 const Icon = ({ className, icon, titleAccess }) => {

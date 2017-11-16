@@ -61,10 +61,10 @@ const propsToState = props => {
  * A control that allows a user to pick a time. Usually used in conjunction with
  * a [DatePicker](#datepicker). See [TextField](#textfield) for relevant props
  * (e.g., `label`, `helperText`).
- * 
+ *
  * `onTimeChange` behaves a bit differently for this control than a typical
  * [TextField](#textfield) `onChange`.
- * 
+ *
  * It will trigger only on a `blur` event, and will trigger only if the value in
  * the field is a string the control can parse. Otherwise, the control reverts
  * its state to the input value and will not trigger `onTimeChange`. The value

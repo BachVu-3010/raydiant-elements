@@ -7,8 +7,8 @@ import Icon from './Icon';
 const propTypes = {
   /** Class name(s) */
   className: PropTypes.string,
-  /** Provides a human-readable title for the element that contains it. 
-   * https://www.w3.org/TR/SVG-access/#Equivalent 
+  /** Provides a human-readable title for the element that contains it.
+   * https://www.w3.org/TR/SVG-access/#Equivalent
    */
   titleAccess: PropTypes.string,
   /** @ignore injected by withStyles */
@@ -21,7 +21,7 @@ const defaultProps = {
 };
 
 /**
- * The SuccessIcon component wraps the Icon component with the default styling for showing 
+ * The SuccessIcon component wraps the Icon component with the default styling for showing
  * a successful action indicator
  */
 const SuccessIcon = ({ className, titleAccess, classes }) => (

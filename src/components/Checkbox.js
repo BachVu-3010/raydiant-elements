@@ -34,7 +34,7 @@ const defaultProps = {
 
 /**
  * Use for independent `true` or `false` values.
- * 
+ *
  * Checkboxes without labels will be rendered as round, and are intended for selecting items
  * in a grid.
  */

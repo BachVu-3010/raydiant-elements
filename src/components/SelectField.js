@@ -27,8 +27,8 @@ const propTypes = {
   disabled: PropTypes.bool,
   /** Ghosted text to display if the input field is empty. */
   placeholder: PropTypes.string,
-  /** Input should be in an error state.  
-   * Pass `true` or `'error'` for an error state.  
+  /** Input should be in an error state.
+   * Pass `true` or `'error'` for an error state.
    * Pass `'alert'` for an alert state.
   */
   error: PropTypes.oneOf(['alert', 'error', true, false]),

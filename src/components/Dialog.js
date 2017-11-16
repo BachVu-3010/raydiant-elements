@@ -25,7 +25,7 @@ const defaultProps = {
 
 /**
  * Use dialogs for tasks that the user should focus on, above all else.
- * 
+ *
  * For proper formatting:
  * * Wrap titles in a [DialogTitle](#dialogtitle) component.
  * * Wrap dialog content in a [DialogContent](#dialogcontent) component.

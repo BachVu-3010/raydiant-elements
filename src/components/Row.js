@@ -38,7 +38,7 @@ const defaultProps = {
 };
 
 /**
- * A row to hold things.  
+ * A row to hold things.
  * See [Flex](#flex) for property information.
  */
 const Row = ({
