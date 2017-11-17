@@ -66,6 +66,10 @@ export default (type = 'light', palette) => {
       : {
           color: '#ffffff',
         };
+  const tabPalette =
+    type === 'dark'
+      ? { textColor: '#ffffff', highlightColor: '#ffffff' }
+      : { textColor: palette.text.primary, highlightColor: purple['500'] };
 
   return {
     breakpoints,
@@ -81,6 +85,7 @@ export default (type = 'light', palette) => {
       checkbox: checkboxPalette,
       switch: switchPalette,
       circularProgress: circularProgressPalette,
+      tab: tabPalette,
     },
     typography: {
       fontFamily,

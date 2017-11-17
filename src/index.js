@@ -26,6 +26,8 @@ import AlertIcon from './components/AlertIcon';
 import SuccessIcon from './components/SuccessIcon';
 import PopoverAnchor from './components/PopoverAnchor';
 import Popover from './components/Popover';
+import Tabs from './components/Tabs';
+import Tab from './components/Tab';
 
 svgClassListShim();
 
@@ -57,4 +59,6 @@ module.exports = {
   SuccessIcon,
   PopoverAnchor,
   Popover,
+  Tabs,
+  Tab,
 };

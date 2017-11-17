@@ -9,6 +9,7 @@ const MODALS = 'Modals';
 const PROGRESS = 'Progress';
 const ICONS = 'Icons';
 const POPOVERS = 'Popovers';
+const TABS = 'Tabs';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
   categories: [
@@ -22,6 +23,7 @@ module.exports = {
     TYPOGRAPHY,
     ICONS,
     LAYOUT,
+    TABS,
     // COLORS,
   ],
   components: {
@@ -59,5 +61,7 @@ module.exports = {
     AlertIcon: { categories: [ICONS] },
     SuccessIcon: { categories: [ICONS] },
     SvgIcon: { categories: [ICONS] },
+    Tabs: { categories: [TABS] },
+    Tab: { categories: [TABS] },
   },
 };
