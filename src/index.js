@@ -29,6 +29,8 @@ import Popover from './components/Popover';
 import Tabs from './components/Tabs';
 import Tab from './components/Tab';
 
+import './components/hacks/ie.css';
+
 svgClassListShim();
 
 module.exports = {
