@@ -10,15 +10,24 @@ import { Note } from './Typography';
 
 export const propTypes = {
   ...tfPropTypes,
-  /** Where the popup should go. By default, will appear above or below
-   * (depending on space) and aligned with the left */
-  popupPlacement: PropTypes.string,
-  /** Function that's called when the value changes and the control's blurred */
+  /** Formatting string for the date; determines what we show in the input field */
+  dateFormat: PropTypes.string,
+  /** The maximum allowable date */
+  maxDate: PropTypes.instanceOf(Date),
+  /** The minimum allowable date */
+  minDate: PropTypes.instanceOf(Date),
+  /** Function that's called when the value changes to a valid date */
   onDateChange: PropTypes.func.isRequired,
+  /** Where the popup should go. By default, will appear below
+   * and aligned with the left */
+  popupPlacement: PropTypes.string,
   /** a date string in format YYYY-MM-DD. Passing a falsy value means "today" */
   value: PropTypes.string,
 };
 export const defaultProps = {
+  dateFormat: 'L',
+  maxDate: null,
+  minDate: null,
   popupPlacement: 'bottom-start',
   value: null,
 };
@@ -37,9 +46,13 @@ class FocusableTextField extends React.Component {
   }
 }
 
-const propsToState = props => ({
-  date: props.value ? moment(props.value, 'YYYY-MM-DD') : moment(),
-});
+const propsToState = props => {
+  const date = props.value ? moment(props.value, 'YYYY-MM-DD') : moment();
+  return {
+    date,
+    text: date.format(props.dateFormat),
+  };
+};
 
 /**
  * A control to choose a date.
@@ -57,21 +70,37 @@ class DatePicker extends React.Component {
   }
   onChange = date => {
     const { value, onDateChange } = this.props;
-    this.setState({ date });
+    this.setState({ date, text: this.formatDate(date) });
     const newDateStr = date.format('YYYY-MM-DD');
     if (value !== newDateStr) {
       onDateChange(newDateStr);
     }
   };
-  render() {
+  onChangeRaw = e => {
+    this.setState({ text: e.target.value });
+  };
+  formatDate = date => {
+    const { dateFormat } = this.props;
+    return date.format(dateFormat);
+  };
+  // Reset the text input to a string representation of the date.
+  // Useful if the user types in something we can't parse.
+  resetInput = () => {
     const { date } = this.state;
+    this.setState({ text: this.formatDate(date) });
+  };
+  render() {
+    const { date, text } = this.state;
     const {
+      dateFormat,
       error,
       helperText,
       label,
+      maxDate,
+      minDate,
       placeholder,
       popupPlacement,
-      value,
+      value: _value, // Ignore the inbound value, use state's `text`
       ...inputProps
     } = this.props;
     return (
@@ -81,11 +110,17 @@ class DatePicker extends React.Component {
           showMonthDropdown
           showYearDropdown
           dropdownMode="scroll"
+          dateFormat={dateFormat}
           dateFormatCalendar=" "
+          minDate={moment(minDate)}
+          maxDate={moment(maxDate)}
           placeholderText={placeholder}
           selected={date}
           onChange={this.onChange}
+          onChangeRaw={this.onChangeRaw}
+          onBlur={this.resetInput}
           {...inputProps}
+          value={text}
           customInput={
             <FocusableTextField
               {...{ label, error }}
