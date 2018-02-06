@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 import React from 'react';
 import PropTypes from 'prop-types';
 import MUITextField from 'material-ui/TextField';
@@ -15,10 +16,10 @@ const propTypes = {
   /** Input should be in an error state.
    * Pass `true` or `'error'` for an error state.
    * Pass `'alert'` for an alert state.
-  */
+   */
   error: PropTypes.oneOf(['alert', 'error', true, false]),
   /** Additional information to help the user fill the field. */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   /** ID */
   id: PropTypes.string,
   /** Icon associated with the input. */
@@ -37,6 +38,8 @@ const propTypes = {
   placeholder: PropTypes.string,
   /** The value of the input field. */
   value: PropTypes.string,
+  /** The maximum number of characters of the input field. */
+  maxLength: PropTypes.number,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */
@@ -60,6 +63,7 @@ const defaultProps = {
   placeholder: '',
   type: 'text',
   value: '',
+  maxLength: null,
   onBlur: null,
   onChange: null,
   onClick: null,
@@ -115,7 +119,8 @@ class TextField extends React.Component {
       multiline,
       onChange,
       icon,
-      ...inputProps
+      maxLength,
+      ...props
     } = this.props;
 
     let multilineOpts = {};
@@ -127,7 +132,7 @@ class TextField extends React.Component {
       <MUITextField
         fullWidth
         {...multilineOpts}
-        {...inputProps}
+        {...props}
         className={classnames(className, {
           [classes.alert]: error === 'alert',
         })}
@@ -153,6 +158,7 @@ class TextField extends React.Component {
             }
           },
         }}
+        inputProps={{ maxLength }}
       />
     );
 

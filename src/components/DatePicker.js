@@ -6,7 +6,7 @@ import ReactDatePicker from 'react-datepicker/lib/datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './hacks/react-datepicker-overrides.css';
 import TextField, { propTypes as tfPropTypes } from './TextField';
-import { Note } from './Typography';
+import { HelperText } from './Typography';
 
 export const propTypes = {
   ...tfPropTypes,
@@ -23,6 +23,8 @@ export const propTypes = {
   popupPlacement: PropTypes.string,
   /** a date string in format YYYY-MM-DD. Passing a falsy value means "today" */
   value: PropTypes.string,
+  /** Additional information to help the user fill the field. */
+  helperText: PropTypes.node,
 };
 export const defaultProps = {
   dateFormat: 'L',
@@ -30,6 +32,7 @@ export const defaultProps = {
   minDate: null,
   popupPlacement: 'bottom-start',
   value: null,
+  helperText: '',
 };
 
 class FocusableTextField extends React.Component {
@@ -130,11 +133,12 @@ class DatePicker extends React.Component {
             />
           }
         />
-        <Note>{helperText}</Note>
+        {helperText && <HelperText>{helperText}</HelperText>}
       </div>
     );
   }
 }
 DatePicker.propTypes = propTypes;
 DatePicker.defaultProps = defaultProps;
+
 export default DatePicker;

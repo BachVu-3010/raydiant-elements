@@ -28,6 +28,9 @@ import PopoverAnchor from './components/PopoverAnchor';
 import Popover from './components/Popover';
 import Tabs from './components/Tabs';
 import Tab from './components/Tab';
+import PresentationBuilderForm from './components/PresentationBuilderForm';
+import PresentationBuilderPreview from './components/PresentationBuilderPreview';
+import PresentationPreview from './components/PresentationPreview';
 
 import './components/hacks/ie.css';
 
@@ -63,4 +66,7 @@ module.exports = {
   Popover,
   Tabs,
   Tab,
+  PresentationBuilderForm,
+  PresentationBuilderPreview,
+  PresentationPreview,
 };

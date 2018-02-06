@@ -30,12 +30,12 @@ const propTypes = {
   /** Input should be in an error state.
    * Pass `true` or `'error'` for an error state.
    * Pass `'alert'` for an alert state.
-  */
+   */
   error: PropTypes.oneOf(['alert', 'error', true, false]),
   /** Name */
   name: PropTypes.string,
   /** Additional information to help the user fill the field. */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */

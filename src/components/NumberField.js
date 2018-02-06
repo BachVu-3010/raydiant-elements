@@ -14,10 +14,10 @@ const propTypes = {
   /** Input should be in an error state.
    * Pass `true` or `'error'` for an error state.
    * Pass `'alert'` for an alert state.
-  */
+   */
   error: PropTypes.oneOf(['alert', 'error', true, false]),
   /** Additional information to help the user fill the field. */
-  helperText: PropTypes.string,
+  helperText: PropTypes.node,
   /** The description for the input field. */
   label: PropTypes.string.isRequired,
   /** Name */

@@ -1,5 +1,4 @@
 const STARTUP = 'Getting Started';
-const COLORS = 'Colors';
 const TOGGLE = 'Selection Controls';
 const BUTTON = 'Buttons';
 const TEXTINPUT = 'Text Inputs';
@@ -10,6 +9,7 @@ const PROGRESS = 'Progress';
 const ICONS = 'Icons';
 const POPOVERS = 'Popovers';
 const TABS = 'Tabs';
+const PRESENTATIONS = 'Presentations';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
   categories: [
@@ -24,7 +24,7 @@ module.exports = {
     ICONS,
     LAYOUT,
     TABS,
-    // COLORS,
+    PRESENTATIONS,
   ],
   components: {
     Checkbox: { categories: [TOGGLE] },
@@ -63,5 +63,8 @@ module.exports = {
     SvgIcon: { categories: [ICONS] },
     Tabs: { categories: [TABS] },
     Tab: { categories: [TABS] },
+    PresentationBuilderForm: { categories: [PRESENTATIONS] },
+    PresentationBuilderPreview: { categories: [PRESENTATIONS] },
+    PresentationPreview: { categories: [PRESENTATIONS] },
   },
 };

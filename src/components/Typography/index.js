@@ -5,4 +5,5 @@ export { default as Heading3 } from './Heading3';
 export { default as Heading4 } from './Heading4';
 export { default as Note } from './Note';
 export { default as Anchor } from './Anchor';
+export { default as HelperText } from './HelperText';
 export { styleSheet } from './shared';
