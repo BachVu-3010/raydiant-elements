@@ -41,8 +41,13 @@ const defaultProps = () => ({
     configurable_duration: true,
     presentation_properties: [
       { name: 'boolean', type: 'boolean' },
-      { name: 'number', type: 'number', min: 0, max: 10 },
-      { name: 'text', type: 'text', optional: true, maxLength: 10 },
+      { name: 'number', type: 'number', constraints: { min: 0, max: 10 } },
+      {
+        name: 'text',
+        type: 'text',
+        optional: true,
+        constraints: { maxlength: 10 },
+      },
       {
         name: 'selection',
         type: 'selection',
@@ -57,9 +62,9 @@ const defaultProps = () => ({
       {
         name: 'string',
         type: 'string',
-        helperText: 'helperText',
-        helperLink: 'helperLink',
-        maxLength: 10,
+        helper_text: 'helperText',
+        helper_link: 'helperLink',
+        constraints: { maxlength: 10 },
       },
     ],
     strings: {},

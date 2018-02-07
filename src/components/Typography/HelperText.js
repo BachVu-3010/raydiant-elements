@@ -5,7 +5,7 @@ import { propTypes, defaultProps } from './shared';
 import Note from './Note';
 
 const HelperText = ({ classes, className, children }) => (
-  <Note className={classnames(classes.caption, className)}>{children}</Note>
+  <Note className={classnames(classes.helperText, className)}>{children}</Note>
 );
 HelperText.propTypes = propTypes;
 HelperText.defaultProps = defaultProps;

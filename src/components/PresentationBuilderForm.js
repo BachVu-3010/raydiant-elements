@@ -47,6 +47,9 @@ class PresentationBuilderForm extends React.Component {
           constraints: PropTypes.shape({
             'content-types': PropTypes.arrayOf(PropTypes.string),
             'content-length': PropTypes.number,
+            maxlength: PropTypes.number,
+            min: PropTypes.number,
+            max: PropTypes.number,
           }),
         })
       ),
@@ -156,13 +159,14 @@ class PresentationBuilderForm extends React.Component {
     return application.presentation_properties.map(prop => {
       const value = presentation.application_vars[prop.name];
       const label = application.strings[prop.name] || prop.name;
+      const constraints = prop.constraints || {};
       const hasError = !!errors[prop.name];
       let helperText =
         errors[prop.name] ||
-        application.strings[prop.helperText] ||
-        prop.helperText;
+        application.strings[prop.helper_text] ||
+        prop.helper_text;
 
-      if (prop.helperLink && helperText) {
+      if (prop.helper_link && helperText) {
         helperText = (
           <Anchor target="_blank" href={prop.helperLink}>
             {helperText}
@@ -205,8 +209,8 @@ class PresentationBuilderForm extends React.Component {
             key={prop.name}
             label={label}
             value={value}
-            min={prop.min}
-            max={prop.max}
+            min={constraints.min}
+            max={constraints.max}
             helperText={helperText}
             error={hasError}
             onChange={evt =>
@@ -222,7 +226,7 @@ class PresentationBuilderForm extends React.Component {
             multiline
             label={label}
             value={value}
-            maxLength={prop.maxLength}
+            maxLength={constraints.maxlength}
             helperText={helperText}
             error={hasError}
             onChange={evt => this.setAppVar(prop, evt.target.value)}
@@ -248,7 +252,7 @@ class PresentationBuilderForm extends React.Component {
           </SelectField>
         );
       } else if (prop.type === 'file') {
-        const accept = prop.constraints['content-types'].join(',');
+        const accept = constraints['content-types'].join(',');
         // FileField accepts a FileList as it's value so for existing uploads to display
         // the file name in the input we need to create a fake FileList.
         let fileList;
@@ -300,7 +304,7 @@ class PresentationBuilderForm extends React.Component {
             key={prop.name}
             label={label}
             value={value}
-            maxLength={prop.maxLength}
+            maxLength={constraints.maxlength}
             helperText={helperText}
             error={hasError}
             onChange={evt => this.setAppVar(prop, evt.target.value)}
