@@ -118,6 +118,7 @@ test('Should render form', () => {
   });
   expect(tf.length).toEqual(1);
   expect(tf[0].helperText.type === Anchor);
+  expect(tf[0].helperText.props.href === 'helperLink');
 });
 
 test('Should not render duration field for dynamic duration', () => {

@@ -168,7 +168,7 @@ class PresentationBuilderForm extends React.Component {
 
       if (prop.helper_link && helperText) {
         helperText = (
-          <Anchor target="_blank" href={prop.helperLink}>
+          <Anchor target="_blank" href={prop.helper_link}>
             {helperText}
           </Anchor>
         );
@@ -192,7 +192,7 @@ class PresentationBuilderForm extends React.Component {
           </Switch>
         );
       } else if (prop.type === 'link') {
-        // TODO: Remove this once all app have been updated to use helperLink
+        // TODO: Remove this once all app have been updated to use helper_link
         input = (
           <Anchor
             key={prop.name}
@@ -424,7 +424,7 @@ const styles = theme => ({
     marginBottom: 25,
   },
 
-  // TODO: Remove this once all apps have been updated to use helperLink
+  // TODO: Remove this once all apps have been updated to use helper_link
   link: {
     // Hack to make link types appear as helper text for
     // the previous presentation property
