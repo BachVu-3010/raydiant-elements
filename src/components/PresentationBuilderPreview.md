@@ -21,7 +21,7 @@ const onPreviewModeChange = previewMode => {
 };
 
 <Column>
-  <div style={{ height: 500 }}>
+  <div style={{ height: 500, display: 'flex' }}>
     <PresentationBuilderPreview
       previewMode={state.previewMode}
       application={state.application}

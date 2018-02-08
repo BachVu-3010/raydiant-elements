@@ -408,7 +408,7 @@ class PresentationBuilderForm extends React.Component {
 
 const styles = theme => ({
   container: {
-    height: '100%',
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
   },

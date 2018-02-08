@@ -68,13 +68,13 @@ const styles = theme => ({
   },
 
   active: {
-    borderBottom: `3px solid ${theme.palette.tab
-      ? theme.palette.tab.highlightColor
-      : ''}`,
+    borderBottom: `3px solid ${
+      theme.palette.tab ? theme.palette.tab.highlightColor : ''
+    }`,
   },
 
   icon: {
-    margin: 8,
+    margin: `${theme.spacing.unit}px auto`,
   },
 });
 

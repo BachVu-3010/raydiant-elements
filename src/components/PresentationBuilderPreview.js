@@ -98,7 +98,7 @@ class PresentationBuilderPreview extends React.Component {
 
 const styles = theme => ({
   container: {
-    height: '100%',
+    flex: 1,
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: theme.palette.primary[800],
@@ -109,6 +109,7 @@ const styles = theme => ({
     flex: 1,
     position: 'relative',
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     margin: 30,

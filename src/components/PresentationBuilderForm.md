@@ -59,7 +59,7 @@ initialState = {
 };
 
 <Column>
-  <div style={{ height: 600 }}>
+  <div style={{ height: 600, overflow: 'auto', display: 'flex' }}>
     <PresentationBuilderForm
       validate
       presentation={state.presentation}
