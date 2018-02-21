@@ -37,6 +37,7 @@ module.exports = {
     FileField: { categories: [TEXTINPUT] },
     DatePicker: { categories: [TEXTINPUT] },
     TimePicker: { categories: [TEXTINPUT] },
+    ListField: { categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },
       Heading1: { categories: [TYPOGRAPHY] },
@@ -63,8 +64,10 @@ module.exports = {
     SvgIcon: { categories: [ICONS] },
     Tabs: { categories: [TABS] },
     Tab: { categories: [TABS] },
-    PresentationBuilderForm: { categories: [PRESENTATIONS] },
-    PresentationBuilderPreview: { categories: [PRESENTATIONS] },
-    PresentationPreview: { categories: [PRESENTATIONS] },
+    Presentation: {
+      PresentationBuilderForm: { categories: [PRESENTATIONS] },
+      PresentationBuilderPreview: { categories: [PRESENTATIONS] },
+      PresentationPreview: { categories: [PRESENTATIONS] },
+    },
   },
 };

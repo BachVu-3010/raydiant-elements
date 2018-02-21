@@ -2,21 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
-import validatePresentation from '../utilities/validatePresentation';
-import hasPresentationChanged from '../utilities/hasPresentationChanged';
-import ThemeProvider from '../styles/ThemeProvider';
-import TextField from './TextField';
-import NumberField from './NumberField';
-import Switch from './Switch';
-import FileField from './FileField';
-import Anchor from './Typography/Anchor';
-import SelectField from './SelectField';
-import DatePicker from './DatePicker';
-import Row from './Row';
-import Column from './Column';
-import Button from './Button';
-import PopoverAnchor from './PopoverAnchor';
-import AlertIcon from './AlertIcon';
+import immutable from 'object-path-immutable';
+import isEqualArray from 'array-equal';
+import ThemeProvider from '../../styles/ThemeProvider';
+import TextField from '../TextField';
+import NumberField from '../NumberField';
+import Anchor from '../Typography/Anchor';
+import Row from '../Row';
+import Column from '../Column';
+import Button from '../Button';
+import PopoverAnchor from '../PopoverAnchor';
+import AlertIcon from '../AlertIcon';
+import validatePresentation from './validatePresentation';
+import hasPresentationChanged from './hasPresentationChanged';
+import * as formInputs from './formInputs';
+import createDefaultValue from './createDefaultValue';
+
+const formInputTypes = {
+  array: formInputs.ArrayInput,
+  boolean: formInputs.BooleanInput,
+  date: formInputs.DateInput,
+  file: formInputs.FileInput,
+  link: formInputs.LinkInput,
+  number: formInputs.NumberInput,
+  selection: formInputs.SelectionInput,
+  string: formInputs.StringInput,
+  text: formInputs.TextInput,
+};
 
 class PresentationBuilderForm extends React.Component {
   static propTypes = {
@@ -91,7 +103,8 @@ class PresentationBuilderForm extends React.Component {
 
     this.state = {
       presentation: props.presentation,
-      errors: {},
+      errors: [],
+      selectedPath: [],
     };
 
     // When set to true we will validate whenever a presentation is updated.
@@ -103,28 +116,21 @@ class PresentationBuilderForm extends React.Component {
     if (nextProps.presentation.id !== this.props.presentation.id) {
       this.setState({
         presentation: nextProps.presentation,
-        errors: {},
+        errors: [],
+        selectedPath: [],
       });
     }
   }
 
-  setAppVar = (prop, value) => {
-    const presentation = this.setPresentation({
-      application_vars: {
-        ...this.state.presentation.application_vars,
-        [prop.name]: value,
-      },
-    });
+  setAppVar = (path, value, prop) => {
+    const presentation = immutable.set(this.state.presentation, path, value);
 
-    this.props.onChange(presentation, prop, value);
+    this.setPresentation(presentation);
+    this.props.onChange(presentation, prop, path, value);
   };
 
-  setPresentation(props) {
+  setPresentation(presentation) {
     const { application, minDuration } = this.props;
-    const presentation = {
-      ...this.state.presentation,
-      ...props,
-    };
 
     if (this.shouldValidateOnUpdate) {
       this.setState({
@@ -134,9 +140,30 @@ class PresentationBuilderForm extends React.Component {
     } else {
       this.setState({ presentation });
     }
-
-    return presentation;
   }
+
+  setSelectedPath = path => {
+    this.setState({ selectedPath: path });
+  };
+
+  removeAppVar = (path, prop) => {
+    const presentation = immutable.del(this.state.presentation, path);
+
+    this.setPresentation(presentation);
+    this.props.onChange(presentation, prop, path);
+  };
+
+  addAppVar = (path, prop) => {
+    const newValue = createDefaultValue(prop.properties);
+    const presentation = immutable.push(
+      this.state.presentation,
+      path,
+      newValue
+    );
+
+    this.setPresentation(presentation);
+    this.props.onChange(presentation, prop, path, newValue);
+  };
 
   handleSubmit = () => {
     const { application, minDuration, onSubmit } = this.props;
@@ -147,26 +174,27 @@ class PresentationBuilderForm extends React.Component {
     this.setState({ errors });
 
     // Execute the submit callback when there are no validation errors.
-    if (Object.keys(errors).length === 0) {
+    if (errors.length === 0) {
       onSubmit(presentation);
     }
   };
 
-  renderAppVars() {
-    const { application, classes, onBlur, onFile } = this.props;
-    const { presentation, errors } = this.state;
+  renderAppVars = (appVars, properties, strings, path) => {
+    const { onBlur, onFile } = this.props;
+    const { errors, selectedPath } = this.state;
 
-    return application.presentation_properties.map(prop => {
-      const value = presentation.application_vars[prop.name];
-      const label = application.strings[prop.name] || prop.name;
-      const constraints = prop.constraints || {};
-      const hasError = !!errors[prop.name];
-      let helperText =
-        errors[prop.name] ||
-        application.strings[prop.helper_text] ||
-        prop.helper_text;
+    return properties.map(prop => {
+      const value = appVars[prop.name];
+      const label = strings[prop.name] || prop.name;
+      const propPath = [...path, prop.name];
+      const propError = errors.find(err => isEqualArray(err.path, propPath));
+      const hasError = !!propError;
 
-      if (prop.helper_link && helperText) {
+      let helperText = hasError
+        ? propError.message
+        : strings[prop.helper_text] || prop.helper_text;
+
+      if (!hasError && prop.helper_link && helperText) {
         helperText = (
           <Anchor target="_blank" href={prop.helper_link}>
             {helperText}
@@ -177,147 +205,31 @@ class PresentationBuilderForm extends React.Component {
       // Always allocate space whether there is helperText or not.
       helperText = helperText || ' ';
 
-      let input;
+      const inputProps = {
+        key: prop.name,
+        value,
+        label,
+        helperText,
+        hasError,
+        strings,
+        constraints: prop.constraints,
+        onChange: newValue => this.setAppVar(propPath, newValue, prop),
+        onFile: file => onFile(prop.name, file),
+        onBlur,
+        url: prop.url, // Link
+        options: prop.options, // Selection
+        properties: prop.properties, // Array
+        propPath, // Array
+        selectedPath, // Array
+        onAdd: () => this.addAppVar(propPath, prop), // Array
+        onRemove: () => this.removeAppVar(selectedPath, prop), // Array
+        setSelectedPath: this.setSelectedPath, // Array
+        renderAppVars: this.renderAppVars, // Array
+      };
 
-      if (prop.type === 'boolean') {
-        input = (
-          <Switch
-            key={prop.name}
-            checked={value}
-            helperText={helperText}
-            onChange={evt => this.setAppVar(prop, evt.target.checked)}
-            onBlur={onBlur}
-          >
-            {label}
-          </Switch>
-        );
-      } else if (prop.type === 'link') {
-        // TODO: Remove this once all app have been updated to use helper_link
-        input = (
-          <Anchor
-            key={prop.name}
-            className={classes.link}
-            href={prop.url}
-            target="_blank"
-          >
-            {label}
-          </Anchor>
-        );
-      } else if (prop.type === 'number') {
-        input = (
-          <NumberField
-            key={prop.name}
-            label={label}
-            value={value}
-            min={constraints.min}
-            max={constraints.max}
-            helperText={helperText}
-            error={hasError}
-            onChange={evt =>
-              this.setAppVar(prop, parseInt(evt.target.value, 10))
-            }
-            onBlur={onBlur}
-          />
-        );
-      } else if (prop.type === 'text') {
-        input = (
-          <TextField
-            key={prop.name}
-            multiline
-            label={label}
-            value={value}
-            maxLength={constraints.maxlength}
-            helperText={helperText}
-            error={hasError}
-            onChange={evt => this.setAppVar(prop, evt.target.value)}
-            onBlur={onBlur}
-          />
-        );
-      } else if (prop.type === 'selection') {
-        input = (
-          <SelectField
-            key={prop.name}
-            label={label}
-            value={value}
-            helperText={helperText}
-            error={hasError}
-            onChange={evt => this.setAppVar(prop, evt.target.value)}
-            onBlur={onBlur}
-          >
-            {prop.options.map(opt => (
-              <option key={opt.value} value={opt.value}>
-                {application.strings[opt.name] || opt.name}
-              </option>
-            ))}
-          </SelectField>
-        );
-      } else if (prop.type === 'file') {
-        const accept = constraints['content-types'].join(',');
-        // FileField accepts a FileList as it's value so for existing uploads to display
-        // the file name in the input we need to create a fake FileList.
-        let fileList;
-        if (value && value.filename) {
-          fileList = [{ name: value.filename }];
-        }
-
-        input = (
-          <FileField
-            key={prop.name}
-            label={label}
-            value={fileList}
-            helperText={helperText}
-            error={hasError}
-            accept={accept}
-            onChange={e => {
-              const files = e.target.files;
-              if (files && files.length) {
-                // We don't support multiple files per presentation property.
-                const file = files[0];
-                onFile(prop.name, file);
-
-                this.setAppVar(prop, {
-                  filename: file.name,
-                  url: URL.createObjectURL(file),
-                  'content-type': file.type,
-                  'content-length': file.size,
-                });
-              }
-            }}
-            onBlur={onBlur}
-          />
-        );
-      } else if (prop.type === 'date') {
-        input = (
-          <DatePicker
-            key={prop.name}
-            label={label}
-            value={value}
-            helperText={helperText}
-            error={hasError}
-            onDateChange={date => this.setAppVar(prop, date)}
-            onBlur={onBlur}
-          />
-        );
-      } else if (prop.type === 'string') {
-        input = (
-          <TextField
-            key={prop.name}
-            label={label}
-            value={value}
-            maxLength={constraints.maxlength}
-            helperText={helperText}
-            error={hasError}
-            onChange={evt => this.setAppVar(prop, evt.target.value)}
-            onBlur={onBlur}
-          />
-        );
-      } else {
-        throw new Error(`Invalid prop type for '${prop.name}'`);
-      }
-
-      return input;
+      return React.createElement(formInputTypes[prop.type], inputProps);
     });
-  }
+  };
 
   renderWarnings() {
     const { warnings, classes } = this.props;
@@ -342,7 +254,10 @@ class PresentationBuilderForm extends React.Component {
       saveButtonPopover,
     } = this.props;
     const { presentation, errors } = this.state;
-
+    const nameError = errors.find(err => isEqualArray(err.path, ['name']));
+    const durationError = errors.find(err =>
+      isEqualArray(err.path, ['duration'])
+    );
     const shouldDisableSave = !hasPresentationChanged(
       originalPresentation,
       presentation,
@@ -358,22 +273,33 @@ class PresentationBuilderForm extends React.Component {
               <TextField
                 label="Name"
                 value={presentation.name}
-                helperText={errors.name || ' '}
-                error={!!errors.name}
+                error={!!nameError}
+                helperText={nameError ? nameError.message : ' '}
                 onChange={evt =>
-                  this.setPresentation({ name: evt.target.value })
+                  this.setPresentation({
+                    ...presentation,
+                    name: evt.target.value,
+                  })
                 }
               />
-              {this.renderAppVars()}
+              {this.renderAppVars(
+                presentation.application_vars,
+                application.presentation_properties,
+                application.strings,
+                ['application_vars']
+              )}
               {application.configurable_duration && (
                 <NumberField
                   label="Duration"
                   min={minDuration}
                   value={presentation.duration || minDuration}
-                  error={!!errors.duration}
-                  helperText={errors.duration || 'Time in seconds.'}
+                  error={!!durationError}
+                  helperText={
+                    durationError ? durationError.message : 'Time in seconds.'
+                  }
                   onChange={evt =>
                     this.setPresentation({
+                      ...presentation,
                       duration: parseInt(evt.target.value, 10),
                     })
                   }
@@ -422,15 +348,6 @@ const styles = theme => ({
   title: {
     color: theme.palette.text.secondary,
     marginBottom: 25,
-  },
-
-  // TODO: Remove this once all apps have been updated to use helper_link
-  link: {
-    // Hack to make link types appear as helper text for
-    // the previous presentation property
-    marginTop: '-26px !important',
-    position: 'relative',
-    fontSize: 12,
   },
 
   spacer: {

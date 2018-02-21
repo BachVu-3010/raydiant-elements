@@ -2,7 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
 import PresentationPreview from './PresentationPreview';
-import Tab from './Tab';
+import Tab from '../Tab';
 
 const defaultProps = () => ({
   application: {

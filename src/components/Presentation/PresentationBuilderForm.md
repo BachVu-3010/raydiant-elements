@@ -9,6 +9,11 @@ initialState = {
       number: 1,
       selection: 'opt1',
       date: '2020-02-02',
+      categories: [],
+      list: [
+        { name: 'Item1', list2: [{ name: 'SubItem1' }, { name: 'SubItem2' }] },
+        { name: 'Item2', list2: [{ name: 'SubItem1' }] },
+      ],
     },
   },
   application: {
@@ -43,7 +48,38 @@ initialState = {
         name: 'selection',
         type: 'selection',
         exclusive: true,
-        options: [{ name: 'Option 1', value: 'opt1' }],
+        options: [
+          { name: 'Option 1', value: 'opt1' },
+          { name: 'Option 2', value: 'opt2' },
+        ],
+      },
+      {
+        name: 'categories',
+        type: 'array',
+        properties: [
+          { name: 'name', type: 'string' },
+          {
+            name: 'menuItems',
+            type: 'array',
+            properties: [
+              { name: 'name', type: 'string' },
+              {
+                name: 'variants',
+                type: 'array',
+                properties: [
+                  { name: 'label', type: 'string' },
+                  { name: 'price', type: 'number', default: 1 },
+                ],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'list',
+        type: 'array',
+        helper_text: 'Drag to reorder',
+        properties: [{ name: 'name', type: 'string' }],
       },
     ],
     strings: {
@@ -54,12 +90,26 @@ initialState = {
       boolean: 'Boolean',
       file: 'File',
       selection: 'Selection',
+      categories: 'Categories',
+      menuItems: 'Menu Items',
+      variants: 'Variants',
+      name: 'Name',
+      label: 'Label',
+      price: 'Price',
+      list: 'List',
     },
   },
 };
 
 <Column>
-  <div style={{ height: 600, overflow: 'auto', display: 'flex' }}>
+  <div
+    style={{
+      height: 600,
+      width: 400,
+      margin: '0 auto',
+      display: 'flex',
+    }}
+  >
     <PresentationBuilderForm
       validate
       presentation={state.presentation}

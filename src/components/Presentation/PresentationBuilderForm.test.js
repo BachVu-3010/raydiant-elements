@@ -1,13 +1,13 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import PresentationBuilderForm from './PresentationBuilderForm';
-import Switch from './Switch';
-import Anchor from './Typography/Anchor';
-import NumberField from './NumberField';
-import SelectField from './SelectField';
-import FileField from './FileField';
-import DatePicker from './DatePicker';
-import TextField from './TextField';
+import Switch from '../Switch';
+import Anchor from '../Typography/Anchor';
+import NumberField from '../NumberField';
+import SelectField from '../SelectField';
+import FileField from '../FileField';
+import DatePicker from '../DatePicker';
+import TextField from '../TextField';
 
 const findProps = (wrapper, componentClass, props) =>
   wrapper
@@ -146,7 +146,11 @@ test('Should call onChange with updated presentation application variable', () =
     p => p.name === 'string'
   );
   expect(props.onChange.mock.calls[0][1]).toEqual(prop);
-  expect(props.onChange.mock.calls[0][2]).toEqual('changed');
+  expect(props.onChange.mock.calls[0][2]).toEqual([
+    'application_vars',
+    'string',
+  ]);
+  expect(props.onChange.mock.calls[0][3]).toEqual('changed');
 });
 
 test('Should call onBlur', () => {
@@ -203,3 +207,5 @@ test('Should call onFile with new file', () => {
   expect(props.onFile).toHaveBeenCalledTimes(1);
   expect(props.onFile.mock.calls[0]).toEqual(['file', file]);
 });
+
+// test('Should pass through error to input', () => {});

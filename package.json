@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.21.3",
+  "version": "0.22.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./dist/mira-elements.js",
@@ -44,7 +44,8 @@
         {
           "ignore": ["classes"]
         }
-      ]
+      ],
+      "import/no-named-as-default": [0]
     },
     "overrides": [
       {
@@ -56,14 +57,17 @@
     ]
   },
   "dependencies": {
+    "array-equal": "^1.0.0",
     "babel-runtime": "^6.25.0",
     "classnames": "^2.2.5",
     "debounce": "^1.1.0",
     "jss": "^8.1.0",
     "material-ui": "^1.0.0-beta.18",
     "moment": "^2.19.1",
+    "object-path-immutable": "^1.0.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
+    "react-beautiful-dnd": "^4.0.1",
     "react-datepicker": "^0.57.0",
     "react-dom": "^15.6.1",
     "react-style-proptype": "^3.0.0"

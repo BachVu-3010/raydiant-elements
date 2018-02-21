@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withStyles } from 'material-ui/styles';
-import ThemeProvider from '../styles/ThemeProvider';
-import Tabs from './Tabs';
-import Tab from './Tab';
+import ThemeProvider from '../../styles/ThemeProvider';
+import Tabs from '../Tabs';
+import Tab from '../Tab';
 import PresentationPreview from './PresentationPreview';
 
 class PresentationBuilderPreview extends React.Component {
