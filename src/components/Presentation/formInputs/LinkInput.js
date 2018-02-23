@@ -4,13 +4,8 @@ import { withStyles } from 'material-ui/styles';
 import Anchor from '../../Typography/Anchor';
 import { propTypes, defaultProps } from './propTypes';
 
-const LinkInput = ({ prop, label, classes }) => (
-  <Anchor
-    key={prop.name}
-    className={classes.link}
-    href={prop.url}
-    target="_blank"
-  >
+const LinkInput = ({ name, url, label, classes }) => (
+  <Anchor key={name} className={classes.link} href={url} target="_blank">
     {label}
   </Anchor>
 );

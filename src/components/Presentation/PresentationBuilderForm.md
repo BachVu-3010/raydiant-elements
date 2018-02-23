@@ -28,6 +28,7 @@ initialState = {
         constraints: { maxlength: 10 },
       },
       { name: 'text', type: 'text', constraints: { maxlength: 100 } },
+      { name: 'link', type: 'link', url: 'http://google.com' },
       {
         name: 'number',
         type: 'number',
@@ -97,6 +98,7 @@ initialState = {
       label: 'Label',
       price: 'Price',
       list: 'List',
+      link: 'Hacky Link',
     },
   },
 };
