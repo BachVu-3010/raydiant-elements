@@ -36,22 +36,6 @@ module.exports = () => ({
         use: [
           {
             loader: 'babel-loader',
-            options: {
-              cacheDirectory: true,
-              presets: [
-                [
-                  'env',
-                  {
-                    modules: false,
-                  },
-                ],
-                'es2015',
-                'react',
-                'stage-1',
-              ],
-              plugins: ['transform-runtime'],
-              babelrc: false,
-            },
           },
         ],
       },

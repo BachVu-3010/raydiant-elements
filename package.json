@@ -1,12 +1,25 @@
 {
   "name": "mira-elements",
-  "version": "0.22.1",
+  "version": "0.22.2",
   "revision": "0",
   "description": "Mira Frontend Component Library",
-  "main": "./dist/mira-elements.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mirainc/mira-elements.git"
+  },
+  "scripts": {
+    "build":
+      "babel src --out-dir lib --copy-files && cross-env NODE_ENV=production webpack",
+    "analyze":
+      "cross-env NODE_ENV=production webpack --profile --json > stats.json && webpack-bundle-analyzer stats.json",
+    "lint": "eslint src/**/*.js",
+    "prepublish": "yarn build",
+    "start": "styleguidist server",
+    "styleguide:build": "cross-env NODE_ENV=production styleguidist build",
+    "test": "jest",
+    "encrypt": "node scripts/codeship.js encrypt",
+    "decrypt": "node scripts/codeship.js decrypt"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -68,21 +81,12 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-beautiful-dnd": "^4.0.1",
-    "react-datepicker": "^0.57.0",
+    "react-datepicker": "^0.58.0",
     "react-dom": "^15.6.1",
     "react-style-proptype": "^3.0.0"
   },
-  "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/"],
-    "moduleNameMapper": {
-      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
-    }
-  },
-  "codeship": {
-    "projectId": "237328",
-    "encryptedFiles": ["deploy.env"]
-  },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
     "babel-loader": "^7.1.1",
@@ -102,16 +106,32 @@
     "react-styleguidist": "^6.0.20",
     "react-test-renderer": "^15.6.1",
     "sinon": "^2.4.1",
-    "webpack": "^3.4.1"
+    "webpack": "^3.4.1",
+    "webpack-bundle-analyzer": "^2.10.0"
   },
-  "scripts": {
-    "build": "cross-env NODE_ENV=production webpack",
-    "lint": "eslint src/**/*.js",
-    "prepublish": "yarn build",
-    "start": "styleguidist server",
-    "styleguide:build": "cross-env NODE_ENV=production styleguidist build",
-    "test": "jest",
-    "encrypt": "node scripts/codeship.js encrypt",
-    "decrypt": "node scripts/codeship.js decrypt"
+  "jest": {
+    "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/"],
+    "moduleNameMapper": {
+      "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
+  "codeship": {
+    "projectId": "237328",
+    "encryptedFiles": ["deploy.env"]
+  },
+  "babel": {
+    "cacheDirectory": true,
+    "presets": [
+      [
+        "env",
+        {
+          "modules": false
+        }
+      ],
+      "es2015",
+      "react",
+      "stage-1"
+    ],
+    "plugins": ["transform-runtime"]
   }
 }

@@ -9,6 +9,7 @@
 # production
 /build
 /dist
+/lib
 
 #styleguide
 /styleguide/build
@@ -28,3 +29,5 @@ yarn-error.log*
 # codeship
 *.aes
 deploy.env
+
+stats.json
