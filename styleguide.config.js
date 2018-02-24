@@ -57,6 +57,7 @@ module.exports = {
   styleguideDir: './dist',
   template: path.join(__dirname, 'styleguide/index.html'),
   theme: {
+    sidebarWidth: 240,
     color: {
       link: '#0683d4',
     },

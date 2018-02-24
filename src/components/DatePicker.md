@@ -46,7 +46,7 @@ initialState = {
       helperText={`value: ${state.date}`}
       minDate={oneWeekPast}
       maxDate={oneWeekFuture}
-      id="dp-start"
+      id="dp-ranged"
       value={state.startDate}
       onDateChange={d => setState({ date: d })}
     />
