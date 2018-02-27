@@ -19,17 +19,15 @@ test('Should return true for duration change', () => {
 });
 
 test('Should return true for deployment id change', () => {
-  const prevPresentation = {
+  const prevPresentation = null;
+  const nextPresentation = {
     name: 'a',
     duration: 1,
     application_deployment_id: 'a',
   };
-  const nextPresentation = {
-    name: 'a',
-    duration: 1,
-    application_deployment_id: 'b',
+  const application = {
+    deployment_id: 'b',
   };
-  const application = {};
   expect(
     hasPresentationChanged(prevPresentation, nextPresentation, application)
   ).toEqual(true);
@@ -104,6 +102,7 @@ test('Should return false equal file prop', () => {
   };
   const application = {
     presentation_properties: [{ name: 'file', type: 'file' }],
+    deployment_id: 'a',
   };
   expect(
     hasPresentationChanged(prevPresentation, nextPresentation, application)
