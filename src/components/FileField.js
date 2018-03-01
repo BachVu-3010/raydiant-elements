@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
 
 import { styles as textFieldStyles } from './TextField';
+import Icon from './Icon';
 
 const propTypes = {
   /** Class name(s) */
@@ -26,6 +27,8 @@ const propTypes = {
   label: PropTypes.string.isRequired,
   /** Name */
   name: PropTypes.string,
+  /** Whether the field is optional or not. */
+  optional: PropTypes.bool,
   /** Ghosted text to display if the input field is empty. */
   placeholder: PropTypes.string,
   /** The value of the input field.
@@ -34,7 +37,12 @@ const propTypes = {
   value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
-  /** Called when the user modifies the text. */
+  /** Called when the user clears the file. Will only be called for `optional` file fields. */
+  onClear: PropTypes.func,
+  /** Called when the user selects a file.
+   *
+   * This will be called with an empty file list if the user cancels out of the selection dialog.
+   */
   onChange: PropTypes.func,
   /** Called when the user focuses the text field. */
   onFocus: PropTypes.func,
@@ -49,10 +57,12 @@ const defaultProps = {
   error: false,
   helperText: '',
   name: '',
+  optional: false,
   placeholder: '',
   value: '',
   onBlur: () => {},
   onChange: () => {},
+  onClear: () => {},
   onFocus: () => {},
 };
 
@@ -68,6 +78,12 @@ class FileField extends React.Component {
       node.setAttribute('tabIndex', -1);
     }
   };
+  handleClear = event => {
+    const { onClear } = this.props;
+    if (onClear) {
+      onClear(event);
+    }
+  };
   render() {
     const {
       classes,
@@ -79,6 +95,7 @@ class FileField extends React.Component {
       helperText,
       label,
       name,
+      optional,
       placeholder,
       value,
       onChange,
@@ -106,6 +123,15 @@ class FileField extends React.Component {
         {!disabled && (
           <input
             type="file"
+            ref={input => {
+              if (this.input) {
+                this.input.removeEventListener('clear', this.handleClear);
+              }
+              this.input = input;
+              if (input) {
+                this.input.addEventListener('clear', this.handleClear);
+              }
+            }}
             className={classes.fileInput}
             {...{
               name,
@@ -117,6 +143,20 @@ class FileField extends React.Component {
             }}
           />
         )}
+        {!disabled &&
+          optional &&
+          value &&
+          value.length && (
+            <button
+              className={classes.clearButton}
+              onClick={() => {
+                const event = new Event('clear');
+                this.input.dispatchEvent(event);
+              }}
+            >
+              <Icon icon="remove" />
+            </button>
+          )}
       </div>
     );
   }
@@ -135,6 +175,17 @@ const styles = {
     height: '100%',
     opacity: 0,
     cursor: 'pointer',
+  },
+  clearButton: {
+    position: 'absolute',
+    right: 0,
+    top: 5,
+    border: 'none',
+    background: 'transparent',
+    margin: 0,
+    padding: 5,
+    zIndex: 1,
+    WebkitAppearance: 'none',
   },
 };
 

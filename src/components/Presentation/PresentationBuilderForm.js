@@ -217,6 +217,7 @@ class PresentationBuilderForm extends React.Component {
         onFile: file => onFile(prop.name, file),
         onBlur,
         url: prop.url, // Link
+        optional: prop.optional,
         options: prop.options, // Selection
         properties: prop.properties, // Array
         propPath, // Array

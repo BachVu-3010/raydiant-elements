@@ -22,6 +22,7 @@ export const propTypes = {
     'content-types': PropTypes.arrayOf(PropTypes.string), // File inputs
   }),
   helperText: PropTypes.node,
+  optional: PropTypes.bool,
   onBlur: PropTypes.func,
   propPath: pathType, // Array inputs
   selectedPath: pathType, // Array inputs
@@ -36,6 +37,7 @@ export const defaultProps = {
   options: [],
   constraints: {},
   helperText: '',
+  optional: false,
   propPath: [],
   onAdd: () => {},
   onRemove: () => {},

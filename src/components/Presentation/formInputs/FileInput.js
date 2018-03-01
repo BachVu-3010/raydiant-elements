@@ -7,6 +7,7 @@ const FileInput = ({
   value,
   helperText,
   constraints,
+  optional,
   hasError,
   onChange,
   onFile,
@@ -27,6 +28,7 @@ const FileInput = ({
       helperText={helperText}
       error={hasError}
       accept={accept}
+      optional={optional}
       onChange={e => {
         const files = e.target.files;
         if (files && files.length) {
@@ -42,6 +44,10 @@ const FileInput = ({
           onFile(file);
           onChange(fileValue);
         }
+      }}
+      onClear={() => {
+        onFile(null);
+        onChange(null);
       }}
       onBlur={onBlur}
     />
