@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import MUITextField from 'material-ui/TextField';
 import { withStyles } from 'material-ui/styles';
 import classnames from 'classnames';
+import buttonReset from '../styles/buttonReset';
 
 import { styles as textFieldStyles } from './TextField';
 import Icon from './Icon';
@@ -177,15 +178,12 @@ const styles = {
     cursor: 'pointer',
   },
   clearButton: {
+    ...buttonReset,
     position: 'absolute',
     right: 0,
     top: 5,
-    border: 'none',
-    background: 'transparent',
-    margin: 0,
     padding: 5,
     zIndex: 1,
-    WebkitAppearance: 'none',
   },
 };
 

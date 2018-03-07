@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./lib/index.js",
@@ -77,6 +77,7 @@
     "jss": "^8.1.0",
     "material-ui": "^1.0.0-beta.18",
     "moment": "^2.19.1",
+    "object-path": "^0.11.4",
     "object-path-immutable": "^1.0.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

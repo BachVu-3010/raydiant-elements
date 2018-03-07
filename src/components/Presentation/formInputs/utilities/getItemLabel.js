@@ -1,10 +1,12 @@
 // Returns the label of an array input's selected item with
 // the provided property definition.
-export default (item, prop) => {
+export default (item, properties, defaultLabel) => {
+  // Use the first property as the label.
+  const prop = properties[0];
   let label = item[prop.name];
 
   if (label === '' || label === undefined || label === null) {
-    label = ' ';
+    label = defaultLabel;
   } else if (prop.type === 'array') {
     label = label.join(', ');
   } else {

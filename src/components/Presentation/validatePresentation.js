@@ -94,3 +94,9 @@ export default function validatePresentation(
 
   return errors;
 }
+
+export const validateAppVars = (appVars, properties) => {
+  const errors = [];
+  validate(appVars, properties, errors, []);
+  return errors;
+};

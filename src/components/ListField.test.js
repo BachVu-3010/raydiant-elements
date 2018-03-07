@@ -1,13 +1,11 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import HelperText from './Typography/HelperText';
 import { ListField } from './ListField';
 
 const defaultProps = () => ({
   label: 'label',
   value: [],
   onItemClick: () => {},
-  onLabelClick: () => {},
   onChange: () => {},
   onAdd: () => {},
   classes: {
@@ -41,19 +39,6 @@ test('Should render list of objects', () => {
   expect(items.at(2).text()).toEqual('c');
 });
 
-test('Should render children instead of list', () => {
-  const props = defaultProps();
-  props.value = ['a', 'b', 'c'];
-
-  const wrapper = mount(
-    <ListField {...props}>
-      <div className="unique" />
-    </ListField>
-  );
-  expect(wrapper.find('.itemLabel').length).toEqual(0);
-  expect(wrapper.find('.unique').length).toEqual(1);
-});
-
 test('Should call onChange with reordered items', () => {
   const props = defaultProps();
   props.value = ['a', 'b', 'c'];
@@ -67,19 +52,7 @@ test('Should call onChange with reordered items', () => {
   expect(props.onChange).toBeCalledWith(['b', 'a', 'c']);
 });
 
-test('Should render error', () => {
-  const props = defaultProps();
-  props.error = true;
-  props.helperText = 'error';
-
-  const wrapper = mount(<ListField {...props} />);
-  const helperText = wrapper.find(HelperText);
-  expect(helperText.length).toEqual(1);
-  expect(helperText.props().error).toEqual(props.error);
-  expect(helperText.text()).toEqual(props.helperText);
-});
-
-test('Should button with onAdd click handler', () => {
+test('Should render button with onAdd click handler', () => {
   const props = defaultProps();
   props.value = ['a', 'b', 'c'];
   props.onAdd = jest.fn();
@@ -87,17 +60,6 @@ test('Should button with onAdd click handler', () => {
   const wrapper = mount(<ListField {...props} />);
   const button = wrapper.find({ onClick: props.onAdd });
   expect(button.length).toEqual(1);
-});
-
-test('Should call onLabelClick', () => {
-  const props = defaultProps();
-  props.value = ['a', 'b', 'c'];
-  props.onLabelClick = jest.fn();
-
-  const wrapper = mount(<ListField {...props} />);
-  const label = wrapper.find('.label');
-  label.simulate('click');
-  expect(props.onLabelClick).toHaveBeenCalledTimes(1);
 });
 
 test('Should call onItemClick with index', () => {

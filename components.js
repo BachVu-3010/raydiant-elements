@@ -8,7 +8,7 @@ const MODALS = 'Modals';
 const PROGRESS = 'Progress';
 const ICONS = 'Icons';
 const POPOVERS = 'Popovers';
-const TABS = 'Tabs';
+const NAVIGATION = 'Navigation';
 const PRESENTATIONS = 'Presentations';
 module.exports = {
   // This is the order that categories will appear in the generated docs.
@@ -23,7 +23,7 @@ module.exports = {
     TYPOGRAPHY,
     ICONS,
     LAYOUT,
-    TABS,
+    NAVIGATION,
     PRESENTATIONS,
   ],
   components: {
@@ -62,8 +62,10 @@ module.exports = {
     AlertIcon: { categories: [ICONS] },
     SuccessIcon: { categories: [ICONS] },
     SvgIcon: { categories: [ICONS] },
-    Tabs: { categories: [TABS] },
-    Tab: { categories: [TABS] },
+    Tabs: { categories: [NAVIGATION] },
+    Tab: { categories: [NAVIGATION] },
+    Breadcrumbs: { categories: [NAVIGATION] },
+    Breadcrumb: { categories: [NAVIGATION] },
     Presentation: {
       PresentationBuilderForm: { categories: [PRESENTATIONS] },
       PresentationBuilderPreview: { categories: [PRESENTATIONS] },

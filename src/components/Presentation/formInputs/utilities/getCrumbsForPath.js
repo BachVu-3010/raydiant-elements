@@ -8,9 +8,13 @@
 //   ['a', 'b', 0, 'c', 1],
 //   ['a', 'b', 0, 'c', 1, 'd', 2],
 // ]
-export default path => {
-  const crumbs = [];
+export default (rootCrumb, path) => {
+  const crumbs = [rootCrumb];
   let currentCrumb = [];
+  // Crumbs are only added from the path if the path is prefixed
+  // with the provided root crumb.
+  const isPathForRootCrumb = rootCrumb.every((p, index) => p === path[index]);
+  if (!isPathForRootCrumb) return crumbs;
 
   path.forEach(item => {
     if (typeof item === 'number') {

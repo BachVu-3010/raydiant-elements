@@ -32,6 +32,8 @@ import Tab from './components/Tab';
 import PresentationBuilderForm from './components/Presentation/PresentationBuilderForm';
 import PresentationBuilderPreview from './components/Presentation/PresentationBuilderPreview';
 import PresentationPreview from './components/Presentation/PresentationPreview';
+import Breadcrumbs from './components/Breadcrumbs';
+import Breadcrumb from './components/Breadcrumb';
 
 import './components/hacks/ie.css';
 
@@ -71,4 +73,6 @@ module.exports = {
   PresentationBuilderForm,
   PresentationBuilderPreview,
   PresentationPreview,
+  Breadcrumbs,
+  Breadcrumb,
 };

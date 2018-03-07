@@ -4,36 +4,42 @@ const pathType = PropTypes.arrayOf(
   PropTypes.oneOfType([PropTypes.string, PropTypes.number])
 );
 
+// Presentation properties.
+const propertiesType = PropTypes.arrayOf(PropTypes.object);
+
 export const propTypes = {
   label: PropTypes.string.isRequired,
   strings: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
   hasError: PropTypes.bool,
-  url: PropTypes.string, // Link inputs
+  url: PropTypes.string, // Link
   options: PropTypes.arrayOf(
     PropTypes.shape({ name: PropTypes.string, value: PropTypes.string })
   ),
   constraints: PropTypes.shape({
-    min: PropTypes.number, // Number inputs
-    max: PropTypes.number, // Number inputs
-    maxlength: PropTypes.number, // String and text inputs
-    'content-length': PropTypes.number, // File inputs
-    'content-types': PropTypes.arrayOf(PropTypes.string), // File inputs
+    min: PropTypes.number, // Number
+    max: PropTypes.number, // Number
+    maxlength: PropTypes.number, // String and text
+    'content-length': PropTypes.number, // File
+    'content-types': PropTypes.arrayOf(PropTypes.string), // File
   }),
   helperText: PropTypes.node,
   optional: PropTypes.bool,
   onBlur: PropTypes.func,
-  propPath: pathType, // Array inputs
-  selectedPath: pathType, // Array inputs
-  onAdd: PropTypes.func, // Array inputs
-  onRemove: PropTypes.func, // Array inputs
-  setSelectedPath: PropTypes.func, // Array inputs
+  singularLabel: PropTypes.string, // Array
+  propPath: pathType, // Array
+  selectedPath: pathType, // Array
+  onAdd: PropTypes.func, // Array
+  onRemove: PropTypes.func, // Array
+  setSelectedPath: PropTypes.func, // Array
+  properties: propertiesType, // Array
+  parentProperties: propertiesType, // Array
+  parentValue: PropTypes.object, // Array
 };
 
 export const defaultProps = {
   hasError: false,
-  url: null,
   options: [],
   constraints: {},
   helperText: '',
@@ -43,4 +49,6 @@ export const defaultProps = {
   onRemove: () => {},
   setSelectedPath: () => {},
   onBlur: () => {},
+  properties: [],
+  parentProperties: [],
 };

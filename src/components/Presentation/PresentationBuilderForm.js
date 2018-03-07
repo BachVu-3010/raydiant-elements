@@ -179,13 +179,22 @@ class PresentationBuilderForm extends React.Component {
     }
   };
 
-  renderAppVars = (appVars, properties, strings, path) => {
+  renderAppVars = (
+    appVars,
+    properties,
+    strings,
+    path,
+    parentProperties,
+    parentValue
+  ) => {
     const { onBlur, onFile } = this.props;
     const { errors, selectedPath } = this.state;
 
     return properties.map(prop => {
       const value = appVars[prop.name];
       const label = strings[prop.name] || prop.name;
+      const singularLabel =
+        strings[prop.singular_name] || prop.singular_name || 'Item';
       const propPath = [...path, prop.name];
       const propError = errors.find(err => isEqualArray(err.path, propPath));
       const hasError = !!propError;
@@ -202,8 +211,11 @@ class PresentationBuilderForm extends React.Component {
         );
       }
 
-      // Always allocate space whether there is helperText or not.
-      helperText = helperText || ' ';
+      // Allocate space whether there is helperText or not when rendering
+      // the main presentation properties, not list field properties.
+      if (!helperText && !parentProperties) {
+        helperText = ' ';
+      }
 
       const inputProps = {
         key: prop.name,
@@ -219,7 +231,10 @@ class PresentationBuilderForm extends React.Component {
         url: prop.url, // Link
         optional: prop.optional,
         options: prop.options, // Selection
+        singularLabel, // Array
         properties: prop.properties, // Array
+        parentProperties, // Array
+        parentValue, // Array
         propPath, // Array
         selectedPath, // Array
         onAdd: () => this.addAppVar(propPath, prop), // Array
