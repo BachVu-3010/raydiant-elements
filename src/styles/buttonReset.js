@@ -1,4 +1,5 @@
 export default {
+  fontSize: 'inherit',
   textAlign: 'left',
   padding: 0,
   margin: 0,

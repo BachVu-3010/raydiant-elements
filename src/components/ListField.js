@@ -133,7 +133,6 @@ const styles = theme => ({
   },
   itemLabel: {
     ...buttonReset,
-    fontSize: 14,
     flex: 1,
     minHeight: '1em',
     paddingTop: theme.spacing.unit,
@@ -147,7 +146,6 @@ const styles = theme => ({
   },
   add: {
     ...buttonReset,
-    fontSize: 14,
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
