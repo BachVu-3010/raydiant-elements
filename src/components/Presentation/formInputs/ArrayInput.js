@@ -38,7 +38,13 @@ export class ArrayInput extends Component {
   };
 
   renderDeletePrompt(value, properties, crumbs) {
-    const { onRemove, setSelectedPath, classes, strings } = this.props;
+    const {
+      onRemove,
+      setSelectedPath,
+      classes,
+      strings,
+      selectedPath,
+    } = this.props;
     const label = getItemLabel(value, properties, defaultLabel);
     const arrayProp = properties.find(prop => prop.type === 'array');
     let message = `Delete ${label}`;
@@ -73,7 +79,7 @@ export class ArrayInput extends Component {
             color="destructive"
             label="Delete"
             onClick={() => {
-              onRemove();
+              onRemove(selectedPath);
               // Go back to the previously selected item.
               setSelectedPath(crumbs[crumbs.length - 2]);
               this.hideDeletePrompt();
@@ -185,7 +191,7 @@ export class ArrayInput extends Component {
           onItemClick={index => setSelectedPath([...propPath, index])}
           onChange={onChange}
           onAdd={() => {
-            onAdd();
+            onAdd(propPath);
             setSelectedPath([...propPath, value.length]);
           }}
           addLabel={addLabel}

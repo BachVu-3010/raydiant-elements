@@ -5,11 +5,13 @@ import { propTypes, defaultProps } from './propTypes';
 const FileInput = ({
   label,
   value,
+  propPath,
   helperText,
   constraints,
   optional,
   hasError,
   onChange,
+  onRemove,
   onFile,
   onBlur,
 }) => {
@@ -47,7 +49,7 @@ const FileInput = ({
       }}
       onClear={() => {
         onFile(null);
-        onChange(null);
+        onRemove(propPath);
       }}
       onBlur={onBlur}
     />

@@ -115,6 +115,7 @@ test('Should call onAdd and set selected path on add', () => {
   const listField = wrapper.find(ListField);
   listField.props().onAdd();
   expect(props.onAdd).toHaveBeenCalledTimes(1);
+  expect(props.onAdd).toHaveBeenCalledWith(props.propPath);
   expect(props.setSelectedPath).toHaveBeenCalledTimes(1);
   expect(props.setSelectedPath).toHaveBeenCalledWith([...props.propPath, 1]);
 });
@@ -150,6 +151,7 @@ test('Should call onRemove and set selected path on remove', () => {
   expect(removeConfirm.length).toEqual(1);
   removeConfirm.props().onClick();
   expect(props.onRemove).toHaveBeenCalledTimes(1);
+  expect(props.onRemove).toHaveBeenCalledWith(props.selectedPath);
   expect(props.setSelectedPath).toHaveBeenCalledTimes(1);
   expect(props.setSelectedPath).toHaveBeenCalledWith(props.propPath);
 });

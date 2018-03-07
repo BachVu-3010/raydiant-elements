@@ -237,8 +237,8 @@ class PresentationBuilderForm extends React.Component {
         parentValue, // Array
         propPath, // Array
         selectedPath, // Array
-        onAdd: () => this.addAppVar(propPath, prop), // Array
-        onRemove: () => this.removeAppVar(selectedPath, prop), // Array
+        onAdd: addPath => this.addAppVar(addPath, prop), // Array
+        onRemove: removePath => this.removeAppVar(removePath, prop), // Array and File
         setSelectedPath: this.setSelectedPath, // Array
         renderAppVars: this.renderAppVars, // Array
       };
