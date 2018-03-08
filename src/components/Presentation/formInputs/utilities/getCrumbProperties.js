@@ -9,7 +9,7 @@ export default (properties, crumb) => {
   let crumbProperties = properties;
   // Finds the crumbs properties in a potentially nested properties list.
   propPath.forEach(path => {
-    const propAtPath = crumbProperties.find(prop => prop.name === path);
+    const propAtPath = crumbProperties.filter(prop => prop.name === path)[0];
     if (propAtPath && propAtPath.properties) {
       crumbProperties = propAtPath.properties;
     }

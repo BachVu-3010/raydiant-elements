@@ -46,7 +46,7 @@ export class ArrayInput extends Component {
       selectedPath,
     } = this.props;
     const label = getItemLabel(value, properties, defaultLabel);
-    const arrayProp = properties.find(prop => prop.type === 'array');
+    const arrayProp = properties.filter(prop => prop.type === 'array')[0];
     let message = `Delete ${label}`;
 
     if (

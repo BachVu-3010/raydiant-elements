@@ -146,11 +146,8 @@ const styles = theme => ({
   },
   add: {
     ...buttonReset,
+    display: 'block',
     width: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
     padding: theme.spacing.unit * 2,
   },
   addDisabled: {
@@ -158,13 +155,14 @@ const styles = theme => ({
     cursor: 'not-allowed',
   },
   addIcon: {
+    display: 'block',
+    margin: '0 auto',
     marginBottom: theme.spacing.unit / 2,
   },
   addLabel: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
-    width: '100%',
     textAlign: 'center',
   },
 });

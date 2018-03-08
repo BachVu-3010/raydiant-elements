@@ -196,7 +196,9 @@ class PresentationBuilderForm extends React.Component {
       const singularLabel =
         strings[prop.singular_name] || prop.singular_name || 'Item';
       const propPath = [...path, prop.name];
-      const propError = errors.find(err => isEqualArray(err.path, propPath));
+      const propError = errors.filter(err =>
+        isEqualArray(err.path, propPath)
+      )[0];
       const hasError = !!propError;
 
       let helperText = hasError
@@ -270,10 +272,10 @@ class PresentationBuilderForm extends React.Component {
       saveButtonPopover,
     } = this.props;
     const { presentation, errors } = this.state;
-    const nameError = errors.find(err => isEqualArray(err.path, ['name']));
-    const durationError = errors.find(err =>
+    const nameError = errors.filter(err => isEqualArray(err.path, ['name']))[0];
+    const durationError = errors.filter(err =>
       isEqualArray(err.path, ['duration'])
-    );
+    )[0];
     const shouldDisableSave = !hasPresentationChanged(
       originalPresentation,
       presentation,
@@ -353,6 +355,7 @@ const styles = theme => ({
     flex: 1,
     display: 'flex',
     flexDirection: 'column',
+    minWidth: 0,
   },
 
   inputs: {
