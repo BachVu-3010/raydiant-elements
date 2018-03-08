@@ -7,6 +7,7 @@ const DateInput = ({
   value,
   helperText,
   hasError,
+  autoFocus,
   onChange,
   onBlur,
 }) => (
@@ -15,6 +16,7 @@ const DateInput = ({
     value={value}
     helperText={helperText}
     error={hasError}
+    autoFocus={autoFocus}
     onDateChange={onChange}
     onBlur={onBlur}
   />

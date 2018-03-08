@@ -30,6 +30,8 @@ const propTypes = {
   min: PropTypes.number,
   /** The value of the input field. */
   max: PropTypes.number,
+  /** Sets focus to the input when true */
+  autoFocus: PropTypes.bool,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */
@@ -49,6 +51,7 @@ const defaultProps = {
   value: 0,
   min: undefined,
   max: undefined,
+  autoFocus: false,
   onBlur: () => {},
   onChange: () => {},
   onFocus: () => {},
@@ -92,6 +95,7 @@ class NumberField extends React.Component {
       value,
       min,
       max,
+      autoFocus,
       onChange,
       onBlur,
       onFocus,
@@ -101,6 +105,7 @@ class NumberField extends React.Component {
       <MUITextField
         type="number"
         fullWidth
+        autoFocus={autoFocus}
         className={classnames(className, classes.root, {
           [classes.alert]: error === 'alert',
         })}

@@ -5,6 +5,7 @@ import { propTypes, defaultProps } from './propTypes';
 const FileInput = ({
   label,
   value,
+  autoFocus,
   propPath,
   helperText,
   constraints,
@@ -29,6 +30,7 @@ const FileInput = ({
       value={fileList}
       helperText={helperText}
       error={hasError}
+      autoFocus={autoFocus}
       accept={accept}
       optional={optional}
       onChange={e => {

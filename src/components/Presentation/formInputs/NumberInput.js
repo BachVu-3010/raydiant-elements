@@ -6,6 +6,7 @@ const NumberInput = ({
   label,
   value = 0,
   helperText,
+  autoFocus,
   constraints,
   hasError,
   onChange,
@@ -18,6 +19,7 @@ const NumberInput = ({
     max={constraints.max}
     helperText={helperText}
     error={hasError}
+    autoFocus={autoFocus}
     onChange={evt => onChange(parseInt(evt.target.value, 10))}
     onBlur={onBlur}
   />

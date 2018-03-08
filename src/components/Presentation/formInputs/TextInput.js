@@ -5,6 +5,7 @@ import { propTypes, defaultProps } from './propTypes';
 const TextInput = ({
   label,
   value,
+  autoFocus,
   helperText,
   constraints,
   hasError,
@@ -15,6 +16,7 @@ const TextInput = ({
     multiline
     label={label}
     value={value || ''}
+    autoFocus={autoFocus}
     maxLength={constraints.maxlength}
     helperText={helperText}
     error={hasError}

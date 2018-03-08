@@ -40,6 +40,8 @@ const propTypes = {
   value: PropTypes.string,
   /** The maximum number of characters of the input field. */
   maxLength: PropTypes.number,
+  /** Sets focus to the input when true */
+  autoFocus: PropTypes.bool,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */
@@ -55,6 +57,7 @@ const defaultProps = {
   disabled: false,
   error: false,
   helperText: '',
+  autoFocus: false,
   icon: null,
   id: null,
   inputRef: null,
@@ -120,6 +123,7 @@ class TextField extends React.Component {
       onChange,
       icon,
       maxLength,
+      autoFocus,
       ...props
     } = this.props;
 
@@ -131,6 +135,7 @@ class TextField extends React.Component {
     const textField = (
       <MUITextField
         fullWidth
+        autoFocus={autoFocus}
         {...multilineOpts}
         {...props}
         className={classnames(className, {

@@ -36,6 +36,8 @@ const propTypes = {
    * Pass a FileList object to display names of the selected files
    */
   value: PropTypes.any, // eslint-disable-line react/forbid-prop-types
+  /** Sets focus to the input when true */
+  autoFocus: PropTypes.bool,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user clears the file. Will only be called for `optional` file fields. */
@@ -61,6 +63,7 @@ const defaultProps = {
   optional: false,
   placeholder: '',
   value: '',
+  autoFocus: false,
   onBlur: () => {},
   onChange: () => {},
   onClear: () => {},
@@ -99,6 +102,7 @@ class FileField extends React.Component {
       optional,
       placeholder,
       value,
+      autoFocus,
       onChange,
       onBlur,
       onFocus,
@@ -109,6 +113,7 @@ class FileField extends React.Component {
         <MUITextField
           inputRef={this.inputRef}
           fullWidth
+          autoFocus={autoFocus}
           className={classnames(className, classes.root, {
             [classes.alert]: error === 'alert',
           })}

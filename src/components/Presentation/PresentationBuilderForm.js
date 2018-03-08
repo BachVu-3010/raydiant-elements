@@ -190,7 +190,7 @@ class PresentationBuilderForm extends React.Component {
     const { onBlur, onFile } = this.props;
     const { errors, selectedPath } = this.state;
 
-    return properties.map(prop => {
+    return properties.map((prop, index) => {
       const value = appVars[prop.name];
       const label = strings[prop.name] || prop.name;
       const singularLabel =
@@ -200,6 +200,9 @@ class PresentationBuilderForm extends React.Component {
         isEqualArray(err.path, propPath)
       )[0];
       const hasError = !!propError;
+
+      // Set focus to the first property at the selected path.
+      const autoFocus = index === 0 && isEqualArray(path, selectedPath);
 
       let helperText = hasError
         ? propError.message
@@ -225,6 +228,7 @@ class PresentationBuilderForm extends React.Component {
         label,
         helperText,
         hasError,
+        autoFocus,
         strings,
         constraints: prop.constraints,
         onChange: newValue => this.setAppVar(propPath, newValue, prop),

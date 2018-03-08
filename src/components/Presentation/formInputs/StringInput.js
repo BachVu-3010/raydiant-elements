@@ -5,6 +5,7 @@ import { propTypes, defaultProps } from './propTypes';
 const StringInput = ({
   label,
   value,
+  autoFocus,
   helperText,
   constraints,
   hasError,
@@ -17,6 +18,7 @@ const StringInput = ({
     maxLength={constraints.maxlength}
     helperText={helperText}
     error={hasError}
+    autoFocus={autoFocus}
     onChange={evt => onChange(evt.target.value)}
     onBlur={onBlur}
   />

@@ -25,6 +25,8 @@ export const propTypes = {
   value: PropTypes.string,
   /** Additional information to help the user fill the field. */
   helperText: PropTypes.node,
+  /** Sets focus to the input when true */
+  autoFocus: PropTypes.bool,
 };
 export const defaultProps = {
   dateFormat: 'L',
@@ -33,6 +35,7 @@ export const defaultProps = {
   popupPlacement: 'bottom-start',
   value: null,
   helperText: '',
+  autoFocus: false,
 };
 
 class FocusableTextField extends React.Component {
@@ -104,6 +107,7 @@ class DatePicker extends React.Component {
       placeholder,
       popupPlacement,
       value: _value, // Ignore the inbound value, use state's `text`
+      autoFocus,
       ...inputProps
     } = this.props;
     return (
@@ -126,7 +130,7 @@ class DatePicker extends React.Component {
           value={text}
           customInput={
             <FocusableTextField
-              {...{ label, error }}
+              {...{ label, error, autoFocus }}
               inputRef={input => {
                 this.input = input;
               }}

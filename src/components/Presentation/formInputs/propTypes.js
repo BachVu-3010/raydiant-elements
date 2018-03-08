@@ -12,6 +12,7 @@ export const propTypes = {
   strings: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.any,
+  autoFocus: PropTypes.bool,
   hasError: PropTypes.bool,
   url: PropTypes.string, // Link
   options: PropTypes.arrayOf(
@@ -39,6 +40,7 @@ export const propTypes = {
 };
 
 export const defaultProps = {
+  autoFocus: false,
   hasError: false,
   options: [],
   constraints: {},

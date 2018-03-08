@@ -6,6 +6,7 @@ const SelectionInput = ({
   label,
   value,
   helperText,
+  autoFocus,
   options,
   strings,
   hasError,
@@ -17,6 +18,7 @@ const SelectionInput = ({
     value={value}
     helperText={helperText}
     error={hasError}
+    autoFocus={autoFocus}
     onChange={evt => onChange(evt.target.value)}
     onBlur={onBlur}
   >

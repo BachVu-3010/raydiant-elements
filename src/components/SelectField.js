@@ -36,6 +36,8 @@ const propTypes = {
   name: PropTypes.string,
   /** Additional information to help the user fill the field. */
   helperText: PropTypes.node,
+  /** Sets focus to the input when true */
+  autoFocus: PropTypes.bool,
   /** Called when the user blurs the text field. */
   onBlur: PropTypes.func,
   /** Called when the user modifies the text. */
@@ -55,6 +57,7 @@ const defaultProps = {
   error: false,
   name: '',
   helperText: '',
+  autoFocus: false,
   onBlur: () => {},
   onChange: () => {},
   onFocus: () => {},
@@ -71,6 +74,7 @@ const SelectField = ({
   name,
   placeholder,
   value,
+  autoFocus,
   onBlur,
   onChange,
   onFocus,
@@ -79,6 +83,7 @@ const SelectField = ({
   <MUITextField
     select
     fullWidth
+    autoFocus={autoFocus}
     className={classnames(className, classes.root, {
       [classes.alert]: error === 'alert',
     })}
