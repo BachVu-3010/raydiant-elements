@@ -17,9 +17,13 @@ import validatePresentation from './validatePresentation';
 import hasPresentationChanged from './hasPresentationChanged';
 import * as formInputs from './formInputs';
 import createDefaultValue from './createDefaultValue';
+import getCrumbProperties from './formInputs/utilities/getCrumbProperties';
+import getCrumbValue from './formInputs/utilities/getCrumbValue';
+import PathTracker from './formInputs/PathTracker';
 
 const formInputTypes = {
   array: formInputs.ArrayInput,
+  topLevelArray: PathTracker(formInputs.ArrayInput),
   boolean: formInputs.BooleanInput,
   date: formInputs.DateInput,
   file: formInputs.FileInput,
@@ -104,7 +108,6 @@ class PresentationBuilderForm extends React.Component {
     this.state = {
       presentation: props.presentation,
       errors: [],
-      selectedPath: [],
     };
 
     // When set to true we will validate whenever a presentation is updated.
@@ -117,7 +120,6 @@ class PresentationBuilderForm extends React.Component {
       this.setState({
         presentation: nextProps.presentation,
         errors: [],
-        selectedPath: [],
       });
     }
   }
@@ -141,10 +143,6 @@ class PresentationBuilderForm extends React.Component {
       this.setState({ presentation });
     }
   }
-
-  setSelectedPath = path => {
-    this.setState({ selectedPath: path });
-  };
 
   removeAppVar = (path, prop) => {
     const presentation = immutable.del(this.state.presentation, path);
@@ -179,30 +177,35 @@ class PresentationBuilderForm extends React.Component {
     }
   };
 
-  renderAppVars = (
-    appVars,
-    properties,
-    strings,
-    path,
-    parentProperties,
-    parentValue
-  ) => {
+  renderAppVars = (appVars, appProperties, strings, path, context = {}) => {
     const { onBlur, onFile } = this.props;
-    const { errors, selectedPath } = this.state;
+    const { errors } = this.state;
+
+    const topLevel = path.length < 2;
+
+    const properties = getCrumbProperties(appProperties, path).properties;
+    const vars = getCrumbValue(appVars, path) || {};
+
+    const inputTypes = { ...formInputTypes };
+    if (topLevel) {
+      // Top-level array inputs should track their selected path
+      inputTypes.array = formInputTypes.topLevelArray;
+    }
 
     return properties.map((prop, index) => {
-      const value = appVars[prop.name];
-      const label = strings[prop.name] || prop.name;
+      const name = prop.name;
+      const value = vars[name];
+      const label = strings[name] || name;
       const singularLabel =
         strings[prop.singular_name] || prop.singular_name || 'Item';
-      const propPath = [...path, prop.name];
+      const propPath = [...path, name];
       const propError = errors.filter(err =>
         isEqualArray(err.path, propPath)
       )[0];
       const hasError = !!propError;
 
       // Set focus to the first property at the selected path.
-      const autoFocus = index === 0 && isEqualArray(path, selectedPath);
+      const autoFocus = index === 0;
 
       let helperText = hasError
         ? propError.message
@@ -218,12 +221,16 @@ class PresentationBuilderForm extends React.Component {
 
       // Allocate space whether there is helperText or not when rendering
       // the main presentation properties, not list field properties.
-      if (!helperText && !parentProperties) {
+      if (!helperText && topLevel) {
         helperText = ' ';
       }
 
       const inputProps = {
-        key: prop.name,
+        key: name,
+        ...context,
+        appVars,
+        appProperties,
+        name,
         value,
         label,
         helperText,
@@ -232,24 +239,20 @@ class PresentationBuilderForm extends React.Component {
         strings,
         constraints: prop.constraints,
         onChange: newValue => this.setAppVar(propPath, newValue, prop),
-        onFile: file => onFile(prop.name, file),
+        onFile: file => onFile(name, file),
         onBlur,
         url: prop.url, // Link
         optional: prop.optional,
         options: prop.options, // Selection
         singularLabel, // Array
         properties: prop.properties, // Array
-        parentProperties, // Array
-        parentValue, // Array
         propPath, // Array
-        selectedPath, // Array
         onAdd: addPath => this.addAppVar(addPath, prop), // Array
         onRemove: removePath => this.removeAppVar(removePath, prop), // Array and File
-        setSelectedPath: this.setSelectedPath, // Array
         renderAppVars: this.renderAppVars, // Array
       };
 
-      return React.createElement(formInputTypes[prop.type], inputProps);
+      return React.createElement(inputTypes[prop.type], inputProps);
     });
   };
 

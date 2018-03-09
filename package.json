@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.25.0",
+  "version": "0.25.1",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./lib/index.js",
@@ -111,7 +111,7 @@
     "webpack-bundle-analyzer": "^2.10.0"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/"],
+    "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/", "/lib/"],
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/__mocks__/styleMock.js"
     }

@@ -20,14 +20,51 @@ import getCrumbValue from './utilities/getCrumbValue';
 import getCrumbProperties from './utilities/getCrumbProperties';
 
 const defaultLabel = 'New';
+const transitionTiming = 200;
 
 export class ArrayInput extends Component {
   static propTypes = propTypes;
   static defaultProps = defaultProps;
 
-  state = {
-    showDeletePrompt: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      showDeletePrompt: false,
+      selectedPath: props.selectedPath,
+    };
+  }
+
+  componentWillReceiveProps(newProps) {
+    const { propPath, selectedPath } = newProps;
+    const isRoot = propPath.length <= 2; // [root, thisProp]
+    if (isRoot) {
+      const prevPath = this.props.selectedPath;
+      if (!isEqualArray(prevPath, selectedPath)) {
+        let animation = 'sibling';
+        if (prevPath.length < selectedPath.length) {
+          animation = 'moveDownHierarchy';
+        } else if (prevPath.length > selectedPath.length) {
+          animation = 'moveUpHierarchy';
+        }
+        // Animate
+        this.animateSelection({ animation, selectedPath });
+        return;
+      }
+    }
+    this.setState({ selectedPath });
+  }
+
+  componentWillUnmount() {
+    this.clearAnimation();
+  }
+
+  getSingularLabel = arrayProp =>
+    this.props.strings[arrayProp.singular_name] ||
+    arrayProp.singular_name ||
+    'Item';
+
+  getPluralLabel = arrayProp =>
+    this.props.strings[arrayProp.name] || arrayProp.name;
 
   showDeletePrompt = () => {
     this.setState({ showDeletePrompt: true });
@@ -37,14 +74,44 @@ export class ArrayInput extends Component {
     this.setState({ showDeletePrompt: false });
   };
 
+  // Clear all outstanding animations; very useful on unmount.
+  clearAnimation = () => {
+    cancelAnimationFrame(this.raf);
+    delete this.raf;
+    clearTimeout(this.animationTimeout);
+    delete this.animationTimeout;
+  };
+
+  // Animate a selected path change.
+  animateSelection = ({ animation, selectedPath }) => {
+    this.clearAnimation();
+    this.setState({ animation, animationState: 'out begin' }, () => {
+      this.raf = requestAnimationFrame(() => {
+        this.setState({ animationState: 'out' });
+        this.animationTimeout = setTimeout(() => {
+          this.setState({ animationState: 'out end' });
+          this.raf = requestAnimationFrame(() => {
+            this.setState({ selectedPath, animationState: 'in begin' }, () => {
+              this.raf = requestAnimationFrame(() => {
+                this.setState({ animationState: 'in' });
+                this.animationTimeout = setTimeout(() => {
+                  this.setState({
+                    animation: null,
+                    animationState: null,
+                  });
+                  this.clearAnimation();
+                }, transitionTiming);
+              });
+            });
+          });
+        }, transitionTiming);
+      });
+    });
+  };
+
   renderDeletePrompt(value, properties, crumbs) {
-    const {
-      onRemove,
-      setSelectedPath,
-      classes,
-      strings,
-      selectedPath,
-    } = this.props;
+    const { onRemove, setSelectedPath, classes } = this.props;
+    const { selectedPath } = this.state;
     const label = getItemLabel(value, properties, defaultLabel);
     const arrayProp = properties.filter(prop => prop.type === 'array')[0];
     let message = `Delete ${label}`;
@@ -55,9 +122,8 @@ export class ArrayInput extends Component {
       value[arrayProp.name].length > 0
     ) {
       const count = value[arrayProp.name].length;
-      const arrayPropLabel = strings[arrayProp.name] || arrayProp.name;
-      const arrayPropLabelSingular =
-        strings[arrayProp.singular_name] || arrayProp.singular_name || 'Item';
+      const arrayPropLabel = this.getPluralLabel(arrayProp);
+      const arrayPropLabelSingular = this.getSingularLabel(arrayProp);
       message = `${message} and its ${count} ${
         count === 1 ? arrayPropLabelSingular : arrayPropLabel
       }`;
@@ -91,7 +157,7 @@ export class ArrayInput extends Component {
   }
 
   renderBreadcrumbs(crumbs) {
-    const { label, value, properties, setSelectedPath } = this.props;
+    const { label, appVars, appProperties, setSelectedPath } = this.props;
     const breadcrumbs = crumbs.map((crumb, index) => {
       if (index === 0) {
         // Root crumb
@@ -99,8 +165,9 @@ export class ArrayInput extends Component {
       }
 
       // The value in the array that corresponds to the current crumb.
-      const crumbValue = getCrumbValue(value, crumb);
-      const crumbProperties = getCrumbProperties(properties, crumb);
+      const crumbValue = getCrumbValue(appVars, crumb);
+      const crumbProperties = getCrumbProperties(appProperties, crumb)
+        .properties;
       const crumbLabel = getItemLabel(
         crumbValue,
         crumbProperties,
@@ -134,10 +201,8 @@ export class ArrayInput extends Component {
   renderContents(crumbs) {
     const {
       singularLabel,
-      value = [],
-      properties,
-      parentProperties,
-      parentValue,
+      appVars = [],
+      appProperties,
       propPath,
       onChange,
       onAdd,
@@ -146,28 +211,35 @@ export class ArrayInput extends Component {
       strings,
       classes,
     } = this.props;
-    const { showDeletePrompt } = this.state;
+    const { showDeletePrompt, selectedPath } = this.state;
 
     // We only render properties for the last crumb.
     const contentCrumb = crumbs[crumbs.length - 1];
-    const contentValue = getCrumbValue(value, contentCrumb);
-    const contentProperties = getCrumbProperties(properties, contentCrumb);
+    const contentValue = getCrumbValue(appVars, contentCrumb) || [];
+    const contentProperties = getCrumbProperties(appProperties, contentCrumb)
+      .properties;
     // If the current property is the last crumb we render the list.
     const propIsLastCrumb = isEqualArray(propPath, contentCrumb);
     if (propIsLastCrumb) {
+      const parentCrumb =
+        crumbs.length > 1 ? crumbs[crumbs.length - 2] : ['application_vars'];
+      const parentValue = getCrumbValue(appVars, parentCrumb);
+      const parentProperties = getCrumbProperties(appProperties, parentCrumb)
+        .properties;
+
       // Add extra spacing to the top of the list field when there it's the only
       // property in the list. Need to account for length == 0 as well when it's the
       // root array type.
-      const isOnlyInput = parentProperties.lengh <= 1;
-      // Disable the add button when any properties execept for other array types
+      const isOnlyInput = parentProperties.length <= 1;
+      // Disable the add button when any properties except for other array types
       // are not valid and there are no items in the list.
       const nonArrayProperties = parentProperties.filter(
         prop => prop.type !== 'array'
       );
       const errors = validateAppVars(parentValue, nonArrayProperties);
-      const isEmpty = value.length === 0;
+      const isEmpty = contentValue.length === 0;
       const isDisabled = isEmpty && errors.length > 0;
-      const isRootCrumb = parentProperties.length === 0;
+      const isRootCrumb = propPath.length <= 2; // [root, thisProp];
       let addLabel;
 
       if (isRootCrumb && isEmpty) {
@@ -175,7 +247,11 @@ export class ArrayInput extends Component {
       } else if (isRootCrumb) {
         addLabel = `Add a new ${singularLabel}`;
       } else {
-        const parentItemLabel = getItemLabel(parentValue, parentProperties, '');
+        const parentItemLabel = getItemLabel(
+          contentValue,
+          contentProperties,
+          ''
+        );
         addLabel = `Add a new ${singularLabel}${
           parentItemLabel ? ` to ${parentItemLabel}` : ''
         }`;
@@ -184,7 +260,7 @@ export class ArrayInput extends Component {
       return (
         <ListField
           className={classnames(classes.list, isOnlyInput && classes.onlyList)}
-          value={value}
+          value={contentValue}
           getItemLabel={item =>
             getItemLabel(item, contentProperties, defaultLabel)
           }
@@ -192,7 +268,7 @@ export class ArrayInput extends Component {
           onChange={onChange}
           onAdd={() => {
             onAdd(propPath);
-            setSelectedPath([...propPath, value.length]);
+            setSelectedPath([...propPath, contentValue.length]);
           }}
           addLabel={addLabel}
           addDisabled={isDisabled}
@@ -225,12 +301,11 @@ export class ArrayInput extends Component {
         </div>
         <Column className={classnames(noList && classes.noList)}>
           {renderAppVars(
-            contentValue,
-            contentProperties,
+            appVars,
+            appProperties,
             strings,
-            contentCrumb, // The current rendering path.
-            contentProperties, // The parent properties.
-            contentValue // The parent value.
+            contentCrumb, // The current rendering path
+            { setSelectedPath, selectedPath }
           )}
         </Column>
       </div>
@@ -238,23 +313,72 @@ export class ArrayInput extends Component {
   }
 
   render() {
-    const { selectedPath, propPath, classes, parentProperties } = this.props;
+    const {
+      appProperties,
+      appVars,
+      onAdd,
+      propPath,
+      setSelectedPath,
+      classes,
+    } = this.props;
+    const { selectedPath, animation, animationState } = this.state;
     // We only show the breadcrumb if we are currently rendering the top most crumb.
-    const isRootCrumb = parentProperties.length === 0;
+    const isRootCrumb = propPath.length <= 2;
     // Get the crumbs for the current prop and selected path. Crumbs for the selected
     // path are only returned if they are prefixed with the prop path. If they are
     // not prefixed with the prop path that means the selected path is for a
     // another top-level array type.
     const crumbs = getCrumbsForPath(propPath, selectedPath);
+    // Logic to figure out the sibling type to the current selection.
+    // Will be useful if/when we add an "Add [sibling]" button.
+    let peerProps;
+    let peerValue;
+    let peerPath;
+    if (crumbs.length > 1) {
+      peerPath = crumbs[crumbs.length - 1].slice(0, -1);
+      peerProps = getCrumbProperties(appProperties, peerPath);
+      peerValue = getCrumbValue(appVars, peerPath);
+    }
 
-    return (
-      <div>
-        {isRootCrumb && this.renderBreadcrumbs(crumbs)}
-        <div className={classnames(isRootCrumb && classes.card)}>
-          {this.renderContents(crumbs)}
+    if (isRootCrumb) {
+      return (
+        <div>
+          {this.renderBreadcrumbs(crumbs)}
+          <div
+            className={classnames(
+              classes.card,
+              animationState ? 'animating' : null
+            )}
+          >
+            <div
+              className={classnames(
+                classes.frame,
+                classes[animation],
+                animationState
+              )}
+            >
+              {this.renderContents(crumbs)}
+            </div>
+          </div>
+          {peerProps && (
+            <button
+              onClick={() => {
+                onAdd(peerPath);
+                setSelectedPath([...peerPath, peerValue.length]);
+              }}
+              className={classes.addSiblingButton}
+            >
+              <Icon icon="add" className={classes.addIcon} />
+              <div
+                className={classes.addLabel}
+              >{`Add another ${this.getSingularLabel(peerProps)}`}</div>
+            </button>
+          )}
         </div>
-      </div>
-    );
+      );
+    }
+
+    return <div>{this.renderContents(crumbs)}</div>;
   }
 }
 
@@ -264,6 +388,30 @@ const styles = theme => ({
     border: 'solid 1px #979797',
     borderRadius: 2,
     marginBottom: theme.spacing.unit * 2,
+    '&.animating': {
+      // Hide overflow so our translation transitions don't throw scrollbars
+      // all over the place
+      overflow: 'hidden',
+    },
+  },
+  addSiblingButton: {
+    ...buttonReset,
+    width: '100%',
+    boxSizing: 'border-box',
+    padding: 12,
+    border: 'solid 1px #979797',
+    marginBottom: theme.spacing.unit,
+  },
+  addIcon: {
+    display: 'block',
+    margin: '0 auto',
+    marginBottom: theme.spacing.unit / 2,
+  },
+  addLabel: {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    textAlign: 'center',
   },
   list: {
     margin: 0,
@@ -301,6 +449,45 @@ const styles = theme => ({
     justifyContent: 'space-between',
     padding: theme.spacing.unit * 2,
     backgroundColor: '#e8eaee',
+  },
+  frame: {
+    transition: `transform ease-out ${transitionTiming}ms`,
+    '&.out.end, &.in.begin': {
+      transition: 'none !important',
+    },
+  },
+  moveUpHierarchy: {
+    '&.in.begin': {
+      transform: 'translateX(-100%)',
+    },
+    '&.in, &.out.begin': {
+      transform: 'translateX(0) translateY(0)',
+    },
+    '&.out': {
+      transform: 'translateX(100%)',
+    },
+  },
+  moveDownHierarchy: {
+    '&.in.begin': {
+      transform: 'translateX(100%)',
+    },
+    '&.in, &.out.begin': {
+      transform: 'translateX(0) translateY(0)',
+    },
+    '&.out': {
+      transform: 'translateX(-100%)',
+    },
+  },
+  sibling: {
+    '&.in.begin': {
+      transform: 'translateY(100%)',
+    },
+    '&.in, &.out.begin': {
+      transform: 'translateX(0) translateY(0)',
+    },
+    '&.out': {
+      transform: 'translateY(-100%)',
+    },
   },
 });
 

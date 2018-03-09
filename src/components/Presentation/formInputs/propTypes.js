@@ -33,10 +33,7 @@ export const propTypes = {
   selectedPath: pathType, // Array
   onAdd: PropTypes.func, // Array
   onRemove: PropTypes.func, // Array
-  setSelectedPath: PropTypes.func, // Array
   properties: propertiesType, // Array
-  parentProperties: propertiesType, // Array
-  parentValue: PropTypes.object, // Array
 };
 
 export const defaultProps = {
@@ -49,8 +46,6 @@ export const defaultProps = {
   propPath: [],
   onAdd: () => {},
   onRemove: () => {},
-  setSelectedPath: () => {},
   onBlur: () => {},
   properties: [],
-  parentProperties: [],
 };

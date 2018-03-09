@@ -10,10 +10,16 @@ const defaultProps = () => ({
   label: 'Items',
   singularLabel: 'Item',
   helperText: undefined,
+  appVars: { items: [] },
+  appProperties: [
+    {
+      name: 'items',
+      type: 'array',
+      properties: [{ name: 'string', type: 'string' }],
+    },
+  ],
   value: [],
-  parentValue: undefined,
-  properties: [],
-  parentProperties: [],
+  properties: [{ name: 'string', type: 'string' }],
   propPath: ['application_vars', 'items'],
   selectedPath: [],
   strings: {},
@@ -35,9 +41,10 @@ test('Should render Breadcrumbs if root crumb', () => {
 });
 
 test('Should not render Breadcrumbs if not root crumb', () => {
-  const props = defaultProps();
-  props.parentValue = { string: 'string' };
-  props.parentProperties = [{ name: 'string', type: 'string' }];
+  const props = {
+    ...defaultProps(),
+    propPath: ['application_vars', 'items', 0],
+  };
   const wrapper = shallow(<ArrayInput {...props} />);
   expect(wrapper.find(Breadcrumbs).length).toEqual(0);
 });
@@ -58,12 +65,14 @@ test('Should call renderAppVars with last crumb', () => {
   shallow(<ArrayInput {...props} />);
   expect(props.renderAppVars).toHaveBeenCalledTimes(1);
   expect(props.renderAppVars).toHaveBeenCalledWith(
-    props.value[0],
-    props.properties,
+    props.appVars,
+    props.appProperties,
     props.strings,
     ['application_vars', 'items', 0], // last crumb
-    props.properties, // parent properties for next render
-    props.value[0] // parent value for next render
+    {
+      selectedPath: ['application_vars', 'items', 0],
+      setSelectedPath: props.setSelectedPath,
+    }
   );
 });
 
@@ -106,8 +115,6 @@ test('Should set selected path on crumb click', () => {
 
 test('Should call onAdd and set selected path on add', () => {
   const props = defaultProps();
-  props.value = [{ string: 'string' }];
-  props.properties = [{ name: 'string', type: 'string' }];
   props.onAdd = jest.fn();
   props.setSelectedPath = jest.fn();
 
@@ -117,7 +124,7 @@ test('Should call onAdd and set selected path on add', () => {
   expect(props.onAdd).toHaveBeenCalledTimes(1);
   expect(props.onAdd).toHaveBeenCalledWith(props.propPath);
   expect(props.setSelectedPath).toHaveBeenCalledTimes(1);
-  expect(props.setSelectedPath).toHaveBeenCalledWith([...props.propPath, 1]);
+  expect(props.setSelectedPath).toHaveBeenCalledWith([...props.propPath, 0]);
 });
 
 test('Should open delete popover on remove', () => {
