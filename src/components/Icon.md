@@ -2,9 +2,9 @@
 const icons = [
   ['add', 'alert', 'arrowLeft', 'defaultContent'],
   ['checkmark', 'edit', 'endDate', 'group'],
-  ['horizontalScreen', 'publish', 'remove', 'repeat'],
-  ['time', 'trash', 'scheduledContent', 'screenSettings'],
-  ['search', 'startDate', 'verticalScreen'],
+  ['horizontalScreen', 'lock', 'publish', 'remove'],
+  ['repeat', 'time', 'trash', 'scheduledContent'],
+  ['screenSettings', 'search', 'startDate', 'verticalScreen'],
 ];
 
 <Column>
