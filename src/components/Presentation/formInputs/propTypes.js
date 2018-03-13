@@ -29,6 +29,12 @@ export const propTypes = {
   optional: PropTypes.bool,
   onBlur: PropTypes.func,
   singularLabel: PropTypes.string, // Array
+  childErrors: PropTypes.arrayOf(
+    PropTypes.shape({
+      path: PropTypes.array,
+      message: PropTypes.string,
+    })
+  ), // Array
   propPath: pathType, // Array
   selectedPath: pathType, // Array
   onAdd: PropTypes.func, // Array

@@ -8,6 +8,7 @@ initialState = {
     value={state.value}
     onChange={value => setState({ value })}
     onItemClick={index => console.log(state.value[index])}
+    getItemError={item => item === 'Item1'}
     onAdd={() =>
       setState({ value: [...state.value, `Item${state.value.length + 1}`] })
     }

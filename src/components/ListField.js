@@ -5,6 +5,7 @@ import { withStyles } from 'material-ui/styles';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import buttonReset from '../styles/buttonReset';
 import Icon from './Icon';
+import AlertIcon from './AlertIcon';
 
 export class ListField extends React.Component {
   static propTypes = {
@@ -16,6 +17,8 @@ export class ListField extends React.Component {
     getItemLabel: PropTypes.func,
     /** Optional function to get the key of each item, defaults to using the index */
     getItemKey: PropTypes.func,
+    /** Optional function to get an error of an each item */
+    getItemError: PropTypes.func,
     /** Called with the new value when items have been reordered */
     onChange: PropTypes.func.isRequired,
     /** Called when an item is clicked */
@@ -34,6 +37,7 @@ export class ListField extends React.Component {
     className: '',
     getItemLabel: item => item,
     getItemKey: (item, index) => index,
+    getItemError: () => {},
     onItemClick: null,
     addLabel: 'Add a new item',
     addDisabled: false,
@@ -53,8 +57,16 @@ export class ListField extends React.Component {
   };
 
   renderItem(item, index) {
-    const { classes, onItemClick, getItemKey, getItemLabel } = this.props;
+    const {
+      classes,
+      onItemClick,
+      getItemKey,
+      getItemLabel,
+      getItemError,
+    } = this.props;
     const key = `${getItemKey(item, index)}`;
+    const error = getItemError(item, index);
+
     return (
       <Draggable key={key} draggableId={key} index={index}>
         {({ innerRef, draggableProps, dragHandleProps, placeholder }) => (
@@ -73,6 +85,7 @@ export class ListField extends React.Component {
               >
                 {getItemLabel(item)}
               </div>
+              {error && <AlertIcon />}
             </div>
             {placeholder}
           </div>

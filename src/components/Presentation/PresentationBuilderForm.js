@@ -202,6 +202,10 @@ class PresentationBuilderForm extends React.Component {
       const propError = errors.filter(err =>
         isEqualArray(err.path, propPath)
       )[0];
+      // Find all errors that start with the prop path.
+      const childErrors = errors.filter(err =>
+        propPath.every((pathPart, i) => err.path[i] === pathPart)
+      );
       const hasError = !!propError;
 
       // Set focus to the first property at the selected path.
@@ -245,6 +249,7 @@ class PresentationBuilderForm extends React.Component {
         optional: prop.optional,
         options: prop.options, // Selection
         singularLabel, // Array
+        childErrors, // Array
         properties: prop.properties, // Array
         propPath, // Array
         onAdd: addPath => this.addAppVar(addPath, prop), // Array

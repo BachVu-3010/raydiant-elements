@@ -58,12 +58,14 @@ initialState = {
         name: 'categories',
         singular_name: 'category',
         type: 'array',
+        optional: true,
         properties: [
           { name: 'category', type: 'string' },
           {
             name: 'items',
             singular_name: 'item',
             type: 'array',
+            optional: true,
             properties: [
               { name: 'item', type: 'string' },
               { name: 'price', type: 'string', optional: true },
@@ -72,6 +74,7 @@ initialState = {
                 name: 'variants',
                 singular_name: 'variant',
                 type: 'array',
+                optional: true,
                 properties: [
                   { name: 'variant', type: 'string' },
                   { name: 'price', type: 'string', default: '$1.00' },
@@ -85,6 +88,7 @@ initialState = {
         name: 'items',
         singular_name: 'item',
         type: 'array',
+        optional: true,
         helper_text: 'Drag to reorder',
         properties: [{ name: 'name', type: 'string' }],
       },

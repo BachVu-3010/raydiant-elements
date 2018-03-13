@@ -161,7 +161,11 @@ export class ArrayInput extends Component {
     const breadcrumbs = crumbs.map((crumb, index) => {
       if (index === 0) {
         // Root crumb
-        return { id: index, label, onClick: () => setSelectedPath([]) };
+        return {
+          id: index,
+          label,
+          onClick: () => setSelectedPath([]),
+        };
       }
 
       // The value in the array that corresponds to the current crumb.
@@ -210,6 +214,7 @@ export class ArrayInput extends Component {
       renderAppVars,
       strings,
       classes,
+      childErrors,
     } = this.props;
     const { showDeletePrompt, selectedPath } = this.state;
 
@@ -264,6 +269,17 @@ export class ArrayInput extends Component {
           getItemLabel={item =>
             getItemLabel(item, contentProperties, defaultLabel)
           }
+          getItemError={(item, index) => {
+            // Find all errors that have a path that starts with the
+            // item path.
+            const itemErrors = childErrors.filter(err =>
+              [...propPath, index].every(
+                (pathPart, i) => err.path[i] === pathPart
+              )
+            );
+
+            return itemErrors.length > 0 ? itemErrors[0].message : '';
+          }}
           onItemClick={index => setSelectedPath([...propPath, index])}
           onChange={onChange}
           onAdd={() => {
