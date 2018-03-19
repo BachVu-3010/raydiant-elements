@@ -1,5 +1,6 @@
 import svgClassListShim from './shims/svgClassList';
 import App from './components/App';
+import Container from './components/Container';
 import Checkbox from './components/Checkbox';
 import Radio from './components/Radio';
 import Switch from './components/Switch';
@@ -41,6 +42,7 @@ svgClassListShim();
 
 module.exports = {
   App,
+  Container,
   Checkbox,
   Radio,
   Switch,
