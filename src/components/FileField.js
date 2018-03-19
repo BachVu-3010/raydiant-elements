@@ -7,6 +7,7 @@ import buttonReset from '../styles/buttonReset';
 
 import { styles as textFieldStyles } from './TextField';
 import Icon from './Icon';
+import createEvent from '../utilities/createEvent';
 
 const propTypes = {
   /** Class name(s) */
@@ -156,8 +157,7 @@ class FileField extends React.Component {
             <button
               className={classes.clearButton}
               onClick={() => {
-                const event = new Event('clear');
-                this.input.dispatchEvent(event);
+                this.input.dispatchEvent(createEvent('clear'));
               }}
             >
               <Icon icon="remove" />
