@@ -22,7 +22,7 @@ class PresentationBuilderPreview extends React.Component {
     /** The preview layout */
     previewMode: PropTypes.oneOf(['horizontal', 'vertical']),
     /** The node to render inside the preview */
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     /** Called when the preview mode has changed */
     onPreviewModeChange: PropTypes.func.isRequired,
     /** @ignore injected by withStyles */
@@ -34,6 +34,7 @@ class PresentationBuilderPreview extends React.Component {
     application: null,
     previewMode: 'horizontal',
     disablePreview: false,
+    children: null,
   };
 
   state = {

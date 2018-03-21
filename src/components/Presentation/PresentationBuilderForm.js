@@ -19,11 +19,11 @@ import * as formInputs from './formInputs';
 import createDefaultValue from './createDefaultValue';
 import getCrumbProperties from './formInputs/utilities/getCrumbProperties';
 import getCrumbValue from './formInputs/utilities/getCrumbValue';
-import PathTracker from './formInputs/PathTracker';
+import getErrorsPerProp from './getErrorsPerProp';
 
 const formInputTypes = {
   array: formInputs.ArrayInput,
-  topLevelArray: PathTracker(formInputs.ArrayInput),
+  topLevelArray: formInputs.ArrayInput,
   boolean: formInputs.BooleanInput,
   date: formInputs.DateInput,
   file: formInputs.FileInput,
@@ -97,10 +97,14 @@ class PresentationBuilderForm extends React.Component {
     validate: false,
     onBlur: () => {},
     onFile: () => {},
+    onError: () => {},
     onCancel: null,
     saveButtonPopover: null,
     warnings: [],
   };
+
+  // Expose the validation function to parent components.
+  static validate = validatePresentation;
 
   constructor(props, context) {
     super(props, context);
@@ -108,6 +112,7 @@ class PresentationBuilderForm extends React.Component {
     this.state = {
       presentation: props.presentation,
       errors: [],
+      selectedPaths: {},
     };
 
     // When set to true we will validate whenever a presentation is updated.
@@ -124,11 +129,30 @@ class PresentationBuilderForm extends React.Component {
     }
   }
 
+  getSelectedPathForProp(propPath) {
+    // We only want to maintain selectedPaths for the top-most array input.
+    // The key at 0 is `application_variables`, the key at 1 is the root prop name.
+    const rootPropName = propPath[1];
+    // Return empty array if it doesn't exist.
+    return this.state.selectedPaths[rootPropName] || [];
+  }
+
+  setSelectedPathForProp(propPath, path) {
+    const rootPropName = propPath[1];
+    // If rootPropName doesn't exist, that means the propPath isn't an array type.
+    if (rootPropName) {
+      this.setState({
+        selectedPaths: {
+          ...this.state.selectedPaths,
+          [rootPropName]: path,
+        },
+      });
+    }
+  }
+
   setAppVar = (path, value, prop) => {
     const presentation = immutable.set(this.state.presentation, path, value);
-
-    this.setPresentation(presentation);
-    this.props.onChange(presentation, prop, path, value);
+    this.handleChange(presentation, prop, path, value);
   };
 
   setPresentation(presentation) {
@@ -146,9 +170,7 @@ class PresentationBuilderForm extends React.Component {
 
   removeAppVar = (path, prop) => {
     const presentation = immutable.del(this.state.presentation, path);
-
-    this.setPresentation(presentation);
-    this.props.onChange(presentation, prop, path);
+    this.handleChange(presentation, prop, path);
   };
 
   addAppVar = (path, prop) => {
@@ -158,18 +180,40 @@ class PresentationBuilderForm extends React.Component {
       path,
       newValue
     );
-
-    this.setPresentation(presentation);
-    this.props.onChange(presentation, prop, path, newValue);
+    this.handleChange(presentation, prop, path, newValue);
   };
+
+  handleChange(presentation, prop, path, newValue) {
+    const { application, minDuration } = this.props;
+    const errors = validatePresentation(presentation, application, minDuration);
+    // Update state regardless if it's a valid presentation or not.
+    this.setPresentation(presentation);
+    // Only call the onChange handler with valid presentations.
+    if (errors.length === 0) {
+      this.props.onChange(presentation, prop, path, newValue);
+    }
+  }
 
   handleSubmit = () => {
     const { application, minDuration, onSubmit } = this.props;
     const { presentation } = this.state;
     const errors = validatePresentation(presentation, application, minDuration);
+    const propErrors = getErrorsPerProp(errors);
+    // If there are prop errors where the error path is longer than the prop path,
+    // set the selected path to make the error visible.
+    const selectedPaths = { ...this.state.selectedPaths };
+    propErrors.forEach(({ propPath, errorPath }) => {
+      if (propPath.length < errorPath.length) {
+        const rootPropName = propPath[1];
+        // The error path contains the input that has the error. We want to set the
+        // selected path to the item that contains the field (the input's parent).
+        const itemPath = errorPath.slice(0, errorPath.length - 1);
+        selectedPaths[rootPropName] = itemPath;
+      }
+    });
 
     this.shouldValidateOnUpdate = true;
-    this.setState({ errors });
+    this.setState({ errors, selectedPaths });
 
     // Execute the submit callback when there are no validation errors.
     if (errors.length === 0) {
@@ -255,6 +299,9 @@ class PresentationBuilderForm extends React.Component {
         onAdd: addPath => this.addAppVar(addPath, prop), // Array
         onRemove: removePath => this.removeAppVar(removePath, prop), // Array and File
         renderAppVars: this.renderAppVars, // Array
+        selectedPath: this.getSelectedPathForProp(propPath),
+        setSelectedPath: selectedPath =>
+          this.setSelectedPathForProp(propPath, selectedPath),
       };
 
       return React.createElement(inputTypes[prop.type], inputProps);
