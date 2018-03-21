@@ -11,9 +11,13 @@ function validate(appVars, properties, errors, path) {
       : value || value === false || value === 0;
 
     if (isRequired && !hasValue) {
+      const isListFieldError = path.length > 2;
+
       errors.push({
         path: [...path, prop.name],
-        message: 'Oops! Please enter required field.',
+        message: isListFieldError
+          ? 'Oops! Empty fields aren’t allowed, please fill or delete this item.'
+          : 'Oops! Please enter required field.',
       });
     }
 

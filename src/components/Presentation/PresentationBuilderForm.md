@@ -122,7 +122,7 @@ initialState = {
   <div
     style={{
       height: 600,
-      width: 400,
+      width: 316,
       margin: '0 auto',
       display: 'flex',
     }}
