@@ -232,10 +232,6 @@ export class ArrayInput extends Component {
       const parentProperties = getCrumbProperties(appProperties, parentCrumb)
         .properties;
 
-      // Add extra spacing to the top of the list field when there it's the only
-      // property in the list. Need to account for length == 0 as well when it's the
-      // root array type.
-      const isOnlyInput = parentProperties.length <= 1;
       // Disable the add button when any properties except for other array types
       // are not valid and there are no items in the list.
       const nonArrayProperties = parentProperties.filter(
@@ -264,7 +260,7 @@ export class ArrayInput extends Component {
 
       return (
         <ListField
-          className={classnames(classes.list, isOnlyInput && classes.onlyList)}
+          className={classes.list}
           value={contentValue}
           getItemLabel={item =>
             getItemLabel(item, contentProperties, defaultLabel)
@@ -431,9 +427,6 @@ const styles = theme => ({
   },
   list: {
     margin: 0,
-  },
-  onlyList: {
-    paddingTop: 24,
   },
   noList: {
     paddingBottom: 24,
