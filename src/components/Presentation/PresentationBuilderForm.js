@@ -82,7 +82,7 @@ class PresentationBuilderForm extends React.Component {
     /** Optional callback, will render a Cancel button if provided */
     onCancel: PropTypes.func,
     /** Called on submit when the presentation is valid */
-    onSubmit: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func,
     /** Optional popover that anchors to the save button */
     saveButtonPopover: PropTypes.node,
     /** Optional warnings to render */
@@ -99,6 +99,7 @@ class PresentationBuilderForm extends React.Component {
     onFile: () => {},
     onError: () => {},
     onCancel: null,
+    onSubmit: null,
     saveButtonPopover: null,
     warnings: [],
   };
@@ -252,8 +253,9 @@ class PresentationBuilderForm extends React.Component {
       );
       const hasError = !!propError;
 
-      // Set focus to the first property at the selected path.
-      const autoFocus = index === 0;
+      // Set focus to the first property at the selected path
+      // unless it's the root path.
+      const autoFocus = index === 0 && path.length > 1;
 
       let helperText = hasError
         ? propError.message
@@ -328,6 +330,7 @@ class PresentationBuilderForm extends React.Component {
       minDuration,
       classes,
       onCancel,
+      onSubmit,
       saveButtonPopover,
     } = this.props;
     const { presentation, errors } = this.state;
@@ -386,22 +389,25 @@ class PresentationBuilderForm extends React.Component {
           </div>
           {this.renderWarnings()}
           <Row
+            className={classes.formActions}
             size="dynamic-padded"
             color="primary"
             border="top"
             alignItems="center"
           >
             {onCancel && <Button label="Cancel" onClick={onCancel} />}
-            {onCancel && <div className={classes.spacer} />}
-            <PopoverAnchor>
-              <Button
-                color="progress"
-                label="Save"
-                onClick={this.handleSubmit}
-                disabled={shouldDisableSave}
-              />
-              {saveButtonPopover}
-            </PopoverAnchor>
+            {onCancel && onSubmit && <div className={classes.spacer} />}
+            {onSubmit && (
+              <PopoverAnchor>
+                <Button
+                  color="progress"
+                  label="Save"
+                  onClick={this.handleSubmit}
+                  disabled={shouldDisableSave}
+                />
+                {saveButtonPopover}
+              </PopoverAnchor>
+            )}
           </Row>
         </div>
       </ThemeProvider>
@@ -441,6 +447,12 @@ const styles = theme => ({
 
   warningIcon: {
     marginRight: 8,
+  },
+
+  formActions: {
+    // Compensate for no cancel or submit button
+    minHeight: 73,
+    boxSizing: 'border-box',
   },
 });
 
