@@ -55,6 +55,10 @@ initialState = {
         ],
       },
       {
+        name: 'themes',
+        type: 'theme',
+      },
+      {
         name: 'categories',
         singular_name: 'category',
         type: 'array',
@@ -101,6 +105,7 @@ initialState = {
       boolean: 'Boolean',
       file: 'File',
       selection: 'Selection',
+      themes: 'Themes',
       categories: 'Categories',
       category: 'Category',
       items: 'Items',
@@ -116,6 +121,12 @@ initialState = {
       link: 'Hacky Link',
     },
   },
+  themes: [
+    { id: 'a', name: 'Clean' },
+    { id: 'b', name: 'Showroom' },
+    { id: 'c', name: 'Slate' },
+    { id: 'd', name: 'Custom' },
+  ],
 };
 
 <Column>
@@ -131,6 +142,7 @@ initialState = {
       validate
       presentation={state.presentation}
       application={state.application}
+      themes={state.themes}
       onChange={presentation => console.log('changed', presentation)}
       onSubmit={presentation => console.log('submit', presentation)}
       onCancel={() => console.log('cancel')}

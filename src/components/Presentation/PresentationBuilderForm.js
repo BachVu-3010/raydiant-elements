@@ -32,6 +32,7 @@ const formInputTypes = {
   selection: formInputs.SelectionInput,
   string: formInputs.StringInput,
   text: formInputs.TextInput,
+  theme: formInputs.SelectionInput,
 };
 
 class PresentationBuilderForm extends React.Component {
@@ -44,6 +45,7 @@ class PresentationBuilderForm extends React.Component {
       name: PropTypes.string,
       duration: PropTypes.number,
       application_vars: PropTypes.object,
+      theme_id: PropTypes.string,
     }).isRequired,
     /** The application definition */
     application: PropTypes.shape({
@@ -71,6 +73,13 @@ class PresentationBuilderForm extends React.Component {
       ),
       strings: PropTypes.object,
     }).isRequired,
+    /** The themes to inject if a theme property is provided */
+    themes: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.string,
+        name: PropTypes.string,
+      })
+    ),
     /** The minimum duration */
     minDuration: PropTypes.number,
     /** Called when a presentation has changed */
@@ -102,6 +111,7 @@ class PresentationBuilderForm extends React.Component {
     onSubmit: null,
     saveButtonPopover: null,
     warnings: [],
+    themes: [],
   };
 
   // Expose the validation function to parent components.
@@ -154,6 +164,18 @@ class PresentationBuilderForm extends React.Component {
   setAppVar = (path, value, prop) => {
     const presentation = immutable.set(this.state.presentation, path, value);
     this.handleChange(presentation, prop, path, value);
+  };
+
+  setTheme = themeId => {
+    const path = ['theme_id'];
+    const presentation = immutable.set(this.state.presentation, path, themeId);
+    this.handleChange(presentation, { type: 'selection' }, path, themeId);
+  };
+
+  setName = name => {
+    const path = ['name'];
+    const presentation = immutable.set(this.state.presentation, path, name);
+    this.handleChange(presentation, { type: 'string' }, path, name);
   };
 
   setPresentation(presentation) {
@@ -223,8 +245,8 @@ class PresentationBuilderForm extends React.Component {
   };
 
   renderAppVars = (appVars, appProperties, strings, path, context = {}) => {
-    const { onBlur, onFile } = this.props;
-    const { errors } = this.state;
+    const { themes, onBlur, onFile } = this.props;
+    const { presentation, errors } = this.state;
 
     const topLevel = path.length < 2;
 
@@ -239,7 +261,6 @@ class PresentationBuilderForm extends React.Component {
 
     return properties.map((prop, index) => {
       const name = prop.name;
-      const value = vars[name];
       const label = strings[name] || name;
       const singularLabel =
         strings[prop.singular_name] || prop.singular_name || 'Item';
@@ -269,6 +290,22 @@ class PresentationBuilderForm extends React.Component {
         );
       }
 
+      let value = vars[name];
+      let options = prop.options;
+      let onChange = newValue => this.setAppVar(propPath, newValue, prop);
+      if (prop.type === 'theme') {
+        // Override selection options with user themes.
+        options = themes.map(theme => ({
+          value: theme.id,
+          name: theme.name,
+        }));
+        // Override selection value with presentation.theme_id.
+        const defaultValue = themes.length > 0 ? themes[0].id : '';
+        value = presentation.theme_id || defaultValue;
+        // Override onChange handler to set presentation.theme_id.
+        onChange = newValue => this.setTheme(newValue);
+      }
+
       // Allocate space whether there is helperText or not when rendering
       // the main presentation properties, not list field properties.
       if (!helperText && topLevel) {
@@ -288,12 +325,12 @@ class PresentationBuilderForm extends React.Component {
         autoFocus,
         strings,
         constraints: prop.constraints,
-        onChange: newValue => this.setAppVar(propPath, newValue, prop),
+        onChange,
         onFile: file => onFile(name, file),
         onBlur,
         url: prop.url, // Link
         optional: prop.optional,
-        options: prop.options, // Selection
+        options, // Selection
         singularLabel, // Array
         childErrors, // Array
         properties: prop.properties, // Array
@@ -355,12 +392,7 @@ class PresentationBuilderForm extends React.Component {
                 value={presentation.name}
                 error={!!nameError}
                 helperText={nameError ? nameError.message : ' '}
-                onChange={evt =>
-                  this.setPresentation({
-                    ...presentation,
-                    name: evt.target.value,
-                  })
-                }
+                onChange={evt => this.setName(evt.target.value)}
               />
               {this.renderAppVars(
                 presentation.application_vars,

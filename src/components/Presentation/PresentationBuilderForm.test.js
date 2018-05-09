@@ -66,9 +66,14 @@ const defaultProps = () => ({
         helper_link: 'helperLink',
         constraints: { maxlength: 10 },
       },
+      {
+        name: 'theme',
+        type: 'theme',
+      },
     ],
     strings: {},
   },
+  themes: [{ id: 'a' }, { id: 'b' }, { id: 'c' }],
   minDuration: 10,
   onChange: () => {},
   onSubmit: () => {},
@@ -119,6 +124,16 @@ test('Should render form', () => {
   expect(tf.length).toEqual(1);
   expect(tf[0].helperText.type === Anchor);
   expect(tf[0].helperText.props.href === 'helperLink');
+
+  const theme = findProps(wrapper, SelectField, {
+    label: 'theme',
+    value: 'a',
+  });
+  expect(theme.length).toEqual(1);
+  expect(theme[0].children.length).toEqual(3);
+  expect(theme[0].children[0].props.value).toEqual('a');
+  expect(theme[0].children[1].props.value).toEqual('b');
+  expect(theme[0].children[2].props.value).toEqual('c');
 });
 
 test('Should not render duration field for dynamic duration', () => {
@@ -208,4 +223,23 @@ test('Should call onFile with new file', () => {
   expect(props.onFile.mock.calls[0]).toEqual(['file', file]);
 });
 
-// test('Should pass through error to input', () => {});
+test('Should set presentation.theme_id when theme prop changes', () => {
+  const props = defaultProps();
+  props.onChange = jest.fn();
+  props.application.presentation_properties = [
+    {
+      name: 'theme',
+      type: 'theme',
+    },
+  ];
+  const wrapper = mount(<PresentationBuilderForm {...props} />);
+
+  const input = wrapper.find('select');
+  input.simulate('change', { target: { value: 'changed' } });
+
+  expect(props.onChange).toHaveBeenCalledTimes(1);
+  expect(props.onChange.mock.calls[0][0].theme_id).toEqual('changed');
+  expect(props.onChange.mock.calls[0][0].application_vars.theme).toEqual(
+    undefined
+  );
+});

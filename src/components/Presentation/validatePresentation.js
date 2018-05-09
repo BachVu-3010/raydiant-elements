@@ -4,7 +4,8 @@ function validate(appVars, properties, errors, path) {
     const constraints = prop.constraints || {};
     // TODO: Remove prop.type !== 'link' once all apps have
     // been updated to use helper_link.
-    const isRequired = !prop.optional && prop.type !== 'link';
+    const isRequired =
+      !prop.optional && prop.type !== 'link' && prop.type !== 'theme';
     // A value is set if it's truthy, false or 0 or has a length.
     const hasValue = Array.isArray(value)
       ? value.length > 0

@@ -201,3 +201,11 @@ test('Should not return error for nested array property', () => {
     'string',
   ]);
 });
+
+test('Should not return error for theme application var', () => {
+  const { presentation, application, minDuration } = defaultProps();
+  presentation.application_vars = {};
+  application.presentation_properties = [{ type: 'theme', name: 'theme' }];
+  const errors = validatePresentation(presentation, application, minDuration);
+  expect(errors).toEqual([]);
+});
