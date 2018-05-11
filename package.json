@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./lib/index.js",

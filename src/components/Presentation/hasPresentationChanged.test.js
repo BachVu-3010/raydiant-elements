@@ -3,18 +3,27 @@ import hasPresentationChanged from './hasPresentationChanged';
 test('Should return true for name change', () => {
   const prevPresentation = { name: 'a' };
   const nextPresentation = { name: 'b' };
-  const application = {};
+  const appVersion = {};
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(true);
 });
 
 test('Should return true for duration change', () => {
   const prevPresentation = { name: 'a', duration: 1 };
   const nextPresentation = { name: 'a', duration: 2 };
-  const application = {};
+  const appVersion = {};
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
+  ).toEqual(true);
+});
+
+test('Should return true for theme_id change', () => {
+  const prevPresentation = { name: 'a', theme_id: 1 };
+  const nextPresentation = { name: 'a', theme_id: 2 };
+  const appVersion = {};
+  expect(
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(true);
 });
 
@@ -25,11 +34,11 @@ test('Should return true for deployment id change', () => {
     duration: 1,
     application_deployment_id: 'a',
   };
-  const application = {
-    deployment_id: 'b',
+  const appVersion = {
+    id: 'b',
   };
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(true);
 });
 
@@ -50,11 +59,11 @@ test('Should return true for app var change', () => {
       string: 'b',
     },
   };
-  const application = {
+  const appVersion = {
     presentation_properties: [{ name: 'string', type: 'string' }],
   };
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(true);
 });
 
@@ -75,11 +84,11 @@ test('Should return true for file app var change', () => {
       file: { url: 'b' },
     },
   };
-  const application = {
+  const appVersion = {
     presentation_properties: [{ name: 'file', type: 'file' }],
   };
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(true);
 });
 
@@ -100,11 +109,11 @@ test('Should return false equal file prop', () => {
       file: { url: 'a' },
     },
   };
-  const application = {
+  const appVersion = {
     presentation_properties: [{ name: 'file', type: 'file' }],
-    deployment_id: 'a',
+    id: 'a',
   };
   expect(
-    hasPresentationChanged(prevPresentation, nextPresentation, application)
+    hasPresentationChanged(prevPresentation, nextPresentation, appVersion)
   ).toEqual(false);
 });

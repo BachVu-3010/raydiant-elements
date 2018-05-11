@@ -34,8 +34,9 @@ const defaultProps = () => ({
       string: 'string',
     },
   },
-  application: {
-    name: 'application',
+  appVersion: {
+    id: 'a',
+    name: 'appVersion',
     thumbnail_url: 'thumb',
     icon_url: 'icon',
     configurable_duration: true,
@@ -138,7 +139,7 @@ test('Should render form', () => {
 
 test('Should not render duration field for dynamic duration', () => {
   const props = defaultProps();
-  props.application.configurable_duration = false;
+  props.appVersion.configurable_duration = false;
   const wrapper = shallow(<PresentationBuilderForm {...props} />);
   expect(findProps(wrapper, NumberField, { label: 'Duration' }).length).toEqual(
     0
@@ -157,7 +158,7 @@ test('Should call onChange with updated presentation application variable', () =
   expect(props.onChange.mock.calls[0][0].application_vars.string).toEqual(
     'changed'
   );
-  const prop = props.application.presentation_properties.find(
+  const prop = props.appVersion.presentation_properties.find(
     p => p.name === 'string'
   );
   expect(props.onChange.mock.calls[0][1]).toEqual(prop);
@@ -226,7 +227,7 @@ test('Should call onFile with new file', () => {
 test('Should set presentation.theme_id when theme prop changes', () => {
   const props = defaultProps();
   props.onChange = jest.fn();
-  props.application.presentation_properties = [
+  props.appVersion.presentation_properties = [
     {
       name: 'theme',
       type: 'theme',

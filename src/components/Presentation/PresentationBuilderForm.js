@@ -47,8 +47,9 @@ class PresentationBuilderForm extends React.Component {
       application_vars: PropTypes.object,
       theme_id: PropTypes.string,
     }).isRequired,
-    /** The application definition */
-    application: PropTypes.shape({
+    /** The appVersion definition */
+    appVersion: PropTypes.shape({
+      id: PropTypes.string,
       name: PropTypes.string,
       configurable_duration: PropTypes.bool,
       presentation_properties: PropTypes.arrayOf(
@@ -169,7 +170,7 @@ class PresentationBuilderForm extends React.Component {
   setTheme = themeId => {
     const path = ['theme_id'];
     const presentation = immutable.set(this.state.presentation, path, themeId);
-    this.handleChange(presentation, { type: 'selection' }, path, themeId);
+    this.handleChange(presentation, { type: 'theme' }, path, themeId);
   };
 
   setName = name => {
@@ -179,12 +180,12 @@ class PresentationBuilderForm extends React.Component {
   };
 
   setPresentation(presentation) {
-    const { application, minDuration } = this.props;
+    const { appVersion, minDuration } = this.props;
 
     if (this.shouldValidateOnUpdate) {
       this.setState({
         presentation,
-        errors: validatePresentation(presentation, application, minDuration),
+        errors: validatePresentation(presentation, appVersion, minDuration),
       });
     } else {
       this.setState({ presentation });
@@ -207,8 +208,8 @@ class PresentationBuilderForm extends React.Component {
   };
 
   handleChange(presentation, prop, path, newValue) {
-    const { application, minDuration } = this.props;
-    const errors = validatePresentation(presentation, application, minDuration);
+    const { appVersion, minDuration } = this.props;
+    const errors = validatePresentation(presentation, appVersion, minDuration);
     // Update state regardless if it's a valid presentation or not.
     this.setPresentation(presentation);
     // Only call the onChange handler with valid presentations.
@@ -218,9 +219,9 @@ class PresentationBuilderForm extends React.Component {
   }
 
   handleSubmit = () => {
-    const { application, minDuration, onSubmit } = this.props;
+    const { appVersion, minDuration, onSubmit } = this.props;
     const { presentation } = this.state;
-    const errors = validatePresentation(presentation, application, minDuration);
+    const errors = validatePresentation(presentation, appVersion, minDuration);
     const propErrors = getErrorsPerProp(errors);
     // If there are prop errors where the error path is longer than the prop path,
     // set the selected path to make the error visible.
@@ -363,7 +364,7 @@ class PresentationBuilderForm extends React.Component {
     const {
       className,
       presentation: originalPresentation,
-      application,
+      appVersion,
       minDuration,
       classes,
       onCancel,
@@ -378,7 +379,7 @@ class PresentationBuilderForm extends React.Component {
     const shouldDisableSave = !hasPresentationChanged(
       originalPresentation,
       presentation,
-      application
+      appVersion
     );
 
     return (
@@ -396,11 +397,11 @@ class PresentationBuilderForm extends React.Component {
               />
               {this.renderAppVars(
                 presentation.application_vars,
-                application.presentation_properties,
-                application.strings,
+                appVersion.presentation_properties,
+                appVersion.strings,
                 ['application_vars']
               )}
-              {application.configurable_duration && (
+              {appVersion.configurable_duration && (
                 <NumberField
                   label="Duration"
                   min={minDuration}

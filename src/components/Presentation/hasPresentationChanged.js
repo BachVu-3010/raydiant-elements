@@ -1,10 +1,6 @@
-export default function hasPresentationChanged(
-  prevPres,
-  nextPres,
-  application
-) {
+export default function hasPresentationChanged(prevPres, nextPres, appVersion) {
   // Enable save when new application version is released.
-  if (application.deployment_id !== nextPres.application_deployment_id) {
+  if (appVersion.id !== nextPres.application_deployment_id) {
     return true;
   }
   // There are no changes, no need to compare.
@@ -14,12 +10,13 @@ export default function hasPresentationChanged(
   // Check if presentation name or duration has changed.
   if (
     prevPres.name !== nextPres.name ||
-    prevPres.duration !== nextPres.duration
+    prevPres.duration !== nextPres.duration ||
+    prevPres.theme_id !== nextPres.theme_id
   ) {
     return true;
   }
   // Check if app vars have changed.
-  const hasAppVarChanges = application.presentation_properties.some(prop => {
+  const hasAppVarChanges = appVersion.presentation_properties.some(prop => {
     const prevAppVar = prevPres.application_vars[prop.name];
     const nextAppVar = nextPres.application_vars[prop.name];
 
