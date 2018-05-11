@@ -1,7 +1,7 @@
 ```jsx
 initialState = {
   previewMode: 'horizontal',
-  application: {
+  appVersion: {
     name: 'My Application',
     thumbnail_url: '',
     strings: {
@@ -24,7 +24,7 @@ const onPreviewModeChange = previewMode => {
   <div style={{ height: 500, display: 'flex' }}>
     <PresentationBuilderPreview
       previewMode={state.previewMode}
-      application={state.application}
+      appVersion={state.appVersion}
       onPreviewModeChange={onPreviewModeChange}
     >
       <div />

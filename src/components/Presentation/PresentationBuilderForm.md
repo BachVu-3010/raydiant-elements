@@ -16,7 +16,7 @@ initialState = {
       ],
     },
   },
-  application: {
+  appVersion: {
     name: 'My Application',
     configurable_duration: true,
     presentation_properties: [
@@ -141,7 +141,7 @@ initialState = {
     <PresentationBuilderForm
       validate
       presentation={state.presentation}
-      application={state.application}
+      appVersion={state.appVersion}
       themes={state.themes}
       onChange={presentation => console.log('changed', presentation)}
       onSubmit={presentation => console.log('submit', presentation)}

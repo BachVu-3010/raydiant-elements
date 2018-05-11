@@ -5,8 +5,8 @@ import PresentationPreview from './PresentationPreview';
 import Tab from '../Tab';
 
 const defaultProps = () => ({
-  application: {
-    name: 'application',
+  appVersion: {
+    name: 'appVersion',
     thumbnail_url: 'thumbnail_url',
     icon_url: 'icon_url',
     strings: {

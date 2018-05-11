@@ -11,8 +11,8 @@ class PresentationBuilderPreview extends React.Component {
   static propTypes = {
     /** Class name(s) */
     className: PropTypes.string,
-    /** The application definition */
-    application: PropTypes.shape({
+    /** The appVersion definition */
+    appVersion: PropTypes.shape({
       name: PropTypes.string,
       icon_url: PropTypes.string,
       strings: PropTypes.shape({
@@ -44,7 +44,7 @@ class PresentationBuilderPreview extends React.Component {
   render() {
     const {
       className,
-      application,
+      appVersion,
       previewMode,
       children,
       onPreviewModeChange,
@@ -64,14 +64,14 @@ class PresentationBuilderPreview extends React.Component {
               <div
                 className={classes.icon}
                 style={{
-                  backgroundImage: `url(${application.icon_url})`,
+                  backgroundImage: `url(${appVersion.icon_url})`,
                 }}
               />
-              {application.name && (
+              {appVersion.name && (
                 <div>
-                  <div className={classes.appName}>{application.name}</div>
+                  <div className={classes.appName}>{appVersion.name}</div>
                   <div className={classes.appDescription}>
-                    {application.strings.description}
+                    {appVersion.strings.description}
                   </div>
                 </div>
               )}
