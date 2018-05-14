@@ -37,6 +37,7 @@ module.exports = {
     FileField: { categories: [TEXTINPUT] },
     DatePicker: { categories: [TEXTINPUT] },
     TimePicker: { categories: [TEXTINPUT] },
+    ColorPicker: { categories: [TEXTINPUT] },
     ListField: { categories: [TEXTINPUT] },
     Typography: {
       Title: { categories: [TYPOGRAPHY] },

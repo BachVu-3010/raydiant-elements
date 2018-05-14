@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.28.1",
+  "version": "0.29.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./lib/index.js",
@@ -82,6 +82,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-beautiful-dnd": "^4.0.1",
+    "react-color": "^2.14.1",
     "react-datepicker": "^0.58.0",
     "react-dom": "^15.6.1",
     "react-style-proptype": "^3.0.0"

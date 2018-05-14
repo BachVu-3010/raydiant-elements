@@ -35,6 +35,7 @@ import PresentationBuilderPreview from './components/Presentation/PresentationBu
 import PresentationPreview from './components/Presentation/PresentationPreview';
 import Breadcrumbs from './components/Breadcrumbs';
 import Breadcrumb from './components/Breadcrumb';
+import ColorPicker from './components/ColorPicker';
 
 import './components/hacks/ie.css';
 
@@ -77,4 +78,5 @@ module.exports = {
   PresentationPreview,
   Breadcrumbs,
   Breadcrumb,
+  ColorPicker,
 };
