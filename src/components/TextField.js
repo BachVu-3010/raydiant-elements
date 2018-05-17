@@ -149,9 +149,6 @@ class TextField extends React.Component {
             this.props.inputRef(node);
           }
         }}
-        ref={node => {
-          this.root = node;
-        }}
         onChange={this.onChange}
         InputProps={{
           onMouseDown: evt => {

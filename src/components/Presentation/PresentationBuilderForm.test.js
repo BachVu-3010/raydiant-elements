@@ -148,10 +148,20 @@ test('Should not render duration field for dynamic duration', () => {
 
 test('Should call onChange with updated presentation application variable', () => {
   const props = defaultProps();
+  props.presentation.application_vars = {
+    string: 'string',
+  };
+  props.appVersion.presentation_properties = [
+    {
+      name: 'string',
+      type: 'string',
+    },
+  ];
   props.onChange = jest.fn();
   const wrapper = mount(<PresentationBuilderForm {...props} />);
-
-  const input = wrapper.find({ type: 'text', value: 'string' });
+  const input = wrapper.findWhere(
+    n => n.type() === 'input' && n.props().value === 'string'
+  );
   input.simulate('change', { target: { value: 'changed' } });
 
   expect(props.onChange).toHaveBeenCalledTimes(1);
@@ -171,9 +181,20 @@ test('Should call onChange with updated presentation application variable', () =
 
 test('Should call onBlur', () => {
   const props = defaultProps();
+  props.presentation.application_vars = {
+    string: 'string',
+  };
+  props.appVersion.presentation_properties = [
+    {
+      name: 'string',
+      type: 'string',
+    },
+  ];
   props.onBlur = jest.fn();
   const wrapper = mount(<PresentationBuilderForm {...props} />);
-  const input = wrapper.find({ type: 'text', value: 'string' });
+  const input = wrapper.findWhere(
+    n => n.type() === 'input' && n.props().value === 'string'
+  );
   input.simulate('blur');
   expect(props.onBlur).toHaveBeenCalledTimes(1);
 });

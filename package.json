@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "0.29.0",
+  "version": "0.30.0",
   "revision": "0",
   "description": "Mira Frontend Component Library",
   "main": "./lib/index.js",
@@ -58,7 +58,13 @@
           "ignore": ["classes"]
         }
       ],
-      "import/no-named-as-default": [0]
+      "import/no-named-as-default": [0],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true
+        }
+      ]
     },
     "overrides": [
       {
@@ -80,17 +86,18 @@
     "object-path": "^0.11.4",
     "object-path-immutable": "^1.0.1",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
+    "react": "^16.3.2",
     "react-beautiful-dnd": "^4.0.1",
     "react-color": "^2.14.1",
     "react-datepicker": "^0.58.0",
-    "react-dom": "^15.6.1",
+    "react-dom": "^16.3.2",
     "react-style-proptype": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.25.0",
     "babel-eslint": "^7.2.3",
+    "babel-jest": "^22.4.3",
     "babel-loader": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.6.0",
@@ -98,23 +105,29 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-1": "^6.24.1",
     "cross-env": "^5.0.5",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.3.0",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
-    "jest": "^20.0.4",
+    "jest": "^22.4.3",
     "react-styleguidist": "^6.0.20",
-    "react-test-renderer": "^15.6.1",
+    "react-test-renderer": "^16.3.2",
     "sinon": "^2.4.1",
     "webpack": "^3.4.1",
     "webpack-bundle-analyzer": "^2.10.0"
   },
   "jest": {
+    "setupFiles": ["<rootDir>/src/setupTests.js"],
     "testPathIgnorePatterns": ["/node_modules/", "/test_helpers/", "/lib/"],
     "moduleNameMapper": {
       "\\.css$": "<rootDir>/__mocks__/styleMock.js"
+    },
+    "transform": {
+      "^.+\\.jsx$": "babel-jest",
+      "^.+\\.js$": "babel-jest"
     }
   },
   "codeship": {
