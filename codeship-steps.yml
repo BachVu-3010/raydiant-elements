@@ -1,0 +1,12 @@
+- type: serial
+  steps:
+    - type: parallel
+      service: elements
+      steps:
+        - command: yarn lint
+        - command: yarn test
+    - type: serial
+      tag: ^(master)
+      service: elements
+      steps:
+        - command: bash deploy-npm.bash
