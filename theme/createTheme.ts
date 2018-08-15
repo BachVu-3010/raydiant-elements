@@ -22,6 +22,25 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         border: string;
       };
     };
+    checkbox: {
+      default: {
+        background: string;
+        backgroundChecked: string;
+        foreground: string;
+        border: string;
+        borderMuted: string;
+      };
+    };
+    switch: {
+      default: {
+        bar: string;
+        barChecked: string;
+        knob: string;
+        knobMuted: string;
+        foreground: string;
+        foregroundMuted: string;
+      };
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -39,6 +58,25 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         foreground: string;
         foregroundMuted: string;
         border: string;
+      };
+    };
+    checkbox: {
+      default: {
+        background: string;
+        backgroundChecked: string;
+        foreground: string;
+        border: string;
+        borderMuted: string;
+      };
+    };
+    switch: {
+      default: {
+        bar: string;
+        barChecked: string;
+        knob: string;
+        knobMuted: string;
+        foreground: string;
+        foregroundMuted: string;
       };
     };
   }

@@ -58,6 +58,25 @@ export const light = createTheme({
       border: '#292834',
     },
   },
+  checkbox: {
+    default: {
+      background: '#ffffff',
+      backgroundChecked: common.palette.primary.main,
+      foreground: '#ffffff',
+      border: '#303141',
+      borderMuted: 'rgba(41, 40, 52, 0.5)',
+    },
+  },
+  switch: {
+    default: {
+      bar: '#C8C9CC',
+      barChecked: common.palette.progress.main,
+      knob: '#ffffff',
+      knobMuted: '#b1b1b1',
+      foreground: '#292834',
+      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    },
+  },
 });
 
 export const grey = createTheme({
@@ -87,6 +106,25 @@ export const grey = createTheme({
       border: '#292834',
     },
   },
+  checkbox: {
+    default: {
+      background: '#ffffff',
+      backgroundChecked: common.palette.primary.main,
+      foreground: '#ffffff',
+      border: '#303141',
+      borderMuted: 'rgba(41, 40, 52, 0.5)',
+    },
+  },
+  switch: {
+    default: {
+      bar: '#C8C9CC',
+      barChecked: common.palette.progress.main,
+      knob: '#ffffff',
+      knobMuted: '#b1b1b1',
+      foreground: '#292834',
+      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    },
+  },
 });
 
 export const dark = createTheme({
@@ -114,6 +152,25 @@ export const dark = createTheme({
       foreground: '#ffffff',
       foregroundMuted: 'rgba(255, 255, 255, 0.5)',
       border: '#ffffff',
+    },
+  },
+  checkbox: {
+    default: {
+      background: 'rgba(255, 255, 255, 0.15)',
+      backgroundChecked: '#ffffff',
+      foreground: common.palette.primary.main,
+      border: '#ffffff',
+      borderMuted: 'rgba(255, 255, 255, 0.5)',
+    },
+  },
+  switch: {
+    default: {
+      bar: 'rgba(255, 255, 255, 0.2)',
+      barChecked: common.palette.progress.main,
+      knob: '#ffffff',
+      knobMuted: '#b1b1b1',
+      foreground: '#ffffff',
+      foregroundMuted: 'rgba(255, 255, 255, 0.5)',
     },
   },
 });
