@@ -1,9 +1,0 @@
-export { default as ArrayInput } from './ArrayInput';
-export { default as BooleanInput } from './BooleanInput';
-export { default as DateInput } from './DateInput';
-export { default as FileInput } from './FileInput';
-export { default as LinkInput } from './LinkInput';
-export { default as NumberInput } from './NumberInput';
-export { default as SelectionInput } from './SelectionInput';
-export { default as StringInput } from './StringInput';
-export { default as TextInput } from './TextInput';
