@@ -18,7 +18,7 @@ export const Switch: React.SFC<SwitchProps> = ({
   onChange,
   classes,
 }) => (
-  <span className={classes.root}>
+  <label className={classes.root}>
     <span className={classes.switchContainer}>
       <span className={classes.switchInner}>
         <MUISwitch
@@ -40,7 +40,7 @@ export const Switch: React.SFC<SwitchProps> = ({
         {label}
       </span>
     )}
-  </span>
+  </label>
 );
 
 export default withStyles(styles)(Switch);
