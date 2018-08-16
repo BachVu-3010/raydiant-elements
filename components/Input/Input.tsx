@@ -1,4 +1,5 @@
 import MUIInput, { InputComponentProps } from '@material-ui/core/Input';
+import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Input.styles';
@@ -10,6 +11,7 @@ interface InputProps extends WithStyles<typeof styles> {
   fullWidth?: boolean;
   disabled?: boolean;
   multiline?: boolean;
+  icon?: React.ReactNode;
   inputProps?: { [key: string]: string };
   // inputComponent is required for the Select component.
   inputComponent?: React.ReactType<InputComponentProps>;
@@ -29,6 +31,7 @@ const Input: React.SFC<InputProps> = ({
   fullWidth = false,
   disabled = false,
   multiline = false,
+  icon,
   inputProps,
   inputComponent,
   onChange,
@@ -42,6 +45,41 @@ const Input: React.SFC<InputProps> = ({
   if (multiline) {
     multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
   }
+
+  const inputElement = (
+    <MUIInput
+      value={value}
+      type={type}
+      placeholder={placeholder}
+      fullWidth={fullWidth}
+      disabled={disabled}
+      inputComponent={inputComponent}
+      onChange={onChange}
+      onKeyUp={onKeyUp}
+      onKeyDown={onKeyDown}
+      onBlur={onBlur}
+      onFocus={onFocus}
+      classes={{
+        root: classes.root,
+        input: cn(classes.input, icon && classes.inputWithIcon),
+        underline: classes.underline,
+        disabled: classes.disabled,
+      }}
+      inputProps={inputProps}
+      {...multilineOpts}
+    />
+  );
+
+  if (icon) {
+    return (
+      <div className={classes.iconContainer}>
+        {inputElement}
+        <div className={classes.icon}>{icon}</div>
+      </div>
+    );
+  }
+
+  return inputElement;
 
   return (
     <MUIInput

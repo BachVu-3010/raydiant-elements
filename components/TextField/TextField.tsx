@@ -20,6 +20,8 @@ interface TextFieldProps {
   multiline?: boolean;
   /** Optional helper text */
   helperText?: React.ReactNode;
+  /** Optional icon to display */
+  icon?: React.ReactNode;
   /** Called when the value changes */
   onChange?: (value: string) => any;
 }
@@ -42,6 +44,7 @@ class TextField extends React.Component<TextFieldProps, {}> {
       label,
       value,
       type,
+      icon,
       error,
       disabled,
       multiline,
@@ -61,6 +64,7 @@ class TextField extends React.Component<TextFieldProps, {}> {
             type={type}
             disabled={disabled}
             multiline={multiline}
+            icon={icon}
             onChange={e => onChange(e.target.value)}
           />
         </InputBackground>

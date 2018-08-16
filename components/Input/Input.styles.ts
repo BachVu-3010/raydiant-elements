@@ -14,6 +14,19 @@ const styles = (theme: Theme) =>
       padding: '18px 10px 4px 10px',
       color: theme.input.default.foreground,
     },
+    inputWithIcon: {
+      paddingRight: 32,
+    },
+    iconContainer: {
+      position: 'relative',
+    },
+    icon: {
+      position: 'absolute',
+      right: 0,
+      top: 5,
+      padding: 5,
+      zIndex: 1,
+    },
     disabled: {
       color: theme.input.default.foregroundMuted,
     },

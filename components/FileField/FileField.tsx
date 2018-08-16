@@ -66,6 +66,13 @@ export class FileField extends React.Component<FileFieldProps, {}> {
           error={error}
           helperText={helperText}
           disabled={disabled}
+          icon={
+            shouldShowClear && (
+              <button className={classes.clear} onClick={() => onClear()}>
+                <Icon icon="remove" />
+              </button>
+            )
+          }
         />
         <input
           disabled={disabled}
@@ -75,11 +82,6 @@ export class FileField extends React.Component<FileFieldProps, {}> {
           multiple={multiple}
           onChange={e => onChange(e.target.files)}
         />
-        {shouldShowClear && (
-          <button className={classes.clear} onClick={() => onClear()}>
-            <Icon icon="remove" />
-          </button>
-        )}
       </div>
     );
   }

@@ -16,11 +16,6 @@ const styles = createStyles({
   },
   clear: {
     ...buttonReset(),
-    position: 'absolute',
-    right: 0,
-    top: 5,
-    padding: 5,
-    zIndex: 1,
   },
 });
 
