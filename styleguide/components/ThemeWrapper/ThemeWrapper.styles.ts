@@ -9,7 +9,6 @@ const styles = createStyles({
     gridAutoFlow: 'column',
     minWidth: 0,
     padding: 16,
-    overflowX: 'auto',
     maxWidth: '100%',
   },
   actions: {

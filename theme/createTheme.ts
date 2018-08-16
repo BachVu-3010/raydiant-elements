@@ -41,6 +41,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         foregroundMuted: string;
       };
     };
+    modal: {
+      default: {
+        overlayBackground: string;
+        shadow: string;
+      };
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -77,6 +83,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         knobMuted: string;
         foreground: string;
         foregroundMuted: string;
+      };
+    };
+    modal: {
+      default: {
+        overlayBackground: string;
+        shadow: string;
       };
     };
   }

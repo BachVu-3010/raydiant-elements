@@ -29,6 +29,12 @@ const common = {
   shape: {
     borderRadius: 2,
   },
+  modal: {
+    default: {
+      overlayBackground: 'rgba(0, 0, 0, 0.5)',
+      shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
+    },
+  },
 };
 
 export const light = createTheme({

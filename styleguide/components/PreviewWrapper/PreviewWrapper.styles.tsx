@@ -4,6 +4,7 @@ import { Theme } from '../../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      fontFamily: theme.typography.fontFamily,
       position: 'relative',
       boxSizing: 'border-box',
       width: '100%',
@@ -12,7 +13,6 @@ const styles = (theme: Theme) =>
       color: theme.palette.text.primary,
       border: `1px solid ${theme.button.default.border}`,
       borderRadius: theme.shape.borderRadius,
-      overflow: 'hidden',
     },
   });
 

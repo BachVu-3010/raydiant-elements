@@ -15,9 +15,15 @@ module.exports = {
         './components/NumberField/NumberField.tsx',
         './components/SelectField/SelectField.tsx',
         './components/FileField/FileField.tsx',
-        './components/ColorField/ColorField.tsx',
         './components/Checkbox/Checkbox.tsx',
         './components/Switch/Switch.tsx',
+      ],
+    },
+    {
+      name: 'Modals',
+      components: () => [
+        './components/Popover/Popover.tsx',
+        './components/Popover/PopoverAnchor.tsx',
       ],
     },
     {

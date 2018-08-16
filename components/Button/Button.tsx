@@ -14,6 +14,10 @@ interface ButtonProps extends WithStyles<typeof styles> {
   color?: 'default' | 'primary' | 'progress' | 'destructive';
   /** Set to true to disable the button */
   disabled?: boolean;
+  /** Called when the button is clicked */
+  onClick?: () => any;
+  /** Overrides icon and label */
+  children?: React.ReactNode;
 }
 
 export const Button: React.SFC<ButtonProps> = ({
@@ -21,11 +25,16 @@ export const Button: React.SFC<ButtonProps> = ({
   icon,
   color = 'default',
   disabled = false,
+  children,
+  onClick = () => {
+    return;
+  },
   classes,
 }) => (
   <MUIButton
     variant={color === 'default' ? 'flat' : 'raised'}
     disabled={disabled}
+    onClick={onClick}
     classes={{
       root: cn(
         classes.button,
@@ -39,10 +48,11 @@ export const Button: React.SFC<ButtonProps> = ({
       label: classes.label,
     }}
   >
-    {icon && (
-      <Icon icon={icon} className={cn(label && classes.iconWithLabel)} />
-    )}
-    {label}
+    {!children &&
+      icon && (
+        <Icon icon={icon} className={cn(label && classes.iconWithLabel)} />
+      )}
+    {children || label}
   </MUIButton>
 );
 
