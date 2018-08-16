@@ -1,8 +1,8 @@
 import * as React from 'react';
-import SelectField from '../../components/SelectField';
-import ThemeProvider from '../../components/ThemeProvider';
-import withStyles, { WithStyles } from '../../components/withStyles';
-import theme from '../../theme';
+import SelectField from '../../../components/SelectField';
+import ThemeProvider from '../../../components/ThemeProvider';
+import withStyles, { WithStyles } from '../../../components/withStyles';
+import theme from '../../../theme';
 import PreviewWrapper from '../PreviewWrapper';
 import styles from './ThemeWrapper.styles';
 

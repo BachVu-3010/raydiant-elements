@@ -3,18 +3,30 @@ const glob = require('glob');
 
 module.exports = {
   title: 'Mira Elements',
-  components: () =>
-    glob
-      .sync(path.resolve(__dirname, 'components/**/*.tsx'))
-      .filter(module => /\/[A-Z]\w*\.tsx$/.test(module)),
+  sections: [
+    {
+      name: 'Buttons',
+      components: () => ['./components/Button/Button.tsx'],
+    },
+    {
+      name: 'Inputs',
+      components: () => [
+        './components/TextField/TextField.tsx',
+        './components/NumberField/NumberField.tsx',
+        './components/SelectField/SelectField.tsx',
+        './components/Checkbox/Checkbox.tsx',
+        './components/Switch/Switch.tsx',
+      ],
+    },
+  ],
+  styleguideDir: path.join(__dirname, 'styleguide/build'),
+  styleguideComponents: {
+    Wrapper: path.join(__dirname, 'styleguide/components/ThemeWrapper'),
+  },
   resolver: require('react-docgen').resolver.findAllComponentDefinitions,
   propsParser: require('react-docgen-typescript').withDefaultConfig({
     propFilter: { skipPropsWithoutDoc: true },
   }).parse,
-  styleguideDir: path.join(__dirname, 'styleguide/build'),
-  styleguideComponents: {
-    Wrapper: path.join(__dirname, 'styleguide/ThemeWrapper'),
-  },
   styles: {
     StyleGuide: {
       '@global html': {

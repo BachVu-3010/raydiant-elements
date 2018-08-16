@@ -1,4 +1,4 @@
-import { createStyles } from '../../components/withStyles';
+import { createStyles } from '../../../components/withStyles';
 
 // We can't use theme here because ThemeProvider is a child component.
 const styles = createStyles({
