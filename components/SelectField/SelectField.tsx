@@ -22,49 +22,33 @@ interface SelectFieldProps {
   children: React.ReactNode;
 }
 
-class SelectField extends React.Component<SelectFieldProps, {}> {
-  static defaultProps = {
-    value: '',
-    type: 'text',
-    error: false,
-    disabled: false,
-    multiline: false,
-    helperText: '',
-    onChange: () => {
-      return;
-    },
-  };
-
-  render() {
-    const {
-      label,
-      value,
-      error,
-      disabled,
-      helperText,
-      onChange,
-      children,
-    } = this.props;
-
-    return (
-      <FormControl fullWidth error={error}>
-        <InputBackground>
-          <InputLabel error={error} disabled={disabled}>
-            {label}
-          </InputLabel>
-          <Select
-            fullWidth
-            value={value}
-            disabled={disabled}
-            onChange={e => onChange(e.target.value)}
-          >
-            {children}
-          </Select>
-        </InputBackground>
-        {helperText && <FormHelperText>{helperText}</FormHelperText>}
-      </FormControl>
-    );
-  }
-}
+const SelectField: React.SFC<SelectFieldProps> = ({
+  label,
+  value = '',
+  error = false,
+  disabled = false,
+  helperText = '',
+  onChange = () => {
+    return;
+  },
+  children,
+}) => (
+  <FormControl fullWidth error={error}>
+    <InputBackground>
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
+      <Select
+        fullWidth
+        value={value}
+        disabled={disabled}
+        onChange={e => onChange(e.target.value)}
+      >
+        {children}
+      </Select>
+    </InputBackground>
+    {helperText && <FormHelperText>{helperText}</FormHelperText>}
+  </FormControl>
+);
 
 export default SelectField;

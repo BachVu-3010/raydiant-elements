@@ -24,48 +24,37 @@ interface NumberFieldProps {
   onChange?: (value: number) => any;
 }
 
-class NumberField extends React.Component<NumberFieldProps, {}> {
-  static defaultProps = {
-    value: '',
-    error: false,
-    disabled: false,
-    helperText: '',
-    onChange: () => {
-      return;
-    },
-  };
-
-  render() {
-    const {
-      label,
-      value,
-      min,
-      max,
-      error,
-      disabled,
-      helperText,
-      onChange,
-    } = this.props;
-
-    return (
-      <FormControl fullWidth error={error}>
-        <InputBackground>
-          <InputLabel error={error} disabled={disabled}>
-            {label}
-          </InputLabel>
-          <Input
-            fullWidth
-            value={String(value)}
-            type="number"
-            disabled={disabled}
-            onChange={e => onChange(parseInt(e.target.value, 10))}
-            inputProps={{ min: String(min), max: String(max) }}
-          />
-        </InputBackground>
-        {helperText && <FormHelperText>{helperText}</FormHelperText>}
-      </FormControl>
-    );
-  }
-}
+const NumberField: React.SFC<NumberFieldProps> = ({
+  label,
+  value = null,
+  min = null,
+  max = null,
+  error = false,
+  disabled = false,
+  helperText = '',
+  onChange = () => {
+    return;
+  },
+}) => (
+  <FormControl fullWidth error={error}>
+    <InputBackground>
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
+      <Input
+        fullWidth
+        value={value !== null ? String(value) : ''}
+        type="number"
+        disabled={disabled}
+        onChange={e => onChange(parseInt(e.target.value, 10))}
+        inputProps={{
+          min: min !== null ? String(min) : '',
+          max: max !== null ? String(max) : '',
+        }}
+      />
+    </InputBackground>
+    {helperText && <FormHelperText>{helperText}</FormHelperText>}
+  </FormControl>
+);
 
 export default NumberField;

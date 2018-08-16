@@ -25,66 +25,53 @@ interface FileFieldProps extends WithStyles<typeof styles> {
   onClear?: () => any;
 }
 
-export class FileField extends React.Component<FileFieldProps, {}> {
-  static defaultProps = {
-    accept: ['*'],
-    multiple: false,
-    error: false,
-    disabled: false,
-    helperText: '',
-    onChange: () => {
-      return;
-    },
-  };
+const getFileNames = (value: FileList) => {
+  const fileArr = [...(value || [])];
+  return fileArr.map(f => f.name).join(', ');
+};
 
-  getFileNames(value: FileList) {
-    const fileArr = [...(value || [])];
-    return fileArr.map(f => f.name).join(', ');
-  }
+export const FileField: React.SFC<FileFieldProps> = ({
+  label,
+  value,
+  accept = ['*'],
+  multiple = false,
+  disabled = false,
+  error = false,
+  helperText = '',
+  onChange = () => {
+    return;
+  },
+  onClear,
+  classes,
+}) => {
+  const shouldShowClear = !!value && !!onClear;
 
-  render() {
-    const {
-      label,
-      value,
-      accept,
-      multiple,
-      disabled,
-      error,
-      helperText,
-      classes,
-      onChange,
-      onClear,
-    } = this.props;
-
-    const shouldShowClear = !!value && !!onClear;
-
-    return (
-      <div className={classes.root}>
-        <TextField
-          label={label}
-          value={this.getFileNames(value)}
-          error={error}
-          helperText={helperText}
-          disabled={disabled}
-          icon={
-            shouldShowClear && (
-              <button className={classes.clear} onClick={() => onClear()}>
-                <Icon icon="remove" />
-              </button>
-            )
-          }
-        />
-        <input
-          disabled={disabled}
-          className={classes.input}
-          type="file"
-          accept={accept.join(',')}
-          multiple={multiple}
-          onChange={e => onChange(e.target.files)}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className={classes.root}>
+      <TextField
+        label={label}
+        value={getFileNames(value)}
+        error={error}
+        helperText={helperText}
+        disabled={disabled}
+        icon={
+          shouldShowClear && (
+            <button className={classes.clear} onClick={() => onClear()}>
+              <Icon icon="remove" />
+            </button>
+          )
+        }
+      />
+      <input
+        disabled={disabled}
+        className={classes.input}
+        type="file"
+        accept={accept.join(',')}
+        multiple={multiple}
+        onChange={e => onChange(e.target.files)}
+      />
+    </div>
+  );
+};
 
 export default withStyles(styles)(FileField);
