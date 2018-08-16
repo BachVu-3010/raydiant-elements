@@ -46,7 +46,6 @@ module.exports = {
         '& > div': {
           width: '100%',
           display: 'flex',
-          overflowX: 'auto',
         },
       },
     },
