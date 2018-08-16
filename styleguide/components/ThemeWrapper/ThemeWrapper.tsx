@@ -1,4 +1,7 @@
 import * as React from 'react';
+import DarkTheme from '../../../components/DarkTheme';
+import GreyTheme from '../../../components/GreyTheme';
+import LightTheme from '../../../components/LightTheme';
 import SelectField from '../../../components/SelectField';
 import ThemeProvider from '../../../components/ThemeProvider';
 import withStyles, { WithStyles } from '../../../components/withStyles';
@@ -26,24 +29,33 @@ class ThemeWrapper extends React.Component<
     const { children, classes } = this.props;
     const { selectedTheme } = this.state;
 
+    let Theme = LightTheme;
+    if (selectedTheme === 'grey') {
+      Theme = GreyTheme;
+    } else if (selectedTheme === 'dark') {
+      Theme = DarkTheme;
+    }
+
     return (
-      <ThemeProvider theme={(theme as any)[selectedTheme]}>
-        <PreviewWrapper>
-          <div className={classes.preview}>{children}</div>
-          <div className={classes.actions}>
-            <SelectField
-              label="Theme"
-              value={selectedTheme}
-              onChange={value => {
-                this.setState({ selectedTheme: value });
-              }}
-            >
-              <option value="light">Light</option>
-              <option value="grey">Grey</option>
-              <option value="dark">Dark</option>
-            </SelectField>
-          </div>
-        </PreviewWrapper>
+      <ThemeProvider theme={theme}>
+        <Theme className={classes.theme}>
+          <PreviewWrapper>
+            <div className={classes.preview}>{children}</div>
+            <div className={classes.actions}>
+              <SelectField
+                label="Theme"
+                value={selectedTheme}
+                onChange={value => {
+                  this.setState({ selectedTheme: value });
+                }}
+              >
+                <option value="light">Light</option>
+                <option value="grey">Grey</option>
+                <option value="dark">Dark</option>
+              </SelectField>
+            </div>
+          </PreviewWrapper>
+        </Theme>
       </ThemeProvider>
     );
   }

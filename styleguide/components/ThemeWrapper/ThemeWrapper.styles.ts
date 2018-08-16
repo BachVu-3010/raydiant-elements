@@ -15,6 +15,9 @@ const styles = createStyles({
     left: 0,
     right: 0,
   },
+  theme: {
+    borderRadius: 2,
+  },
 });
 
 export default styles;
