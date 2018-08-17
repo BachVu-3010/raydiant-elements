@@ -8,9 +8,9 @@ const styles = (theme: Theme) =>
       borderRadius: 100,
     },
     default: {
-      fill: theme.input.default.border,
-      backgroundColor: theme.input.default.background,
-      border: `2px solid ${theme.input.default.border}`,
+      fill: theme.button.default.foreground,
+      backgroundColor: theme.button.default.background,
+      border: `2px solid ${theme.button.default.foreground}`,
     },
     error: {
       fill: theme.palette.warning.contrastText,
