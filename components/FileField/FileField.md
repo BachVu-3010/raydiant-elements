@@ -17,15 +17,9 @@ initialState = {
     multiple
     value={state.multiple}
     onChange={multiple => setState({ multiple })}
-  />
-  <FileField
-    label="Optional"
-    value={state.optional}
-    onChange={optional => setState({ optional })}
-    onClear={() => setState({ optional: null })}
     helperText="Helper text (optional)"
   />
-  <FileField label="Disabled" disabled />
+  <FileField label="Disabled" disabled helperText="Helper text (optional)" />
   <FileField label="Error" error helperText="Oops! This field is invalid" />
 </>;
 ```

@@ -11,13 +11,14 @@ module.exports = {
     {
       name: 'Inputs',
       components: () => [
+        './components/Checkbox/Checkbox.tsx',
+        './components/Switch/Switch.tsx',
         './components/TextField/TextField.tsx',
         './components/NumberField/NumberField.tsx',
         './components/SelectField/SelectField.tsx',
         './components/FileField/FileField.tsx',
         './components/ColorField/ColorField.tsx',
-        './components/Checkbox/Checkbox.tsx',
-        './components/Switch/Switch.tsx',
+        './components/ListField/ListField.tsx',
       ],
     },
     {
@@ -29,7 +30,11 @@ module.exports = {
     },
     {
       name: 'Icons',
-      components: () => ['./components/Icon/Icon.tsx'],
+      components: () => [
+        './components/Icon/Icon.tsx',
+        './components/AlertIcon/AlertIcon.tsx',
+        './components/SuccessIcon/SuccessIcon.tsx',
+      ],
     },
   ],
   styleguideDir: path.join(__dirname, 'styleguide/build'),
