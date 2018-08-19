@@ -26,7 +26,7 @@ module.exports = {
     },
     {
       name: 'Modals',
-      components: () => [getPath('Popover')],
+      components: () => [getPath('Modal'), getPath('Popover')],
     },
     {
       name: 'Icons',

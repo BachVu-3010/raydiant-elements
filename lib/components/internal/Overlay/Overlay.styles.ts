@@ -5,7 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     overlay: {
       position: 'fixed',
-      zIndex: 100,
+      zIndex: theme.zIndex.modal,
       top: 0,
       left: 0,
       width: '100%',

@@ -4,6 +4,7 @@ import withStyles, { WithStyles } from '../../core/withStyles';
 import styles from './Overlay.styles';
 
 export interface OverlayProps extends WithStyles<typeof styles> {
+  className?: string;
   onClick?: () => any;
 }
 
