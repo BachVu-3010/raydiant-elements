@@ -1,43 +1,43 @@
 const path = require('path');
 const glob = require('glob');
 
+const getPath = component =>
+  `./lib/components/core/${component}/${component}.tsx`;
+
 module.exports = {
   title: 'Mira Elements',
   sections: [
     {
       name: 'Buttons',
-      components: () => ['./components/Button/Button.tsx'],
+      components: () => [getPath('Button')],
     },
     {
       name: 'Inputs',
       components: () => [
-        './components/Checkbox/Checkbox.tsx',
-        './components/Switch/Switch.tsx',
-        './components/TextField/TextField.tsx',
-        './components/NumberField/NumberField.tsx',
-        './components/SelectField/SelectField.tsx',
-        './components/FileField/FileField.tsx',
-        './components/ColorField/ColorField.tsx',
-        './components/ListField/ListField.tsx',
+        getPath('Checkbox'),
+        getPath('Switch'),
+        getPath('TextField'),
+        getPath('NumberField'),
+        getPath('SelectField'),
+        getPath('FileField'),
+        getPath('ColorField'),
+        getPath('ListField'),
       ],
     },
     {
       name: 'Modals',
-      components: () => [
-        './components/Popover/Popover.tsx',
-        './components/Popover/PopoverAnchor.tsx',
-      ],
+      components: () => [getPath('Popover')],
     },
     {
       name: 'Icons',
       components: () => [
-        './components/Icon/Icon.tsx',
-        './components/AlertIcon/AlertIcon.tsx',
-        './components/SuccessIcon/SuccessIcon.tsx',
+        getPath('Icon'),
+        getPath('AlertIcon'),
+        getPath('SuccessIcon'),
       ],
     },
   ],
-  styleguideDir: path.join(__dirname, 'styleguide/build'),
+  styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
     Wrapper: path.join(__dirname, 'styleguide/components/ThemeWrapper'),
   },

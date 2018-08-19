@@ -1,11 +1,13 @@
 import * as React from 'react';
-import DarkTheme from '../../../components/DarkTheme';
-import GreyTheme from '../../../components/GreyTheme';
-import LightTheme from '../../../components/LightTheme';
-import SelectField from '../../../components/SelectField';
-import ThemeProvider from '../../../components/ThemeProvider';
-import withStyles, { WithStyles } from '../../../components/withStyles';
-import theme from '../../../theme';
+import DarkTheme from '../../../lib/components/core/DarkTheme';
+import GreyTheme from '../../../lib/components/core/GreyTheme';
+import LightTheme from '../../../lib/components/core/LightTheme';
+import SelectField from '../../../lib/components/core/SelectField';
+import ThemeProvider from '../../../lib/components/core/ThemeProvider';
+import withStyles, {
+  WithStyles,
+} from '../../../lib/components/core/withStyles';
+import theme from '../../../lib/theme';
 import PreviewWrapper from '../PreviewWrapper';
 import styles from './ThemeWrapper.styles';
 

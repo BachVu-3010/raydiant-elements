@@ -8,10 +8,6 @@
 
 # production
 /build
-/lib
-
-#styleguide
-/styleguide/build
 
 # misc
 .DS_Store
