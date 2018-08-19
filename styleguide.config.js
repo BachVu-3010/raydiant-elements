@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       name: 'Navigation',
-      components: () => [getPath('Tab')],
+      components: () => [getPath('Tab'), getPath('Breadcrumb')],
     },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
