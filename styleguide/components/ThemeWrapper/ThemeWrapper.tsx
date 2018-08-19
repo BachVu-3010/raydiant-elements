@@ -1,8 +1,6 @@
 import * as React from 'react';
-import DarkTheme from '../../../lib/components/core/DarkTheme';
-import GreyTheme from '../../../lib/components/core/GreyTheme';
-import LightTheme from '../../../lib/components/core/LightTheme';
 import SelectField from '../../../lib/components/core/SelectField';
+import Theme, { ThemeType } from '../../../lib/components/core/Theme';
 import ThemeProvider from '../../../lib/components/core/ThemeProvider';
 import withStyles, {
   WithStyles,
@@ -31,16 +29,9 @@ class ThemeWrapper extends React.Component<
     const { children, classes } = this.props;
     const { selectedTheme } = this.state;
 
-    let Theme = LightTheme;
-    if (selectedTheme === 'grey') {
-      Theme = GreyTheme;
-    } else if (selectedTheme === 'dark') {
-      Theme = DarkTheme;
-    }
-
     return (
       <ThemeProvider theme={theme}>
-        <Theme className={classes.theme}>
+        <Theme type={selectedTheme as ThemeType}>
           <PreviewWrapper>
             <div className={classes.preview}>{children}</div>
             <div className={classes.actions}>
