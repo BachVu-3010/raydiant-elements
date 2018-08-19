@@ -8,6 +8,14 @@ module.exports = {
   title: 'Mira Elements',
   sections: [
     {
+      name: 'Icons',
+      components: () => [
+        getPath('Icon'),
+        getPath('AlertIcon'),
+        getPath('SuccessIcon'),
+      ],
+    },
+    {
       name: 'Buttons',
       components: () => [getPath('Button')],
     },
@@ -29,12 +37,8 @@ module.exports = {
       components: () => [getPath('Modal'), getPath('Popover')],
     },
     {
-      name: 'Icons',
-      components: () => [
-        getPath('Icon'),
-        getPath('AlertIcon'),
-        getPath('SuccessIcon'),
-      ],
+      name: 'Navigation',
+      components: () => [getPath('Tab')],
     },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),

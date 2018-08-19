@@ -47,6 +47,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         shadow: string;
       };
     };
+    tab: {
+      default: {
+        foreground: string;
+        border: string;
+      };
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -89,6 +95,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       default: {
         overlayBackground: string;
         shadow: string;
+      };
+    };
+    tab: {
+      default: {
+        foreground: string;
+        border: string;
       };
     };
   }

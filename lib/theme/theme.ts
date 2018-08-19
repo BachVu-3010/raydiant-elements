@@ -83,6 +83,12 @@ export const light = createTheme({
       foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     },
   },
+  tab: {
+    default: {
+      foreground: '#292834',
+      border: common.palette.primary.main,
+    },
+  },
 });
 
 export const grey = createTheme({
@@ -131,6 +137,12 @@ export const grey = createTheme({
       foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     },
   },
+  tab: {
+    default: {
+      foreground: '#292834',
+      border: common.palette.primary.main,
+    },
+  },
 });
 
 export const dark = createTheme({
@@ -177,6 +189,12 @@ export const dark = createTheme({
       knobMuted: '#b1b1b1',
       foreground: '#ffffff',
       foregroundMuted: 'rgba(255, 255, 255, 0.5)',
+    },
+  },
+  tab: {
+    default: {
+      foreground: '#ffffff',
+      border: '#ffffff',
     },
   },
 });

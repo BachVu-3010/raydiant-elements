@@ -2,6 +2,7 @@ import * as React from 'react';
 import Overlay from '../../internal/Overlay';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Popover.styles';
+import PopoverContainer from './PopoverContainer';
 import translations, { XPosition, YPosition } from './translations';
 
 export interface PopoverProps extends WithStyles<typeof styles> {
@@ -50,4 +51,6 @@ export const Popover: React.SFC<PopoverProps> = ({
   );
 };
 
-export default withStyles(styles)(Popover);
+export default Object.assign(withStyles(styles)(Popover), {
+  Container: PopoverContainer,
+});
