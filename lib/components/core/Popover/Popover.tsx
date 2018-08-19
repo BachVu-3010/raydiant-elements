@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Overlay from '../../internal/Overlay';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Popover.styles';
 import translations, { XPosition, YPosition } from './translations';
@@ -31,19 +32,10 @@ export const Popover: React.SFC<PopoverProps> = ({
   const toY = to[0] as YPosition;
   const toX = to[1] as XPosition;
   const translate = translations[anchorY][anchorX][toY][toX];
-  const clickProps = {
-    onClick: onOverlayClick,
-    tabIndex: -1,
-    role: 'button',
-    style: { cursor: 'pointer' },
-  };
 
   return (
-    <div>
-      <div
-        className={classes.overlay}
-        {...(onOverlayClick ? clickProps : {})}
-      />
+    <>
+      <Overlay onClick={onOverlayClick} />
       <div
         className={classes.popover}
         style={{
@@ -54,7 +46,7 @@ export const Popover: React.SFC<PopoverProps> = ({
       >
         {children}
       </div>
-    </div>
+    </>
   );
 };
 
