@@ -53,6 +53,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
         border: string;
       };
     };
+    progress: {
+      default: {
+        background: string;
+      };
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -101,6 +106,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       default: {
         foreground: string;
         border: string;
+      };
+    };
+    progress: {
+      default: {
+        background: string;
       };
     };
   }

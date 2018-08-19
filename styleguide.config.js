@@ -20,6 +20,10 @@ module.exports = {
       components: () => [getPath('Button')],
     },
     {
+      name: 'Progress',
+      components: () => [getPath('CircularProgress')],
+    },
+    {
       name: 'Inputs',
       components: () => [
         getPath('Checkbox'),

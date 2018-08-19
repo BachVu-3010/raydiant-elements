@@ -89,6 +89,11 @@ export const light = createTheme({
       border: common.palette.primary.main,
     },
   },
+  progress: {
+    default: {
+      background: common.palette.primary.main,
+    },
+  },
 });
 
 export const grey = createTheme({
@@ -143,6 +148,11 @@ export const grey = createTheme({
       border: common.palette.primary.main,
     },
   },
+  progress: {
+    default: {
+      background: common.palette.primary.main,
+    },
+  },
 });
 
 export const dark = createTheme({
@@ -195,6 +205,11 @@ export const dark = createTheme({
     default: {
       foreground: '#ffffff',
       border: '#ffffff',
+    },
+  },
+  progress: {
+    default: {
+      background: '#ffffff',
     },
   },
 });
