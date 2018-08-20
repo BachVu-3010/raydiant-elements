@@ -13,7 +13,7 @@ const styles = (theme: Theme) =>
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
       borderRadius: theme.shape.borderRadius,
-      boxShadow: theme.modal.default.shadow,
+      boxShadow: theme.modal.shadow,
       margin: theme.spacing.unit * 3,
     },
   });

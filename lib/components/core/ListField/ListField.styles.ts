@@ -11,7 +11,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
-      borderBottom: `1px solid ${theme.button.default.border}`,
+      borderBottom: `1px solid ${theme.button.border}`,
     },
     itemLabel: {
       ...buttonReset(),

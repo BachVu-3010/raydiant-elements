@@ -10,7 +10,7 @@ const styles = (theme: Theme) =>
       left: 0,
       width: '100%',
       height: '100%',
-      backgroundColor: theme.modal.default.overlayBackground,
+      backgroundColor: theme.modal.overlayBackground,
     },
   });
 

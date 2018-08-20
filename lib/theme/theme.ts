@@ -30,10 +30,8 @@ const common = {
     borderRadius: 2,
   },
   modal: {
-    default: {
-      overlayBackground: 'rgba(0, 0, 0, 0.5)',
-      shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
-    },
+    overlayBackground: 'rgba(0, 0, 0, 0.5)',
+    shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
   },
 };
 
@@ -49,50 +47,38 @@ export const light = createTheme({
     },
   },
   button: {
-    default: {
-      background: '#ffffff',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-      border: '#c6cedc',
-    },
+    background: '#ffffff',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    border: '#c6cedc',
   },
   input: {
-    default: {
-      background: '#f3f4f6',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-      border: '#292834',
-    },
+    background: '#f3f4f6',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    border: '#292834',
   },
   checkbox: {
-    default: {
-      background: '#ffffff',
-      backgroundChecked: common.palette.primary.main,
-      foreground: '#ffffff',
-      border: '#303141',
-      borderMuted: 'rgba(41, 40, 52, 0.5)',
-    },
+    background: '#ffffff',
+    backgroundChecked: common.palette.primary.main,
+    foreground: '#ffffff',
+    border: '#303141',
+    borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
-    default: {
-      bar: '#C8C9CC',
-      barChecked: common.palette.progress.main,
-      knob: '#ffffff',
-      knobMuted: '#b1b1b1',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    },
+    bar: '#C8C9CC',
+    barChecked: common.palette.progress.main,
+    knob: '#ffffff',
+    knobMuted: '#b1b1b1',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
   },
   tab: {
-    default: {
-      foreground: '#292834',
-      border: common.palette.primary.main,
-    },
+    foreground: '#292834',
+    border: common.palette.primary.main,
   },
   progress: {
-    default: {
-      background: common.palette.primary.main,
-    },
+    background: common.palette.primary.main,
   },
 });
 
@@ -108,50 +94,38 @@ export const grey = createTheme({
     },
   },
   button: {
-    default: {
-      background: '#ffffff',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-      border: '#c6cedc',
-    },
+    background: '#ffffff',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    border: '#c6cedc',
   },
   input: {
-    default: {
-      background: '#ffffff',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-      border: '#292834',
-    },
+    background: '#ffffff',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    border: '#292834',
   },
   checkbox: {
-    default: {
-      background: '#ffffff',
-      backgroundChecked: common.palette.primary.main,
-      foreground: '#ffffff',
-      border: '#303141',
-      borderMuted: 'rgba(41, 40, 52, 0.5)',
-    },
+    background: '#ffffff',
+    backgroundChecked: common.palette.primary.main,
+    foreground: '#ffffff',
+    border: '#303141',
+    borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
-    default: {
-      bar: '#C8C9CC',
-      barChecked: common.palette.progress.main,
-      knob: '#ffffff',
-      knobMuted: '#b1b1b1',
-      foreground: '#292834',
-      foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    },
+    bar: '#C8C9CC',
+    barChecked: common.palette.progress.main,
+    knob: '#ffffff',
+    knobMuted: '#b1b1b1',
+    foreground: '#292834',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
   },
   tab: {
-    default: {
-      foreground: '#292834',
-      border: common.palette.primary.main,
-    },
+    foreground: '#292834',
+    border: common.palette.primary.main,
   },
   progress: {
-    default: {
-      background: common.palette.primary.main,
-    },
+    background: common.palette.primary.main,
   },
 });
 
@@ -167,49 +141,37 @@ export const dark = createTheme({
     },
   },
   button: {
-    default: {
-      background: 'rgba(0, 0, 0, 0.5)',
-      foreground: '#ffffff',
-      foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-      border: 'rgba(255, 255, 255, 0.2)',
-    },
+    background: 'rgba(0, 0, 0, 0.5)',
+    foreground: '#ffffff',
+    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
+    border: 'rgba(255, 255, 255, 0.2)',
   },
   input: {
-    default: {
-      background: 'rgba(255, 255, 255, 0.15)',
-      foreground: '#ffffff',
-      foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-      border: '#ffffff',
-    },
+    background: 'rgba(255, 255, 255, 0.15)',
+    foreground: '#ffffff',
+    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
+    border: '#ffffff',
   },
   checkbox: {
-    default: {
-      background: 'rgba(255, 255, 255, 0.15)',
-      backgroundChecked: '#ffffff',
-      foreground: common.palette.primary.main,
-      border: '#ffffff',
-      borderMuted: 'rgba(255, 255, 255, 0.5)',
-    },
+    background: 'rgba(255, 255, 255, 0.15)',
+    backgroundChecked: '#ffffff',
+    foreground: common.palette.primary.main,
+    border: '#ffffff',
+    borderMuted: 'rgba(255, 255, 255, 0.5)',
   },
   switch: {
-    default: {
-      bar: 'rgba(255, 255, 255, 0.2)',
-      barChecked: common.palette.progress.main,
-      knob: '#ffffff',
-      knobMuted: '#b1b1b1',
-      foreground: '#ffffff',
-      foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-    },
+    bar: 'rgba(255, 255, 255, 0.2)',
+    barChecked: common.palette.progress.main,
+    knob: '#ffffff',
+    knobMuted: '#b1b1b1',
+    foreground: '#ffffff',
+    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
   },
   tab: {
-    default: {
-      foreground: '#ffffff',
-      border: '#ffffff',
-    },
+    foreground: '#ffffff',
+    border: '#ffffff',
   },
   progress: {
-    default: {
-      background: '#ffffff',
-    },
+    background: '#ffffff',
   },
 });

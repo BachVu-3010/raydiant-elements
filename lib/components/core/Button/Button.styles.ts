@@ -26,11 +26,11 @@ const styles = (theme: Theme) =>
       marginRight: theme.spacing.unit / 2,
     },
     default: {
-      backgroundColor: theme.button.default.background,
-      color: theme.button.default.foreground,
-      borderColor: theme.button.default.border,
+      backgroundColor: theme.button.background,
+      color: theme.button.foreground,
+      borderColor: theme.button.border,
       '&:disabled': {
-        color: theme.button.default.foregroundMuted,
+        color: theme.button.foregroundMuted,
       },
     },
     primary: {

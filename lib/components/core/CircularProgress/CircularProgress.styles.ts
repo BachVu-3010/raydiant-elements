@@ -4,7 +4,7 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      color: theme.progress.default.background,
+      color: theme.progress.background,
     },
   });
 

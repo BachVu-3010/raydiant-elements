@@ -7,111 +7,83 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     // Custom theme properties.
     button: {
-      default: {
-        background: string;
-        foreground: string;
-        foregroundMuted: string;
-        border: string;
-      };
+      background: string;
+      foreground: string;
+      foregroundMuted: string;
+      border: string;
     };
     input: {
-      default: {
-        background: string;
-        foreground: string;
-        foregroundMuted: string;
-        border: string;
-      };
+      background: string;
+      foreground: string;
+      foregroundMuted: string;
+      border: string;
     };
     checkbox: {
-      default: {
-        background: string;
-        backgroundChecked: string;
-        foreground: string;
-        border: string;
-        borderMuted: string;
-      };
+      background: string;
+      backgroundChecked: string;
+      foreground: string;
+      border: string;
+      borderMuted: string;
     };
     switch: {
-      default: {
-        bar: string;
-        barChecked: string;
-        knob: string;
-        knobMuted: string;
-        foreground: string;
-        foregroundMuted: string;
-      };
+      bar: string;
+      barChecked: string;
+      knob: string;
+      knobMuted: string;
+      foreground: string;
+      foregroundMuted: string;
     };
     modal: {
-      default: {
-        overlayBackground: string;
-        shadow: string;
-      };
+      overlayBackground: string;
+      shadow: string;
     };
     tab: {
-      default: {
-        foreground: string;
-        border: string;
-      };
+      foreground: string;
+      border: string;
     };
     progress: {
-      default: {
-        background: string;
-      };
+      background: string;
     };
   }
   interface ThemeOptions {
     // Custom theme options.
     button: {
-      default: {
-        background: string;
-        foreground: string;
-        foregroundMuted: string;
-        border: string;
-      };
+      background: string;
+      foreground: string;
+      foregroundMuted: string;
+      border: string;
     };
     input: {
-      default: {
-        background: string;
-        foreground: string;
-        foregroundMuted: string;
-        border: string;
-      };
+      background: string;
+      foreground: string;
+      foregroundMuted: string;
+      border: string;
     };
     checkbox: {
-      default: {
-        background: string;
-        backgroundChecked: string;
-        foreground: string;
-        border: string;
-        borderMuted: string;
-      };
+      background: string;
+      backgroundChecked: string;
+      foreground: string;
+      border: string;
+      borderMuted: string;
     };
     switch: {
-      default: {
-        bar: string;
-        barChecked: string;
-        knob: string;
-        knobMuted: string;
-        foreground: string;
-        foregroundMuted: string;
-      };
+      bar: string;
+      barChecked: string;
+      knob: string;
+      knobMuted: string;
+      foreground: string;
+      foregroundMuted: string;
     };
     modal: {
-      default: {
-        overlayBackground: string;
-        shadow: string;
-      };
+      overlayBackground: string;
+      shadow: string;
     };
     tab: {
-      default: {
-        foreground: string;
-        border: string;
-      };
+      foreground: string;
+      border: string;
     };
     progress: {
-      default: {
-        background: string;
-      };
+      background: string;
     };
   }
 }

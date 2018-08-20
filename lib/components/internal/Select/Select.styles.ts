@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       boxSizing: 'border-box',
       paddingRight: 32,
       '&:focus': {
-        color: theme.input.default.foreground,
+        color: theme.input.foreground,
         backgroundColor: 'transparent',
       },
     },

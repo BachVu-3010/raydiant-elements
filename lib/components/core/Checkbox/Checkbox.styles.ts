@@ -16,17 +16,17 @@ const styles = (theme: Theme) =>
       top: -14,
       left: -14,
       padding: 0,
-      color: theme.checkbox.default.backgroundChecked,
+      color: theme.checkbox.backgroundChecked,
       '&$checked': {
-        color: theme.checkbox.default.backgroundChecked,
+        color: theme.checkbox.backgroundChecked,
       },
     },
     container: {
       boxSizing: 'border-box',
       width: 20,
       height: 20,
-      backgroundColor: theme.checkbox.default.background,
-      border: `1px solid ${theme.checkbox.default.border}`,
+      backgroundColor: theme.checkbox.background,
+      border: `1px solid ${theme.checkbox.border}`,
       borderRadius: theme.shape.borderRadius,
       display: 'flex',
       alignItems: 'center',
@@ -37,16 +37,16 @@ const styles = (theme: Theme) =>
     },
     disabled: {
       background: 'transparent',
-      borderColor: theme.checkbox.default.borderMuted,
+      borderColor: theme.checkbox.borderMuted,
     },
     containerChecked: {
-      backgroundColor: theme.checkbox.default.backgroundChecked,
-      borderColor: theme.checkbox.default.backgroundChecked,
+      backgroundColor: theme.checkbox.backgroundChecked,
+      borderColor: theme.checkbox.backgroundChecked,
     },
     icon: {
       height: '100%',
       width: '100%',
-      color: theme.checkbox.default.foreground,
+      color: theme.checkbox.foreground,
     },
   });
 

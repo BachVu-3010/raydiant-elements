@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
       boxSizing: 'border-box',
       height: '100%',
       padding: '18px 10px 4px 10px',
-      color: theme.input.default.foreground,
+      color: theme.input.foreground,
     },
     inputWithIcon: {
       paddingRight: 32,
@@ -28,18 +28,18 @@ const styles = (theme: Theme) =>
       zIndex: 1,
     },
     disabled: {
-      color: theme.input.default.foregroundMuted,
+      color: theme.input.foregroundMuted,
     },
     underline: {
       '&:before': {
         borderBottomLeftRadius: theme.shape.borderRadius,
         borderBottomRightRadius: theme.shape.borderRadius,
-        borderBottomColor: theme.input.default.border,
+        borderBottomColor: theme.input.border,
       },
       '&:after': {
         borderBottomLeftRadius: theme.shape.borderRadius,
         borderBottomRightRadius: theme.shape.borderRadius,
-        borderBottomColor: theme.input.default.border,
+        borderBottomColor: theme.input.border,
       },
     },
   });

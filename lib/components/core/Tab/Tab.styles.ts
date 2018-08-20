@@ -13,7 +13,7 @@ const styles = (theme: Theme) =>
       fontWeight: 500,
       lineHeight: 1.33,
       padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-      color: theme.tab.default.foreground,
+      color: theme.tab.foreground,
       backgroundColor: 'transparent',
       borderBottom: '3px solid transparent',
       borderTop: 0,
@@ -23,7 +23,7 @@ const styles = (theme: Theme) =>
       textDecoration: 'none',
     },
     active: {
-      borderBottom: `3px solid ${theme.tab.default.border}`,
+      borderBottom: `3px solid ${theme.tab.border}`,
     },
     icon: {
       margin: `${theme.spacing.unit}px auto`,

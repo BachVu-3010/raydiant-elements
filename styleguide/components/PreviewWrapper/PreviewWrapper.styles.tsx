@@ -11,7 +11,7 @@ const styles = (theme: Theme) =>
       paddingBottom: 40,
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
-      border: `1px solid ${theme.button.default.border}`,
+      border: `1px solid ${theme.button.border}`,
       borderRadius: theme.shape.borderRadius,
       display: 'flex',
       justifyContent: 'center',

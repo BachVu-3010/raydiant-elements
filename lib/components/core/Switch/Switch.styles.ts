@@ -9,11 +9,11 @@ const styles = (theme: Theme) =>
     },
     label: {
       fontFamily: theme.typography.fontFamily,
-      color: theme.switch.default.foreground,
+      color: theme.switch.foreground,
       marginLeft: theme.spacing.unit / 2,
     },
     labelDisabled: {
-      color: theme.switch.default.foregroundMuted,
+      color: theme.switch.foregroundMuted,
     },
     switchContainer: {
       position: 'relative',
@@ -28,29 +28,29 @@ const styles = (theme: Theme) =>
       left: -14,
     },
     switchBase: {
-      color: theme.switch.default.barChecked,
+      color: theme.switch.barChecked,
 
       '& $knob': {
-        color: theme.switch.default.knob,
+        color: theme.switch.knob,
       },
       '& + $bar': {
-        backgroundColor: theme.switch.default.bar,
+        backgroundColor: theme.switch.bar,
         opacity: 1,
       },
       '&$checked': {
-        color: theme.switch.default.barChecked,
+        color: theme.switch.barChecked,
 
         '& + $bar': {
-          backgroundColor: theme.switch.default.barChecked,
+          backgroundColor: theme.switch.barChecked,
           opacity: 1,
         },
       },
       '&$disabled': {
         '& $knob': {
-          color: theme.switch.default.knobMuted,
+          color: theme.switch.knobMuted,
         },
         '& + $bar': {
-          backgroundColor: theme.switch.default.bar,
+          backgroundColor: theme.switch.bar,
           opacity: 1,
         },
       },

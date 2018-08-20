@@ -14,7 +14,7 @@ const styles = (theme: Theme) =>
       height: 12,
       marginRight: theme.spacing.unit / 2,
       borderRadius: 100,
-      border: `1px solid ${theme.button.default.border}`,
+      border: `1px solid ${theme.button.border}`,
     },
   });
 

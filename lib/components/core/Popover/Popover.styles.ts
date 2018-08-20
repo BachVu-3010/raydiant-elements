@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       zIndex: theme.zIndex.modal,
       borderRadius: theme.shape.borderRadius,
       backgroundColor: theme.palette.background.default,
-      boxShadow: theme.modal.default.shadow,
+      boxShadow: theme.modal.shadow,
     },
   });
 

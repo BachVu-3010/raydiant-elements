@@ -5,7 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       borderRadius: theme.shape.borderRadius,
-      backgroundColor: theme.input.default.background,
+      backgroundColor: theme.input.background,
     },
   });
 
