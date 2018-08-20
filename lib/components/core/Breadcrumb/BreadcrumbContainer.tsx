@@ -20,7 +20,7 @@ const BreadcrumbContainer: React.SFC<BreadcrumbContainerProps> = ({
   }
 
   const crumbs: React.ReactChild[] = [
-    <Breadcrumb key="back" onClick={onBack} className={classes.back}>
+    <Breadcrumb key="back" onClick={onBack} noShrink>
       <Icon icon="arrowLeft" className={classes.backIcon} />
     </Breadcrumb>,
   ];

@@ -10,9 +10,6 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       marginBottom: theme.spacing.unit / 2,
     },
-    back: {
-      flexShrink: 0,
-    },
     backIcon: {
       height: '100%',
       width: 16,

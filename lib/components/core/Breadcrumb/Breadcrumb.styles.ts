@@ -10,6 +10,9 @@ const styles = createStyles({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
+  noShrink: {
+    flexShrink: 0,
+  },
 });
 
 export default styles;
