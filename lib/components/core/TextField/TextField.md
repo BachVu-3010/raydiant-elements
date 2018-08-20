@@ -66,6 +66,50 @@ initialState = {
 />
 ```
 
+### Masks
+
+```js
+initialState = {
+  zip: '',
+  phone: '',
+  code: '',
+};
+
+<>
+  <TextField
+    label="Zip Code"
+    value={state.zip}
+    onChange={zip => setState({ zip })}
+    mask={[/\d/, /\d/, /\d/, /\d/, /\d/]}
+  />
+  <TextField
+    label="Phone number"
+    value={state.phone}
+    onChange={phone => setState({ phone })}
+    mask={[/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/]}
+    maskGuide
+  />
+  <TextField
+    label="Confirmation Code"
+    value={state.code}
+    mask={(value = '') => {
+      const maskArray = [];
+      const parts = value.split(/\-/);
+
+      for (let i = 0; i < value.length; i += 1) {
+        maskArray.push(/[a-zA-Z\-]/);
+      }
+
+      return maskArray;
+    }}
+    pipe={(value = '') => {
+      return value.toUpperCase();
+    }}
+    onChange={code => setState({ code })}
+  />
+</>;
+```
+
 ### Multiline
 
 ```js

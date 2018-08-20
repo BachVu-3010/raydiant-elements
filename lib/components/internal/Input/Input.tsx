@@ -13,6 +13,7 @@ interface InputProps extends WithStyles<typeof styles> {
   multiline?: boolean;
   icon?: React.ReactNode;
   inputProps?: { [key: string]: string };
+  inputRef?: React.RefObject<any>;
   // inputComponent is required for the Select component.
   inputComponent?: React.ReactType<InputComponentProps>;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
@@ -40,6 +41,7 @@ const Input: React.SFC<InputProps> = ({
   onBlur,
   onFocus,
   classes,
+  inputRef,
 }) => {
   let multilineOpts = {};
   if (multiline) {
@@ -48,6 +50,7 @@ const Input: React.SFC<InputProps> = ({
 
   const inputElement = (
     <MUIInput
+      inputRef={inputRef}
       value={value}
       type={type}
       placeholder={placeholder}
