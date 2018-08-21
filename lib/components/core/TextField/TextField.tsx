@@ -15,7 +15,7 @@ interface TextFieldProps {
   type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url';
   /** Set to true to display input with error */
   error?: boolean;
-  /** Set to true to disable in the input */
+  /** Set to true to disable the input */
   disabled?: boolean;
   /** Set to true to display as a textarea */
   multiline?: boolean;

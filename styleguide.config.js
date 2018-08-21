@@ -32,6 +32,7 @@ module.exports = {
         getPath('NumberField'),
         getPath('SelectField'),
         getPath('FileField'),
+        getPath('DateField'),
         getPath('ColorField'),
         getPath('ListField'),
       ],

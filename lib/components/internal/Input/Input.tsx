@@ -13,7 +13,7 @@ interface InputProps extends WithStyles<typeof styles> {
   multiline?: boolean;
   icon?: React.ReactNode;
   inputProps?: { [key: string]: string };
-  inputRef?: React.RefObject<any>;
+  inputRef?: React.Ref<HTMLInputElement>;
   // inputComponent is required for the Select component.
   inputComponent?: React.ReactType<InputComponentProps>;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
