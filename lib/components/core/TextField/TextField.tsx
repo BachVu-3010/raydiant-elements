@@ -29,6 +29,8 @@ interface TextFieldProps {
   maskGuide?: boolean;
   /** The mask's placeholder character (defaults to '_') */
   maskPlaceholderChar?: string;
+  /** Preserves the text positions when deleting characters in a masked input */
+  keepCharPositions?: boolean;
   /** A function to modify the value of a masked input */
   pipe?: (
     conformedValue: string,
@@ -50,6 +52,7 @@ const TextField: React.SFC<TextFieldProps> = ({
   mask,
   maskGuide = false,
   maskPlaceholderChar = '_',
+  keepCharPositions = false,
   pipe,
   onChange = () => {
     return;
@@ -76,6 +79,7 @@ const TextField: React.SFC<TextFieldProps> = ({
             guide={maskGuide}
             placeholderChar={maskPlaceholderChar}
             pipe={pipe}
+            keepCharPositions={keepCharPositions}
             onChange={e => onChange(e.target.value)}
             render={(ref, inputProps) => (
               <Input

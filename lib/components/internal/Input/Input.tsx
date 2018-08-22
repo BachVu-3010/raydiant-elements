@@ -6,7 +6,15 @@ import styles from './Input.styles';
 
 interface InputProps extends WithStyles<typeof styles> {
   value?: string;
-  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url' | 'number';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'tel'
+    | 'search'
+    | 'url'
+    | 'number'
+    | 'time';
   placeholder?: string;
   fullWidth?: boolean;
   disabled?: boolean;
