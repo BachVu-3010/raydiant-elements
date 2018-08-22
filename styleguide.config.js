@@ -6,46 +6,32 @@ const getPath = component =>
 
 module.exports = {
   title: 'Mira Elements',
+  pagePerSection: true,
   sections: [
     {
-      name: 'Icons',
+      name: 'Core',
       components: () => [
-        getPath('Icon'),
         getPath('AlertIcon'),
-        getPath('SuccessIcon'),
-      ],
-    },
-    {
-      name: 'Buttons',
-      components: () => [getPath('Button')],
-    },
-    {
-      name: 'Progress',
-      components: () => [getPath('CircularProgress')],
-    },
-    {
-      name: 'Inputs',
-      components: () => [
+        getPath('Breadcrumb'),
+        getPath('Button'),
         getPath('Checkbox'),
-        getPath('Switch'),
-        getPath('TextField'),
-        getPath('NumberField'),
-        getPath('SelectField'),
-        getPath('FileField'),
-        getPath('DateField'),
-        getPath('TimeField'),
+        getPath('CircularProgress'),
         getPath('ColorField'),
+        getPath('DateField'),
+        getPath('FileField'),
+        getPath('Icon'),
         getPath('ListField'),
+        getPath('Modal'),
+        getPath('NumberField'),
+        getPath('Popover'),
+        getPath('SelectField'),
+        getPath('SuccessIcon'),
+        getPath('Switch'),
+        getPath('Tab'),
+        getPath('TextField'),
       ],
     },
-    {
-      name: 'Modals',
-      components: () => [getPath('Modal'), getPath('Popover')],
-    },
-    {
-      name: 'Navigation',
-      components: () => [getPath('Tab'), getPath('Breadcrumb')],
-    },
+    { name: 'Presentation', components: () => [] },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
