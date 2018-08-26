@@ -3,7 +3,7 @@ initialState = {
   time: '12:00 am',
 };
 
-<>
+<Row inline>
   <TimeField
     label="Time"
     value={state.time}
@@ -22,5 +22,5 @@ initialState = {
     value={state.time}
     onChange={time => setState({ time })}
   />
-</>;
+</Row>;
 ```

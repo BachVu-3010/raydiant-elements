@@ -10,7 +10,7 @@ const Content = ({ label }) => (
   <div style={{ padding: '24px 16px', whiteSpace: 'nowrap' }}>{label}</div>
 );
 
-<>
+<Row inline>
   <Popover.Container>
     <Button label="Open" onClick={() => setState({ bltl: true })} />
     <Popover
@@ -58,5 +58,5 @@ const Content = ({ label }) => (
       <Content label="Anchor Top Right to Bottom Right" />
     </Popover>
   </Popover.Container>
-</>;
+</Row>;
 ```

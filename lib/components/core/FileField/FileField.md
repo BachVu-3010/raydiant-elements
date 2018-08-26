@@ -5,7 +5,7 @@ initialState = {
   optional: null,
 };
 
-<>
+<Row inline>
   <FileField
     label="Image"
     accept={['image/jpg', 'image/png']}
@@ -21,5 +21,5 @@ initialState = {
   />
   <FileField label="Disabled" disabled helperText="Helper text (optional)" />
   <FileField label="Error" error helperText="Oops! This field is invalid" />
-</>;
+</Row>;
 ```

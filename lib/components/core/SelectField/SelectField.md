@@ -3,7 +3,7 @@ initialState = {
   value: 'opt1',
 };
 
-<>
+<Row inline>
   <SelectField
     label="Select"
     value={state.value}
@@ -48,5 +48,5 @@ initialState = {
     <option value="opt2">Option 2</option>
     <option value="opt3">Option 3</option>
   </SelectField>
-</>;
+</Row>;
 ```

@@ -1,5 +1,5 @@
 ```js
-<div style={{ width: 200 }}>
+<div style={{ width: 300 }}>
   <Breadcrumb.Container onBack={() => console.log('Go back')}>
     <Breadcrumb label="Crumb 1" onClick={() => console.log('Crumb 1')} />
   </Breadcrumb.Container>

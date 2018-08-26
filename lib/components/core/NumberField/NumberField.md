@@ -3,7 +3,7 @@ initialState = {
   count: 1,
 };
 
-<>
+<Row inline>
   <NumberField
     label="Count"
     value={state.count}
@@ -33,5 +33,5 @@ initialState = {
     helperText="Increment from 1 to 10"
     onChange={count => setState({ count })}
   />
-</>;
+</Row>;
 ```

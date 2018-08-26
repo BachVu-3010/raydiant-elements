@@ -4,12 +4,10 @@ import { createStyles } from '../../../lib/components/core/withStyles';
 const styles = createStyles({
   preview: {
     boxSizing: 'border-box',
-    display: 'inline-grid',
-    gridGap: '16px',
-    gridAutoFlow: 'column',
-    minWidth: 0,
     padding: 16,
-    maxWidth: '100%',
+    width: '100%',
+    display: 'flex',
+    justifyContent: 'center',
   },
   actions: {
     position: 'absolute',

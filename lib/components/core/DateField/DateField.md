@@ -3,7 +3,7 @@ initialState = {
   date: null,
 };
 
-<>
+<Row inline>
   <DateField
     label="Date"
     value={state.date}
@@ -30,5 +30,5 @@ initialState = {
     onChange={date => setState({ date })}
     disabled
   />
-</>;
+</Row>;
 ```

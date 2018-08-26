@@ -3,7 +3,7 @@ initialState = {
   checked: false,
 };
 
-<>
+<Row inline>
   <Switch checked={state.checked} onChange={checked => setState({ checked })} />
   <Switch disabled />
   <Switch
@@ -12,5 +12,5 @@ initialState = {
     label="Label"
   />
   <Switch disabled label="Label" />
-</>;
+</Row>;
 ```

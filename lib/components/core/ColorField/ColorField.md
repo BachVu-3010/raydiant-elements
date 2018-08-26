@@ -4,7 +4,7 @@ initialState = {
   border: '',
 };
 
-<>
+<Row inline>
   <ColorField
     label="Background Color"
     value={state.background}
@@ -16,5 +16,5 @@ initialState = {
     onChange={border => setState({ border })}
   />
   <ColorField label="Disabled" disabled />
-</>;
+</Row>;
 ```

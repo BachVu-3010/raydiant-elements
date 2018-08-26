@@ -5,6 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
+      display: 'inline-block',
       '& .block-picker, & .block-picker > div': {
         borderRadius: '0 !important',
       },

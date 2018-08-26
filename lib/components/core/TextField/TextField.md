@@ -6,7 +6,7 @@ initialState = {
   error: 'Error',
 };
 
-<>
+<Row inline>
   <TextField
     label="Text"
     value={state.text}
@@ -33,37 +33,36 @@ initialState = {
     helperText="Oops! This field has an invalid value"
     onChange={error => setState({ error })}
   />
-</>;
+</Row>;
 ```
 
 ### Disabled
 
 ```js
-<TextField
-  label="Text"
-  disabled
-/>
-<TextField
-  label="Email"
-  type="email"
-  value="email@example.com"
-  disabled
-  helperText="Please enter your email"
-/>
-<TextField
-  label="Password"
-  type="password"
-  value="password"
-  disabled
-  helperText="Please enter your password"
-/>
-<TextField
-  error
-  label="Error"
-  value="Invalid"
-  disabled
-  helperText="Oops! This field has an invalid value"
-/>
+<Row inline>
+  <TextField label="Text" disabled />
+  <TextField
+    label="Email"
+    type="email"
+    value="email@example.com"
+    disabled
+    helperText="Please enter your email"
+  />
+  <TextField
+    label="Password"
+    type="password"
+    value="password"
+    disabled
+    helperText="Please enter your password"
+  />
+  <TextField
+    error
+    label="Error"
+    value="Invalid"
+    disabled
+    helperText="Oops! This field has an invalid value"
+  />
+</Row>
 ```
 
 ### Masks
@@ -75,7 +74,7 @@ initialState = {
   code: '',
 };
 
-<>
+<Row inline>
   <TextField
     label="Zip Code"
     value={state.zip}
@@ -107,7 +106,7 @@ initialState = {
     }}
     onChange={code => setState({ code })}
   />
-</>;
+</Row>;
 ```
 
 ### Multiline
@@ -117,7 +116,7 @@ initialState = {
   text: '',
 };
 
-<>
+<Row inline>
   <TextField
     multiline
     label="Text"
@@ -139,5 +138,5 @@ initialState = {
     helperText="Helper text (optional)"
     onChange={text => setState({ text })}
   />
-</>;
+</Row>;
 ```

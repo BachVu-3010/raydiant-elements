@@ -10,3 +10,10 @@ export const buttonReset = (): React.CSSProperties => ({
   border: 'none',
   cursor: 'pointer',
 });
+
+export const tabContainer = (): React.CSSProperties => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'stretch',
+  minHeight: 68,
+});

@@ -5,6 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
+      display: 'inline-block',
       width: 20,
       height: 20,
     },
