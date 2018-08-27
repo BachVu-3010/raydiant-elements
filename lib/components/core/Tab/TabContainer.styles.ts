@@ -4,6 +4,7 @@ import { createStyles } from '../withStyles';
 const styles = createStyles({
   root: {
     ...tabContainer(),
+    width: '100%',
   },
 });
 

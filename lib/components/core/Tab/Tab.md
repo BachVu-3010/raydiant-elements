@@ -50,3 +50,28 @@ initialState = {
   />
 </Tab.Container>;
 ```
+
+### Srhink
+
+```js
+initialState = {
+  selected: 1,
+};
+
+<Tab.Container>
+  <Tab
+    shrink
+    icon="horizontalScreen"
+    label="Horizontal"
+    active={state.selected === 1}
+    onClick={() => setState({ selected: 1 })}
+  />
+  <Tab
+    shrink
+    icon="verticalScreen"
+    label="Vertical"
+    active={state.selected === 2}
+    onClick={() => setState({ selected: 2 })}
+  />
+</Tab.Container>;
+```
