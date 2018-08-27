@@ -7,8 +7,9 @@ const styles = (theme: Theme) =>
       height: 40,
       minWidth: 92,
       fontSize: '1rem',
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
+      // Subtract 1px from padding to compensate for additional 1px border
+      paddingLeft: theme.spacing.unit * 2 - 1,
+      paddingRight: theme.spacing.unit * 2 - 1,
       borderRadius: theme.shape.borderRadius,
       border: '1px solid transparent',
     },
