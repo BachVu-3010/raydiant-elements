@@ -5,8 +5,9 @@ const common = {
     fontSize: 14,
   },
   fontSizes: {
-    sm: '0.86rem', // 12 px
+    sm: '0.857rem', // 12 px
     md: '1rem',
+    lg: '1.143rem', // 16px
   },
   palette: {
     primary: {
@@ -49,6 +50,7 @@ export const light = createTheme({
     ...common.palette,
     text: {
       primary: '#292834',
+      secondary: 'rgba(41, 40, 52, 0.7)',
     },
     background: {
       default: '#ffffff',
@@ -88,6 +90,9 @@ export const light = createTheme({
   progress: {
     background: common.palette.primary.main,
   },
+  titlebar: {
+    border: '#c6cedc',
+  },
 });
 
 export const grey = createTheme({
@@ -96,6 +101,7 @@ export const grey = createTheme({
     ...common.palette,
     text: {
       primary: '#292834',
+      secondary: 'rgba(41, 40, 52, 0.6)',
     },
     background: {
       default: '#f3f4f6',
@@ -135,6 +141,9 @@ export const grey = createTheme({
   progress: {
     background: common.palette.primary.main,
   },
+  titlebar: {
+    border: '#c6cedc',
+  },
 });
 
 export const dark = createTheme({
@@ -143,6 +152,7 @@ export const dark = createTheme({
     ...common.palette,
     text: {
       primary: '#ffffff',
+      secondary: 'rgba(255, 255, 255, 0.5)',
     },
     background: {
       default: '#303141',
@@ -181,5 +191,8 @@ export const dark = createTheme({
   },
   progress: {
     background: '#ffffff',
+  },
+  titlebar: {
+    border: '',
   },
 });

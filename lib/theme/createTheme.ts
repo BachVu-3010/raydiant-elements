@@ -9,6 +9,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     fontSizes: {
       sm: string;
       md: string;
+      lg: string;
     };
     logo: {
       default: string;
@@ -51,6 +52,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     };
     progress: {
       background: string;
+    };
+    titlebar: {
+      border: string;
     };
   }
   interface ThemeOptions {
@@ -58,6 +62,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     fontSizes: {
       sm: string;
       md: string;
+      lg: string;
     };
     logo: {
       default: string;
@@ -100,6 +105,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     };
     progress: {
       background: string;
+    };
+    titlebar: {
+      border: string;
     };
   }
 }

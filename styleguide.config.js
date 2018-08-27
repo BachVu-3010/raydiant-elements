@@ -24,7 +24,6 @@ module.exports = {
         getCorePath('FileField'),
         getCorePath('Icon'),
         getCorePath('ListField'),
-
         getCorePath('Modal'),
         getCorePath('NumberField'),
         getCorePath('Popover'),
@@ -35,9 +34,16 @@ module.exports = {
         getCorePath('TextField'),
         getCorePath('Row'),
         getCorePath('Column'),
+        getCorePath('Hidden'),
       ],
     },
-    { name: 'Application', components: () => [getApplicationPath('Menu')] },
+    {
+      name: 'Application',
+      components: () => [
+        getApplicationPath('Menu'),
+        getApplicationPath('Titlebar'),
+      ],
+    },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
