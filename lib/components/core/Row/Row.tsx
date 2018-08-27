@@ -5,9 +5,9 @@ import styles from './Row.styles';
 
 interface RowProps extends WithStyles<typeof styles> {
   /** Additional class name(s) */
-  className: string;
+  className?: string;
   /** Set to true to display inline */
-  inline: boolean;
+  inline?: boolean;
 }
 
 export const Row: React.SFC<RowProps> = ({
