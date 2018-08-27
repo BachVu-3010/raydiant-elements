@@ -4,6 +4,7 @@ import { createStyles } from '../../core/withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      height: 40,
       'label + &': {
         marginTop: 0,
       },
@@ -15,16 +16,20 @@ const styles = (theme: Theme) =>
       color: theme.input.foreground,
     },
     inputWithIcon: {
+      overflow: 'hidden',
+      textOverflow: 'ellipsis',
       paddingRight: 32,
     },
     iconContainer: {
       position: 'relative',
     },
     icon: {
+      opacity: 0.7,
       position: 'absolute',
       right: 0,
-      top: 5,
-      padding: 5,
+      top: 0,
+      bottom: 0,
+      padding: 10,
       zIndex: 1,
     },
     disabled: {

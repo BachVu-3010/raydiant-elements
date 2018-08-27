@@ -5,6 +5,7 @@ import FormHelperText from '../../internal/FormHelperText';
 import Input from '../../internal/Input';
 import InputBackground from '../../internal/InputBackground';
 import InputLabel from '../../internal/InputLabel';
+import Icon, { IconOptions } from '../Icon';
 
 interface TextFieldProps {
   /** The label of the field */
@@ -17,12 +18,14 @@ interface TextFieldProps {
   error?: boolean;
   /** Set to true to disable the input */
   disabled?: boolean;
+  /** Set the max width */
+  maxWidth?: number;
   /** Set to true to display as a textarea */
   multiline?: boolean;
   /** Optional helper text */
   helperText?: React.ReactNode;
   /** Optional icon to display */
-  icon?: React.ReactNode;
+  icon?: React.ReactNode | IconOptions;
   /** Optional text mask, only works with type='text' and non-multiline */
   mask?: Array<string | RegExp> | ((value: string) => Array<string | RegExp>);
   /** Set to false to disable the mask guide while typing */
@@ -46,6 +49,7 @@ const TextField: React.SFC<TextFieldProps> = ({
   type = 'text',
   error = false,
   disabled = false,
+  maxWidth,
   multiline = false,
   helperText = '',
   icon = null,
@@ -64,10 +68,10 @@ const TextField: React.SFC<TextFieldProps> = ({
     fullWidth: true,
     disabled,
     value,
-    icon,
+    icon: typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon,
   };
   return (
-    <FormControl fullWidth error={error}>
+    <FormControl fullWidth error={error} style={{ maxWidth }}>
       <InputBackground>
         <InputLabel error={error} disabled={disabled}>
           {label}

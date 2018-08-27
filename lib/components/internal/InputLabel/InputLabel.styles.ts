@@ -5,7 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       left: 10,
-      transform: 'translate(0, 12px) scale(1)',
+      transform: 'translate(0, 14px) scale(1)',
       color: theme.input.foregroundMuted,
 
       '&$focused': {

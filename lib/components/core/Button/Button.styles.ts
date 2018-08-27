@@ -24,7 +24,7 @@ const styles = (theme: Theme) =>
       letterSpacing: 0.3,
     },
     iconWithLabel: {
-      marginRight: theme.spacing.unit / 2,
+      marginRight: theme.spacing.unit,
     },
     default: {
       backgroundColor: theme.button.background,

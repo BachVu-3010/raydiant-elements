@@ -2,7 +2,6 @@
 initialState = {
   image: null,
   multiple: null,
-  optional: null,
 };
 
 <Row inline>
@@ -11,12 +10,14 @@ initialState = {
     accept={['image/jpg', 'image/png']}
     value={state.image}
     onChange={image => setState({ image })}
+    onClear={() => setState({ image: null })}
   />
   <FileField
     label="Multiple"
     multiple
     value={state.multiple}
     onChange={multiple => setState({ multiple })}
+    onClear={() => setState({ multiple: null })}
     helperText="Helper text (optional)"
   />
   <FileField label="Disabled" disabled helperText="Helper text (optional)" />
