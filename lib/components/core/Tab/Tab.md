@@ -51,7 +51,7 @@ initialState = {
 </Tab.Container>;
 ```
 
-### Srhink
+### Shrink
 
 ```js
 initialState = {

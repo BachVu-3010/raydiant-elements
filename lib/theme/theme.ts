@@ -85,7 +85,8 @@ export const light = createTheme({
   },
   tab: {
     foreground: '#292834',
-    border: common.palette.primary.main,
+    border: '#c6cedc',
+    activeBorder: common.palette.primary.main,
   },
   progress: {
     background: common.palette.primary.main,
@@ -136,7 +137,8 @@ export const grey = createTheme({
   },
   tab: {
     foreground: '#292834',
-    border: common.palette.primary.main,
+    border: '#c6cedc',
+    activeBorder: common.palette.primary.main,
   },
   progress: {
     background: common.palette.primary.main,
@@ -187,7 +189,8 @@ export const dark = createTheme({
   },
   tab: {
     foreground: '#ffffff',
-    border: '#ffffff',
+    border: '',
+    activeBorder: '#ffffff',
   },
   progress: {
     background: '#ffffff',

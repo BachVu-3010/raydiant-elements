@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
       flexGrow: 0,
     },
     active: {
-      borderBottomColor: theme.tab.border,
+      borderBottomColor: theme.tab.activeBorder,
     },
     icon: {
       fill: theme.tab.foreground,

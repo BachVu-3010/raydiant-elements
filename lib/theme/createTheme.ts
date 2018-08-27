@@ -49,6 +49,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     tab: {
       foreground: string;
       border: string;
+      activeBorder: string;
     };
     progress: {
       background: string;
@@ -102,6 +103,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     tab: {
       foreground: string;
       border: string;
+      activeBorder: string;
     };
     progress: {
       background: string;
