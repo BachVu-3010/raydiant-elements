@@ -6,6 +6,14 @@ import createMuiTheme, {
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     // Custom theme properties.
+    fontSizes: {
+      sm: string;
+      md: string;
+    };
+    logo: {
+      default: string;
+      contrast: string;
+    };
     button: {
       background: string;
       foreground: string;
@@ -47,6 +55,14 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   }
   interface ThemeOptions {
     // Custom theme options.
+    fontSizes: {
+      sm: string;
+      md: string;
+    };
+    logo: {
+      default: string;
+      contrast: string;
+    };
     button: {
       background: string;
       foreground: string;

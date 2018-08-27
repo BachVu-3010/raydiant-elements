@@ -4,6 +4,10 @@ const common = {
   typography: {
     fontSize: 14,
   },
+  fontSizes: {
+    sm: '0.86rem', // 12 px
+    md: '1rem',
+  },
   palette: {
     primary: {
       main: '#414698',
@@ -28,6 +32,10 @@ const common = {
   },
   shape: {
     borderRadius: 2,
+  },
+  logo: {
+    default: 'https://public-assets.getmira.com/mira-logo.svg',
+    contrast: 'https://public-assets.getmira.com/mira-logo-white.svg',
   },
   modal: {
     overlayBackground: 'rgba(0, 0, 0, 0.5)',

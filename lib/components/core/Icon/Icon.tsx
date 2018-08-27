@@ -16,6 +16,7 @@ export type IconOptions =
   | 'group'
   | 'horizontalScreen'
   | 'lock'
+  | 'menu'
   | 'publish'
   | 'remove'
   | 'repeat'

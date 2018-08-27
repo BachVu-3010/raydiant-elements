@@ -1,8 +1,11 @@
 const path = require('path');
 const glob = require('glob');
 
-const getPath = component =>
+const getCorePath = component =>
   `./lib/components/core/${component}/${component}.tsx`;
+
+const getApplicationPath = component =>
+  `./lib/components/application/${component}/${component}.tsx`;
 
 module.exports = {
   title: 'Mira Elements',
@@ -11,30 +14,30 @@ module.exports = {
     {
       name: 'Core',
       components: () => [
-        getPath('AlertIcon'),
-        getPath('Breadcrumb'),
-        getPath('Button'),
-        getPath('Checkbox'),
-        getPath('CircularProgress'),
-        getPath('ColorField'),
-        getPath('DateField'),
-        getPath('FileField'),
-        getPath('Icon'),
-        getPath('ListField'),
-        getPath('MainMenu'),
-        getPath('Modal'),
-        getPath('NumberField'),
-        getPath('Popover'),
-        getPath('SelectField'),
-        getPath('SuccessIcon'),
-        getPath('Switch'),
-        getPath('Tab'),
-        getPath('TextField'),
-        getPath('Row'),
-        getPath('Column'),
+        getCorePath('AlertIcon'),
+        getCorePath('Breadcrumb'),
+        getCorePath('Button'),
+        getCorePath('Checkbox'),
+        getCorePath('CircularProgress'),
+        getCorePath('ColorField'),
+        getCorePath('DateField'),
+        getCorePath('FileField'),
+        getCorePath('Icon'),
+        getCorePath('ListField'),
+
+        getCorePath('Modal'),
+        getCorePath('NumberField'),
+        getCorePath('Popover'),
+        getCorePath('SelectField'),
+        getCorePath('SuccessIcon'),
+        getCorePath('Switch'),
+        getCorePath('Tab'),
+        getCorePath('TextField'),
+        getCorePath('Row'),
+        getCorePath('Column'),
       ],
     },
-    { name: 'Presentation', components: () => [] },
+    { name: 'Application', components: () => [getApplicationPath('Menu')] },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
