@@ -4,7 +4,7 @@ initialState = {
   page: 'screens',
 };
 
-<div style={{ width: '100%' }}>
+<App>
   <Menu
     open={state.open}
     onOpen={() => setState({ open: true })}
@@ -37,5 +37,5 @@ initialState = {
     <Menu.Item href="/support" label="Support" />
     <Menu.Item href="/feedback" label="Feedback" />
   </Menu>
-</div>;
+</App>;
 ```
