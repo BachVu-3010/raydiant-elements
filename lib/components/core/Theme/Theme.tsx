@@ -1,6 +1,6 @@
 import { MuiThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
-import { ThemeContext } from './ThemeProvider';
+import { ThemeContext } from '../ThemeProvider';
 
 export type ThemeType = 'light' | 'grey' | 'dark';
 
