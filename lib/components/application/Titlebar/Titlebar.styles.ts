@@ -19,13 +19,6 @@ const styles = (theme: Theme) =>
         ? `inset 0 -1px 0 0 ${theme.titlebar.border}`
         : '',
 
-      '& > *': {
-        marginRight: theme.spacing.unit * 2,
-      },
-      '& > *:last-child': {
-        marginRight: 0,
-      },
-
       [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing.unit * 2,
         paddingRight: theme.spacing.unit * 2,

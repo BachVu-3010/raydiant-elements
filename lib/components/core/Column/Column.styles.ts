@@ -9,7 +9,7 @@ const styles = (theme: Theme) =>
       width: '100%',
 
       '& > *': {
-        marginBottom: theme.spacing.unit,
+        marginBottom: theme.spacing.unit * 2,
       },
       '& > *:last-child': {
         marginBottom: 0,
