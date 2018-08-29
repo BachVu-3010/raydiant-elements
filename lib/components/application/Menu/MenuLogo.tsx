@@ -10,20 +10,17 @@ export interface MenuLogoProps extends WithStyles<typeof styles> {
   href: string;
   /** Called when the menu item is clicked */
   onClick: () => any;
-  /** Set the width of the logo */
-  width?: number;
   theme: Theme;
 }
 
 export const MenuLogo: React.SFC<MenuLogoProps> = ({
   href,
   onClick,
-  width,
   classes,
   theme,
 }) => (
   <a href={href} onClick={preventDefault(onClick)} className={classes.root}>
-    <img src={theme.logo.contrast} style={{ width }} />
+    <img src={theme.logo.contrast} style={{ width: theme.logo.width }} />
   </a>
 );
 

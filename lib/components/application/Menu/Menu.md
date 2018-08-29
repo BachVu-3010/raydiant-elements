@@ -10,11 +10,7 @@ initialState = {
     onOpen={() => setState({ open: true })}
     onClose={() => setState({ open: false })}
   >
-    <Menu.Logo
-      href="/"
-      onClick={() => setState({ page: 'screens' })}
-      width={66}
-    />
+    <Menu.Logo href="/" onClick={() => setState({ page: 'screens' })} />
     <Menu.Item
       href="/screens"
       label="Screens"
