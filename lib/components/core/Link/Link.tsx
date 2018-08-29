@@ -10,7 +10,7 @@ interface LinkProps extends WithStyles<typeof styles> {
 }
 
 export const Link: React.SFC<LinkProps> = ({
-  href,
+  href = 'javascript:;',
   target,
   onClick,
   children,

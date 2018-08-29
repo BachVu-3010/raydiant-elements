@@ -38,6 +38,7 @@ const common = {
   logo: {
     default: 'https://public-assets.getmira.com/mira-logo.svg',
     contrast: 'https://public-assets.getmira.com/mira-logo-white.svg',
+    width: 66,
   },
   loginAsset: {
     default: 'https://public-assets.getmira.com/mira-login-asset.png',
@@ -55,6 +56,7 @@ export const light = createTheme({
     text: {
       primary: '#292834',
       secondary: 'rgba(32, 32, 42, 0.6)',
+      link: '#009bff',
     },
     background: {
       default: '#ffffff',
@@ -108,6 +110,7 @@ export const grey = createTheme({
     text: {
       primary: '#292834',
       secondary: 'rgba(32, 32, 42, 0.6)',
+      link: '#009bff',
     },
     background: {
       default: '#f3f4f6',
@@ -161,6 +164,7 @@ export const dark = createTheme({
     text: {
       primary: '#ffffff',
       secondary: 'rgba(255, 255, 255, 0.5)',
+      link: '#009bff',
     },
     background: {
       default: '#303141',

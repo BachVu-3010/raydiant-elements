@@ -10,6 +10,9 @@ const styles = (theme: Theme) =>
     muted: {
       color: theme.palette.text.secondary,
     },
+    small: {
+      fontSize: theme.fontSizes.sm,
+    },
   });
 
 export default styles;
