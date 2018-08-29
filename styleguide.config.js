@@ -31,6 +31,7 @@ module.exports = {
         getCorePath('SuccessIcon'),
         getCorePath('Switch'),
         getCorePath('Tab'),
+        getCorePath('Text'),
         getCorePath('TextField'),
         getCorePath('Theme'),
         getCorePath('Column'),

@@ -50,7 +50,7 @@ export const light = createTheme({
     ...common.palette,
     text: {
       primary: '#292834',
-      secondary: 'rgba(41, 40, 52, 0.7)',
+      secondary: 'rgba(32, 32, 42, 0.6)',
     },
     background: {
       default: '#ffffff',
@@ -102,7 +102,7 @@ export const grey = createTheme({
     ...common.palette,
     text: {
       primary: '#292834',
-      secondary: 'rgba(41, 40, 52, 0.6)',
+      secondary: 'rgba(32, 32, 42, 0.6)',
     },
     background: {
       default: '#f3f4f6',
