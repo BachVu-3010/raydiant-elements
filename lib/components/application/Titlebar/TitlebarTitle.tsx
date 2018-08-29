@@ -1,4 +1,6 @@
 import * as React from 'react';
+import Heading1 from '../../core/Heading1';
+import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import styles from './TitlebarTitle.styles';
 
@@ -15,8 +17,12 @@ export const TitlebarTitle: React.SFC<TitlebarTitleProps> = ({
   subtitle,
 }) => (
   <span>
-    <span className={classes.title}>{title}</span>
-    {subtitle && <span className={classes.subtitle}>{subtitle}</span>}
+    <Heading1>{title}</Heading1>
+    {subtitle && (
+      <span className={classes.subtitle}>
+        <Text muted>{subtitle}</Text>
+      </span>
+    )}
   </span>
 );
 

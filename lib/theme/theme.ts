@@ -8,6 +8,7 @@ const common = {
     sm: '0.857rem', // 12 px
     md: '1rem',
     lg: '1.143rem', // 16px
+    xl: '2.571rem', // 36px
   },
   palette: {
     primary: {
@@ -38,6 +39,9 @@ const common = {
     default: 'https://public-assets.getmira.com/mira-logo.svg',
     contrast: 'https://public-assets.getmira.com/mira-logo-white.svg',
   },
+  loginAsset: {
+    default: 'https://public-assets.getmira.com/mira-login-asset.png',
+  },
   modal: {
     overlayBackground: 'rgba(0, 0, 0, 0.5)',
     shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
@@ -54,6 +58,7 @@ export const light = createTheme({
     },
     background: {
       default: '#ffffff',
+      gradient: '',
     },
   },
   button: {
@@ -106,6 +111,7 @@ export const grey = createTheme({
     },
     background: {
       default: '#f3f4f6',
+      gradient: '',
     },
   },
   button: {
@@ -158,6 +164,7 @@ export const dark = createTheme({
     },
     background: {
       default: '#303141',
+      gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
     },
   },
   button: {

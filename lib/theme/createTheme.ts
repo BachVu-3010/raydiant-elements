@@ -10,6 +10,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       sm: string;
       md: string;
       lg: string;
+      xl: string;
     };
     logo: {
       default: string;
@@ -64,6 +65,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       sm: string;
       md: string;
       lg: string;
+      xl: string;
     };
     logo: {
       default: string;
