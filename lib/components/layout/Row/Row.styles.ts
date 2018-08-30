@@ -1,5 +1,5 @@
 import { Theme } from '../../../theme';
-import { createStyles } from '../withStyles';
+import { createStyles } from '../../core/withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({

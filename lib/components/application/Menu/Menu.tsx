@@ -3,7 +3,6 @@ import Button from '../../core/Button';
 import Theme from '../../core/Theme';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import Overlay from '../../internal/Overlay';
-import Spacer from '../../internal/Spacer';
 import styles from './Menu.styles';
 import MenuDrawer from './MenuDrawer';
 import MenuItem from './MenuItem';
@@ -54,5 +53,4 @@ export const Menu: React.SFC<MenuProps> = ({
 export default Object.assign(withStyles(styles)(Menu), {
   Logo: MenuLogo,
   Item: MenuItem,
-  Spacer,
 });

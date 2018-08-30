@@ -3,7 +3,7 @@
   <Titlebar>
     <Hidden xsDown>
       <Titlebar.Title title="Your Library" subtitle="(12 items)" />
-      <Titlebar.Spacer />
+      <Spacer />
       <TextField type="search" label="Search" icon="search" maxWidth={260} />
       <Button label="Manage" />
       <Button label="New Content" icon="add" />
@@ -16,19 +16,19 @@
   <Titlebar>
     <Hidden xsDown>
       Select screens below to add them to a group.
-      <Titlebar.Spacer />
+      <Spacer />
       <Button label="Done" />
       <Button label="Add to Group" color="progress" />
     </Hidden>
     <Hidden smUp>
       <Button label="Done" />
-      <Titlebar.Spacer />
+      <Spacer />
       <Button label="Add to Group" color="progress" />
     </Hidden>
   </Titlebar>
   <Titlebar>
     <Titlebar.Title title="Your Account" />
-    <Titlebar.Spacer />
+    <Spacer />
     <Button label="Sign Out" />
   </Titlebar>
   <Titlebar>

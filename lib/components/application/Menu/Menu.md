@@ -29,7 +29,7 @@ initialState = {
       active={state.page === 'account'}
       onClick={() => setState({ page: 'account' })}
     />
-    <Menu.Spacer />
+    <Spacer />
     <Menu.Item href="/support" label="Support" />
     <Menu.Item href="/feedback" label="Feedback" />
   </Menu>

@@ -4,6 +4,9 @@ const glob = require('glob');
 const getCorePath = component =>
   `./lib/components/core/${component}/${component}.tsx`;
 
+const getLayoutPath = component =>
+  `./lib/components/layout/${component}/${component}.tsx`;
+
 const getApplicationPath = component =>
   `./lib/components/application/${component}/${component}.tsx`;
 
@@ -40,9 +43,16 @@ module.exports = {
         getCorePath('TextField'),
         getCorePath('Theme'),
         getCorePath('Title'),
-        getCorePath('Column'),
-        getCorePath('Row'),
-        getCorePath('Hidden'),
+      ],
+    },
+    {
+      name: 'Layout',
+      components: () => [
+        getLayoutPath('Column'),
+        getLayoutPath('Hidden'),
+        getLayoutPath('OneThirdLayout'),
+        getLayoutPath('Row'),
+        getLayoutPath('Spacer'),
       ],
     },
     {
@@ -51,7 +61,6 @@ module.exports = {
         getApplicationPath('App'),
         getApplicationPath('LoginScreen'),
         getApplicationPath('Menu'),
-        getApplicationPath('OneThirdLayout'),
         getApplicationPath('Titlebar'),
       ],
     },

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Theme as ThemeInterface } from '../../../theme';
 import Theme from '../../core/Theme';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import OneThirdLayout from '../OneThirdLayout';
+import OneThirdLayout from '../../layout/OneThirdLayout';
 import styles from './LoginScreen.styles';
 
 interface LoginScreenProps extends WithStyles<typeof styles> {

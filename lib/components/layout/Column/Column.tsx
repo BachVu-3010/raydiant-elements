@@ -1,16 +1,16 @@
 import cn from 'classnames';
 import * as React from 'react';
-import withStyles, { WithStyles } from '../withStyles';
-import styles from './Row.styles';
+import withStyles, { WithStyles } from '../../core/withStyles';
+import styles from './Column.styles';
 
-interface RowProps extends WithStyles<typeof styles> {
+interface ColumnProps extends WithStyles<typeof styles> {
   /** Additional class name(s) */
   className?: string;
   /** Set to true to display inline */
   inline?: boolean;
 }
 
-export const Row: React.SFC<RowProps> = ({
+export const Column: React.SFC<ColumnProps> = ({
   className,
   inline,
   classes,
@@ -21,4 +21,4 @@ export const Row: React.SFC<RowProps> = ({
   </div>
 );
 
-export default withStyles(styles)(Row);
+export default withStyles(styles)(Column);

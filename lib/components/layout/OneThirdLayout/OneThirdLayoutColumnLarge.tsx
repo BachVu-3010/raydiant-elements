@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Hidden from '../../core/Hidden';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import Hidden from '../Hidden';
 import styles from './OneThirdLayoutColumnLarge.styles';
 
 export interface OneThirdLayoutColumnLargeProps

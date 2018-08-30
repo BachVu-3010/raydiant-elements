@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Row from '../../core/Row';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import Spacer from '../../internal/Spacer';
+import Row from '../../layout/Row';
 import styles from './Titlebar.styles';
 import TitlebarTitle from './TitlebarTitle';
 
@@ -13,5 +12,4 @@ export const Titlebar: React.SFC<TitlebarProps> = ({ classes, children }) => (
 
 export default Object.assign(withStyles(styles)(Titlebar), {
   Title: TitlebarTitle,
-  Spacer,
 });
