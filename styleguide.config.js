@@ -60,6 +60,7 @@ module.exports = {
       components: () => [
         getApplicationPath('App'),
         getApplicationPath('LoginScreen'),
+        getApplicationPath('Logo'),
         getApplicationPath('Menu'),
         getApplicationPath('Titlebar'),
       ],

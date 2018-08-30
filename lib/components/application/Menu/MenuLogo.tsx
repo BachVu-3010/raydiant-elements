@@ -1,8 +1,7 @@
-import { withTheme } from '@material-ui/core/styles';
 import * as React from 'react';
-import { Theme } from '../../../theme';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import { preventDefault } from '../../helpers';
+import Logo from '../Logo';
 import styles from './MenuLogo.styles';
 
 export interface MenuLogoProps extends WithStyles<typeof styles> {
@@ -10,18 +9,16 @@ export interface MenuLogoProps extends WithStyles<typeof styles> {
   href: string;
   /** Called when the menu item is clicked */
   onClick: () => any;
-  theme: Theme;
 }
 
 export const MenuLogo: React.SFC<MenuLogoProps> = ({
   href,
   onClick,
   classes,
-  theme,
 }) => (
   <a href={href} onClick={preventDefault(onClick)} className={classes.root}>
-    <img src={theme.logo.contrast} style={{ width: theme.logo.width }} />
+    <Logo contrast />
   </a>
 );
 
-export default withStyles(styles)(withTheme()(MenuLogo));
+export default withStyles(styles)(MenuLogo);
