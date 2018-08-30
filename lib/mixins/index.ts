@@ -10,6 +10,7 @@ export const buttonReset = (): React.CSSProperties => ({
   background: 'transparent',
   border: 'none',
   cursor: 'pointer',
+  outline: 'none',
 });
 
 export const tabContainer = (): React.CSSProperties => ({
@@ -36,4 +37,5 @@ export const tab = (theme: Theme): React.CSSProperties => ({
   borderRight: 0,
   cursor: 'pointer',
   textDecoration: 'none',
+  outline: 'none',
 });
