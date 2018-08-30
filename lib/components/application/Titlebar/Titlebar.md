@@ -1,5 +1,5 @@
 ```js
-<div style={{ width: '100%' }}>
+<App>
   <Titlebar>
     <Hidden xsDown>
       <Titlebar.Title title="Your Library" subtitle="(12 items)" />
@@ -34,5 +34,5 @@
   <Titlebar>
     <Titlebar.Title title="Daily good morning loop" />
   </Titlebar>
-</div>
+</App>
 ```
