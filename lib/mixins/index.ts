@@ -13,6 +13,17 @@ export const buttonReset = (): React.CSSProperties => ({
   outline: 'none',
 });
 
+export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
+  width: '100%',
+  boxSizing: 'border-box',
+  padding: theme.spacing.unit * 4,
+
+  [theme.breakpoints.down('xs')]: {
+    paddingLeft: theme.spacing.unit * 2,
+    paddingRight: theme.spacing.unit * 2,
+  },
+});
+
 export const tabContainer = (): React.CSSProperties => ({
   boxSizing: 'border-box',
   display: 'flex',

@@ -5,6 +5,8 @@ import Theme from '../../core/Theme';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import OneThirdLayout from '../../layout/OneThirdLayout';
 import styles from './LoginScreen.styles';
+import LoginScreenContent from './LoginScreenContent';
+import LoginScreenHeader from './LoginScreenHeader';
 
 interface LoginScreenProps extends WithStyles<typeof styles> {
   theme: ThemeInterface;
@@ -17,8 +19,8 @@ export const LoginScreen: React.SFC<LoginScreenProps> = ({
 }) => (
   <OneThirdLayout>
     <Theme type="light">
-      <OneThirdLayout.ColumnSmall>
-        <div className={classes.contents}>{children}</div>
+      <OneThirdLayout.ColumnSmall className={classes.contents}>
+        {children}
       </OneThirdLayout.ColumnSmall>
     </Theme>
     <Theme type="dark">
@@ -31,4 +33,7 @@ export const LoginScreen: React.SFC<LoginScreenProps> = ({
   </OneThirdLayout>
 );
 
-export default withStyles(styles)(withTheme()(LoginScreen));
+export default Object.assign(withStyles(styles)(withTheme()(LoginScreen)), {
+  Header: LoginScreenHeader,
+  Content: LoginScreenContent,
+});

@@ -1,21 +1,16 @@
+import { responsiveContainer } from '../../../mixins';
 import { Theme } from '../../../theme';
 import { createStyles } from '../../core/withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
     contents: {
-      boxSizing: 'border-box',
-      width: '100%',
-      padding: theme.spacing.unit * 4,
+      position: 'relative',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-
-      [theme.breakpoints.down('xs')]: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2,
-      },
+      ...responsiveContainer(theme),
     },
     assetContainer: {
       flex: 1,
