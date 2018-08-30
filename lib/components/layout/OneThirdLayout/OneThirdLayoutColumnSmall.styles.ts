@@ -5,6 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
+      flexDirection: 'column',
       width: '33.333%',
       maxWidth: 425,
       backgroundColor: theme.palette.background.default,
