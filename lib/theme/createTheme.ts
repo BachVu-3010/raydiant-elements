@@ -15,6 +15,10 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     logo: {
       default: string;
       contrast: string;
+      width: number;
+    };
+    loginAsset: {
+      default: string;
     };
     button: {
       background: string;
@@ -70,6 +74,10 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     logo: {
       default: string;
       contrast: string;
+      width: number;
+    };
+    loginAsset: {
+      default: string;
     };
     button: {
       background: string;
@@ -117,6 +125,14 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 }
 
 declare module '@material-ui/core/styles/createPalette' {
+  interface TypeBackground {
+    gradient: string;
+  }
+
+  interface TypeText {
+    link: string;
+  }
+
   interface Palette {
     progress: PaletteColor;
     warning: PaletteColor;

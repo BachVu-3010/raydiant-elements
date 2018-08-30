@@ -9,6 +9,9 @@ const getApplicationPath = component =>
 
 module.exports = {
   title: 'Mira Elements',
+  theme: {
+    maxWidth: 'none',
+  },
   pagePerSection: true,
   sections: [
     {
@@ -46,6 +49,7 @@ module.exports = {
       name: 'Application',
       components: () => [
         getApplicationPath('App'),
+        getApplicationPath('LoginScreen'),
         getApplicationPath('Menu'),
         getApplicationPath('OneThirdLayout'),
         getApplicationPath('Titlebar'),
