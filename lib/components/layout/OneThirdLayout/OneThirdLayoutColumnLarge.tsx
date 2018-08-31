@@ -12,7 +12,7 @@ export interface OneThirdLayoutColumnLargeProps
 export const OneThirdLayoutColumnLarge: React.SFC<
   OneThirdLayoutColumnLargeProps
 > = ({ className, children, classes }) => (
-  <Hidden xsDown>
+  <Hidden smDown>
     <div className={cn(classes.root, className)}>{children}</div>
   </Hidden>
 );

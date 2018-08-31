@@ -1,14 +1,14 @@
 ```js
 <App>
   <Titlebar>
-    <Hidden xsDown>
+    <Hidden smDown>
       <Titlebar.Title title="Your Library" subtitle="(12 items)" />
       <Spacer />
       <TextField type="search" label="Search" icon="search" maxWidth={260} />
       <Button label="Manage" />
       <Button label="New Content" icon="add" />
     </Hidden>
-    <Hidden smUp>
+    <Hidden mdUp>
       <TextField type="search" label="Search" icon="search" />
       <Button icon="add" />
     </Hidden>

@@ -6,6 +6,7 @@ const styles = createStyles({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'stretch',
+    justifyContent: 'center',
   },
 });
 
