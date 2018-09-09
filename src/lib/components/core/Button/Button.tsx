@@ -14,6 +14,8 @@ interface ButtonProps extends WithStyles<typeof styles> {
   color?: 'default' | 'primary' | 'progress' | 'destructive';
   /** Set to true to disable the button */
   disabled?: boolean;
+  /** The type of button, defaults to button. */
+  type?: 'submit' | 'button';
   /** Called when the button is clicked */
   onClick?: () => any;
   /** Overrides icon and label */
@@ -25,6 +27,7 @@ export const Button: React.SFC<ButtonProps> = ({
   icon,
   color = 'default',
   disabled = false,
+  type = 'button',
   children,
   onClick = () => {
     return;
@@ -34,6 +37,7 @@ export const Button: React.SFC<ButtonProps> = ({
   <MUIButton
     variant={color === 'default' ? 'flat' : 'raised'}
     disabled={disabled}
+    type={type}
     onClick={onClick}
     classes={{
       root: cn(

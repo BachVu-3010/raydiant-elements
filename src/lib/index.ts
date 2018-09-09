@@ -9,6 +9,7 @@ export {
 export { default as ColorField } from './components/core/ColorField';
 export { default as DateField } from './components/core/DateField';
 export { default as FileField } from './components/core/FileField';
+export { default as Form } from './components/core/Form';
 export { default as Heading1 } from './components/core/Heading1';
 export { default as Icon } from './components/core/Icon';
 export { default as Link } from './components/core/Link';
