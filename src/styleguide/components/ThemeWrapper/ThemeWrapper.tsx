@@ -1,7 +1,9 @@
 import * as React from 'react';
 import SelectField from '../../../lib/components/core/SelectField';
-import Theme, { ThemeType } from '../../../lib/components/core/Theme';
 import ThemeProvider from '../../../lib/components/core/ThemeProvider';
+import ThemeSelector, {
+  ThemeType,
+} from '../../../lib/components/core/ThemeSelector';
 import withStyles, {
   WithStyles,
 } from '../../../lib/components/core/withStyles';
@@ -31,7 +33,7 @@ class ThemeWrapper extends React.Component<
 
     return (
       <ThemeProvider theme={theme}>
-        <Theme type={selectedTheme as ThemeType}>
+        <ThemeSelector type={selectedTheme as ThemeType}>
           <PreviewWrapper>
             <div className={classes.preview}>{children}</div>
             <div className={classes.actions}>
@@ -48,7 +50,7 @@ class ThemeWrapper extends React.Component<
               </SelectField>
             </div>
           </PreviewWrapper>
-        </Theme>
+        </ThemeSelector>
       </ThemeProvider>
     );
   }

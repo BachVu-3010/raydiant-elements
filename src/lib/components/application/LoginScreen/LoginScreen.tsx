@@ -1,7 +1,7 @@
 import { withTheme } from '@material-ui/core/styles';
 import * as React from 'react';
-import { Theme as ThemeInterface } from '../../../theme';
-import Theme from '../../core/Theme';
+import { Theme } from '../../../theme';
+import ThemeSelector from '../../core/ThemeSelector';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import OneThirdLayout from '../../layout/OneThirdLayout';
 import styles from './LoginScreen.styles';
@@ -9,7 +9,7 @@ import LoginScreenContent from './LoginScreenContent';
 import LoginScreenHeader from './LoginScreenHeader';
 
 interface LoginScreenProps extends WithStyles<typeof styles> {
-  theme: ThemeInterface;
+  theme: Theme;
 }
 
 export const LoginScreen: React.SFC<LoginScreenProps> = ({
@@ -18,18 +18,18 @@ export const LoginScreen: React.SFC<LoginScreenProps> = ({
   children,
 }) => (
   <OneThirdLayout>
-    <Theme type="light">
+    <ThemeSelector type="light">
       <OneThirdLayout.ColumnSmall className={classes.contents}>
         {children}
       </OneThirdLayout.ColumnSmall>
-    </Theme>
-    <Theme type="dark">
+    </ThemeSelector>
+    <ThemeSelector type="dark">
       <OneThirdLayout.ColumnLarge>
         <div className={classes.assetContainer}>
           <img className={classes.asset} src={theme.loginAsset.default} />
         </div>
       </OneThirdLayout.ColumnLarge>
-    </Theme>
+    </ThemeSelector>
   </OneThirdLayout>
 );
 

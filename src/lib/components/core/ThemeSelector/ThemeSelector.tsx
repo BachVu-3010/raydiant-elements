@@ -9,7 +9,7 @@ interface ThemeProps {
   className?: string;
 }
 
-const Theme: React.SFC<ThemeProps> = ({ type = 'light', children }) => (
+const ThemeSelector: React.SFC<ThemeProps> = ({ type = 'light', children }) => (
   <ThemeContext.Consumer>
     {theme => (
       <MuiThemeProvider theme={theme[type]}>{children}</MuiThemeProvider>
@@ -17,4 +17,4 @@ const Theme: React.SFC<ThemeProps> = ({ type = 'light', children }) => (
   </ThemeContext.Consumer>
 );
 
-export default Theme;
+export default ThemeSelector;

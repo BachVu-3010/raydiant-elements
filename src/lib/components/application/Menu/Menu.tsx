@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Button from '../../core/Button';
-import Theme from '../../core/Theme';
+import ThemeSelector from '../../core/ThemeSelector';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import Overlay from '../../internal/Overlay';
 import styles from './Menu.styles';
@@ -36,16 +36,16 @@ export const Menu: React.SFC<MenuProps> = ({
         <div className={classes.items}>{items}</div>
         <div className={classes.mobile}>
           <div className={classes.label}>{activeLabel}</div>
-          <Theme type="dark">
+          <ThemeSelector type="dark">
             <Button icon="menu" onClick={open ? onClose : onOpen} />
-          </Theme>
+          </ThemeSelector>
         </div>
       </div>
-      <Theme type="light">
+      <ThemeSelector type="light">
         <MenuDrawer open={open} onClose={onClose}>
           {items}
         </MenuDrawer>
-      </Theme>
+      </ThemeSelector>
     </div>
   );
 };
