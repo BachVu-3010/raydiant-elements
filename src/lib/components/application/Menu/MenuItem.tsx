@@ -8,18 +8,18 @@ export interface MenuItemProps extends WithStyles<typeof styles> {
   /** The label of the menu item */
   label: string;
   /** Set to true when the menu item is active */
-  active: boolean;
+  active?: boolean;
   /** Set href to render  */
-  href: string;
+  href?: string;
   /** Called when the menu item is clicked */
-  onClick: () => any;
+  onClick?: () => any;
   isDrawerItem?: boolean;
 }
 
 export const MenuItem: React.SFC<MenuItemProps> = ({
   label,
-  active,
-  href,
+  active = false,
+  href = '',
   onClick,
   classes,
   isDrawerItem,

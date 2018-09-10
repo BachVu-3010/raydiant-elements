@@ -15,7 +15,7 @@ const styles = (theme: Theme) =>
       color: theme.palette.primary.contrastText,
       paddingLeft: theme.spacing.unit * 2,
       paddingRight: theme.spacing.unit * 2,
-      height: 70,
+      height: 68,
 
       [theme.breakpoints.down('xs')]: {
         paddingLeft: 0,

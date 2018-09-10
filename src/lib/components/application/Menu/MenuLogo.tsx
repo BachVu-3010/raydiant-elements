@@ -8,7 +8,7 @@ export interface MenuLogoProps extends WithStyles<typeof styles> {
   /** Set href to render  */
   href: string;
   /** Called when the menu item is clicked */
-  onClick: () => any;
+  onClick?: () => any;
 }
 
 export const MenuLogo: React.SFC<MenuLogoProps> = ({
