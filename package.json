@@ -10,12 +10,17 @@
     "tsc": "tsc",
     "build": "tsc && copyfiles -u 2 src/lib/**/*.css build/lib",
     "lint": "tslint --project .",
-    "test": "echo TODO",
+    "test": "jest src --env=jsdom",
     "styleguide:build": "tsc && styleguidist build",
     "start": "tsc && styleguidist server --config styleguide.config.js",
     "encryptenv": "jet encrypt docker/deploy.env docker/deploy.env.encrypted --key-path=mirainc_mira-kit.aes",
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-kit.aes"
   },
+  "files": [
+    "./build/lib/**/*",
+    "./helpers.js",
+    "./helpers.d.ts"
+  ],
   "dependencies": {
     "@material-ui/core": "^3.0.1",
     "classnames": "^2.2.6",
@@ -29,19 +34,29 @@
   },
   "devDependencies": {
     "@types/classnames": "^2.2.6",
+    "@types/enzyme": "^3.1.13",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.2",
     "@types/react": "^16.4.13",
     "@types/react-beautiful-dnd": "^7.1.1",
     "@types/react-datepicker": "^1.1.7",
     "@types/react-dom": "^16.0.7",
+    "@types/react-test-renderer": "^16.0.2",
     "@types/react-text-mask": "^5.4.1",
     "copyfiles": "^2.0.0",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "husky": "^0.14.3",
+    "jest": "^23.5.0",
+    "jest-enzyme": "^6.0.4",
     "lint-staged": "^7.2.0",
     "prettier": "^1.14.2",
     "react-docgen-typescript": "^1.6.3",
     "react-styleguidist": "^7.2.1",
+    "react-test-renderer": "^16.5.0",
     "style-loader": "^0.22.1",
+    "ts-jest": "^23.1.4",
     "ts-loader": "^4.4.2",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.14.0",
@@ -50,9 +65,22 @@
     "typescript": "^3.0.1",
     "webpack": "^4.16.5"
   },
-  "files": [
-    "./build/lib/**/*",
-    "./theme.js",
-    "./mixins.js"
-  ]
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "rootDir": "src",
+    "setupFiles": [
+      "<rootDir>/setupTests.ts"
+    ]
+  }
 }

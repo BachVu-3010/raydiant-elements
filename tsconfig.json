@@ -3,7 +3,7 @@
     "outDir": "./build",
     "jsx": "react",
     "target": "es2015",
-    "module": "esnext",
+    "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
     "removeComments": false,

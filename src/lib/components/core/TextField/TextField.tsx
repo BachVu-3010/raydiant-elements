@@ -1,6 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
 import MaskedInput from 'react-text-mask';
+import { testAttr } from '../../helpers';
 import FormHelperText from '../../internal/FormHelperText';
 import Input from '../../internal/Input';
 import InputBackground from '../../internal/InputBackground';
@@ -41,6 +42,8 @@ interface TextFieldProps {
   ) => false | string | { value: string; indexesOfPipedChars: number[] };
   /** Called when the value changes */
   onChange?: (value: string) => any;
+  /** The test id of the input */
+  testId?: string;
 }
 
 const TextField: React.SFC<TextFieldProps> = ({
@@ -61,6 +64,7 @@ const TextField: React.SFC<TextFieldProps> = ({
   onChange = () => {
     return;
   },
+  testId,
 }) => {
   const commonProps = {
     type: mask ? 'text' : type,
@@ -89,12 +93,16 @@ const TextField: React.SFC<TextFieldProps> = ({
               <Input
                 {...commonProps}
                 inputRef={ref as any}
-                inputProps={inputProps}
+                inputProps={{ ...inputProps, ...testAttr(testId) }}
               />
             )}
           />
         ) : (
-          <Input {...commonProps} onChange={e => onChange(e.target.value)} />
+          <Input
+            {...commonProps}
+            onChange={e => onChange(e.target.value)}
+            inputProps={testAttr(testId)}
+          />
         )}
       </InputBackground>
       {helperText && <FormHelperText>{helperText}</FormHelperText>}

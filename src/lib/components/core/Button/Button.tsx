@@ -1,6 +1,7 @@
 import MUIButton from '@material-ui/core/Button';
 import * as cn from 'classnames';
 import * as React from 'react';
+import { testAttr } from '../../helpers';
 import Icon, { IconOptions } from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Button.styles';
@@ -20,6 +21,8 @@ interface ButtonProps extends WithStyles<typeof styles> {
   onClick?: () => any;
   /** Overrides icon and label */
   children?: React.ReactNode;
+  /** The test id of the button */
+  testId?: string;
 }
 
 export const Button: React.SFC<ButtonProps> = ({
@@ -33,6 +36,7 @@ export const Button: React.SFC<ButtonProps> = ({
     return;
   },
   classes,
+  testId,
 }) => (
   <MUIButton
     variant={color === 'default' ? 'flat' : 'raised'}
@@ -51,6 +55,7 @@ export const Button: React.SFC<ButtonProps> = ({
       ),
       label: classes.label,
     }}
+    {...testAttr(testId)}
   >
     {!children &&
       icon && (
