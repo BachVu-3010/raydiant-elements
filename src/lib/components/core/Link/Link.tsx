@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { preventDefault, testAttr } from '../../../helpers';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import { preventDefault, testAttr } from '../../helpers';
 import styles from './Link.styles';
 
 interface LinkProps extends WithStyles<typeof styles> {

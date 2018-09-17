@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { preventDefault } from '../../helpers';
+import { preventDefault } from '../../../helpers';
 
 interface FormProps {
   onSubmit: () => any;

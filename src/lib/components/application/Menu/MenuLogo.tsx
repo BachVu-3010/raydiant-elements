@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { preventDefault } from '../../../helpers';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import { preventDefault } from '../../helpers';
 import Logo from '../Logo';
 import styles from './MenuLogo.styles';
 

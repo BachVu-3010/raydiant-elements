@@ -1,7 +1,7 @@
 import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
 import MaskedInput from 'react-text-mask';
-import { testAttr } from '../../helpers';
+import { testAttr } from '../../../helpers';
 import FormHelperText from '../../internal/FormHelperText';
 import Input from '../../internal/Input';
 import InputBackground from '../../internal/InputBackground';

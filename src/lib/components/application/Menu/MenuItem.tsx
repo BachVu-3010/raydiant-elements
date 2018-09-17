@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
+import { preventDefault } from '../../../helpers';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import { preventDefault } from '../../helpers';
 import styles from './MenuItem.styles';
 
 export interface MenuItemProps extends WithStyles<typeof styles> {

@@ -48,6 +48,3 @@ export { default as Titlebar } from './components/application/Titlebar';
 
 // Theme
 export { default as theme, Theme } from './theme';
-
-// Component helpers
-export * from './components/helpers';

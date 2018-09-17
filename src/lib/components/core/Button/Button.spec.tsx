@@ -1,7 +1,7 @@
 import { mount } from 'enzyme';
 import * as React from 'react';
+import { testAttrName } from '../../../helpers';
 import theme from '../../../theme';
-import { testAttrName } from '../../helpers';
 import ThemeProvider from '../ThemeProvider';
 import ThemeSelector from '../ThemeSelector';
 import Button from './Button';

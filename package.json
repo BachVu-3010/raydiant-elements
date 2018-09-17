@@ -1,6 +1,6 @@
 {
   "name": "mira-elements",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "build/lib/index.js",
   "types": "build/lib/index.d.ts",
   "sideEffects": [
@@ -17,9 +17,10 @@
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-kit.aes"
   },
   "files": [
-    "./build/lib/**/*",
-    "./helpers.js",
-    "./helpers.d.ts"
+    "build/lib/**/*",
+    "helpers.js",
+    "helpers.d.ts",
+    "typings.d.ts"
   ],
   "dependencies": {
     "@material-ui/core": "^3.0.1",

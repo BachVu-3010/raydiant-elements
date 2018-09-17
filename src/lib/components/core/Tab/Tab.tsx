@@ -1,6 +1,6 @@
 import cn from 'classnames';
 import * as React from 'react';
-import { preventDefault } from '../../helpers';
+import { preventDefault } from '../../../helpers';
 import Icon, { IconOptions } from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Tab.styles';

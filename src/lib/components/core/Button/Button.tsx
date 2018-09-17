@@ -1,7 +1,7 @@
 import MUIButton from '@material-ui/core/Button';
 import * as cn from 'classnames';
 import * as React from 'react';
-import { testAttr } from '../../helpers';
+import { testAttr } from '../../../helpers';
 import Icon, { IconOptions } from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Button.styles';
