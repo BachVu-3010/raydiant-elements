@@ -9,4 +9,4 @@
       tag: ^(master)
       service: elements
       steps:
-        - command: bash deploy-npm.bash
+        - command: yarn deploy:latest

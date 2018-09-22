@@ -1,27 +1,18 @@
 {
   "name": "mira-elements",
   "version": "1.0.1",
-  "main": "build/lib/index.js",
-  "types": "build/lib/index.d.ts",
-  "sideEffects": [
-    "*.css"
-  ],
   "scripts": {
+    "start": "tsc && styleguidist server --config styleguide.config.js",
     "tsc": "tsc",
-    "build": "tsc && copyfiles -u 2 src/lib/**/*.css build/lib",
+    "build": "tsc && copyfiles -u 2 src/lib/**/*.css build/lib && node tasks/copy-package-json.js",
     "lint": "tslint --project .",
     "test": "jest src --env=jsdom",
+    "deploy:next": "NPM_TAG=next tasks/npm-publish.bash",
+    "deploy:latest": "NPM_TAG=latest tasks/npm-publish.bash",
     "styleguide:build": "tsc && styleguidist build",
-    "start": "tsc && styleguidist server --config styleguide.config.js",
     "encryptenv": "jet encrypt docker/deploy.env docker/deploy.env.encrypted --key-path=mirainc_mira-elements.aes",
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-elements.aes"
   },
-  "files": [
-    "build/lib/**/*",
-    "helpers.js",
-    "helpers.d.ts",
-    "typings.d.ts"
-  ],
   "dependencies": {
     "@material-ui/core": "^3.0.1",
     "classnames": "^2.2.6",
@@ -48,6 +39,7 @@
     "css-loader": "^1.0.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
+    "fs-extra": "^7.0.0",
     "husky": "^0.14.3",
     "jest": "^23.5.0",
     "jest-enzyme": "^6.0.4",
