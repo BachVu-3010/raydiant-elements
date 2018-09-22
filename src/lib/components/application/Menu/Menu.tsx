@@ -36,12 +36,12 @@ export const Menu: React.SFC<MenuProps> = ({
         <div className={classes.items}>{items}</div>
         <div className={classes.mobile}>
           <div className={classes.label}>{activeLabel}</div>
-          <ThemeSelector type="dark">
+          <ThemeSelector color="dark">
             <Button icon="menu" onClick={open ? onClose : onOpen} />
           </ThemeSelector>
         </div>
       </div>
-      <ThemeSelector type="light">
+      <ThemeSelector color="light">
         <MenuDrawer open={open} onClose={onClose}>
           {items}
         </MenuDrawer>

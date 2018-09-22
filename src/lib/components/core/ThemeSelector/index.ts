@@ -1,3 +1,3 @@
-import ThemeSelector, { ThemeType } from './ThemeSelector';
+import ThemeSelector, { ThemeProps, ThemeType } from './ThemeSelector';
 export default ThemeSelector;
-export { ThemeType };
+export { ThemeProps, ThemeType };

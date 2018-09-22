@@ -9,7 +9,7 @@ import TextField from './TextField';
 test('Should set test id on button', () => {
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <ThemeSelector type="light">
+      <ThemeSelector color="light">
         <TextField label="test" testId="testId" />
       </ThemeSelector>
     </ThemeProvider>,

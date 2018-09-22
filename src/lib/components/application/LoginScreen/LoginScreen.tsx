@@ -18,12 +18,10 @@ export const LoginScreen: React.SFC<LoginScreenProps> = ({
   children,
 }) => (
   <OneThirdLayout>
-    <ThemeSelector type="light">
-      <OneThirdLayout.ColumnSmall className={classes.contents}>
-        {children}
-      </OneThirdLayout.ColumnSmall>
-    </ThemeSelector>
-    <ThemeSelector type="dark">
+    <OneThirdLayout.ColumnSmall className={classes.contents}>
+      {children}
+    </OneThirdLayout.ColumnSmall>
+    <ThemeSelector color="dark">
       <OneThirdLayout.ColumnLarge>
         <div className={classes.assetContainer}>
           <img className={classes.asset} src={theme.loginAsset.default} />

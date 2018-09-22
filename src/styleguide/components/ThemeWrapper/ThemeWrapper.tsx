@@ -33,7 +33,7 @@ class ThemeWrapper extends React.Component<
 
     return (
       <ThemeProvider theme={theme}>
-        <ThemeSelector type={selectedTheme as ThemeType}>
+        <ThemeSelector color={selectedTheme as ThemeType}>
           <PreviewWrapper>
             <div className={classes.preview}>{children}</div>
             <div className={classes.actions}>

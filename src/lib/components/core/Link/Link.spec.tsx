@@ -9,7 +9,7 @@ import Link from './Link';
 test('Should set test id on button', () => {
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <ThemeSelector type="light">
+      <ThemeSelector color="light">
         <Link href="test" testId="testId" />
       </ThemeSelector>
     </ThemeProvider>,

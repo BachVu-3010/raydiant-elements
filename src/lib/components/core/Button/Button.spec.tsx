@@ -9,7 +9,7 @@ import Button from './Button';
 test('Should set test id on button', () => {
   const wrapper = mount(
     <ThemeProvider theme={theme}>
-      <ThemeSelector type="light">
+      <ThemeSelector color="light">
         <Button testId="testId" />
       </ThemeSelector>
     </ThemeProvider>,
