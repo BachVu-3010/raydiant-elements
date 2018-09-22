@@ -1,0 +1,21 @@
+import { createStyles } from '../../core/withStyles';
+import { Theme } from '../../theme';
+
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '33.333%',
+      maxWidth: 425,
+      backgroundColor: theme.palette.background.default,
+      color: theme.palette.text.primary,
+
+      [theme.breakpoints.down('xs')]: {
+        width: '100%',
+        maxWidth: 'none',
+      },
+    },
+  });
+
+export default styles;

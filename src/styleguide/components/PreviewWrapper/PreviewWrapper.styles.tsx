@@ -1,4 +1,4 @@
-import { createStyles } from '../../../lib/components/core/withStyles';
+import { createStyles } from '../../../lib/core/withStyles';
 import { Theme } from '../../../lib/theme';
 
 const styles = (theme: Theme) =>

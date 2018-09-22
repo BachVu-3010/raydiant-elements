@@ -1,7 +1,5 @@
 import * as React from 'react';
-import withStyles, {
-  WithStyles,
-} from '../../../lib/components/core/withStyles';
+import withStyles, { WithStyles } from '../../../lib/core/withStyles';
 import styles from './PreviewWrapper.styles';
 
 interface PreviewWrapperProps extends WithStyles<typeof styles> {}

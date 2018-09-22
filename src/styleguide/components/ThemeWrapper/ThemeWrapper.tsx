@@ -1,12 +1,8 @@
 import * as React from 'react';
-import SelectField from '../../../lib/components/core/SelectField';
-import ThemeProvider from '../../../lib/components/core/ThemeProvider';
-import ThemeSelector, {
-  ThemeType,
-} from '../../../lib/components/core/ThemeSelector';
-import withStyles, {
-  WithStyles,
-} from '../../../lib/components/core/withStyles';
+import SelectField from '../../../lib/core/SelectField';
+import ThemeProvider from '../../../lib/core/ThemeProvider';
+import ThemeSelector, { ThemeType } from '../../../lib/core/ThemeSelector';
+import withStyles, { WithStyles } from '../../../lib/core/withStyles';
 import theme from '../../../lib/theme';
 import PreviewWrapper from '../PreviewWrapper';
 import styles from './ThemeWrapper.styles';

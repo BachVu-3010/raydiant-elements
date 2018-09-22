@@ -2,19 +2,13 @@ const path = require('path');
 const glob = require('glob');
 
 const getCorePath = component =>
-  path.join(__dirname, `src/lib/components/core/${component}/${component}.tsx`);
+  path.join(__dirname, `src/lib/core/${component}/${component}.tsx`);
 
 const getLayoutPath = component =>
-  path.join(
-    __dirname,
-    `src/lib/components/layout/${component}/${component}.tsx`,
-  );
+  path.join(__dirname, `src/lib/layout/${component}/${component}.tsx`);
 
 const getApplicationPath = component =>
-  path.join(
-    __dirname,
-    `src/lib/components/application/${component}/${component}.tsx`,
-  );
+  path.join(__dirname, `src/lib/app/${component}/${component}.tsx`);
 
 module.exports = {
   title: 'Mira Elements',
@@ -74,7 +68,7 @@ module.exports = {
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
-    Wrapper: path.join(__dirname, 'src/styleguide/components/ThemeWrapper'),
+    Wrapper: path.join(__dirname, 'src/styleguide/ThemeWrapper'),
   },
   resolver: require('react-docgen').resolver.findAllComponentDefinitions,
   propsParser: require('react-docgen-typescript').withDefaultConfig({

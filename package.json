@@ -13,8 +13,8 @@
     "test": "jest src --env=jsdom",
     "styleguide:build": "tsc && styleguidist build",
     "start": "tsc && styleguidist server --config styleguide.config.js",
-    "encryptenv": "jet encrypt docker/deploy.env docker/deploy.env.encrypted --key-path=mirainc_mira-kit.aes",
-    "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-kit.aes"
+    "encryptenv": "jet encrypt docker/deploy.env docker/deploy.env.encrypted --key-path=mirainc_mira-elements.aes",
+    "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-elements.aes"
   },
   "files": [
     "build/lib/**/*",
