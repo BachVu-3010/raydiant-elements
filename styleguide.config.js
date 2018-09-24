@@ -68,7 +68,7 @@ module.exports = {
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
   styleguideComponents: {
-    Wrapper: path.join(__dirname, 'src/styleguide/ThemeWrapper'),
+    Wrapper: path.join(__dirname, 'src/styleguide/components/ThemeWrapper'),
   },
   resolver: require('react-docgen').resolver.findAllComponentDefinitions,
   propsParser: require('react-docgen-typescript').withDefaultConfig({
