@@ -4,7 +4,7 @@ set -e
 echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > ~/.npmrc
 echo "unsafe-perm=true" >> ~/.npmrc
 
-# Why was this here? Probably just for CI but this does bad things if deploying locally.
+# Why was this here? Probably just for CI?
 # chown -R root /usr/local
 
 # Publish from build/lib
