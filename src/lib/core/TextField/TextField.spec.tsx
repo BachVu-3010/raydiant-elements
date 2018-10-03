@@ -6,7 +6,7 @@ import ThemeProvider from '../ThemeProvider';
 import ThemeSelector from '../ThemeSelector';
 import TextField from './TextField';
 
-test('Should set test id on button', () => {
+test('Should set test id on input', () => {
   const wrapper = mount(
     <ThemeProvider theme={theme}>
       <ThemeSelector color="light">
