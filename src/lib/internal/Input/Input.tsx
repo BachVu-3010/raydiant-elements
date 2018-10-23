@@ -72,9 +72,14 @@ const Input: React.SFC<InputProps> = ({
       onFocus={onFocus}
       classes={{
         root: classes.root,
-        input: cn(classes.input, icon && classes.inputWithIcon),
+        multiline: classes.multiline,
         underline: classes.underline,
         disabled: classes.disabled,
+        input: cn(
+          classes.input,
+          icon && classes.inputWithIcon,
+          multiline && classes.inputWithMultiline,
+        ),
       }}
       inputProps={inputProps}
       {...multilineOpts}

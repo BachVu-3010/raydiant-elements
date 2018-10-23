@@ -9,6 +9,12 @@ const styles = (theme: Theme) =>
         marginTop: 0,
       },
     },
+    multiline: {
+      // To avoid label overlapping text we need the padding to be on the root
+      // element instead of the input when it's a multiline.
+      paddingTop: 18,
+      height: 'auto',
+    },
     input: {
       boxSizing: 'border-box',
       height: '100%',
@@ -19,6 +25,9 @@ const styles = (theme: Theme) =>
       overflow: 'hidden',
       textOverflow: 'ellipsis',
       paddingRight: 32,
+    },
+    inputWithMultiline: {
+      paddingTop: 0,
     },
     iconContainer: {
       position: 'relative',
