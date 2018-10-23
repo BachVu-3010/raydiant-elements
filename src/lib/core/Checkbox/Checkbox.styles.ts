@@ -18,9 +18,6 @@ const styles = (theme: Theme) =>
       left: -14,
       padding: 0,
       color: theme.checkbox.backgroundChecked,
-      '&$checked': {
-        color: theme.checkbox.backgroundChecked,
-      },
     },
     container: {
       boxSizing: 'border-box',
