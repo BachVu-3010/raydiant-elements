@@ -42,6 +42,7 @@ module.exports = {
         getCorePath('Text'),
         getCorePath('TextField'),
         getCorePath('Title'),
+        getCorePath('ThemeSelector'),
       ],
     },
     {
