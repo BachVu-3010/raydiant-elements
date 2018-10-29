@@ -7,8 +7,8 @@ import styles from './ActionBar.styles';
 import ActionBarTitle from './ActionBarTitle';
 
 interface ActionBarProps extends WithStyles<typeof styles> {
-  condensed: boolean;
-  bottom: boolean;
+  condensed?: boolean;
+  bottom?: boolean;
 }
 
 export const ActionBar: React.SFC<ActionBarProps> = ({
