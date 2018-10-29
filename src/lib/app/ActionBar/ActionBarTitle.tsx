@@ -2,16 +2,16 @@ import * as React from 'react';
 import Heading1 from '../../core/Heading1';
 import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import styles from './TitlebarTitle.styles';
+import styles from './ActionBarTitle.styles';
 
-export interface TitlebarTitleProps extends WithStyles<typeof styles> {
+export interface ActionBarTitleProps extends WithStyles<typeof styles> {
   /** The title of the title bar */
   title: string;
   /** Optional subtitle of the title bar */
   subtitle?: string;
 }
 
-export const TitlebarTitle: React.SFC<TitlebarTitleProps> = ({
+export const ActionBarTitle: React.SFC<ActionBarTitleProps> = ({
   classes,
   title,
   subtitle,
@@ -26,4 +26,4 @@ export const TitlebarTitle: React.SFC<TitlebarTitleProps> = ({
   </span>
 );
 
-export default withStyles(styles)(TitlebarTitle);
+export default withStyles(styles)(ActionBarTitle);

@@ -9,7 +9,7 @@ const getLayoutPath = component =>
 
 const getApplicationPath = component =>
   path.join(__dirname, `src/lib/app/${component}/${component}.tsx`);
-  
+
 module.exports = {
   title: 'Mira Elements',
   theme: {
@@ -58,11 +58,11 @@ module.exports = {
     {
       name: 'Application',
       components: () => [
+        getApplicationPath('ActionBar'),
         getApplicationPath('App'),
         getApplicationPath('LoginScreen'),
         getApplicationPath('Logo'),
         getApplicationPath('Menu'),
-        getApplicationPath('Titlebar'),
       ],
     },
   ],

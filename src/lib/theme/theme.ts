@@ -98,7 +98,7 @@ export const light = createTheme({
   progress: {
     background: common.palette.primary.main,
   },
-  titlebar: {
+  actionBar: {
     border: '#c6cedc',
   },
 });
@@ -152,7 +152,7 @@ export const grey = createTheme({
   progress: {
     background: common.palette.primary.main,
   },
-  titlebar: {
+  actionBar: {
     border: '#c6cedc',
   },
 });
@@ -206,7 +206,7 @@ export const dark = createTheme({
   progress: {
     background: '#ffffff',
   },
-  titlebar: {
-    border: '',
+  actionBar: {
+    border: 'rgba(255, 255, 255, 0.15)',
   },
 });

@@ -59,7 +59,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     progress: {
       background: string;
     };
-    titlebar: {
+    actionBar: {
       border: string;
     };
   }
@@ -118,7 +118,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     progress: {
       background: string;
     };
-    titlebar: {
+    actionBar: {
       border: string;
     };
   }
