@@ -101,6 +101,12 @@ export const light = createTheme({
   actionBar: {
     border: '#c6cedc',
   },
+  popover: {
+    headerBackground: '#e8eaee',
+    contentBackground: 'rgba(255, 255 ,255)',
+    borderColor: '#cdd4e1',
+    color: '#292834',
+  },
 });
 
 export const grey = createTheme({
@@ -155,6 +161,12 @@ export const grey = createTheme({
   actionBar: {
     border: '#c6cedc',
   },
+  popover: {
+    headerBackground: 'rgba(255, 255 ,255)',
+    contentBackground: '#e8eaee',
+    borderColor: '#cdd4e1',
+    color: '#292834',
+  },
 });
 
 export const dark = createTheme({
@@ -208,5 +220,12 @@ export const dark = createTheme({
   },
   actionBar: {
     border: 'rgba(255, 255, 255, 0.15)',
+  },
+  // TODO: needs tweaking
+  popover: {
+    headerBackground: '#292834',
+    contentBackground: '#292834',
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    color: 'rgba(255, 255, 255)',
   },
 });

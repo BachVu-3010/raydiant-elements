@@ -65,7 +65,7 @@ export class ColorField extends React.Component<
     const { open } = this.state;
     return (
       <div className={classes.root}>
-        <Popover.Container>
+        <Popover.Anchor>
           <Button disabled={disabled} onClick={this.openPicker}>
             <div className={classes.color} style={{ backgroundColor: value }} />
             {label}
@@ -81,7 +81,7 @@ export class ColorField extends React.Component<
               onChangeComplete={this.handleChange}
             />
           </Popover>
-        </Popover.Container>
+        </Popover.Anchor>
       </div>
     );
   }

@@ -62,6 +62,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     actionBar: {
       border: string;
     };
+    popover: {
+      headerBackground: string;
+      contentBackground: string;
+      borderColor: string;
+      color: string;
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -120,6 +126,12 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     };
     actionBar: {
       border: string;
+    };
+    popover: {
+      headerBackground: string;
+      contentBackground: string;
+      borderColor: string;
+      color: string;
     };
   }
 }

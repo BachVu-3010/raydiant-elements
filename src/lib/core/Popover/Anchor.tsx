@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-const PopoverContainer: React.SFC<{}> = ({ children }) => (
+const Anchor: React.SFC<{}> = ({ children }) => (
   <span style={{ position: 'relative', display: 'inline-block' }}>
     {children}
   </span>
 );
 
-export default PopoverContainer;
+export default Anchor;
