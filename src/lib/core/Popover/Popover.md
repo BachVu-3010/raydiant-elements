@@ -1,11 +1,68 @@
 ```js
-initialState = {
-  bltl: false,
-  brtr: false,
-  tlbl: false,
-  trbr: false,
-};
+initialState = {};
 
+<App>
+  <Row>
+    <Popover.Anchor>
+      <Button label="Items" onClick={() => setState({ multiple: true })} />
+      <Popover
+        anchor={['top', 'left']}
+        to={['bottom', 'left']}
+        open={state.multiple}
+        onOverlayClick={() => setState({ multiple: false })}
+      >
+        <Popover.Header>Multiple Items</Popover.Header>
+        <Popover.Body>
+          <Popover.Item onClick={() => setState({ multiple: false })}>
+            Item 1
+          </Popover.Item>
+          <Popover.Item onClick={() => setState({ multiple: false })}>
+            Item 2
+          </Popover.Item>
+          <Popover.Item onClick={() => setState({ multiple: false })}>
+            Item 3
+          </Popover.Item>
+          <Popover.Item onClick={() => setState({ multiple: false })}>
+            Item 4
+          </Popover.Item>
+          <Popover.Item onClick={() => setState({ multiple: false })}>
+            Item 5
+          </Popover.Item>
+        </Popover.Body>
+      </Popover>
+    </Popover.Anchor>
+
+    <Popover.Anchor>
+      <Button
+        label="Single Item (auto-size)"
+        onClick={() => setState({ single: true })}
+      />
+      <Popover
+        anchor={['top', 'left']}
+        to={['bottom', 'left']}
+        open={state.single}
+        onOverlayClick={() => setState({ single: false })}
+        size="auto"
+      >
+        <Popover.Header>Single Item</Popover.Header>
+        <Popover.Item>
+          <Button label="Cancel" onClick={() => setState({ single: false })} />
+          <Spacer />
+          <Button
+            label="Done"
+            color="primary"
+            onClick={() => setState({ single: false })}
+          />
+        </Popover.Item>
+      </Popover>
+    </Popover.Anchor>
+  </Row>
+</App>;
+```
+
+### Positioning
+
+```jsx
 const Content = ({ label }) => (
   <div style={{ padding: '24px 16px', whiteSpace: 'nowrap' }}>{label}</div>
 );
@@ -19,6 +76,7 @@ const Content = ({ label }) => (
         to={['top', 'left']}
         open={state.bltl}
         onOverlayClick={() => setState({ bltl: false })}
+        size="auto"
       >
         <Content label="Anchor Bottom Left to Top Left" />
       </Popover>
@@ -30,6 +88,7 @@ const Content = ({ label }) => (
         to={['top', 'right']}
         open={state.brtr}
         onOverlayClick={() => setState({ brtr: false })}
+        size="auto"
       >
         <Content label="Anchor Bottom Right to Top Right" />
       </Popover>
@@ -41,6 +100,7 @@ const Content = ({ label }) => (
         to={['bottom', 'left']}
         open={state.tlbl}
         onOverlayClick={() => setState({ tlbl: false })}
+        size="auto"
       >
         <Content label="Anchor Top Left to Bottom Left" />
       </Popover>
@@ -52,125 +112,9 @@ const Content = ({ label }) => (
         to={['bottom', 'right']}
         open={state.trbr}
         onOverlayClick={() => setState({ trbr: false })}
+        size="auto"
       >
         <Content label="Anchor Top Right to Bottom Right" />
-      </Popover>
-    </Popover.Anchor>
-  </Row>
-
-  <Row>
-    <Popover.Anchor>
-      <Button label="Light" onClick={() => setState({ popover1: true })} />
-      <Popover
-        anchor={['bottom', 'left']}
-        to={['top', 'left']}
-        open={state.popover1}
-        onOverlayClick={() => setState({ popover1: false })}
-        color="light"
-      >
-        <Popover.Header>Light Popover</Popover.Header>
-        <Popover.Item>
-          <Button
-            label="Cancel"
-            color="destructive"
-            onClick={() => {
-              setState({ popover1: false });
-            }}
-          />
-          <Button label="Done" />
-        </Popover.Item>
-      </Popover>
-    </Popover.Anchor>
-
-    <Popover.Anchor>
-      <Button
-        label="Light w/items"
-        onClick={() => setState({ popover1a: true })}
-      />
-      <Popover
-        anchor={['bottom', 'left']}
-        to={['top', 'left']}
-        open={state.popover1a}
-        onOverlayClick={() => setState({ popover1a: false })}
-        color="light"
-      >
-        <Popover.Header>Light Popover</Popover.Header>
-        <Popover.Body>
-          <Popover.Item>Item 1</Popover.Item>
-          <Popover.Item>Item 2</Popover.Item>
-          <Popover.Item>Item 3</Popover.Item>
-          <Popover.Item>Item 4</Popover.Item>
-          <Popover.Item>Item 5</Popover.Item>
-        </Popover.Body>
-      </Popover>
-    </Popover.Anchor>
-
-    <Popover.Anchor>
-      <Button label="Grey" onClick={() => setState({ popover2: true })} />
-      <Popover
-        anchor={['bottom', 'left']}
-        to={['top', 'left']}
-        open={state.popover2}
-        onOverlayClick={() => setState({ popover2: false })}
-        color="grey"
-      >
-        <Popover.Header>Grey popover</Popover.Header>
-        <Popover.Item>
-          <Button
-            label="Cancel"
-            color="destructive"
-            onClick={() => {
-              setState({ popover2: false });
-            }}
-          />
-          <Button label="Done" />
-        </Popover.Item>
-      </Popover>
-    </Popover.Anchor>
-
-    <Popover.Anchor>
-      <Button
-        label="Grey w/items"
-        onClick={() => setState({ popover2a: true })}
-      />
-      <Popover
-        anchor={['bottom', 'left']}
-        to={['top', 'left']}
-        open={state.popover2a}
-        onOverlayClick={() => setState({ popover2a: false })}
-        color="grey"
-      >
-        <Popover.Header>Grey popover</Popover.Header>
-        <Popover.Body>
-          <Popover.Item>Item 1</Popover.Item>
-          <Popover.Item>Item 2</Popover.Item>
-          <Popover.Item>Item 3</Popover.Item>
-          <Popover.Item>Item 4</Popover.Item>
-          <Popover.Item>Item 5</Popover.Item>
-        </Popover.Body>
-      </Popover>
-    </Popover.Anchor>
-
-    <Popover.Anchor>
-      <Button label="Dark" onClick={() => setState({ popover3: true })} />
-      <Popover
-        anchor={['bottom', 'left']}
-        to={['top', 'left']}
-        open={state.popover3}
-        onOverlayClick={() => setState({ popover3: false })}
-        color="dark"
-      >
-        <Popover.Header>Dark popover</Popover.Header>
-        <Popover.Item>
-          <Button
-            label="Cancel"
-            color="destructive"
-            onClick={() => {
-              setState({ popover3: false });
-            }}
-          />
-          <Button label="Done" />
-        </Popover.Item>
       </Popover>
     </Popover.Anchor>
   </Row>

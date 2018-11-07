@@ -16,6 +16,7 @@ export interface PopoverProps extends WithStyles<typeof styles> {
   anchor: [YPosition, XPosition];
   /** The corner of the container to fix the anchor to */
   to: [YPosition, XPosition];
+  size?: 'auto';
   /** Called when the user clicks the overlay  */
   onOverlayClick: () => any;
   /** The popover contents */
@@ -27,6 +28,7 @@ export const Popover: React.SFC<PopoverProps> = ({
   open = false,
   anchor = ['top', 'left'],
   to = ['bottom', 'left'],
+  size,
   onOverlayClick,
   children,
 }) => {
@@ -47,6 +49,7 @@ export const Popover: React.SFC<PopoverProps> = ({
           [toY]: -2, // should have a 2px buffer
           [toX]: 0,
           transform: `translate(${translate[0]}%, ${translate[1]}%)`,
+          width: size,
         }}
       >
         {children}
