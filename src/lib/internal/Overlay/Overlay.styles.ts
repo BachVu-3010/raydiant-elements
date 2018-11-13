@@ -5,7 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     overlay: {
       position: 'fixed',
-      zIndex: theme.zIndex.modal,
+      zIndex: theme.zIndex.mobileStepper,
       top: 0,
       left: 0,
       width: '100%',

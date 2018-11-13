@@ -8,16 +8,16 @@ const styles = (theme: Theme) =>
       borderRadius: 100,
     },
     default: {
-      fill: theme.button.foreground,
+      color: theme.button.foreground,
       backgroundColor: theme.button.background,
       border: `2px solid ${theme.button.foreground}`,
     },
     error: {
-      fill: theme.palette.warning.contrastText,
+      color: theme.palette.error.contrastText,
       backgroundColor: theme.palette.error.main,
     },
     warning: {
-      fill: theme.palette.warning.contrastText,
+      color: theme.palette.warning.contrastText,
       backgroundColor: theme.palette.warning.main,
     },
   });

@@ -8,6 +8,9 @@ const styles = (theme: Theme) =>
       background: theme.popover.headerBackground,
       padding: theme.spacing.unit * 2,
       borderBottom: `1px solid ${theme.popover.borderColor}`,
+      minHeight: 56,
+      display: 'flex',
+      alignItems: 'center',
     },
   });
 

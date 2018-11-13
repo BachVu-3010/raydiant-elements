@@ -50,4 +50,10 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   </span>
 );
 
+Checkbox.defaultProps = {
+  onChange: () => {
+    return;
+  },
+};
+
 export default withStyles(styles)(Checkbox);

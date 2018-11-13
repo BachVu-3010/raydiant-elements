@@ -18,7 +18,7 @@ interface ButtonProps extends WithStyles<typeof styles> {
   /** The type of button, defaults to button. */
   type?: 'submit' | 'button';
   /** Called when the button is clicked */
-  onClick?: () => any;
+  onClick?: (event: React.MouseEvent<any>) => any;
   /** Overrides icon and label */
   children?: React.ReactNode;
   /** The test id of the button */

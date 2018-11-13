@@ -5,11 +5,11 @@ import styles from './Link.styles';
 
 interface LinkProps extends WithStyles<typeof styles> {
   /** The href of the link */
-  href: string;
+  href?: string;
   /** The target of the link */
   target?: string;
   /** Called when the link is clicked. */
-  onClick?: () => any;
+  onClick?: (e: React.MouseEvent<any>) => any;
   /** The test id of the link */
   testId?: string;
 }

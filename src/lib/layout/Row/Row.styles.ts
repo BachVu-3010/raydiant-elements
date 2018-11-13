@@ -5,7 +5,6 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      flexDirection: 'row',
       width: '100%',
 
       '& > *': {
