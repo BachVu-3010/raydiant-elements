@@ -5,7 +5,7 @@ import Popover from '../../core/Popover';
 import TextField from '../../core/TextField';
 import { pluralize } from '../../helpers';
 import Row from '../../layout/Row';
-import * as T from './types';
+import * as T from '../DeviceTypes';
 
 export interface AddToGroupPopoverProps {
   selectedDeviceIds: string[];

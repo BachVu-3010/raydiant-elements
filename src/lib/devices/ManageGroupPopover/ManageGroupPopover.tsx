@@ -3,7 +3,7 @@ import Button from '../../core/Button';
 import Popover from '../../core/Popover';
 import { pluralize } from '../../helpers';
 import Spacer from '../../layout/Spacer';
-import * as T from './types';
+import * as T from '../DeviceTypes';
 
 export interface ManageGroupPopoverProps {
   onOverlayClick: () => void;

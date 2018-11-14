@@ -10,8 +10,8 @@ const getLayoutPath = component =>
 const getApplicationPath = component =>
   path.join(__dirname, `src/lib/app/${component}/${component}.tsx`);
 
-const getDeviceListPath = component =>
-  path.join(__dirname, `src/lib/devices/DeviceList/${component}.tsx`);
+const getDevicePath = component =>
+  path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
 
 module.exports = {
   title: 'Mira Elements',
@@ -46,7 +46,6 @@ module.exports = {
         getCorePath('TextField'),
         getCorePath('Title'),
         getCorePath('ThemeSelector'),
-        getCorePath('ConnectivityWizard'),
       ],
     },
     {
@@ -72,9 +71,9 @@ module.exports = {
     {
       name: 'Devices',
       components: () => [
-        getDeviceListPath('DeviceList'),
-        getDeviceListPath('AddToGroupPopover'),
-        getDeviceListPath('ManageGroupPopover'),
+        getDevicePath('DeviceList'),
+        getDevicePath('AddToGroupPopover'),
+        getDevicePath('ManageGroupPopover'),
       ],
     },
   ],

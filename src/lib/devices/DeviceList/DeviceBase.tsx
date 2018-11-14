@@ -4,10 +4,10 @@ import withStyles, { WithStyles } from '../../core/withStyles';
 import Hidden from '../../layout/Hidden';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
+import * as T from '../DeviceTypes';
 import styles from './DeviceBase.styles';
 import DeviceStatus from './DeviceStatus';
 import Thumbnail from './Thumbnail';
-import * as T from './types';
 
 export interface DeviceBaseProps {
   device: T.Device;

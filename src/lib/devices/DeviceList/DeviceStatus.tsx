@@ -1,9 +1,10 @@
 import * as React from 'react';
 import AlertIcon from '../../core/AlertIcon';
-import ConnectivityWizard from '../../core/ConnectivityWizard';
+import Link from '../../core/Link';
 import SuccessIcon from '../../core/SuccessIcon';
 import Text from '../../core/Text';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import { stopPropagation } from '../../helpers';
 import { Theme } from '../../theme';
 
 enum Errors {
@@ -53,9 +54,7 @@ export const DeviceStatus: React.SFC<DeviceStatusProps> = props => {
           </div>
           <div>
             <Text muted>{getError(isOnline, hasFileError)}</Text>{' '}
-            <ConnectivityWizard
-              onConnectivityWizardClick={onConnectivityWizardClick}
-            />
+            <Link onClick={stopPropagation(onConnectivityWizardClick)} />
           </div>
         </>
       ) : (
