@@ -73,6 +73,7 @@ module.exports = {
       components: () => [
         getDevicePath('DeviceList'),
         getDevicePath('AddToGroupPopover'),
+        getDevicePath('AffectedScreensPopover'),
         getDevicePath('ManageGroupPopover'),
       ],
     },
