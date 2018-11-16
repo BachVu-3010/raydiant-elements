@@ -6,8 +6,8 @@ const getCorePath = component =>
 const getLayoutPath = component =>
   path.join(__dirname, `src/lib/layout/${component}/${component}.tsx`);
 
-const getApplicationPath = component =>
-  path.join(__dirname, `src/lib/app/${component}/${component}.tsx`);
+const getLoginPath = component =>
+  path.join(__dirname, `src/lib/login/${component}/${component}.tsx`);
 
 const getDevicePath = component =>
   path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
@@ -25,7 +25,9 @@ module.exports = {
     {
       name: 'Core',
       components: () => [
+        getCorePath('ActionBar'),
         getCorePath('AlertIcon'),
+        getCorePath('App'),
         getCorePath('Breadcrumb'),
         getCorePath('Button'),
         getCorePath('Checkbox'),
@@ -35,8 +37,10 @@ module.exports = {
         getCorePath('FileField'),
         getCorePath('Heading1'),
         getCorePath('Icon'),
+        getCorePath('Logo'),
         getCorePath('Link'),
         getCorePath('ListField'),
+        getCorePath('Menu'),
         getCorePath('Modal'),
         getCorePath('NumberField'),
         getCorePath('Popover'),
@@ -61,14 +65,8 @@ module.exports = {
       ],
     },
     {
-      name: 'Application',
-      components: () => [
-        getApplicationPath('ActionBar'),
-        getApplicationPath('App'),
-        getApplicationPath('LoginScreen'),
-        getApplicationPath('Logo'),
-        getApplicationPath('Menu'),
-      ],
+      name: 'Login',
+      components: () => [getLoginPath('LoginScreen')],
     },
     {
       name: 'Devices',

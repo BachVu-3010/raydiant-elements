@@ -1,6 +1,6 @@
 import * as immutable from 'object-path-immutable';
 import * as React from 'react';
-import ActionBar from '../../app/ActionBar';
+import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
 import Link from '../../core/Link';
 import NumberField from '../../core/NumberField';
