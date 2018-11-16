@@ -12,5 +12,6 @@ initialState = {
     label="Label"
   />
   <Switch disabled label="Label" />
+  <Switch disabled label="Label" helperText="Some helper text" />
 </Row>;
 ```

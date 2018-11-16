@@ -1,5 +1,4 @@
 const path = require('path');
-const glob = require('glob');
 
 const getCorePath = component =>
   path.join(__dirname, `src/lib/core/${component}/${component}.tsx`);
@@ -12,6 +11,9 @@ const getApplicationPath = component =>
 
 const getDevicePath = component =>
   path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
+
+const getPresentationPath = component =>
+  path.join(__dirname, `src/lib/presentation/${component}/${component}.tsx`);
 
 module.exports = {
   title: 'Mira Elements',
@@ -75,6 +77,13 @@ module.exports = {
         getDevicePath('AddToGroupPopover'),
         getDevicePath('AffectedScreensPopover'),
         getDevicePath('ManageGroupPopover'),
+      ],
+    },
+    {
+      name: 'Presentation',
+      components: () => [
+        getPresentationPath('PresentationBuilder'),
+        getPresentationPath('PresentationPreview'),
       ],
     },
   ],

@@ -3,7 +3,8 @@ import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    root: {},
+    control: {
       display: 'inline-flex',
       alignItems: 'center',
     },

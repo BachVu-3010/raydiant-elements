@@ -12,6 +12,7 @@ const styles = (theme: Theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
+      flexShrink: 0,
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
       borderTop: '1px solid transparent',

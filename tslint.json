@@ -14,6 +14,7 @@
     "member-access": false,
     "curly": [true, "ignore-same-line"],
     "jsx-boolean-value": false,
-    "prefer-object-spread": false
+    "prefer-object-spread": false,
+    "no-empty-interface": false
   }
 }

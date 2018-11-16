@@ -4,9 +4,7 @@ import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
-      marginBottom: theme.spacing.unit * 2,
-    },
+    root: {},
     item: {
       display: 'flex',
       flexDirection: 'row',

@@ -6,15 +6,28 @@ const styles = (theme: Theme) =>
     root: {
       position: 'fixed',
       zIndex: theme.zIndex.modal,
-      top: '50%',
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    modal: {
+      position: 'relative',
+      zIndex: theme.zIndex.modal + 10,
+      display: 'flex',
+      width: '100%',
+      height: '100%',
+      maxWidth: 960,
+      maxHeight: 672,
       fontFamily: theme.typography.fontFamily,
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
       borderRadius: theme.shape.borderRadius,
       boxShadow: theme.modal.shadow,
-      margin: theme.spacing.unit * 3,
     },
   });
 

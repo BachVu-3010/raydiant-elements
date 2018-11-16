@@ -15,11 +15,11 @@ interface ListFieldProps<T> extends WithStyles<typeof styles> {
   /** The value of the list field */
   value: T[];
   /** Function to render the item label, useful when list is an array of objects */
-  getItemLabel: (item: T, index: number) => string;
+  getItemLabel?: (item: T, index: number) => string;
   /** Function to get the key of each item, defaults to using the index */
-  getItemKey: (item: T, index: number) => string;
+  getItemKey?: (item: T, index: number) => string;
   /** Function to get an error for an item */
-  hasItemError: (item: T, index: number) => boolean;
+  hasItemError?: (item: T, index: number) => boolean;
   /** Called with the new value when items have been reordered */
   onChange: (value: T[]) => any;
   /** Called when an item is clicked */
@@ -27,13 +27,14 @@ interface ListFieldProps<T> extends WithStyles<typeof styles> {
   /** Called when the user clicks the add button */
   onAdd: () => any;
   /** Add button label */
-  addLabel: string;
+  addLabel?: string;
   /** Set to true to disable the add button. */
-  addDisabled: boolean;
+  addDisabled?: boolean;
 }
 
 export class ListField<T = any> extends React.Component<ListFieldProps<T>, {}> {
   static defaultProps = {
+    value: [] as any[],
     getItemLabel: (item: any) => item,
     getItemKey: (_: any, index: number) => `${index}`,
     hasItemError: () => false,
@@ -52,7 +53,7 @@ export class ListField<T = any> extends React.Component<ListFieldProps<T>, {}> {
     onChange(reordered);
   };
 
-  renderItem(item: T, index: number) {
+  renderItem = (item: T, index: number) => {
     const {
       classes,
       onItemClick,
@@ -88,7 +89,7 @@ export class ListField<T = any> extends React.Component<ListFieldProps<T>, {}> {
         )}
       </Draggable>
     );
-  }
+  };
 
   render() {
     const { value, addLabel, onAdd, addDisabled, classes } = this.props;
@@ -99,9 +100,7 @@ export class ListField<T = any> extends React.Component<ListFieldProps<T>, {}> {
           <Droppable droppableId="droppable">
             {({ innerRef, placeholder }) => (
               <div>
-                <div ref={innerRef}>
-                  {value.map((item, index) => this.renderItem(item, index))}
-                </div>
+                <div ref={innerRef}>{value.map(this.renderItem)}</div>
                 {placeholder}
               </div>
             )}

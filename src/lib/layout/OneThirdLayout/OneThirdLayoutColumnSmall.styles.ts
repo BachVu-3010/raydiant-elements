@@ -6,14 +6,14 @@ const styles = (theme: Theme) =>
     root: {
       display: 'flex',
       flexDirection: 'column',
-      width: '33.333%',
-      maxWidth: 425,
+      width: '100%',
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
 
-      [theme.breakpoints.down('xs')]: {
-        width: '100%',
-        maxWidth: 'none',
+      [theme.breakpoints.up('sm')]: {
+        width: '33.333%',
+        minWidth: 324,
+        maxWidth: 425,
       },
     },
   });

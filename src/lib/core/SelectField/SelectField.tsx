@@ -18,17 +18,22 @@ interface SelectFieldProps {
   helperText?: React.ReactNode;
   /** Called when the value changes */
   onChange?: (value: string) => any;
+  /** Called when the input loses focus */
+  onBlur?: React.FocusEventHandler<any>;
   /** The <option>s of the select */
   children: React.ReactNode;
 }
 
-const SelectField: React.SFC<SelectFieldProps> = ({
+export const SelectField: React.SFC<SelectFieldProps> = ({
   label,
   value = '',
   error = false,
   disabled = false,
   helperText = '',
   onChange = () => {
+    return;
+  },
+  onBlur = () => {
     return;
   },
   children,
@@ -43,6 +48,7 @@ const SelectField: React.SFC<SelectFieldProps> = ({
         value={value}
         disabled={disabled}
         onChange={e => onChange(e.target.value)}
+        onBlur={onBlur}
       >
         {children}
       </Select>

@@ -15,6 +15,8 @@ interface ButtonProps extends WithStyles<typeof styles> {
   color?: 'default' | 'primary' | 'progress' | 'destructive';
   /** Set to true to disable the button */
   disabled?: boolean;
+  /** Set to true to make the button expand to it's container */
+  fullWidth?: boolean;
   /** The type of button, defaults to button. */
   type?: 'submit' | 'button';
   /** Called when the button is clicked */
@@ -31,6 +33,7 @@ export const Button: React.SFC<ButtonProps> = ({
   color = 'default',
   disabled = false,
   type = 'button',
+  fullWidth = false,
   children,
   onClick = () => {
     return;
@@ -42,6 +45,7 @@ export const Button: React.SFC<ButtonProps> = ({
     variant={color === 'default' ? 'flat' : 'raised'}
     disabled={disabled}
     type={type}
+    fullWidth={fullWidth}
     onClick={onClick}
     classes={{
       root: cn(

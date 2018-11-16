@@ -7,7 +7,10 @@ const styles = (theme: Theme) =>
     root: {
       ...tabContainer(),
       width: '100%',
-      boxShadow: theme.tab.border ? `inset 0 -1px 0 0 ${theme.tab.border}` : '',
+      border: theme.tab.border ? `1px solid ${theme.tab.border}` : null,
+    },
+    inline: {
+      width: 'auto',
     },
   });
 

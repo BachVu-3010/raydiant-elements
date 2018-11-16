@@ -1,18 +1,24 @@
-import { buttonReset } from '../../mixins';
+import { Theme } from '../../theme';
 import { createStyles } from '../withStyles';
 
-const styles = createStyles({
-  root: {
-    ...buttonReset(),
-    height: '100%',
-    fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-  },
-  noShrink: {
-    flexShrink: 0,
-  },
-});
+const styles = (theme: Theme) =>
+  createStyles({
+    root: {
+      height: 20,
+      display: 'flex',
+      alignItems: 'center',
+      marginBottom: theme.spacing.unit / 2,
+    },
+    backIcon: {
+      height: '100%',
+      width: 16,
+      marginLeft: -2, // Compensate for padding in SVG.
+      marginRight: theme.spacing.unit / 2,
+    },
+    separator: {
+      marginLeft: theme.spacing.unit / 2,
+      marginRight: theme.spacing.unit / 2,
+    },
+  });
 
 export default styles;

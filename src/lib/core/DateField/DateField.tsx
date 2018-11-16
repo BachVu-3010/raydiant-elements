@@ -24,6 +24,8 @@ interface DateFieldProps {
   dateFormat: string;
   /** Function that's called when the value changes to a valid date */
   onChange?: (value: string) => any;
+  /** Called when the input loses focus */
+  onBlur?: React.FocusEventHandler<any>;
 }
 
 interface DateFieldState {
@@ -74,6 +76,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
       minDate,
       maxDate,
       dateFormat,
+      onBlur,
     } = this.props;
 
     const { date } = this.state;
@@ -84,6 +87,7 @@ class DateField extends React.Component<DateFieldProps, DateFieldState> {
         selected={date}
         onChange={this.handleChange}
         onChangeRaw={this.handleRawChange}
+        onBlur={onBlur}
         minDate={minDate ? moment(minDate) : undefined}
         maxDate={maxDate ? moment(maxDate) : undefined}
         dateFormat={dateFormat}

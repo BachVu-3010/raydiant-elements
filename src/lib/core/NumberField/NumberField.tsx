@@ -22,9 +22,11 @@ interface NumberFieldProps {
   helperText?: React.ReactNode;
   /** Called when the value changes */
   onChange?: (value: number) => any;
+  /** Called when the input loses focus */
+  onBlur?: React.FocusEventHandler<any>;
 }
 
-const NumberField: React.SFC<NumberFieldProps> = ({
+export const NumberField: React.SFC<NumberFieldProps> = ({
   label,
   value = null,
   min = null,
@@ -33,6 +35,9 @@ const NumberField: React.SFC<NumberFieldProps> = ({
   disabled = false,
   helperText = '',
   onChange = () => {
+    return;
+  },
+  onBlur = () => {
     return;
   },
 }) => (
@@ -47,6 +52,7 @@ const NumberField: React.SFC<NumberFieldProps> = ({
         type="number"
         disabled={disabled}
         onChange={e => onChange(parseInt(e.target.value, 10))}
+        onBlur={onBlur}
         inputProps={{
           min: min !== null ? String(min) : '',
           max: max !== null ? String(max) : '',

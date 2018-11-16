@@ -23,6 +23,8 @@ interface FileFieldProps extends WithStyles<typeof styles> {
   onChange?: (value: FileList) => any;
   /** Called when the user clears the file. If provided, an 'x' will be displayed. */
   onClear?: () => any;
+  /** Called when the input loses focus */
+  onBlur?: React.FocusEventHandler<any>;
 }
 
 const getFileNames = (value: FileList) => {
@@ -42,6 +44,7 @@ export const FileField: React.SFC<FileFieldProps> = ({
     return;
   },
   onClear,
+  onBlur,
   classes,
 }) => {
   const shouldShowClear = !!value && !!onClear;
@@ -69,6 +72,7 @@ export const FileField: React.SFC<FileFieldProps> = ({
         accept={accept.join(',')}
         multiple={multiple}
         onChange={e => onChange(e.target.files)}
+        onBlur={onBlur}
       />
     </div>
   );

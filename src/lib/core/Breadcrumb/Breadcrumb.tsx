@@ -1,33 +1,44 @@
-import cn from 'classnames';
 import * as React from 'react';
+import Icon from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Breadcrumb.styles';
-import BreadcrumbContainer from './BreadcrumbContainer';
+import BreadcrumbCrumb from './BreadcrumbCrumb';
 
 export interface BreadcrumbProps extends WithStyles<typeof styles> {
-  /** Text of the breadcrumb */
-  label?: React.ReactNode;
-  /** Set to true to prevent the component from shrinking  */
-  noShrink?: boolean;
-  /** Called when the user clicks the breadcrumb */
-  onClick: () => any;
+  /** Called when the user clicks the back button */
+  onBack: () => any;
 }
 
 export const Breadcrumb: React.SFC<BreadcrumbProps> = ({
-  label,
-  noShrink = false,
-  onClick,
-  classes,
+  onBack,
   children,
-}) => (
-  <button
-    className={cn(classes.root, noShrink && classes.noShrink)}
-    onClick={onClick}
-  >
-    {label || children}
-  </button>
-);
+  classes,
+}) => {
+  const numberOfChildren = React.Children.count(children);
+  if (numberOfChildren <= 1) {
+    return <div className={classes.root}>{children}</div>;
+  }
+
+  const crumbs: React.ReactChild[] = [
+    <BreadcrumbCrumb key="back" onClick={onBack} noShrink>
+      <Icon icon="arrowLeft" className={classes.backIcon} />
+    </BreadcrumbCrumb>,
+  ];
+
+  React.Children.forEach(children, (child, index) => {
+    crumbs.push(child);
+    if (index !== numberOfChildren - 1) {
+      crumbs.push(
+        <span key={`sep-${index}`} className={classes.separator}>
+          /
+        </span>,
+      );
+    }
+  });
+
+  return <div className={classes.root}>{crumbs}</div>;
+};
 
 export default Object.assign(withStyles(styles)(Breadcrumb), {
-  Container: BreadcrumbContainer,
+  Crumb: BreadcrumbCrumb,
 });

@@ -21,6 +21,8 @@ interface TextFieldProps {
   disabled?: boolean;
   /** Set the max width */
   maxWidth?: number;
+  /** Set the max character length of the input */
+  maxLength?: number;
   /** Set to true to display as a textarea */
   multiline?: boolean;
   /** Optional helper text */
@@ -42,17 +44,20 @@ interface TextFieldProps {
   ) => false | string | { value: string; indexesOfPipedChars: number[] };
   /** Called when the value changes */
   onChange?: (value: string) => any;
+  /** Called when the input loses focus */
+  onBlur?: React.FocusEventHandler<any>;
   /** The test id of the input */
   testId?: string;
 }
 
-const TextField: React.SFC<TextFieldProps> = ({
+export const TextField: React.SFC<TextFieldProps> = ({
   label,
   value = '',
   type = 'text',
   error = false,
   disabled = false,
   maxWidth,
+  maxLength,
   multiline = false,
   helperText = '',
   icon = null,
@@ -64,6 +69,9 @@ const TextField: React.SFC<TextFieldProps> = ({
   onChange = () => {
     return;
   },
+  onBlur = () => {
+    return;
+  },
   testId,
 }) => {
   const commonProps = {
@@ -73,7 +81,14 @@ const TextField: React.SFC<TextFieldProps> = ({
     disabled,
     value,
     icon: typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon,
+    onBlur,
   };
+
+  const commonInputProps = {
+    maxLength: String(maxLength),
+    ...testAttr(testId),
+  };
+
   return (
     <FormControl fullWidth error={error} style={{ maxWidth }}>
       <InputBackground>
@@ -93,7 +108,7 @@ const TextField: React.SFC<TextFieldProps> = ({
               <Input
                 {...commonProps}
                 inputRef={ref as any}
-                inputProps={{ ...inputProps, ...testAttr(testId) }}
+                inputProps={{ ...inputProps, ...commonInputProps }}
               />
             )}
           />
@@ -101,7 +116,7 @@ const TextField: React.SFC<TextFieldProps> = ({
           <Input
             {...commonProps}
             onChange={e => onChange(e.target.value)}
-            inputProps={testAttr(testId)}
+            inputProps={commonInputProps}
           />
         )}
       </InputBackground>
