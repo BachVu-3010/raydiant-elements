@@ -5,6 +5,9 @@ const defaultProps = () => ({
     id: 'a',
     appVersionId: 'b',
     name: 'name',
+    applicationThumbnailUrl: '',
+    iconUrl: '',
+    hasDynamicThumbnails: false,
     duration: 10,
     applicationVariables: {
       boolean: true,

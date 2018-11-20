@@ -82,6 +82,7 @@ module.exports = {
       components: () => [
         getPresentationPath('PresentationBuilder'),
         getPresentationPath('PresentationPreview'),
+        getPresentationPath('PresentationThumbnail'),
       ],
     },
   ],

@@ -26,3 +26,9 @@ declare module 'object-path-immutable' {
     updater?: (formerValue: any) => any,
   ): WrappedObject<T>;
 }
+
+declare module 'is-touch-device' {
+  type IsTouchDevice = () => boolean;
+  const isTouchDeviceExport: IsTouchDevice;
+  export = isTouchDeviceExport;
+}

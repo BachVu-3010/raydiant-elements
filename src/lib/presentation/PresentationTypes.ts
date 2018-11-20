@@ -63,6 +63,10 @@ export interface Presentation {
   themeId?: string;
   applicationVariables: ApplicationVariables;
   duration?: number; // For legacy apps with configurable_duration = true
+  hasDynamicThumbnails: boolean;
+  thumbnailUrl?: string;
+  iconUrl: string;
+  applicationThumbnailUrl: string;
 }
 
 export interface AppVersion {

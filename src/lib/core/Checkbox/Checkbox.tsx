@@ -10,6 +10,7 @@ interface CheckboxProps extends WithStyles<typeof styles> {
   round?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
+  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 export const Checkbox: React.SFC<CheckboxProps> = ({
@@ -17,6 +18,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   round,
   disabled,
   onChange,
+  onClick,
   classes,
 }) => (
   <span className={classes.root}>
@@ -24,6 +26,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
       checked={checked}
       disabled={disabled}
       onChange={e => onChange(e.target.checked)}
+      onClick={onClick}
       color="primary"
       icon={
         <div
