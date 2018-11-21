@@ -6,7 +6,7 @@ const styles = (theme: Theme) =>
     root: {
       // We need to use padding (instead of margin) so that our grid
       // calculations include the gutter size.
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing.unit,
     },
   });
 

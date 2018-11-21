@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       alignItems: 'center',
-      margin: -theme.spacing.unit * 2,
+      margin: -theme.spacing.unit,
     },
 
     center: {

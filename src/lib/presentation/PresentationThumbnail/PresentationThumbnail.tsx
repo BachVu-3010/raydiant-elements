@@ -11,31 +11,33 @@ import { stopPropagation } from '../../helpers';
 import * as T from '../PresentationTypes';
 import styles from './PresentationThumbnail.styles';
 
-interface PresentationThumbnailProps extends WithStyles<typeof styles> {
+export interface PresentationThumbnailProps {
   presentation: T.Presentation;
   selected?: boolean;
   onEdit?: () => any;
   onSelect?: (selected: boolean) => any;
   onClick?: () => any;
   showControls?: boolean;
-  showControlsOnHover?: boolean;
   hasError?: boolean;
   errorMessage?: string;
   isLoading?: boolean;
 }
+
+interface PresentationThumbnailPropsWithStyles
+  extends WithStyles<typeof styles>,
+    PresentationThumbnailProps {}
 
 interface PresentationThumbnailState {
   isHover: boolean;
 }
 
 export class PresentationThumbnail extends React.Component<
-  PresentationThumbnailProps,
+  PresentationThumbnailPropsWithStyles,
   PresentationThumbnailState
 > {
   static defaultProps = {
     selected: false,
     showControls: false,
-    showControlsOnHover: true,
     hasError: false,
     errorMessage: '',
     isLoading: false,
@@ -59,7 +61,6 @@ export class PresentationThumbnail extends React.Component<
       presentation,
       selected,
       showControls,
-      showControlsOnHover,
       hasError,
       errorMessage,
       isLoading,
@@ -73,7 +74,7 @@ export class PresentationThumbnail extends React.Component<
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
-    const shouldShowControls = showControls || (showControlsOnHover && isHover);
+    const shouldShowControls = showControls || isHover;
     const shouldShowEdit =
       onEdit && shouldShowControls && !hasError && !isLoading;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;

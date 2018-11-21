@@ -18,6 +18,7 @@ const styles = (theme: Theme) =>
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
+      backgroundClip: 'padding-box',
     },
 
     icon: {
@@ -26,7 +27,6 @@ const styles = (theme: Theme) =>
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',
-      flexShrink: 0,
     },
 
     overlay: {
@@ -67,6 +67,7 @@ const styles = (theme: Theme) =>
 
       [theme.breakpoints.up('sm')]: {
         '& > svg': {
+          flexShrink: 0,
           marginRight: theme.spacing.unit / 2,
         },
       },
@@ -74,6 +75,7 @@ const styles = (theme: Theme) =>
 
     errorMessage: {
       display: 'none',
+      fontSize: theme.fontSizes.sm,
 
       [theme.breakpoints.up('sm')]: {
         display: 'block',
