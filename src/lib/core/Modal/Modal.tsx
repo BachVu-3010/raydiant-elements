@@ -1,7 +1,9 @@
 import * as React from 'react';
 import Overlay from '../../internal/Overlay';
 import withStyles, { WithStyles } from '../withStyles';
+import withThemeSelector from '../withThemeSelector';
 import styles from './Modal.styles';
+import ModalPortal from './ModalPortal';
 
 interface ModalProps extends WithStyles<typeof styles> {
   /** Opens the modal when true */
@@ -24,15 +26,17 @@ export class Modal extends React.Component<ModalProps, {}> {
   render() {
     const { open, onOverlayClick, children, classes } = this.props;
 
-    if (!open) return null;
-
     return (
-      <div className={classes.root}>
-        <Overlay onClick={onOverlayClick} />
-        <div className={classes.modal}>{children}</div>
-      </div>
+      <ModalPortal>
+        {open && (
+          <div className={classes.root}>
+            <Overlay onClick={onOverlayClick} />
+            <div className={classes.modal}>{children}</div>
+          </div>
+        )}
+      </ModalPortal>
     );
   }
 }
 
-export default withStyles(styles)(Modal);
+export default withThemeSelector(withStyles(styles)(Modal));
