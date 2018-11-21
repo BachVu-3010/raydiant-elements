@@ -7,6 +7,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     // Custom theme properties.
     fontSizes: {
+      xs: string;
       sm: string;
       md: string;
       lg: string;
@@ -72,6 +73,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   interface ThemeOptions {
     // Custom theme options.
     fontSizes: {
+      xs: string;
       sm: string;
       md: string;
       lg: string;

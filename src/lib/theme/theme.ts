@@ -5,6 +5,7 @@ const common = {
     fontSize: 14,
   },
   fontSizes: {
+    xs: '0.786rem', // 11 px
     sm: '0.857rem', // 12 px
     md: '1rem',
     lg: '1.143rem', // 16px
