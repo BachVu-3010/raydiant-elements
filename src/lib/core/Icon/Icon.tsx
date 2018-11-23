@@ -13,6 +13,7 @@ export type IconOptions =
   | 'dragVertical'
   | 'edit'
   | 'endDate'
+  | 'facebook'
   | 'group'
   | 'horizontalScreen'
   | 'lock'

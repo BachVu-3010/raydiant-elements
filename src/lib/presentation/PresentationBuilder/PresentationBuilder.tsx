@@ -15,7 +15,9 @@ import * as T from '../PresentationTypes';
 import ArrayInput from './ArrayInput';
 import BooleanInput from './BooleanInput';
 import DateInput from './DateInput';
+import FacebookAuthInput from './FacebookAuthInput';
 import FileInput from './FileInput';
+import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
@@ -296,6 +298,42 @@ export class PresentationBuilder extends React.Component<
       case 'oAuth':
         return (
           <OAuthInput
+            key={key}
+            path={path}
+            label={label}
+            value={value}
+            authUrl={property.auth_url}
+            verifyUrl={property.verify_url}
+            verifyQsParam={property.verify_qs_param}
+            helperText={helperText}
+            error={hasError}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
+          />
+        );
+
+      case 'facebookAuth':
+        return (
+          <FacebookAuthInput
+            key={key}
+            path={path}
+            label={label}
+            value={value}
+            authUrl={property.auth_url}
+            verifyUrl={property.verify_url}
+            verifyQsParam={property.verify_qs_param}
+            helperText={helperText}
+            error={hasError}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
+          />
+        );
+
+      case 'googleAuth':
+        return (
+          <GoogleAuthInput
             key={key}
             path={path}
             label={label}

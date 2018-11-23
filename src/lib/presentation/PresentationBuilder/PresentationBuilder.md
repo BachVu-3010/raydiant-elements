@@ -5,6 +5,8 @@ const presentation = {
   name: 'New Presentation',
   themeId: 'c',
   applicationVariables: {
+    facebookAuth: undefined,
+    googleAuth: undefined,
     oAuth: undefined,
     string: 'string',
     text: 'text',
@@ -25,11 +27,32 @@ const appVersion = {
   name: 'My Mira App',
   presentationProperties: [
     {
+      name: 'facebookAuth',
+      type: 'facebookAuth',
+      optional: true,
+      auth_url:
+        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/auth',
+      verify_url:
+        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/verify',
+      verify_qs_param: 'access_token',
+      logout_url:
+        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/logout',
+      logout_qs_param: 'access_token',
+    },
+    {
+      name: 'googleAuth',
+      type: 'googleAuth',
+      optional: true,
+      auth_url:
+        'https://rfx4m8d3g5.execute-api.us-east-1.amazonaws.com/dev/auth',
+      verify_url:
+        'https://rfx4m8d3g5.execute-api.us-east-1.amazonaws.com/dev/verify',
+      verify_qs_param: 'access_token',
+    },
+    {
       name: 'oAuth',
       type: 'oAuth',
       optional: true,
-      helper_text: 'Connect your account',
-      helper_link: 'http://google.com',
       auth_url:
         'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/auth',
       verify_url:
@@ -131,7 +154,7 @@ const appVersion = {
   ],
   strings: {
     description: 'Create your first Mira app.',
-    oAuth: 'Connect to Instagram',
+    oAuth: 'Connect to Provider',
     string: 'String',
     link: 'Link',
     text: 'Text',
