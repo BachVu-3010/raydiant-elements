@@ -9,6 +9,7 @@ import * as T from '../DeviceTypes';
 interface AffectedScreensPopoverProps extends WithStyles<typeof styles> {
   devices: T.Device[];
   open: boolean;
+  isDeleting?: boolean;
   onClose: () => void;
 }
 
@@ -16,6 +17,9 @@ const styles = (theme: Theme) =>
   createStyles({
     warning: {
       display: 'flex',
+      fontSize: theme.fontSizes.sm,
+      marginRight: theme.spacing.unit,
+      lineHeight: 1.5,
     },
     icon: {
       marginRight: theme.spacing.unit,
@@ -25,31 +29,41 @@ const styles = (theme: Theme) =>
 export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
   devices = [],
   open,
+  isDeleting,
   onClose,
   classes,
-}) => (
-  <Popover
-    anchor={['bottom', 'left']}
-    to={['top', 'left']}
-    open={open}
-    onOverlayClick={onClose}
-    color="grey"
-  >
-    <Popover.Header>
-      <div className={classes.warning}>
-        <span className={classes.icon}>
-          <AlertIcon color="warning" />
-        </span>
-        Saving these changes will overwrite content on these screens:
-      </div>
-      <Button label="Got it" onClick={onClose} />
-    </Popover.Header>
-    <Popover.Body>
-      {devices.map(device => (
-        <Popover.Item key={device.id}>{device.name}</Popover.Item>
-      ))}
-    </Popover.Body>
-  </Popover>
-);
+}) => {
+  const screensText = devices.length === 1 ? 'this screen' : 'these screens';
+  return (
+    <Popover
+      anchor={isDeleting ? ['top', 'right'] : ['bottom', 'left']}
+      to={isDeleting ? ['bottom', 'right'] : ['top', 'left']}
+      open={open}
+      onOverlayClick={onClose}
+      color="grey"
+    >
+      <Popover.Header>
+        <div className={classes.warning}>
+          <span className={classes.icon}>
+            <AlertIcon color="warning" />
+          </span>
+          {isDeleting
+            ? `Deleting this content will permanently remove content from ${screensText}:`
+            : `Saving these changes will overwrite content on ${screensText}:`}
+        </div>
+        {isDeleting ? (
+          <Button label="Delete Anyway" color="destructive" onClick={onClose} />
+        ) : (
+          <Button label="Got it" onClick={onClose} />
+        )}
+      </Popover.Header>
+      <Popover.Body>
+        {devices.map(device => (
+          <Popover.Item key={device.id}>{device.name}</Popover.Item>
+        ))}
+      </Popover.Body>
+    </Popover>
+  );
+};
 
 export default withStyles(styles)(AffectedScreensPopover);

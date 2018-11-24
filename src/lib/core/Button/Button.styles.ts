@@ -12,6 +12,7 @@ const styles = (theme: Theme) =>
       paddingRight: theme.spacing.unit * 2 - 1,
       borderRadius: theme.shape.borderRadius,
       border: '1px solid transparent',
+      flexShrink: 0,
     },
     buttonWithIcon: {
       paddingLeft: theme.spacing.unit * 2 - 4,
@@ -22,6 +23,7 @@ const styles = (theme: Theme) =>
     label: {
       textTransform: 'none',
       letterSpacing: 0.3,
+      whiteSpace: 'nowrap',
     },
     iconWithLabel: {
       marginRight: theme.spacing.unit,

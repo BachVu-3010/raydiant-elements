@@ -10,15 +10,28 @@ initialState = {
     { id: 'g', name: 'Screen G' },
     { id: 'h', name: 'Screen H' },
   ],
-  open: false,
 };
 <Row inline>
   <Popover.Anchor>
-    <Button onClick={() => setState({ open: true })} label="open" />
+    <Button label="Open" onClick={() => setState({ open1: true })} />
     <AffectedScreensPopover
       devices={state.devices}
-      open={state.open}
-      onClose={() => setState({ open: false })}
+      open={state.open1}
+      onClose={() => setState({ open1: false })}
+    />
+  </Popover.Anchor>
+
+  <Popover.Anchor>
+    <Button
+      color="destructive"
+      label="Delete"
+      onClick={() => setState({ open2: true })}
+    />
+    <AffectedScreensPopover
+      isDeleting
+      devices={state.devices}
+      open={state.open2}
+      onClose={() => setState({ open2: false })}
     />
   </Popover.Anchor>
 </Row>;
