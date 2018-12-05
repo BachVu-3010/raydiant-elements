@@ -9,23 +9,19 @@ import { Theme } from '../../theme';
 
 enum Errors {
   Offline = 'Offline',
+  SomeOffline = 'Some Offline',
   Generic = 'Oops! Something went wrong!',
 }
 
-const getError = (isOnline: boolean, hasFileError: boolean): string => {
-  let error = '';
-  if (!isOnline) {
-    error = Errors.Offline;
-  } else if (hasFileError) {
-    error = Errors.Generic;
-  }
-  return error;
-};
-
 export interface DeviceStatusProps extends WithStyles<typeof styles> {
-  hasFileError: boolean;
+  hasAFileError: boolean;
   isOnline: boolean;
   onConnectivityWizardClick: () => void;
+  onlineCount?: number;
+  deviceCount?: number;
+  resinCount?: number;
+  isResin?: boolean;
+  devicesWithErrorsCount?: number;
 }
 
 const styles = (theme: Theme) =>
@@ -41,32 +37,112 @@ const styles = (theme: Theme) =>
     },
   });
 
-export const DeviceStatus: React.SFC<DeviceStatusProps> = props => {
-  const { isOnline, hasFileError, classes, onConnectivityWizardClick } = props;
-  const hasError = !isOnline || hasFileError;
+export class DeviceStatus extends React.Component<DeviceStatusProps> {
+  renderDeviceError = () => {
+    const { isOnline, hasAFileError, isResin } = this.props;
+    let element;
+    if (!isOnline && isResin) {
+      element = this.renderError(Errors.Offline, {
+        severity: 'error',
+        showConnectivityWizard: true,
+      });
+    } else if (hasAFileError) {
+      element = this.renderError(Errors.Generic, { severity: 'error' });
+    }
+    return element;
+  };
+  renderError = (
+    error: string,
+    {
+      severity,
+      showConnectivityWizard,
+    }: {
+      severity: 'default' | 'error' | 'warning';
+      showConnectivityWizard?: boolean;
+    },
+  ) => {
+    const { classes, onConnectivityWizardClick } = this.props;
+    // This is for the scenario where the device !isResin && !hasAFileError
+    if (!error) {
+      return null;
+    }
 
-  return (
-    <div className={classes.root}>
-      {hasError ? (
-        <>
-          <div className={classes.deviceStatusIconContainer}>
-            <AlertIcon />
-          </div>
-          <div>
-            <Text muted>{getError(isOnline, hasFileError)}</Text>{' '}
-            <Link onClick={stopPropagation(onConnectivityWizardClick)} />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className={classes.deviceStatusIconContainer}>
-            <SuccessIcon />
-          </div>
-          <Text muted>Online</Text>
-        </>
-      )}
-    </div>
-  );
-};
+    return (
+      <>
+        <div className={classes.deviceStatusIconContainer}>
+          <AlertIcon color={severity} />
+        </div>
+        <div>
+          <Text muted>{error}</Text>{' '}
+          {showConnectivityWizard && (
+            <Link onClick={stopPropagation(onConnectivityWizardClick)}>
+              Need help?
+            </Link>
+          )}
+        </div>
+      </>
+    );
+  };
+  renderOnlineStatus = () => {
+    const { classes } = this.props;
+    return (
+      <>
+        <div className={classes.deviceStatusIconContainer}>
+          <SuccessIcon />
+        </div>
+        <Text muted>Online</Text>
+      </>
+    );
+  };
+  renderDeviceGroupStatus = () => {
+    const {
+      deviceCount,
+      resinCount,
+      onlineCount,
+      devicesWithErrorsCount,
+    } = this.props;
+    const allResin = deviceCount === resinCount;
+    let element;
+    if (allResin && onlineCount === 0) {
+      element = this.renderError(Errors.Offline, {
+        severity: 'error',
+        showConnectivityWizard: true,
+      });
+    } else if (allResin && deviceCount > onlineCount) {
+      element = this.renderError(Errors.SomeOffline, {
+        severity: 'warning',
+        showConnectivityWizard: true,
+      });
+    } else if (devicesWithErrorsCount === deviceCount) {
+      element = this.renderError(Errors.Generic, {
+        severity: 'error',
+      });
+    } else if (devicesWithErrorsCount > 0) {
+      element = this.renderError(Errors.Generic, { severity: 'warning' });
+    } else if (allResin && deviceCount === onlineCount) {
+      element = this.renderOnlineStatus();
+    }
+    return element;
+  };
+
+  render() {
+    const { isOnline, hasAFileError, classes, deviceCount } = this.props;
+    // Using deviceCount to test if a DeviceGroup is passed in.
+    const isDeviceGroup = !isNaN(deviceCount);
+
+    if (isDeviceGroup) {
+      return (
+        <div className={classes.root}>{this.renderDeviceGroupStatus()}</div>
+      );
+    }
+
+    const isError = !isOnline || hasAFileError;
+    return (
+      <div className={classes.root}>
+        {isError ? this.renderDeviceError() : this.renderOnlineStatus()}
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles)(DeviceStatus);

@@ -11,6 +11,7 @@ const styles = (theme: Theme) =>
       borderRadius: theme.shape.borderRadius,
       backgroundColor: theme.palette.background.default,
       boxShadow: theme.modal.shadow,
+      width: `calc(100vw - ${4 * theme.spacing.unit}px)`,
       [theme.breakpoints.up('sm')]: {
         width: '400px',
       },

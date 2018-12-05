@@ -6,15 +6,15 @@ import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
 import * as T from '../DeviceTypes';
 import styles from './DeviceBase.styles';
-import DeviceStatus from './DeviceStatus';
 import Thumbnail from './Thumbnail';
 
 export interface DeviceBaseProps {
-  device: T.Device;
+  device: T.Device | T.DeviceGroup;
   isManageMode: boolean;
   isSelected: boolean;
   onSelect: (id: string, selected: boolean) => any;
   onConnectivityWizardClick: () => void;
+  onPublish: (deviceId: string) => void;
 }
 
 export interface DeviceBaseWithStylesProps
@@ -22,6 +22,7 @@ export interface DeviceBaseWithStylesProps
     DeviceBaseProps {
   controlsElement: React.ReactNode;
   checkboxElement: React.ReactNode;
+  deviceStatusElement: React.ReactNode;
   showMultipleThumbnails?: boolean;
 }
 
@@ -51,12 +52,12 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
       classes,
       controlsElement,
       checkboxElement,
+      deviceStatusElement,
       showMultipleThumbnails,
       isSelected,
       onSelect,
-      onConnectivityWizardClick,
     } = this.props;
-    const { id, name, isOnline, hasFileError, showConnectivityStatus } = device;
+    const { id, name } = device;
     return (
       <div
         onClick={
@@ -75,13 +76,7 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
           />
           <div>
             <div className={classes.deviceName}>{name}</div>
-            {showConnectivityStatus && (
-              <DeviceStatus
-                isOnline={isOnline}
-                hasFileError={hasFileError}
-                onConnectivityWizardClick={onConnectivityWizardClick}
-              />
-            )}
+            {deviceStatusElement}
           </div>
           <Spacer />
           <Hidden smDown>{controlsElement}</Hidden>

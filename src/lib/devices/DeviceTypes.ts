@@ -7,17 +7,13 @@ export interface Device {
   id: string;
   name: string;
   isOnline: boolean;
-  hasFileError?: boolean;
-  showPublish?: boolean;
-  showConnectivityStatus?: boolean;
   defaultSequence: string[];
   deployedPresentations: { [id: string]: Presentation };
+
+  // Allow for extra props to be passed in
+  [key: string]: any;
 }
 
-export interface DeviceGroup {
-  id: string;
-  name: string;
+export interface DeviceGroup extends Device {
   devices: Device[];
-  defaultSequence: string[];
-  deployedPresentations: { [id: string]: Presentation };
 }

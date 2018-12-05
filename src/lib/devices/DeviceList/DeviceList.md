@@ -10,48 +10,26 @@ initialState = {
 
 <App>
   <DeviceList color="light">
-    {devices.map(
-      ({ id, name, isOnline, defaultSequence, deployedPresentations }) => {
-        return (
-          <DeviceList.Device
-            device={{
-              id,
-              name,
-              isOnline,
-              defaultSequence,
-              deployedPresentations,
-              hasFileError: false,
-              showPublish: true,
-              showConnectivityStatus: true,
-            }}
-            isManageMode={state.isManageMode}
-            key={id}
-            onSelect={this.onSelect}
-            isSelected={false}
-          />
-        );
-      },
-    )}
-    {deviceGroups.map(
-      ({ id, name, defaultSequence, deployedPresentations }) => (
-        <DeviceList.DeviceGroup
-          device={{
-            id,
-            name,
-            hasFileError: false,
-            showPublish: true,
-            showConnectivityStatus: true,
-            isOnline: true,
-            defaultSequence,
-            deployedPresentations,
-          }}
+    {devices.map(d => {
+      return (
+        <DeviceList.Device
+          device={d}
           isManageMode={state.isManageMode}
-          key={id}
+          key={d.id}
           onSelect={console.log}
           isSelected={false}
         />
-      ),
-    )}
+      );
+    })}
+    {deviceGroups.map(dg => (
+      <DeviceList.DeviceGroup
+        device={dg}
+        isManageMode={state.isManageMode}
+        key={dg.id}
+        onSelect={console.log}
+        isSelected={false}
+      />
+    ))}
   </DeviceList>
 </App>;
 ```

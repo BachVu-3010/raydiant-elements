@@ -13,10 +13,13 @@ export interface AddToGroupPopoverProps {
   onOverlayClick: () => void;
   deviceToInheritContentFrom: T.Device | undefined;
   open: boolean;
+  onAddSelectedToNewGroup: (groupName: string) => void;
+  onAddSelectedToGroup: (deviceGroupId: string) => void;
 }
 
 export interface AddToGroupPopoverState {
   isCreating: boolean;
+  groupName?: string;
 }
 
 export class AddToGroupPopover extends React.Component<
@@ -25,24 +28,31 @@ export class AddToGroupPopover extends React.Component<
 > {
   state = {
     isCreating: false,
+    groupName: '',
   };
 
-  getGroupName = () => {
+  componentWillMount() {
+    this.setState({ groupName: this.getSuggestedGroupName() });
+  }
+
+  getSuggestedGroupName = () => {
     const { deviceToInheritContentFrom } = this.props;
     return deviceToInheritContentFrom && `${deviceToInheritContentFrom.name}`;
   };
 
-  getSuggestedGroupName = () => {
-    return `${this.getGroupName() || 'New'} Group`;
+  getSuggestedGroupNameLabel = () => {
+    return `${this.getSuggestedGroupName() || 'New'} Group`;
   };
 
   render() {
-    const { isCreating } = this.state;
+    const { isCreating, groupName } = this.state;
     const {
       selectedDeviceIds,
       deviceGroups,
       onOverlayClick,
       open,
+      onAddSelectedToNewGroup,
+      onAddSelectedToGroup,
     } = this.props;
     return (
       <Popover
@@ -57,7 +67,10 @@ export class AddToGroupPopover extends React.Component<
         </Popover.Header>
         <Popover.Body>
           {deviceGroups.map(dg => (
-            <Popover.Item key={dg.id}>
+            <Popover.Item
+              key={dg.id}
+              onClick={() => onAddSelectedToGroup(dg.id)}
+            >
               <Icon icon="group" title="group" />
               <span>{dg.name}</span>
             </Popover.Item>
@@ -70,14 +83,21 @@ export class AddToGroupPopover extends React.Component<
                     <div style={{ fontWeight: 'normal' }}>
                       <TextField
                         label="Group Name"
-                        value={this.getSuggestedGroupName()}
+                        value={groupName}
+                        onChange={value => {
+                          this.setState({ groupName: value });
+                        }}
                         helperText={
-                          this.getGroupName() &&
-                          `Group will inherit content from "${this.getGroupName()}" screen`
+                          this.getSuggestedGroupName() &&
+                          `Group will inherit content from "${this.getSuggestedGroupName()}" screen`
                         }
                       />
                     </div>
-                    <Button label="Create" color="progress" />
+                    <Button
+                      label="Create"
+                      color="progress"
+                      onClick={() => onAddSelectedToNewGroup(groupName)}
+                    />
                   </Row>
                 </Popover.Item>
               ) : (

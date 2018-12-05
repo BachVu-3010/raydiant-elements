@@ -1,6 +1,7 @@
 import { createStyles } from '../../core/withStyles';
+import { Theme } from '../../theme';
 
-const styles = () =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
@@ -13,7 +14,7 @@ const styles = () =>
       top: '50%',
       left: '50%',
       background: '#000',
-      boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.2)',
+      boxShadow: theme.shadows[1],
       transformOrigin: 'top left',
       overflow: 'hidden',
     },

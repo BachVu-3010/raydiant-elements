@@ -7,6 +7,11 @@ import * as T from '../DeviceTypes';
 
 export interface ManageGroupPopoverProps {
   onOverlayClick: () => void;
+  onDeleteDeviceGroup: (deviceGroupId: string) => void;
+  onRemoveDeviceFromDeviceGroup: (
+    deviceGroupId: string,
+    deviceId: string,
+  ) => void;
   deviceGroup?: T.DeviceGroup;
   open: boolean;
 }
@@ -23,7 +28,13 @@ export class ManageGroupPopover extends React.Component<
     isCreating: false,
   };
   render() {
-    const { onOverlayClick, deviceGroup, open } = this.props;
+    const {
+      onOverlayClick,
+      deviceGroup,
+      open,
+      onDeleteDeviceGroup,
+      onRemoveDeviceFromDeviceGroup,
+    } = this.props;
     if (!deviceGroup) {
       return null;
     }
@@ -41,14 +52,24 @@ export class ManageGroupPopover extends React.Component<
           <Popover.Item>
             <span>{pluralize('screen', devices.length)}</span>
             <Spacer />
-            <Button label="Ungroup" color="destructive" />
+            <Button
+              label="Ungroup"
+              color="destructive"
+              onClick={() => onDeleteDeviceGroup(deviceGroup.id)}
+            />
             <Button label="Done" onClick={onOverlayClick} />
           </Popover.Item>
           {devices.map(d => (
             <Popover.Item key={d.id}>
               <div>{d.name}</div>
               <Spacer />
-              <Button label="Remove" disabled={devices.length < 3} />
+              <Button
+                label="Remove"
+                disabled={devices.length < 3}
+                onClick={() =>
+                  onRemoveDeviceFromDeviceGroup(deviceGroup.id, d.id)
+                }
+              />
             </Popover.Item>
           ))}
         </Popover.Body>
