@@ -15,6 +15,7 @@ export interface AddToGroupPopoverProps {
   open: boolean;
   onAddSelectedToNewGroup: (groupName: string) => void;
   onAddSelectedToGroup: (deviceGroupId: string) => void;
+  loading: boolean;
 }
 
 export interface AddToGroupPopoverState {
@@ -53,6 +54,7 @@ export class AddToGroupPopover extends React.Component<
       open,
       onAddSelectedToNewGroup,
       onAddSelectedToGroup,
+      loading,
     } = this.props;
     return (
       <Popover
@@ -97,6 +99,7 @@ export class AddToGroupPopover extends React.Component<
                       label="Create"
                       color="progress"
                       onClick={() => onAddSelectedToNewGroup(groupName)}
+                      disabled={loading}
                     />
                   </Row>
                 </Popover.Item>

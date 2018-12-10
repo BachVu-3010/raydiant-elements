@@ -14,6 +14,7 @@ export interface ManageGroupPopoverProps {
   ) => void;
   deviceGroup?: T.DeviceGroup;
   open: boolean;
+  loading: boolean;
 }
 
 export interface ManageGroupPopoverState {
@@ -34,6 +35,7 @@ export class ManageGroupPopover extends React.Component<
       open,
       onDeleteDeviceGroup,
       onRemoveDeviceFromDeviceGroup,
+      loading,
     } = this.props;
     if (!deviceGroup) {
       return null;
@@ -56,6 +58,7 @@ export class ManageGroupPopover extends React.Component<
               label="Ungroup"
               color="destructive"
               onClick={() => onDeleteDeviceGroup(deviceGroup.id)}
+              disabled={loading}
             />
             <Button label="Done" onClick={onOverlayClick} />
           </Popover.Item>
@@ -65,7 +68,7 @@ export class ManageGroupPopover extends React.Component<
               <Spacer />
               <Button
                 label="Remove"
-                disabled={devices.length < 3}
+                disabled={devices.length < 3 || loading}
                 onClick={() =>
                   onRemoveDeviceFromDeviceGroup(deviceGroup.id, d.id)
                 }

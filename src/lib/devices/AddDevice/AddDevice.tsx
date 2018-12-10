@@ -50,7 +50,7 @@ export interface AddDeviceProps extends WithStyles<typeof styles> {
     { activationCode, name }: { activationCode: string; name: string },
   ) => void;
   loading?: boolean;
-  error: string;
+  error?: string;
 }
 
 interface AddDeviceState {
