@@ -28,8 +28,9 @@ interface FileFieldProps extends WithStyles<typeof styles> {
 }
 
 const getFileNames = (value: FileList) => {
-  const fileArr = [...(value || [])];
-  return fileArr.map(f => f.name).join(', ');
+  return Array.from(value || [])
+    .map(f => f.name)
+    .join(', ');
 };
 
 export const FileField: React.SFC<FileFieldProps> = ({

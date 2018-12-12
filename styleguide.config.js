@@ -45,6 +45,7 @@ module.exports = {
         getCorePath('ListField'),
         getCorePath('Menu'),
         getCorePath('Modal'),
+        getCorePath('MultiSelectField'),
         getCorePath('NumberField'),
         getCorePath('Popover'),
         getCorePath('SelectField'),

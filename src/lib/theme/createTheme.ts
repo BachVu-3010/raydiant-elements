@@ -141,6 +141,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
 declare module '@material-ui/core/styles/createPalette' {
   interface TypeBackground {
     gradient: string;
+    inset: string;
   }
 
   interface TypeText {

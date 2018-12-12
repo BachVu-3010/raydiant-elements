@@ -13,6 +13,7 @@ const presentation = {
     boolean: true,
     number: 1,
     selection: 'opt1',
+    multiselection: ['opt1'],
     date: '02/02/2020',
     categories: [],
     items: [
@@ -26,6 +27,16 @@ const appVersion = {
   id: 'b',
   name: 'My Mira App',
   presentationProperties: [
+    {
+      name: 'oAuth',
+      type: 'oAuth',
+      optional: true,
+      auth_url:
+        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/auth',
+      verify_url:
+        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/verify',
+      verify_qs_param: 'access_token',
+    },
     {
       name: 'facebookAuth',
       type: 'facebookAuth',
@@ -50,14 +61,13 @@ const appVersion = {
       verify_qs_param: 'access_token',
     },
     {
-      name: 'oAuth',
-      type: 'oAuth',
+      name: 'calendars',
+      type: 'selection',
       optional: true,
-      auth_url:
-        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/auth',
-      verify_url:
-        'https://spqbfu5spd.execute-api.us-west-2.amazonaws.com/staging/verify',
-      verify_qs_param: 'access_token',
+      multiple: true,
+      helper_text: 'Log in with Google to select your calendar(s)',
+      options_url:
+        'https://rfx4m8d3g5.execute-api.us-east-1.amazonaws.com/dev/calendars?access_token={{googleAuth}}',
     },
     {
       name: 'string',
@@ -90,10 +100,22 @@ const appVersion = {
     {
       name: 'selection',
       type: 'selection',
-      exclusive: true,
+      optional: true,
       options: [
         { name: 'Option 1', value: 'opt1' },
         { name: 'Option 2', value: 'opt2' },
+      ],
+    },
+    {
+      name: 'multiselection',
+      type: 'selection',
+      multiple: true,
+      optional: true,
+      options: [
+        { name: 'Option 1', value: 'opt1' },
+        { name: 'Option 2', value: 'opt2' },
+        { name: 'Option 3', value: 'opt3' },
+        { name: 'Option 4', value: 'opt4' },
       ],
     },
     {
@@ -155,6 +177,7 @@ const appVersion = {
   strings: {
     description: 'Create your first Mira app.',
     oAuth: 'Connect to Provider',
+    calendars: 'Calendars',
     string: 'String',
     link: 'Link',
     text: 'Text',
@@ -163,6 +186,7 @@ const appVersion = {
     file: 'File',
     date: 'Date',
     selection: 'Selection',
+    multiselection: 'Multi-Selection',
     themes: 'Themes',
     categories: 'Categories',
     category: 'Category',

@@ -62,6 +62,7 @@ export const light = createTheme({
     background: {
       default: '#ffffff',
       gradient: '',
+      inset: '#f3f4f6',
     },
   },
   button: {
@@ -122,6 +123,7 @@ export const grey = createTheme({
     background: {
       default: '#f3f4f6',
       gradient: '',
+      inset: '#d8d8d8',
     },
   },
   button: {
@@ -182,6 +184,7 @@ export const dark = createTheme({
     background: {
       default: '#303141',
       gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
+      inset: '#171828',
     },
   },
   button: {

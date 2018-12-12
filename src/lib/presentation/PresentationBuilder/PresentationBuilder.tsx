@@ -152,6 +152,7 @@ export class PresentationBuilder extends React.Component<
         property,
         // appVars can be undefined for newly added array items.
         appVars && appVars[property.name],
+        appVars,
         inputPath,
         strings,
         errors,
@@ -164,6 +165,7 @@ export class PresentationBuilder extends React.Component<
   renderInput(
     property: T.PresentationProperty,
     value: any = property.default,
+    parentValue: any,
     path: T.Path,
     strings: T.Strings,
     errors?: T.PresentationError[],
@@ -253,7 +255,10 @@ export class PresentationBuilder extends React.Component<
             key={key}
             label={label}
             value={value}
+            parentValue={parentValue}
+            multiple={property.multiple}
             options={property.options}
+            optionsUrl={property.options_url}
             helperText={helperText}
             error={hasError}
             onBlur={this.handleBlur}

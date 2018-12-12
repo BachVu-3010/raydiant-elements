@@ -7,56 +7,77 @@ import styles from './Checkbox.styles';
 
 interface CheckboxProps extends WithStyles<typeof styles> {
   checked: boolean;
+  label?: string;
   round?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
-  onClick?: (e: React.MouseEvent<HTMLInputElement>) => void;
+  onClick?: (e: React.MouseEvent<any>) => void;
 }
 
 export const Checkbox: React.SFC<CheckboxProps> = ({
   checked,
+  label,
   round,
   disabled,
-  onChange,
-  onClick,
   classes,
-}) => (
-  <span className={classes.root}>
-    <MUICheckbox
-      checked={checked}
-      disabled={disabled}
-      onChange={e => onChange(e.target.checked)}
-      onClick={onClick}
-      color="primary"
-      icon={
-        <div
-          className={cn(
-            classes.container,
-            disabled && classes.disabled,
-            round && classes.round,
-          )}
-        />
-      }
-      checkedIcon={
-        <div
-          className={cn(
-            classes.container,
-            classes.containerChecked,
-            round && classes.round,
-          )}
-        >
-          <Icon icon="checkmark" className={classes.icon} />
-        </div>
-      }
-      classes={{ root: classes.checkbox }}
-    />
-  </span>
-);
+  onClick,
+  onChange,
+}) => {
+  const checkbox = (
+    <span className={classes.checkboxContainer}>
+      <MUICheckbox
+        checked={checked}
+        disabled={disabled}
+        onChange={e => {
+          if (onChange) {
+            onChange(e.target.checked);
+          }
+        }}
+        onClick={!label ? onClick : null}
+        color="primary"
+        icon={
+          <div
+            className={cn(
+              classes.iconContainer,
+              disabled && classes.iconDisabled,
+              round && classes.round,
+            )}
+          />
+        }
+        checkedIcon={
+          <div
+            className={cn(
+              classes.iconContainer,
+              classes.iconChecked,
+              disabled && classes.iconDisabled,
+              disabled && classes.iconCheckedDisabled,
+              round && classes.round,
+            )}
+          >
+            <Icon icon="checkmark" className={classes.icon} />
+          </div>
+        }
+        classes={{ root: classes.checkbox }}
+      />
+    </span>
+  );
 
-Checkbox.defaultProps = {
-  onChange: () => {
-    return;
-  },
+  if (label) {
+    return (
+      <label
+        className={cn(
+          classes.labelContainer,
+          disabled && classes.labelDisabled,
+        )}
+        onClick={onClick}
+      >
+        {checkbox}
+        <span className={classes.label}>{label}</span>
+      </label>
+    );
+  }
+
+  return checkbox;
 };
 
 export default withStyles(styles)(Checkbox);

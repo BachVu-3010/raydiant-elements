@@ -3,7 +3,8 @@ import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    root: {},
+    checkboxContainer: {
       position: 'relative',
       display: 'inline-block',
       width: 20,
@@ -19,7 +20,7 @@ const styles = (theme: Theme) =>
       padding: 0,
       color: theme.checkbox.backgroundChecked,
     },
-    container: {
+    iconContainer: {
       boxSizing: 'border-box',
       width: 20,
       height: 20,
@@ -30,21 +31,38 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
     },
+    iconDisabled: {
+      background: 'transparent',
+      borderColor: theme.checkbox.borderMuted,
+      cursor: 'not-allowed',
+    },
     round: {
       borderRadius: '100%',
     },
-    disabled: {
-      background: 'transparent',
-      borderColor: theme.checkbox.borderMuted,
-    },
-    containerChecked: {
+    iconChecked: {
       backgroundColor: theme.checkbox.backgroundChecked,
       borderColor: theme.checkbox.backgroundChecked,
+    },
+    iconCheckedDisabled: {
+      backgroundColor: theme.checkbox.borderMuted,
+      borderColor: theme.checkbox.borderMuted,
     },
     icon: {
       height: '100%',
       width: '100%',
       color: theme.checkbox.foreground,
+    },
+    labelContainer: {
+      cursor: 'pointer',
+      display: 'flex',
+      alignItems: 'center',
+    },
+    label: {
+      marginLeft: theme.spacing.unit,
+    },
+    labelDisabled: {
+      cursor: 'not-allowed',
+      color: theme.palette.text.secondary,
     },
   });
 

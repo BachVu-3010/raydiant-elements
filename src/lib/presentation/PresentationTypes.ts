@@ -6,8 +6,14 @@ export type Path = Array<string | number>;
 export type Crumbs = Path[];
 
 export interface SelectionOption {
-  name: string;
   value: string;
+  name?: string;
+  // Label is what remote options can send instead of name.
+  // We should normalize on `label` in the future.
+  label?: string;
+  // Default can be set by a remote options url to specify the default
+  // value of the input.
+  default?: boolean;
 }
 
 // The FileUpload interface is the structure returned by the API for uploaded files.
@@ -38,7 +44,9 @@ export interface PresentationProperty {
   helper_link?: string;
   optional?: boolean;
   // Selection
+  multiple?: boolean;
   options?: SelectionOption[];
+  options_url?: string;
   // OAuth
   auth_url?: string;
   verify_url?: string;
