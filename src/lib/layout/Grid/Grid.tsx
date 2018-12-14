@@ -106,9 +106,7 @@ export class Grid extends React.Component<GridProps, GridState> {
     }
 
     return (
-      // We don't want the negative margin on the outer div to make <Grid /> work
-      // inside <Row /> or <Column />.
-      <div>
+      <div className={classes.root}>
         <div
           className={cn(classes.grid, shouldCenterItems && classes.center)}
           ref={this.gridRef}

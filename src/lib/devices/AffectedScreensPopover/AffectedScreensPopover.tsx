@@ -11,6 +11,7 @@ interface AffectedScreensPopoverProps extends WithStyles<typeof styles> {
   open: boolean;
   isDeleting?: boolean;
   onClose: () => void;
+  onDelete: () => void;
 }
 
 const styles = (theme: Theme) =>
@@ -31,6 +32,7 @@ export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
   open,
   isDeleting,
   onClose,
+  onDelete,
   classes,
 }) => {
   const screensText = devices.length === 1 ? 'this screen' : 'these screens';
@@ -52,7 +54,11 @@ export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
             : `Saving these changes will overwrite content on ${screensText}:`}
         </div>
         {isDeleting ? (
-          <Button label="Delete Anyway" color="destructive" onClick={onClose} />
+          <Button
+            label="Delete Anyway"
+            color="destructive"
+            onClick={onDelete}
+          />
         ) : (
           <Button label="Got it" onClick={onClose} />
         )}

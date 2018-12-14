@@ -3,6 +3,12 @@ import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
+    root: {
+      flex: 1,
+      padding: theme.spacing.unit * 2,
+      overflow: 'auto',
+    },
+
     grid: {
       display: 'flex',
       flexWrap: 'wrap',
