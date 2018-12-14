@@ -79,7 +79,7 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
             {deviceStatusElement}
           </div>
           <Spacer />
-          <Hidden smDown>{controlsElement}</Hidden>
+          <Hidden xsDown>{controlsElement}</Hidden>
         </Row>
       </div>
     );
