@@ -40,6 +40,7 @@ const styles = (theme: Theme) =>
 
     autoWidth: {
       width: 'auto',
+      maxWidth: 'none',
 
       [theme.breakpoints.up('sm')]: {
         width: 'auto',

@@ -84,6 +84,7 @@ module.exports = {
         getDevicePath('AffectedScreensPopover'),
         getDevicePath('ManageGroupPopover'),
         getDevicePath('AddDevice'),
+        getDevicePath('AddDevicePopover'),
       ],
     },
     {

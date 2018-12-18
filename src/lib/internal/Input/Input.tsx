@@ -96,30 +96,6 @@ const Input: React.SFC<InputProps> = ({
   }
 
   return inputElement;
-
-  return (
-    <MUIInput
-      value={value}
-      type={type}
-      placeholder={placeholder}
-      fullWidth={fullWidth}
-      disabled={disabled}
-      inputComponent={inputComponent}
-      onChange={onChange}
-      onKeyUp={onKeyUp}
-      onKeyDown={onKeyDown}
-      onBlur={onBlur}
-      onFocus={onFocus}
-      classes={{
-        root: classes.root,
-        input: classes.input,
-        underline: classes.underline,
-        disabled: classes.disabled,
-      }}
-      inputProps={inputProps}
-      {...multilineOpts}
-    />
-  );
 };
 
 export default withStyles(styles)(Input);

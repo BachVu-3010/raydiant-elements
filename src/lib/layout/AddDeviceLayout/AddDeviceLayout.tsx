@@ -7,20 +7,15 @@ export interface AddDeviceLayoutProps extends WithStyles<typeof styles> {}
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      margin: theme.spacing.unit * 2,
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
+      padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 2}px`,
+
       [theme.breakpoints.up('sm')]: {
+        padding: theme.spacing.unit * 4,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-    },
-    addDeviceContainer: {
-      [theme.breakpoints.up('sm')]: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2,
-        width: 400,
       },
     },
   });
@@ -28,10 +23,6 @@ const styles = (theme: Theme) =>
 export const AddDeviceLayout: React.SFC<AddDeviceLayoutProps> = ({
   classes,
   children,
-}) => (
-  <main className={classes.root}>
-    <div className={classes.addDeviceContainer}>{children}</div>
-  </main>
-);
+}) => <main className={classes.root}>{children}</main>;
 
 export default withStyles(styles)(AddDeviceLayout);

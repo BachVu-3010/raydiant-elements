@@ -6,18 +6,43 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import Column from '../../layout/Column';
 import { Theme } from '../../theme';
 
+export const AddDeviceMinHeight = 400;
+const heightUpBp = `@media screen and (min-height: ${AddDeviceMinHeight}px)`;
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      flexDirection: 'column',
-      textAlign: 'center',
+      alignItems: 'center',
       width: '100%',
-      padding: theme.spacing.unit * 2,
+
+      [heightUpBp]: {
+        flexDirection: 'column',
+        maxWidth: 400,
+      },
+    },
+    cta: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      paddingRight: theme.spacing.unit * 2,
+
+      [heightUpBp]: {
+        marginBottom: theme.spacing.unit * 2,
+      },
+    },
+    form: {
+      width: '100%',
+      minWidth: 240,
+
+      [heightUpBp]: {
+        minWidth: 'none',
+      },
     },
     subHeading: {
       fontWeight: 500,
       fontSize: theme.fontSizes.lg,
+      whiteSpace: 'nowrap',
     },
     heading: {
       fontSize: theme.fontSizes.lg,
@@ -35,16 +60,9 @@ const styles = (theme: Theme) =>
       height: '108px',
       boxShadow: theme.shadows[1],
     },
-    formInner: {
-      display: 'flex',
-      flexDirection: 'column',
-      '& > *': {
-        marginBottom: theme.spacing.unit * 2,
-      },
-    },
   });
 
-export interface AddDeviceProps extends WithStyles<typeof styles> {
+export interface AddDeviceProps {
   headingText: string;
   onRegister: (
     { activationCode, name }: { activationCode: string; name: string },
@@ -53,12 +71,19 @@ export interface AddDeviceProps extends WithStyles<typeof styles> {
   error?: string;
 }
 
+interface AddDevicePropsWithStyles
+  extends AddDeviceProps,
+    WithStyles<typeof styles> {}
+
 interface AddDeviceState {
   activationCode: string;
   name: string;
 }
 
-export class AddDevice extends React.Component<AddDeviceProps, AddDeviceState> {
+export class AddDevice extends React.Component<
+  AddDevicePropsWithStyles,
+  AddDeviceState
+> {
   state = {
     activationCode: '',
     name: '',
@@ -72,18 +97,21 @@ export class AddDevice extends React.Component<AddDeviceProps, AddDeviceState> {
     const { classes, headingText, loading, error } = this.props;
     const { activationCode, name } = this.state;
     return (
-      <Column className={classes.root}>
-        <div>
+      <div className={classes.root}>
+        <Column className={classes.cta}>
           <span className={classes.heading}>{headingText}</span>
-        </div>
-        <div className={classes.screen}>
-          <span>WORD 1 - WORD 2</span>
-        </div>
-        <div className={classes.subHeading}>
-          Enter the code shown on your TV
-        </div>
-        <Form onSubmit={this.handleSubmitRegisterDeviceForm}>
-          <div className={classes.formInner}>
+          <div className={classes.screen}>
+            <span>WORD 1 - WORD 2</span>
+          </div>
+          <div className={classes.subHeading}>
+            Enter the code shown on your TV
+          </div>
+        </Column>
+        <Form
+          className={classes.form}
+          onSubmit={this.handleSubmitRegisterDeviceForm}
+        >
+          <Column>
             <TextField
               label="Activation Code"
               value={activationCode}
@@ -114,9 +142,9 @@ export class AddDevice extends React.Component<AddDeviceProps, AddDeviceState> {
               color="progress"
               disabled={!activationCode.match(/^[A-Z]+-[A-Z]+$/) || loading}
             />
-          </div>
+          </Column>
         </Form>
-      </Column>
+      </div>
     );
   }
 }

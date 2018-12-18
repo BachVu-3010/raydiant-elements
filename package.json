@@ -27,6 +27,7 @@
     "react-color": "^2.14.1",
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.4.2",
+    "react-media": "^1.9.2",
     "react-motion": "^0.5.2",
     "react-text-mask": "^5.4.3"
   },
