@@ -1,10 +1,10 @@
-import * as T from '../../PresentationTypes';
+import * as A from '../../../application/ApplicationTypes';
 
 // Returns the label of an array input's selected item with
 // the provided property definition.
 export default function getItemLabel(
   item: { [key: string]: any },
-  properties: T.PresentationProperty[],
+  properties: A.PresentationProperty[],
   defaultLabel: string,
 ) {
   // Use the first property as the label.

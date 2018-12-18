@@ -1,16 +1,19 @@
 const path = require('path');
 
+const getApplicationPath = component =>
+  path.join(__dirname, `src/lib/application/${component}/${component}.tsx`);
+
 const getCorePath = component =>
   path.join(__dirname, `src/lib/core/${component}/${component}.tsx`);
+
+const getDevicePath = component =>
+  path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
 
 const getLayoutPath = component =>
   path.join(__dirname, `src/lib/layout/${component}/${component}.tsx`);
 
 const getLoginPath = component =>
   path.join(__dirname, `src/lib/login/${component}/${component}.tsx`);
-
-const getDevicePath = component =>
-  path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
 
 const getPresentationPath = component =>
   path.join(__dirname, `src/lib/presentation/${component}/${component}.tsx`);
@@ -90,6 +93,13 @@ module.exports = {
         getPresentationPath('PresentationCard'),
         getPresentationPath('PresentationPreview'),
         getPresentationPath('PresentationThumbnail'),
+      ],
+    },
+    {
+      name: 'Application',
+      components: () => [
+        getApplicationPath('ApplicationCard'),
+        getApplicationPath('ApplicationCTA'),
       ],
     },
     {

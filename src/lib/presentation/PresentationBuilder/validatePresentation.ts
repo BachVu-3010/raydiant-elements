@@ -1,10 +1,11 @@
-import * as T from '../PresentationTypes';
+import * as A from '../../application/ApplicationTypes';
+import * as P from '../PresentationTypes';
 
 function validate(
-  appVars: T.ApplicationVariables,
-  properties: T.PresentationProperty[],
-  errors: T.PresentationError[],
-  path: T.Path,
+  appVars: P.ApplicationVariables,
+  properties: A.PresentationProperty[],
+  errors: P.PresentationError[],
+  path: P.Path,
 ) {
   properties.forEach(prop => {
     const value = appVars[prop.name];
@@ -72,11 +73,11 @@ function validate(
 }
 
 export default function validatePresentation(
-  presentation: T.Presentation,
-  appVersion: T.AppVersion,
+  presentation: P.Presentation,
+  appVersion: A.AppVersion,
   minDuration: number,
 ) {
-  const errors: T.PresentationError[] = [];
+  const errors: P.PresentationError[] = [];
 
   // Validate name.
   validate(presentation, [{ name: 'name', type: 'string' }], errors, []);

@@ -1,15 +1,16 @@
 import * as React from 'react';
+import * as A from '../../application/ApplicationTypes';
 import Tab from '../../core/Tab';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import PresentationPreview from '../PresentationPreview';
-import * as T from '../PresentationTypes';
+import * as P from '../PresentationTypes';
 import styles from './PresentationBuilderPreview.styles';
 
 interface PresentationBuilderPreviewProps extends WithStyles<typeof styles> {
-  appVersion: T.AppVersion;
-  previewMode: T.PreviewMode;
-  onPreviewModeChange: (previewMode: T.PreviewMode) => any;
+  appVersion: A.AppVersion;
+  previewMode: P.PreviewMode;
+  onPreviewModeChange: (previewMode: P.PreviewMode) => any;
 }
 interface PresentationBuilderPreviewState {}
 
@@ -56,14 +57,14 @@ class PresentationBuilderPreview extends React.Component<
             <Tab
               icon="horizontalScreen"
               label="Horizontal"
-              active={previewMode === T.PreviewMode.Horizontal}
-              onClick={() => onPreviewModeChange(T.PreviewMode.Horizontal)}
+              active={previewMode === P.PreviewMode.Horizontal}
+              onClick={() => onPreviewModeChange(P.PreviewMode.Horizontal)}
             />
             <Tab
               icon="verticalScreen"
               label="Vertical"
-              active={previewMode === T.PreviewMode.Vertical}
-              onClick={() => onPreviewModeChange(T.PreviewMode.Vertical)}
+              active={previewMode === P.PreviewMode.Vertical}
+              onClick={() => onPreviewModeChange(P.PreviewMode.Vertical)}
             />
           </Tab.Container>
         </div>

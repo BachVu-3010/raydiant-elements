@@ -1,9 +1,10 @@
-import * as T from '../PresentationTypes';
+import * as A from '../../application/ApplicationTypes';
+import * as P from '../PresentationTypes';
 
 export default function hasPresentationChanged(
-  prevPres: T.Presentation,
-  nextPres: T.Presentation,
-  appVersion: T.AppVersion,
+  prevPres: P.Presentation,
+  nextPres: P.Presentation,
+  appVersion: A.AppVersion,
 ) {
   // Enable save when new application version is released.
   if (appVersion.id !== nextPres.appVersionId) {

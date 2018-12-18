@@ -52,7 +52,7 @@ export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
             <AlertIcon color="warning" />
           </span>
           {isDeleting
-            ? `Deleting this content will permanently remove content from ${screensText}:`
+            ? `Deleting this content will permanently remove it from ${screensText}:`
             : `Saving these changes will overwrite content on ${screensText}:`}
         </div>
         <Hidden smDown>

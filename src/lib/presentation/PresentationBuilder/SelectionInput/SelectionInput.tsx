@@ -1,13 +1,14 @@
 import * as React from 'react';
+import * as A from '../../../application/ApplicationTypes';
 import MultiSelectField from '../../../core/MultiSelectField';
 import SelectField from '../../../core/SelectField';
-import * as T from '../../PresentationTypes';
+import * as P from '../../PresentationTypes';
 
 interface SelectionInputProps {
   label: string;
   value: string | string[];
   multiple?: boolean;
-  options?: T.SelectionOption[];
+  options?: A.SelectionOption[];
   optionsUrl?: string;
   helperText?: React.ReactNode;
   error?: boolean;
@@ -15,12 +16,12 @@ interface SelectionInputProps {
   onBlur: React.FocusEventHandler<any>;
   // TODO: Don't like that we need to pass in the strings object. Strings likely isn't
   // the correct way to i18n and we should remove it in the future.
-  strings: T.Strings;
-  parentValue: T.ApplicationVariables;
+  strings: A.Strings;
+  parentValue: P.ApplicationVariables;
 }
 
 interface SelectionInputState {
-  options: T.SelectionOption[] | null;
+  options: A.SelectionOption[] | null;
   optionsError: string;
 }
 
@@ -30,12 +31,12 @@ class SelectionInput extends React.Component<
 > {
   static defaultProps = {
     multiple: false,
-    options: [] as T.SelectionOption[],
+    options: [] as A.SelectionOption[],
     optionsUrl: '',
   };
 
   state = {
-    options: null as T.SelectionOption[],
+    options: null as A.SelectionOption[],
     optionsError: '',
   };
 
@@ -100,7 +101,7 @@ class SelectionInput extends React.Component<
     }
   }
 
-  checkDefaultOptions(options: T.SelectionOption[]) {
+  checkDefaultOptions(options: A.SelectionOption[]) {
     const { value, multiple, onChange } = this.props;
     const isValueUnset = value === null || value === undefined;
     const hasOptions = options.length > 0;

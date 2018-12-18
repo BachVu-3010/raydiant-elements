@@ -1,8 +1,8 @@
-import * as T from '../../PresentationTypes';
+import * as A from '../../../application/ApplicationTypes';
 
 // TODO: Tests.
 export default function createDefaultValue(
-  properties: T.PresentationProperty[],
+  properties: A.PresentationProperty[],
 ) {
   const value: { [key: string]: any } = {};
 

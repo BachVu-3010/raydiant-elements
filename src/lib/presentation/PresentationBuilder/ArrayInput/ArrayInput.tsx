@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import * as immutable from 'object-path-immutable';
 import * as React from 'react';
 import { spring, TransitionMotion } from 'react-motion';
+import * as A from '../../../application/ApplicationTypes';
 import Breadcrumb from '../../../core/Breadcrumb';
 import Button from '../../../core/Button';
 import ListField from '../../../core/ListField';
@@ -11,7 +12,7 @@ import FormHelperText from '../../../internal/FormHelperText';
 import Column from '../../../layout/Column';
 import Row from '../../../layout/Row';
 import Spacer from '../../../layout/Spacer';
-import * as T from '../../PresentationTypes';
+import * as P from '../../PresentationTypes';
 import createDefaultValue from '../utilities/createDefaultValue';
 import getCrumbsFromPath from '../utilities/getCrumbsFromPath';
 import getItemLabel from '../utilities/getItemLabel';
@@ -23,32 +24,32 @@ import RemoveButton from './RemoveButton';
 import withSelectedPath from './withSelectedPath';
 
 interface ArrayInputProps extends WithStyles<typeof styles> {
-  value: T.ApplicationVariables[];
+  value: P.ApplicationVariables[];
   label: string;
-  path: T.Path;
-  properties: T.PresentationProperty[];
+  path: P.Path;
+  properties: A.PresentationProperty[];
   singularLabel: string;
   helperText: React.ReactNode;
   error?: boolean;
-  strings: T.Strings;
+  strings: A.Strings;
   constraints: {
     max_items?: number;
   };
-  errors: T.PresentationError[];
+  errors: P.PresentationError[];
   addLabelTemplate?: string;
   addSiblingLabelTemplate?: string;
   defaultNewLabelTemplate?: string;
-  onChange: (value: T.ApplicationVariables[]) => any;
+  onChange: (value: P.ApplicationVariables[]) => any;
   onBlur: () => any;
   renderForm: (
     itemValue: any,
-    itemProperties: T.PresentationProperty[],
-    itemPath: T.Path,
+    itemProperties: A.PresentationProperty[],
+    itemPath: P.Path,
   ) => React.ReactNode;
   // Injected by withSelectedPath
-  selectedPath: T.Path;
-  prevSelectedPath: T.Path;
-  setSelectedPath: (path: T.Path) => any;
+  selectedPath: P.Path;
+  prevSelectedPath: P.Path;
+  setSelectedPath: (path: P.Path) => any;
 }
 
 interface ArrayInputState {
@@ -57,7 +58,7 @@ interface ArrayInputState {
 
 class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
   static defaultProps = {
-    value: [] as T.ApplicationVariables[],
+    value: [] as P.ApplicationVariables[],
     addLabelTemplate: 'Add a new {{label}}',
     addSiblingLabelTemplate: 'Add another {{label}}',
     defaultNewLabelTemplate: 'New ({{index}})',
@@ -67,8 +68,8 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     showDeletePrompt: false,
   };
 
-  deletedItemValue: T.ApplicationVariables;
-  deleteItemProperty: T.PresentationProperty;
+  deletedItemValue: P.ApplicationVariables;
+  deleteItemProperty: A.PresentationProperty;
 
   showDeletePrompt = () => {
     this.setState({ showDeletePrompt: true });
@@ -98,7 +99,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     return this.props.path.slice(2);
   }
 
-  getRootProperty(): T.PresentationProperty {
+  getRootProperty(): A.PresentationProperty {
     // Inputs don't receive the full property object so we need to create a "fake" property
     // with the dummy type and name to appease the PresentationProperty type. We may want to
     // re-think the api to pass in the full property object to all inputs.
@@ -110,7 +111,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     };
   }
 
-  hasMaxItems(value: T.ApplicationVariables[], constraints?: T.Constraints) {
+  hasMaxItems(value: P.ApplicationVariables[], constraints?: A.Constraints) {
     return (
       constraints !== undefined &&
       constraints.max_items !== undefined &&
@@ -127,7 +128,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     return errors.some(error => itemPath.every((p, i) => p === error.path[i]));
   }
 
-  getLocalSelectedPath(selectedPath: T.Path) {
+  getLocalSelectedPath(selectedPath: P.Path) {
     // The local selected path is the intersection of the root path and the selected path.
     // The root path and the selected path contains the full path starting from the top-most
     // array input. For a nested array input to compute it's value and properties at a given
@@ -137,7 +138,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     return selectedPath.filter((p, i) => p !== rootPath[i]);
   }
 
-  renderBreadcrumb(selectedPath: T.Path) {
+  renderBreadcrumb(selectedPath: P.Path) {
     const { value, label, setSelectedPath } = this.props;
     const crumbEls: React.ReactNode[] = [];
     const crumbs = getCrumbsFromPath(selectedPath);
@@ -180,7 +181,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     );
   }
 
-  renderItemForm(selectedPath: T.Path) {
+  renderItemForm(selectedPath: P.Path) {
     const { value, renderForm } = this.props;
 
     const crumbs = getCrumbsFromPath(selectedPath);
@@ -213,10 +214,10 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
   }
 
   renderDeletePrompt(
-    itemValue: T.ApplicationVariables[],
-    itemProperty: T.PresentationProperty,
-    selectedPath: T.Path,
-    crumbs: T.Crumbs,
+    itemValue: P.ApplicationVariables[],
+    itemProperty: A.PresentationProperty,
+    selectedPath: P.Path,
+    crumbs: P.Crumbs,
   ) {
     const { value, onChange, setSelectedPath } = this.props;
     const { showDeletePrompt } = this.state;
@@ -289,7 +290,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     );
   }
 
-  renderContents(selectedPath: T.Path) {
+  renderContents(selectedPath: P.Path) {
     // An array input can have nested array inputs and thus recursively renders.
     // When a selected item has an array input it renders the item's app vars with
     // the path to the item. We know we need to render the list field when the length
@@ -302,7 +303,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
       : this.renderList();
   }
 
-  renderAddSibling(selectedPath: T.Path): React.ReactNode {
+  renderAddSibling(selectedPath: P.Path): React.ReactNode {
     const {
       value,
       setSelectedPath,

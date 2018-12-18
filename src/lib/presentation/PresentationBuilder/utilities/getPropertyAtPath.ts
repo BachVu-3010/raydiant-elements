@@ -1,11 +1,12 @@
-import * as T from '../../PresentationTypes';
+import * as A from '../../../application/ApplicationTypes';
+import * as P from '../../PresentationTypes';
 
 // Returns the presentation property of an array input type for
 // the path of the selected item.
 export default function getPropertyAtPath(
-  rootProperty: T.PresentationProperty,
-  path: T.Path,
-): T.PresentationProperty {
+  rootProperty: A.PresentationProperty,
+  path: P.Path,
+): A.PresentationProperty {
   // The selected item's index is irrelevant, remove numbers from the path.
   const propertyPath = path.filter(p => typeof p === 'string');
   // console.log(property, propertyPath);

@@ -1,5 +1,6 @@
 import * as immutable from 'object-path-immutable';
 import * as React from 'react';
+import * as A from '../../application/ApplicationTypes';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
 import Link from '../../core/Link';
@@ -11,7 +12,7 @@ import withThemeSelector from '../../core/withThemeSelector';
 import Column from '../../layout/Column';
 import OneThirdLayout from '../../layout/OneThirdLayout';
 import Spacer from '../../layout/Spacer';
-import * as T from '../PresentationTypes';
+import * as P from '../PresentationTypes';
 import ArrayInput from './ArrayInput';
 import BooleanInput from './BooleanInput';
 import DateInput from './DateInput';
@@ -32,32 +33,32 @@ import getErrorAtPath from './utilities/getErrorAtPath';
 import validatePresentation from './validatePresentation';
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
-  presentation: T.Presentation;
-  appVersion: T.AppVersion;
-  themes: T.Theme[];
+  presentation: P.Presentation;
+  appVersion: A.AppVersion;
+  themes: P.Theme[];
   warnings: React.ReactNode[];
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration: number;
   onCancel?: () => void;
-  onSave?: (presentation: T.Presentation) => void;
+  onSave?: (presentation: P.Presentation) => void;
   onChange: (
-    presentation: T.Presentation,
-    prop: T.PresentationProperty,
-    path: T.Path,
+    presentation: P.Presentation,
+    prop: A.PresentationProperty,
+    path: P.Path,
     value: any,
     file?: File,
   ) => void;
   children?: (
-    presentation: T.Presentation,
-    errors: T.PresentationError[],
+    presentation: P.Presentation,
+    errors: P.PresentationError[],
   ) => React.ReactNode;
 }
 
 interface PresentationBuilderState {
-  presentation: T.Presentation;
-  previewPresentation: T.Presentation;
+  presentation: P.Presentation;
+  previewPresentation: P.Presentation;
   validate: boolean;
-  previewMode: T.PreviewMode;
+  previewMode: P.PreviewMode;
 }
 
 export class PresentationBuilder extends React.Component<
@@ -70,10 +71,10 @@ export class PresentationBuilder extends React.Component<
     presentation: this.props.presentation,
     previewPresentation: this.props.presentation,
     validate: false,
-    previewMode: T.PreviewMode.Horizontal,
+    previewMode: P.PreviewMode.Horizontal,
   };
 
-  queuedPresentationPreview: T.Presentation | null = null;
+  queuedPresentationPreview: P.Presentation | null = null;
 
   handleSave = () => {
     const { onSave, appVersion, minDuration } = this.props;
@@ -97,9 +98,9 @@ export class PresentationBuilder extends React.Component<
   };
 
   updatePresentation(
-    path: T.Path,
+    path: P.Path,
     value: any,
-    property: T.PresentationProperty,
+    property: A.PresentationProperty,
     file?: File,
   ) {
     const { onChange, appVersion, minDuration } = this.props;
@@ -139,11 +140,11 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderForm(
-    appVars: T.ApplicationVariables,
-    properties: T.PresentationProperty[],
-    path: T.Path,
-    strings: T.Strings,
-    errors: T.PresentationError[],
+    appVars: P.ApplicationVariables,
+    properties: A.PresentationProperty[],
+    path: P.Path,
+    strings: A.Strings,
+    errors: P.PresentationError[],
   ) {
     const formInputs = properties.map(property => {
       const inputPath = [...path, property.name];
@@ -163,19 +164,19 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderInput(
-    property: T.PresentationProperty,
+    property: A.PresentationProperty,
     value: any = property.default,
     parentValue: any,
-    path: T.Path,
-    strings: T.Strings,
-    errors?: T.PresentationError[],
+    path: P.Path,
+    strings: A.Strings,
+    errors?: P.PresentationError[],
   ): React.ReactNode {
     const { themes } = this.props;
     const { presentation } = this.state;
 
     const key = property.name;
     const label = strings[property.name] || property.name;
-    const constraints: T.Constraints = property.constraints || {};
+    const constraints: A.Constraints = property.constraints || {};
 
     const inputError = getErrorAtPath(errors, path);
     const hasError = !!inputError;
@@ -410,8 +411,8 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderInputHelperText(
-    property: T.PresentationProperty,
-    path: T.Path,
+    property: A.PresentationProperty,
+    path: P.Path,
     error?: string,
   ) {
     let helperText: React.ReactNode;

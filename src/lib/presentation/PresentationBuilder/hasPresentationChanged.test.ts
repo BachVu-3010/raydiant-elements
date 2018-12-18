@@ -1,4 +1,4 @@
-import * as T from '../PresentationTypes';
+import * as A from '../../application/ApplicationTypes';
 import hasPresentationChanged from './hasPresentationChanged';
 
 const defaultProps = (presentation = {}, appVersion = {}) => ({
@@ -15,7 +15,7 @@ const defaultProps = (presentation = {}, appVersion = {}) => ({
   appVersion: {
     id: 'b',
     name: 'appVersion',
-    presentationProperties: [] as T.PresentationProperty[],
+    presentationProperties: [] as A.PresentationProperty[],
     strings: {},
     ...appVersion,
   },
