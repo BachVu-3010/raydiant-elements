@@ -1,4 +1,3 @@
-import cn from 'classnames';
 import * as React from 'react';
 import Row from '../../layout/Row';
 import { Theme } from '../../theme';
@@ -15,30 +14,21 @@ const styles = (theme: Theme) =>
       paddingTop: theme.spacing.unit,
       paddingBottom: theme.spacing.unit,
       borderBottom: '1px solid transparent',
-      '&:not(:last-child)': {
-        borderBottomColor: theme.popover.borderColor,
-      },
+      borderTop: `1px solid ${theme.popover.borderColor}`,
       minHeight: 68,
-    },
-    cursorPointer: {
-      cursor: 'pointer',
     },
     row: {
       alignItems: 'center',
+      justifyContent: 'space-between',
     },
   });
 
-export interface ItemProps extends WithStyles<typeof styles> {
-  onClick?: () => void;
-}
+export interface FooterProps extends WithStyles<typeof styles> {}
 
-const Item: React.SFC<ItemProps> = ({ classes, children, onClick }) => (
-  <div
-    className={cn(classes.root, onClick && classes.cursorPointer)}
-    onClick={onClick}
-  >
+const Footer: React.SFC<FooterProps> = ({ classes, children }) => (
+  <div className={classes.root}>
     <Row className={classes.row}>{children}</Row>
   </div>
 );
 
-export default withStyles(styles)(Item);
+export default withStyles(styles)(Footer);

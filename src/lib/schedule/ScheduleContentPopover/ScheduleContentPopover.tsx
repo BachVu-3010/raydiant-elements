@@ -29,7 +29,8 @@ export const ScheduleContentPopover: React.SFC<ScheduleContentPopoverProps> = ({
     to={['top', 'right']}
     open={open}
     onOverlayClick={onClose}
-    size="auto"
+    width="auto"
+    height="auto"
     color="light"
   >
     <div className={classes.root}>{children}</div>

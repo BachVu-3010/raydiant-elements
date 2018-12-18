@@ -5,6 +5,7 @@ import withStyles, { createStyles, WithStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      flexShrink: 0,
       background: theme.popover.headerBackground,
       padding: theme.spacing.unit * 2,
       borderBottom: `1px solid ${theme.popover.borderColor}`,

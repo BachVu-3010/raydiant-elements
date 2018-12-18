@@ -16,20 +16,25 @@ initialState = {
   },
   open: false,
 };
-<Row inline>
-  <Popover.Anchor>
-    <Button
-      onClick={() => {
-        setState({ open: true });
-      }}
-      label="open"
-    />
-    <ManageGroupPopover
-      {...state}
-      onOverlayClick={() => {
-        setState({ open: false });
-      }}
-    />
-  </Popover.Anchor>
-</Row>;
+
+<App>
+  <Row inline>
+    <Spacer />
+    <Popover.Anchor>
+      <Button
+        onClick={() => {
+          setState({ open: true });
+        }}
+        label="open"
+      />
+      <ManageGroupPopover
+        {...state}
+        onOverlayClick={() => {
+          setState({ open: false });
+        }}
+      />
+    </Popover.Anchor>
+    <Spacer />
+  </Row>
+</App>;
 ```

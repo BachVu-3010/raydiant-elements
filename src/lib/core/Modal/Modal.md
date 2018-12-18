@@ -7,8 +7,10 @@ const Content = ({ children }) => (
   <div style={{ padding: '16px' }}>{children}</div>
 );
 
-<>
-  <Button label="Open" onClick={() => setState({ open: true })} />
+<App>
+  <Row>
+    <Button label="Open" onClick={() => setState({ open: true })} />
+  </Row>
   <Modal open={state.open} onOverlayClick={() => setState({ open: false })}>
     <Content>
       <Button
@@ -18,5 +20,5 @@ const Content = ({ children }) => (
       />
     </Content>
   </Modal>
-</>;
+</App>;
 ```

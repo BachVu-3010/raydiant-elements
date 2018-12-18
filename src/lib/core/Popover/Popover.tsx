@@ -1,12 +1,16 @@
+import * as cn from 'classnames';
 import * as React from 'react';
 import Overlay from '../../internal/Overlay';
+import Hidden from '../../layout/Hidden';
 import withStyles, { WithStyles } from '../withStyles';
 import withThemeSelector from '../withThemeSelector';
 import Anchor from './Anchor';
 import Body from './Body';
+import Footer from './Footer';
 import Header from './Header';
 import Item from './Item';
 import styles from './Popover.styles';
+import PopoverPortal from './PopoverPortal';
 import translations, { XPosition, YPosition } from './translations';
 
 export interface PopoverProps extends WithStyles<typeof styles> {
@@ -16,7 +20,8 @@ export interface PopoverProps extends WithStyles<typeof styles> {
   anchor: [YPosition, XPosition];
   /** The corner of the container to fix the anchor to */
   to: [YPosition, XPosition];
-  size?: 'auto';
+  width?: 'auto';
+  height?: 'auto';
   /** Called when the user clicks the overlay  */
   onOverlayClick: () => any;
   /** The popover contents */
@@ -28,7 +33,8 @@ export const Popover: React.SFC<PopoverProps> = ({
   open = false,
   anchor = ['top', 'left'],
   to = ['bottom', 'left'],
-  size,
+  width,
+  height,
   onOverlayClick,
   children,
 }) => {
@@ -40,20 +46,36 @@ export const Popover: React.SFC<PopoverProps> = ({
   const toX = to[1] as XPosition;
   const translate = translations[anchorY][anchorX][toY][toX];
 
+  const className = cn(
+    classes.popover,
+    width === 'auto' && classes.autoWidth,
+    height === 'auto' && classes.autoHeight,
+  );
+
   return (
     <>
-      <Overlay onClick={onOverlayClick} />
-      <div
-        className={classes.popover}
-        style={{
-          [toY]: -2, // should have a 2px buffer
-          [toX]: 0,
-          transform: `translate(${translate[0]}%, ${translate[1]}%)`,
-          width: size,
-        }}
-      >
-        {children}
-      </div>
+      <PopoverPortal>
+        <Hidden mdUp>
+          <div className={classes.popoverContainer}>
+            <Overlay onClick={onOverlayClick} />
+            <div className={className}>{children}</div>
+          </div>
+        </Hidden>
+      </PopoverPortal>
+      <Hidden smDown>
+        <Overlay className={classes.overlay} onClick={onOverlayClick} />
+        <div
+          className={className}
+          style={{
+            [toY]: -2, // should have a 2px buffer
+            [toX]: 0,
+            transform: `translate(${translate[0]}%, ${translate[1]}%)`,
+            width,
+          }}
+        >
+          {children}
+        </div>
+      </Hidden>
     </>
   );
 };
@@ -63,4 +85,5 @@ export default Object.assign(withThemeSelector(withStyles(styles)(Popover)), {
   Item,
   Header,
   Body,
+  Footer,
 });

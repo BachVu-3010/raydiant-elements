@@ -7,6 +7,7 @@ const styles = (theme: Theme) =>
       flex: 1,
       padding: theme.spacing.unit * 2,
       overflow: 'auto',
+      WebkitOverflowScrolling: 'touch',
     },
 
     grid: {

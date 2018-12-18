@@ -4,9 +4,9 @@ import withStyles, { createStyles, WithStyles } from '../withStyles';
 const styles = () =>
   createStyles({
     root: {
+      flex: 1,
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
-      maxHeight: '256px',
     },
   });
 

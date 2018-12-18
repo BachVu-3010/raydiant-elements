@@ -11,6 +11,11 @@ const common = {
     lg: '1.143rem', // 16px
     xl: '2.571rem', // 36px
   },
+  zIndex: {
+    menu: 1000,
+    modal: 2000,
+    popover: 3000,
+  },
   palette: {
     primary: {
       main: '#414698',

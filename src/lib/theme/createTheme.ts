@@ -159,6 +159,14 @@ declare module '@material-ui/core/styles/createPalette' {
   }
 }
 
+declare module '@material-ui/core/styles/zIndex' {
+  interface ZIndex {
+    menu: number;
+    modal: number;
+    popover: number;
+  }
+}
+
 export { Theme };
 
 export default function createTheme(options: ThemeOptions) {

@@ -10,7 +10,7 @@ const styles = (theme: Theme) =>
     header: {
       ...tabContainer(),
       position: 'relative',
-      zIndex: theme.zIndex.drawer + 10,
+      zIndex: theme.zIndex.menu + 10,
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
       paddingLeft: theme.spacing.unit * 2,
@@ -48,7 +48,7 @@ const styles = (theme: Theme) =>
     },
     overlay: {
       display: 'none',
-      zIndex: theme.zIndex.drawer - 10,
+      zIndex: theme.zIndex.menu - 10,
 
       [theme.breakpoints.down('sm')]: {
         display: 'block',

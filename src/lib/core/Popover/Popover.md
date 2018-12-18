@@ -3,6 +3,7 @@ initialState = {};
 
 <App>
   <Row>
+    <Spacer />
     <Popover.Anchor>
       <Button label="Items" onClick={() => setState({ multiple: true })} />
       <Popover
@@ -42,7 +43,7 @@ initialState = {};
         to={['bottom', 'left']}
         open={state.single}
         onOverlayClick={() => setState({ single: false })}
-        size="auto"
+        width="auto"
       >
         <Popover.Header>Single Item</Popover.Header>
         <Popover.Item>
@@ -56,6 +57,7 @@ initialState = {};
         </Popover.Item>
       </Popover>
     </Popover.Anchor>
+    <Spacer />
   </Row>
 </App>;
 ```
@@ -69,6 +71,7 @@ const Content = ({ label }) => (
 
 <App>
   <Row>
+    <Spacer />
     <Popover.Anchor>
       <Button label="Open" onClick={() => setState({ bltl: true })} />
       <Popover
@@ -76,7 +79,7 @@ const Content = ({ label }) => (
         to={['top', 'left']}
         open={state.bltl}
         onOverlayClick={() => setState({ bltl: false })}
-        size="auto"
+        width="auto"
       >
         <Content label="Anchor Bottom Left to Top Left" />
       </Popover>
@@ -88,7 +91,7 @@ const Content = ({ label }) => (
         to={['top', 'right']}
         open={state.brtr}
         onOverlayClick={() => setState({ brtr: false })}
-        size="auto"
+        width="auto"
       >
         <Content label="Anchor Bottom Right to Top Right" />
       </Popover>
@@ -100,7 +103,7 @@ const Content = ({ label }) => (
         to={['bottom', 'left']}
         open={state.tlbl}
         onOverlayClick={() => setState({ tlbl: false })}
-        size="auto"
+        width="auto"
       >
         <Content label="Anchor Top Left to Bottom Left" />
       </Popover>
@@ -112,11 +115,12 @@ const Content = ({ label }) => (
         to={['bottom', 'right']}
         open={state.trbr}
         onOverlayClick={() => setState({ trbr: false })}
-        size="auto"
+        width="auto"
       >
         <Content label="Anchor Top Right to Bottom Right" />
       </Popover>
     </Popover.Anchor>
+    <Spacer />
   </Row>
 </App>;
 ```

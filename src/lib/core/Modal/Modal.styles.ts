@@ -8,8 +8,8 @@ const styles = (theme: Theme) =>
       zIndex: theme.zIndex.modal,
       top: 0,
       left: 0,
-      width: '100%',
-      height: '100%',
+      width: '100vw',
+      height: '100vh',
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -28,6 +28,10 @@ const styles = (theme: Theme) =>
       color: theme.palette.text.primary,
       borderRadius: theme.shape.borderRadius,
       boxShadow: theme.modal.shadow,
+    },
+
+    overlay: {
+      zIndex: theme.zIndex.modal,
     },
   });
 

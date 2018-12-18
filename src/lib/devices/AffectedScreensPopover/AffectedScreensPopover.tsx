@@ -3,6 +3,8 @@ import AlertIcon from '../../core/AlertIcon';
 import Button from '../../core/Button';
 import Popover from '../../core/Popover';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import Hidden from '../../layout/Hidden';
+import Spacer from '../../layout/Spacer';
 import { Theme } from '../../theme';
 import * as T from '../DeviceTypes';
 
@@ -53,21 +55,42 @@ export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
             ? `Deleting this content will permanently remove content from ${screensText}:`
             : `Saving these changes will overwrite content on ${screensText}:`}
         </div>
-        {isDeleting ? (
-          <Button
-            label="Delete Anyway"
-            color="destructive"
-            onClick={onDelete}
-          />
-        ) : (
-          <Button label="Got it" onClick={onClose} />
-        )}
+        <Hidden smDown>
+          {isDeleting ? (
+            <Button
+              label="Delete Anyway"
+              color="destructive"
+              onClick={onDelete}
+            />
+          ) : (
+            <Button label="Got it" onClick={onClose} />
+          )}
+        </Hidden>
       </Popover.Header>
       <Popover.Body>
         {devices.map(device => (
           <Popover.Item key={device.id}>{device.name}</Popover.Item>
         ))}
       </Popover.Body>
+      <Hidden mdUp>
+        <Popover.Footer>
+          {isDeleting ? (
+            <>
+              <Button label="Cancel" onClick={onClose} />
+              <Button
+                label="Delete Anyway"
+                color="destructive"
+                onClick={onDelete}
+              />
+            </>
+          ) : (
+            <>
+              <Spacer />
+              <Button label="Got it" onClick={onClose} />
+            </>
+          )}
+        </Popover.Footer>
+      </Hidden>
     </Popover>
   );
 };

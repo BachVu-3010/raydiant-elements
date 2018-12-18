@@ -30,7 +30,7 @@ export class Modal extends React.Component<ModalProps, {}> {
       <ModalPortal>
         {open && (
           <div className={classes.root}>
-            <Overlay onClick={onOverlayClick} />
+            <Overlay className={classes.overlay} onClick={onOverlayClick} />
             <div className={classes.modal}>{children}</div>
           </div>
         )}

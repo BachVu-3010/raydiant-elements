@@ -232,7 +232,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
         anchor={['top', 'right']}
         to={['top', 'right']}
         open={showDeletePrompt}
-        size="auto"
+        width="auto"
         onOverlayClick={this.hideDeletePrompt}
       >
         <Popover.Header>Delete {itemLabel}?</Popover.Header>
