@@ -28,6 +28,7 @@ const styles = (theme: Theme) =>
       paddingRight: theme.spacing.unit * 2,
 
       [heightUpBp]: {
+        paddingRight: 0,
         marginBottom: theme.spacing.unit * 2,
       },
     },
