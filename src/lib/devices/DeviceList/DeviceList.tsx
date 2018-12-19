@@ -12,8 +12,11 @@ export interface DeviceListProps extends WithStyles<typeof styles> {}
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      overflow: 'scroll',
+      WebkitOverflowScrolling: 'touch',
+
       [theme.breakpoints.up('sm')]: {
-        margin: theme.spacing.unit * 2,
+        padding: theme.spacing.unit * 2,
       },
     },
   });
