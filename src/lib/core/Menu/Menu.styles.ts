@@ -7,6 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       position: 'relative',
     },
+    isCollapsed: {},
     header: {
       ...tabContainer(),
       position: 'relative',
@@ -17,7 +18,7 @@ const styles = (theme: Theme) =>
       paddingRight: theme.spacing.unit * 2,
       height: 68,
 
-      [theme.breakpoints.down('xs')]: {
+      '$isCollapsed &': {
         paddingLeft: 0,
         paddingRight: 0,
       },
@@ -27,11 +28,11 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'row',
 
-      [theme.breakpoints.down('xs')]: {
+      '$isCollapsed &': {
         display: 'none',
       },
     },
-    mobile: {
+    collapsed: {
       flex: 1,
       display: 'none',
       flexDirection: 'row',
@@ -39,20 +40,19 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       paddingRight: theme.spacing.unit * 2,
 
-      [theme.breakpoints.down('xs')]: {
+      '$isCollapsed &': {
         display: 'flex',
       },
     },
     label: {
       marginRight: theme.spacing.unit * 2,
+      maxWidth: 160,
+      textOverflow: 'ellipsis',
+      whiteSpace: 'nowrap',
+      overflow: 'hidden',
     },
     overlay: {
-      display: 'none',
       zIndex: theme.zIndex.menu - 10,
-
-      [theme.breakpoints.down('sm')]: {
-        display: 'block',
-      },
     },
   });
 
