@@ -5,11 +5,15 @@ import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
 import Link from '../../core/Link';
 import NumberField from '../../core/NumberField';
+import Popover from '../../core/Popover';
 import Text from '../../core/Text';
 import TextField from '../../core/TextField';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
+import AffectedScreensPopover from '../../devices/AffectedScreensPopover';
+import * as D from '../../devices/DeviceTypes';
 import Column from '../../layout/Column';
+import Hidden from '../../layout/Hidden';
 import OneThirdLayout from '../../layout/OneThirdLayout';
 import Spacer from '../../layout/Spacer';
 import * as P from '../PresentationTypes';
@@ -29,19 +33,19 @@ import SelectionInput from './SelectionInput';
 import StringInput from './StringInput';
 import TextInput from './TextInput';
 import ThemeInput from './ThemeInput';
-import getErrorAtPath from './utilities/getErrorAtPath';
+import { getErrorAtPath, isPathEqual } from './utilities';
 import validatePresentation from './validatePresentation';
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation: P.Presentation;
   appVersion: A.AppVersion;
   themes: P.Theme[];
-  warnings: React.ReactNode[];
+  affectedDevices: D.Device[];
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration: number;
   onCancel?: () => void;
-  onSave?: (presentation: P.Presentation) => void;
-  onChange: (
+  onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
+  onChange?: (
     presentation: P.Presentation,
     prop: A.PresentationProperty,
     path: P.Path,
@@ -54,11 +58,18 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   ) => React.ReactNode;
 }
 
+interface FileUpload {
+  path: P.Path;
+  file: File;
+}
+
 interface PresentationBuilderState {
   presentation: P.Presentation;
   previewPresentation: P.Presentation;
   validate: boolean;
   previewMode: P.PreviewMode;
+  files: FileUpload[];
+  showAffectedDevices: boolean;
 }
 
 export class PresentationBuilder extends React.Component<
@@ -72,20 +83,22 @@ export class PresentationBuilder extends React.Component<
     previewPresentation: this.props.presentation,
     validate: false,
     previewMode: P.PreviewMode.Horizontal,
+    files: [] as FileUpload[],
+    showAffectedDevices: false,
   };
 
   queuedPresentationPreview: P.Presentation | null = null;
 
   handleSave = () => {
     const { onSave, appVersion, minDuration } = this.props;
-    const { presentation } = this.state;
+    const { presentation, files } = this.state;
 
     this.setState({ validate: true });
 
     // Only call the onSave handler with valid presentations.
     const errors = validatePresentation(presentation, appVersion, minDuration);
     if (errors.length === 0) {
-      onSave(presentation);
+      onSave(presentation, files);
     }
   };
 
@@ -128,7 +141,14 @@ export class PresentationBuilder extends React.Component<
         this.queuedPresentationPreview = null;
         shouldUpdatePreview = true;
       }
-      onChange(updatedPresentation, property, path, value, file);
+
+      if (property.type === 'file') {
+        this.handleFileChange(path, file);
+      }
+
+      if (onChange) {
+        onChange(updatedPresentation, property, path, value, file);
+      }
     }
 
     this.setState({
@@ -137,6 +157,32 @@ export class PresentationBuilder extends React.Component<
         ? updatedPresentation
         : previewPresentation,
     });
+  }
+
+  handleFileChange(path: P.Path, file: File) {
+    const { files } = this.state;
+
+    if (file) {
+      const existingFileAtPath = files.find(f => isPathEqual(f.path, path));
+      if (existingFileAtPath) {
+        // Update file upload at path.
+        this.setState({
+          files: files.map(f =>
+            f === existingFileAtPath ? { path, file } : f,
+          ),
+        });
+      } else {
+        // Add file upload.
+        this.setState({
+          files: [...files, { path, file }],
+        });
+      }
+    } else {
+      // Remove file upload.
+      this.setState({
+        files: files.filter(f => !isPathEqual(f.path, path)),
+      });
+    }
   }
 
   renderForm(
@@ -183,6 +229,7 @@ export class PresentationBuilder extends React.Component<
     const helperText = this.renderInputHelperText(
       property,
       path,
+      strings,
       inputError ? inputError : '',
     );
 
@@ -413,6 +460,7 @@ export class PresentationBuilder extends React.Component<
   renderInputHelperText(
     property: A.PresentationProperty,
     path: P.Path,
+    strings: A.Strings,
     error?: string,
   ) {
     let helperText: React.ReactNode;
@@ -422,11 +470,11 @@ export class PresentationBuilder extends React.Component<
     } else if (property.helper_link) {
       helperText = (
         <Link target="_blank" href={property.helper_link}>
-          {property.helper_text}
+          {strings[property.helper_text] || property.helper_text}
         </Link>
       );
     } else if (property.helper_text) {
-      helperText = property.helper_text;
+      helperText = strings[property.helper_text] || property.helper_text;
     } else if (path.length <= 2) {
       // Inputs should always account for helper text spacing even if there isn't
       // any helper text displayed but only at the root (when path <= 2).
@@ -437,12 +485,55 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderWarnings() {
-    const { warnings = [] } = this.props;
+    const { presentation, appVersion, affectedDevices } = this.props;
+    const warnings = [];
+
+    if (appVersion.embeddedUrlFormat) {
+      warnings.push('Preview not available for this application');
+    }
+
+    if (presentation.appVersionId !== appVersion.id) {
+      warnings.push(
+        'Saving will update content to the newer version of the app, and may cause visual changes.',
+      );
+    }
+
+    if (affectedDevices.length) {
+      const count = affectedDevices.length;
+      warnings.push(
+        <span>
+          Saving these changes will affect&nbsp;
+          <Link onClick={() => this.setState({ showAffectedDevices: true })}>
+            {count > 1 ? `${count} screens` : '1 screen'}
+          </Link>
+        </span>,
+      );
+    }
+
     return warnings.map((warning, i) => (
       <PresentationBuilderWarning key={i} color="light">
         {warning}
       </PresentationBuilderWarning>
     ));
+  }
+
+  renderPreview() {
+    const { appVersion, children, minDuration } = this.props;
+    const { previewMode, previewPresentation } = this.state;
+
+    return (
+      <PresentationBuilderPreview
+        color="dark"
+        appVersion={appVersion}
+        previewMode={previewMode}
+        onPreviewModeChange={value => this.setState({ previewMode: value })}
+      >
+        {children(
+          previewPresentation,
+          validatePresentation(previewPresentation, appVersion, minDuration),
+        )}
+      </PresentationBuilderPreview>
+    );
   }
 
   render() {
@@ -453,14 +544,9 @@ export class PresentationBuilder extends React.Component<
       minDuration,
       onSave,
       onCancel,
-      children,
+      affectedDevices,
     } = this.props;
-    const {
-      presentation,
-      previewPresentation,
-      validate,
-      previewMode,
-    } = this.state;
+    const { presentation, validate, showAffectedDevices } = this.state;
 
     const shouldDisableSave = !hasPresentationChanged(
       originalPresentation,
@@ -485,6 +571,7 @@ export class PresentationBuilder extends React.Component<
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
           <div className={classes.scroll}>
+            <Hidden smUp>{this.renderPreview()}</Hidden>
             <div className={classes.title}>
               <Text muted>Presentation Details</Text>
             </div>
@@ -498,6 +585,7 @@ export class PresentationBuilder extends React.Component<
                 helperText={this.renderInputHelperText(
                   nameProp,
                   namePath,
+                  appVersion.strings,
                   nameError,
                 )}
                 error={!!nameError}
@@ -526,6 +614,7 @@ export class PresentationBuilder extends React.Component<
                   helperText={this.renderInputHelperText(
                     durationProp,
                     durationPath,
+                    appVersion.strings,
                     durationError,
                   )}
                   error={!!durationError}
@@ -541,32 +630,25 @@ export class PresentationBuilder extends React.Component<
             {onCancel && <Button label="Cancel" onClick={onCancel} />}
             <Spacer />
             {onSave && (
-              <Button
-                label="Save"
-                color="progress"
-                disabled={shouldDisableSave}
-                onClick={this.handleSave}
-              />
+              <Popover.Anchor>
+                <Button
+                  label="Save"
+                  color="progress"
+                  disabled={shouldDisableSave}
+                  onClick={this.handleSave}
+                />
+                <AffectedScreensPopover
+                  open={showAffectedDevices}
+                  devices={affectedDevices}
+                  onClose={() => this.setState({ showAffectedDevices: false })}
+                />
+              </Popover.Anchor>
             )}
           </ActionBar>
         </OneThirdLayout.ColumnSmall>
 
         <OneThirdLayout.ColumnLarge>
-          <PresentationBuilderPreview
-            color="dark"
-            appVersion={appVersion}
-            previewMode={previewMode}
-            onPreviewModeChange={value => this.setState({ previewMode: value })}
-          >
-            {children(
-              previewPresentation,
-              validatePresentation(
-                previewPresentation,
-                appVersion,
-                minDuration,
-              ),
-            )}
-          </PresentationBuilderPreview>
+          {this.renderPreview()}
         </OneThirdLayout.ColumnLarge>
       </OneThirdLayout>
     );

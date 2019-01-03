@@ -13,11 +13,13 @@ import Column from '../../../layout/Column';
 import Row from '../../../layout/Row';
 import Spacer from '../../../layout/Spacer';
 import * as P from '../../PresentationTypes';
-import createDefaultValue from '../utilities/createDefaultValue';
-import getCrumbsFromPath from '../utilities/getCrumbsFromPath';
-import getItemLabel from '../utilities/getItemLabel';
-import getPropertyAtPath from '../utilities/getPropertyAtPath';
-import getValueAtPath from '../utilities/getValueAtPath';
+import {
+  createDefaultValue,
+  getCrumbsFromPath,
+  getItemLabel,
+  getPropertyAtPath,
+  getValueAtPath,
+} from '../utilities';
 import AddButton from './AddButton';
 import styles from './ArrayInput.styles';
 import RemoveButton from './RemoveButton';

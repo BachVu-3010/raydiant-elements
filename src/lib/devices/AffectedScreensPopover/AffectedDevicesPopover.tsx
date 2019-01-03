@@ -8,12 +8,12 @@ import Spacer from '../../layout/Spacer';
 import { Theme } from '../../theme';
 import * as T from '../DeviceTypes';
 
-interface AffectedScreensPopoverProps extends WithStyles<typeof styles> {
+interface AffectedDevicesPopoverProps extends WithStyles<typeof styles> {
   devices: T.Device[];
   open: boolean;
   isDeleting?: boolean;
   onClose: () => void;
-  onDelete: () => void;
+  onDelete?: () => void;
 }
 
 const styles = (theme: Theme) =>
@@ -29,7 +29,7 @@ const styles = (theme: Theme) =>
     },
   });
 
-export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
+export const AffectedDevicesPopover: React.SFC<AffectedDevicesPopoverProps> = ({
   devices = [],
   open,
   isDeleting,
@@ -95,4 +95,4 @@ export const AffectedScreensPopover: React.SFC<AffectedScreensPopoverProps> = ({
   );
 };
 
-export default withStyles(styles)(AffectedScreensPopover);
+export default withStyles(styles)(AffectedDevicesPopover);

@@ -61,4 +61,5 @@ export interface AppVersion {
   // dynamic duration (responsible for firing their own onComplete). We still
   // need to support it for legacy apps and embedded apps.
   hasConfigurableDuration?: boolean;
+  embeddedUrlFormat?: string;
 }

@@ -1,2 +1,2 @@
-import AffectedScreensPopover from './AffectedScreensPopover';
-export default AffectedScreensPopover;
+import AffectedDevicesPopover from './AffectedDevicesPopover';
+export default AffectedDevicesPopover;

@@ -18,7 +18,13 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      margin: 30,
+      height: 192,
+      marginTop: theme.spacing.unit * 2,
+
+      [theme.breakpoints.up('sm')]: {
+        height: 'auto',
+        margin: 30,
+      },
     },
 
     footer: {

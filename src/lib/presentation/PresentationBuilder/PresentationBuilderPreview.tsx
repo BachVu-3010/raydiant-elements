@@ -3,6 +3,7 @@ import * as A from '../../application/ApplicationTypes';
 import Tab from '../../core/Tab';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
+import Hidden from '../../layout/Hidden';
 import PresentationPreview from '../PresentationPreview';
 import * as P from '../PresentationTypes';
 import styles from './PresentationBuilderPreview.styles';
@@ -53,20 +54,22 @@ class PresentationBuilderPreview extends React.Component<
               </div>
             )}
           </div>
-          <Tab.Container inline>
-            <Tab
-              icon="horizontalScreen"
-              label="Horizontal"
-              active={previewMode === P.PreviewMode.Horizontal}
-              onClick={() => onPreviewModeChange(P.PreviewMode.Horizontal)}
-            />
-            <Tab
-              icon="verticalScreen"
-              label="Vertical"
-              active={previewMode === P.PreviewMode.Vertical}
-              onClick={() => onPreviewModeChange(P.PreviewMode.Vertical)}
-            />
-          </Tab.Container>
+          <Hidden smDown>
+            <Tab.Container inline>
+              <Tab
+                icon="horizontalScreen"
+                label="Horizontal"
+                active={previewMode === P.PreviewMode.Horizontal}
+                onClick={() => onPreviewModeChange(P.PreviewMode.Horizontal)}
+              />
+              <Tab
+                icon="verticalScreen"
+                label="Vertical"
+                active={previewMode === P.PreviewMode.Vertical}
+                onClick={() => onPreviewModeChange(P.PreviewMode.Vertical)}
+              />
+            </Tab.Container>
+          </Hidden>
         </div>
       </div>
     );
