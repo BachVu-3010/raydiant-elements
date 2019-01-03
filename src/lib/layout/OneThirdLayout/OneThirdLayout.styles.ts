@@ -7,6 +7,8 @@ const styles = createStyles({
     flexDirection: 'row',
     alignItems: 'stretch',
     justifyContent: 'center',
+    // Fix for FF overflow.
+    minHeight: 0,
   },
 });
 
