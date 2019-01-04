@@ -20,16 +20,16 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
       device: deviceGroup,
       onConnectivityWizardClick,
       onPublish,
+      disablePublish,
     } = this.props;
     const {
       isOnline,
-      hasAFileError,
+      hasFileError,
       onlineCount,
       resinCount,
       deviceCount,
       devicesWithErrorsCount,
       needsPublish,
-      isPublishing,
       id,
     } = deviceGroup;
     return (
@@ -47,7 +47,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
             <DeviceList.Controls
               showPublish={needsPublish}
               onPublish={() => onPublish(id)}
-              isPublishing={isPublishing}
+              disablePublish={disablePublish}
             />
           )
         }
@@ -62,7 +62,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
         deviceStatusElement={
           <DeviceStatus
             isOnline={isOnline}
-            hasAFileError={hasAFileError}
+            hasFileError={hasFileError}
             onConnectivityWizardClick={onConnectivityWizardClick}
             onlineCount={onlineCount}
             resinCount={resinCount}

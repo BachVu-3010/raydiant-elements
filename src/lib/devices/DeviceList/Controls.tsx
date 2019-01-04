@@ -4,13 +4,13 @@ import Button from '../../core/Button';
 export interface ControlsProps {
   showPublish: boolean;
   onPublish: () => void;
-  isPublishing: boolean;
+  disablePublish: boolean;
 }
 
 export const Controls: React.SFC<ControlsProps> = ({
   showPublish,
   onPublish,
-  isPublishing,
+  disablePublish,
 }) => (
   <>
     <Button icon="add" label="Add Content" />
@@ -20,7 +20,7 @@ export const Controls: React.SFC<ControlsProps> = ({
         label="Publish"
         color="primary"
         onClick={onPublish}
-        disabled={isPublishing}
+        disabled={disablePublish}
       />
     )}
   </>

@@ -12,6 +12,7 @@ export interface DeviceBaseProps {
   device: T.Device | T.DeviceGroup;
   isManageMode: boolean;
   isSelected: boolean;
+  disablePublish?: boolean;
   onSelect: (id: string, selected: boolean) => any;
   onConnectivityWizardClick: () => void;
   onPublish: (deviceId: string) => void;

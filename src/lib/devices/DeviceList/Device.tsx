@@ -12,15 +12,9 @@ class Device extends React.Component<DeviceBaseProps> {
       device,
       onConnectivityWizardClick,
       onPublish,
+      disablePublish,
     } = this.props;
-    const {
-      isOnline,
-      hasAFileError,
-      isResin,
-      needsPublish,
-      id,
-      isPublishing,
-    } = device;
+    const { isOnline, hasFileError, isResin, needsPublish, id } = device;
     return (
       <DeviceBase
         controlsElement={
@@ -28,7 +22,7 @@ class Device extends React.Component<DeviceBaseProps> {
             <DeviceList.Controls
               showPublish={needsPublish}
               onPublish={() => onPublish(id)}
-              isPublishing={isPublishing}
+              disablePublish={disablePublish}
             />
           )
         }
@@ -38,7 +32,7 @@ class Device extends React.Component<DeviceBaseProps> {
         deviceStatusElement={
           <DeviceStatus
             isOnline={isOnline}
-            hasAFileError={hasAFileError}
+            hasFileError={hasFileError}
             onConnectivityWizardClick={onConnectivityWizardClick}
             isResin={isResin}
           />

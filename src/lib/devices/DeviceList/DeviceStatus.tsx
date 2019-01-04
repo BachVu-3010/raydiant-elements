@@ -14,7 +14,7 @@ enum Errors {
 }
 
 export interface DeviceStatusProps extends WithStyles<typeof styles> {
-  hasAFileError: boolean;
+  hasFileError: boolean;
   isOnline: boolean;
   onConnectivityWizardClick: () => void;
   onlineCount?: number;
@@ -39,14 +39,14 @@ const styles = (theme: Theme) =>
 
 export class DeviceStatus extends React.Component<DeviceStatusProps> {
   renderDeviceError = () => {
-    const { isOnline, hasAFileError, isResin } = this.props;
+    const { isOnline, hasFileError, isResin } = this.props;
     let element;
     if (!isOnline && isResin) {
       element = this.renderError(Errors.Offline, {
         severity: 'error',
         showConnectivityWizard: true,
       });
-    } else if (hasAFileError) {
+    } else if (hasFileError) {
       element = this.renderError(Errors.Generic, { severity: 'error' });
     }
     return element;
@@ -62,7 +62,7 @@ export class DeviceStatus extends React.Component<DeviceStatusProps> {
     },
   ) => {
     const { classes, onConnectivityWizardClick } = this.props;
-    // This is for the scenario where the device !isResin && !hasAFileError
+    // This is for the scenario where the device !isResin && !hasFileError
     if (!error) {
       return null;
     }
@@ -126,7 +126,7 @@ export class DeviceStatus extends React.Component<DeviceStatusProps> {
   };
 
   render() {
-    const { isOnline, hasAFileError, classes, deviceCount } = this.props;
+    const { isOnline, hasFileError, classes, deviceCount } = this.props;
     // Using deviceCount to test if a DeviceGroup is passed in.
     const isDeviceGroup = !isNaN(deviceCount);
 
@@ -136,7 +136,7 @@ export class DeviceStatus extends React.Component<DeviceStatusProps> {
       );
     }
 
-    const isError = !isOnline || hasAFileError;
+    const isError = !isOnline || hasFileError;
     return (
       <div className={classes.root}>
         {isError ? this.renderDeviceError() : this.renderOnlineStatus()}
