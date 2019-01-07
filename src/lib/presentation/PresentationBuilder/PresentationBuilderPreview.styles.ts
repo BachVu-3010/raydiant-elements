@@ -12,7 +12,6 @@ const styles = (theme: Theme) =>
     },
 
     preview: {
-      flex: 1,
       position: 'relative',
       display: 'flex',
       flexDirection: 'column',
@@ -22,6 +21,7 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing.unit * 2,
 
       [theme.breakpoints.up('sm')]: {
+        flex: 1,
         height: 'auto',
         margin: 30,
       },

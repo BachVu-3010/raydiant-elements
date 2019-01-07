@@ -75,8 +75,7 @@ export class PresentationThumbnail extends React.Component<
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
     const shouldShowControls = showControls || isHover;
-    const shouldShowEdit =
-      onEdit && shouldShowControls && !hasError && !isLoading;
+    const shouldShowEdit = onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowError = hasError && !shouldShowSelect;
     const shouldShowProgress = isLoading;
