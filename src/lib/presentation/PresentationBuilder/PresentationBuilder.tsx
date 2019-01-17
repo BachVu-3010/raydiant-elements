@@ -131,6 +131,7 @@ export class PresentationBuilder extends React.Component<
       appVersion,
       minDuration,
     );
+
     let shouldUpdatePreview = false;
     if (errors.length === 0) {
       // Delay updating the preview for text and string inputs until onBlur.

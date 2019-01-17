@@ -164,6 +164,7 @@ declare module '@material-ui/core/styles/zIndex' {
     menu: number;
     modal: number;
     popover: number;
+    fileDropper: number;
   }
 }
 

@@ -29,7 +29,8 @@ export const Tab: React.SFC<TabProps> = ({
   onClick,
   classes,
 }) => {
-  const TabElement = href ? 'a' : 'button';
+  const TabElement = (href ? 'a' : 'button') as React.ReactType;
+
   return (
     <TabElement
       className={cn(

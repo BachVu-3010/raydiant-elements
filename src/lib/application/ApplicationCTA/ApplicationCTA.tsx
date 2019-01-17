@@ -29,16 +29,19 @@ export const ApplicationCTA: React.SFC<ApplicationCTAProps> = ({
           auto
           application={applications[0]}
           onClick={() => onApplicationClick(applications[0].id)}
+          smDownShrink={false}
         />
         <ApplicationCard
           auto
           application={applications[1]}
           onClick={() => onApplicationClick(applications[1].id)}
+          smDownShrink={false}
         />
         <ApplicationCard
           auto
           application={applications[2]}
           onClick={() => onApplicationClick(applications[2].id)}
+          smDownShrink={false}
         />
       </div>
       <div className={classes.actions}>

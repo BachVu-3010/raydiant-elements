@@ -40,6 +40,7 @@ module.exports = {
         getCorePath('CircularProgress'),
         getCorePath('ColorField'),
         getCorePath('DateField'),
+        getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Heading1'),
         getCorePath('Icon'),

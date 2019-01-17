@@ -8,6 +8,7 @@ interface ApplicationCardProps extends WithStyles<typeof styles> {
   application: A.AppVersion;
   onClick?: () => void;
   auto?: boolean;
+  smDownShrink?: boolean;
 }
 
 export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
@@ -15,15 +16,24 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
   application,
   onClick,
   auto = false,
+  smDownShrink = true,
 }) => (
-  <div className={cn(classes.root, auto && classes.auto)}>
+  <div
+    className={cn(
+      classes.root,
+      auto && classes.auto,
+      smDownShrink && classes.smDownShrink,
+    )}
+  >
     <button className={classes.thumbnail} onClick={onClick}>
       <div
         className={classes.image}
         style={{ backgroundImage: `url(${application.thumbnailUrl})` }}
       />
     </button>
-    <div className={classes.name}>{application.strings.callToAction}</div>
+    <div className={classes.name}>
+      {application.strings.callToAction || application.name}
+    </div>
   </div>
 );
 

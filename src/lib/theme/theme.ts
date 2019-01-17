@@ -15,6 +15,7 @@ const common = {
     menu: 1000,
     modal: 2000,
     popover: 3000,
+    fileDropper: 4000,
   },
   palette: {
     primary: {

@@ -8,6 +8,14 @@ const styles = (theme: Theme) =>
       width: theme.spacing.unit * 24,
     },
 
+    smDownShrink: {
+      width: theme.spacing.unit * 16,
+
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing.unit * 24,
+      },
+    },
+
     auto: {
       width: '100%',
       maxWidth: theme.spacing.unit * 24,
