@@ -4,7 +4,6 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     icon: {
-      boxSizing: 'border-box',
       borderRadius: 100,
     },
     default: {

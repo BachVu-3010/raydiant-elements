@@ -7,10 +7,10 @@ const styles = (theme: Theme) =>
       width: '100%',
     },
     items: {
-      boxSizing: 'border-box',
       // A magic number so we partially show the 3rd item to indicate that
       // the user can scroll.
       height: 104,
+      boxSizing: 'border-box',
       padding: `${theme.spacing.unit}px 0px`,
       backgroundColor: theme.palette.background.inset,
       borderRadius: theme.shape.borderRadius,

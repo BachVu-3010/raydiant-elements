@@ -21,7 +21,6 @@ const styles = (theme: Theme) =>
       color: theme.checkbox.backgroundChecked,
     },
     iconContainer: {
-      boxSizing: 'border-box',
       width: 20,
       height: 20,
       backgroundColor: theme.checkbox.background,

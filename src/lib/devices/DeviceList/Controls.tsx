@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '../../core/Button';
+import { stopPropagation } from '../../helpers';
 
 export interface ControlsProps {
   showPublish: boolean;
@@ -19,7 +20,7 @@ export const Controls: React.SFC<ControlsProps> = ({
         icon="publish"
         label="Publish"
         color="primary"
-        onClick={onPublish}
+        onClick={stopPropagation(onPublish)}
         disabled={disablePublish}
       />
     )}

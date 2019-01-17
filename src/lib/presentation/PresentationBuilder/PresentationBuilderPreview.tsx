@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as A from '../../application/ApplicationTypes';
-import Tab from '../../core/Tab';
+import Tabs from '../../core/Tabs/Tabs';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import Hidden from '../../layout/Hidden';
@@ -55,20 +55,20 @@ class PresentationBuilderPreview extends React.Component<
             )}
           </div>
           <Hidden smDown>
-            <Tab.Container inline>
-              <Tab
+            <Tabs inline>
+              <Tabs.Item
                 icon="horizontalScreen"
                 label="Horizontal"
                 active={previewMode === P.PreviewMode.Horizontal}
                 onClick={() => onPreviewModeChange(P.PreviewMode.Horizontal)}
               />
-              <Tab
+              <Tabs.Item
                 icon="verticalScreen"
                 label="Vertical"
                 active={previewMode === P.PreviewMode.Vertical}
                 onClick={() => onPreviewModeChange(P.PreviewMode.Vertical)}
               />
-            </Tab.Container>
+            </Tabs>
           </Hidden>
         </div>
       </div>

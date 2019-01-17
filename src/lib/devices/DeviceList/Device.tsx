@@ -1,10 +1,14 @@
 import * as React from 'react';
 import Checkbox from '../../core/Checkbox';
-import DeviceBase, { DeviceBaseProps } from './DeviceBase';
 import DeviceList from './DeviceList';
 import DeviceStatus from './DeviceStatus';
+import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';
 
-class Device extends React.Component<DeviceBaseProps> {
+interface DeviceProps extends ItemBaseProps {
+  device: DeviceBaseWithComputedProps;
+}
+
+class Device extends React.Component<DeviceProps> {
   render() {
     const {
       isManageMode,
@@ -16,7 +20,7 @@ class Device extends React.Component<DeviceBaseProps> {
     } = this.props;
     const { isOnline, hasFileError, isResin, needsPublish, id } = device;
     return (
-      <DeviceBase
+      <Item
         controlsElement={
           isManageMode ? null : (
             <DeviceList.Controls

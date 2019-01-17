@@ -17,6 +17,8 @@ export const devices = [
         name: 'Clock',
       },
     },
+    screenOrientation: 'normal',
+    screenDimensions: '1920x1080',
   },
   {
     id: 'DEVICE_ID_2',

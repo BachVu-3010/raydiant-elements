@@ -15,7 +15,6 @@ export const buttonReset = (): React.CSSProperties => ({
 
 export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
   width: '100%',
-  boxSizing: 'border-box',
   padding: theme.spacing.unit * 4,
 
   [theme.breakpoints.down('xs')]: {
@@ -24,13 +23,11 @@ export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
   },
 });
 
-export const tabContainer = (): React.CSSProperties => ({
-  boxSizing: 'border-box',
+export const tabContainer = (theme: Theme): React.CSSProperties => ({
   display: 'flex',
-  flexDirection: 'row',
-  alignItems: 'stretch',
   width: '100%',
   minHeight: 68,
+  background: theme.palette.background.default,
 });
 
 export const tab = (theme: Theme): React.CSSProperties => ({

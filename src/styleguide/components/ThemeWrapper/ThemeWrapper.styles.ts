@@ -3,7 +3,6 @@ import { createStyles } from '../../../lib/core/withStyles';
 // We can't use theme here because ThemeProvider is a child component.
 const styles = createStyles({
   preview: {
-    boxSizing: 'border-box',
     padding: 16,
     width: '100%',
     display: 'flex',

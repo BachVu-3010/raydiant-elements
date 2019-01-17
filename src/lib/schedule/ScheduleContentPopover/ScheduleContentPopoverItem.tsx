@@ -16,7 +16,6 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       ...buttonReset(),
-      boxSizing: 'border-box',
       width: theme.spacing.unit * 22,
       height: theme.spacing.unit * 15.875,
       display: 'flex',

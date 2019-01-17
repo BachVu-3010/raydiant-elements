@@ -1,5 +1,5 @@
 #Pulling latest version of node
-FROM node:latest
+FROM node:dubnium
 
 # Create app directory
 RUN mkdir -p /usr/src/app

@@ -9,7 +9,6 @@ const styles = (theme: Theme) =>
       paddingLeft: theme.spacing.unit * 4,
       paddingRight: theme.spacing.unit * 4,
       display: 'flex',
-      flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
       flexShrink: 0,

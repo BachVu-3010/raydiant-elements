@@ -4,12 +4,32 @@ import withStyles, { WithStyles } from '../../core/withStyles';
 import Hidden from '../../layout/Hidden';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
-import * as T from '../DeviceTypes';
-import styles from './DeviceBase.styles';
+import { Presentation } from '../../presentation/PresentationTypes';
+import * as D from '../DeviceTypes';
+import { DeviceGroupWithComputedProps } from './DeviceGroup';
+import styles from './Item.styles';
 import Thumbnail from './Thumbnail';
 
-export interface DeviceBaseProps {
-  device: T.Device | T.DeviceGroup;
+interface FileStatus {
+  isFileUploading: boolean;
+  hasFileError: boolean;
+}
+
+interface IsResin {
+  isResin: boolean;
+}
+
+interface PublishStatus {
+  needsPublish: boolean;
+}
+
+export type DeviceBaseWithComputedProps = D.DeviceBase &
+  FileStatus &
+  IsResin &
+  PublishStatus;
+
+// This interface is shared with DeviceList/Device and DeviceList/DeviceGroup
+export interface ItemBaseProps {
   isManageMode: boolean;
   isSelected: boolean;
   disablePublish?: boolean;
@@ -18,23 +38,23 @@ export interface DeviceBaseProps {
   onPublish: (deviceId: string) => void;
 }
 
-export interface DeviceBaseWithStylesProps
-  extends WithStyles<typeof styles>,
-    DeviceBaseProps {
+type ItemProps = ItemBaseProps & {
+  device?: DeviceBaseWithComputedProps;
+  deviceGroup?: DeviceGroupWithComputedProps;
   controlsElement: React.ReactNode;
   checkboxElement: React.ReactNode;
   deviceStatusElement: React.ReactNode;
   showMultipleThumbnails?: boolean;
-}
+} & WithStyles<typeof styles>;
 
-class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
+class Item extends React.Component<ItemProps> {
   static defaultProps = {
     showMultipleThumbnail: false,
   };
   getThumbnailSrc = () => {
-    const { device } = this.props;
-    const { defaultSequence, deployedPresentations } = device;
-    let firstPresentation = {
+    const { device, deviceGroup } = this.props;
+    const { defaultSequence, deployedPresentations } = device || deviceGroup;
+    let firstPresentation: Partial<Presentation> = {
       applicationThumbnailUrl: '',
       thumbnailUrl: '',
     };
@@ -50,6 +70,7 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
   render() {
     const {
       device,
+      deviceGroup,
       classes,
       controlsElement,
       checkboxElement,
@@ -58,7 +79,7 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
       isSelected,
       onSelect,
     } = this.props;
-    const { id, name } = device;
+    const { id, name } = device || deviceGroup;
     return (
       <div
         onClick={
@@ -87,4 +108,4 @@ class DeviceBase extends React.Component<DeviceBaseWithStylesProps> {
   }
 }
 
-export default withStyles(styles)(DeviceBase);
+export default withStyles(styles)(Item);

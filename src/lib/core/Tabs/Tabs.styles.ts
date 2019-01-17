@@ -5,7 +5,7 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      ...tabContainer(),
+      ...tabContainer(theme),
       width: '100%',
       border: theme.tab.border ? `1px solid ${theme.tab.border}` : null,
     },

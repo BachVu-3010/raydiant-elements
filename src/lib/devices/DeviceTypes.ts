@@ -1,19 +1,19 @@
-interface Presentation {
-  applicationThumbnailUrl: string;
-  thumbnailUrl: string;
-}
+import * as P from '../presentation/PresentationTypes';
 
-export interface Device {
+export interface DeviceBase {
   id: string;
   name: string;
   isOnline: boolean;
   defaultSequence: string[];
-  deployedPresentations: { [id: string]: Presentation };
-
-  // Allow for extra props to be passed in
-  [key: string]: any;
+  deployedPresentations: { [key: string]: P.Presentation };
 }
 
-export interface DeviceGroup extends Device {
+export interface Device extends DeviceBase {
+  description: string;
+  screenDimensions: string;
+  screenOrientation: string;
+}
+
+export interface DeviceGroup extends DeviceBase {
   devices: Device[];
 }

@@ -9,7 +9,7 @@ const styles = (theme: Theme) =>
     },
     isCollapsed: {},
     header: {
-      ...tabContainer(),
+      ...tabContainer(theme),
       position: 'relative',
       zIndex: theme.zIndex.menu + 10,
       backgroundColor: theme.palette.primary.main,
@@ -26,7 +26,6 @@ const styles = (theme: Theme) =>
     items: {
       flex: 1,
       display: 'flex',
-      flexDirection: 'row',
 
       '$isCollapsed &': {
         display: 'none',
@@ -35,7 +34,6 @@ const styles = (theme: Theme) =>
     collapsed: {
       flex: 1,
       display: 'none',
-      flexDirection: 'row',
       justifyContent: 'flex-end',
       alignItems: 'center',
       paddingRight: theme.spacing.unit * 2,

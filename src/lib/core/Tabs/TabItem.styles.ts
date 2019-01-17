@@ -5,7 +5,7 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      flexGrow: 1,
+      flex: 1,
       ...tab(theme),
     },
     shrink: {
@@ -22,6 +22,7 @@ const styles = (theme: Theme) =>
       color: theme.tab.foreground,
       fontSize: theme.fontSizes.sm,
       fontWeight: 500,
+      textAlign: 'center',
     },
     labelNoIcon: {
       fontSize: theme.fontSizes.md,

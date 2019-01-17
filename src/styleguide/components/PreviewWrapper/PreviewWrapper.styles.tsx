@@ -6,7 +6,6 @@ const styles = (theme: Theme) =>
     root: {
       fontFamily: theme.typography.fontFamily,
       position: 'relative',
-      boxSizing: 'border-box',
       width: '100%',
       paddingBottom: 40,
       backgroundColor: theme.palette.background.default,

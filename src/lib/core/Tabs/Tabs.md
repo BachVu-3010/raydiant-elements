@@ -3,23 +3,23 @@ initialState = {
   selected: 1,
 };
 
-<Tab.Container>
-  <Tab
+<Tabs>
+  <Tabs.Item
     label="Tab 1"
     active={state.selected === 1}
     onClick={() => setState({ selected: 1 })}
   />
-  <Tab
+  <Tabs.Item
     label="Tab 2"
     active={state.selected === 2}
     onClick={() => setState({ selected: 2 })}
   />
-  <Tab
+  <Tabs.Item
     label="Tab 3"
     active={state.selected === 3}
     onClick={() => setState({ selected: 3 })}
   />
-</Tab.Container>;
+</Tabs>;
 ```
 
 ### Icons
@@ -29,26 +29,26 @@ initialState = {
   selected: 1,
 };
 
-<Tab.Container>
-  <Tab
+<Tabs>
+  <Tabs.Item
     icon="defaultContent"
     label="Default Content"
     active={state.selected === 1}
     onClick={() => setState({ selected: 1 })}
   />
-  <Tab
+  <Tabs.Item
     icon="scheduledContent"
     label="Scheduled Content"
     active={state.selected === 2}
     onClick={() => setState({ selected: 2 })}
   />
-  <Tab
+  <Tabs.Item
     icon="screenSettings"
     label="Screen Settings"
     active={state.selected === 3}
     onClick={() => setState({ selected: 3 })}
   />
-</Tab.Container>;
+</Tabs>;
 ```
 
 ### Shrink
@@ -58,20 +58,20 @@ initialState = {
   selected: 1,
 };
 
-<Tab.Container>
-  <Tab
+<Tabs>
+  <Tabs.Item
     shrink
     icon="horizontalScreen"
     label="Horizontal"
     active={state.selected === 1}
     onClick={() => setState({ selected: 1 })}
   />
-  <Tab
+  <Tabs.Item
     shrink
     icon="verticalScreen"
     label="Vertical"
     active={state.selected === 2}
     onClick={() => setState({ selected: 2 })}
   />
-</Tab.Container>;
+</Tabs>;
 ```

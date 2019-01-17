@@ -7,7 +7,6 @@ const styles = (theme: Theme) =>
     root: {},
     item: {
       display: 'flex',
-      flexDirection: 'row',
       alignItems: 'center',
       borderBottom: `1px solid ${theme.button.border}`,
     },

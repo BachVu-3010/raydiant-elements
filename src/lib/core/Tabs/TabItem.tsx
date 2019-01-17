@@ -1,10 +1,9 @@
-import cn from 'classnames';
+import * as cn from 'classnames';
 import * as React from 'react';
 import { preventDefault } from '../../helpers';
 import Icon, { IconOptions } from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
-import styles from './Tab.styles';
-import TabContainer from './TabContainer';
+import styles from './TabItem.styles';
 
 export interface TabProps extends WithStyles<typeof styles> {
   /** The label of the tab */
@@ -18,7 +17,7 @@ export interface TabProps extends WithStyles<typeof styles> {
   /** Set to true to disable growing  */
   shrink?: boolean;
   /** Called when the tab is clicked */
-  onClick: () => any;
+  onClick?: () => any;
 }
 
 export const Tab: React.SFC<TabProps> = ({
@@ -49,6 +48,4 @@ export const Tab: React.SFC<TabProps> = ({
   );
 };
 
-export default Object.assign(withStyles(styles)(Tab), {
-  Container: TabContainer,
-});
+export default withStyles(styles)(Tab);

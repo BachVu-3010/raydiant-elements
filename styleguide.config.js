@@ -6,7 +6,7 @@ const getApplicationPath = component =>
 const getCorePath = component =>
   path.join(__dirname, `src/lib/core/${component}/${component}.tsx`);
 
-const getDevicePath = component =>
+const getDevicesPath = component =>
   path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
 
 const getLayoutPath = component =>
@@ -54,7 +54,7 @@ module.exports = {
         getCorePath('SelectField'),
         getCorePath('SuccessIcon'),
         getCorePath('Switch'),
-        getCorePath('Tab'),
+        getCorePath('Tabs'),
         getCorePath('Text'),
         getCorePath('TextField'),
         getCorePath('Title'),
@@ -79,12 +79,14 @@ module.exports = {
     {
       name: 'Devices',
       components: () => [
-        getDevicePath('DeviceList'),
-        getDevicePath('AddToGroupPopover'),
-        getDevicePath('AffectedDevicesPopover'),
-        getDevicePath('ManageGroupPopover'),
-        getDevicePath('AddDevice'),
-        getDevicePath('AddDevicePopover'),
+        getDevicesPath('DeviceList'),
+        getDevicesPath('AddToGroupPopover'),
+        getDevicesPath('AffectedScreensPopover'),
+        getDevicesPath('ManageGroupPopover'),
+        getDevicesPath('AddDevice'),
+        getDevicesPath('AddDevicePopover'),
+        getDevicesPath('DeviceSettingsForm'),
+        getDevicesPath('DeviceGroupSettingsForm'),
       ],
     },
     {

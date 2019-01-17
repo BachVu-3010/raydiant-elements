@@ -1,6 +1,6 @@
 ```js
-const devices = require('./deviceData').devices;
-const deviceGroups = require('./deviceData').deviceGroups;
+const devices = require('../deviceData').devices;
+const deviceGroups = require('../deviceData').deviceGroups;
 
 initialState = {
   devices,

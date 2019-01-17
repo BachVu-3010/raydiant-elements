@@ -2,12 +2,23 @@ import * as React from 'react';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
 import { stopPropagation } from '../../helpers/index';
-import DeviceBase, { DeviceBaseProps } from './DeviceBase';
 import DeviceList from './DeviceList';
 import DeviceStatus from './DeviceStatus';
+import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';
 
-interface DeviceGroupProps extends DeviceBaseProps {
+interface DeviceGroupStats {
+  resinCount: number;
+  onlineCount: number;
+  deviceCount: number;
+  devicesWithErrorsCount: number;
+}
+
+export type DeviceGroupWithComputedProps = DeviceBaseWithComputedProps &
+  DeviceGroupStats;
+
+interface DeviceGroupProps extends ItemBaseProps {
   onManageGroupClick: (selectedGroupIdToManage: string) => void;
+  deviceGroup: DeviceGroupWithComputedProps;
 }
 
 class DeviceGroup extends React.Component<DeviceGroupProps> {
@@ -15,9 +26,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
     const {
       isManageMode,
       onManageGroupClick,
-      // Aliasing Device -> DeviceGroup as <DeviceBase /> is expecting a `device` prop - may be worth updating
-      // <DeviceBase /> to take in a Device or DeviceGroup - instead of a Device (which can be of type: Device | DeviceGroup)
-      device: deviceGroup,
+      deviceGroup,
       onConnectivityWizardClick,
       onPublish,
       disablePublish,
@@ -33,7 +42,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
       id,
     } = deviceGroup;
     return (
-      <DeviceBase
+      <Item
         controlsElement={
           isManageMode ? (
             <Button
