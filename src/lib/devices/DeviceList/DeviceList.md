@@ -23,7 +23,7 @@ initialState = {
     })}
     {deviceGroups.map(dg => (
       <DeviceList.DeviceGroup
-        device={dg}
+        deviceGroup={dg}
         isManageMode={state.isManageMode}
         key={dg.id}
         onSelect={console.log}
