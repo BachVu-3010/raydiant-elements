@@ -30,6 +30,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
       onConnectivityWizardClick,
       onPublish,
       disablePublish,
+      onAddContent,
     } = this.props;
     const {
       isOnline,
@@ -55,8 +56,9 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
           ) : (
             <DeviceList.Controls
               showPublish={needsPublish}
-              onPublish={() => onPublish(id)}
               disablePublish={disablePublish}
+              onPublish={() => onPublish(id)}
+              onAddContent={() => onAddContent(id)}
             />
           )
         }

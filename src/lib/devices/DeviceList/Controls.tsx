@@ -6,15 +6,21 @@ export interface ControlsProps {
   showPublish: boolean;
   onPublish: () => void;
   disablePublish: boolean;
+  onAddContent: () => void;
 }
 
 export const Controls: React.SFC<ControlsProps> = ({
   showPublish,
   onPublish,
   disablePublish,
+  onAddContent,
 }) => (
   <>
-    <Button icon="add" label="Add Content" />
+    <Button
+      icon="add"
+      label="Add Content"
+      onClick={stopPropagation(onAddContent)}
+    />
     {showPublish && (
       <Button
         icon="publish"

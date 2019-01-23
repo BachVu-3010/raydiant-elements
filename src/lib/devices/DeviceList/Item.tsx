@@ -36,6 +36,7 @@ export interface ItemBaseProps {
   onSelect: (id: string, selected: boolean) => any;
   onConnectivityWizardClick: () => void;
   onPublish: (deviceId: string) => void;
+  onAddContent: (deviceId: string) => void;
 }
 
 type ItemProps = ItemBaseProps & {

@@ -17,6 +17,7 @@ class Device extends React.Component<DeviceProps> {
       onConnectivityWizardClick,
       onPublish,
       disablePublish,
+      onAddContent,
     } = this.props;
     const { isOnline, hasFileError, isResin, needsPublish, id } = device;
     return (
@@ -25,8 +26,9 @@ class Device extends React.Component<DeviceProps> {
           isManageMode ? null : (
             <DeviceList.Controls
               showPublish={needsPublish}
-              onPublish={() => onPublish(id)}
               disablePublish={disablePublish}
+              onPublish={() => onPublish(id)}
+              onAddContent={() => onAddContent(id)}
             />
           )
         }
