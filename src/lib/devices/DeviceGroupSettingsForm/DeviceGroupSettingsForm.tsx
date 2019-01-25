@@ -15,12 +15,12 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       flex: 1,
-      flexShrink: 0,
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
     },
 
     inputs: {
+      flexShrink: 0,
       padding: theme.spacing.unit * 2,
     },
   });
@@ -69,17 +69,16 @@ export class DeviceGroupSettingsForm extends React.Component<
               }}
             />
           </Column>
-          <Spacer />
-          <ActionBar bottom condensed>
-            <Spacer />
-            <Button
-              label="Save"
-              color="primary"
-              onClick={this.onSubmit}
-              disabled={disabled || !this.hasFormChanged()}
-            />
-          </ActionBar>
         </div>
+        <ActionBar bottom condensed>
+          <Spacer />
+          <Button
+            label="Save"
+            color="primary"
+            onClick={this.onSubmit}
+            disabled={disabled || !this.hasFormChanged()}
+          />
+        </ActionBar>
       </ThemeSelector>
     );
   }

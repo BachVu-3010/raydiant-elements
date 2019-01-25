@@ -23,7 +23,11 @@ const styles = (theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         flex: 1,
         height: 'auto',
-        margin: 30,
+        margin: theme.spacing.unit * 2,
+      },
+
+      [theme.breakpoints.up('md')]: {
+        margin: theme.spacing.unit * 4,
       },
     },
 

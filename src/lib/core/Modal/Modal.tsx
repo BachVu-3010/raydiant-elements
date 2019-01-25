@@ -9,7 +9,7 @@ interface ModalProps extends WithStyles<typeof styles> {
   /** Opens the modal when true */
   open: boolean;
   /** Called when the user clicks the overlay  */
-  onOverlayClick: () => any;
+  onOverlayClick?: () => any;
 }
 
 export class Modal extends React.Component<ModalProps, {}> {

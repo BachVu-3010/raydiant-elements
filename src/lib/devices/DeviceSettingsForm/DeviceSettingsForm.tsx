@@ -20,8 +20,8 @@ const styles = (theme: Theme) =>
       overflow: 'auto',
       WebkitOverflowScrolling: 'touch',
     },
-
     inputs: {
+      flexShrink: 0,
       padding: theme.spacing.unit * 2,
     },
     screenInformationContainer: {
@@ -135,23 +135,22 @@ export class DeviceSettingsForm extends React.Component<
               />
             </Row>
           </Column>
-          <Spacer />
-          <ActionBar bottom condensed>
-            <Button
-              label="Restart"
-              onClick={() => this.props.onRestartDevice(device.id)}
-              disabled={disabled}
-            />
-            <Spacer />
-            <Button
-              type="submit"
-              label="Save"
-              color="primary"
-              onClick={this.onSubmit}
-              disabled={disabled || !this.hasFormChanged()}
-            />
-          </ActionBar>
         </div>
+        <ActionBar bottom condensed>
+          <Button
+            label="Restart"
+            onClick={() => this.props.onRestartDevice(device.id)}
+            disabled={disabled}
+          />
+          <Spacer />
+          <Button
+            type="submit"
+            label="Save"
+            color="primary"
+            onClick={this.onSubmit}
+            disabled={disabled || !this.hasFormChanged()}
+          />
+        </ActionBar>
       </ThemeSelector>
     );
   }
