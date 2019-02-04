@@ -1,5 +1,5 @@
 import App from './App';
-import AppContext from './AppContext';
+import AppContext, { AppContextProps } from './AppContext';
 
 export default App;
-export { AppContext };
+export { AppContext, AppContextProps };

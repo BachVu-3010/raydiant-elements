@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-interface AppContextProps {
-  modalRoot: HTMLDivElement;
-  popoverRoot: HTMLDivElement;
+export interface AppContextProps {
+  modalRoot: HTMLElement;
+  popoverRoot: HTMLElement;
 }
 
 const AppContext = React.createContext<AppContextProps>({

@@ -1,42 +1,52 @@
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Overlay from '../../internal/Overlay';
+import { AppContext, AppContextProps } from '../App';
 import withStyles, { WithStyles } from '../withStyles';
 import withThemeSelector from '../withThemeSelector';
 import styles from './Modal.styles';
-import ModalPortal from './ModalPortal';
 
-interface ModalProps extends WithStyles<typeof styles> {
+interface ModalProps {
   /** Opens the modal when true */
   open: boolean;
   /** Called when the user clicks the overlay  */
   onOverlayClick?: () => any;
 }
 
-export class Modal extends React.Component<ModalProps, {}> {
-  modalRoot = document.createElement('div');
+export class Modal extends React.Component<
+  ModalProps & AppContextProps & WithStyles<typeof styles>,
+  {}
+> {
+  el = document.createElement('div');
 
   componentDidMount() {
-    document.body.appendChild(this.modalRoot);
+    this.props.modalRoot.appendChild(this.el);
   }
 
   componentWillUnmount() {
-    document.body.removeChild(this.modalRoot);
+    this.props.modalRoot.removeChild(this.el);
   }
 
   render() {
     const { open, onOverlayClick, children, classes } = this.props;
 
-    return (
-      <ModalPortal>
-        {open && (
-          <div className={classes.root}>
-            <Overlay className={classes.overlay} onClick={onOverlayClick} />
-            <div className={classes.modal}>{children}</div>
-          </div>
-        )}
-      </ModalPortal>
+    if (!open) return null;
+
+    return ReactDOM.createPortal(
+      <div className={classes.root}>
+        <Overlay className={classes.overlay} onClick={onOverlayClick} />
+        <div className={classes.modal}>{children}</div>
+      </div>,
+      this.el,
     );
   }
 }
 
-export default withThemeSelector(withStyles(styles)(Modal));
+const ModalWithStyles = withThemeSelector(withStyles(styles)(Modal));
+const ModalRoot: React.SFC<ModalProps> = props => (
+  <AppContext.Consumer>
+    {appContextProps => <ModalWithStyles {...props} {...appContextProps} />}
+  </AppContext.Consumer>
+);
+
+export default ModalRoot;
