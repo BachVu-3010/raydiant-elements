@@ -1,5 +1,5 @@
 import { createStyles } from '../../core/withStyles';
-import { tabContainer } from '../../mixins';
+import { tabContainer, textTruncate } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -45,9 +45,7 @@ const styles = (theme: Theme) =>
     label: {
       marginRight: theme.spacing.unit * 2,
       maxWidth: 160,
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden',
+      ...textTruncate(),
     },
     overlay: {
       zIndex: theme.zIndex.menu - 10,

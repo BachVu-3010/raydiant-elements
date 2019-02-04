@@ -72,9 +72,10 @@ export class PresentationThumbnail extends React.Component<
 
     const imageUrl =
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
+    const hasControls = onEdit || onSelect;
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
-    const shouldShowControls = showControls || isHover;
+    const shouldShowControls = hasControls && (showControls || isHover);
     const shouldShowEdit = onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowError = hasError && !shouldShowSelect;
@@ -108,7 +109,9 @@ export class PresentationThumbnail extends React.Component<
         )}
         {shouldShowOverlay && <div className={classes.overlay} />}
         {shouldShowEdit && (
-          <div className={classes.topRight}>
+          <div
+            className={shouldShowSelect ? classes.topRight : classes.topLeft}
+          >
             <Button icon="edit" onClick={stopPropagation(onEdit)} />
           </div>
         )}

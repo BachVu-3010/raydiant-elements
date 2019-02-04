@@ -6,16 +6,23 @@ import styles from './Text.styles';
 interface TextProps extends WithStyles<typeof styles> {
   muted?: boolean;
   small?: boolean;
+  center?: boolean;
 }
 
 export const Text: React.SFC<TextProps> = ({
   muted,
   small,
+  center,
   children,
   classes,
 }) => (
   <span
-    className={cn(classes.root, muted && classes.muted, small && classes.small)}
+    className={cn(
+      classes.root,
+      muted && classes.muted,
+      small && classes.small,
+      center && classes.center,
+    )}
   >
     {children}
   </span>

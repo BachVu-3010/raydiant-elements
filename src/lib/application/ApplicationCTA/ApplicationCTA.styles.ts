@@ -1,5 +1,5 @@
 import { createStyles } from '../../core/withStyles';
-import { responsiveContainer } from '../../mixins';
+import { responsiveContainer, scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -11,8 +11,7 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
+      ...scrollable(),
       ...responsiveContainer(theme),
     },
 

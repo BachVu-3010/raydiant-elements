@@ -6,6 +6,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
+import { reorder } from '../../helpers';
 import AlertIcon from '../AlertIcon';
 import Icon from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
@@ -47,9 +48,7 @@ export class ListField<T = any> extends React.Component<ListFieldProps<T>, {}> {
     // Dropped outside the list.
     if (!destination) return;
 
-    const reordered = [...value];
-    const [removed] = reordered.splice(source.index, 1);
-    reordered.splice(destination.index, 0, removed);
+    const reordered = reorder(value, source.index, destination.index);
     onChange(reordered);
   };
 

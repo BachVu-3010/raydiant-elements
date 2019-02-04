@@ -1,24 +1,30 @@
 import * as React from 'react';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
+import Form from '../../core/Form';
 import SelectField from '../../core/SelectField';
 import TextField from '../../core/TextField';
-import ThemeSelector from '../../core/ThemeSelector';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import withThemeSelector from '../../core/withThemeSelector';
 import * as D from '../../devices/DeviceTypes';
 import Column from '../../layout/Column';
 import Row from '../../layout/Row';
 import { Spacer } from '../../layout/Spacer/Spacer';
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
-    scroll: {
+    root: {
+      flex: 1,
       display: 'flex',
       flexDirection: 'column',
+    },
+    scroll: {
       flex: 1,
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
+      display: 'flex',
+      flexDirection: 'column',
+      ...scrollable(),
     },
     inputs: {
       flexShrink: 0,
@@ -85,7 +91,7 @@ export class DeviceSettingsForm extends React.Component<
     const { device } = this.state;
 
     return (
-      <ThemeSelector color="grey">
+      <Form className={classes.root} onSubmit={this.onSubmit}>
         <div className={classes.scroll}>
           <Column className={classes.inputs}>
             <TextField
@@ -147,13 +153,15 @@ export class DeviceSettingsForm extends React.Component<
             type="submit"
             label="Save"
             color="primary"
-            onClick={this.onSubmit}
             disabled={disabled || !this.hasFormChanged()}
           />
         </ActionBar>
-      </ThemeSelector>
+      </Form>
     );
   }
 }
 
-export default withStyles(styles)(DeviceSettingsForm);
+export default withThemeSelector(
+  withStyles(styles)(DeviceSettingsForm),
+  'grey',
+);

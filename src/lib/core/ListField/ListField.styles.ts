@@ -1,4 +1,4 @@
-import { buttonReset } from '../../mixins';
+import { buttonReset, textTruncate } from '../../mixins';
 import { Theme } from '../../theme';
 import { createStyles } from '../withStyles';
 
@@ -6,6 +6,8 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {},
     item: {
+      // prevent text selection while drag and dropping
+      userSelect: 'none',
       display: 'flex',
       alignItems: 'center',
       borderBottom: `1px solid ${theme.button.border}`,
@@ -39,9 +41,7 @@ const styles = (theme: Theme) =>
       marginBottom: theme.spacing.unit / 2,
     },
     addLabel: {
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
+      ...textTruncate(),
       textAlign: 'center',
     },
   });

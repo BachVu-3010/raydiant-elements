@@ -1,22 +1,29 @@
 import * as React from 'react';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
+import Form from '../../core/Form';
 import TextField from '../../core/TextField';
-import ThemeSelector from '../../core/ThemeSelector';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import withThemeSelector from '../../core/withThemeSelector';
 import * as D from '../../devices/DeviceTypes';
 import Column from '../../layout/Column/Column';
 import { Spacer } from '../../layout/Spacer/Spacer';
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
+    root: {
+      display: 'flex',
+      flexDirection: 'column',
+      flex: 1,
+    },
     scroll: {
       display: 'flex',
       flexDirection: 'column',
       flex: 1,
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
+      flexShrink: 0,
+      ...scrollable(),
     },
 
     inputs: {
@@ -58,7 +65,7 @@ export class DeviceGroupSettingsForm extends React.Component<
     const { deviceGroup } = this.state;
     const { disabled, classes } = this.props;
     return (
-      <ThemeSelector color="grey">
+      <Form className={classes.root} onSubmit={this.onSubmit}>
         <div className={classes.scroll}>
           <Column className={classes.inputs}>
             <TextField
@@ -75,13 +82,15 @@ export class DeviceGroupSettingsForm extends React.Component<
           <Button
             label="Save"
             color="primary"
-            onClick={this.onSubmit}
             disabled={disabled || !this.hasFormChanged()}
           />
         </ActionBar>
-      </ThemeSelector>
+      </Form>
     );
   }
 }
 
-export default withStyles(styles)(DeviceGroupSettingsForm);
+export default withThemeSelector(
+  withStyles(styles)(DeviceGroupSettingsForm),
+  'grey',
+);

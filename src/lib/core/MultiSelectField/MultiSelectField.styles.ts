@@ -1,3 +1,4 @@
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 import { createStyles } from '../withStyles';
 
@@ -15,8 +16,7 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.palette.background.inset,
       borderRadius: theme.shape.borderRadius,
       boxShadow: 'inset 0px 1px 5px rgba(0, 0, 0, 0.2)',
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
+      ...scrollable(),
     },
     label: {
       fontSize: theme.fontSizes.sm,

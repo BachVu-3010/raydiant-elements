@@ -9,6 +9,7 @@ const defaultProps = () => ({
     iconUrl: '',
     hasDynamicThumbnails: false,
     duration: 10,
+    applicationName: 'flyers',
     applicationVariables: {
       boolean: true,
       number: 4,

@@ -10,6 +10,7 @@ const defaultProps = (presentation = {}, appVersion = {}) => ({
     iconUrl: '',
     hasDynamicThumbnails: false,
     applicationVariables: {},
+    applicationName: 'flyers',
     ...presentation,
   },
   appVersion: {

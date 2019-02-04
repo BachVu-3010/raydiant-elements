@@ -1,6 +1,7 @@
 import * as React from 'react';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 import Controls from './Controls';
 import Device from './Device';
@@ -12,8 +13,7 @@ export interface DeviceListProps extends WithStyles<typeof styles> {}
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      overflow: 'scroll',
-      WebkitOverflowScrolling: 'touch',
+      ...scrollable(),
 
       [theme.breakpoints.up('sm')]: {
         padding: theme.spacing.unit * 2,

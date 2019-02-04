@@ -1,13 +1,14 @@
 import * as cn from 'classnames';
 import * as React from 'react';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import { Theme } from '../../theme';
 
 export interface ThumbnailProps extends WithStyles<typeof styles> {
   src?: string;
   showMultipleThumbnails: boolean;
 }
 
-const styles = () =>
+const styles = (theme: Theme) =>
   createStyles({
     root: {
       width: 128,
@@ -17,7 +18,7 @@ const styles = () =>
     },
     thumbnailBackground: {
       background: 'rgba(0,0,0,1)',
-      boxShadow: '0 1px 3px 0 rgba(0,0,0,.6)',
+      boxShadow: theme.shadows[1],
     },
     thumbnailDevice: {
       backgroundSize: '100% 100%',

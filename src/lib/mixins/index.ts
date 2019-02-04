@@ -13,6 +13,12 @@ export const buttonReset = (): React.CSSProperties => ({
   outline: 'none',
 });
 
+export const textTruncate = (): React.CSSProperties => ({
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  whiteSpace: 'nowrap',
+});
+
 export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
   width: '100%',
   padding: theme.spacing.unit * 4,
@@ -28,6 +34,11 @@ export const tabContainer = (theme: Theme): React.CSSProperties => ({
   width: '100%',
   minHeight: 68,
   background: theme.palette.background.default,
+});
+
+export const scrollable = (): React.CSSProperties => ({
+  overflowY: 'auto',
+  WebkitOverflowScrolling: 'touch',
 });
 
 export const tab = (theme: Theme): React.CSSProperties => ({

@@ -10,7 +10,6 @@ const styles = (theme: Theme) =>
       left: 0,
       width: '100vw',
       height: '100vh',
-      overflow: 'auto',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',

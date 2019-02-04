@@ -1,4 +1,5 @@
 import { createStyles } from '../../core/withStyles';
+import { textTruncate } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -19,9 +20,7 @@ const styles = (theme: Theme) =>
       marginTop: theme.spacing.unit,
       fontSize: theme.fontSizes.sm,
       textAlign: 'center',
-      overflow: 'hidden',
-      textOverflow: 'ellipsis',
-      whiteSpace: 'nowrap',
+      ...textTruncate(),
     },
   });
 

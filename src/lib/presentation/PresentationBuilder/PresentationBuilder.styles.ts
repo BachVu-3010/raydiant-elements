@@ -1,12 +1,12 @@
 import { createStyles } from '../../core/withStyles';
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
     scroll: {
       flex: 1,
-      overflow: 'auto',
-      WebkitOverflowScrolling: 'touch',
+      ...scrollable(),
     },
 
     inputs: {

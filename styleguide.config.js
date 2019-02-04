@@ -97,6 +97,7 @@ module.exports = {
         getPresentationPath('PresentationCard'),
         getPresentationPath('PresentationPreview'),
         getPresentationPath('PresentationThumbnail'),
+        getPresentationPath('PresentationsList'),
       ],
     },
     {

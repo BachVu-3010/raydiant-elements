@@ -1,4 +1,4 @@
-import { buttonReset } from '../../mixins';
+import { buttonReset, textTruncate } from '../../mixins';
 import { createStyles } from '../withStyles';
 
 const styles = createStyles({
@@ -6,9 +6,7 @@ const styles = createStyles({
     ...buttonReset(),
     height: '100%',
     fontWeight: 'bold',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
+    ...textTruncate(),
   },
   noShrink: {
     flexShrink: 0,

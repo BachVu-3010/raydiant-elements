@@ -28,6 +28,7 @@ export interface Presentation {
   thumbnailUrl?: string;
   iconUrl: string;
   applicationThumbnailUrl: string;
+  applicationName: string;
 }
 
 export interface Theme {

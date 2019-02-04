@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
-import { stopPropagation } from '../../helpers/index';
+import { stopPropagation } from '../../helpers';
 import DeviceList from './DeviceList';
 import DeviceStatus from './DeviceStatus';
 import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';

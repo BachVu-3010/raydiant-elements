@@ -23,7 +23,7 @@
     "object-path": "^0.11.4",
     "object-path-immutable": "^3.0.0",
     "react": "^16.4.2",
-    "react-beautiful-dnd": "^9.0.0",
+    "react-beautiful-dnd": "^10.0.3",
     "react-color": "^2.14.1",
     "react-datepicker": "^1.6.0",
     "react-dom": "^16.4.2",
