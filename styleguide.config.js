@@ -43,6 +43,7 @@ module.exports = {
         getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Heading1'),
+        getCorePath('Heading2'),
         getCorePath('Icon'),
         getCorePath('Logo'),
         getCorePath('Link'),
