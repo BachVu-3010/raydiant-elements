@@ -1,6 +1,7 @@
 import MUICheckbox from '@material-ui/core/Checkbox';
 import cn from 'classnames';
 import * as React from 'react';
+import { testAttr } from '../../helpers';
 import Icon from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Checkbox.styles';
@@ -12,6 +13,7 @@ interface CheckboxProps extends WithStyles<typeof styles> {
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
+  testId?: string;
 }
 
 export const Checkbox: React.SFC<CheckboxProps> = ({
@@ -22,6 +24,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   classes,
   onClick,
   onChange,
+  testId,
 }) => {
   const checkbox = (
     <span className={classes.checkboxContainer}>
@@ -58,6 +61,9 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
           </div>
         }
         classes={{ root: classes.checkbox }}
+        inputProps={{
+          ...(testAttr(testId) as any),
+        }}
       />
     </span>
   );

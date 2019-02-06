@@ -10,6 +10,7 @@ interface ApplicationCTAProps extends WithStyles<typeof styles> {
   applications: A.AppVersion[];
   onApplicationClick?: (applicationId: string) => void;
   onMore?: () => void;
+  testId?: string;
 }
 
 export const ApplicationCTA: React.SFC<ApplicationCTAProps> = ({
@@ -20,6 +21,7 @@ export const ApplicationCTA: React.SFC<ApplicationCTAProps> = ({
     return;
   },
   onMore,
+  testId,
 }) => (
   <div className={classes.root}>
     <div className={classes.container}>
@@ -30,22 +32,29 @@ export const ApplicationCTA: React.SFC<ApplicationCTAProps> = ({
           application={applications[0]}
           onClick={() => onApplicationClick(applications[0].id)}
           smDownShrink={false}
+          testId={testId ? `${testId}-${applications[0].id}` : ''}
         />
         <ApplicationCard
           auto
           application={applications[1]}
           onClick={() => onApplicationClick(applications[1].id)}
           smDownShrink={false}
+          testId={testId ? `${testId}-${applications[1].id}` : ''}
         />
         <ApplicationCard
           auto
           application={applications[2]}
           onClick={() => onApplicationClick(applications[2].id)}
           smDownShrink={false}
+          testId={testId ? `${testId}-${applications[2].id}` : ''}
         />
       </div>
       <div className={classes.actions}>
-        <Button label="More Options" onClick={onMore} />
+        <Button
+          label="More Options"
+          onClick={onMore}
+          testId={testId ? `${testId}-more` : ''}
+        />
       </div>
     </div>
   </div>

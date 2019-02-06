@@ -1,6 +1,7 @@
 import * as cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { testAttr } from '../../helpers';
 import * as A from '../ApplicationTypes';
 import styles from './ApplicationCard.styles';
 
@@ -9,6 +10,7 @@ interface ApplicationCardProps extends WithStyles<typeof styles> {
   onClick?: () => void;
   auto?: boolean;
   smDownShrink?: boolean;
+  testId?: string;
 }
 
 export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
@@ -17,6 +19,7 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
   onClick,
   auto = false,
   smDownShrink = true,
+  testId,
 }) => (
   <div
     className={cn(
@@ -25,7 +28,11 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
       smDownShrink && classes.smDownShrink,
     )}
   >
-    <button className={classes.thumbnail} onClick={onClick}>
+    <button
+      className={classes.thumbnail}
+      onClick={onClick}
+      {...testAttr(testId)}
+    >
       <div
         className={classes.image}
         style={{ backgroundImage: `url(${application.thumbnailUrl})` }}

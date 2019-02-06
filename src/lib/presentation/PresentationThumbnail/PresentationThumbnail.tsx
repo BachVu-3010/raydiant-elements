@@ -7,7 +7,7 @@ import Checkbox from '../../core/Checkbox';
 import CircularProgress from '../../core/CircularProgress';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
-import { stopPropagation } from '../../helpers';
+import { stopPropagation, testAttr } from '../../helpers';
 import * as T from '../PresentationTypes';
 import styles from './PresentationThumbnail.styles';
 
@@ -21,6 +21,7 @@ export interface PresentationThumbnailProps {
   hasError?: boolean;
   errorMessage?: string;
   isLoading?: boolean;
+  testId?: string;
 }
 
 interface PresentationThumbnailPropsWithStyles
@@ -67,6 +68,7 @@ export class PresentationThumbnail extends React.Component<
       onEdit,
       onSelect,
       onClick,
+      testId,
     } = this.props;
     const { isHover } = this.state;
 
@@ -92,6 +94,7 @@ export class PresentationThumbnail extends React.Component<
         onMouseOver={shouldAddMouseEvents ? this.handleMouseOver : null}
         onMouseLeave={shouldAddMouseEvents ? this.handleMouseLeave : null}
         onClick={onClick}
+        {...testAttr(testId)}
       >
         <div
           className={classes.image}
@@ -112,7 +115,11 @@ export class PresentationThumbnail extends React.Component<
           <div
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
           >
-            <Button icon="edit" onClick={stopPropagation(onEdit)} />
+            <Button
+              icon="edit"
+              onClick={stopPropagation(onEdit)}
+              testId={testId ? `${testId}-edit` : ''}
+            />
           </div>
         )}
         {shouldShowSelect && (
@@ -122,6 +129,7 @@ export class PresentationThumbnail extends React.Component<
               checked={selected}
               onChange={onSelect}
               onClick={stopPropagation()}
+              testId={testId ? `${testId}-select` : ''}
             />
           </div>
         )}
