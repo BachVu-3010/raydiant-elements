@@ -19,16 +19,23 @@ const styles = () =>
     },
   });
 
-type Presentation = P.Presentation;
+type Presentation = P.Presentation & {
+  isLoading: boolean;
+  hasError: boolean;
+};
+interface RenderProps {
+  presentation: Presentation;
+  onRemove: () => void;
+  itemId: string;
+}
 
 export interface PresentationsListProps extends WithStyles {
   presentations: Presentation[];
-  onEdit: (presentationId: string) => void;
   onOrderChange: (presentations: string[]) => void;
+  children: (props: RenderProps) => React.ReactNode;
 }
 
 export interface PresentationsListState {
-  selectedItemId: string;
   presentations: Presentation[];
 }
 
@@ -37,7 +44,6 @@ export class PresentationsList extends React.Component<
   PresentationsListState
 > {
   state: PresentationsListState = {
-    selectedItemId: undefined,
     presentations: this.props.presentations,
   };
 
@@ -89,8 +95,8 @@ export class PresentationsList extends React.Component<
     });
   };
   render() {
-    const { classes, onEdit } = this.props;
-    const { selectedItemId, presentations } = this.state;
+    const { classes, children } = this.props;
+    const { presentations } = this.state;
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -111,24 +117,11 @@ export class PresentationsList extends React.Component<
                       {...draggableProvided.draggableProps}
                       {...draggableProvided.dragHandleProps}
                     >
-                      <Item
-                        presentation={p}
-                        onClick={() => {
-                          this.setState({
-                            selectedItemId:
-                              this.getUniquePresentationId(p.id, i) ===
-                              selectedItemId
-                                ? ''
-                                : this.getUniquePresentationId(p.id, i),
-                          });
-                        }}
-                        selected={
-                          selectedItemId ===
-                          this.getUniquePresentationId(p.id, i)
-                        }
-                        onEdit={() => onEdit(p.id)}
-                        onRemove={() => this.removeItem(i)}
-                      />
+                      {children({
+                        onRemove: () => this.removeItem(i),
+                        presentation: p,
+                        itemId: this.getUniquePresentationId(p.id, i),
+                      })}
                     </div>
                   )}
                 </Draggable>
@@ -141,4 +134,6 @@ export class PresentationsList extends React.Component<
   }
 }
 
-export default withStyles(styles)(PresentationsList);
+export default Object.assign(withStyles(styles)(PresentationsList), {
+  Item,
+});
