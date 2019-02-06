@@ -11,7 +11,7 @@ import { PresentationThumbnailProps } from '../../presentation/PresentationThumb
 import * as P from '../../presentation/PresentationTypes';
 import styles from './Item.styles';
 
-interface ItemProps extends WithStyles, PresentationThumbnailProps {
+export interface ItemProps extends WithStyles, PresentationThumbnailProps {
   presentation: P.Presentation;
   onRemove: () => void;
 }
