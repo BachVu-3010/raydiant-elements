@@ -7,11 +7,13 @@ import styles from './ColorField.styles';
 
 interface ColorFieldProps extends WithStyles<typeof styles> {
   /** The label of the field */
-  label: string;
+  label?: React.ReactNode;
   /** The value of the field */
   value?: string;
   /** Set to true to disable in the input */
   disabled?: boolean;
+  /** Set to true to make the button expand to it's container */
+  fullWidth?: boolean;
   /** Called when the value changes */
   onChange?: (value: string) => any;
 }
@@ -61,19 +63,25 @@ export class ColorField extends React.Component<
   };
 
   render() {
-    const { label, value, disabled, classes } = this.props;
+    const { children, label, fullWidth, value, disabled, classes } = this.props;
     const { open } = this.state;
     return (
       <div className={classes.root}>
-        <Popover.Anchor>
-          <Button disabled={disabled} onClick={this.openPicker}>
+        <Popover.Anchor fullWidth={fullWidth}>
+          <Button
+            disabled={disabled}
+            onClick={this.openPicker}
+            fullWidth={fullWidth}
+          >
             <div className={classes.color} style={{ backgroundColor: value }} />
-            {label}
+            {children || label}
           </Button>
           <Popover
             anchor={['top', 'left']}
             to={['bottom', 'left']}
             open={open}
+            height="auto"
+            width="auto"
             onOverlayClick={this.closePicker}
           >
             <ChromePicker

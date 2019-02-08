@@ -8,7 +8,7 @@ import styles from './Button.styles';
 
 interface ButtonProps extends WithStyles<typeof styles> {
   /** The button's label */
-  label?: string;
+  label?: React.ReactNode;
   /** The button's icon */
   icon?: IconOptions;
   /** The button's color */
@@ -61,10 +61,9 @@ export const Button: React.SFC<ButtonProps> = ({
     }}
     {...testAttr(testId)}
   >
-    {!children &&
-      icon && (
-        <Icon icon={icon} className={cn(label && classes.iconWithLabel)} />
-      )}
+    {!children && icon && (
+      <Icon icon={icon} className={cn(label && classes.iconWithLabel)} />
+    )}
     {children || label}
   </MUIButton>
 );
