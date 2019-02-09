@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ChromePicker from 'react-color/lib/Chrome';
+import { testAttr } from '../../helpers';
 import Button from '../Button';
 import Popover from '../Popover';
 import withStyles, { WithStyles } from '../withStyles';
@@ -14,6 +15,7 @@ interface ColorFieldProps extends WithStyles<typeof styles> {
   disabled?: boolean;
   /** Set to true to make the button expand to it's container */
   fullWidth?: boolean;
+  testId?: string;
   /** Called when the value changes */
   onChange?: (value: string) => any;
 }
@@ -63,7 +65,15 @@ export class ColorField extends React.Component<
   };
 
   render() {
-    const { children, label, fullWidth, value, disabled, classes } = this.props;
+    const {
+      children,
+      label,
+      fullWidth,
+      value,
+      disabled,
+      classes,
+      testId,
+    } = this.props;
     const { open } = this.state;
     return (
       <div className={classes.root}>
@@ -72,6 +82,7 @@ export class ColorField extends React.Component<
             disabled={disabled}
             onClick={this.openPicker}
             fullWidth={fullWidth}
+            {...testAttr(testId)}
           >
             <div className={classes.color} style={{ backgroundColor: value }} />
             {children || label}
