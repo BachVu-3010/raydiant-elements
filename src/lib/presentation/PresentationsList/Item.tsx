@@ -27,7 +27,10 @@ class Item extends React.Component<ItemProps> {
       onRemove,
       isLoading,
       hasError,
+      isLocked,
+      lockedMessage,
     } = this.props;
+    const shouldShowRemove = !isLocked && selected;
     return (
       <div
         className={cn(classes.root, selected && classes.selected)}
@@ -41,6 +44,8 @@ class Item extends React.Component<ItemProps> {
               hasError={hasError}
               onEdit={selected && onEdit}
               showControls={selected}
+              isLocked={isLocked}
+              lockedMessage={lockedMessage}
             />
           </div>
           <div className={classes.presentationDetails}>
@@ -48,7 +53,7 @@ class Item extends React.Component<ItemProps> {
             <Text muted>{presentation.applicationName}</Text>
           </div>
           <Spacer />
-          {selected && (
+          {shouldShowRemove && (
             <div className={classes.topRight}>
               <Button icon="remove" onClick={onRemove} />
             </div>

@@ -19,33 +19,45 @@ const styles = () =>
     },
   });
 
-type Presentation = P.Presentation & {
-  isLoading: boolean;
-  hasError: boolean;
-};
 interface RenderProps {
-  presentation: Presentation;
+  presentation: P.Presentation;
   onRemove: () => void;
   itemId: string;
 }
 
 export interface PresentationsListProps extends WithStyles {
-  presentations: Presentation[];
-  onOrderChange: (presentations: string[]) => void;
-  children: (props: RenderProps) => React.ReactNode;
+  presentations?: P.Presentation[];
+  onOrderChange?: (presentations: string[]) => void;
+  children?: (props: RenderProps) => React.ReactNode;
 }
 
 export interface PresentationsListState {
-  presentations: Presentation[];
+  presentations: P.Presentation[];
 }
 
 export class PresentationsList extends React.Component<
   PresentationsListProps,
   PresentationsListState
 > {
+  static defaultProps: Partial<PresentationsListProps> = {
+    presentations: [],
+    onOrderChange: () => {
+      return;
+    },
+    children: () => null,
+  };
+
   state: PresentationsListState = {
     presentations: this.props.presentations,
   };
+
+  componentDidUpdate() {
+    // Update state if a presentation is added or removed. This is a naive
+    // implementation and will undo any re-ordering since component mount.
+    if (this.props.presentations.length !== this.state.presentations.length) {
+      this.setState({ presentations: this.props.presentations });
+    }
+  }
 
   onDragStart = () => {
     if (window.navigator.vibrate) {
@@ -94,6 +106,7 @@ export class PresentationsList extends React.Component<
       onOrderChange(presentationsUpdated.map(p => p.id));
     });
   };
+
   render() {
     const { classes, children } = this.props;
     const { presentations } = this.state;

@@ -5,9 +5,13 @@ import AlertIcon from '../../core/AlertIcon';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
 import CircularProgress from '../../core/CircularProgress';
+import Icon from '../../core/Icon';
+import Popover from '../../core/Popover';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
+import Row from '../../layout/Row';
+import Spacer from '../../layout/Spacer';
 import * as T from '../PresentationTypes';
 import styles from './PresentationThumbnail.styles';
 
@@ -21,6 +25,8 @@ export interface PresentationThumbnailProps {
   hasError?: boolean;
   errorMessage?: string;
   isLoading?: boolean;
+  isLocked?: boolean;
+  lockedMessage?: React.ReactNode;
   testId?: string;
 }
 
@@ -30,6 +36,7 @@ interface PresentationThumbnailPropsWithStyles
 
 interface PresentationThumbnailState {
   isHover: boolean;
+  editPopoverOpen: boolean;
 }
 
 export class PresentationThumbnail extends React.Component<
@@ -46,6 +53,7 @@ export class PresentationThumbnail extends React.Component<
 
   state = {
     isHover: false,
+    editPopoverOpen: false,
   };
 
   handleMouseOver = () => {
@@ -68,9 +76,11 @@ export class PresentationThumbnail extends React.Component<
       onEdit,
       onSelect,
       onClick,
+      isLocked,
+      lockedMessage,
       testId,
     } = this.props;
-    const { isHover } = this.state;
+    const { isHover, editPopoverOpen } = this.state;
 
     const imageUrl =
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
@@ -78,9 +88,10 @@ export class PresentationThumbnail extends React.Component<
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
     const shouldShowControls = hasControls && (showControls || isHover);
-    const shouldShowEdit = onEdit && shouldShowControls;
+    const shouldShowEdit = !isLocked && onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowError = hasError && !shouldShowSelect;
+    const shouldShowLock = isLocked && shouldShowControls;
     const shouldShowProgress = isLoading;
     const shouldShowOverlay =
       shouldShowControls || hasError || isLoading || selected;
@@ -111,6 +122,17 @@ export class PresentationThumbnail extends React.Component<
           />
         )}
         {shouldShowOverlay && <div className={classes.overlay} />}
+        {shouldShowProgress && (
+          <div className={classes.topRight}>
+            <CircularProgress />
+          </div>
+        )}
+        {shouldShowError && (
+          <div className={cn(classes.topLeft, classes.error)}>
+            <AlertIcon />
+            <span className={classes.errorMessage}>{errorMessage}</span>
+          </div>
+        )}
         {shouldShowEdit && (
           <div
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
@@ -122,6 +144,44 @@ export class PresentationThumbnail extends React.Component<
             />
           </div>
         )}
+        {shouldShowLock && (
+          <div className={classes.topLeft}>
+            <Popover.Anchor>
+              <Button
+                icon="lock"
+                onClick={stopPropagation(() => {
+                  this.setState({ editPopoverOpen: true });
+                })}
+              />
+              <Popover
+                color="grey"
+                open={editPopoverOpen}
+                anchor={['top', 'left']}
+                to={['bottom', 'left']}
+                width="auto"
+                onOverlayClick={() => {
+                  this.setState({ editPopoverOpen: false });
+                }}
+              >
+                <Popover.Header>
+                  <Row>
+                    <Icon icon="lock" />
+                    <div style={{ width: 220 }}>{lockedMessage}</div>
+                  </Row>
+                </Popover.Header>
+                <Popover.Footer>
+                  <Spacer />
+                  <Button
+                    label="Got It"
+                    onClick={() => {
+                      this.setState({ editPopoverOpen: false });
+                    }}
+                  />
+                </Popover.Footer>
+              </Popover>
+            </Popover.Anchor>
+          </div>
+        )}
         {shouldShowSelect && (
           <div className={classes.topLeft}>
             <Checkbox
@@ -131,17 +191,6 @@ export class PresentationThumbnail extends React.Component<
               onClick={stopPropagation()}
               testId={testId ? `${testId}-select` : ''}
             />
-          </div>
-        )}
-        {shouldShowProgress && (
-          <div className={classes.topRight}>
-            <CircularProgress />
-          </div>
-        )}
-        {shouldShowError && (
-          <div className={cn(classes.topLeft, classes.error)}>
-            <AlertIcon />
-            <span className={classes.errorMessage}>{errorMessage}</span>
           </div>
         )}
       </div>
