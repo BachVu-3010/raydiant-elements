@@ -37,12 +37,13 @@ import { getErrorAtPath, isPathEqual } from './utilities';
 import validatePresentation from './validatePresentation';
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
-  presentation: P.Presentation;
-  appVersion: A.AppVersion;
-  themes: P.Theme[];
-  affectedDevices: D.Device[];
+  presentation?: P.Presentation;
+  appVersion?: A.AppVersion;
+  themes?: P.Theme[];
+  affectedDevices?: D.Device[];
+  previewMode?: P.PreviewMode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
-  minDuration: number;
+  minDuration?: number;
   onCancel?: () => void;
   onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
   onChange?: (
@@ -64,8 +65,8 @@ interface FileUpload {
 }
 
 interface PresentationBuilderState {
-  presentation: P.Presentation;
-  previewPresentation: P.Presentation;
+  presentation?: P.Presentation;
+  previewPresentation?: P.Presentation;
   validate: boolean;
   previewMode: P.PreviewMode;
   files: FileUpload[];
@@ -76,18 +77,30 @@ export class PresentationBuilder extends React.Component<
   PresentationBuilderProps,
   PresentationBuilderState
 > {
-  static defaultProps = {};
+  static defaultProps: Partial<PresentationBuilderProps> = {
+    themes: [],
+    affectedDevices: [],
+    minDuration: 5,
+    previewMode: P.PreviewMode.Horizontal,
+  };
 
-  state = {
+  state: PresentationBuilderState = {
     presentation: this.props.presentation,
     previewPresentation: this.props.presentation,
     validate: false,
-    previewMode: P.PreviewMode.Horizontal,
+    previewMode: this.props.previewMode,
     files: [] as FileUpload[],
     showAffectedDevices: false,
   };
 
   queuedPresentationPreview: P.Presentation | null = null;
+
+  componentDidUpdate(prevProps: PresentationBuilderProps) {
+    const { presentation } = this.props;
+    if (!prevProps.presentation && presentation) {
+      this.setState({ presentation, previewPresentation: presentation });
+    }
+  }
 
   handleSave = () => {
     const { onSave, appVersion, minDuration } = this.props;
@@ -186,7 +199,7 @@ export class PresentationBuilder extends React.Component<
     }
   }
 
-  renderForm(
+  renderApplicationVariables(
     appVars: P.ApplicationVariables,
     properties: A.PresentationProperty[],
     path: P.Path,
@@ -441,7 +454,7 @@ export class PresentationBuilder extends React.Component<
             }
             renderForm={(itemValue, itemProperties, itemPath) => (
               <Column>
-                {this.renderForm(
+                {this.renderApplicationVariables(
                   itemValue,
                   itemProperties,
                   [...path, ...itemPath],
@@ -522,6 +535,8 @@ export class PresentationBuilder extends React.Component<
     const { appVersion, children, minDuration } = this.props;
     const { previewMode, previewPresentation } = this.state;
 
+    const isLoading = !appVersion || !previewPresentation;
+
     return (
       <PresentationBuilderPreview
         color="dark"
@@ -529,11 +544,74 @@ export class PresentationBuilder extends React.Component<
         previewMode={previewMode}
         onPreviewModeChange={value => this.setState({ previewMode: value })}
       >
-        {children(
-          previewPresentation,
-          validatePresentation(previewPresentation, appVersion, minDuration),
-        )}
+        {!isLoading &&
+          children(
+            previewPresentation,
+            validatePresentation(previewPresentation, appVersion, minDuration),
+          )}
       </PresentationBuilderPreview>
+    );
+  }
+
+  renderForm() {
+    const { classes, appVersion, minDuration } = this.props;
+    const { presentation, validate } = this.state;
+
+    const errors = validate
+      ? validatePresentation(presentation, appVersion, minDuration)
+      : [];
+
+    // These are "fake" presentation properties for name and duration so they can
+    // be treated the same as application variables when updating the presentation state.
+    const namePath = ['name'];
+    const durationPath = ['duration'];
+    const nameProp = { type: 'string', name: 'name' };
+    const durationProp = { type: 'number', name: 'duration' };
+    const nameError = getErrorAtPath(errors, namePath);
+    const durationError = getErrorAtPath(errors, durationPath);
+
+    return (
+      <Column className={classes.inputs}>
+        <TextField
+          label="Name"
+          value={presentation.name}
+          onChange={name => this.updatePresentation(namePath, name, nameProp)}
+          helperText={this.renderInputHelperText(
+            nameProp,
+            namePath,
+            appVersion.strings,
+            nameError,
+          )}
+          error={!!nameError}
+          onBlur={this.handleBlur}
+        />
+
+        {this.renderApplicationVariables(
+          presentation.applicationVariables,
+          appVersion.presentationProperties,
+          ['applicationVariables'],
+          appVersion.strings,
+          errors,
+        )}
+
+        {appVersion.hasConfigurableDuration && (
+          <NumberField
+            label="Duration"
+            value={presentation.duration}
+            onChange={duration =>
+              this.updatePresentation(durationPath, duration, durationProp)
+            }
+            helperText={this.renderInputHelperText(
+              durationProp,
+              durationPath,
+              appVersion.strings,
+              durationError,
+            )}
+            error={!!durationError}
+            onBlur={this.handleBlur}
+          />
+        )}
+      </Column>
     );
   }
 
@@ -542,31 +620,16 @@ export class PresentationBuilder extends React.Component<
       classes,
       presentation: originalPresentation,
       appVersion,
-      minDuration,
       onSave,
       onCancel,
       affectedDevices,
     } = this.props;
-    const { presentation, validate, showAffectedDevices } = this.state;
+    const { presentation, showAffectedDevices } = this.state;
 
-    const shouldDisableSave = !hasPresentationChanged(
-      originalPresentation,
-      presentation,
-      appVersion,
-    );
-
-    const errors = validate
-      ? validatePresentation(presentation, appVersion, minDuration)
-      : [];
-
-    // These are "fake" presentation properties for name and duration so they can
-    // be treated the same as application variables when updating the presentation state.
-    const nameProp = { type: 'string', name: 'name' };
-    const durationProp = { type: 'number', name: 'duration' };
-    const namePath = ['name'];
-    const durationPath = ['duration'];
-    const nameError = getErrorAtPath(errors, namePath);
-    const durationError = getErrorAtPath(errors, durationPath);
+    const isLoading = !originalPresentation || !presentation || !appVersion;
+    const shouldDisableSave =
+      isLoading ||
+      !hasPresentationChanged(originalPresentation, presentation, appVersion);
 
     return (
       <OneThirdLayout>
@@ -576,57 +639,9 @@ export class PresentationBuilder extends React.Component<
             <div className={classes.title}>
               <Text muted>Presentation Details</Text>
             </div>
-            <Column className={classes.inputs}>
-              <TextField
-                label="Name"
-                value={presentation.name}
-                onChange={name =>
-                  this.updatePresentation(namePath, name, nameProp)
-                }
-                helperText={this.renderInputHelperText(
-                  nameProp,
-                  namePath,
-                  appVersion.strings,
-                  nameError,
-                )}
-                error={!!nameError}
-                onBlur={this.handleBlur}
-              />
-
-              {this.renderForm(
-                presentation.applicationVariables,
-                appVersion.presentationProperties,
-                ['applicationVariables'],
-                appVersion.strings,
-                errors,
-              )}
-
-              {appVersion.hasConfigurableDuration && (
-                <NumberField
-                  label="Duration"
-                  value={presentation.duration}
-                  onChange={duration =>
-                    this.updatePresentation(
-                      durationPath,
-                      duration,
-                      durationProp,
-                    )
-                  }
-                  helperText={this.renderInputHelperText(
-                    durationProp,
-                    durationPath,
-                    appVersion.strings,
-                    durationError,
-                  )}
-                  error={!!durationError}
-                  onBlur={this.handleBlur}
-                />
-              )}
-            </Column>
+            {!isLoading && this.renderForm()}
           </div>
-
-          {this.renderWarnings()}
-
+          {!isLoading && this.renderWarnings()}
           <ActionBar condensed bottom color="light">
             {onCancel && <Button label="Cancel" onClick={onCancel} />}
             <Spacer />

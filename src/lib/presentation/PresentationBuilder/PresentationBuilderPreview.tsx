@@ -9,7 +9,7 @@ import * as P from '../PresentationTypes';
 import styles from './PresentationBuilderPreview.styles';
 
 interface PresentationBuilderPreviewProps extends WithStyles<typeof styles> {
-  appVersion: A.AppVersion;
+  appVersion?: A.AppVersion;
   previewMode: P.PreviewMode;
   onPreviewModeChange: (previewMode: P.PreviewMode) => any;
 }
@@ -19,6 +19,14 @@ class PresentationBuilderPreview extends React.Component<
   PresentationBuilderPreviewProps,
   PresentationBuilderPreviewState
 > {
+  static defaultProps = {
+    appVersion: {
+      name: '',
+      iconUrl: '',
+      strings: { description: '' },
+    },
+  };
+
   render() {
     const {
       classes,
