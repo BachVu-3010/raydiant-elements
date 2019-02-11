@@ -32,7 +32,7 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.button.background,
       color: theme.button.foreground,
       borderColor: theme.button.border,
-      '&:disabled': {
+      '&:disabled, &:disabled:hover': {
         color: theme.button.foregroundMuted,
       },
     },
@@ -43,7 +43,7 @@ const styles = (theme: Theme) =>
       '&:hover': {
         backgroundColor: theme.palette.primary.dark,
       },
-      '&:disabled': {
+      '&:disabled, &:disabled:hover': {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
         opacity: 0.5,
@@ -56,7 +56,7 @@ const styles = (theme: Theme) =>
       '&:hover': {
         backgroundColor: theme.palette.error.dark,
       },
-      '&:disabled': {
+      '&:disabled, &:disabled:hover': {
         backgroundColor: theme.palette.error.main,
         color: theme.palette.error.contrastText,
         opacity: 0.5,
@@ -69,7 +69,7 @@ const styles = (theme: Theme) =>
       '&:hover': {
         backgroundColor: theme.palette.progress.dark,
       },
-      '&:disabled': {
+      '&:disabled, &:disabled:hover': {
         backgroundColor: theme.palette.progress.main,
         color: theme.palette.progress.contrastText,
         opacity: 0.5,
