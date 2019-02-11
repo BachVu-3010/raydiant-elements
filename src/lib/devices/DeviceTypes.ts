@@ -8,10 +8,12 @@ export interface DeviceBase {
   deployedPresentations: { [key: string]: P.Presentation };
 }
 
+export type ScreenOrientation = 'normal' | 'left' | 'right';
+
 export interface Device extends DeviceBase {
   description: string;
   screenDimensions: string;
-  screenOrientation: string;
+  screenOrientation: ScreenOrientation;
 }
 
 export interface DeviceGroup extends DeviceBase {

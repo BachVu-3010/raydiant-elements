@@ -1,3 +1,4 @@
+import * as cn from 'classnames';
 import * as debounce from 'debounce';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
@@ -7,10 +8,12 @@ import styles from './PresentationPreview.styles';
 
 interface PresentationPreviewProps extends WithStyles<typeof styles> {
   previewMode: T.PreviewMode;
+  showBorder?: boolean;
 }
+
 interface PresentationPreviewState {
-  width: number;
-  height: number;
+  containerWidth: number;
+  containerHeight: number;
 }
 
 export class PresentationPreview extends React.Component<
@@ -21,8 +24,8 @@ export class PresentationPreview extends React.Component<
   updateBoundsDebounced: any;
 
   state = {
-    width: 0,
-    height: 0,
+    containerWidth: 0,
+    containerHeight: 0,
   };
 
   constructor(props: PresentationPreviewProps) {
@@ -31,8 +34,12 @@ export class PresentationPreview extends React.Component<
   }
 
   updateBounds = () => {
-    const { width, height } = this.previewRef.getBoundingClientRect();
-    this.setState({ width, height });
+    const {
+      width: containerWidth,
+      height: containerHeight,
+    } = this.previewRef.getBoundingClientRect();
+
+    this.setState({ containerWidth, containerHeight });
   };
 
   componentDidMount() {
@@ -59,13 +66,20 @@ export class PresentationPreview extends React.Component<
   };
 
   render() {
-    const { previewMode, children, classes } = this.props;
-    const { width, height } = this.state;
-    const layoutProps = getLayoutProperties(width, height, previewMode);
+    const { showBorder, previewMode, children, classes } = this.props;
+    const { containerWidth, containerHeight } = this.state;
+    const layoutProps = getLayoutProperties(
+      containerWidth,
+      containerHeight,
+      previewMode,
+    );
 
     return (
       <div ref={this.initPreview} className={classes.root}>
-        <div className={classes.preview} style={layoutProps}>
+        <div
+          className={cn(classes.preview, showBorder && classes.border)}
+          style={layoutProps}
+        >
           {children}
         </div>
       </div>

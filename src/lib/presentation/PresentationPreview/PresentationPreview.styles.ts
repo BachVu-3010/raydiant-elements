@@ -18,6 +18,10 @@ const styles = (theme: Theme) =>
       transformOrigin: 'top left',
       overflow: 'hidden',
     },
+
+    border: {
+      border: '8px solid #0f0f14',
+    },
   });
 
 export default styles;

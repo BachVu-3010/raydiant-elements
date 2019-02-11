@@ -1,11 +1,11 @@
-import * as T from '../PresentationTypes';
+import * as P from '../PresentationTypes';
 
 export default function getLayoutProperties(
   containerWidth: number,
   containerHeight: number,
-  previewMode: T.PreviewMode,
+  previewMode: P.PreviewMode,
 ) {
-  const isLandscape = previewMode === T.PreviewMode.Horizontal;
+  const isLandscape = previewMode === P.PreviewMode.Horizontal;
   const width = isLandscape ? 1920 : 1080;
   const height = isLandscape ? 1080 : 1920;
   const scaleX = containerWidth / width;

@@ -119,7 +119,7 @@ export class DeviceSettingsForm extends React.Component<
               <SelectField
                 label="Screen Orientation"
                 value={device.screenOrientation}
-                onChange={screenOrientation => {
+                onChange={(screenOrientation: D.ScreenOrientation) => {
                   this.setState({ device: { ...device, screenOrientation } });
                 }}
               >
