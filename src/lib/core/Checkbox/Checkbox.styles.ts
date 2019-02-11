@@ -25,7 +25,7 @@ const styles = (theme: Theme) =>
       height: 20,
       backgroundColor: theme.checkbox.background,
       border: `1px solid ${theme.checkbox.border}`,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

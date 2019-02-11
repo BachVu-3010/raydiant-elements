@@ -14,7 +14,7 @@ const styles = (theme: Theme) =>
       boxSizing: 'border-box',
       padding: `${theme.spacing.unit}px 0px`,
       backgroundColor: theme.palette.background.inset,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       boxShadow: 'inset 0px 1px 5px rgba(0, 0, 0, 0.2)',
       ...scrollable(),
     },

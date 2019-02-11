@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       marginTop: theme.spacing.unit * 2,
       padding: theme.spacing.unit * 2,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       border: `1px solid ${theme.button.border}`,
 
       '& > svg': {

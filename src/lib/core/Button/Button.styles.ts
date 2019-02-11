@@ -10,7 +10,7 @@ const styles = (theme: Theme) =>
       // Subtract 1px from padding to compensate for additional 1px border
       paddingLeft: theme.spacing.unit * 2 - 1,
       paddingRight: theme.spacing.unit * 2 - 1,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
     },

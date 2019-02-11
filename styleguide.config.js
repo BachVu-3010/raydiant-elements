@@ -1,25 +1,15 @@
 const path = require('path');
 
-const getApplicationPath = component =>
-  path.join(__dirname, `src/lib/application/${component}/${component}.tsx`);
+const componentPathGetter = pathname => component =>
+  path.join(__dirname, 'src', 'lib', pathname, component, `${component}.tsx`);
 
-const getCorePath = component =>
-  path.join(__dirname, `src/lib/core/${component}/${component}.tsx`);
-
-const getDevicesPath = component =>
-  path.join(__dirname, `src/lib/devices/${component}/${component}.tsx`);
-
-const getLayoutPath = component =>
-  path.join(__dirname, `src/lib/layout/${component}/${component}.tsx`);
-
-const getLoginPath = component =>
-  path.join(__dirname, `src/lib/login/${component}/${component}.tsx`);
-
-const getPresentationPath = component =>
-  path.join(__dirname, `src/lib/presentation/${component}/${component}.tsx`);
-
-const getSchedulePath = component =>
-  path.join(__dirname, `src/lib/schedule/${component}/${component}.tsx`);
+const getApplicationPath = componentPathGetter('application');
+const getCorePath = componentPathGetter('core');
+const getDevicesPath = componentPathGetter('devices');
+const getLayoutPath = componentPathGetter('layout');
+const getLoginPath = componentPathGetter('login');
+const getPresentationPath = componentPathGetter('presentation');
+const getSchedulePath = componentPathGetter('schedule');
 
 const getAccountPath = component =>
   path.join(__dirname, `src/lib/account/${component}/${component}.tsx`);
@@ -39,18 +29,20 @@ module.exports = {
         getCorePath('App'),
         getCorePath('Breadcrumb'),
         getCorePath('Button'),
+        getCorePath('Card'),
         getCorePath('Checkbox'),
         getCorePath('CircularProgress'),
         getCorePath('ColorField'),
         getCorePath('DateField'),
+        getCorePath('Divider'),
         getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Heading1'),
         getCorePath('Heading2'),
         getCorePath('Icon'),
-        getCorePath('Logo'),
         getCorePath('Link'),
         getCorePath('ListField'),
+        getCorePath('Logo'),
         getCorePath('Menu'),
         getCorePath('Modal'),
         getCorePath('MultiSelectField'),
@@ -62,8 +54,8 @@ module.exports = {
         getCorePath('Tabs'),
         getCorePath('Text'),
         getCorePath('TextField'),
-        getCorePath('Title'),
         getCorePath('ThemeSelector'),
+        getCorePath('Title'),
       ],
     },
     {

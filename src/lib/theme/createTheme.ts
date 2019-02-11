@@ -69,6 +69,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       borderColor: string;
       color: string;
     };
+    borderRadius: {
+      xs: number;
+      sm: number;
+      md: number;
+    };
   }
   interface ThemeOptions {
     // Custom theme options.
@@ -134,6 +139,11 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       contentBackground: string;
       borderColor: string;
       color: string;
+    };
+    borderRadius: {
+      xs: number;
+      sm: number;
+      md: number;
     };
   }
 }

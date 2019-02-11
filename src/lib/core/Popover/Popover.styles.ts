@@ -27,7 +27,7 @@ const styles = (theme: Theme) =>
       zIndex: theme.zIndex.popover,
       overflow: 'hidden',
       color: theme.popover.color,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       backgroundColor: theme.palette.background.default,
       boxShadow: theme.modal.shadow,
 

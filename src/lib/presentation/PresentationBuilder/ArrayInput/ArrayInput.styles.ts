@@ -9,7 +9,7 @@ const styles = (theme: Theme) =>
     contents: {
       position: 'relative',
       padding: theme.spacing.unit * 2,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       border: `1px solid ${theme.button.border}`,
     },
     contentsOut: {

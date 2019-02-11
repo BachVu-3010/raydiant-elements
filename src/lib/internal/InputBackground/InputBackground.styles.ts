@@ -4,7 +4,7 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       backgroundColor: theme.input.background,
     },
   });

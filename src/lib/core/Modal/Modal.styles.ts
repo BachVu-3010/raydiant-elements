@@ -27,7 +27,7 @@ const styles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
-      borderRadius: theme.shape.borderRadius,
+      borderRadius: theme.borderRadius.sm,
       boxShadow: theme.modal.shadow,
     },
 

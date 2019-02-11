@@ -52,13 +52,13 @@ const styles = (theme: Theme) =>
     },
     underline: {
       '&:before': {
-        borderBottomLeftRadius: theme.shape.borderRadius,
-        borderBottomRightRadius: theme.shape.borderRadius,
+        borderBottomLeftRadius: theme.borderRadius.sm,
+        borderBottomRightRadius: theme.borderRadius.sm,
         borderBottomColor: theme.input.border,
       },
       '&:after': {
-        borderBottomLeftRadius: theme.shape.borderRadius,
-        borderBottomRightRadius: theme.shape.borderRadius,
+        borderBottomLeftRadius: theme.borderRadius.sm,
+        borderBottomRightRadius: theme.borderRadius.sm,
         borderBottomColor: theme.input.border,
       },
     },

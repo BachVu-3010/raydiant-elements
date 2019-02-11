@@ -38,9 +38,7 @@ const common = {
       dark: '#f6aa14',
       contrastText: '#ffffff',
     },
-  },
-  shape: {
-    borderRadius: 2,
+    divider: '#c6cedc',
   },
   logo: {
     default: 'https://public-assets.getmira.com/mira-logo.svg',
@@ -53,6 +51,11 @@ const common = {
   modal: {
     overlayBackground: 'rgba(0, 0, 0, 0.5)',
     shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
+  },
+  borderRadius: {
+    xs: 0,
+    sm: 2,
+    md: 4,
   },
 };
 
