@@ -21,6 +21,9 @@ const getPresentationPath = component =>
 const getSchedulePath = component =>
   path.join(__dirname, `src/lib/schedule/${component}/${component}.tsx`);
 
+const getAccountPath = component =>
+  path.join(__dirname, `src/lib/account/${component}/${component}.tsx`);
+
 module.exports = {
   title: 'Mira Elements',
   theme: {
@@ -112,6 +115,10 @@ module.exports = {
     {
       name: 'Schedule',
       components: () => [getSchedulePath('ScheduleContentPopover')],
+    },
+    {
+      name: 'Account',
+      components: () => [getAccountPath('AccountSection')],
     },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),
