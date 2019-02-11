@@ -88,12 +88,17 @@ export const AffectedDevicesPopover: React.SFC<AffectedDevicesPopoverProps> = ({
                 label="Delete Anyway"
                 color="destructive"
                 onClick={onDelete}
+                testId={testId ? `${testId}-delete` : ''}
               />
             </>
           ) : (
             <>
               <Spacer />
-              <Button label="Got it" onClick={onClose} />
+              <Button
+                label="Got it"
+                onClick={onClose}
+                testId={testId ? `${testId}-ok` : ''}
+              />
             </>
           )}
         </Popover.Footer>
