@@ -161,10 +161,10 @@
     moment ">=2.14.0"
     popper.js "^1.14.1"
 
-"@types/react-dom@^16.0.7":
-  version "16.0.9"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.9.tgz#73ceb7abe6703822eab6600e65c5c52efd07fb91"
-  integrity sha512-4Z0bW+75zeQgsEg7RaNuS1k9MKhci7oQqZXxrV5KUGIyXZHHAAL3KA4rjhdH8o6foZ5xsRMSqkoM5A3yRVPR5w==
+"@types/react-dom@16.0.7":
+  version "16.0.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.7.tgz#54d0f867a76b90597e8432030d297982f25c20ba"
+  integrity sha512-vaq4vMaJOaNgFff1t3LnHYr6vRa09vRspMkmLdXtFZmO1fwDI2snP+dpOkwrtlU8UC8qsqemCu4RmVM2OLq/fA==
   dependencies:
     "@types/node" "*"
     "@types/react" "*"
@@ -197,7 +197,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.1.0", "@types/react@^16.4.13":
+"@types/react@*", "@types/react@16.7.6", "@types/react@^16.1.0":
   version "16.7.6"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.6.tgz#80e4bab0d0731ad3ae51f320c4b08bdca5f03040"
   integrity sha512-QBUfzftr/8eg/q3ZRgf/GaDP6rTYc7ZNem+g4oZM38C9vXyV8AWRWaTQuW5yCoZTsfHrN7b3DeEiUnqH9SrnpA==
@@ -2895,7 +2895,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.0, fbjs@^0.8.1:
+fbjs@^0.8.0, fbjs@^0.8.1, fbjs@^0.8.16:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -6937,15 +6937,15 @@ react-docgen@3.0.0-beta12:
     node-dir "^0.1.10"
     recast "^0.13.0"
 
-react-dom@^16.4.2:
-  version "16.6.3"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.6.3.tgz#8fa7ba6883c85211b8da2d0efeffc9d3825cccc0"
-  integrity sha512-8ugJWRCWLGXy+7PmNh8WJz3g1TaTUt1XyoIcFN+x0Zbkoz+KKdUyx1AQLYJdbFXjuF41Nmjn5+j//rxvhFjgSQ==
+react-dom@16.4.2:
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.2.tgz#4afed569689f2c561d2b8da0b819669c38a0bda4"
+  integrity sha512-Usl73nQqzvmJN+89r97zmeUpQDKDlh58eX6Hbs/ERdDHzeBzWy+ENk7fsGQ+5KxArV1iOFPT46/VneklK9zoWw==
   dependencies:
+    fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.11.2"
+    prop-types "^15.6.0"
 
 react-error-overlay@^4.0.1:
   version "4.0.1"
@@ -7143,15 +7143,15 @@ react-transition-group@^2.2.1:
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
-react@^16.4.2:
-  version "16.6.3"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.6.3.tgz#25d77c91911d6bbdd23db41e70fb094cc1e0871c"
-  integrity sha512-zCvmH2vbEolgKxtqXL2wmGCUxUyNheYn/C+PD1YAjfxHC54+MhdruyhO7QieQrYsYeTxrn93PM2y0jRH1zEExw==
+react@16.4.2:
+  version "16.4.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.4.2.tgz#2cd90154e3a9d9dd8da2991149fdca3c260e129f"
+  integrity sha512-dMv7YrbxO4y2aqnvA7f/ik9ibeLSHQJTI6TrYAenPSaQ6OXfb+Oti+oJiy8WBxgRzlKatYqtCjphTgDSCEiWFg==
   dependencies:
+    fbjs "^0.8.16"
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.11.2"
+    prop-types "^15.6.0"
 
 reactcss@^1.2.0:
   version "1.2.3"
