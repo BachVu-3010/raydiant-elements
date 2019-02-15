@@ -27,7 +27,12 @@ interface RenderProps {
 
 export interface PresentationsListProps extends WithStyles {
   presentations?: P.Presentation[];
-  onOrderChange?: (presentations: string[]) => void;
+  onOrderChange?: (
+    presentations: string[],
+    // passing the updated selected item id so that the
+    // consumer can re-select the item from the list.
+    updatedSelectedItemId?: string,
+  ) => void;
   children?: (props: RenderProps) => React.ReactNode;
 }
 
@@ -83,7 +88,15 @@ export class PresentationsList extends React.Component<
       result.destination.index,
     );
     this.setState({ presentations: presentationsReOrdered }, () => {
-      onOrderChange(presentationsReOrdered.map(p => p.id));
+      const selectedPresentationId = presentations[result.source.index].id;
+      const updatedSelectedItemId = this.getUniquePresentationId(
+        selectedPresentationId,
+        result.destination.index,
+      );
+      onOrderChange(
+        presentationsReOrdered.map(p => p.id),
+        updatedSelectedItemId,
+      );
     });
   };
 

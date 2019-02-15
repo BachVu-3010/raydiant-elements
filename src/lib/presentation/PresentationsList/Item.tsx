@@ -4,6 +4,7 @@ import Button from '../../core/Button';
 import Heading1 from '../../core/Heading1';
 import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { stopPropagation } from '../../helpers';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
 import PresentationThumbnail from '../../presentation/PresentationThumbnail';
@@ -55,7 +56,7 @@ class Item extends React.Component<ItemProps> {
           <Spacer />
           {shouldShowRemove && (
             <div className={classes.topRight}>
-              <Button icon="remove" onClick={onRemove} />
+              <Button icon="remove" onClick={stopPropagation(onRemove)} />
             </div>
           )}
         </Row>
