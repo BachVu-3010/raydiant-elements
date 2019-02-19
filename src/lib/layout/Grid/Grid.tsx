@@ -83,7 +83,7 @@ export class Grid extends React.Component<GridProps, GridState> {
 
     const childrenCount = React.Children.count(children);
     if (childrenCount === 0) {
-      return null;
+      return <div className={classes.root} />;
     }
 
     // Fill the last row with empty elements of equal width to maintain grid shape.
