@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ChromePicker from 'react-color/lib/Chrome';
-import { testAttr } from '../../helpers';
 import Button from '../Button';
 import Popover from '../Popover';
 import withStyles, { WithStyles } from '../withStyles';
@@ -82,7 +81,7 @@ export class ColorField extends React.Component<
             disabled={disabled}
             onClick={this.openPicker}
             fullWidth={fullWidth}
-            {...testAttr(testId)}
+            testId={testId}
           >
             <div className={classes.color} style={{ backgroundColor: value }} />
             {children || label}
