@@ -1,6 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
-import { preventDefault } from '../../helpers';
+import { preventDefault, testAttr } from '../../helpers';
 import Icon, { IconOptions } from '../Icon';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './TabItem.styles';
@@ -18,6 +18,7 @@ export interface TabProps extends WithStyles<typeof styles> {
   shrink?: boolean;
   /** Called when the tab is clicked */
   onClick?: () => any;
+  testId?: string;
 }
 
 export const Tab: React.SFC<TabProps> = ({
@@ -27,6 +28,7 @@ export const Tab: React.SFC<TabProps> = ({
   active,
   shrink,
   onClick,
+  testId,
   classes,
 }) => {
   const TabElement = (href ? 'a' : 'button') as React.ReactType;
@@ -40,6 +42,7 @@ export const Tab: React.SFC<TabProps> = ({
       )}
       href={href}
       onClick={onClick && preventDefault(onClick)}
+      {...testAttr(testId)}
     >
       {icon && <Icon icon={icon} className={classes.icon} />}
       <span className={cn(classes.label, !icon && classes.labelNoIcon)}>
