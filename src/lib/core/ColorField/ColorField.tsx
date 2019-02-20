@@ -96,7 +96,7 @@ export class ColorField extends React.Component<
           >
             <ChromePicker
               color={value || 'transparent'}
-              onChangeComplete={this.handleChange}
+              onChange={this.handleChange}
             />
           </Popover>
         </Popover.Anchor>
