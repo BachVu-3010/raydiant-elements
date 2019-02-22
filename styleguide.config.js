@@ -67,6 +67,7 @@ module.exports = {
         getLayoutPath('OneThirdLayout'),
         getLayoutPath('Row'),
         getLayoutPath('Spacer'),
+        getLayoutPath('SpaceAround'),
       ],
     },
     {

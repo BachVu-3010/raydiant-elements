@@ -15,10 +15,12 @@ export const Row: React.SFC<RowProps> = ({
   inline,
   classes,
   children,
-}) => (
-  <div className={cn(classes.root, inline && classes.inline, className)}>
-    {children}
-  </div>
-);
+}) => {
+  return (
+    <div className={cn(classes.root, inline && classes.inline, className)}>
+      {children}
+    </div>
+  );
+};
 
 export default withStyles(styles)(Row);

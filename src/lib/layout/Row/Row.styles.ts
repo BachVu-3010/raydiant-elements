@@ -1,4 +1,5 @@
 import { createStyles } from '../../core/withStyles';
+import { marginBetweenChildrenHorizontal } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -6,13 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       display: 'flex',
       width: '100%',
-
-      '& > *': {
-        marginRight: theme.spacing.unit * 2,
-      },
-      '& > *:last-child': {
-        marginRight: 0,
-      },
+      ...marginBetweenChildrenHorizontal(theme.spacing.unit),
     },
 
     inline: {

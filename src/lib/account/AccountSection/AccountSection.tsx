@@ -14,7 +14,7 @@ export const AccountSection: React.SFC<AccountSectionProps> = ({
   title,
   classes,
 }) => (
-  <div className={cn(classes.accountSection)}>
+  <div>
     <div className={cn(classes.accountSectionTitle)}>
       <Heading2>{title}</Heading2>
     </div>

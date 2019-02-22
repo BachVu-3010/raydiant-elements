@@ -1,3 +1,4 @@
+import { CSSProperties } from '@material-ui/core/styles/withStyles';
 import * as React from 'react';
 import { Theme } from '../theme';
 
@@ -57,4 +58,26 @@ export const tab = (theme: Theme): React.CSSProperties => ({
   cursor: 'pointer',
   textDecoration: 'none',
   outline: 'none',
+});
+
+export const marginBetweenChildrenHorizontal = (
+  margin: number | string,
+): CSSProperties => ({
+  '& > :not(:first-child)': {
+    marginLeft: margin,
+  },
+  '& > :not(:last-child)': {
+    marginRight: margin,
+  },
+});
+
+export const marginBetweenChildrenVertical = (
+  margin: number | string,
+): CSSProperties => ({
+  '& > :not(:first-child)': {
+    marginTop: margin,
+  },
+  '& > :not(:last-child)': {
+    marginBottom: margin,
+  },
 });
