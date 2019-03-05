@@ -11,6 +11,13 @@ import { scrollable } from '../../mixins';
 import * as P from '../../presentation/PresentationTypes';
 import Item from './Item';
 
+// Necessary for keeping track of the selected item.
+// Using index to track the selected item causes issues when selecting an item, then re-ordering.
+// Using presentationId will select multiple items if there are duplicate presentations in the list.
+const getUniquePresentationId = (presentationId: string, index: number) => {
+  return `${presentationId}-${index}`;
+};
+
 const styles = () =>
   createStyles({
     root: {
@@ -37,7 +44,7 @@ export interface PresentationsListProps extends WithStyles {
 }
 
 export interface PresentationsListState {
-  presentations: P.Presentation[];
+  presentationIds: string[];
 }
 
 export class PresentationsList extends React.Component<
@@ -53,14 +60,19 @@ export class PresentationsList extends React.Component<
   };
 
   state: PresentationsListState = {
-    presentations: this.props.presentations,
+    presentationIds: this.props.presentations.map(p => p.id),
   };
 
-  componentDidUpdate() {
-    // Update state if a presentation is added or removed. This is a naive
-    // implementation and will undo any re-ordering since component mount.
-    if (this.props.presentations.length !== this.state.presentations.length) {
-      this.setState({ presentations: this.props.presentations });
+  componentDidUpdate(prevProps: PresentationsListProps) {
+    const { presentations } = this.props;
+    const didPresentationsChange =
+      presentations.length !== prevProps.presentations.length ||
+      presentations.some((p, i) => p.id !== prevProps.presentations[i].id);
+
+    if (didPresentationsChange) {
+      this.setState({
+        presentationIds: this.props.presentations.map(p => p.id),
+      });
     }
   }
 
@@ -71,8 +83,8 @@ export class PresentationsList extends React.Component<
   };
 
   onDragEnd = (result: DropResult) => {
-    const { onOrderChange } = this.props;
-    const { presentations } = this.state;
+    const { onOrderChange, presentations } = this.props;
+    const { presentationIds } = this.state;
     // dropped outside the list
     if (!result.destination) {
       return;
@@ -82,47 +94,38 @@ export class PresentationsList extends React.Component<
       return;
     }
 
-    const presentationsReOrdered = reorder(
-      presentations,
+    const presentationIdsReOrdered = reorder(
+      presentationIds,
       result.source.index,
       result.destination.index,
     );
-    this.setState({ presentations: presentationsReOrdered }, () => {
+
+    this.setState({ presentationIds: presentationIdsReOrdered }, () => {
       const selectedPresentationId = presentations[result.source.index].id;
-      const updatedSelectedItemId = this.getUniquePresentationId(
+      const updatedSelectedItemId = getUniquePresentationId(
         selectedPresentationId,
         result.destination.index,
       );
-      onOrderChange(
-        presentationsReOrdered.map(p => p.id),
-        updatedSelectedItemId,
-      );
+      onOrderChange(presentationIdsReOrdered, updatedSelectedItemId);
     });
-  };
-
-  // Used to keep track of the selected item.
-  // Using id to track the selected item causes issues when selecting an item, then re-ordering.
-  // Using presentationId will select multiple items if there are duplicate presentations in the list.
-  getUniquePresentationId = (presentationId: string, index: number) => {
-    return `${presentationId}-${index}`;
   };
 
   removeItem = (idx: number) => {
     const { onOrderChange } = this.props;
-    const { presentations } = this.state;
+    const { presentationIds } = this.state;
 
-    const presentationsUpdated = [
-      ...presentations.slice(0, idx),
-      ...presentations.slice(idx + 1, presentations.length),
+    const presentationIdsUpdated = [
+      ...presentationIds.slice(0, idx),
+      ...presentationIds.slice(idx + 1, presentationIds.length),
     ];
-    this.setState({ presentations: presentationsUpdated }, () => {
-      onOrderChange(presentationsUpdated.map(p => p.id));
+    this.setState({ presentationIds: presentationIdsUpdated }, () => {
+      onOrderChange(presentationIdsUpdated);
     });
   };
-
   render() {
-    const { classes, children } = this.props;
-    const { presentations } = this.state;
+    const { classes, children, presentations } = this.props;
+    const { presentationIds } = this.state;
+
     return (
       <DragDropContext
         onDragStart={this.onDragStart}
@@ -131,10 +134,10 @@ export class PresentationsList extends React.Component<
         <Droppable droppableId="droppable">
           {droppableProvided => (
             <div className={classes.root} ref={droppableProvided.innerRef}>
-              {presentations.map((p, i) => (
+              {presentationIds.map((id, i) => (
                 <Draggable
-                  key={this.getUniquePresentationId(p.id, i)}
-                  draggableId={this.getUniquePresentationId(p.id, i)}
+                  key={getUniquePresentationId(id, i)}
+                  draggableId={getUniquePresentationId(id, i)}
                   index={i}
                 >
                   {draggableProvided => (
@@ -145,8 +148,8 @@ export class PresentationsList extends React.Component<
                     >
                       {children({
                         onRemove: () => this.removeItem(i),
-                        presentation: p,
-                        itemId: this.getUniquePresentationId(p.id, i),
+                        presentation: presentations.find(p => p.id === id),
+                        itemId: getUniquePresentationId(id, i),
                       })}
                     </div>
                   )}
