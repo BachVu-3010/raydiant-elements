@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+import { testAttr } from '../../helpers';
 import Overlay from '../../internal/Overlay';
 import { AppContext, AppContextProps } from '../App';
 import withStyles, { WithStyles } from '../withStyles';
@@ -11,6 +12,7 @@ interface ModalProps {
   open: boolean;
   /** Called when the user clicks the overlay  */
   onOverlayClick?: () => any;
+  testId?: string;
 }
 
 export class Modal extends React.Component<
@@ -28,13 +30,17 @@ export class Modal extends React.Component<
   }
 
   render() {
-    const { open, onOverlayClick, children, classes } = this.props;
+    const { open, onOverlayClick, children, classes, testId } = this.props;
 
     if (!open) return null;
 
     return ReactDOM.createPortal(
-      <div className={classes.root}>
-        <Overlay className={classes.overlay} onClick={onOverlayClick} />
+      <div className={classes.root} {...testAttr(testId)}>
+        <Overlay
+          className={classes.overlay}
+          onClick={onOverlayClick}
+          testId={`${testId}-overlay`}
+        />
         <div className={classes.modal}>{children}</div>
       </div>,
       this.el,

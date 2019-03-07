@@ -2,11 +2,13 @@ import Fade from '@material-ui/core/Fade';
 import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { testAttr } from '../../helpers';
 import styles from './Overlay.styles';
 
 export interface OverlayProps extends WithStyles<typeof styles> {
   className?: string;
   onClick?: () => any;
+  testId?: string;
 }
 
 export const Overlay: React.SFC<OverlayProps> = ({
@@ -14,6 +16,7 @@ export const Overlay: React.SFC<OverlayProps> = ({
   onClick,
   children,
   classes,
+  testId,
 }) => {
   const clickProps = {
     onClick,
@@ -27,6 +30,7 @@ export const Overlay: React.SFC<OverlayProps> = ({
       <div
         className={cn(classes.overlay, className)}
         {...(onClick ? clickProps : {})}
+        {...testAttr(testId)}
       >
         {children}
       </div>
