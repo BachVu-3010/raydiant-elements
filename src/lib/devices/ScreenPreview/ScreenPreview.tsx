@@ -1,5 +1,6 @@
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { testAttr } from '../../helpers';
 import PresentationPreview from '../../presentation/PresentationPreview';
 import * as P from '../../presentation/PresentationTypes';
 import * as D from '../DeviceTypes';
@@ -37,8 +38,16 @@ export const ScreenPreview: React.SFC<ScreenPreviewProps> = ({
     <div className={classes.footer}>
       {presentation && (
         <>
-          <div className={classes.presentationName}>{presentation.name}</div>
-          <div className={classes.applicationName}>
+          <div
+            className={classes.presentationName}
+            {...testAttr('presentation-preview-presentation-name')}
+          >
+            {presentation.name}
+          </div>
+          <div
+            className={classes.applicationName}
+            {...testAttr('presentation-preview-application-name')}
+          >
             {presentation.applicationName}
           </div>
         </>

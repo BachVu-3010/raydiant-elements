@@ -4,7 +4,7 @@ import Button from '../../core/Button';
 import Heading1 from '../../core/Heading1';
 import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import { stopPropagation } from '../../helpers';
+import { stopPropagation, testAttr } from '../../helpers';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
 import PresentationThumbnail from '../../presentation/PresentationThumbnail';
@@ -15,6 +15,7 @@ import styles from './Item.styles';
 export interface ItemProps extends WithStyles, PresentationThumbnailProps {
   presentation: P.Presentation;
   onRemove: () => void;
+  testId?: string;
 }
 
 class Item extends React.Component<ItemProps> {
@@ -30,12 +31,14 @@ class Item extends React.Component<ItemProps> {
       hasError,
       isLocked,
       lockedMessage,
+      testId,
     } = this.props;
     const shouldShowRemove = !isLocked && selected;
     return (
       <div
         className={cn(classes.root, selected && classes.selected)}
         onClick={onClick}
+        {...testAttr(testId)}
       >
         <Row>
           <div className={classes.thumbnail}>
@@ -55,7 +58,7 @@ class Item extends React.Component<ItemProps> {
           </div>
           <Spacer />
           {shouldShowRemove && (
-            <div className={classes.topRight}>
+            <div className={classes.topRight} {...testAttr(`${testId}-remove`)}>
               <Button icon="remove" onClick={stopPropagation(onRemove)} />
             </div>
           )}
