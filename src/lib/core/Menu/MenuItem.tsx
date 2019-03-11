@@ -11,6 +11,8 @@ export interface MenuItemProps extends WithStyles<typeof styles> {
   active?: boolean;
   /** Set href to render  */
   href?: string;
+  /** Set target of the href */
+  target?: string;
   /** Called when the menu item is clicked */
   onClick?: () => any;
   isDrawerItem?: boolean;
@@ -20,18 +22,20 @@ export const MenuItem: React.SFC<MenuItemProps> = ({
   label,
   active = false,
   href = '',
+  target,
   onClick,
   classes,
   isDrawerItem,
 }) => (
   <a
     href={href}
-    onClick={preventDefault(onClick)}
+    target={target}
     className={cn(
       classes.root,
       active && classes.active,
       isDrawerItem && classes.drawer,
     )}
+    {...(onClick ? { onClick: preventDefault(onClick) } : {})}
   >
     {label}
   </a>
