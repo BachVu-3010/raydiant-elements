@@ -36,6 +36,11 @@ export interface Theme {
   name: string;
 }
 
+export interface SoundZone {
+  id: string;
+  name: string;
+}
+
 export interface PresentationError {
   path: Path;
   message: string;

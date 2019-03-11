@@ -30,6 +30,7 @@ import styles from './PresentationBuilder.styles';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
 import PresentationBuilderWarning from './PresentationBuilderWarning';
 import SelectionInput from './SelectionInput';
+import SoundZoneInput from './SoundZoneInput';
 import StringInput from './StringInput';
 import TextInput from './TextInput';
 import ThemeInput from './ThemeInput';
@@ -40,6 +41,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
   appVersion?: A.AppVersion;
   themes?: P.Theme[];
+  soundZones?: P.SoundZone[];
   affectedDevices?: D.Device[];
   previewMode?: P.PreviewMode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
@@ -79,6 +81,7 @@ export class PresentationBuilder extends React.Component<
 > {
   static defaultProps: Partial<PresentationBuilderProps> = {
     themes: [],
+    soundZones: [],
     affectedDevices: [],
     minDuration: 5,
     previewMode: P.PreviewMode.Horizontal,
@@ -231,7 +234,7 @@ export class PresentationBuilder extends React.Component<
     strings: A.Strings,
     errors?: P.PresentationError[],
   ): React.ReactNode {
-    const { themes } = this.props;
+    const { themes, soundZones } = this.props;
     const { presentation } = this.state;
 
     const key = property.name;
@@ -428,6 +431,22 @@ export class PresentationBuilder extends React.Component<
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(['themeId'], newValue, property)
+            }
+          />
+        );
+
+      case 'soundZone':
+        return (
+          <SoundZoneInput
+            key={key}
+            label={label}
+            value={presentation.themeId}
+            soundZones={soundZones}
+            helperText={helperText}
+            error={hasError}
+            onBlur={this.handleBlur}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
             }
           />
         );

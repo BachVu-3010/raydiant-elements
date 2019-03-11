@@ -1,11 +1,11 @@
 import * as React from 'react';
 import SelectField from '../../../core/SelectField';
-import * as T from '../../PresentationTypes';
+import * as P from '../../PresentationTypes';
 
 interface ThemeInputProps {
   label: string;
   value: string;
-  themes: T.Theme[];
+  themes: P.Theme[];
   helperText: React.ReactNode;
   error?: boolean;
   onChange: (value: string) => any;
