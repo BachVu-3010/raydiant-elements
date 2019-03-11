@@ -35,6 +35,7 @@ module.exports = {
         getCorePath('ColorField'),
         getCorePath('DateField'),
         getCorePath('Divider'),
+        getCorePath('ExpansionPanel'),
         getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Heading1'),
