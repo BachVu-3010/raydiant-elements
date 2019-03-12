@@ -9,6 +9,7 @@ export type IconOptions =
   | 'alert'
   | 'arrowLeft'
   | 'checkmark'
+  | 'chevronDown'
   | 'defaultContent'
   | 'dragVertical'
   | 'edit'
