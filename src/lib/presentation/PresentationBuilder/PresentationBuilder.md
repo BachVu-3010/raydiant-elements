@@ -84,8 +84,10 @@ const appVersion = {
     {
       name: 'number',
       type: 'number',
-      min: 1,
-      max: 10,
+      constraints: {
+        min: 1,
+        max: 10,
+      },
       default: 1,
       helper_text: 'Here is some helpful text',
     },
