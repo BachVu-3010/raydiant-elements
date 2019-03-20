@@ -7,6 +7,8 @@ import MultiSelectFieldOption, {
   MultiSelectFieldOptionProps,
 } from './MultiSelectFieldOption';
 
+type MultiSelectFieldChild = React.ReactElement<MultiSelectFieldOptionProps>;
+
 interface MultiSelectFieldProps extends WithStyles<typeof styles> {
   label: string;
   value: string[];
@@ -15,10 +17,11 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
   helperText?: React.ReactNode;
   onChange: (value: string[]) => void;
   onBlur: (e: React.FocusEvent<any>) => void;
+  children?: MultiSelectFieldChild[];
 }
 
 interface MultiSelectFieldState {
-  orderedChildren: Array<React.ReactElement<MultiSelectFieldOptionProps>>;
+  orderedChildren: MultiSelectFieldChild[];
 }
 
 const isSelected = (
@@ -29,7 +32,10 @@ const isSelected = (
   return value.includes(optionValue);
 };
 
-const sortChildrenBySelected = (value: string[], children: React.ReactNode) => {
+const sortChildrenBySelected = (
+  value: string[],
+  children: MultiSelectFieldChild[],
+) => {
   // We need to cast to React.ReactElement<any> here because
   // React.ReactChild does not allow us to access child.props.
   const array = React.Children.toArray(children) as Array<
@@ -46,35 +52,49 @@ const sortChildrenBySelected = (value: string[], children: React.ReactNode) => {
   });
 };
 
+const hasMissingChildValue = (
+  prevChildren: MultiSelectFieldChild[],
+  nextChildren: MultiSelectFieldChild[],
+) => {
+  if (prevChildren.length !== nextChildren.length) return true;
+
+  return prevChildren.some(child => {
+    const nextChildWithValue = nextChildren.find(
+      nextChild => nextChild.props.value === child.props.value,
+    );
+    return !nextChildWithValue;
+  });
+};
+
 export class MultiSelectField extends React.Component<
   MultiSelectFieldProps,
   MultiSelectFieldState
 > {
-  static defaultProps = {
+  static defaultProps: Partial<MultiSelectFieldProps> = {
     disabled: false,
     error: false,
     helperText: '',
+    children: [],
   };
 
   static getDerivedStateFromProps(
-    props: MultiSelectFieldProps & { children?: React.ReactNode },
+    props: MultiSelectFieldProps,
     state: MultiSelectFieldState,
   ) {
-    // Only reorder children on mount and when the # of children have
-    // changed. We don't want to reorder as the user selects items.
-    const shouldSortChildren =
-      React.Children.count(props.children) !==
-      React.Children.count(state.orderedChildren);
+    // Only reorder children on mount and when the child options have changed.
+    // We don't want to reorder as the user selects items.
+    const shouldSortChildren = hasMissingChildValue(
+      state.orderedChildren,
+      props.children,
+    );
 
     return shouldSortChildren
       ? { orderedChildren: sortChildrenBySelected(props.value, props.children) }
       : null;
   }
 
-  state = {
-    orderedChildren: [] as Array<
-      React.ReactElement<MultiSelectFieldOptionProps>
-    >,
+  state: MultiSelectFieldState = {
+    orderedChildren: [],
   };
 
   render() {

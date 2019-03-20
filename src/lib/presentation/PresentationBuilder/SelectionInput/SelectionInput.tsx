@@ -86,8 +86,10 @@ class SelectionInput extends React.Component<
     if (resp.ok) {
       try {
         const options = await resp.json();
-        this.setState({ options });
+        // Set the default value before the options. This fixes an issue with
+        // multi-selects not ordering the selected items to the top of the list.
         this.checkDefaultOptions(options);
+        this.setState({ options });
       } catch (err) {
         this.setState({ optionsError: defaultErrorMessage });
       }
@@ -105,14 +107,26 @@ class SelectionInput extends React.Component<
     const { value, multiple, onChange } = this.props;
     const isValueUnset = value === null || value === undefined;
     const hasOptions = options.length > 0;
-    if (isValueUnset && hasOptions) {
+
+    const isValueInOptions = multiple
+      ? Array.isArray(value) &&
+        value.length > 0 &&
+        value.every(v => options.some(opt => opt.value === v))
+      : options.some(opt => opt.value === value);
+
+    const shouldSetValueToDefault = isValueUnset || !isValueInOptions;
+
+    if (shouldSetValueToDefault && hasOptions) {
       const defaultValue = options
         .filter(opt => opt.default)
         .map(opt => opt.value);
-      if (multiple) {
-        onChange(defaultValue);
-      } else {
-        onChange(defaultValue[0]);
+
+      if (defaultValue.length > 0) {
+        if (multiple) {
+          onChange(defaultValue);
+        } else {
+          onChange(defaultValue[0]);
+        }
       }
     }
   }
