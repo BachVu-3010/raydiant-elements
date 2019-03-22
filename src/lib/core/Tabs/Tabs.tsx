@@ -2,6 +2,7 @@ import * as cn from 'classnames';
 import * as React from 'react';
 import withThemeSelector from '../../core/withThemeSelector';
 import withStyles, { WithStyles } from '../withStyles';
+import TabContent from './TabContent';
 import TabItem from './TabItem';
 import styles from './Tabs.styles';
 
@@ -19,4 +20,5 @@ export const Tabs: React.SFC<TabsContainerProps> = ({
 
 export default Object.assign(withThemeSelector(withStyles(styles)(Tabs)), {
   Item: TabItem,
+  Content: TabContent,
 });

@@ -5,9 +5,7 @@ import {
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd';
-import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import { reorder } from '../../helpers';
-import { scrollable } from '../../mixins';
 import * as P from '../../presentation/PresentationTypes';
 import Item from './Item';
 
@@ -18,21 +16,13 @@ const getUniquePresentationId = (presentationId: string, index: number) => {
   return `${presentationId}-${index}`;
 };
 
-const styles = () =>
-  createStyles({
-    root: {
-      flex: 1,
-      ...scrollable(),
-    },
-  });
-
 interface RenderProps {
   presentation: P.Presentation;
   onRemove: () => void;
   itemId: string;
 }
 
-export interface PresentationsListProps extends WithStyles {
+export interface PresentationsListProps {
   presentations?: P.Presentation[];
   onOrderChange?: (
     presentations: string[],
@@ -123,7 +113,7 @@ export class PresentationsList extends React.Component<
     });
   };
   render() {
-    const { classes, children, presentations } = this.props;
+    const { children, presentations } = this.props;
     const { presentationIds } = this.state;
 
     return (
@@ -133,7 +123,7 @@ export class PresentationsList extends React.Component<
       >
         <Droppable droppableId="droppable">
           {droppableProvided => (
-            <div className={classes.root} ref={droppableProvided.innerRef}>
+            <div ref={droppableProvided.innerRef}>
               {presentationIds.map((id, i) => (
                 <Draggable
                   key={getUniquePresentationId(id, i)}
@@ -163,6 +153,6 @@ export class PresentationsList extends React.Component<
   }
 }
 
-export default Object.assign(withStyles(styles)(PresentationsList), {
+export default Object.assign(PresentationsList, {
   Item,
 });
