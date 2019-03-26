@@ -4,15 +4,17 @@ import withStyles, { WithStyles } from '../../core/withStyles';
 import styles from './Text.styles';
 
 interface TextProps extends WithStyles<typeof styles> {
+  center?: boolean;
   muted?: boolean;
   small?: boolean;
-  center?: boolean;
+  strikethrough?: boolean;
 }
 
 export const Text: React.SFC<TextProps> = ({
+  center,
   muted,
   small,
-  center,
+  strikethrough,
   children,
   classes,
 }) => (
@@ -21,6 +23,7 @@ export const Text: React.SFC<TextProps> = ({
       classes.root,
       muted && classes.muted,
       small && classes.small,
+      strikethrough && classes.strikethrough,
       center && classes.center,
     )}
   >

@@ -16,6 +16,9 @@ const styles = (theme: Theme) =>
     center: {
       textAlign: 'center',
     },
+    strikethrough: {
+      textDecoration: 'line-through',
+    },
   });
 
 export default styles;
