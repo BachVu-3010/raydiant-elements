@@ -1,39 +1,51 @@
+import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
-import TextField from '../TextField';
+import { testAttr } from '../../helpers';
+import Input from '../../internal/Input';
+import InputBackground from '../../internal/InputBackground/index';
+import InputLabel from '../../internal/InputLabel/index';
 
 interface TimeFieldProps {
-  /** The label of the field */
-  label: string;
-  /** The value of the field */
-  value?: string;
-  /** Set to true to display input with error */
+  testId?: string;
+  label?: React.ReactNode;
   error?: boolean;
-  /** Set to true to disable the input */
+  value?: string;
+  onChange?: (val: string) => any;
+  onBlur?: React.FocusEventHandler<any>;
   disabled?: boolean;
-  /** Optional helper text */
-  helperText?: React.ReactNode;
-  /** Called when the value changes */
-  onChange?: (value: string) => any;
 }
 
-class TimeField extends React.Component<TimeFieldProps> {
-  render() {
-    const { label, value, error, disabled, helperText, onChange } = this.props;
-    return (
-      <TextField
-        label={label}
+export const TimeField: React.SFC<TimeFieldProps> = ({
+  testId,
+  value = '',
+  error = false,
+  onChange = () => {
+    return;
+  },
+  onBlur = () => {
+    return;
+  },
+  label = '',
+  disabled = false,
+}) => (
+  <FormControl fullWidth error={error}>
+    <InputBackground>
+      <InputLabel error={error} disabled={disabled} shrink>
+        {label}
+      </InputLabel>
+      <Input
+        fullWidth
+        type="time"
         value={value}
-        error={error}
+        onChange={e => onChange(e.target.value)}
+        onBlur={onBlur}
+        inputProps={{
+          ...(testAttr(testId) as any),
+        }}
         disabled={disabled}
-        helperText={helperText}
-        onChange={onChange}
-        mask={[/\d/, /\d/, ':', /\d/, /\d/, ' ', /(a|p)/, 'm']}
-        maskPlaceholderChar="_"
-        maskGuide
-        keepCharPositions
       />
-    );
-  }
-}
+    </InputBackground>
+  </FormControl>
+);
 
 export default TimeField;

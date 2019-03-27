@@ -134,7 +134,7 @@ export class DeviceSettingsForm extends React.Component<
               <TextField
                 multiline
                 label="Notes"
-                value={device.description}
+                value={device.description || ''}
                 onChange={description => {
                   this.setState({ device: { ...device, description } });
                 }}

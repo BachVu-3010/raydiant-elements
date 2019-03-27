@@ -1,26 +1,38 @@
 ```js
 initialState = {
-  time: '12:00 am',
+  value: '07:00',
+  value1: '08:00',
+  value2: '09:00',
 };
-
 <Row inline>
   <TimeField
-    label="Time"
-    value={state.time}
-    onChange={time => setState({ time })}
+    label="Alarm Clock"
+    value={state.value}
+    onChange={value => {
+      setState({
+        value,
+      });
+    }}
   />
   <TimeField
     error
-    label="Time"
-    value={state.time}
-    helperText="Oops! Invalid time"
-    onChange={time => setState({ time })}
+    label="Alarm Clock"
+    value={state.value1}
+    onChange={value1 => {
+      setState({
+        value1,
+      });
+    }}
   />
   <TimeField
     disabled
-    label="Disabled"
-    value={state.time}
-    onChange={time => setState({ time })}
+    label="Alarm Clock"
+    value={state.value2}
+    onChange={value2 => {
+      setState({
+        value2,
+      });
+    }}
   />
 </Row>;
 ```

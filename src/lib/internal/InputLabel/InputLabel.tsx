@@ -6,6 +6,7 @@ import styles from './InputLabel.styles';
 interface InputLabelProps extends WithStyles<typeof styles> {
   disabled?: boolean;
   error?: boolean;
+  shrink?: boolean;
 }
 
 const InputLabel: React.SFC<InputLabelProps> = ({
@@ -13,6 +14,7 @@ const InputLabel: React.SFC<InputLabelProps> = ({
   error = false,
   children,
   classes,
+  shrink,
 }) => (
   <MUIInputLabel
     disabled={disabled}
@@ -26,6 +28,7 @@ const InputLabel: React.SFC<InputLabelProps> = ({
       error: classes.error,
       disabled: classes.disabled,
     }}
+    shrink={shrink}
   >
     {children}
   </MUIInputLabel>
