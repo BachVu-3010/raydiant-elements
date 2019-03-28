@@ -14,9 +14,11 @@ const styles = (theme: Theme) =>
       zIndex: theme.zIndex.menu + 10,
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
+      height: 68,
+      paddingTop: 1,
+      paddingBottom: 1,
       paddingLeft: theme.spacing.unit * 2,
       paddingRight: theme.spacing.unit * 2,
-      height: 68,
 
       '$isCollapsed &': {
         paddingLeft: 0,
