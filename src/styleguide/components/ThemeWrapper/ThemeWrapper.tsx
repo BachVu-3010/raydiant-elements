@@ -31,7 +31,9 @@ class ThemeWrapper extends React.Component<
       <ThemeProvider theme={theme}>
         <ThemeSelector color={selectedTheme as ThemeType}>
           <PreviewWrapper>
-            <div className={classes.preview}>{children}</div>
+            <div className={classes.preview}>
+              <div className={classes.content}>{children}</div>
+            </div>
             <div className={classes.actions}>
               <SelectField
                 label="Theme"

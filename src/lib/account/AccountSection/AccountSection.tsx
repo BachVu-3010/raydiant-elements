@@ -1,7 +1,7 @@
 import * as cn from 'classnames';
 import * as React from 'react';
-import Heading2 from '../../core/Heading2';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import Heading2 from '../../typography/Heading2';
 import styles from './AccountSection.styles';
 
 interface AccountSectionProps extends WithStyles<typeof styles> {

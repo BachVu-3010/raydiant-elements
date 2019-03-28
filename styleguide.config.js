@@ -10,6 +10,7 @@ const getLayoutPath = componentPathGetter('layout');
 const getLoginPath = componentPathGetter('login');
 const getPresentationPath = componentPathGetter('presentation');
 const getSchedulePath = componentPathGetter('schedule');
+const getTypographyPath = componentPathGetter('typography');
 
 const getAccountPath = component =>
   path.join(__dirname, `src/lib/account/${component}/${component}.tsx`);
@@ -38,8 +39,6 @@ module.exports = {
         getCorePath('ExpansionPanel'),
         getCorePath('FileDropper'),
         getCorePath('FileField'),
-        getCorePath('Heading1'),
-        getCorePath('Heading2'),
         getCorePath('Icon'),
         getCorePath('Link'),
         getCorePath('ListField'),
@@ -53,10 +52,8 @@ module.exports = {
         getCorePath('SuccessIcon'),
         getCorePath('Switch'),
         getCorePath('Tabs'),
-        getCorePath('Text'),
         getCorePath('TextField'),
         getCorePath('ThemeSelector'),
-        getCorePath('Title'),
         getCorePath('TimeField'),
       ],
     },
@@ -114,6 +111,15 @@ module.exports = {
     {
       name: 'Account',
       components: () => [getAccountPath('AccountSection')],
+    },
+    {
+      name: 'Typography',
+      components: () => [
+        getTypographyPath('Heading1'),
+        getTypographyPath('Heading2'),
+        getTypographyPath('Text'),
+        getTypographyPath('Title'),
+      ],
     },
   ],
   styleguideDir: path.join(__dirname, 'build/styleguide'),

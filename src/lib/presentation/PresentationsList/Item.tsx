@@ -1,8 +1,6 @@
 import * as cn from 'classnames';
 import * as React from 'react';
 import Button from '../../core/Button';
-import Heading1 from '../../core/Heading1';
-import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import { stopPropagation, testAttr } from '../../helpers';
 import Row from '../../layout/Row';
@@ -10,6 +8,8 @@ import Spacer from '../../layout/Spacer';
 import PresentationThumbnail from '../../presentation/PresentationThumbnail';
 import { PresentationThumbnailProps } from '../../presentation/PresentationThumbnail/PresentationThumbnail';
 import * as P from '../../presentation/PresentationTypes';
+import Heading1 from '../../typography/Heading1';
+import Text from '../../typography/Text';
 import styles from './Item.styles';
 
 export interface ItemProps extends WithStyles, PresentationThumbnailProps {
@@ -53,7 +53,7 @@ class Item extends React.Component<ItemProps> {
             />
           </div>
           <div className={classes.presentationDetails}>
-            <Heading1 textTruncate>{presentation.name}</Heading1>
+            <Heading1 ellipsis>{presentation.name}</Heading1>
             <Text muted>{presentation.applicationName}</Text>
           </div>
           <Spacer />

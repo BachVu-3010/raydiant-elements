@@ -3,7 +3,6 @@ import { createStyles } from '../../../lib/core/withStyles';
 // We can't use theme here because ThemeProvider is a child component.
 const styles = createStyles({
   preview: {
-    padding: 16,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -15,6 +14,11 @@ const styles = createStyles({
     ].join(','),
     backgroundSize: '1em 1em', // must be square
     backgroundPosition: '0 0, 0.5em 0, 0.5em -0.5em, 0px 0.5em', // must be half of background-size
+  },
+  content: {
+    width: '100%',
+    overflow: 'scroll',
+    padding: 16,
   },
   actions: {
     position: 'absolute',

@@ -2,10 +2,10 @@ import * as React from 'react';
 import AlertIcon from '../../core/AlertIcon';
 import Link from '../../core/Link';
 import SuccessIcon from '../../core/SuccessIcon';
-import Text from '../../core/Text';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import { stopPropagation } from '../../helpers';
 import { Theme } from '../../theme';
+import Text from '../../typography/Text';
 
 enum Errors {
   Offline = 'Offline',

@@ -1,6 +1,5 @@
-import { textTruncate } from '../../mixins';
+import { createStyles } from '../../core/withStyles';
 import { Theme } from '../../theme';
-import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -10,7 +9,6 @@ const styles = (theme: Theme) =>
       fontWeight: 500,
       lineHeight: 1.5,
     },
-    textTruncate: { ...textTruncate() },
   });
 
 export default styles;

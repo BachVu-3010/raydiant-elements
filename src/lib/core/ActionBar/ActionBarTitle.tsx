@@ -1,7 +1,7 @@
 import * as React from 'react';
-import Heading1 from '../../core/Heading1';
-import Text from '../../core/Text';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import Heading1 from '../../typography/Heading1';
+import Text from '../../typography/Text';
 import styles from './ActionBarTitle.styles';
 
 export interface ActionBarTitleProps extends WithStyles<typeof styles> {
