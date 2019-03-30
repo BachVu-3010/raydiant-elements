@@ -10,6 +10,7 @@ const getLayoutPath = componentPathGetter('layout');
 const getLoginPath = componentPathGetter('login');
 const getPresentationPath = componentPathGetter('presentation');
 const getSchedulePath = componentPathGetter('schedule');
+const getSequencePath = componentPathGetter('sequence');
 const getTypographyPath = componentPathGetter('typography');
 
 const getAccountPath = component =>
@@ -119,6 +120,13 @@ module.exports = {
         getTypographyPath('Heading2'),
         getTypographyPath('Text'),
         getTypographyPath('Title'),
+      ],
+    },
+    {
+      name: 'Sequence',
+      components: () => [
+        getSequencePath('OccurrenceList'),
+        getSequencePath('SequenceSchedule'),
       ],
     },
   ],
