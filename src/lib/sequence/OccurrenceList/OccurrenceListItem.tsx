@@ -58,7 +58,7 @@ export const OccurrenceListItem: React.FunctionComponent<
     >
       <div className={cn(classes.content, overridden && classes.overridden)}>
         {occurrenceName}
-        <div className={classes.overriddenTime}>
+        <div className={classes.duration}>
           <Text small muted ellipsis={!overridden}>
             {startTimeText}
           </Text>
@@ -97,7 +97,6 @@ const styles = (theme: Theme) =>
         borderBottomLeftRadius: 2,
         borderBottomRightRadius: 2,
       },
-      overflow: 'hidden',
       backgroundColor: theme.palette.background.default,
       whiteSpace: 'nowrap',
     },
@@ -109,14 +108,13 @@ const styles = (theme: Theme) =>
       paddingRight: theme.spacing.unit * 2,
       paddingTop: theme.spacing.unit,
       paddingBottom: theme.spacing.unit,
-      overflow: 'hidden',
     },
     overridden: {
       display: 'inline-flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
     },
-    overriddenTime: { display: 'flex', flexShrink: 0 },
+    duration: { display: 'flex', flexShrink: 0 },
     badges: {
       flex: 0,
     },

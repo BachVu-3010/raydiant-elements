@@ -41,7 +41,6 @@ const styles = (theme: Theme) =>
       paddingTop: theme.spacing.unit,
       paddingBottom: theme.spacing.unit,
       ...marginBetweenChildrenVertical(theme.spacing.unit * 1.5),
-      overflow: 'hidden',
     },
     date: {
       width: theme.spacing.unit * 5,
