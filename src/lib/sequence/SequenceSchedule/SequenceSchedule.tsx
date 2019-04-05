@@ -76,6 +76,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       flex: 1,
+      overflow: 'hidden',
     },
     currentMonthHeader: {
       paddingTop: theme.spacing.unit,
