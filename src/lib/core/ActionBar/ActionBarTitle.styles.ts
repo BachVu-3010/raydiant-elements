@@ -3,6 +3,10 @@ import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
+    actionBarTitle: {
+      display: 'flex',
+      alignItems: 'center',
+    },
     title: {
       whiteSpace: 'nowrap',
     },

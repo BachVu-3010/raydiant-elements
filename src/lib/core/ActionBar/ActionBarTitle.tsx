@@ -16,7 +16,7 @@ export const ActionBarTitle: React.SFC<ActionBarTitleProps> = ({
   title,
   subtitle,
 }) => (
-  <span>
+  <span className={classes.actionBarTitle}>
     <Heading1>
       <span className={classes.title}>{title}</span>
     </Heading1>
