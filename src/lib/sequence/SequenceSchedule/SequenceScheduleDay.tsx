@@ -47,7 +47,10 @@ const styles = (theme: Theme) =>
     },
     dayOfMonth: {
       fontSize: theme.spacing.unit * 4.5,
+      marginTop: 6,
+      marginBottom: 2,
       fontWeight: 300,
+      lineHeight: 1,
     },
     dayOfWeek: {
       textTransform: 'uppercase',
