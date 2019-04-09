@@ -9,6 +9,7 @@ export interface TypographyStyleProps {
   muted?: boolean;
   nowrap?: boolean;
   small?: boolean;
+  medium?: boolean;
   strikethrough?: boolean;
 }
 
@@ -25,6 +26,7 @@ export const Typography: React.FunctionComponent<
   muted,
   nowrap,
   small,
+  medium,
   strikethrough,
   children,
   classes,
@@ -39,6 +41,7 @@ export const Typography: React.FunctionComponent<
       muted && classes.muted,
       nowrap && classes.nowrap,
       small && classes.small,
+      medium && classes.medium,
       strikethrough && classes.strikethrough,
       className,
     )}

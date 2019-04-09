@@ -16,6 +16,9 @@ const styles = (theme: Theme) =>
     small: {
       fontSize: theme.fontSizes.sm,
     },
+    medium: {
+      fontSize: theme.fontSizes.md,
+    },
     center: {
       textAlign: 'center',
     },
