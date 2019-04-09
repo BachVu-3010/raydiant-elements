@@ -4,6 +4,7 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import stateChanged from '../../helpers/stateChanged';
 import withScrollProvider from '../../internal/Scroll/withScrollProvider';
+import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 import Text from '../../typography/Text';
 import SequenceScheduleContext from './SequenceScheduleContext';
@@ -89,7 +90,7 @@ const styles = (theme: Theme) =>
       borderBottomWidth: 1,
     },
     months: {
-      overflowY: 'auto',
+      ...scrollable(),
       position: 'relative',
     },
   });
