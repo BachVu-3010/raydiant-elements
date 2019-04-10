@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       position: 'relative',
       display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center',
+      alignItems: 'stretch',
       justifyContent: 'center',
       ...responsiveContainer(theme),
     },
