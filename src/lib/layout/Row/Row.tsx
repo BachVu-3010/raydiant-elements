@@ -8,16 +8,25 @@ interface RowProps extends WithStyles<typeof styles> {
   className?: string;
   /** Set to true to display inline */
   inline?: boolean;
+  center?: boolean;
 }
 
 export const Row: React.SFC<RowProps> = ({
   className,
   inline,
+  center,
   classes,
   children,
 }) => {
   return (
-    <div className={cn(classes.root, inline && classes.inline, className)}>
+    <div
+      className={cn(
+        classes.root,
+        inline && classes.inline,
+        center && classes.center,
+        className,
+      )}
+    >
       {children}
     </div>
   );

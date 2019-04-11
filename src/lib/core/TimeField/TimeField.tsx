@@ -13,6 +13,7 @@ interface TimeFieldProps {
   onChange?: (val: string) => any;
   onBlur?: React.FocusEventHandler<any>;
   disabled?: boolean;
+  fullWidth?: boolean;
 }
 
 export const TimeField: React.SFC<TimeFieldProps> = ({
@@ -27,8 +28,9 @@ export const TimeField: React.SFC<TimeFieldProps> = ({
   },
   label = '',
   disabled = false,
+  fullWidth = true,
 }) => (
-  <FormControl fullWidth error={error}>
+  <FormControl fullWidth={fullWidth} error={error}>
     <InputBackground>
       <InputLabel error={error} disabled={disabled} shrink>
         {label}

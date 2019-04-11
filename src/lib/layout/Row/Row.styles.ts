@@ -14,6 +14,10 @@ const styles = (theme: Theme) =>
       display: 'inline-flex',
       width: 'auto',
     },
+    center: {
+      display: 'flex',
+      alignItems: 'center',
+    },
   });
 
 export default styles;

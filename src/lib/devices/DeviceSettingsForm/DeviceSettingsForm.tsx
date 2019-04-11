@@ -7,13 +7,11 @@ import TextField from '../../core/TextField';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import * as D from '../../devices/DeviceTypes';
-import Column from '../../layout/Column';
 import Row from '../../layout/Row';
 import { Spacer } from '../../layout/Spacer/Spacer';
 import { scrollable } from '../../mixins';
-import { Theme } from '../../theme';
 
-const styles = (theme: Theme) =>
+const styles = () =>
   createStyles({
     root: {
       flex: 1,
@@ -25,10 +23,6 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       ...scrollable(),
-    },
-    inputs: {
-      flexShrink: 0,
-      padding: theme.spacing.unit * 2,
     },
     screenInformationContainer: {
       display: 'flex',
@@ -93,7 +87,7 @@ export class DeviceSettingsForm extends React.Component<
     return (
       <Form className={classes.root} onSubmit={this.onSubmit}>
         <div className={classes.scroll}>
-          <Column className={classes.inputs}>
+          <Form.Section>
             <TextField
               label="Screen Name"
               value={device.name}
@@ -140,7 +134,7 @@ export class DeviceSettingsForm extends React.Component<
                 }}
               />
             </Row>
-          </Column>
+          </Form.Section>
         </div>
         <ActionBar bottom condensed>
           <Button
