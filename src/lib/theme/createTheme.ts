@@ -26,6 +26,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       foreground: string;
       foregroundMuted: string;
       border: string;
+      backgroundSelected: string;
     };
     input: {
       background: string;
@@ -97,6 +98,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       foreground: string;
       foregroundMuted: string;
       border: string;
+      backgroundSelected: string;
     };
     input: {
       background: string;

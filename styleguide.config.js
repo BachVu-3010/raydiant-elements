@@ -49,6 +49,7 @@ module.exports = {
         getCorePath('MultiSelectField'),
         getCorePath('NumberField'),
         getCorePath('Popover'),
+        getCorePath('RadioButtonGroup'),
         getCorePath('SelectField'),
         getCorePath('SuccessIcon'),
         getCorePath('Switch'),

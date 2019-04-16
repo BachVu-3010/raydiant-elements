@@ -79,6 +79,7 @@ export const light = createTheme({
     foreground: '#292834',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     border: '#c6cedc',
+    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
   },
   input: {
     background: '#f3f4f6',
@@ -140,6 +141,7 @@ export const grey = createTheme({
     foreground: '#292834',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     border: '#c6cedc',
+    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
   },
   input: {
     background: '#ffffff',
@@ -201,6 +203,7 @@ export const dark = createTheme({
     foreground: '#ffffff',
     foregroundMuted: 'rgba(255, 255, 255, 0.5)',
     border: 'rgba(255, 255, 255, 0.2)',
+    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
   },
   input: {
     background: 'rgba(255, 255, 255, 0.15)',
