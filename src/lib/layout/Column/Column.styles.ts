@@ -9,6 +9,9 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       width: '100%',
       ...marginBetweenChildrenVertical(theme.spacing.unit),
+      ['& > *']: {
+        flexShrink: 0,
+      },
     },
 
     inline: {

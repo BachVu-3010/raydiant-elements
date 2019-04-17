@@ -8,6 +8,9 @@ const styles = (theme: Theme) =>
       display: 'flex',
       width: '100%',
       ...marginBetweenChildrenHorizontal(theme.spacing.unit),
+      ['& > *']: {
+        flexShrink: 0,
+      },
     },
 
     inline: {

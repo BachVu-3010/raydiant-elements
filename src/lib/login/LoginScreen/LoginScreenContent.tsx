@@ -7,6 +7,12 @@ export interface LoginScreenContentProps extends WithStyles<typeof styles> {}
 export const LoginScreenContent: React.SFC<LoginScreenContentProps> = ({
   children,
   classes,
-}) => <div className={classes.root}>{children}</div>;
+}) => (
+  <div className={classes.root}>
+    <span />
+    {children}
+    <span />
+  </div>
+);
 
 export default withStyles(styles)(LoginScreenContent);
