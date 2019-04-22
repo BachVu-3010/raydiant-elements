@@ -41,7 +41,7 @@ export class SequenceSchedule extends React.Component<
       const currentMonth = Object.keys(monthVisibility)
         .filter(monthStr => monthVisibility[monthStr])
         .map(monthStr => new Date(monthStr))
-        .sort()[0];
+        .sort((month1, month2) => +month1 - +month2)[0];
       this.setState({ currentMonth, monthVisibility });
     }
   };
