@@ -26,10 +26,13 @@ const withScrollProvider = <ComponentProps extends object>(
       offsetWidth: 0,
     };
 
-    handleScroll: React.ReactEventHandler<HTMLElement> = rafThrottle(
-      ({
-        currentTarget: { scrollTop, scrollLeft, offsetHeight, offsetWidth },
-      }) => {
+    updateScrollState = rafThrottle(
+      (
+        scrollTop: number,
+        scrollLeft: number,
+        offsetHeight: number,
+        offsetWidth: number,
+      ) => {
         this.setState({
           scrollTop,
           scrollLeft,
@@ -38,6 +41,11 @@ const withScrollProvider = <ComponentProps extends object>(
         });
       },
     );
+
+    handleScroll: React.ReactEventHandler<HTMLElement> = ({
+      currentTarget: { scrollTop, scrollLeft, offsetHeight, offsetWidth },
+    }) =>
+      this.updateScrollState(scrollTop, scrollLeft, offsetHeight, offsetWidth);
 
     render() {
       const { scrollTop, scrollLeft, offsetHeight, offsetWidth } = this.state;
