@@ -32,7 +32,7 @@ const NumberInput: React.SFC<NumberInputProps> = ({
     min={constraints.min}
     max={constraints.max}
     onBlur={() => {
-      if (constraints.min && value < constraints.min) {
+      if (constraints.min && (!value || value < constraints.min)) {
         onChange(constraints.min);
       } else if (constraints.max && value > constraints.max) {
         onChange(constraints.max);
