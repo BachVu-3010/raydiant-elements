@@ -3,6 +3,7 @@ import * as React from 'react';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withVisibility from '../../internal/Scroll/withVisibility';
 import { Theme } from '../../theme';
+import Heading2 from '../../typography/Heading2';
 import { withSequenceScheduleContext } from './SequenceScheduleContext';
 
 export interface SequenceScheduleMonthProps extends WithStyles<typeof styles> {
@@ -21,9 +22,12 @@ class SequenceScheduleMonth extends React.Component<
   }
 
   render() {
-    const { children, classes } = this.props;
+    const { children, classes, date } = this.props;
     return (
       <div ref={this.props.visibleElementRef} className={classes.root}>
+        <div className={classes.header}>
+          <Heading2>{moment(date).format('MMMM YYYY')}</Heading2>
+        </div>
         {children}
       </div>
     );
@@ -35,6 +39,10 @@ const styles = (theme: Theme) =>
     root: {
       marginTop: theme.spacing.unit * 2,
       marginBottom: theme.spacing.unit * 2,
+    },
+    header: {
+      paddingLeft: theme.spacing.unit * 9,
+      paddingRight: theme.spacing.unit * 2,
     },
   });
 
