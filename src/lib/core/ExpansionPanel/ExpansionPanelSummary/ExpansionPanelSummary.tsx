@@ -1,6 +1,5 @@
 import MUIExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import * as React from 'react';
-
 import { testAttr } from '../../../helpers';
 import Icon from '../../Icon';
 import withStyles, { WithStyles } from '../../withStyles';
@@ -13,9 +12,7 @@ export interface ExpansionPanelSummaryProps extends WithStyles<typeof styles> {
 
 export const ExpansionPanelSummary: React.SFC<ExpansionPanelSummaryProps> = ({
   children,
-  onClick = () => {
-    return;
-  },
+  onClick,
   testId,
   ...props
 }) => (
