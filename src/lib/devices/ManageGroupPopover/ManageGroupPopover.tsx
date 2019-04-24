@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Button from '../../core/Button';
 import Popover from '../../core/Popover';
-import { pluralize } from '../../helpers';
+import { pluralizeWithCount } from '../../helpers/pluralize';
 import Spacer from '../../layout/Spacer';
 import * as T from '../DeviceTypes';
 
@@ -50,7 +50,7 @@ export class ManageGroupPopover extends React.Component<
         <Popover.Header>{deviceGroup.name}</Popover.Header>
         <Popover.Body>
           <Popover.Item>
-            <span>{pluralize('screen', devices.length)}</span>
+            <span>{pluralizeWithCount('screen', devices.length)}</span>
             <Spacer />
             <Button
               label="Ungroup"

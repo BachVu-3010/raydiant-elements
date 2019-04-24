@@ -19,6 +19,9 @@ const styles = (theme: Theme) =>
     medium: {
       fontSize: theme.fontSizes.md,
     },
+    bold: {
+      fontWeight: 500,
+    },
     center: {
       textAlign: 'center',
     },

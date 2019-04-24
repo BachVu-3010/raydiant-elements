@@ -3,7 +3,7 @@ import Button from '../../core/Button';
 import Icon from '../../core/Icon';
 import Popover from '../../core/Popover';
 import TextField from '../../core/TextField';
-import { pluralize } from '../../helpers';
+import { pluralizeWithCount } from '../../helpers';
 import Row from '../../layout/Row';
 import * as T from '../DeviceTypes';
 
@@ -63,7 +63,7 @@ export class AddToGroupPopover extends React.Component<
         color="light"
       >
         <Popover.Header>
-          Add {pluralize('screen', selectedDeviceIds.length)} to
+          Add {pluralizeWithCount('screen', selectedDeviceIds.length)} to
         </Popover.Header>
         <Popover.Body>
           {deviceGroups.map(dg => (

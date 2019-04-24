@@ -7,7 +7,7 @@ import Select from '../../internal/Select';
 
 interface SelectFieldProps {
   /** The label of the text field */
-  label: string;
+  label?: string;
   /** The label of the text field */
   value?: string;
   /** Set to true to display input with error */
@@ -22,6 +22,7 @@ interface SelectFieldProps {
   onBlur?: React.FocusEventHandler<any>;
   /** The <option>s of the select */
   children: React.ReactNode;
+  shrink?: boolean;
 }
 
 export const SelectField: React.SFC<SelectFieldProps> = ({
@@ -37,12 +38,15 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
     return;
   },
   children,
+  shrink,
 }) => (
   <FormControl fullWidth error={error}>
     <InputBackground>
-      <InputLabel error={error} disabled={disabled}>
-        {label}
-      </InputLabel>
+      {label && (
+        <InputLabel error={error} disabled={disabled} shrink={shrink}>
+          {label}
+        </InputLabel>
+      )}
       <Select
         fullWidth
         value={value}

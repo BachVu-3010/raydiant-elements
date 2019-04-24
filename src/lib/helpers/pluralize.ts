@@ -1,4 +1,7 @@
-const pluralize = (word: string, count: number): string =>
-  `${count} ${count === 1 ? word : `${word}s`}`;
+export const pluralizeWithCount = (word: string, count: number): string =>
+  `${count} ${pluralize(word, count)}`;
 
-export default pluralize;
+export const pluralize = (word: string, count: number): string =>
+  `${count === 1 ? word : `${word}s`}`;
+
+export default pluralizeWithCount;

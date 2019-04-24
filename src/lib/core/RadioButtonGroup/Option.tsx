@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import { preventDefault } from '../../helpers';
 import { Theme } from '../../theme';
 
 export interface OptionProps extends WithStyles<typeof styles> {
@@ -20,7 +21,7 @@ export const Option: React.SFC<OptionProps> = ({
 }) => (
   <button
     className={cn(classes.root, selected && classes.selected)}
-    onClick={() => onChange(value)}
+    onClick={preventDefault(() => onChange(value))}
   >
     {children}
   </button>

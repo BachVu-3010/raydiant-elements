@@ -11,6 +11,7 @@ export interface TypographyStyleProps {
   small?: boolean;
   medium?: boolean;
   strikethrough?: boolean;
+  bold?: boolean;
 }
 
 export interface TypographyProps extends TypographyStyleProps {
@@ -31,6 +32,7 @@ export const Typography: React.FunctionComponent<
   children,
   classes,
   className,
+  bold,
   tag: Tag = 'span',
 }) => (
   <Tag
@@ -43,6 +45,7 @@ export const Typography: React.FunctionComponent<
       small && classes.small,
       medium && classes.medium,
       strikethrough && classes.strikethrough,
+      bold && classes.bold,
       className,
     )}
   >
