@@ -8,7 +8,7 @@ import InputBackground from '../../internal/InputBackground';
 import InputLabel from '../../internal/InputLabel';
 import Icon, { IconOptions } from '../Icon';
 
-interface TextFieldProps {
+export interface TextFieldProps {
   /** The label of the field */
   label: string;
   /** The value of the field */
@@ -48,6 +48,7 @@ interface TextFieldProps {
   onBlur?: React.FocusEventHandler<any>;
   /** The test id of the input */
   testId?: string;
+  onClick?: (event: React.MouseEvent<any>) => any;
 }
 
 export const TextField: React.SFC<TextFieldProps> = ({
@@ -72,6 +73,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
   onBlur = () => {
     return;
   },
+  onClick,
   testId,
 }) => {
   const commonProps = {
@@ -87,6 +89,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
   const commonInputProps = {
     maxLength: String(maxLength),
     ...testAttr(testId),
+    onClick,
   };
 
   return (

@@ -20,11 +20,11 @@ const DateInput: React.SFC<DateInputProps> = ({
 }) => (
   <DateField
     label={label}
+    helperText={helperText}
+    error={error}
     value={value}
     onChange={onChange}
     onBlur={onBlur}
-    helperText={helperText}
-    error={error}
   />
 );
 

@@ -16,11 +16,13 @@
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-elements.aes"
   },
   "dependencies": {
+    "@date-io/moment": "^1.3.5",
     "@material-ui/core": "~3.2.0",
     "classnames": "^2.2.6",
     "debounce": "^1.2.0",
     "is-touch-device": "^1.0.1",
-    "moment": "^2.22.2",
+    "material-ui-pickers": "^2.2.4",
+    "moment": "^2.24.0",
     "object-path": "^0.11.4",
     "object-path-immutable": "^3.0.0",
     "react": "16.4.2",

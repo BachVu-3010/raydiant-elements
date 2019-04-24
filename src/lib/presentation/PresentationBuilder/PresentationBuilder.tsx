@@ -561,7 +561,9 @@ export class PresentationBuilder extends React.Component<
         color="dark"
         appVersion={appVersion}
         previewMode={previewMode}
-        onPreviewModeChange={value => this.setState({ previewMode: value })}
+        onPreviewModeChange={(value: P.PreviewMode) =>
+          this.setState({ previewMode: value })
+        }
       >
         {!isLoading &&
           children(
