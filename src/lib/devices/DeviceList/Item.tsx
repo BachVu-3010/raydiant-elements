@@ -50,7 +50,7 @@ type ItemProps = ItemBaseProps & {
 
 class Item extends React.Component<ItemProps> {
   static defaultProps = {
-    showMultipleThumbnail: false,
+    showMultipleThumbnails: false,
   };
   getThumbnailSrc = () => {
     const { device, deviceGroup } = this.props;

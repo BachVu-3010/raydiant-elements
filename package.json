@@ -16,7 +16,7 @@
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-elements.aes"
   },
   "dependencies": {
-    "@material-ui/core": "3.0.1",
+    "@material-ui/core": "~3.2.0",
     "classnames": "^2.2.6",
     "debounce": "^1.2.0",
     "is-touch-device": "^1.0.1",

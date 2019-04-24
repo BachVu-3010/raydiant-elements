@@ -19,11 +19,13 @@ class PresentationBuilderPreview extends React.Component<
   PresentationBuilderPreviewProps,
   PresentationBuilderPreviewState
 > {
-  static defaultProps = {
+  static defaultProps: Partial<PresentationBuilderPreviewProps> = {
     appVersion: {
       name: '',
       iconUrl: '',
       strings: { description: '' },
+      presentationProperties: [],
+      id: '',
     },
   };
 

@@ -1,4 +1,5 @@
-import MUIInput, { InputComponentProps } from '@material-ui/core/Input';
+import MUIInput from '@material-ui/core/Input';
+import { InputBaseComponentProps } from '@material-ui/core/InputBase';
 import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
@@ -23,7 +24,7 @@ interface InputProps extends WithStyles<typeof styles> {
   inputProps?: { [key: string]: string };
   inputRef?: React.Ref<HTMLInputElement>;
   // inputComponent is required for the Select component.
-  inputComponent?: React.ReactType<InputComponentProps>;
+  inputComponent?: React.ReactType<InputBaseComponentProps>;
   onChange?: React.ChangeEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   onKeyUp?: React.KeyboardEventHandler<HTMLTextAreaElement | HTMLInputElement>;
   onKeyDown?: React.KeyboardEventHandler<

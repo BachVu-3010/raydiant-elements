@@ -11,12 +11,6 @@ const styles = (theme: Theme) =>
       height: 20,
     },
     checkbox: {
-      // MUI Checkboxes have a width / height of 48px to compensate for the ripple effect
-      // which adds undesirable padding to the element. As a workaround, we position it
-      // absolutely inside a container element with the correct width / height.
-      position: 'absolute',
-      top: -14,
-      left: -14,
       padding: 0,
       color: theme.checkbox.backgroundChecked,
     },
