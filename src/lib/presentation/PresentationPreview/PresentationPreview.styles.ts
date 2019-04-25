@@ -19,6 +19,13 @@ const styles = (theme: Theme) =>
       overflow: 'hidden',
     },
 
+    error: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      padding: theme.spacing.unit * 4,
+    },
+
     border: {
       border: '8px solid #0f0f14',
     },

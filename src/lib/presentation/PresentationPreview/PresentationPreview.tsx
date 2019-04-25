@@ -3,11 +3,11 @@ import * as debounce from 'debounce';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import * as T from '../PresentationTypes';
-import getLayoutProperties from './getLayoutProperties';
 import styles from './PresentationPreview.styles';
 
 interface PresentationPreviewProps extends WithStyles<typeof styles> {
   previewMode: T.PreviewMode;
+  error?: React.ReactNode;
   showBorder?: boolean;
 }
 
@@ -66,21 +66,43 @@ export class PresentationPreview extends React.Component<
   };
 
   render() {
-    const { showBorder, previewMode, children, classes } = this.props;
+    const { showBorder, previewMode, children, classes, error } = this.props;
     const { containerWidth, containerHeight } = this.state;
-    const layoutProps = getLayoutProperties(
-      containerWidth,
-      containerHeight,
-      previewMode,
-    );
+
+    const isLandscape = previewMode === T.PreviewMode.Horizontal;
+    const width = isLandscape ? 1920 : 1080;
+    const height = isLandscape ? 1080 : 1920;
+    const scaleX = containerWidth / width;
+    const scaleY = containerHeight / height;
+    const scale = Math.min(scaleX, scaleY);
+    const marginTop = -(height / 2) * scale;
+    const marginLeft = -(width / 2) * scale;
+    const layoutProps = error
+      ? {
+          width: width * scale,
+          height: height * scale,
+          marginTop,
+          marginLeft,
+        }
+      : {
+          width,
+          height,
+          marginTop,
+          marginLeft,
+          transform: `scale(${scale})`,
+        };
 
     return (
       <div ref={this.initPreview} className={classes.root}>
         <div
-          className={cn(classes.preview, showBorder && classes.border)}
+          className={cn(
+            classes.preview,
+            showBorder && classes.border,
+            error && classes.error,
+          )}
           style={layoutProps}
         >
-          {children}
+          {error || children}
         </div>
       </div>
     );

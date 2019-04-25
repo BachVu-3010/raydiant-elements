@@ -4,7 +4,6 @@ import Tabs from '../../core/Tabs/Tabs';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import Hidden from '../../layout/Hidden';
-import PresentationPreview from '../PresentationPreview';
 import * as P from '../PresentationTypes';
 import styles from './PresentationBuilderPreview.styles';
 
@@ -39,11 +38,7 @@ class PresentationBuilderPreview extends React.Component<
     } = this.props;
     return (
       <div className={classes.root}>
-        <div className={classes.preview}>
-          <PresentationPreview previewMode={previewMode}>
-            {children}
-          </PresentationPreview>
-        </div>
+        <div className={classes.preview}>{children}</div>
         <div className={classes.footer}>
           <div className={classes.app}>
             <div
