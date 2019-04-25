@@ -16,6 +16,7 @@ initialState = {
   />
   <TimeField
     error
+    helperText="Helper text (optional)"
     label="Alarm Clock"
     value={state.value1}
     onChange={value1 => {
