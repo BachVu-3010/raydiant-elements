@@ -88,7 +88,7 @@ const appVersion = {
         min: 1,
         max: 10,
       },
-      default: 1,
+      default: 5,
       helper_text: 'Here is some helpful text',
     },
     { name: 'boolean', type: 'boolean', helper_text: 'Some helper text' },

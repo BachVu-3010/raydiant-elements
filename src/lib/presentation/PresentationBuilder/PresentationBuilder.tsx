@@ -289,6 +289,7 @@ export class PresentationBuilder extends React.Component<
             key={key}
             label={label}
             value={value}
+            defaultValue={property.default}
             helperText={helperText}
             error={hasError}
             constraints={constraints}

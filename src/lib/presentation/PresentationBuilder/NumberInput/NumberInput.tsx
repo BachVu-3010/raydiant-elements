@@ -4,6 +4,7 @@ import NumberField from '../../../core/NumberField';
 interface NumberInputProps {
   label: string;
   value: number;
+  defaultValue: number;
   constraints: {
     min?: number;
     max?: number;
@@ -14,9 +15,13 @@ interface NumberInputProps {
   onBlur: () => any;
 }
 
+const isValid = (value: any) =>
+  value !== undefined && value !== null && value !== '' && !isNaN(value);
+
 const NumberInput: React.SFC<NumberInputProps> = ({
   label,
   value,
+  defaultValue,
   constraints,
   helperText,
   error,
@@ -32,9 +37,14 @@ const NumberInput: React.SFC<NumberInputProps> = ({
     min={constraints.min}
     max={constraints.max}
     onBlur={() => {
-      if (constraints.min && (!value || value < constraints.min)) {
+      if (isValid(defaultValue) && !isValid(value)) {
+        onChange(defaultValue);
+      } else if (
+        isValid(constraints.min) &&
+        (!isValid(value) || value < constraints.min)
+      ) {
         onChange(constraints.min);
-      } else if (constraints.max && value > constraints.max) {
+      } else if (isValid(constraints.max) && value > constraints.max) {
         onChange(constraints.max);
       }
 
