@@ -68,6 +68,7 @@ module.exports = {
         getLayoutPath('Grid'),
         getLayoutPath('OneThirdLayout'),
         getLayoutPath('Row'),
+        getLayoutPath('Scrollable'),
         getLayoutPath('Spacer'),
         getLayoutPath('SpaceAround'),
       ],
