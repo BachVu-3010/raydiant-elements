@@ -86,8 +86,6 @@ module.exports = {
         getDevicesPath('ManageGroupPopover'),
         getDevicesPath('AddDevice'),
         getDevicesPath('AddDevicePopover'),
-        getDevicesPath('DeviceSettingsForm'),
-        getDevicesPath('DeviceGroupSettingsForm'),
         getDevicesPath('ScreenPreview'),
       ],
     },
