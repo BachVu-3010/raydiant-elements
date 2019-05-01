@@ -185,5 +185,10 @@ export { Theme };
 export default function createTheme(options: ThemeOptions) {
   return createMuiTheme({
     ...options,
+    typography: {
+      // Hides warnings according to
+      // https://material-ui.com/style/typography/#migration-to-typography-v2
+      useNextVariants: true,
+    },
   });
 }

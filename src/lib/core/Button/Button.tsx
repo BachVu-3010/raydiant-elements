@@ -42,7 +42,7 @@ export const Button: React.SFC<ButtonProps> = ({
   testId,
 }) => (
   <MUIButton
-    variant={color === 'default' ? 'flat' : 'raised'}
+    variant={color === 'default' ? 'text' : 'raised'}
     disabled={disabled}
     type={type}
     fullWidth={fullWidth}
