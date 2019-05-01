@@ -131,17 +131,20 @@ export class AddDevice extends React.Component<
                 return maskArray;
               }}
               pipe={(value = '') => value.toUpperCase()}
+              testId="register-device-activation-code"
             />
             <TextField
               label="Name (Optional)"
               value={name}
               onChange={value => this.setState({ name: value })}
+              testId="register-device-name"
             />
             <Button
               type="submit"
               label="Activate"
               color="progress"
               disabled={!activationCode.match(/^[A-Z]+-[A-Z]+$/) || loading}
+              testId="register-device-submit"
             />
           </Column>
         </Form>
