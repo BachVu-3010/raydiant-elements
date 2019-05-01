@@ -7,6 +7,8 @@ const styles = (theme: Theme) =>
       flex: 1,
       width: '100%',
       position: 'relative',
+      // Needed for Edge to prevent scroll bars.
+      overflow: 'hidden',
     },
 
     preview: {
