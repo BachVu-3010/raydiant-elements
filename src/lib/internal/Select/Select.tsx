@@ -1,6 +1,7 @@
 import MUISelect from '@material-ui/core/Select';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { testAttr } from '../../helpers';
 import Input from '../Input';
 import styles from './Select.styles';
 
@@ -16,6 +17,7 @@ interface SelectProps extends WithStyles<typeof styles> {
   ) => void;
   onBlur?: React.FocusEventHandler<any>;
   onFocus?: React.FocusEventHandler<any>;
+  testId?: string;
 }
 
 const Select: React.SFC<SelectProps> = ({
@@ -27,6 +29,7 @@ const Select: React.SFC<SelectProps> = ({
   onBlur,
   onFocus,
   classes,
+  testId,
 }) => (
   <MUISelect
     native
@@ -38,6 +41,7 @@ const Select: React.SFC<SelectProps> = ({
     onBlur={onBlur}
     onFocus={onFocus}
     classes={{ select: classes.select }}
+    inputProps={{ ...testAttr(testId) }}
   >
     {children}
   </MUISelect>

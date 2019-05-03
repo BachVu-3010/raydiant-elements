@@ -1,15 +1,15 @@
 import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
-import { preventDefault } from '../../helpers';
+import { preventDefault, testAttr } from '../../helpers';
 import { Theme } from '../../theme';
 
 export interface OptionProps extends WithStyles<typeof styles> {
   selected?: boolean;
   value: string;
   children: string;
-  name?: string;
   onChange?: (value: string) => void;
+  testId?: string;
 }
 
 export const Option: React.SFC<OptionProps> = ({
@@ -18,10 +18,12 @@ export const Option: React.SFC<OptionProps> = ({
   children,
   classes,
   selected,
+  testId,
 }) => (
   <button
     className={cn(classes.root, selected && classes.selected)}
     onClick={preventDefault(() => onChange(value))}
+    {...testAttr(testId)}
   >
     {children}
   </button>

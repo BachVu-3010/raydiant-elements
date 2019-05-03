@@ -45,7 +45,7 @@ export const TimeField: React.SFC<TimeFieldProps> = ({
         onChange={e => onChange(e.target.value)}
         onBlur={onBlur}
         inputProps={{
-          ...(testAttr(testId) as any),
+          ...testAttr(testId),
         }}
         disabled={disabled}
       />

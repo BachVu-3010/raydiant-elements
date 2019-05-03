@@ -17,6 +17,7 @@ interface DateFieldProps {
   maxDate?: string | Date;
   minDate?: string | Date;
   dateFormat?: string;
+  testId?: string;
 }
 
 export class DateField extends React.Component<DateFieldProps> {
@@ -35,6 +36,7 @@ export class DateField extends React.Component<DateFieldProps> {
       minDate,
       maxDate,
       dateFormat,
+      testId,
     } = this.props;
     return (
       <MuiPickersUtilsProvider utils={MomentUtils}>
@@ -44,7 +46,11 @@ export class DateField extends React.Component<DateFieldProps> {
           onBlur={onBlur}
           TextFieldComponent={(textFieldComponentProps: any) => (
             <TextField
-              {...{ ...textFieldComponentProps, label, helperText, error }}
+              {...textFieldComponentProps}
+              label={label}
+              helperText={helperText}
+              error={error}
+              testId={testId}
             />
           )}
           disabled={disabled}

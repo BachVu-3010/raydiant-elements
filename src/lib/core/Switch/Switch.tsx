@@ -1,6 +1,7 @@
 import MUISwitch from '@material-ui/core/Switch';
 import cn from 'classnames';
 import * as React from 'react';
+import { testAttr } from '../../helpers';
 import FormHelperText from '../../internal/FormHelperText';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Switch.styles';
@@ -16,6 +17,7 @@ interface SwitchProps extends WithStyles<typeof styles> {
   onChange?: (checked: boolean) => void;
   /** Additional information to help the user fill the field. */
   helperText?: React.ReactNode;
+  testId?: string;
 }
 
 export const Switch: React.SFC<SwitchProps> = ({
@@ -25,6 +27,7 @@ export const Switch: React.SFC<SwitchProps> = ({
   onChange,
   helperText,
   classes,
+  testId,
 }) => (
   <div className={classes.root}>
     <label className={classes.control}>
@@ -40,6 +43,11 @@ export const Switch: React.SFC<SwitchProps> = ({
               icon: classes.knob,
               bar: classes.bar,
               disabled: classes.disabled,
+            }}
+            inputProps={{
+              ...(testAttr(testId) as React.InputHTMLAttributes<
+                HTMLInputElement
+              >),
             }}
           />
         </span>

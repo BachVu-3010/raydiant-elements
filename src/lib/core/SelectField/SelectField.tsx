@@ -23,6 +23,7 @@ interface SelectFieldProps {
   /** The <option>s of the select */
   children: React.ReactNode;
   shrink?: boolean;
+  testId?: string;
 }
 
 export const SelectField: React.SFC<SelectFieldProps> = ({
@@ -39,6 +40,7 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
   },
   children,
   shrink,
+  testId,
 }) => (
   <FormControl fullWidth error={error}>
     <InputBackground>
@@ -53,6 +55,7 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
         disabled={disabled}
         onChange={e => onChange(e.target.value)}
         onBlur={onBlur}
+        testId={testId}
       >
         {children}
       </Select>

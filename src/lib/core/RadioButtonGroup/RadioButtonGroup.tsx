@@ -1,13 +1,14 @@
 import cn from 'classnames';
 import * as React from 'react';
+import { testAttr } from '../../helpers';
 import withStyles, { createStyles, WithStyles } from '../withStyles';
 import Option, { OptionProps } from './Option';
 
 interface RadioButtonGroupProps {
   onChange: (selectedValues: string[]) => void;
-  name?: string;
   fullWidth?: boolean;
   selectedValues?: string[];
+  testId?: string;
 }
 
 interface RadioButtonGroupState {
@@ -48,17 +49,20 @@ export class RadioButtonGroup extends React.Component<
   };
 
   render() {
-    const { children, classes, name, fullWidth } = this.props;
+    const { children, classes, fullWidth, testId } = this.props;
     const { selectedValues } = this.state;
     return (
-      <div className={cn(classes.root, fullWidth && classes.fullWidth)}>
+      <div
+        className={cn(classes.root, fullWidth && classes.fullWidth)}
+        {...testAttr(testId)}
+      >
         {React.Children.map(
           children,
-          (child: React.ReactElement<OptionProps>) =>
+          (child: React.ReactElement<OptionProps>, index) =>
             React.cloneElement(child, {
               selected: selectedValues.includes(child.props.value),
-              name,
               onChange: this.handleChange,
+              testId: testId && `${testId}-${index}`,
             }),
         )}
       </div>
