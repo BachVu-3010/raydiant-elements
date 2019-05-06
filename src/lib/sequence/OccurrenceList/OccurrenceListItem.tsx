@@ -36,13 +36,18 @@ export const OccurrenceListItem: React.FunctionComponent<
   const startTime = moment(start);
   const endTime = moment(end);
   const sameDate = startTime.isSame(endTime, 'date');
-  const sameAMPM = moment(startTime)
-    .subtract(12, 'hours')
-    .isSame(moment(endTime).subtract(12, 'hours'), 'date');
-  const startTimeText = startTime.format(
-    sameDate ? (sameAMPM ? 'h:mm' : 'h:mm A') : 'h:mm A (LL)',
-  );
-  const endTimeText = endTime.format(sameDate ? 'h:mm A' : 'h:mm A (LL)');
+  const sameYear = startTime.year() === endTime.year();
+
+  let dateFormat = 'h:mm A';
+  if (!sameDate && !sameYear) {
+    dateFormat = `${dateFormat} (MMM D, YY)`;
+  } else if (!sameDate) {
+    dateFormat = `${dateFormat} (MMM D)`;
+  }
+
+  const startTimeText = startTime.format(dateFormat);
+  const endTimeText = endTime.format(dateFormat);
+
   const occurrenceName = overridden ? (
     <Text small strikethrough ellipsis>
       {name}
@@ -50,6 +55,7 @@ export const OccurrenceListItem: React.FunctionComponent<
   ) : (
     <Heading2 ellipsis>{name}</Heading2>
   );
+
   return (
     <div
       onClick={onClick}
@@ -113,8 +119,13 @@ const styles = (theme: Theme) =>
       display: 'inline-flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
+      flexWrap: 'wrap',
     },
-    duration: { display: 'flex', flexShrink: 0 },
+    duration: {
+      display: 'flex',
+      flexShrink: 0,
+      flexWrap: 'wrap',
+    },
     badges: {
       flex: 0,
     },
