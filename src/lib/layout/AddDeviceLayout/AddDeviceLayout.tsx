@@ -23,6 +23,6 @@ const styles = (theme: Theme) =>
 export const AddDeviceLayout: React.SFC<AddDeviceLayoutProps> = ({
   classes,
   children,
-}) => <main className={classes.root}>{children}</main>;
+}) => <div className={classes.root}>{children}</div>;
 
 export default withStyles(styles)(AddDeviceLayout);
