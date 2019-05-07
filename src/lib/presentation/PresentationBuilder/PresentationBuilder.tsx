@@ -58,6 +58,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   children?: (
     presentation: P.Presentation,
     errors: P.PresentationError[],
+    previewMode: P.PreviewMode,
   ) => React.ReactNode;
 }
 
@@ -570,6 +571,7 @@ export class PresentationBuilder extends React.Component<
           children(
             previewPresentation,
             validatePresentation(previewPresentation, appVersion, minDuration),
+            previewMode,
           )}
       </PresentationBuilderPreview>
     );
