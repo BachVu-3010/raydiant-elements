@@ -12,6 +12,7 @@ import SelectField from '../SelectField';
 export interface RecurrenceSelectorProps extends WithStyles {
   onChange?: (recurrenceRule: Partial<S.RecurrenceRule>) => any;
   recurrenceRule?: Partial<S.RecurrenceRule>;
+  testId?: string;
 }
 
 interface RecurrenceSelectorState {
@@ -42,17 +43,19 @@ const initialValues: Partial<S.RecurrenceRule> = {
   byday: [],
   bymonthday: '',
 };
+
 export class RecurrenceSelector extends React.Component<
   RecurrenceSelectorProps,
   RecurrenceSelectorState
 > {
   static defaultProps = {
+    recurrenceRule: {},
     onChange: () => {
       return;
     },
   };
   state: RecurrenceSelectorState = {
-    recurrenceRule: this.props.recurrenceRule || initialValues,
+    recurrenceRule: { ...initialValues, ...this.props.recurrenceRule },
   };
   componentWillMount() {
     this.props.onChange(this.state.recurrenceRule);
@@ -82,7 +85,7 @@ export class RecurrenceSelector extends React.Component<
   render() {
     const { recurrenceRule } = this.state;
     const { freq, interval, bymonthday, byday } = recurrenceRule;
-    const { classes } = this.props;
+    const { classes, testId } = this.props;
 
     return (
       <Column>
@@ -92,11 +95,11 @@ export class RecurrenceSelector extends React.Component<
         <Row>
           <div className={classes.intervalSelector}>
             <SelectField
-              value={interval.toString()}
+              value={String(interval)}
               onChange={value =>
                 this.updateRecurrenceRule({ interval: parseInt(value, 10) })
               }
-              testId="recurrence-interval"
+              testId={`${testId}-interval`}
             >
               {frequencies[freq].intervals.map(o => (
                 <option key={o} value={o}>
@@ -109,7 +112,7 @@ export class RecurrenceSelector extends React.Component<
             <SelectField
               value={freq}
               onChange={this.handleFrequencyChange}
-              testId="recurrence-frequency"
+              testId={`${testId}-frequency`}
             >
               {Object.entries(frequencies).map(([k, { label }]) => (
                 <option key={k} value={k}>
@@ -132,7 +135,7 @@ export class RecurrenceSelector extends React.Component<
                 this.updateRecurrenceRule({ bymonthday: value })
               }
               shrink
-              testId="recurrence-bymonthday"
+              testId={`${testId}-bymonthday`}
             >
               <option key="Use start date" value="">
                 Use start date
@@ -153,7 +156,7 @@ export class RecurrenceSelector extends React.Component<
                 this.updateRecurrenceRule({ byday: value })
               }
               selectedValues={byday}
-              testId="recurrence-byday"
+              testId={`${testId}-byday`}
             >
               {Object.entries(S.DaysOfWeek).map(([value, label]) => (
                 <RadioButtonGroup.Option key={value} value={value}>
