@@ -5,7 +5,13 @@ import withStyles, { createStyles, WithStyles } from '../withStyles';
 const styles = () =>
   createStyles({
     root: {
+      display: 'flex',
       flex: 1,
+      // For IE11 it's necessary to set the maxHeight on the scrollable element.
+      // Originally we had a maxHeight of 320px on the popover container, so we are
+      // substracting the height of the popover header (~56px) from 320px to get 264px.
+      maxHeight: 264,
+      flexDirection: 'column',
       ...scrollable(),
     },
   });

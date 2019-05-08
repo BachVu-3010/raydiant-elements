@@ -21,7 +21,6 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
-      maxHeight: 320,
       maxWidth: 400,
       position: 'relative',
       zIndex: theme.zIndex.popover,

@@ -1,6 +1,7 @@
 import { createStyles } from '../../core/withStyles';
 import { responsiveContainer, scrollable } from '../../mixins';
 import { Theme } from '../../theme';
+const assetWidth = 1128;
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -21,7 +22,10 @@ const styles = (theme: Theme) =>
       justifyContent: 'center',
     },
     asset: {
-      maxWidth: '100%',
+      // We're unable to simply use `maxWidth: 100%` here as
+      // the value is ignored in IE11 (see here: https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items)
+      width: '100%',
+      maxWidth: assetWidth,
     },
   });
 
