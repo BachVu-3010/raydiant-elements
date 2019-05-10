@@ -23,12 +23,14 @@ export const MenuDrawer: React.SFC<MenuDrawerProps> = ({
       // Inject isDrawerItem to MenuItem and intercept onClick to close drawer.
       React.cloneElement(child, {
         isDrawerItem: true,
-        onClick: () => {
-          if (child.props.onClick) {
-            child.props.onClick();
-          }
-          onClose();
-        },
+        ...(child.props.onClick
+          ? {
+              onClick: () => {
+                child.props.onClick();
+                onClose();
+              },
+            }
+          : {}),
       }),
   );
   return (
