@@ -6,6 +6,7 @@ import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';
 
 interface DeviceProps extends ItemBaseProps {
   device: DeviceBaseWithComputedProps;
+  wifiStrength: number;
 }
 
 class Device extends React.Component<DeviceProps> {
@@ -18,6 +19,7 @@ class Device extends React.Component<DeviceProps> {
       onPublish,
       disablePublish,
       onAddContent,
+      wifiStrength,
     } = this.props;
     const { isOnline, hasFileError, isResin, needsPublish, id } = device;
     return (
@@ -41,6 +43,7 @@ class Device extends React.Component<DeviceProps> {
             hasFileError={hasFileError}
             onConnectivityWizardClick={onConnectivityWizardClick}
             isResin={isResin}
+            wifiStrength={wifiStrength}
           />
         }
         {...this.props}

@@ -18,6 +18,7 @@ initialState = {
           key={d.id}
           onSelect={console.log}
           isSelected={false}
+          wifiStrength={d.wifiStrength}
         />
       );
     })}

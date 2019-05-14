@@ -6,6 +6,7 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import { stopPropagation } from '../../helpers';
 import { Theme } from '../../theme';
 import Text from '../../typography/Text';
+import ConnectionIndicator from '../ConnectionIndicator/ConnectionIndicator';
 
 enum Errors {
   Offline = 'Offline',
@@ -22,6 +23,7 @@ export interface DeviceStatusProps extends WithStyles<typeof styles> {
   resinCount?: number;
   isResin?: boolean;
   devicesWithErrorsCount?: number;
+  wifiStrength?: number;
 }
 
 const styles = (theme: Theme) =>
@@ -35,6 +37,11 @@ const styles = (theme: Theme) =>
       display: 'flex',
       marginRight: theme.spacing.unit / 2,
     },
+    deviceConnectionStatusIconContainer: {
+      display: 'flex',
+      marginLeft: theme.spacing.unit,
+      marginRight: theme.spacing.unit,
+    }
   });
 
 export class DeviceStatus extends React.Component<DeviceStatusProps> {
@@ -84,11 +91,14 @@ export class DeviceStatus extends React.Component<DeviceStatusProps> {
     );
   };
   renderOnlineStatus = () => {
-    const { classes } = this.props;
+    const { classes, wifiStrength } = this.props;
     return (
       <>
         <div className={classes.deviceStatusIconContainer}>
           <SuccessIcon />
+        </div>
+        <div className={classes.deviceConnectionStatusIconContainer}>
+          <ConnectionIndicator wifiStrength={wifiStrength} />
         </div>
         <Text muted>Online</Text>
       </>

@@ -19,6 +19,7 @@ export const devices = [
     },
     screenOrientation: 'normal',
     screenDimensions: '1920x1080',
+    wifiStrength: 60,
   },
   {
     id: 'DEVICE_ID_2',
@@ -37,6 +38,45 @@ export const devices = [
         name: 'Clock',
       },
     },
+  },
+  {
+    id: 'DEVICE_ID_3',
+    name: "Hank's Screen",
+    showConnectivityStatus: true,
+    isOnline: true,
+    hasAFileError: true,
+    defaultSequence: [],
+    deployedPresentations: {
+      PRESENTATION_ID_1: {
+        id: 'PRESENTATION_ID_1',
+        name: 'Menus',
+      },
+      PRESENTATION_ID_2: {
+        id: 'PRESENTATION_ID_2',
+        name: 'Clock',
+      },
+    },
+    wifiStrength: 90,
+  },
+  {
+    id: 'DEVICE_ID_4',
+    name: "Alicia's Screen",
+    showConnectivityStatus: true,
+    isOnline: false,
+    isResin: true,
+    hasAFileError: true,
+    defaultSequence: [],
+    deployedPresentations: {
+      PRESENTATION_ID_1: {
+        id: 'PRESENTATION_ID_1',
+        name: 'Menus',
+      },
+      PRESENTATION_ID_2: {
+        id: 'PRESENTATION_ID_2',
+        name: 'Clock',
+      },
+    },
+    wifiStrength: 90,
   },
 ];
 export const deviceGroups = [
