@@ -20,6 +20,7 @@ export const devices = [
     screenOrientation: 'normal',
     screenDimensions: '1920x1080',
     wifiStrength: 60,
+    isEthernet: false,
   },
   {
     id: 'DEVICE_ID_2',
@@ -38,6 +39,8 @@ export const devices = [
         name: 'Clock',
       },
     },
+    wifiStrength: 0,
+    isEthernet: true,
   },
   {
     id: 'DEVICE_ID_3',
@@ -57,6 +60,7 @@ export const devices = [
       },
     },
     wifiStrength: 90,
+    isEthernet: false,
   },
   {
     id: 'DEVICE_ID_4',
@@ -77,6 +81,7 @@ export const devices = [
       },
     },
     wifiStrength: 90,
+    isEthernet: false,
   },
 ];
 export const deviceGroups = [

@@ -19,6 +19,7 @@ initialState = {
           onSelect={console.log}
           isSelected={false}
           wifiStrength={d.wifiStrength}
+          isEthernet={d.isEthernet}
         />
       );
     })}

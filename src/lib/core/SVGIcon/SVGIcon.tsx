@@ -4,9 +4,11 @@ import styles from './SVGIcon.styles';
 import svgs from './svgs';
 
 export type SVGIconOptions =
+    | 'wifiFull'
     | 'wifiHigh'
     | 'wifiMedium'
     | 'wifiLow'
+    | 'wifiNone'
     | 'ethernet'
     ;
 

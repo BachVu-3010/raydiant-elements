@@ -24,6 +24,7 @@ export interface DeviceStatusProps extends WithStyles<typeof styles> {
   isResin?: boolean;
   devicesWithErrorsCount?: number;
   wifiStrength?: number;
+  isEthernet?: boolean;
 }
 
 const styles = (theme: Theme) =>
@@ -91,14 +92,14 @@ export class DeviceStatus extends React.Component<DeviceStatusProps> {
     );
   };
   renderOnlineStatus = () => {
-    const { classes, wifiStrength } = this.props;
+    const { classes, wifiStrength, isEthernet } = this.props;
     return (
       <>
         <div className={classes.deviceStatusIconContainer}>
           <SuccessIcon />
         </div>
         <div className={classes.deviceConnectionStatusIconContainer}>
-          <ConnectionIndicator wifiStrength={wifiStrength} />
+          <ConnectionIndicator wifiStrength={wifiStrength} isEthernet={isEthernet} />
         </div>
         <Text muted>Online</Text>
       </>
