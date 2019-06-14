@@ -5,13 +5,12 @@
   "scripts": {
     "start": "tsc && styleguidist server --config styleguide.config.js",
     "tsc": "tsc",
-    "build": "rm -rf build && tsc && copyfiles -u 2 src/lib/**/*.css build/lib && node tasks/copy-package-json.js",
+    "build": "tsc && copyfiles -u 2 src/lib/**/*.css build/lib && node tasks/copy-package-json.js",
     "build:watch": "tsc -w",
     "build:link": "yarn build && cd build/lib && yarn unlink && yarn link",
     "lint": "tslint --project .",
     "test": "jest src --env=jsdom",
-    "deploy:next": "NPM_TAG=next tasks/npm-publish.bash",
-    "deploy:latest": "NPM_TAG=latest tasks/npm-publish.bash",
+    "deploy": "sh tasks/npm-publish.sh",
     "styleguide:build": "tsc && styleguidist build",
     "encryptenv": "jet encrypt docker/deploy.env docker/deploy.env.encrypted --key-path=mirainc_mira-elements.aes",
     "decryptenv": "jet decrypt docker/deploy.env.encrypted docker/deploy.env --key-path=mirainc_mira-elements.aes"

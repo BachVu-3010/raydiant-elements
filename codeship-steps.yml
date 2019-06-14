@@ -5,8 +5,3 @@
       steps:
         - command: yarn lint
         - command: yarn test
-    - type: serial
-      tag: ^(master)
-      service: elements
-      steps:
-        - command: yarn deploy:latest

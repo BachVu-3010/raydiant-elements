@@ -21,7 +21,7 @@ interface SwitchProps extends WithStyles<typeof styles> {
 }
 
 export const Switch: React.SFC<SwitchProps> = ({
-  checked,
+  checked = false,
   label,
   disabled,
   onChange,
