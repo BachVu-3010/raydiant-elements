@@ -46,6 +46,8 @@ export interface TextFieldProps {
   onChange?: (value: string) => any;
   /** Called when the input loses focus */
   onBlur?: React.FocusEventHandler<any>;
+  /** Called when the input becomes focused */
+  onFocus?: React.FocusEventHandler<any>;
   /** The test id of the input */
   testId?: string;
   onClick?: (event: React.MouseEvent<any>) => any;
@@ -70,9 +72,8 @@ export const TextField: React.SFC<TextFieldProps> = ({
   onChange = () => {
     return;
   },
-  onBlur = () => {
-    return;
-  },
+  onBlur,
+  onFocus,
   onClick,
   testId,
 }) => {
@@ -84,6 +85,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
     value,
     icon: typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon,
     onBlur,
+    onFocus,
   };
 
   const commonInputProps = {

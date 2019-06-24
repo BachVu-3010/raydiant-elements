@@ -18,7 +18,7 @@ initialState = {
     value={state.multiple}
     onChange={multiple => setState({ multiple })}
     onClear={() => setState({ multiple: null })}
-    helperText="Helper text (optional)"
+    helperText={<Link href="https://google.com">Helper link</Link>}
   />
   <FileField label="Disabled" disabled helperText="Helper text (optional)" />
   <FileField label="Error" error helperText="Oops! This field is invalid" />

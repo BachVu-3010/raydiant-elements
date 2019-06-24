@@ -49,6 +49,7 @@ export const FileField: React.SFC<FileFieldProps> = ({
   classes,
 }) => {
   const shouldShowClear = !!value && !!onClear;
+  const fileInput = React.createRef<HTMLInputElement>();
 
   return (
     <div className={classes.root}>
@@ -65,8 +66,10 @@ export const FileField: React.SFC<FileFieldProps> = ({
             </button>
           )
         }
+        onFocus={() => fileInput.current.focus()}
       />
       <input
+        ref={fileInput}
         disabled={disabled}
         className={classes.input}
         type="file"
