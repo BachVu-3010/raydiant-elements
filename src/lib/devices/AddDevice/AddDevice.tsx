@@ -119,18 +119,14 @@ export class AddDevice extends React.Component<
               onChange={value => this.setState({ activationCode: value })}
               error={!!error}
               helperText={error}
-              mask={(value = '') => {
-                const maskArray = [];
-
-                // suppress tslint warning for for loops
-                // tslint:disable-next-line
-                for (let i = 0; i < value.length; i += 1) {
-                  maskArray.push(/[a-zA-Z\-]/);
-                }
-
-                return maskArray;
+              mask={(value = '') => value.split('').map(() => /[a-zA-Z\-\s]/g)}
+              pipe={(value = '') => {
+                const newValue = value.toUpperCase().replace(' ', '-');
+                return {
+                  value: newValue,
+                  indexesOfPipedChars: [newValue.indexOf('-') - 1],
+                };
               }}
-              pipe={(value = '') => value.toUpperCase()}
               testId="register-device-activation-code"
             />
             <TextField
