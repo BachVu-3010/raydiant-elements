@@ -109,3 +109,26 @@ const presentation2 = {
   </Column>
 </App>;
 ```
+
+### Disabled
+
+```jsx
+const presentation1 = {
+  name: 'Menu',
+  thumbnailUrl:
+    'https://mira-screenshot-staging.s3.amazonaws.com/df338865-251b-495b-9e21-15ce7fddb263/20180829152724910934',
+  iconUrl:
+    'https://apps-repository.staging.getmira.com/3390b318-e587-42ae-8dac-6bcb2c1c36be/1.3.1/icon.svg',
+  hasDynamicThumbnails: true,
+};
+
+<PresentationCard
+  disabled
+  presentation={presentation1}
+  selected={state.selected1}
+  onEdit={() => console.log('edit')}
+  onSelect={() => setState({ selected1: !state.selected1 })}
+  onClick={() => setState({ selected1: !state.selected1 })}
+  showControls={state.showControls}
+/>;
+```

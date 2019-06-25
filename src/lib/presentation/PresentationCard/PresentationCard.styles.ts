@@ -22,6 +22,11 @@ const styles = (theme: Theme) =>
       textAlign: 'center',
       ...textTruncate(),
     },
+
+    disabled: {
+      opacity: 0.5,
+      cursor: 'not-allowed',
+    },
   });
 
 export default styles;
