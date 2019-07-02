@@ -20,4 +20,4 @@ mv build/node_modules node_modules
 
 # Publish from build/lib
 cd build/lib
-yarn publish
+yarn publish --non-interactive
