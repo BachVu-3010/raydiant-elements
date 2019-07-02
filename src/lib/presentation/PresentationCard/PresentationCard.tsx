@@ -9,13 +9,13 @@ import styles from './PresentationCard.styles';
 interface PresentationCardProps
   extends WithStyles<typeof styles>,
     PresentationThumbnailProps {
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export const PresentationCard: React.SFC<PresentationCardProps> = ({
   classes,
   presentation,
-  disabled,
+  disabled = false,
   ...thumbnailProps
 }) => (
   <div className={cn(classes.root, disabled && classes.disabled)}>
