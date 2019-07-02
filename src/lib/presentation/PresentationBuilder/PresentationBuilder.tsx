@@ -442,7 +442,7 @@ export class PresentationBuilder extends React.Component<
           <SoundZoneInput
             key={key}
             label={label}
-            value={presentation.themeId}
+            value={value}
             soundZones={soundZones}
             helperText={helperText}
             error={hasError}
