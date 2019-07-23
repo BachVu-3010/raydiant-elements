@@ -25,6 +25,8 @@ export interface TextFieldProps {
   maxLength?: number;
   /** Set to true to display as a textarea */
   multiline?: boolean;
+  /** Set to true to auto focus the input */
+  autoFocus?: boolean;
   /** Optional helper text */
   helperText?: React.ReactNode;
   /** Optional icon to display */
@@ -48,9 +50,10 @@ export interface TextFieldProps {
   onBlur?: React.FocusEventHandler<any>;
   /** Called when the input becomes focused */
   onFocus?: React.FocusEventHandler<any>;
+  /** Called when the input is clicked */
+  onClick?: (event: React.MouseEvent<any>) => any;
   /** The test id of the input */
   testId?: string;
-  onClick?: (event: React.MouseEvent<any>) => any;
 }
 
 export const TextField: React.SFC<TextFieldProps> = ({
@@ -62,6 +65,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
   maxWidth,
   maxLength,
   multiline = false,
+  autoFocus = false,
   helperText = '',
   icon = null,
   mask,
@@ -90,6 +94,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
 
   const commonInputProps = {
     maxLength: String(maxLength),
+    autoFocus,
     ...testAttr(testId),
     onClick,
   };
