@@ -26,6 +26,7 @@ import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
+import PlaylistInput from './PlaylistInput';
 import styles from './PresentationBuilder.styles';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
 import PresentationBuilderWarning from './PresentationBuilderWarning';
@@ -42,6 +43,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   appVersion?: A.AppVersion;
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
+  playlists?: P.Playlist[];
   affectedDevices?: D.Device[];
   previewMode?: P.PreviewMode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
@@ -83,6 +85,7 @@ export class PresentationBuilder extends React.Component<
   static defaultProps: Partial<PresentationBuilderProps> = {
     themes: [],
     soundZones: [],
+    playlists: [],
     affectedDevices: [],
     minDuration: 5,
     previewMode: P.PreviewMode.Horizontal,
@@ -246,7 +249,7 @@ export class PresentationBuilder extends React.Component<
     strings: A.Strings,
     errors?: P.PresentationError[],
   ): React.ReactNode {
-    const { themes, soundZones } = this.props;
+    const { themes, soundZones, playlists } = this.props;
     const { presentation } = this.state;
 
     const key = property.name;
@@ -444,6 +447,22 @@ export class PresentationBuilder extends React.Component<
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(['themeId'], newValue, property)
+            }
+          />
+        );
+
+      case 'playlist':
+        return (
+          <PlaylistInput
+            key={key}
+            label={label}
+            value={value}
+            playlists={playlists}
+            helperText={helperText}
+            error={hasError}
+            onBlur={this.handleBlur}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
             }
           />
         );

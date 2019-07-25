@@ -121,6 +121,10 @@ const appVersion = {
       ],
     },
     {
+      name: 'playlists',
+      type: 'playlist',
+    },
+    {
       name: 'themes',
       type: 'theme',
     },
@@ -190,6 +194,7 @@ const appVersion = {
     selection: 'Selection',
     multiselection: 'Multi-Selection',
     themes: 'Themes',
+    playlists: 'Playlists',
     categories: 'Categories',
     category: 'Category',
     items: 'Items',
@@ -215,6 +220,13 @@ const themes = [
   { id: 'd', name: 'Custom' },
 ];
 
+const playlists = [
+  { id: 'a', name: 'Playlist 1' },
+  { id: 'b', name: 'Playlist 2' },
+  { id: 'c', name: 'Playlist 3' },
+  { id: 'd', name: 'Playlist 4' },
+];
+
 initialState = {
   // Default to opening the modal for development by
   // appending &showModal to the url.
@@ -236,6 +248,7 @@ initialState = {
       presentation={state.presentation}
       appVersion={appVersion}
       themes={themes}
+      playlists={playlists}
       warnings={[
         <span>
           Oops! This is a warning.{' '}
