@@ -15,10 +15,16 @@ export type IconOptions =
   | 'edit'
   | 'endDate'
   | 'facebook'
+  | 'fullscreen'
+  | 'fullscreenExit'
   | 'group'
   | 'horizontalScreen'
   | 'lock'
+  | 'next'
   | 'menu'
+  | 'pause'
+  | 'play'
+  | 'previous'
   | 'publish'
   | 'remove'
   | 'repeat'
@@ -28,6 +34,7 @@ export type IconOptions =
   | 'screenSettings'
   | 'search'
   | 'startDate'
+  | 'stop'
   | 'verticalScreen';
 
 interface IconProps extends WithStyles<typeof styles> {
@@ -45,6 +52,10 @@ export const Icon: React.SFC<IconProps> = ({
   className,
   classes,
 }) => {
+  if (!paths[icon]) {
+    console.warn(`Unsupported icon '${icon}' used in <Icon />`); // tslint:disable-line no-console
+    return null;
+  }
   const { path, viewBox } = paths[icon];
 
   return (

@@ -104,6 +104,17 @@ export class PresentationBuilder extends React.Component<
     if (!prevProps.presentation && presentation) {
       this.setState({ presentation, previewPresentation: presentation });
     }
+    // Below is only here because of MiraKit in order to re-render the preview
+    // when the values change outside of the form.
+    if (
+      prevProps.presentation &&
+      presentation &&
+      (prevProps.presentation.id !== presentation.id ||
+        Object.keys(prevProps.presentation.applicationVariables).length !==
+          Object.keys(presentation.applicationVariables).length)
+    ) {
+      this.setState({ presentation, previewPresentation: presentation });
+    }
   }
 
   handleSave = () => {
