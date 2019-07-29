@@ -13,6 +13,8 @@ interface SoundZoneProps {
 }
 
 class SoundZone extends React.Component<SoundZoneProps> {
+  onChangeTimeout: number;
+
   componentDidMount() {
     this.checkDefaultValue();
   }
@@ -33,8 +35,14 @@ class SoundZone extends React.Component<SoundZoneProps> {
     const { value, soundZones, onChange } = this.props;
     // Default to first sound zone if value is not set.
     if (!value && soundZones.length > 0) {
-      onChange(soundZones[0].id);
+      this.onChangeTimeout = setTimeout(() => {
+        onChange(soundZones[0].id);
+      });
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.onChangeTimeout);
   }
 
   render() {

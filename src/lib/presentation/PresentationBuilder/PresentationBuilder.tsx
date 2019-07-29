@@ -224,11 +224,15 @@ export class PresentationBuilder extends React.Component<
     strings: A.Strings,
     errors: P.PresentationError[],
   ) {
+    const propertyTypeIndexes: { [key: string]: number } = {};
     const formInputs = properties.map(property => {
       const inputPath = [...path, property.name];
+      const propertyTypeIndex = propertyTypeIndexes[property.type] || 0;
+      propertyTypeIndexes[property.type] = propertyTypeIndex + 1;
 
       return this.renderInput(
         property,
+        propertyTypeIndex,
         // appVars can be undefined for newly added array items.
         appVars && appVars[property.name],
         appVars,
@@ -243,6 +247,7 @@ export class PresentationBuilder extends React.Component<
 
   renderInput(
     property: A.PresentationProperty,
+    propertyTypeIndex: number,
     value: any = property.default,
     parentValue: any,
     path: P.Path,
@@ -460,6 +465,7 @@ export class PresentationBuilder extends React.Component<
             playlists={playlists}
             helperText={helperText}
             error={hasError}
+            propertyTypeIndex={propertyTypeIndex}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
