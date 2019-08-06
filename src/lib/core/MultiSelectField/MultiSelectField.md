@@ -11,6 +11,11 @@ const countries = [
   { name: 'Canada', code: 'CA' },
   { name: 'China', code: 'CN' },
   { name: 'Mexico', code: 'MX' },
+  {
+    name:
+      'Some reeeeeaallly really reaaaalllllly  reeeeeaallly really reaaaalllllly  long country name',
+    code: 'long',
+  },
   { name: 'Sweden', code: 'SE' },
   { name: 'United States', code: 'US' },
 ];

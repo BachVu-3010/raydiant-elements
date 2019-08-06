@@ -48,9 +48,10 @@ const styles = (theme: Theme) =>
     labelContainer: {
       cursor: 'pointer',
       display: 'flex',
-      alignItems: 'center',
+      alignItems: 'flex-start',
     },
     label: {
+      marginTop: theme.spacing.unit / 8,
       marginLeft: theme.spacing.unit,
     },
     labelDisabled: {
