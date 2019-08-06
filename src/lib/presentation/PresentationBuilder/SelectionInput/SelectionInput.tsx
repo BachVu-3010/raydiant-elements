@@ -160,9 +160,9 @@ class SelectionInput extends React.Component<
           onChange={onChange}
           onBlur={onBlur}
         >
-          {options.map(opt => (
+          {options.map((opt, index) => (
             <MultiSelectField.Option
-              key={opt.value}
+              key={index}
               value={opt.value}
               label={strings[opt.name] || opt.name || opt.label}
             />
@@ -183,8 +183,8 @@ class SelectionInput extends React.Component<
         helperText={helperText}
         error={error}
       >
-        {options.map(opt => (
-          <option key={opt.value} value={opt.value}>
+        {options.map((opt, index) => (
+          <option key={index} value={opt.value}>
             {strings[opt.name] || opt.name || opt.label}
           </option>
         ))}
