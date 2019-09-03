@@ -40,6 +40,7 @@ import validatePresentation from './validatePresentation';
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
+  initialPresentationState?: P.Presentation;
   appVersion?: A.AppVersion;
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
@@ -50,7 +51,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   minDuration?: number;
   onCancel?: () => void;
   onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
-  onChange?: (
+  onStateChange?: (
     presentation: P.Presentation,
     prop: A.PresentationProperty,
     path: P.Path,
@@ -92,8 +93,10 @@ export class PresentationBuilder extends React.Component<
   };
 
   state: PresentationBuilderState = {
-    presentation: this.props.presentation,
-    previewPresentation: this.props.presentation,
+    presentation:
+      this.props.initialPresentationState || this.props.presentation,
+    previewPresentation:
+      this.props.initialPresentationState || this.props.presentation,
     validate: false,
     previewMode: this.props.previewMode,
     files: [] as FileUpload[],
@@ -103,9 +106,12 @@ export class PresentationBuilder extends React.Component<
   queuedPresentationPreview: P.Presentation | null = null;
 
   componentDidUpdate(prevProps: PresentationBuilderProps) {
-    const { presentation } = this.props;
+    const { presentation, initialPresentationState } = this.props;
     if (!prevProps.presentation && presentation) {
-      this.setState({ presentation, previewPresentation: presentation });
+      this.setState({
+        presentation: initialPresentationState || presentation,
+        previewPresentation: initialPresentationState || presentation,
+      });
     }
     // Below is only here because of MiraKit in order to re-render the preview
     // when the values change outside of the form.
@@ -147,7 +153,7 @@ export class PresentationBuilder extends React.Component<
     property: A.PresentationProperty,
     file?: File,
   ) {
-    const { onChange, appVersion, minDuration } = this.props;
+    const { onStateChange, appVersion, minDuration } = this.props;
     const { presentation, previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
@@ -177,10 +183,10 @@ export class PresentationBuilder extends React.Component<
       if (property.type === 'file') {
         this.handleFileChange(path, file);
       }
+    }
 
-      if (onChange) {
-        onChange(updatedPresentation, property, path, value, file);
-      }
+    if (onStateChange) {
+      onStateChange(updatedPresentation, property, path, value, file);
     }
 
     this.setState({
