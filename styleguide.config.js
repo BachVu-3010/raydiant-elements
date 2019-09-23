@@ -51,6 +51,7 @@ module.exports = {
         getCorePath('NumberField'),
         getCorePath('Popover'),
         getCorePath('RecurrenceSelector'),
+        getCorePath('RadioGroup'),
         getCorePath('RadioButtonGroup'),
         getCorePath('SelectField'),
         getCorePath('SuccessIcon'),
