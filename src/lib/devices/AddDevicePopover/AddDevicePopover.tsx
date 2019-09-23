@@ -18,6 +18,8 @@ interface AddDevicePopoverProps
   open?: boolean;
   onClose: () => void;
   headingText: string;
+  testId?: string;
+  hideAudioOnly?: boolean;
 }
 
 export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
@@ -27,6 +29,8 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
   onRegister,
   error,
   classes,
+  testId,
+  hideAudioOnly,
 }) => {
   const popoverProps = {
     open,
@@ -41,6 +45,8 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
         headingText={headingText}
         onRegister={onRegister}
         error={error}
+        testId={testId}
+        hideAudioOnly={hideAudioOnly}
       />
     </div>
   );

@@ -1,6 +1,8 @@
 import * as React from 'react';
+import Media from 'react-media';
 import Button from '../../core/Button';
 import Form from '../../core/Form';
+import RadioGroup from '../../core/RadioGroup';
 import TextField from '../../core/TextField';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import Column from '../../layout/Column';
@@ -61,24 +63,37 @@ const styles = (theme: Theme) =>
       height: '108px',
       boxShadow: theme.shadows[1],
     },
+    audioOnly: {
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    audioOnlyLabel: {
+      marginRight: theme.spacing.unit * 2,
+    },
   });
 
 export interface AddDeviceProps {
   headingText: string;
   onRegister: (
-    { activationCode, name }: { activationCode: string; name: string },
+    props: { activationCode: string; name: string; isAudioOnly: boolean },
   ) => void;
   loading?: boolean;
   error?: string;
+  hideAudioOnly?: boolean;
 }
 
 interface AddDevicePropsWithStyles
   extends AddDeviceProps,
-    WithStyles<typeof styles> {}
+    WithStyles<typeof styles> {
+  testId?: string;
+}
 
 interface AddDeviceState {
   activationCode: string;
   name: string;
+  isAudioOnly: boolean;
 }
 
 export class AddDevice extends React.Component<
@@ -88,19 +103,54 @@ export class AddDevice extends React.Component<
   state = {
     activationCode: '',
     name: '',
+    isAudioOnly: false,
   };
   handleSubmitRegisterDeviceForm = () => {
     const { onRegister } = this.props;
-    const { activationCode, name } = this.state;
-    onRegister({ activationCode, name });
+    const { activationCode, name, isAudioOnly } = this.state;
+    onRegister({ activationCode, name, isAudioOnly });
   };
+  renderAudioOnly() {
+    const { classes, testId, hideAudioOnly } = this.props;
+    const { isAudioOnly } = this.state;
+
+    if (hideAudioOnly) return null;
+
+    return (
+      <div className={classes.audioOnly}>
+        <span className={classes.audioOnlyLabel}>
+          Is this an audio-only device?
+        </span>
+        <RadioGroup
+          inline
+          value={isAudioOnly ? 'yes' : 'no'}
+          onChange={value => this.setState({ isAudioOnly: value === 'yes' })}
+          testId={`${testId}-audio-only`}
+        >
+          <RadioGroup.Option
+            value="yes"
+            label="Yes"
+            testId={`${testId}-audio-only-yes`}
+          />
+          <RadioGroup.Option
+            value="no"
+            label="No"
+            testId={`${testId}-audio-only-no`}
+          />
+        </RadioGroup>
+      </div>
+    );
+  }
   render() {
-    const { classes, headingText, loading, error } = this.props;
+    const { classes, headingText, loading, error, testId } = this.props;
     const { activationCode, name } = this.state;
     return (
       <div className={classes.root}>
         <Column className={classes.cta}>
           <span className={classes.heading}>{headingText}</span>
+          <Media query={`(min-height: ${AddDeviceMinHeight}px)`}>
+            {matches => (matches ? this.renderAudioOnly() : null)}
+          </Media>
           <div className={classes.screen}>
             <span>WORD 1 - WORD 2</span>
           </div>
@@ -113,6 +163,9 @@ export class AddDevice extends React.Component<
           onSubmit={this.handleSubmitRegisterDeviceForm}
         >
           <Column>
+            <Media query={`(min-height: ${AddDeviceMinHeight}px)`}>
+              {matches => (matches ? null : this.renderAudioOnly())}
+            </Media>
             <TextField
               label="Activation Code"
               value={activationCode}
@@ -127,20 +180,20 @@ export class AddDevice extends React.Component<
                   indexesOfPipedChars: [newValue.indexOf('-') - 1],
                 };
               }}
-              testId="register-device-activation-code"
+              testId={`${testId}-activation-code`}
             />
             <TextField
               label="Name (Optional)"
               value={name}
               onChange={value => this.setState({ name: value })}
-              testId="register-device-name"
+              testId={`${testId}-name`}
             />
             <Button
               type="submit"
               label="Activate"
               color="progress"
               disabled={!activationCode.match(/^[A-Z]+-[A-Z]+$/) || loading}
-              testId="register-device-submit"
+              testId={`${testId}-submit`}
             />
           </Column>
         </Form>

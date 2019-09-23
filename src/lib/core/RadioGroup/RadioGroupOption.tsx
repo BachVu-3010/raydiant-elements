@@ -1,6 +1,5 @@
 import MUIFormControlLabel from '@material-ui/core/FormControlLabel';
 import * as React from 'react';
-// import { testAttr } from '../../helpers';
 import { Theme } from '../../theme';
 import withStyles, { createStyles, WithStyles } from '../withStyles';
 import RadioGroupRadio from './RadioGroupRadio';
