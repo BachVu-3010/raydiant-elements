@@ -1,15 +1,54 @@
 import createTheme from './createTheme';
 
+const colors = {
+  white: '#FFFFFF',
+  grey: '#E3E3E2',
+  limeGreen: '#28D972',
+  skyBlue: '#009BD2',
+  forestGreen: '#006D5D',
+  navy: '#003670',
+  yellow: '#edde4f',
+};
+
 const common = {
+  fontFaces: [
+    {
+      fontFamily: 'Gilroy',
+      src: `url('https://fonts.raydiant.com/Gilroy-Regular.woff') format('woff')`,
+      fontWeight: 400,
+      fontStyle: 'normal',
+    },
+    {
+      fontFamily: 'Gilroy',
+      src: `url('https://fonts.raydiant.com/Gilroy-SemiBold.woff') format('woff')`,
+      fontWeight: 500,
+      fontStyle: 'normal',
+    },
+    {
+      fontFamily: 'Gilroy',
+      src: `url('https://fonts.raydiant.com/Gilroy-Bold.woff') format('woff')`,
+      fontWeight: 600,
+      fontStyle: 'normal',
+    },
+    {
+      fontFamily: 'Gilroy',
+      src: `url('https://fonts.raydiant.com/Gilroy-Black.woff') format('woff')`,
+      fontWeight: 700,
+      fontStyle: 'normal',
+    },
+  ],
   typography: {
     fontSize: 14,
+    fontFamily: 'Gilroy,Roboto,sans-serif',
   },
   fontSizes: {
+    xxs: '0.643rem', // 9 px
     xs: '0.786rem', // 11 px
     sm: '0.857rem', // 12 px
-    md: '1rem',
+    md: '1rem', // 14px
     lg: '1.143rem', // 16px
-    xl: '2.571rem', // 36px
+    xl: '2.857rem', // 40px
+    xxl: '6.25rem', // 100px
   },
   zIndex: {
     menu: 1000,
@@ -19,34 +58,33 @@ const common = {
   },
   palette: {
     primary: {
-      main: '#414698',
-      dark: '#323785',
-      contrastText: '#ffffff',
+      main: colors.navy,
+      dark: colors.navy,
+      contrastText: colors.white,
     },
     error: {
       main: '#eb5843',
       dark: '#e54734',
-      contrastText: '#ffffff',
+      contrastText: colors.white,
     },
     progress: {
-      main: '#41984d',
-      dark: '#32853d',
-      contrastText: '#ffffff',
+      main: colors.limeGreen,
+      dark: colors.limeGreen,
+      contrastText: colors.navy,
     },
     warning: {
       main: '#f8b91c',
       dark: '#f6aa14',
-      contrastText: '#ffffff',
+      contrastText: colors.white,
     },
     divider: '#c6cedc',
   },
   logo: {
-    default: 'https://public-assets.getmira.com/mira-logo.svg',
-    contrast: 'https://public-assets.getmira.com/mira-logo-white.svg',
-    width: 66,
+    width: 122,
+    squareWidth: 30,
   },
   loginAsset: {
-    default: 'https://public-assets.getmira.com/mira-login-asset.png',
+    default: 'https://assets.raydiant.com/raydiant-login-asset.png',
   },
   modal: {
     overlayBackground: 'rgba(0, 0, 0, 0.5)',
@@ -54,8 +92,8 @@ const common = {
   },
   borderRadius: {
     xs: 0,
-    sm: 2,
-    md: 4,
+    sm: 4,
+    md: 6,
   },
 };
 
@@ -64,40 +102,52 @@ export const light = createTheme({
   palette: {
     ...common.palette,
     text: {
-      primary: '#292834',
+      primary: 'rgba(0, 0, 0, 0.6)',
       secondary: 'rgba(32, 32, 42, 0.6)',
-      link: '#009bff',
+      link: colors.skyBlue,
+      heading: colors.navy,
     },
     background: {
-      default: '#ffffff',
+      default: colors.white,
       gradient: '',
-      inset: '#f3f4f6',
+      inset: colors.grey,
+      paper: colors.grey,
     },
   },
+  logo: {
+    ...common.logo,
+    src: 'https://assets.raydiant.com/raydiant-logo-sky-blue.svg',
+    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
+  },
+  menu: {
+    background: colors.white,
+    foreground: colors.navy,
+    border: colors.navy,
+  },
   button: {
-    background: '#ffffff',
-    foreground: '#292834',
+    background: 'transparent',
+    foreground: colors.navy,
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: '#c6cedc',
-    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
+    border: colors.navy,
+    backgroundSelected: colors.limeGreen,
   },
   input: {
     background: '#f3f4f6',
-    foreground: '#292834',
+    foreground: 'rgba(41, 40, 52, 1)',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: '#292834',
+    border: colors.navy,
   },
   checkbox: {
-    background: '#ffffff',
+    background: colors.white,
     backgroundChecked: common.palette.primary.main,
-    foreground: '#ffffff',
+    foreground: colors.white,
     border: '#303141',
     borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
     bar: '#C8C9CC',
     barChecked: common.palette.progress.main,
-    knob: '#ffffff',
+    knob: colors.white,
     knobMuted: '#b1b1b1',
     foreground: '#292834',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
@@ -126,40 +176,52 @@ export const grey = createTheme({
   palette: {
     ...common.palette,
     text: {
-      primary: '#292834',
+      primary: 'rgba(0, 0, 0, 0.6)',
       secondary: 'rgba(32, 32, 42, 0.6)',
-      link: '#009bff',
+      link: colors.skyBlue,
+      heading: colors.navy,
     },
     background: {
       default: '#f3f4f6',
       gradient: '',
       inset: '#d8d8d8',
+      paper: colors.white,
     },
   },
+  logo: {
+    ...common.logo,
+    src: 'https://assets.raydiant.com/raydiant-logo-sky-blue.svg',
+    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
+  },
+  menu: {
+    background: colors.grey,
+    foreground: colors.navy,
+    border: colors.navy,
+  },
   button: {
-    background: '#ffffff',
-    foreground: '#292834',
+    background: 'transparent',
+    foreground: colors.navy,
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: '#c6cedc',
-    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
+    border: colors.navy,
+    backgroundSelected: colors.limeGreen,
   },
   input: {
-    background: '#ffffff',
-    foreground: '#292834',
+    background: colors.white,
+    foreground: 'rgba(41, 40, 52, 1)',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: '#292834',
+    border: colors.navy,
   },
   checkbox: {
-    background: '#ffffff',
+    background: colors.white,
     backgroundChecked: common.palette.primary.main,
-    foreground: '#ffffff',
+    foreground: colors.white,
     border: '#303141',
     borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
     bar: '#C8C9CC',
     barChecked: common.palette.progress.main,
-    knob: '#ffffff',
+    knob: colors.white,
     knobMuted: '#b1b1b1',
     foreground: '#292834',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
@@ -183,56 +245,143 @@ export const grey = createTheme({
   },
 });
 
-export const dark = createTheme({
+export const medium = createTheme({
   ...common,
   palette: {
     ...common.palette,
     text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.5)',
-      link: '#009bff',
+      primary: colors.navy,
+      secondary: colors.navy,
+      link: colors.white,
+      heading: colors.white,
     },
     background: {
-      default: '#303141',
+      default: colors.skyBlue,
       gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
       inset: '#171828',
+      paper: colors.white,
     },
   },
+  logo: {
+    ...common.logo,
+    src: 'https://assets.raydiant.com/raydiant-logo-navy.svg',
+    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-navy.svg',
+  },
+  menu: {
+    background: colors.skyBlue,
+    foreground: colors.navy,
+    border: colors.navy,
+  },
   button: {
-    background: 'rgba(0, 0, 0, 0.5)',
-    foreground: '#ffffff',
-    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-    border: 'rgba(255, 255, 255, 0.2)',
-    backgroundSelected: 'rgba(105, 113, 242, 0.12)',
+    background: 'transparent',
+    foreground: colors.navy,
+    foregroundMuted: colors.navy,
+    border: colors.navy,
+    backgroundSelected: colors.navy,
   },
   input: {
-    background: 'rgba(255, 255, 255, 0.15)',
-    foreground: '#ffffff',
-    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-    border: '#ffffff',
+    background: colors.white,
+    foreground: 'rgba(41, 40, 52, 1)',
+    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    border: colors.navy,
   },
   checkbox: {
     background: 'rgba(255, 255, 255, 0.15)',
-    backgroundChecked: '#ffffff',
+    backgroundChecked: colors.white,
     foreground: common.palette.primary.main,
-    border: '#ffffff',
+    border: colors.white,
     borderMuted: 'rgba(255, 255, 255, 0.5)',
   },
   switch: {
     bar: 'rgba(255, 255, 255, 0.2)',
     barChecked: common.palette.progress.main,
-    knob: '#ffffff',
+    knob: colors.white,
     knobMuted: '#b1b1b1',
-    foreground: '#ffffff',
+    foreground: colors.white,
     foregroundMuted: 'rgba(255, 255, 255, 0.5)',
   },
   tab: {
-    foreground: '#ffffff',
+    foreground: colors.white,
     border: '',
-    activeBorder: '#ffffff',
+    activeBorder: colors.white,
   },
   progress: {
-    background: '#ffffff',
+    background: colors.white,
+  },
+  actionBar: {
+    border: 'rgba(255, 255, 255, 0.15)',
+  },
+  // TODO: needs tweaking
+  popover: {
+    headerBackground: '#292834',
+    contentBackground: '#292834',
+    borderColor: 'rgba(255, 255, 255, 0.15)',
+    color: 'rgba(255, 255, 255)',
+  },
+});
+
+export const dark = createTheme({
+  ...common,
+  palette: {
+    ...common.palette,
+    text: {
+      primary: colors.white,
+      secondary: colors.grey,
+      link: colors.white,
+      heading: colors.skyBlue,
+    },
+    background: {
+      default: colors.navy,
+      gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
+      inset: '#171828',
+      paper: colors.white,
+    },
+  },
+  logo: {
+    ...common.logo,
+    src: 'https://assets.raydiant.com/raydiant-logo-sky-blue.svg',
+    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
+  },
+  menu: {
+    background: colors.navy,
+    foreground: colors.white,
+    border: colors.skyBlue,
+  },
+  button: {
+    background: 'transparent',
+    foreground: colors.white,
+    foregroundMuted: colors.white,
+    border: colors.white,
+    backgroundSelected: colors.white,
+  },
+  input: {
+    background: 'rgba(255, 255, 255, 0.15)',
+    foreground: colors.white,
+    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
+    border: colors.white,
+  },
+  checkbox: {
+    background: 'rgba(255, 255, 255, 0.15)',
+    backgroundChecked: colors.white,
+    foreground: common.palette.primary.main,
+    border: colors.white,
+    borderMuted: 'rgba(255, 255, 255, 0.5)',
+  },
+  switch: {
+    bar: 'rgba(255, 255, 255, 0.2)',
+    barChecked: common.palette.progress.main,
+    knob: colors.white,
+    knobMuted: '#b1b1b1',
+    foreground: colors.white,
+    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
+  },
+  tab: {
+    foreground: colors.white,
+    border: '',
+    activeBorder: colors.white,
+  },
+  progress: {
+    background: colors.white,
   },
   actionBar: {
     border: 'rgba(255, 255, 255, 0.15)',

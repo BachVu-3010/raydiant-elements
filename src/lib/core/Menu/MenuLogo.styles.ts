@@ -7,7 +7,9 @@ const styles = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: theme.spacing.unit * 2,
+      flexShrink: 0,
+      height: '100%',
+      marginRight: theme.spacing.unit * 2,
     },
   });
 

@@ -1,56 +1,17 @@
 import { createStyles } from '../../core/withStyles';
-import { tabContainer, textTruncate } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
-    },
-    isCollapsed: {},
-    header: {
-      ...tabContainer(theme),
-      position: 'relative',
       zIndex: theme.zIndex.menu + 10,
-      backgroundColor: theme.palette.primary.main,
-      color: theme.palette.primary.contrastText,
-      height: 68,
-      paddingTop: 1,
-      paddingBottom: 1,
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
-
-      '$isCollapsed &': {
-        paddingLeft: 0,
-        paddingRight: 0,
-      },
     },
-    items: {
-      flex: 1,
-      display: 'flex',
-
-      '$isCollapsed &': {
-        display: 'none',
-      },
-    },
-    collapsed: {
-      flex: 1,
-      display: 'none',
-      justifyContent: 'flex-end',
-      alignItems: 'center',
-      paddingRight: theme.spacing.unit * 2,
-
-      '$isCollapsed &': {
-        display: 'flex',
-      },
-    },
-    label: {
-      marginRight: theme.spacing.unit * 2,
-      maxWidth: 160,
-      ...textTruncate(),
-    },
-    overlay: {
-      zIndex: theme.zIndex.menu - 10,
+    fixed: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      right: 0,
     },
   });
 

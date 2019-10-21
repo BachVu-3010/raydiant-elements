@@ -25,7 +25,7 @@ export const Controls: React.SFC<ControlsProps> = ({
       <Button
         icon="publish"
         label="Publish"
-        color="primary"
+        color="progress"
         onClick={stopPropagation(onPublish)}
         disabled={disablePublish}
       />

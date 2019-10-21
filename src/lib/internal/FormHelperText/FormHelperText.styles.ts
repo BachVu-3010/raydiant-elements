@@ -7,7 +7,13 @@ const styles = (theme: Theme) =>
       lineHeight: 1.5,
       marginTop: theme.spacing.unit / 2,
       color: theme.input.foregroundMuted,
+
+      '&$error': {
+        color: theme.palette.text.primary,
+      },
     },
+
+    error: {},
   });
 
 export default styles;

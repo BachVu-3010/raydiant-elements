@@ -11,6 +11,16 @@ const styles = (theme: Theme) =>
         textDecoration: 'underline',
       },
     },
+    fullWidth: {
+      display: 'block',
+      width: '100%',
+    },
+    active: {
+      fontWeight: 500,
+    },
+    underline: {
+      textDecoration: 'underline',
+    },
   });
 
 export default styles;

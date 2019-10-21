@@ -6,7 +6,10 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       ...tab(theme),
+      alignItems: 'flex-start',
+      padding: `${theme.spacing.unit * 1.5}px ${theme.spacing.unit * 10}px`,
       color: theme.menu.foreground,
+      border: 0,
     },
     active: {
       fontWeight: 500,

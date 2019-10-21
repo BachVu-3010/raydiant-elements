@@ -2,7 +2,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import { preventDefault } from '../../helpers';
-import styles from './MenuItem.styles';
+import styles from './MenuDrawerItem.styles';
 
 type RenderFn = (
   props: { className: string; activeClassName: string },
@@ -11,7 +11,7 @@ type RenderFn = (
 const isRenderFn = (value: any): value is RenderFn =>
   typeof value === 'function';
 
-export interface MenuItemProps extends WithStyles<typeof styles> {
+export interface MenuDrawerItemProps extends WithStyles<typeof styles> {
   /** The label of the menu item */
   label?: string;
   /** Set to true when the menu item is active */
@@ -25,7 +25,7 @@ export interface MenuItemProps extends WithStyles<typeof styles> {
   children?: React.ReactNode | RenderFn;
 }
 
-export const MenuItem: React.SFC<MenuItemProps> = ({
+export const MenuDrawerItem: React.SFC<MenuDrawerItemProps> = ({
   label,
   active = false,
   href = '',
@@ -53,4 +53,4 @@ export const MenuItem: React.SFC<MenuItemProps> = ({
   );
 };
 
-export default withStyles(styles)(MenuItem);
+export default withStyles(styles)(MenuDrawerItem);

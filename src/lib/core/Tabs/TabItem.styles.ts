@@ -6,7 +6,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      ...tab(theme),
+      ...tab(theme, { border: true }),
     },
     shrink: {
       flexGrow: 0,

@@ -1,14 +1,11 @@
-import { createStyles } from '../../core/withStyles';
-import { tab } from '../../mixins';
 import { Theme } from '../../theme';
+import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      ...tab(theme),
       color: theme.menu.foreground,
-    },
-    active: {
+      padding: theme.spacing.unit * 2,
       fontWeight: 500,
     },
   });

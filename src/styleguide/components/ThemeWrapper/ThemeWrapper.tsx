@@ -44,6 +44,7 @@ class ThemeWrapper extends React.Component<
               >
                 <option value="light">Light</option>
                 <option value="grey">Grey</option>
+                <option value="medium">Medium</option>
                 <option value="dark">Dark</option>
               </SelectField>
             </div>

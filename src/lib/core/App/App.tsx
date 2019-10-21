@@ -8,8 +8,10 @@ import AppContext from './AppContext';
 interface AppProps extends WithStyles<typeof styles> {}
 
 export class App extends React.Component<AppProps> {
-  modalRoot = document.createElement('div');
-  popoverRoot = document.createElement('div');
+  modalRoot =
+    typeof document !== 'undefined' ? document.createElement('div') : null;
+  popoverRoot =
+    typeof document !== 'undefined' ? document.createElement('div') : null;
 
   initRoots = (root: HTMLElement) => {
     if (root) {

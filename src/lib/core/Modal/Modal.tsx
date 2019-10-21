@@ -19,7 +19,7 @@ export class Modal extends React.Component<
   ModalProps & AppContextProps & WithStyles<typeof styles>,
   {}
 > {
-  el = document.createElement('div');
+  el = typeof document !== 'undefined' ? document.createElement('div') : null;
 
   componentDidMount() {
     this.props.modalRoot.appendChild(this.el);

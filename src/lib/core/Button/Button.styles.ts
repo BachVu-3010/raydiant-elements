@@ -4,29 +4,40 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     button: {
+      position: 'relative',
       height: 40,
       minWidth: 92,
       fontSize: '1rem',
-      // Subtract 1px from padding to compensate for additional 1px border
-      paddingLeft: theme.spacing.unit * 2 - 1,
-      paddingRight: theme.spacing.unit * 2 - 1,
+      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing.unit * 2,
       borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
     },
-    buttonWithIcon: {
-      paddingLeft: theme.spacing.unit * 2 - 4,
+    buttonFullWidth: {
+      width: '100%',
+      flexShrink: 1,
     },
     buttonOnlyIcon: {
       minWidth: 0,
     },
+    buttonWithIconAndLabel: {
+      paddingLeft: theme.spacing.unit * 1.5,
+    },
     label: {
+      fontWeight: 400,
       textTransform: 'none',
       letterSpacing: 0.3,
       whiteSpace: 'nowrap',
     },
     iconWithLabel: {
       marginRight: theme.spacing.unit,
+    },
+    iconWithLabelFullWidth: {
+      position: 'absolute',
+      top: 0,
+      left: theme.spacing.unit * 1.5,
+      height: '100%',
     },
     default: {
       backgroundColor: theme.button.background,
@@ -73,6 +84,16 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.progress.main,
         color: theme.palette.progress.contrastText,
         opacity: 0.5,
+      },
+    },
+    hideBorder: {
+      border: 0,
+
+      '&:hover': {
+        border: 0,
+      },
+      '&:disabled, &:disabled:hover': {
+        border: 0,
       },
     },
   });

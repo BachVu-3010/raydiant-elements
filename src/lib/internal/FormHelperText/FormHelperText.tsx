@@ -12,7 +12,11 @@ const FormHelperText: React.SFC<FormHelperTextProps> = ({
   children,
   classes,
 }) => (
-  <MUIFormHelperText className={classes.root} error={error}>
+  <MUIFormHelperText
+    className={classes.root}
+    classes={{ error: classes.error }}
+    error={error}
+  >
     {children}
   </MUIFormHelperText>
 );

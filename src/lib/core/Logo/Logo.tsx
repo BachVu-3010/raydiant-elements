@@ -1,18 +1,27 @@
 import { withTheme } from '@material-ui/core/styles';
+import cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import { Theme } from '../../theme';
 import styles from './Logo.styles';
 
 export interface LogoProps extends WithStyles<typeof styles> {
-  contrast?: boolean;
   theme: Theme;
+  square?: boolean;
+  width?: string | number;
 }
 
-export const Logo: React.SFC<LogoProps> = ({ contrast, classes, theme }) => (
+export const Logo: React.SFC<LogoProps> = ({
+  classes,
+  theme,
+  square = false,
+  width,
+}) => (
   <img
-    className={classes.root}
-    src={contrast ? theme.logo.contrast : theme.logo.default}
+    key={square ? 'logo-square' : 'logo'}
+    className={cn(classes.root, square && classes.square)}
+    src={square ? theme.logo.squareSrc : theme.logo.src}
+    style={{ width }}
   />
 );
 

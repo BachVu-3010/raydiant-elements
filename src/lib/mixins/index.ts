@@ -42,7 +42,10 @@ export const scrollable = (): React.CSSProperties => ({
   WebkitOverflowScrolling: 'touch',
 });
 
-export const tab = (theme: Theme): React.CSSProperties => ({
+export const tab = (
+  theme: Theme,
+  opts: { border: boolean } = { border: false },
+): React.CSSProperties => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -51,13 +54,16 @@ export const tab = (theme: Theme): React.CSSProperties => ({
   lineHeight: 1.33,
   padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
   backgroundColor: 'transparent',
-  borderTop: '3px solid transparent',
-  borderBottom: '3px solid transparent',
-  borderLeft: 0,
-  borderRight: 0,
+  border: 0,
   cursor: 'pointer',
   textDecoration: 'none',
   outline: 'none',
+  ...(opts.border
+    ? {
+        borderTop: '3px solid transparent',
+        borderBottom: '3px solid transparent',
+      }
+    : {}),
 });
 
 export const marginBetweenChildrenHorizontal = (

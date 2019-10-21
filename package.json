@@ -1,7 +1,7 @@
 {
   "private": true,
-  "name": "mira-elements",
-  "version": "1.8.33",
+  "name": "raydiant-elements",
+  "version": "0.2.0",
   "scripts": {
     "start": "tsc && styleguidist server --config styleguide.config.js",
     "tsc": "tsc",

@@ -8,7 +8,8 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       padding: theme.spacing.unit * 2,
-      color: theme.palette.primary.contrastText,
+      marginLeft: -theme.spacing.unit * 2,
+      color: theme.menu.foreground,
 
       '& > svg': {
         height: 24,

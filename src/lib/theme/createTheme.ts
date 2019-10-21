@@ -6,20 +6,34 @@ import createMuiTheme, {
 declare module '@material-ui/core/styles/createMuiTheme' {
   interface Theme {
     // Custom theme properties.
+    fontFaces: Array<{
+      fontFamily: string;
+      src: string;
+      fontWeight: number;
+      fontStyle: string;
+    }>;
     fontSizes: {
+      xxs: string;
       xs: string;
       sm: string;
       md: string;
       lg: string;
       xl: string;
+      xxl: string;
     };
     logo: {
-      default: string;
-      contrast: string;
+      src: string;
+      squareSrc: string;
       width: number;
+      squareWidth: number;
     };
     loginAsset: {
       default: string;
+    };
+    menu: {
+      background: string;
+      foreground: string;
+      border: string;
     };
     button: {
       background: string;
@@ -78,20 +92,34 @@ declare module '@material-ui/core/styles/createMuiTheme' {
   }
   interface ThemeOptions {
     // Custom theme options.
+    fontFaces: Array<{
+      fontFamily: string;
+      src: string;
+      fontWeight: number;
+      fontStyle: string;
+    }>;
     fontSizes: {
+      xxs: string;
       xs: string;
       sm: string;
       md: string;
       lg: string;
       xl: string;
+      xxl: string;
     };
     logo: {
-      default: string;
-      contrast: string;
+      src: string;
+      squareSrc: string;
       width: number;
+      squareWidth: number;
     };
     loginAsset: {
       default: string;
+    };
+    menu: {
+      background: string;
+      foreground: string;
+      border: string;
     };
     button: {
       background: string;
@@ -158,6 +186,7 @@ declare module '@material-ui/core/styles/createPalette' {
 
   interface TypeText {
     link: string;
+    heading: string;
   }
 
   interface Palette {
@@ -186,6 +215,7 @@ export default function createTheme(options: ThemeOptions) {
   return createMuiTheme({
     ...options,
     typography: {
+      ...options.typography,
       // Hides warnings according to
       // https://material-ui.com/style/typography/#migration-to-typography-v2
       useNextVariants: true,

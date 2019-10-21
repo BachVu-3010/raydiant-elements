@@ -4,38 +4,7 @@ import withStyles, { WithStyles } from '../withStyles';
 import styles from './Icon.styles';
 import paths from './paths';
 
-export type IconOptions =
-  | 'add'
-  | 'alert'
-  | 'arrowLeft'
-  | 'checkmark'
-  | 'chevronDown'
-  | 'defaultContent'
-  | 'dragVertical'
-  | 'edit'
-  | 'endDate'
-  | 'facebook'
-  | 'fullscreen'
-  | 'fullscreenExit'
-  | 'group'
-  | 'horizontalScreen'
-  | 'lock'
-  | 'next'
-  | 'menu'
-  | 'pause'
-  | 'play'
-  | 'previous'
-  | 'publish'
-  | 'remove'
-  | 'repeat'
-  | 'time'
-  | 'trash'
-  | 'scheduledContent'
-  | 'screenSettings'
-  | 'search'
-  | 'startDate'
-  | 'stop'
-  | 'verticalScreen';
+export type IconOptions = keyof typeof paths;
 
 interface IconProps extends WithStyles<typeof styles> {
   /** Icon name */
