@@ -15,7 +15,7 @@ const styles = (theme: Theme) =>
       borderBottomColor: theme.tab.activeBorder,
     },
     icon: {
-      fill: theme.tab.foreground,
+      color: theme.tab.foreground,
       margin: `${theme.spacing.unit}px auto`,
     },
     label: {
