@@ -1,10 +1,12 @@
 import { createStyles } from '../../core/withStyles';
 import { Theme } from '../../theme';
 
+export const inputHeight = 40;
+
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      height: 40,
+      height: inputHeight,
       'label + &': {
         marginTop: 0,
       },
