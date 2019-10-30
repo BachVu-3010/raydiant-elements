@@ -6,7 +6,7 @@ import { Theme } from '../../theme';
 import Controls from './Controls';
 import Device from './Device';
 import DeviceGroup from './DeviceGroup';
-import Thumbnail from './Thumbnail';
+import DeviceThumbnail from './DeviceThumbnail';
 
 export interface DeviceListProps extends WithStyles<typeof styles> {}
 
@@ -32,6 +32,6 @@ export default Object.assign(
     Device,
     DeviceGroup,
     Controls,
-    Thumbnail,
+    Thumbnail: DeviceThumbnail,
   },
 );

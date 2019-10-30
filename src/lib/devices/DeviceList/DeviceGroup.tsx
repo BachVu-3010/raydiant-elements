@@ -2,9 +2,12 @@ import * as React from 'react';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
 import { stopPropagation } from '../../helpers';
+import DeviceItem, {
+  DeviceBaseWithComputedProps,
+  DeviceItemBaseProps,
+} from './DeviceItem';
 import DeviceList from './DeviceList';
 import DeviceStatus from './DeviceStatus';
-import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';
 
 interface DeviceGroupStats {
   resinCount: number;
@@ -16,7 +19,7 @@ interface DeviceGroupStats {
 export type DeviceGroupWithComputedProps = DeviceBaseWithComputedProps &
   DeviceGroupStats;
 
-interface DeviceGroupProps extends ItemBaseProps {
+interface DeviceGroupProps extends DeviceItemBaseProps {
   onManageGroupClick: (selectedGroupIdToManage: string) => void;
   deviceGroup: DeviceGroupWithComputedProps;
 }
@@ -43,7 +46,7 @@ class DeviceGroup extends React.Component<DeviceGroupProps> {
       id,
     } = deviceGroup;
     return (
-      <Item
+      <DeviceItem
         controlsElement={
           isManageMode ? (
             <Button

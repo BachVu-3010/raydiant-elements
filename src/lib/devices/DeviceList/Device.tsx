@@ -1,13 +1,17 @@
 import * as React from 'react';
 import Checkbox from '../../core/Checkbox';
+import DeviceItem, {
+  DeviceBaseWithComputedProps,
+  DeviceItemBaseProps,
+} from './DeviceItem';
 import DeviceList from './DeviceList';
 import DeviceStatus from './DeviceStatus';
-import Item, { DeviceBaseWithComputedProps, ItemBaseProps } from './Item';
 
-interface DeviceProps extends ItemBaseProps {
+interface DeviceProps extends DeviceItemBaseProps {
   device: DeviceBaseWithComputedProps;
   wifiStrength?: number;
   isEthernet?: boolean;
+  thumbnail?: string;
 }
 
 class Device extends React.Component<DeviceProps> {
@@ -22,10 +26,11 @@ class Device extends React.Component<DeviceProps> {
       onAddContent,
       wifiStrength,
       isEthernet,
+      thumbnail,
     } = this.props;
     const { isOnline, hasFileError, isResin, needsPublish, id } = device;
     return (
-      <Item
+      <DeviceItem
         controlsElement={
           isManageMode ? null : (
             <DeviceList.Controls
@@ -49,6 +54,7 @@ class Device extends React.Component<DeviceProps> {
             isEthernet={isEthernet}
           />
         }
+        thumbnail={thumbnail}
         {...this.props}
       />
     );

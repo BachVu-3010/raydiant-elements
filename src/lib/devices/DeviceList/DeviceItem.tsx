@@ -7,8 +7,8 @@ import Spacer from '../../layout/Spacer';
 import { Presentation } from '../../presentation/PresentationTypes';
 import * as D from '../DeviceTypes';
 import { DeviceGroupWithComputedProps } from './DeviceGroup';
+import DeviceThumbnail from './DeviceThumbnail';
 import styles from './Item.styles';
-import Thumbnail from './Thumbnail';
 
 interface FileStatus {
   isFileUploading: boolean;
@@ -29,7 +29,7 @@ export type DeviceBaseWithComputedProps = D.DeviceBase &
   PublishStatus;
 
 // This interface is shared with DeviceList/Device and DeviceList/DeviceGroup
-export interface ItemBaseProps {
+export interface DeviceItemBaseProps {
   isManageMode: boolean;
   isSelected: boolean;
   disablePublish?: boolean;
@@ -37,9 +37,10 @@ export interface ItemBaseProps {
   onConnectivityWizardClick: () => void;
   onPublish: (deviceId: string) => void;
   onAddContent: (deviceId: string) => void;
+  thumbnail?: string;
 }
 
-type ItemProps = ItemBaseProps & {
+type DeviceItemProps = DeviceItemBaseProps & {
   device?: DeviceBaseWithComputedProps;
   deviceGroup?: DeviceGroupWithComputedProps;
   controlsElement: React.ReactNode;
@@ -48,7 +49,7 @@ type ItemProps = ItemBaseProps & {
   showMultipleThumbnails?: boolean;
 } & WithStyles<typeof styles>;
 
-class Item extends React.Component<ItemProps> {
+class DeviceItem extends React.Component<DeviceItemProps> {
   static defaultProps = {
     showMultipleThumbnails: false,
   };
@@ -79,8 +80,14 @@ class Item extends React.Component<ItemProps> {
       showMultipleThumbnails,
       isSelected,
       onSelect,
+      thumbnail,
     } = this.props;
     const { id, name } = device || deviceGroup;
+    // getThumbnailSrc and showMultipleThumbnails is only here for device groups
+    // compatibility. Once 100% of users are on playlist (no more device groups),
+    // we can remove them.
+    const thumbnailSrc = thumbnail || this.getThumbnailSrc();
+
     return (
       <div
         onClick={
@@ -93,9 +100,9 @@ class Item extends React.Component<ItemProps> {
       >
         <Row className={classes.deviceContainer}>
           {checkboxElement}
-          <Thumbnail
+          <DeviceThumbnail
             showMultipleThumbnails={showMultipleThumbnails}
-            src={this.getThumbnailSrc()}
+            src={thumbnailSrc}
           />
           <div>
             <div className={classes.deviceName}>{name}</div>
@@ -109,4 +116,4 @@ class Item extends React.Component<ItemProps> {
   }
 }
 
-export default withStyles(styles)(Item);
+export default withStyles(styles)(DeviceItem);
