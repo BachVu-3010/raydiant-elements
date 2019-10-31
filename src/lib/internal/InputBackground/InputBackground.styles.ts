@@ -9,6 +9,9 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.input.background,
       height: inputHeight,
     },
+    multiline: {
+      height: 'auto',
+    },
   });
 
 export default styles;

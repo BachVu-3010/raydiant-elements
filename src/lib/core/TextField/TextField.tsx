@@ -101,7 +101,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
 
   return (
     <FormControl fullWidth error={error} style={{ maxWidth }}>
-      <InputBackground>
+      <InputBackground multiline={multiline}>
         <InputLabel error={error} disabled={disabled}>
           {label}
         </InputLabel>
