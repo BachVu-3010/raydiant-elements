@@ -63,6 +63,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
     errors: P.PresentationError[],
     previewMode: P.PreviewMode,
   ) => React.ReactNode;
+  onPlaylistEdit?: (playlistId: string) => void;
+  onPlaylistCreate?: () => void;
 }
 
 interface FileUpload {
@@ -260,7 +262,13 @@ export class PresentationBuilder extends React.Component<
     strings: A.Strings,
     errors?: P.PresentationError[],
   ): React.ReactNode {
-    const { themes, soundZones, playlists } = this.props;
+    const {
+      themes,
+      soundZones,
+      playlists,
+      onPlaylistEdit,
+      onPlaylistCreate,
+    } = this.props;
     const { presentation } = this.state;
 
     const key = property.name;
@@ -476,6 +484,8 @@ export class PresentationBuilder extends React.Component<
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
+            onEdit={onPlaylistEdit}
+            onCreate={onPlaylistCreate}
           />
         );
 

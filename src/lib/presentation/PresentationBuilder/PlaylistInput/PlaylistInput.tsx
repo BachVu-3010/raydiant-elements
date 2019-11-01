@@ -1,5 +1,7 @@
 import * as React from 'react';
+import Button from '../../../core/Button';
 import SelectField from '../../../core/SelectField';
+import Row from '../../../layout/Row';
 import * as P from '../../PresentationTypes';
 
 interface PlaylistInputProps {
@@ -11,7 +13,11 @@ interface PlaylistInputProps {
   error?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
+  onEdit?: (value: string) => void;
+  onCreate?: () => void;
 }
+
+export const NEW_PLAYLIST_VALUE = 'new';
 
 class PlaylistInput extends React.Component<PlaylistInputProps> {
   onChangeTimeout: number;
@@ -47,6 +53,15 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
     clearTimeout(this.onChangeTimeout);
   }
 
+  handleChange = (value: string) => {
+    const { onChange, onCreate } = this.props;
+    if (value === NEW_PLAYLIST_VALUE) {
+      onCreate();
+    } else {
+      onChange(value);
+    }
+  };
+
   render() {
     const {
       label,
@@ -54,8 +69,9 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
       playlists,
       helperText,
       error,
-      onChange,
       onBlur,
+      onEdit,
+      onCreate,
     } = this.props;
 
     const options = playlists.map(pl => ({
@@ -63,22 +79,37 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
       name: pl.name,
     }));
 
+    const valueOrDefault = value || (options[0] ? options[0].value : '');
+
     return (
-      <SelectField
-        label={label}
-        value={value || (options[0] ? options[0].value : '')}
-        onChange={onChange}
-        onBlur={onBlur}
-        helperText={helperText}
-        error={error}
-      >
-        {options.map(opt => (
-          <option key={opt.value} value={opt.value}>
-            {opt.name}
-          </option>
-        ))}
-        {options.length === 0 && <option disabled>No playlists found</option>}
-      </SelectField>
+      <Row>
+        <SelectField
+          label={label}
+          value={valueOrDefault}
+          onChange={this.handleChange}
+          onBlur={onBlur}
+          helperText={helperText}
+          error={error}
+        >
+          {onCreate && (
+            <>
+              <option value={NEW_PLAYLIST_VALUE}>New Empty Playlist</option>
+              <option value="new-separator" disabled>
+                --------------------------
+              </option>
+            </>
+          )}
+          {options.map(opt => (
+            <option key={opt.value} value={opt.value}>
+              {opt.name}
+            </option>
+          ))}
+          {options.length === 0 && <option disabled>No playlists found</option>}
+        </SelectField>
+        {onEdit && (
+          <Button icon="edit" onClick={() => onEdit(valueOrDefault)} />
+        )}
+      </Row>
     );
   }
 }
