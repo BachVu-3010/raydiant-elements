@@ -16,32 +16,31 @@ const getUniquePresentationId = (presentationId: string, index: number) => {
   return `${presentationId}-${index}`;
 };
 
-interface RenderProps {
-  presentation: P.Presentation;
+interface RenderProps<T extends P.Presentation> {
+  presentation: T;
   onRemove: () => void;
   itemId: string;
 }
 
-export interface PresentationsListProps {
-  presentations?: P.Presentation[];
+export interface PresentationsListProps<T extends P.Presentation> {
+  presentations?: T[];
   onOrderChange?: (
     presentations: string[],
     // passing the updated selected item id so that the
     // consumer can re-select the item from the list.
     updatedSelectedItemId?: string,
   ) => void;
-  children?: (props: RenderProps) => React.ReactNode;
+  children?: (props: RenderProps<T>) => React.ReactNode;
 }
 
 export interface PresentationsListState {
   presentationIds: string[];
 }
 
-export class PresentationsList extends React.Component<
-  PresentationsListProps,
-  PresentationsListState
-> {
-  static defaultProps: Partial<PresentationsListProps> = {
+export class PresentationsList<
+  T extends P.Presentation
+> extends React.Component<PresentationsListProps<T>, PresentationsListState> {
+  static defaultProps: Partial<PresentationsListProps<P.Presentation>> = {
     presentations: [],
     onOrderChange: () => {
       return;
@@ -53,7 +52,7 @@ export class PresentationsList extends React.Component<
     presentationIds: this.props.presentations.map(p => p.id),
   };
 
-  componentDidUpdate(prevProps: PresentationsListProps) {
+  componentDidUpdate(prevProps: PresentationsListProps<T>) {
     const { presentations } = this.props;
     const didPresentationsChange =
       presentations.length !== prevProps.presentations.length ||
