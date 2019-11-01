@@ -10,15 +10,17 @@ import { PresentationThumbnailProps } from '../../presentation/PresentationThumb
 import * as P from '../../presentation/PresentationTypes';
 import Heading1 from '../../typography/Heading1';
 import Text from '../../typography/Text';
-import styles from './Item.styles';
+import styles from './PresentationListItem.styles';
 
-export interface ItemProps extends WithStyles, PresentationThumbnailProps {
+export interface PresentationListItemProps
+  extends WithStyles,
+    PresentationThumbnailProps {
   presentation: P.Presentation;
   onRemove: () => void;
   testId?: string;
 }
 
-class Item extends React.Component<ItemProps> {
+class PresentationListItem extends React.Component<PresentationListItemProps> {
   render() {
     const {
       presentation,
@@ -68,4 +70,4 @@ class Item extends React.Component<ItemProps> {
   }
 }
 
-export default withStyles(styles)(Item);
+export default withStyles(styles)(PresentationListItem);

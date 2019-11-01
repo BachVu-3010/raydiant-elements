@@ -5,7 +5,7 @@ import ThemeProvider from '../../core/ThemeProvider';
 import ThemeSelector from '../../core/ThemeSelector';
 import { testSelector } from '../../helpers';
 import theme from '../../theme';
-import Item from './Item';
+import PresentationListItem from './PresentationListItem';
 
 test('Should set test ids', () => {
   const presentation = {
@@ -23,7 +23,7 @@ test('Should set test ids', () => {
   const wrapper = mount(
     <ThemeProvider theme={theme}>
       <ThemeSelector color="light">
-        <Item
+        <PresentationListItem
           testId="testId"
           presentation={presentation}
           onRemove={() => {

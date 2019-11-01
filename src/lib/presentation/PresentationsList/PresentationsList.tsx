@@ -7,7 +7,7 @@ import {
 } from 'react-beautiful-dnd';
 import { reorder } from '../../helpers';
 import * as P from '../../presentation/PresentationTypes';
-import Item from './Item';
+import PresentationListItem from './PresentationListItem';
 
 // Necessary for keeping track of the selected item.
 // Using index to track the selected item causes issues when selecting an item, then re-ordering.
@@ -153,5 +153,5 @@ export class PresentationsList<
 }
 
 export default Object.assign(PresentationsList, {
-  Item,
+  Item: PresentationListItem,
 });

@@ -21,8 +21,7 @@ const styles = (theme: Theme) =>
       flexShrink: 0,
     },
     thumbnail: {
-      height: 72,
-      width: 128,
+      width: 100,
       position: 'relative',
       boxShadow: theme.shadows[1],
       flexShrink: 0,
