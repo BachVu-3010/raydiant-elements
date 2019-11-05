@@ -19,19 +19,6 @@ const styles = (theme: Theme) =>
         marginLeft: theme.spacing.unit * 4,
         marginRight: theme.spacing.unit * 4,
       },
-
-      [theme.breakpoints.up('md')]: {
-        marginTop: theme.spacing.unit * 16,
-        marginBottom: theme.spacing.unit * 16,
-        marginLeft: theme.spacing.unit * 8,
-        marginRight: theme.spacing.unit * 8,
-      },
-
-      [theme.breakpoints.up('lg')]: {
-        marginTop: theme.spacing.unit * 10,
-        marginBottom: theme.spacing.unit * 10,
-        margin: theme.spacing.unit * 16,
-      },
     },
 
     header: {

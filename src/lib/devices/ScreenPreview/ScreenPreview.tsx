@@ -5,7 +5,7 @@ import * as P from '../../presentation/PresentationTypes';
 import styles from './ScreenPreview.styles';
 
 interface ScreenPreviewProps extends WithStyles<typeof styles> {
-  name: string;
+  name?: string;
   presentation?: P.Presentation;
 }
 
@@ -16,12 +16,14 @@ export const ScreenPreview: React.SFC<ScreenPreviewProps> = ({
   classes,
 }) => (
   <div className={classes.root}>
-    <div className={classes.header}>
-      <h1 className={classes.screenName}>{name}</h1>
-    </div>
+    {name && (
+      <div className={classes.header}>
+        <h1 className={classes.screenName}>{name}</h1>
+      </div>
+    )}
     <div className={classes.preview}>{children}</div>
-    <div className={classes.footer}>
-      {presentation && (
+    {presentation && (
+      <div className={classes.footer}>
         <>
           <div
             className={classes.presentationName}
@@ -36,8 +38,8 @@ export const ScreenPreview: React.SFC<ScreenPreviewProps> = ({
             {presentation.applicationName}
           </div>
         </>
-      )}
-    </div>
+      </div>
+    )}
   </div>
 );
 

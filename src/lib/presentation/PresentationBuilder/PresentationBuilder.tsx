@@ -3,6 +3,7 @@ import * as React from 'react';
 import * as A from '../../application/ApplicationTypes';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
+import Form from '../../core/Form';
 import Link from '../../core/Link';
 import NumberField from '../../core/NumberField';
 import Popover from '../../core/Popover';
@@ -712,9 +713,9 @@ export class PresentationBuilder extends React.Component<
         <OneThirdLayout.ColumnSmall>
           <div className={classes.scroll}>
             <Hidden smUp>{this.renderPreview()}</Hidden>
-            <div className={classes.title}>
+            <Form.Section>
               <Text muted>Presentation Details</Text>
-            </div>
+            </Form.Section>
             {!isLoading && this.renderForm()}
           </div>
           {!isLoading && this.renderWarnings()}
