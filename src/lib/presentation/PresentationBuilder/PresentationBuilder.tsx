@@ -117,16 +117,15 @@ export class PresentationBuilder extends React.Component<
   }
 
   componentDidUpdate(prevProps: PresentationBuilderProps) {
-    const { presentation, initialPresentationState, appVersion } = this.props;
+    const { presentation, initialPresentationState } = this.props;
     if (!prevProps.presentation && presentation) {
-      this.setState({
-        presentation: initialPresentationState || presentation,
-        previewPresentation: initialPresentationState || presentation,
-      });
-    }
-
-    if (presentation && appVersion) {
-      this.checkHashParams();
+      this.setState(
+        {
+          presentation: initialPresentationState || presentation,
+          previewPresentation: initialPresentationState || presentation,
+        },
+        this.checkHashParams,
+      );
     }
 
     // Below is only here because of MiraKit in order to re-render the preview

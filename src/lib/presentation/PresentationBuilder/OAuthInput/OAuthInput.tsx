@@ -36,7 +36,19 @@ class OAuthInput extends React.Component<OAuthInputProps, OAuthInputState> {
   };
 
   componentDidMount() {
-    this.verify(this.props.value);
+    const { value } = this.props;
+
+    if (value) {
+      this.verify(value);
+    }
+  }
+
+  componentDidUpdate(prevProps: OAuthInputProps) {
+    const { value } = this.props;
+
+    if (value && value !== prevProps.value) {
+      this.verify(value);
+    }
   }
 
   authRedirect = () => {
