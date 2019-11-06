@@ -3,8 +3,7 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import { Theme } from '../../theme';
 import Column from '../Column';
 
-export interface DefaultOrScheduledContentEmptyStateLayoutProps
-  extends WithStyles<typeof styles> {}
+export interface CenterProps extends WithStyles<typeof styles> {}
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -17,10 +16,8 @@ const styles = (theme: Theme) =>
     },
   });
 
-export const DefaultOrScheduledContentEmptyStateLayout: React.SFC<
-  DefaultOrScheduledContentEmptyStateLayoutProps
-> = ({ classes, children }) => (
+export const Center: React.SFC<CenterProps> = ({ classes, children }) => (
   <Column className={classes.root}>{children}</Column>
 );
 
-export default withStyles(styles)(DefaultOrScheduledContentEmptyStateLayout);
+export default withStyles(styles)(Center);

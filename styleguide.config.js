@@ -65,6 +65,7 @@ module.exports = {
     {
       name: 'Layout',
       components: () => [
+        getLayoutPath('Center'),
         getLayoutPath('Column'),
         getLayoutPath('Hidden'),
         getLayoutPath('Grid'),
