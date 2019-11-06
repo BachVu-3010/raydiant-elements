@@ -36,36 +36,7 @@ class OAuthInput extends React.Component<OAuthInputProps, OAuthInputState> {
   };
 
   componentDidMount() {
-    const { value, onChange } = this.props;
-    // Get the window hash without the leading '#'.
-    const hash = window.location.hash.substr(1);
-    // Parse hash params by splitting on & (or #) and then =.
-    //   ie. #param1=1&param2=2 => [[param1, 1], [param2, 2]]
-    const hashParams = hash.split(/[&#]/).map(paramStr => paramStr.split('='));
-    // Find the hash param for the current prop path.
-    const propHashParam = hashParams.filter(
-      paramArr => paramArr[0] === this.serializePropPath(),
-    )[0];
-
-    if (propHashParam) {
-      // The value (accessToken) to store is the second parameter in the array.
-      //  ie. #propPath=token
-      const newValue = propHashParam[1];
-      // Remove auth param from hash.
-      const newHashParams = hashParams
-        .filter(arr => arr !== propHashParam)
-        .map(arr => arr.join('='))
-        .join('&');
-
-      window.location.hash = `#${newHashParams}`;
-
-      // Verify accessToken and save
-      this.verify(newValue);
-      onChange(newValue);
-    } else if (value) {
-      // Verify accessToken
-      this.verify(value);
-    }
+    this.verify(this.props.value);
   }
 
   authRedirect = () => {

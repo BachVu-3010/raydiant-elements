@@ -64,8 +64,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
     errors: P.PresentationError[],
     previewMode: P.PreviewMode,
   ) => React.ReactNode;
-  onPlaylistEdit?: (playlistId: string) => void;
-  onPlaylistCreate?: () => void;
+  onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
+  onPlaylistCreate?: (path: P.Path) => void;
 }
 
 interface FileUpload {
@@ -108,14 +108,27 @@ export class PresentationBuilder extends React.Component<
 
   queuedPresentationPreview: P.Presentation | null = null;
 
+  componentDidMount() {
+    const { presentation, appVersion } = this.props;
+
+    if (presentation && appVersion) {
+      this.checkHashParams();
+    }
+  }
+
   componentDidUpdate(prevProps: PresentationBuilderProps) {
-    const { presentation, initialPresentationState } = this.props;
+    const { presentation, initialPresentationState, appVersion } = this.props;
     if (!prevProps.presentation && presentation) {
       this.setState({
         presentation: initialPresentationState || presentation,
         previewPresentation: initialPresentationState || presentation,
       });
     }
+
+    if (presentation && appVersion) {
+      this.checkHashParams();
+    }
+
     // Below is only here because of MiraKit in order to re-render the preview
     // when the values change outside of the form.
     if (
@@ -127,6 +140,48 @@ export class PresentationBuilder extends React.Component<
     ) {
       this.setState({ presentation, previewPresentation: presentation });
     }
+  }
+
+  checkHashParams() {
+    const { appVersion } = this.props;
+    // Get the window hash without the leading '#'.
+    const hash = window.location.hash.substr(1);
+    // Parse hash params by splitting on & (or #) and then =.
+    //   ie. #applicationVariables.headingText=text => [['applicationVariables.headingText', 'SomeText'], ...]
+    const hashParams = hash.split(/[&#]/).map(paramStr => paramStr.split('='));
+
+    appVersion.presentationProperties.forEach(property => {
+      // Don't support hash parameters for array and file properties.
+      if (property.type === 'array' || property.type === 'file') {
+        return;
+      }
+
+      const path = ['applicationVariables', property.name];
+      const pathStr = path.join('.');
+      const hashParamAtPath = hashParams.find(
+        ([hashPath]) => hashPath === pathStr,
+      );
+      if (hashParamAtPath) {
+        let newValue: any = decodeURIComponent(hashParamAtPath[1]);
+        if (property.type === 'boolean') {
+          if (newValue.toLowerCase() === 'false') {
+            newValue = false;
+          } else if (newValue.toLowerCase() === 'true') {
+            newValue = true;
+          } else {
+            newValue = undefined;
+          }
+        }
+
+        if (newValue !== undefined) {
+          this.updatePresentation(path, newValue, property, undefined, true);
+        }
+      }
+    });
+
+    // Clear hash parameters to avoid leaking tokens and other sensitive
+    // values to the user.
+    window.location.hash = '';
   }
 
   handleSave = () => {
@@ -155,6 +210,7 @@ export class PresentationBuilder extends React.Component<
     value: any,
     property: A.PresentationProperty,
     file?: File,
+    forceFlush?: boolean,
   ) {
     const { onStateChange, appVersion, minDuration } = this.props;
     const { presentation, previewPresentation } = this.state;
@@ -175,7 +231,10 @@ export class PresentationBuilder extends React.Component<
     let shouldUpdatePreview = false;
     if (errors.length === 0) {
       // Delay updating the preview for text and string inputs until onBlur.
-      if (property.type === 'string' || property.type === 'text') {
+      if (
+        (property.type === 'string' || property.type === 'text') &&
+        !forceFlush
+      ) {
         this.queuedPresentationPreview = updatedPresentation;
       } else {
         // Clear any queued preview updates because we're about to update.
@@ -235,7 +294,7 @@ export class PresentationBuilder extends React.Component<
   ) {
     const propertyTypeIndexes: { [key: string]: number } = {};
     const formInputs = properties.map(property => {
-      const inputPath = [...path, property.name];
+      const propertyPath = [...path, property.name];
       const propertyTypeIndex = propertyTypeIndexes[property.type] || 0;
       propertyTypeIndexes[property.type] = propertyTypeIndex + 1;
 
@@ -245,7 +304,7 @@ export class PresentationBuilder extends React.Component<
         // appVars can be undefined for newly added array items.
         appVars && appVars[property.name],
         appVars,
-        inputPath,
+        propertyPath,
         strings,
         errors,
       );
@@ -485,8 +544,8 @@ export class PresentationBuilder extends React.Component<
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
-            onEdit={onPlaylistEdit}
-            onCreate={onPlaylistCreate}
+            onEdit={playlistId => onPlaylistEdit(playlistId, path)}
+            onCreate={() => onPlaylistCreate(path)}
           />
         );
 
