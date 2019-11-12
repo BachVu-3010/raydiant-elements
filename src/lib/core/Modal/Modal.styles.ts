@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       width: '100%',
       height: '100%',
-      maxWidth: 960,
+      maxWidth: 1020,
       maxHeight: 672,
       fontFamily: theme.typography.fontFamily,
       background: theme.palette.background.default,
