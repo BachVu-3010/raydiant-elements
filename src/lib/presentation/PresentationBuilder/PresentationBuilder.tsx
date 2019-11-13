@@ -4,6 +4,7 @@ import * as A from '../../application/ApplicationTypes';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
 import Form from '../../core/Form';
+import { IconOptions } from '../../core/Icon';
 import Link from '../../core/Link';
 import NumberField from '../../core/NumberField';
 import Popover from '../../core/Popover';
@@ -50,6 +51,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   previewMode?: P.PreviewMode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration?: number;
+  cancelLabel?: string;
+  cancelIcon?: IconOptions;
   onCancel?: () => void;
   onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
   onStateChange?: (
@@ -93,6 +96,7 @@ export class PresentationBuilder extends React.Component<
     affectedDevices: [],
     minDuration: 5,
     previewMode: P.PreviewMode.Horizontal,
+    cancelLabel: 'Cancel',
   };
 
   state: PresentationBuilderState = {
@@ -758,6 +762,8 @@ export class PresentationBuilder extends React.Component<
       onSave,
       onCancel,
       affectedDevices,
+      cancelIcon,
+      cancelLabel,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
@@ -778,7 +784,13 @@ export class PresentationBuilder extends React.Component<
           </div>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed bottom color="light">
-            {onCancel && <Button label="Cancel" onClick={onCancel} />}
+            {onCancel && (
+              <Button
+                icon={cancelIcon}
+                label={cancelLabel}
+                onClick={onCancel}
+              />
+            )}
             <Spacer />
             {onSave && (
               <Popover.Anchor>
