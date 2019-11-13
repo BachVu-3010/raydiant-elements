@@ -778,9 +778,7 @@ export class PresentationBuilder extends React.Component<
           </div>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed bottom color="light">
-            {onCancel && (
-              <Button icon="arrowLeft" label="Back" onClick={onCancel} />
-            )}
+            {onCancel && <Button label="Cancel" onClick={onCancel} />}
             <Spacer />
             {onSave && (
               <Popover.Anchor>
