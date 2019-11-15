@@ -87,6 +87,16 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
 
     const valueOrDefault = value || (options[0] ? options[0].value : '');
 
+    if (onCreate && !playlists.length) {
+      return (
+        <Button
+          color="primary"
+          label={`Create a Playlist for ${label}`}
+          onClick={onCreate}
+        />
+      );
+    }
+
     return (
       <Row>
         <SelectField
