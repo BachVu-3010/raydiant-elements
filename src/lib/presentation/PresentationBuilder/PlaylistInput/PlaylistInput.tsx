@@ -44,7 +44,13 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
     // another playlist when there are multiple zones.
     if (!value && playlists.length > 0) {
       this.onChangeTimeout = setTimeout(() => {
-        onChange(playlists[Math.min(propertyTypeIndex, playlists.length)].id);
+        // This ensures we pick the second playlist as the default for zone2 of MZ
+        // if there is more than one user playlist.
+        const defaultPlaylistIndex = Math.min(
+          propertyTypeIndex,
+          playlists.length - 1,
+        );
+        onChange(playlists[defaultPlaylistIndex].id);
       });
     }
   }
