@@ -4,7 +4,6 @@ import * as A from '../../application/ApplicationTypes';
 import ActionBar from '../../core/ActionBar';
 import Button from '../../core/Button';
 import Form from '../../core/Form';
-import { IconOptions } from '../../core/Icon';
 import Link from '../../core/Link';
 import NumberField from '../../core/NumberField';
 import Popover from '../../core/Popover';
@@ -51,8 +50,6 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   previewMode?: P.PreviewMode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration?: number;
-  cancelLabel?: string;
-  cancelIcon?: IconOptions;
   onCancel?: () => void;
   onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
   onStateChange?: (
@@ -69,6 +66,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   ) => React.ReactNode;
   onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
   onPlaylistCreate?: (path: P.Path) => void;
+  onBackToPlaylist?: () => void;
+  backToPlaylistLabel?: string;
 }
 
 interface FileUpload {
@@ -96,7 +95,6 @@ export class PresentationBuilder extends React.Component<
     affectedDevices: [],
     minDuration: 5,
     previewMode: P.PreviewMode.Horizontal,
-    cancelLabel: 'Cancel',
   };
 
   state: PresentationBuilderState = {
@@ -762,8 +760,8 @@ export class PresentationBuilder extends React.Component<
       onSave,
       onCancel,
       affectedDevices,
-      cancelIcon,
-      cancelLabel,
+      onBackToPlaylist,
+      backToPlaylistLabel,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
@@ -778,19 +776,20 @@ export class PresentationBuilder extends React.Component<
           <div className={classes.scroll}>
             <Hidden smUp>{this.renderPreview()}</Hidden>
             <Form.Section>
+              {onBackToPlaylist && (
+                <Button
+                  icon="arrowLeft"
+                  label={backToPlaylistLabel || 'Back to Playlist'}
+                  onClick={onBackToPlaylist}
+                />
+              )}
               <Text muted>Presentation Details</Text>
             </Form.Section>
             {!isLoading && this.renderForm()}
           </div>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed bottom color="light">
-            {onCancel && (
-              <Button
-                icon={cancelIcon}
-                label={cancelLabel}
-                onClick={onCancel}
-              />
-            )}
+            {onCancel && <Button label="Cancel" onClick={onCancel} />}
             <Spacer />
             {onSave && (
               <Popover.Anchor>
