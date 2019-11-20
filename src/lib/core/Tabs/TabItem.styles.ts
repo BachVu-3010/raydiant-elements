@@ -12,6 +12,7 @@ const styles = (theme: Theme) =>
       flexGrow: 0,
     },
     active: {
+      fontWeight: 500,
       borderBottomColor: theme.tab.activeBorder,
     },
     icon: {
@@ -23,10 +24,15 @@ const styles = (theme: Theme) =>
       fontSize: theme.fontSizes.sm,
       fontWeight: 500,
       textAlign: 'center',
+      whiteSpace: 'nowrap',
     },
     labelNoIcon: {
       fontSize: theme.fontSizes.md,
       fontWeight: 400,
+
+      '$active &': {
+        fontWeight: 500,
+      },
     },
   });
 
