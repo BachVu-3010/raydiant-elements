@@ -42,7 +42,7 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
     const { value, propertyTypeIndex, playlists, onChange } = this.props;
     // Set default playlist if one doesn't exist. Uses propertyTypeIndex to pick
     // another playlist when there are multiple zones.
-    if (!value && playlists.length > 0) {
+    if (playlists.length > 0 && (!value || !this.isValueInPlaylists())) {
       this.onChangeTimeout = setTimeout(() => {
         // This ensures we pick the second playlist as the default for zone2 of MZ
         // if there is more than one user playlist.
@@ -53,6 +53,11 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
         onChange(playlists[defaultPlaylistIndex].id);
       });
     }
+  }
+
+  isValueInPlaylists() {
+    const { value, playlists } = this.props;
+    return !!playlists.map(pl => pl.id).includes(value);
   }
 
   componentWillUnmount() {

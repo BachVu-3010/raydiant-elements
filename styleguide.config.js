@@ -12,6 +12,7 @@ const getPresentationPath = componentPathGetter('presentation');
 const getSchedulePath = componentPathGetter('schedule');
 const getSequencePath = componentPathGetter('sequence');
 const getTypographyPath = componentPathGetter('typography');
+const getPlaylistPath = componentPathGetter('playlist');
 
 const getAccountPath = component =>
   path.join(__dirname, `src/lib/account/${component}/${component}.tsx`);
@@ -108,6 +109,10 @@ module.exports = {
         getApplicationPath('ApplicationCard'),
         getApplicationPath('ApplicationCTA'),
       ],
+    },
+    {
+      name: 'Playlist',
+      components: () => [getPlaylistPath('PlaylistCard')],
     },
     {
       name: 'Schedule',
