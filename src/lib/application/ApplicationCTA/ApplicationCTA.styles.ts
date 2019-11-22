@@ -25,13 +25,8 @@ const styles = (theme: Theme) =>
     title: {
       width: '100%',
       textAlign: 'center',
-      fontSize: theme.fontSizes.md,
-      marginBottom: theme.spacing.unit * 3,
-
-      [theme.breakpoints.up('sm')]: {
-        fontSize: theme.fontSizes.lg,
-        marginBottom: theme.spacing.unit * 4,
-      },
+      fontSize: theme.fontSizes.lg,
+      marginBottom: theme.spacing.unit * 4,
     },
 
     applications: {

@@ -12,6 +12,10 @@ const styles = (theme: Theme) =>
       },
     },
 
+    noShrink: {
+      width: theme.spacing.unit * 24,
+    },
+
     thumbnail: {
       boxShadow: theme.shadows[1],
     },

@@ -18,6 +18,10 @@ const styles = (theme: Theme) =>
       display: 'inline-flex',
       width: 'auto',
     },
+
+    doubleMargin: {
+      ...marginBetweenChildrenVertical(theme.spacing.unit * 2),
+    },
   });
 
 export default styles;

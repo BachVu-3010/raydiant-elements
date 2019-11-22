@@ -8,15 +8,24 @@ interface ColumnProps extends WithStyles<typeof styles> {
   className?: string;
   /** Set to true to display inline */
   inline?: boolean;
+  doubleMargin?: boolean;
 }
 
 export const Column: React.SFC<ColumnProps> = ({
   className,
   inline,
+  doubleMargin,
   classes,
   children,
 }) => (
-  <div className={cn(classes.root, inline && classes.inline, className)}>
+  <div
+    className={cn(
+      classes.root,
+      inline && classes.inline,
+      doubleMargin && classes.doubleMargin,
+      className,
+    )}
+  >
     {children}
   </div>
 );

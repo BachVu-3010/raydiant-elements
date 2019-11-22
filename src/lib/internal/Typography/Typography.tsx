@@ -8,8 +8,13 @@ export interface TypographyStyleProps {
   ellipsis?: boolean;
   muted?: boolean;
   nowrap?: boolean;
+  xxsmall?: boolean;
+  xsmall?: boolean;
   small?: boolean;
   medium?: boolean;
+  large?: boolean;
+  xlarge?: boolean;
+  xxlarge?: boolean;
   strikethrough?: boolean;
   bold?: boolean;
 }
@@ -26,8 +31,13 @@ export const Typography: React.FunctionComponent<
   ellipsis,
   muted,
   nowrap,
+  xxsmall,
+  xsmall,
   small,
   medium,
+  large,
+  xlarge,
+  xxlarge,
   strikethrough,
   children,
   classes,
@@ -42,8 +52,13 @@ export const Typography: React.FunctionComponent<
       ellipsis && classes.ellipsis,
       muted && classes.muted,
       nowrap && classes.nowrap,
+      xxsmall && classes.xxsmall,
+      xsmall && classes.xsmall,
       small && classes.small,
       medium && classes.medium,
+      large && classes.large,
+      xlarge && classes.xlarge,
+      xxlarge && classes.xxlarge,
       strikethrough && classes.strikethrough,
       bold && classes.bold,
       className,

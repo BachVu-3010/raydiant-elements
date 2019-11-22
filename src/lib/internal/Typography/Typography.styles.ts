@@ -13,11 +13,26 @@ const styles = (theme: Theme) =>
     muted: {
       color: theme.palette.text.secondary,
     },
+    xxsmall: {
+      fontSize: theme.fontSizes.xxs,
+    },
+    xsmall: {
+      fontSize: theme.fontSizes.xs,
+    },
     small: {
       fontSize: theme.fontSizes.sm,
     },
     medium: {
       fontSize: theme.fontSizes.md,
+    },
+    large: {
+      fontSize: theme.fontSizes.lg,
+    },
+    xlarge: {
+      fontSize: theme.fontSizes.xl,
+    },
+    xxlarge: {
+      fontSize: theme.fontSizes.xxl,
     },
     bold: {
       fontWeight: 500,

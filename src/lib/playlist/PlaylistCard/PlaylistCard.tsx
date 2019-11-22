@@ -1,3 +1,4 @@
+import * as cn from 'classnames';
 import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import PlaylistThumbnail, {
@@ -10,14 +11,16 @@ interface PlaylistCardProps
   extends WithStyles<typeof styles>,
     PlaylistThumbnailProps {
   playlist: PL.Playlist;
+  noShrink?: boolean;
 }
 
 export const PlaylistCard: React.SFC<PlaylistCardProps> = ({
   classes,
   playlist,
+  noShrink,
   ...thumbnailProps
 }) => (
-  <div className={classes.root}>
+  <div className={cn(classes.root, noShrink && classes.noShrink)}>
     <div className={classes.thumbnail}>
       <PlaylistThumbnail {...thumbnailProps} />
     </div>

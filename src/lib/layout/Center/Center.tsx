@@ -3,7 +3,9 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import { Theme } from '../../theme';
 import Column from '../Column';
 
-export interface CenterProps extends WithStyles<typeof styles> {}
+export interface CenterProps extends WithStyles<typeof styles> {
+  doubleMargin?: boolean;
+}
 
 const styles = (theme: Theme) =>
   createStyles({
@@ -16,8 +18,14 @@ const styles = (theme: Theme) =>
     },
   });
 
-export const Center: React.SFC<CenterProps> = ({ classes, children }) => (
-  <Column className={classes.root}>{children}</Column>
+export const Center: React.SFC<CenterProps> = ({
+  classes,
+  children,
+  doubleMargin,
+}) => (
+  <Column className={classes.root} doubleMargin={doubleMargin}>
+    {children}
+  </Column>
 );
 
 export default withStyles(styles)(Center);
