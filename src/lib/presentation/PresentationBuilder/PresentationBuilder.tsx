@@ -48,6 +48,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   playlists?: P.Playlist[];
   affectedDevices?: D.Device[];
   previewMode?: P.PreviewMode;
+  header?: React.ReactNode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration?: number;
   onCancel?: () => void;
@@ -762,6 +763,7 @@ export class PresentationBuilder extends React.Component<
       affectedDevices,
       onBackToPlaylist,
       backToPlaylistLabel,
+      header,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
@@ -783,8 +785,12 @@ export class PresentationBuilder extends React.Component<
                   onClick={onBackToPlaylist}
                 />
               )}
+
               <Text muted>Presentation Details</Text>
+
+              {header && <div>{header}</div>}
             </Form.Section>
+
             {!isLoading && this.renderForm()}
           </div>
           {!isLoading && this.renderWarnings()}
