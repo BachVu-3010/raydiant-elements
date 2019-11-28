@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { preventDefault } from '../../helpers';
-import Section from './Section';
+import FormSection from './FormSection';
 interface FormProps {
   className?: string;
   onSubmit: () => any;
@@ -13,5 +13,5 @@ const Form: React.SFC<FormProps> = ({ className, onSubmit, children }) => (
 );
 
 export default Object.assign(Form, {
-  Section,
+  Section: FormSection,
 });

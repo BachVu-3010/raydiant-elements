@@ -27,9 +27,9 @@ class ConnectionIndicator extends React.Component<ConnectionIndicatorProps> {
     if (wifiStrength === 0) {
       return <SVGIcon icon="wifiNone" title="wifiNone" />;
     }
-    // TODO: Unknown connection, possibly loading connection info.
+    // TODO: Unknown connection status, possibly still fetching or failed.
     // Consider showing a loading indicator.
-    return null;
+    return <SVGIcon icon="wifiNone" title="wifiNone" />;
   }
 }
 
