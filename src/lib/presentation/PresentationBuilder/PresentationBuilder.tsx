@@ -634,20 +634,29 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderWarnings() {
-    const { presentation, appVersion, affectedDevices } = this.props;
+    const {
+      presentation: originalPresentation,
+      appVersion,
+      affectedDevices,
+    } = this.props;
+    const { presentation } = this.state;
+
     const warnings = [];
 
     if (appVersion.embeddedUrlFormat) {
       warnings.push('Preview not available for this application');
     }
 
-    if (presentation.appVersionId !== appVersion.id) {
+    if (originalPresentation.appVersionId !== appVersion.id) {
       warnings.push(
         'Saving will update content to the newer version of the app, and may cause visual changes.',
       );
     }
 
-    if (affectedDevices.length) {
+    if (
+      affectedDevices.length &&
+      hasPresentationChanged(originalPresentation, presentation, appVersion)
+    ) {
       const count = affectedDevices.length;
       warnings.push(
         <span>

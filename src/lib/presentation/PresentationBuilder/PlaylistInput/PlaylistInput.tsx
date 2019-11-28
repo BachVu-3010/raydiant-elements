@@ -31,7 +31,7 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
 
     const didPlaylistsChange =
       playlists.length !== prevProps.playlists.length ||
-      playlists.some((sz, i) => sz.id !== prevProps.playlists[i].id);
+      playlists.some((p, i) => p.id !== prevProps.playlists[i].id);
 
     if (didPlaylistsChange) {
       this.checkDefaultValue();

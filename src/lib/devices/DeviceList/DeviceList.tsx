@@ -3,10 +3,7 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
-import Controls from './Controls';
-import Device from './Device';
-import DeviceGroup from './DeviceGroup';
-import DeviceThumbnail from './DeviceThumbnail';
+import DeviceListDevice from './DeviceListDevice';
 
 export interface DeviceListProps extends WithStyles<typeof styles> {}
 
@@ -29,9 +26,6 @@ export const DeviceList: React.SFC<DeviceListProps> = ({
 export default Object.assign(
   withThemeSelector(withStyles(styles)(DeviceList)),
   {
-    Device,
-    DeviceGroup,
-    Controls,
-    Thumbnail: DeviceThumbnail,
+    Device: DeviceListDevice,
   },
 );

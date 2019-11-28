@@ -1,11 +1,10 @@
 ```js
 const devices = require('../deviceData').devices;
-const deviceGroups = require('../deviceData').deviceGroups;
+const playlists = require('../deviceData').playlists;
 
 initialState = {
   devices,
-  deviceGroups,
-  isManageMode: false,
+  playlists,
 };
 
 <App>
@@ -13,25 +12,23 @@ initialState = {
     {devices.map(d => {
       return (
         <DeviceList.Device
-          device={d}
-          isManageMode={state.isManageMode}
           key={d.id}
-          onSelect={console.log}
-          isSelected={false}
+          device={d}
+          playlists={playlists}
           wifiStrength={d.wifiStrength}
           isEthernet={d.isEthernet}
+          needsPublish={d.needsPublish}
+          onPlaylistSelect={playlistId =>
+            console.log('select playlist', playlistId)
+          }
+          onPlaylistEdit={playlistId =>
+            console.log('edit playlist', playlistId)
+          }
+          onPlaylistEdit={() => console.log('create playlist')}
+          onPublish={() => console.log('publish')}
         />
       );
     })}
-    {deviceGroups.map(dg => (
-      <DeviceList.DeviceGroup
-        deviceGroup={dg}
-        isManageMode={state.isManageMode}
-        key={dg.id}
-        onSelect={console.log}
-        isSelected={false}
-      />
-    ))}
   </DeviceList>
 </App>;
 ```
