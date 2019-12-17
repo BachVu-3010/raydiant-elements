@@ -6,11 +6,13 @@ import withStyles, { WithStyles } from '../withStyles';
 import styles from './Card.styles';
 import CardActions from './CardActions';
 import CardContent from './CardContent';
+import CardHeading from './CardHeading';
 
 interface CardProps extends WithStyles<typeof styles> {
   fullWidth?: boolean;
   raised?: boolean;
   onClick?: (event: React.MouseEvent<any>) => any;
+  children?: React.ReactNode;
 }
 
 export const Card: React.SFC<CardProps> = ({
@@ -34,6 +36,7 @@ export const Card: React.SFC<CardProps> = ({
 );
 
 export default Object.assign(withThemeSelector(withStyles(styles)(Card)), {
-  Actions: CardActions,
+  Heading: CardHeading,
   Content: CardContent,
+  Actions: CardActions,
 });

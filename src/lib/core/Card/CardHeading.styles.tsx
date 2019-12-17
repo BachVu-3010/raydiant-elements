@@ -3,7 +3,7 @@ import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
-    accountSectionTitle: {
+    root: {
       marginTop: theme.spacing.unit,
       marginBottom: theme.spacing.unit,
       marginLeft: theme.spacing.unit * 2,

@@ -18,6 +18,9 @@ const styles = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
     },
+    halfMargin: {
+      ...marginBetweenChildrenHorizontal(theme.spacing.unit / 2),
+    },
   });
 
 export default styles;

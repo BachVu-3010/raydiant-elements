@@ -1,15 +1,14 @@
 import * as React from 'react';
-import AlertIcon from '../../core/AlertIcon';
 import Button from '../../core/Button';
-import Link from '../../core/Link';
-import SelectField from '../../core/SelectField';
-import SuccessIcon from '../../core/SuccessIcon';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import Column from '../../layout/Column';
+import Hidden from '../../layout/Hidden';
 import Row from '../../layout/Row';
-import Text from '../../typography/Text';
-import ConnectionIndicator from '../ConnectionIndicator/ConnectionIndicator';
+import Spacer from '../../layout/Spacer';
 import * as D from '../DeviceTypes';
+import ConnectionStatus from './DeviceListConnectionStatus';
 import styles from './DeviceListDevice.styles';
+import PlaylistSelector from './DeviceListPlaylistSelector';
 
 export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   device: D.Device;
@@ -24,11 +23,66 @@ export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   onCreatePlaylist: () => void;
   onPublish: () => void;
   onConnectivityWizard?: () => void;
+  onSettings?: () => void;
 }
 
-export const NEW_PLAYLIST_VALUE = 'new';
+const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
+  classes,
+  device,
+  playlists,
+  wifiStrength,
+  isEthernet,
+  needsPublish,
+  disablePublish,
+  onSelectPlaylist,
+  onEditPlaylist,
+  onCreatePlaylist,
+  onPublish,
+  onConnectivityWizard,
+  onSettings,
+}) => {
+  const playlist = playlists.find(pl => pl.id === device.playlistId);
 
-const DeviceListDevice: React.SFC<DeviceListDeviceProps> = ({
+  return (
+    <Column className={classes.root}>
+      <Row center>
+        <div className={classes.name}>{device.name}</div>
+        <Spacer />
+        {onSettings && (
+          <Button icon="settings" hideBorder onClick={onSettings} />
+        )}
+      </Row>
+
+      <Row center>
+        <PlaylistSelector
+          value={playlist ? playlist.id : ''}
+          playlists={playlists}
+          onSelectPlaylist={onSelectPlaylist}
+          onEditPlaylist={onEditPlaylist}
+          onCreatePlaylist={onCreatePlaylist}
+        />
+
+        {needsPublish && (
+          <Button
+            color="progress"
+            icon="publish"
+            disabled={disablePublish}
+            onClick={onPublish}
+          />
+        )}
+      </Row>
+
+      <ConnectionStatus
+        device={device}
+        wifiStrength={wifiStrength}
+        isEthernet={isEthernet}
+        onConnectivityWizard={onConnectivityWizard}
+      />
+    </Column>
+  );
+};
+
+const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   classes,
   device,
   playlists,
@@ -42,8 +96,10 @@ const DeviceListDevice: React.SFC<DeviceListDeviceProps> = ({
   onCreatePlaylist,
   onPublish,
   onConnectivityWizard,
+  onSettings,
 }) => {
   const playlist = playlists.find(pl => pl.id === device.playlistId);
+
   return (
     <Row className={classes.root} center>
       <Row className={classes.deviceInfo} center>
@@ -53,71 +109,28 @@ const DeviceListDevice: React.SFC<DeviceListDeviceProps> = ({
         />
         <div>
           <div className={classes.name}>{device.name}</div>
-          {device.resinUuid && (
-            <div className={classes.status}>
-              {device.isOnline ? <SuccessIcon /> : <AlertIcon />}
-              {device.isOnline && (
-                <ConnectionIndicator
-                  wifiStrength={wifiStrength}
-                  isEthernet={isEthernet}
-                />
-              )}
-              {device.isOnline ? (
-                <Text small>Online</Text>
-              ) : (
-                <Text small>Offline</Text>
-              )}
-              {!device.isOnline && onConnectivityWizard && (
-                <Text small>
-                  <Link onClick={onConnectivityWizard}>Need help?</Link>
-                </Text>
-              )}
-            </div>
-          )}
+          <ConnectionStatus
+            device={device}
+            wifiStrength={wifiStrength}
+            isEthernet={isEthernet}
+            onConnectivityWizard={onConnectivityWizard}
+          />
         </div>
       </Row>
 
-      <div className={classes.playlistSelector}>
-        {playlists.length === 0 ? (
-          <Button
-            fullWidth
-            color="primary"
-            label="Create a Playlist"
-            onClick={onCreatePlaylist}
-          />
-        ) : (
-          <Row>
-            <SelectField
-              label="Playlist"
-              value={playlist ? playlist.id : ''}
-              onChange={playlistId => {
-                if (playlistId === NEW_PLAYLIST_VALUE) {
-                  onCreatePlaylist();
-                } else {
-                  onSelectPlaylist(playlistId);
-                }
-              }}
-            >
-              {!playlist && <option value="" />}
-              <option value={NEW_PLAYLIST_VALUE}>New Empty Playlist</option>
-              <option value="new-separator" disabled>
-                --------------------------
-              </option>
-              {playlists.map(pl => (
-                <option key={pl.id} value={pl.id}>
-                  {pl.name}
-                </option>
-              ))}
-            </SelectField>
-            <Button
-              icon="edit"
-              onClick={() => playlist && onEditPlaylist(playlist.id)}
-            />
-          </Row>
-        )}
-      </div>
+      <PlaylistSelector
+        value={playlist ? playlist.id : ''}
+        playlists={playlists}
+        onSelectPlaylist={onSelectPlaylist}
+        onEditPlaylist={onEditPlaylist}
+        onCreatePlaylist={onCreatePlaylist}
+      />
 
       <Row className={classes.deviceActions} center>
+        {onSettings && (
+          <Button icon="settings" hideBorder onClick={onSettings} />
+        )}
+
         {needsPublish && (
           <Button
             color="progress"
@@ -131,5 +144,16 @@ const DeviceListDevice: React.SFC<DeviceListDeviceProps> = ({
     </Row>
   );
 };
+
+export const DeviceListDevice: React.SFC<DeviceListDeviceProps> = props => (
+  <>
+    <Hidden xsDown>
+      <DeviceListDeviceDesktop {...props} />
+    </Hidden>
+    <Hidden smUp>
+      <DeviceListDeviceMobile {...props} />
+    </Hidden>
+  </>
+);
 
 export default withStyles(styles)(DeviceListDevice);

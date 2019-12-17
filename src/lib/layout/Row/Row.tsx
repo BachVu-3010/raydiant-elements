@@ -9,11 +9,13 @@ interface RowProps extends WithStyles<typeof styles> {
   /** Set to true to display inline */
   inline?: boolean;
   center?: boolean;
+  halfMargin?: boolean;
 }
 
 export const Row: React.SFC<RowProps> = ({
   className,
   inline,
+  halfMargin,
   center,
   classes,
   children,
@@ -24,6 +26,7 @@ export const Row: React.SFC<RowProps> = ({
         classes.root,
         inline && classes.inline,
         center && classes.center,
+        halfMargin && classes.halfMargin,
         className,
       )}
     >

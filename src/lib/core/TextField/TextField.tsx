@@ -25,6 +25,8 @@ export interface TextFieldProps {
   maxLength?: number;
   /** Set to true to display as a textarea */
   multiline?: boolean;
+  /** The height of the textarea */
+  multilineHeight?: number | string;
   /** Set to true to auto focus the input */
   autoFocus?: boolean;
   /** Optional helper text */
@@ -65,6 +67,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
   maxWidth,
   maxLength,
   multiline = false,
+  multilineHeight,
   autoFocus = false,
   helperText = '',
   icon = null,
@@ -84,6 +87,7 @@ export const TextField: React.SFC<TextFieldProps> = ({
   const commonProps = {
     type: mask ? 'text' : type,
     multiline: mask ? false : multiline,
+    multilineHeight,
     fullWidth: true,
     disabled,
     value,

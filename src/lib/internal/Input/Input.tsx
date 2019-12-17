@@ -20,6 +20,7 @@ interface InputProps extends WithStyles<typeof styles> {
   fullWidth?: boolean;
   disabled?: boolean;
   multiline?: boolean;
+  multilineHeight?: string | number;
   icon?: React.ReactNode;
   inputProps?: { [key: string]: any };
   inputRef?: React.Ref<HTMLInputElement>;
@@ -41,6 +42,7 @@ const Input: React.SFC<InputProps> = ({
   fullWidth = false,
   disabled = false,
   multiline = false,
+  multilineHeight,
   icon,
   inputProps,
   inputComponent,
@@ -53,8 +55,14 @@ const Input: React.SFC<InputProps> = ({
   inputRef,
 }) => {
   let multilineOpts = {};
+  let multilineInputOpts = {};
   if (multiline) {
-    multilineOpts = { rows: 4, rowsMax: 4, multiline: true };
+    multilineOpts = {
+      rows: 4,
+      rowsMax: 4,
+      multiline: true,
+    };
+    multilineInputOpts = { style: { height: multilineHeight } };
   }
 
   const inputElement = (
@@ -82,7 +90,7 @@ const Input: React.SFC<InputProps> = ({
           multiline && classes.inputWithMultiline,
         ),
       }}
-      inputProps={inputProps}
+      inputProps={{ ...inputProps, ...multilineInputOpts }}
       {...multilineOpts}
     />
   );

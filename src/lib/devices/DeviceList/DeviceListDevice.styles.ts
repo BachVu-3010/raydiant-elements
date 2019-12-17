@@ -1,5 +1,4 @@
 import { createStyles } from '../../core/withStyles';
-import { marginBetweenChildrenHorizontal } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -55,17 +54,10 @@ const styles = (theme: Theme) =>
     name: {
       fontSize: theme.fontSizes.lg,
       marginBottom: theme.spacing.unit / 2,
-    },
 
-    status: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      ...marginBetweenChildrenHorizontal(theme.spacing.unit / 2),
-    },
-
-    playlistSelector: {
-      width: 280,
+      [theme.breakpoints.down('sm')]: {
+        marginBottom: 0,
+      },
     },
   });
 

@@ -9,12 +9,14 @@ interface ColumnProps extends WithStyles<typeof styles> {
   /** Set to true to display inline */
   inline?: boolean;
   doubleMargin?: boolean;
+  flex?: number;
 }
 
 export const Column: React.SFC<ColumnProps> = ({
   className,
   inline,
   doubleMargin,
+  flex,
   classes,
   children,
 }) => (
@@ -25,6 +27,7 @@ export const Column: React.SFC<ColumnProps> = ({
       doubleMargin && classes.doubleMargin,
       className,
     )}
+    style={{ flex }}
   >
     {children}
   </div>

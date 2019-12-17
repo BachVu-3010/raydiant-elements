@@ -14,11 +14,8 @@ const getSequencePath = componentPathGetter('sequence');
 const getTypographyPath = componentPathGetter('typography');
 const getPlaylistPath = componentPathGetter('playlist');
 
-const getAccountPath = component =>
-  path.join(__dirname, `src/lib/account/${component}/${component}.tsx`);
-
 module.exports = {
-  title: 'Mira Elements',
+  title: 'Raydiant Elements',
   theme: {
     maxWidth: 'none',
   },
@@ -117,10 +114,6 @@ module.exports = {
     {
       name: 'Schedule',
       components: () => [getSchedulePath('ScheduleContentPopover')],
-    },
-    {
-      name: 'Account',
-      components: () => [getAccountPath('AccountSection')],
     },
     {
       name: 'Typography',

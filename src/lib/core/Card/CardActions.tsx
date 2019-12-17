@@ -1,10 +1,11 @@
 import MUICardActions from '@material-ui/core/CardActions';
 import * as React from 'react';
-import withStyles, { WithStyles } from '../../withStyles';
+import withStyles, { WithStyles } from '../withStyles';
 import styles from './CardActions.styles';
 
 export interface CardActionsProps extends WithStyles<typeof styles> {
   onClick?: (event: React.MouseEvent<any>) => any;
+  children?: React.ReactNode;
 }
 
 export const CardActions: React.SFC<CardActionsProps> = ({
