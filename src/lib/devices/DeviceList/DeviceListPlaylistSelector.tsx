@@ -68,7 +68,7 @@ const styles = (theme: Theme) =>
       width: '100%',
       maxWidth: 280,
 
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         maxWidth: 'none',
       },
     },

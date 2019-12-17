@@ -53,9 +53,9 @@ const styles = (theme: Theme) =>
 
     name: {
       fontSize: theme.fontSizes.lg,
-      marginBottom: theme.spacing.unit / 2,
+      marginBottom: theme.spacing.unit,
 
-      [theme.breakpoints.down('sm')]: {
+      [theme.breakpoints.down('xs')]: {
         marginBottom: 0,
       },
     },

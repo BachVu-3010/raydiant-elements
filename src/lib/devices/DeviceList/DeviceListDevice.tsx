@@ -103,10 +103,12 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   return (
     <Row className={classes.root} center>
       <Row className={classes.deviceInfo} center>
-        <div
-          style={{ backgroundImage: thumbnail ? `url(${thumbnail})` : '' }}
-          className={classes.thumbnail}
-        />
+        <Hidden smDown>
+          <div
+            style={{ backgroundImage: thumbnail ? `url(${thumbnail})` : '' }}
+            className={classes.thumbnail}
+          />
+        </Hidden>
         <div>
           <div className={classes.name}>{device.name}</div>
           <ConnectionStatus
