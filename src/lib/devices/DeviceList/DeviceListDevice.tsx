@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Button from '../../core/Button';
 import withStyles, { WithStyles } from '../../core/withStyles';
+import { stopPropagation } from '../../helpers';
 import Column from '../../layout/Column';
 import Hidden from '../../layout/Hidden';
 import Row from '../../layout/Row';
@@ -24,6 +25,7 @@ export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   onPublish: () => void;
   onConnectivityWizard?: () => void;
   onSettings?: () => void;
+  onClick?: () => void;
 }
 
 const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
@@ -97,11 +99,12 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   onPublish,
   onConnectivityWizard,
   onSettings,
+  onClick,
 }) => {
   const playlist = playlists.find(pl => pl.id === device.playlistId);
 
   return (
-    <Row className={classes.root} center>
+    <Row className={classes.root} center onClick={onClick}>
       <Row className={classes.deviceInfo} center>
         <Hidden smDown>
           <div
@@ -129,17 +132,21 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
       />
 
       <Row className={classes.deviceActions} center>
-        {onSettings && (
-          <Button icon="settings" hideBorder onClick={onSettings} />
-        )}
-
         {needsPublish && (
           <Button
             color="progress"
             icon="publish"
             label="Publish"
             disabled={disablePublish}
-            onClick={onPublish}
+            onClick={stopPropagation(onPublish)}
+          />
+        )}
+
+        {onSettings && (
+          <Button
+            icon="settings"
+            hideBorder
+            onClick={stopPropagation(onSettings)}
           />
         )}
       </Row>

@@ -2,6 +2,7 @@ import * as React from 'react';
 import Button from '../../core/Button';
 import SelectField from '../../core/SelectField';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
+import { stopPropagation } from '../../helpers';
 import Row from '../../layout/Row';
 import { Theme } from '../../theme';
 import * as D from '../DeviceTypes';
@@ -24,7 +25,7 @@ const PlaylistSelector: React.SFC<PlaylistSelectorProps> = ({
   onEditPlaylist,
   onSelectPlaylist,
 }) => (
-  <div className={classes.root}>
+  <div className={classes.root} onClick={stopPropagation()}>
     {playlists.length === 0 ? (
       <Button
         fullWidth

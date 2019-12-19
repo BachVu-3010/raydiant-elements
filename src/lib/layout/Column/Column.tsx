@@ -10,6 +10,7 @@ interface ColumnProps extends WithStyles<typeof styles> {
   inline?: boolean;
   doubleMargin?: boolean;
   flex?: number;
+  onClick?: () => void;
 }
 
 export const Column: React.SFC<ColumnProps> = ({
@@ -19,6 +20,7 @@ export const Column: React.SFC<ColumnProps> = ({
   flex,
   classes,
   children,
+  onClick,
 }) => (
   <div
     className={cn(
@@ -28,6 +30,7 @@ export const Column: React.SFC<ColumnProps> = ({
       className,
     )}
     style={{ flex }}
+    onClick={onClick}
   >
     {children}
   </div>
