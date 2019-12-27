@@ -27,6 +27,7 @@ export const Column: React.SFC<ColumnProps> = ({
       classes.root,
       inline && classes.inline,
       doubleMargin && classes.doubleMargin,
+      onClick && classes.clickable,
       className,
     )}
     style={{ flex }}

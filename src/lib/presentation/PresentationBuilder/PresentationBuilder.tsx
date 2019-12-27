@@ -51,14 +51,14 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   header?: React.ReactNode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
   minDuration?: number;
-  onCancel?: () => void;
-  onSave?: (presentation: P.Presentation, files: FileUpload[]) => void;
+  didSave?: boolean;
+  backToLabel?: string;
+  onBack?: () => void;
+  onSave?: () => void;
+  onDone?: () => void;
   onStateChange?: (
     presentation: P.Presentation,
-    prop: A.PresentationProperty,
-    path: P.Path,
-    value: any,
-    file?: File,
+    fileUploads: FileUpload[],
   ) => void;
   children?: (
     presentation: P.Presentation,
@@ -67,8 +67,6 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   ) => React.ReactNode;
   onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
   onPlaylistCreate?: (path: P.Path) => void;
-  onBackToPlaylist?: () => void;
-  backToPlaylistLabel?: string;
 }
 
 interface FileUpload {
@@ -81,7 +79,7 @@ interface PresentationBuilderState {
   previewPresentation?: P.Presentation;
   validate: boolean;
   previewMode: P.PreviewMode;
-  files: FileUpload[];
+  fileUploads: FileUpload[];
   showAffectedDevices: boolean;
 }
 
@@ -105,7 +103,7 @@ export class PresentationBuilder extends React.Component<
       this.props.initialPresentationState || this.props.presentation,
     validate: false,
     previewMode: this.props.previewMode,
-    files: [] as FileUpload[],
+    fileUploads: [],
     showAffectedDevices: false,
   };
 
@@ -186,16 +184,23 @@ export class PresentationBuilder extends React.Component<
     window.location.hash = '';
   }
 
-  handleSave = () => {
-    const { onSave, appVersion, minDuration } = this.props;
-    const { presentation, files } = this.state;
+  validate() {
+    const { appVersion, minDuration } = this.props;
+    const { presentation } = this.state;
 
     this.setState({ validate: true });
+    return validatePresentation(presentation, appVersion, minDuration);
+  }
 
-    // Only call the onSave handler with valid presentations.
-    const errors = validatePresentation(presentation, appVersion, minDuration);
-    if (errors.length === 0) {
-      onSave(presentation, files);
+  handleSave = () => {
+    if (this.validate().length === 0) {
+      this.props.onSave();
+    }
+  };
+
+  handleDone = () => {
+    if (this.validate().length === 0) {
+      this.props.onDone();
     }
   };
 
@@ -231,6 +236,8 @@ export class PresentationBuilder extends React.Component<
     );
 
     let shouldUpdatePreview = false;
+    let fileUploads = this.state.fileUploads;
+
     if (errors.length === 0) {
       // Delay updating the preview for text and string inputs until onBlur.
       if (
@@ -245,12 +252,12 @@ export class PresentationBuilder extends React.Component<
       }
 
       if (property.type === 'file') {
-        this.handleFileChange(path, file);
+        fileUploads = this.getFileUploads(path, file);
       }
     }
 
     if (onStateChange) {
-      onStateChange(updatedPresentation, property, path, value, file);
+      onStateChange(updatedPresentation, fileUploads);
     }
 
     this.setState({
@@ -258,33 +265,32 @@ export class PresentationBuilder extends React.Component<
       previewPresentation: shouldUpdatePreview
         ? updatedPresentation
         : previewPresentation,
+      fileUploads,
     });
   }
 
-  handleFileChange(path: P.Path, file: File) {
-    const { files } = this.state;
+  getFileUploads(path: P.Path, file: File) {
+    const { fileUploads: previousFileUploads } = this.state;
+    let fileUploads: FileUpload[];
 
     if (file) {
-      const existingFileAtPath = files.find(f => isPathEqual(f.path, path));
+      const existingFileAtPath = previousFileUploads.find(f =>
+        isPathEqual(f.path, path),
+      );
       if (existingFileAtPath) {
         // Update file upload at path.
-        this.setState({
-          files: files.map(f =>
-            f === existingFileAtPath ? { path, file } : f,
-          ),
-        });
+        fileUploads = previousFileUploads.map(f =>
+          f === existingFileAtPath ? { path, file } : f,
+        );
       } else {
         // Add file upload.
-        this.setState({
-          files: [...files, { path, file }],
-        });
+        fileUploads = [...previousFileUploads, { path, file }];
       }
     } else {
-      // Remove file upload.
-      this.setState({
-        files: files.filter(f => !isPathEqual(f.path, path)),
-      });
+      fileUploads = previousFileUploads.filter(f => !isPathEqual(f.path, path));
     }
+
+    return fileUploads;
   }
 
   renderApplicationVariables(
@@ -768,11 +774,12 @@ export class PresentationBuilder extends React.Component<
       presentation: originalPresentation,
       appVersion,
       onSave,
-      onCancel,
       affectedDevices,
-      onBackToPlaylist,
-      backToPlaylistLabel,
+      onBack,
+      backToLabel,
       header,
+      onDone,
+      didSave,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
@@ -780,18 +787,18 @@ export class PresentationBuilder extends React.Component<
     const shouldDisableSave =
       isLoading ||
       !hasPresentationChanged(originalPresentation, presentation, appVersion);
-
+    const shouldDisableDone = shouldDisableSave && !didSave;
     return (
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
           <div className={classes.scroll}>
             <Hidden smUp>{this.renderPreview()}</Hidden>
             <Form.Section>
-              {onBackToPlaylist && (
+              {onBack && (
                 <Button
                   icon="arrowLeft"
-                  label={backToPlaylistLabel || 'Back to Playlist'}
-                  onClick={onBackToPlaylist}
+                  label={backToLabel || 'Back'}
+                  onClick={onBack}
                 />
               )}
 
@@ -804,8 +811,15 @@ export class PresentationBuilder extends React.Component<
           </div>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed bottom color="light">
-            {onCancel && <Button label="Cancel" onClick={onCancel} />}
             <Spacer />
+            {onDone && (
+              <Button
+                label="Done"
+                color="primary"
+                disabled={shouldDisableDone}
+                onClick={this.handleDone}
+              />
+            )}
             {onSave && (
               <Popover.Anchor>
                 <Button

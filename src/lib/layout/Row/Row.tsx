@@ -29,6 +29,7 @@ export const Row: React.SFC<RowProps> = ({
         inline && classes.inline,
         center && classes.center,
         halfMargin && classes.halfMargin,
+        onClick && classes.clickable,
         className,
       )}
       onClick={onClick}

@@ -9,7 +9,9 @@ const styles = (theme: Theme) =>
       width: '100%',
       ...marginBetweenChildrenHorizontal(theme.spacing.unit),
     },
-
+    clickable: {
+      cursor: 'pointer',
+    },
     inline: {
       display: 'inline-flex',
       width: 'auto',

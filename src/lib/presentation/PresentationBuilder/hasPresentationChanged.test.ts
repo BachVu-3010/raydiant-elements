@@ -110,3 +110,49 @@ test('Should return false equal file prop', () => {
     hasPresentationChanged(presentation, { ...presentation }, appVersion),
   ).toEqual(false);
 });
+
+test('Should return true for array app var change', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { array: [{ string: 'a' }] } },
+    {
+      presentationProperties: [
+        {
+          name: 'array',
+          type: 'array',
+          properties: [{ name: 'string', type: 'string' }],
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { array: [{ string: 'b' }] } },
+      appVersion,
+    ),
+  ).toEqual(true);
+});
+
+test('Should return false for equal array', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { array: [{ string: 'a' }] } },
+    {
+      presentationProperties: [
+        {
+          name: 'array',
+          type: 'array',
+          properties: [{ name: 'string', type: 'string' }],
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { array: [{ string: 'a' }] } },
+      appVersion,
+    ),
+  ).toEqual(false);
+});

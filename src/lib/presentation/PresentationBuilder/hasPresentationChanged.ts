@@ -1,6 +1,42 @@
 import * as A from '../../application/ApplicationTypes';
 import * as P from '../PresentationTypes';
 
+const hasAppVarChanges = (
+  properties: A.PresentationProperty[],
+  prevAppVars: P.ApplicationVariables,
+  nextAppVars: P.ApplicationVariables,
+): boolean => {
+  for (const prop of properties) {
+    const prevAppVar = prevAppVars[prop.name];
+    const nextAppVar = nextAppVars[prop.name];
+
+    if (prop.type === 'file') {
+      const prevFile = prevAppVar || { url: '' };
+      const nextFile = nextAppVar || { url: '' };
+
+      if (prevFile.url !== nextFile.url) {
+        return true;
+      }
+    } else if (prop.type === 'array') {
+      const prevArray = prevAppVar || [];
+      const nextArray = nextAppVar || [];
+
+      if (prevArray.length !== nextArray.length) {
+        return true;
+      }
+
+      for (let i = 0; i < nextArray.length; i += 1) {
+        if (hasAppVarChanges(prop.properties, prevAppVar[i], nextAppVar[i])) {
+          return true;
+        }
+      }
+    } else if (prevAppVar !== nextAppVar) {
+      return true;
+    }
+  }
+  return false;
+};
+
 export default function hasPresentationChanged(
   prevPres: P.Presentation,
   nextPres: P.Presentation,
@@ -23,18 +59,9 @@ export default function hasPresentationChanged(
     return true;
   }
   // Check if app vars have changed.
-  // TODO: Handle array inputs (correctly does a shallow equal)
-  const hasAppVarChanges = appVersion.presentationProperties.some(prop => {
-    const prevAppVar = prevPres.applicationVariables[prop.name];
-    const nextAppVar = nextPres.applicationVariables[prop.name];
-
-    // For file types, check for pending uploads.
-    if (prevAppVar && nextAppVar && prop.type === 'file') {
-      return prevAppVar.url !== nextAppVar.url;
-    }
-
-    return prevAppVar !== nextAppVar;
-  });
-
-  return hasAppVarChanges;
+  return hasAppVarChanges(
+    appVersion.presentationProperties,
+    prevPres.applicationVariables,
+    nextPres.applicationVariables,
+  );
 }

@@ -13,12 +13,13 @@ const styles = (theme: Theme) =>
         flexShrink: 0,
       },
     },
-
+    clickable: {
+      cursor: 'pointer',
+    },
     inline: {
       display: 'inline-flex',
       width: 'auto',
     },
-
     doubleMargin: {
       ...marginBetweenChildrenVertical(theme.spacing.unit * 2),
     },
