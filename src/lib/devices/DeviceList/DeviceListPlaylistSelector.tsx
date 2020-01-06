@@ -36,7 +36,7 @@ const PlaylistSelector: React.SFC<PlaylistSelectorProps> = ({
     ) : (
       <Row>
         <SelectField
-          label="Playlist"
+          label={value ? 'Playlist' : 'Select a playlist'}
           value={value}
           onChange={playlistId => {
             if (playlistId === NEW_PLAYLIST_VALUE) {
@@ -57,7 +57,11 @@ const PlaylistSelector: React.SFC<PlaylistSelectorProps> = ({
             </option>
           ))}
         </SelectField>
-        <Button icon="edit" onClick={() => onEditPlaylist(value)} />
+        <Button
+          icon="edit"
+          disabled={!value}
+          onClick={() => onEditPlaylist(value)}
+        />
       </Row>
     )}
   </div>
