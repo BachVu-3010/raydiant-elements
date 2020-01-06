@@ -10,13 +10,13 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import SelectField from '../SelectField';
 
 export interface RecurrenceSelectorProps extends WithStyles {
-  onChange?: (recurrenceRule: Partial<S.RecurrenceRule>) => any;
-  recurrenceRule?: Partial<S.RecurrenceRule>;
+  onChange?: (recurrenceRule: S.RecurrenceRule) => any;
+  recurrenceRule?: S.RecurrenceRule | null;
   testId?: string;
 }
 
 interface RecurrenceSelectorState {
-  recurrenceRule: Partial<S.RecurrenceRule>;
+  recurrenceRule: S.RecurrenceRule;
 }
 
 const generateArrayRange = (start: number, end: number) => {
@@ -37,29 +37,26 @@ const frequencies = {
 
 const monthDayOptions = generateArrayRange(1, 31);
 
-const initialValues: Partial<S.RecurrenceRule> = {
+const initialValues: S.RecurrenceRule = {
+  dtstart: '',
   freq: S.Frequency.weekly,
   interval: 1,
   byday: [],
-  bymonthday: '',
+  bymonthday: [],
 };
 
 export class RecurrenceSelector extends React.Component<
   RecurrenceSelectorProps,
   RecurrenceSelectorState
 > {
-  static defaultProps = {
-    recurrenceRule: {},
-    onChange: () => {
-      return;
-    },
-  };
   state: RecurrenceSelectorState = {
     recurrenceRule: { ...initialValues, ...this.props.recurrenceRule },
   };
+
   componentWillMount() {
     this.props.onChange(this.state.recurrenceRule);
   }
+
   updateRecurrenceRule = (recurrenceRule: Partial<S.RecurrenceRule>) => {
     this.setState(
       { recurrenceRule: { ...this.state.recurrenceRule, ...recurrenceRule } },
@@ -68,13 +65,17 @@ export class RecurrenceSelector extends React.Component<
       },
     );
   };
+
   handleFrequencyChange = (value: S.Frequency) => {
     this.setState(
       {
         recurrenceRule: {
-          // reset form values when frequency changes
-          ...initialValues,
+          ...this.state.recurrenceRule,
           freq: value,
+          // reset form values when frequency changes
+          interval: initialValues.interval,
+          byday: initialValues.byday,
+          bymonthday: initialValues.bymonthday,
         },
       },
       () => {
@@ -82,6 +83,7 @@ export class RecurrenceSelector extends React.Component<
       },
     );
   };
+
   render() {
     const { recurrenceRule } = this.state;
     const { freq, interval, bymonthday, byday } = recurrenceRule;
@@ -130,9 +132,11 @@ export class RecurrenceSelector extends React.Component<
           {freq === S.Frequency.monthly && (
             <SelectField
               label="Day"
-              value={bymonthday}
+              value={bymonthday ? String(bymonthday[0]) : ''}
               onChange={value =>
-                this.updateRecurrenceRule({ bymonthday: value })
+                this.updateRecurrenceRule({
+                  bymonthday: value ? [parseInt(value, 10)] : [],
+                })
               }
               shrink
               testId={`${testId}-bymonthday`}

@@ -9,10 +9,11 @@ export enum DaysOfWeek {
 }
 
 export interface RecurrenceRule {
+  dtstart: string;
   freq: Frequency;
   interval: number;
-  byday: Array<keyof typeof DaysOfWeek>;
-  bymonthday: string;
+  byday?: Array<keyof typeof DaysOfWeek>;
+  bymonthday?: number[];
 }
 
 export enum Frequency {

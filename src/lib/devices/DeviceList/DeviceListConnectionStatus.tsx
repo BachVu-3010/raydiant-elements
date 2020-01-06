@@ -2,6 +2,7 @@ import * as React from 'react';
 import AlertIcon from '../../core/AlertIcon';
 import Link from '../../core/Link';
 import SuccessIcon from '../../core/SuccessIcon';
+import { stopPropagation } from '../../helpers';
 import Row from '../../layout/Row';
 import Text from '../../typography/Text';
 import ConnectionIndicator from '../ConnectionIndicator/ConnectionIndicator';
@@ -38,7 +39,9 @@ const ConnectionStatus: React.SFC<ConnectionStatusProps> = ({
       {device.isOnline ? <Text small>Online</Text> : <Text small>Offline</Text>}
       {!device.isOnline && onConnectivityWizard && (
         <Text small>
-          <Link onClick={onConnectivityWizard}>Need help?</Link>
+          <Link onClick={stopPropagation(onConnectivityWizard)}>
+            Need help?
+          </Link>
         </Text>
       )}
     </Row>
