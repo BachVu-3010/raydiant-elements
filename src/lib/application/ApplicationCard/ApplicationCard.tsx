@@ -6,7 +6,7 @@ import * as A from '../ApplicationTypes';
 import styles from './ApplicationCard.styles';
 
 interface ApplicationCardProps extends WithStyles<typeof styles> {
-  application: A.AppVersion;
+  application: A.Application;
   onClick?: () => void;
   auto?: boolean;
   smDownShrink?: boolean;
@@ -35,11 +35,14 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
     >
       <div
         className={classes.image}
-        style={{ backgroundImage: `url(${application.thumbnailUrl})` }}
+        style={{
+          backgroundImage: `url(${application.currentAppVersion.thumbnailUrl})`,
+        }}
       />
     </button>
     <div className={classes.name}>
-      {application.strings.callToAction || application.name}
+      {application.currentAppVersion.strings.callToAction ||
+        application.currentAppVersion.name}
     </div>
   </div>
 );

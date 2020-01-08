@@ -42,7 +42,7 @@ import validatePresentation from './validatePresentation';
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
   initialPresentationState?: P.Presentation;
-  appVersion?: A.AppVersion;
+  appVersion?: A.ApplicationVersion;
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
   playlists?: P.Playlist[];

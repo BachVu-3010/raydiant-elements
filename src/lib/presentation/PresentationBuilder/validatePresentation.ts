@@ -74,7 +74,7 @@ function validate(
 
 export default function validatePresentation(
   presentation: P.Presentation,
-  appVersion: A.AppVersion,
+  appVersion: A.ApplicationVersion,
   minDuration: number,
 ) {
   const errors: P.PresentationError[] = [];

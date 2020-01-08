@@ -50,7 +50,7 @@ export interface Strings {
   [key: string]: string;
 }
 
-export interface AppVersion {
+export interface ApplicationVersion {
   id: string;
   name: string;
   presentationProperties: PresentationProperty[];
@@ -62,4 +62,9 @@ export interface AppVersion {
   // need to support it for legacy apps and embedded apps.
   hasConfigurableDuration?: boolean;
   embeddedUrlFormat?: string;
+}
+
+export interface Application {
+  id: string;
+  currentAppVersion: ApplicationVersion;
 }

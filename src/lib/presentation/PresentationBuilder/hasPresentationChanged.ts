@@ -40,7 +40,7 @@ const hasAppVarChanges = (
 export default function hasPresentationChanged(
   prevPres: P.Presentation,
   nextPres: P.Presentation,
-  appVersion: A.AppVersion,
+  appVersion: A.ApplicationVersion,
 ) {
   // Enable save when new application version is released.
   if (appVersion.id !== nextPres.appVersionId) {

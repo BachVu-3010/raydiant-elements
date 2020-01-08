@@ -7,7 +7,7 @@ import styles from './ApplicationCTA.styles';
 
 interface ApplicationCTAProps extends WithStyles<typeof styles> {
   title: string;
-  applications: A.AppVersion[];
+  applications: A.Application[];
   onApplicationClick?: (applicationId: string) => void;
   onMore?: () => void;
   testId?: string;

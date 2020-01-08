@@ -8,7 +8,7 @@ import * as P from '../PresentationTypes';
 import styles from './PresentationBuilderPreview.styles';
 
 interface PresentationBuilderPreviewProps extends WithStyles<typeof styles> {
-  appVersion?: A.AppVersion;
+  appVersion?: A.ApplicationVersion;
   previewMode: P.PreviewMode;
   onPreviewModeChange: (previewMode: P.PreviewMode) => any;
 }
