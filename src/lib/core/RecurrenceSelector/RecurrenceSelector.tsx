@@ -53,17 +53,17 @@ export class RecurrenceSelector extends React.Component<
     recurrenceRule: { ...initialValues, ...this.props.recurrenceRule },
   };
 
-  componentWillMount() {
-    this.props.onChange(this.state.recurrenceRule);
-  }
-
   updateRecurrenceRule = (recurrenceRule: Partial<S.RecurrenceRule>) => {
-    this.setState(
-      { recurrenceRule: { ...this.state.recurrenceRule, ...recurrenceRule } },
-      () => {
-        this.props.onChange(this.state.recurrenceRule);
-      },
-    );
+    const updatedRecurrenceRule = {
+      ...this.state.recurrenceRule,
+      ...recurrenceRule,
+    };
+
+    this.setState({
+      recurrenceRule: updatedRecurrenceRule,
+    });
+
+    this.props.onChange(updatedRecurrenceRule);
   };
 
   handleFrequencyChange = (value: S.Frequency) => {
