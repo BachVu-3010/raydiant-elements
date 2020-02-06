@@ -36,8 +36,15 @@ import SoundZoneInput from './SoundZoneInput';
 import StringInput from './StringInput';
 import TextInput from './TextInput';
 import ThemeInput from './ThemeInput';
-import { getErrorAtPath, isPathEqual } from './utilities';
+import { getErrorAtPath, getPropertyAtPath, isPathEqual } from './utilities';
 import validatePresentation from './validatePresentation';
+
+// These are "fake" presentation properties for name and duration so they can
+// be treated the same as application variables when updating the presentation state.
+const namePath = ['name'];
+const durationPath = ['duration'];
+const nameProp = { type: 'string', name: 'name' };
+const durationProp = { type: 'number', name: 'duration' };
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
@@ -150,32 +157,34 @@ export class PresentationBuilder extends React.Component<
     //   ie. #applicationVariables.headingText=text => [['applicationVariables.headingText', 'SomeText'], ...]
     const hashParams = hash.split(/[&#]/).map(paramStr => paramStr.split('='));
 
-    appVersion.presentationProperties.forEach(property => {
-      // Don't support hash parameters for array and file properties.
-      if (property.type === 'array' || property.type === 'file') {
-        return;
+    hashParams.forEach(hashParam => {
+      if (hashParam.length !== 2) return;
+
+      const path: Path = hashParam[0].split('.').filter(pathPart => !!pathPart);
+      if (!path.length) return;
+
+      // Try to find the property at this path.
+      let property: A.PresentationProperty;
+      if (path[0] === 'applicationVariables') {
+        property = getPropertyAtPath(appVersion.presentationProperties, path);
+      } else if (isPathEqual(path, namePath)) {
+        property = nameProp;
+      } else if (isPathEqual(path, durationPath)) {
+        property = durationProp;
       }
 
-      const path = ['applicationVariables', property.name];
-      const pathStr = path.join('.');
-      const hashParamAtPath = hashParams.find(
-        ([hashPath]) => hashPath === pathStr,
-      );
-      if (hashParamAtPath) {
-        let newValue: any = decodeURIComponent(hashParamAtPath[1]);
-        if (property.type === 'boolean') {
-          if (newValue.toLowerCase() === 'false') {
-            newValue = false;
-          } else if (newValue.toLowerCase() === 'true') {
-            newValue = true;
-          } else {
-            newValue = undefined;
-          }
-        }
+      if (!property) return;
 
-        if (newValue !== undefined) {
-          this.updatePresentation(path, newValue, property, undefined, true);
-        }
+      let value: any = decodeURIComponent(hashParam[1]);
+      try {
+        value = JSON.parse(value);
+      } catch (err) {
+        // If we can't parse valid JSON, assume a string value is passed in.
+        // This allows the hash param to omit quotes (ie. #headingText=text)
+      }
+
+      if (value !== undefined) {
+        this.updatePresentation(path, value, property, undefined, true);
       }
     });
 
@@ -714,12 +723,6 @@ export class PresentationBuilder extends React.Component<
       ? validatePresentation(presentation, appVersion, minDuration)
       : [];
 
-    // These are "fake" presentation properties for name and duration so they can
-    // be treated the same as application variables when updating the presentation state.
-    const namePath = ['name'];
-    const durationPath = ['duration'];
-    const nameProp = { type: 'string', name: 'name' };
-    const durationProp = { type: 'number', name: 'duration' };
     const nameError = getErrorAtPath(errors, namePath);
     const durationError = getErrorAtPath(errors, durationPath);
 
