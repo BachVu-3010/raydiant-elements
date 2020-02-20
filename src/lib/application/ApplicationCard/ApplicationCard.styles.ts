@@ -42,11 +42,17 @@ const styles = (theme: Theme) =>
       backgroundClip: 'padding-box',
     },
 
-    name: {
+    cta: {
       marginTop: theme.spacing.unit,
       fontSize: theme.fontSizes.sm,
       textAlign: 'center',
       ...textTruncate(),
+    },
+
+    website: {
+      marginTop: theme.spacing.unit,
+      fontSize: theme.fontSizes.sm,
+      textAlign: 'center',
     },
   });
 

@@ -1,5 +1,4 @@
 import { createStyles } from '../../core/withStyles';
-import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -7,7 +6,6 @@ const styles = (theme: Theme) =>
     root: {
       flex: 1,
       padding: theme.spacing.unit * 2,
-      ...scrollable(),
     },
 
     grid: {

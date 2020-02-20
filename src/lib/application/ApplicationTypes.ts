@@ -57,6 +57,7 @@ export interface ApplicationVersion {
   strings: Strings;
   thumbnailUrl?: string;
   iconUrl?: string;
+  websiteUrl?: string;
   // configurable_duration is deprecated in favour of all Mira apps now being
   // dynamic duration (responsible for firing their own onComplete). We still
   // need to support it for legacy apps and embedded apps.
