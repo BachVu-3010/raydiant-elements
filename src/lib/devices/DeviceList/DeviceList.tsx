@@ -3,6 +3,7 @@ import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
+import DeviceListAudioDevice from './DeviceListAudioDevice';
 import DeviceListDevice from './DeviceListDevice';
 
 export interface DeviceListProps extends WithStyles<typeof styles> {}
@@ -27,5 +28,6 @@ export default Object.assign(
   withThemeSelector(withStyles(styles)(DeviceList)),
   {
     Device: DeviceListDevice,
+    AudioDevice: DeviceListAudioDevice,
   },
 );

@@ -38,6 +38,15 @@ export const devices = [
     isEthernet: false,
     playlistId: 'PLALIST_ID_4',
   },
+  {
+    id: 'DEVICE_ID_5',
+    name: "Dougie's Audio Device",
+    isAudioOnly: true,
+    resinUuid: 'resinUuid',
+    isOnline: false,
+    wifiStrength: 90,
+    isEthernet: false,
+  },
 ];
 
 export const playlists = [
