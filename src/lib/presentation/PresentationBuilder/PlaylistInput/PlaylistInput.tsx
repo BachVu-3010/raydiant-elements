@@ -11,6 +11,7 @@ interface PlaylistInputProps {
   playlists: P.Playlist[];
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
   onEdit?: (value: string) => void;
@@ -80,6 +81,7 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
       playlists,
       helperText,
       error,
+      disabled,
       onBlur,
       onEdit,
       onCreate,
@@ -98,6 +100,7 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
           color="primary"
           label={`Create a Playlist for ${label}`}
           onClick={onCreate}
+          disabled={disabled}
         />
       );
     }
@@ -111,6 +114,7 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
           onBlur={onBlur}
           helperText={helperText}
           error={error}
+          disabled={disabled}
         >
           {onCreate && (
             <>
@@ -128,7 +132,11 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
           {options.length === 0 && <option disabled>No playlists found</option>}
         </SelectField>
         {onEdit && (
-          <Button icon="edit" onClick={() => onEdit(valueOrDefault)} />
+          <Button
+            icon="edit"
+            disabled={disabled}
+            onClick={() => onEdit(valueOrDefault)}
+          />
         )}
       </Row>
     );

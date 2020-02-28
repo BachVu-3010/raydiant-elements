@@ -10,6 +10,7 @@ export interface OAuthInputProps {
   helperText: React.ReactNode;
   path: T.Path;
   error?: boolean;
+  disabled?: boolean;
   authUrl: string;
   verifyUrl: string;
   verifyQsParam: string;
@@ -95,7 +96,7 @@ class OAuthInput extends React.Component<OAuthInputProps, OAuthInputState> {
   }
 
   renderButton() {
-    const { label, children } = this.props;
+    const { label, children, disabled } = this.props;
 
     if (children) {
       return children({ label, onClick: this.authRedirect });
@@ -107,6 +108,7 @@ class OAuthInput extends React.Component<OAuthInputProps, OAuthInputState> {
         color="primary"
         label={label}
         onClick={this.authRedirect}
+        disabled={disabled}
       />
     );
   }

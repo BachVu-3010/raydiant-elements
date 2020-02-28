@@ -33,6 +33,7 @@ interface ArrayInputProps extends WithStyles<typeof styles> {
   singularLabel: string;
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   strings: A.Strings;
   constraints: {
     max_items?: number;
@@ -188,7 +189,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
   }
 
   renderItemForm(selectedPath: P.Path) {
-    const { value, renderForm } = this.props;
+    const { value, renderForm, disabled } = this.props;
 
     const crumbs = getCrumbsFromPath(selectedPath);
     // Assume if we can't find the value or property at the selected path that
@@ -204,7 +205,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
         <Row>
           <Spacer />
           <Popover.Anchor>
-            <RemoveButton onClick={this.showDeletePrompt} />
+            <RemoveButton disabled={disabled} onClick={this.showDeletePrompt} />
             {this.renderDeletePrompt(
               itemValue,
               itemProperty,
@@ -272,6 +273,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
       constraints,
       onChange,
       setSelectedPath,
+      disabled,
     } = this.props;
 
     return (
@@ -282,14 +284,16 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
         }
         hasItemError={(_, index) => this.hasErrorAtIndex(index)}
         addLabel={this.getSingularLabel()}
-        addDisabled={this.hasMaxItems(value, constraints)}
+        addDisabled={disabled || this.hasMaxItems(value, constraints)}
         onChange={onChange}
         onAdd={() => {
           onChange([...value, createDefaultValue(properties)]);
           setSelectedPath([...this.getRootPath(), value.length]);
         }}
         onItemClick={(_, index) => {
-          setSelectedPath([...this.getRootPath(), index]);
+          if (!disabled) {
+            setSelectedPath([...this.getRootPath(), index]);
+          }
         }}
       />
     );
@@ -316,6 +320,7 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
       singularLabel,
       addSiblingLabelTemplate,
       strings,
+      disabled,
     } = this.props;
     if (!selectedPath.length) return null;
 
@@ -333,7 +338,9 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     return (
       <AddButton
         label={addSiblingLabelTemplate.replace('{{label}}', siblingLabel)}
-        disabled={this.hasMaxItems(parentValue, siblingProperty.constraints)}
+        disabled={
+          disabled || this.hasMaxItems(parentValue, siblingProperty.constraints)
+        }
         onClick={() => {
           // Push a new sibling item onto the parent array value.
           onChange(

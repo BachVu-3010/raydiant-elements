@@ -9,6 +9,7 @@ interface StringInputProps {
   };
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -19,6 +20,7 @@ const StringInput: React.SFC<StringInputProps> = ({
   constraints,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => (
@@ -30,6 +32,7 @@ const StringInput: React.SFC<StringInputProps> = ({
     helperText={helperText}
     error={error}
     maxLength={constraints.maxlength}
+    disabled={disabled}
   />
 );
 

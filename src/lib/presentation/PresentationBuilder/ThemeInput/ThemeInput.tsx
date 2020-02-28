@@ -8,6 +8,7 @@ interface ThemeInputProps {
   themes: P.Theme[];
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -18,6 +19,7 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
   themes,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => {
@@ -34,6 +36,7 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
       onBlur={onBlur}
       helperText={helperText}
       error={error}
+      disabled={disabled}
     >
       {options.map(opt => (
         <option key={opt.value} value={opt.value}>

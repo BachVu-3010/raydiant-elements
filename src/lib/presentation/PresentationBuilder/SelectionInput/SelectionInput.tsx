@@ -12,6 +12,7 @@ interface SelectionInputProps {
   optionsUrl?: string;
   helperText?: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string | string[]) => any;
   onBlur: React.FocusEventHandler<any>;
   // TODO: Don't like that we need to pass in the strings object. Strings likely isn't
@@ -138,6 +139,7 @@ class SelectionInput extends React.Component<
       multiple,
       helperText,
       error,
+      disabled,
       onChange,
       onBlur,
       strings,
@@ -157,6 +159,7 @@ class SelectionInput extends React.Component<
           value={multiSelectValue}
           helperText={helperText}
           error={error}
+          disabled={disabled}
           onChange={onChange}
           onBlur={onBlur}
         >
@@ -182,6 +185,7 @@ class SelectionInput extends React.Component<
         onBlur={onBlur}
         helperText={helperText}
         error={error}
+        disabled={disabled}
       >
         {options.map((opt, index) => (
           <option key={index} value={opt.value}>

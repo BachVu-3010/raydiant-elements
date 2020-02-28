@@ -39,6 +39,8 @@ export interface PresentationProperty {
   // Array
   singular_name?: string;
   properties?: PresentationProperty[];
+  hide?: boolean;
+  disable?: boolean;
 }
 
 export interface Strings {

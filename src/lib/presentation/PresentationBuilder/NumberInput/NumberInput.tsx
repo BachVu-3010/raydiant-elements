@@ -11,6 +11,7 @@ interface NumberInputProps {
   };
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: number) => any;
   onBlur: () => any;
 }
@@ -25,6 +26,7 @@ const NumberInput: React.SFC<NumberInputProps> = ({
   constraints,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => (
@@ -34,6 +36,7 @@ const NumberInput: React.SFC<NumberInputProps> = ({
     onChange={onChange}
     helperText={helperText}
     error={error}
+    disabled={disabled}
     min={constraints.min}
     max={constraints.max}
     onBlur={() => {
