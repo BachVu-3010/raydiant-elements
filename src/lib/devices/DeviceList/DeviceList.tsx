@@ -14,7 +14,7 @@ const styles = (theme: Theme) =>
       ...scrollable(),
 
       [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing.unit * 2,
+        padding: theme.spacing(2),
       },
     },
   });

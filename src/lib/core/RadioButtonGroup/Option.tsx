@@ -34,7 +34,7 @@ const styles = (theme: Theme) =>
     root: {
       display: 'flex',
       fontSize: theme.fontSizes.md,
-      padding: theme.spacing.unit,
+      padding: theme.spacing(1),
       alignItems: 'center',
       justifyContent: 'center',
       flex: 1,

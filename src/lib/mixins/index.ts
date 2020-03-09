@@ -22,11 +22,11 @@ export const textTruncate = (): React.CSSProperties => ({
 
 export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
   width: '100%',
-  padding: theme.spacing.unit * 4,
+  padding: theme.spacing(4),
 
   [theme.breakpoints.down('xs')]: {
-    paddingLeft: theme.spacing.unit * 2,
-    paddingRight: theme.spacing.unit * 2,
+    paddingLeft: theme.spacing(2),
+    paddingRight: theme.spacing(2),
   },
 });
 
@@ -52,7 +52,7 @@ export const tab = (
   justifyContent: 'center',
   fontFamily: theme.typography.fontFamily,
   lineHeight: 1.33,
-  padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+  padding: theme.spacing(1, 2),
   backgroundColor: 'transparent',
   border: 0,
   cursor: 'pointer',

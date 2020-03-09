@@ -9,14 +9,13 @@ import Modal from './Modal';
 
 test('Should set test ids', () => {
   const wrapper = mount(
-    <App>
-      <ThemeProvider theme={theme}>
-        <ThemeSelector color="light">
+    <ThemeProvider theme={theme}>
+      <ThemeSelector color="light">
+        <App>
           <Modal testId="testId" open={true} />
-        </ThemeSelector>
-      </ThemeProvider>
-      ,
-    </App>,
+        </App>
+      </ThemeSelector>
+    </ThemeProvider>,
   );
 
   expect(wrapper.find(testSelector('testId'))).toHaveLength(1);

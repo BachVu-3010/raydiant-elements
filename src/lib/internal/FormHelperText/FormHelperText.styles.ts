@@ -5,7 +5,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       lineHeight: 1.5,
-      marginTop: theme.spacing.unit / 2,
+      marginTop: theme.spacing(0.5),
       color: theme.input.foregroundMuted,
 
       '&$error': {

@@ -7,12 +7,12 @@ const styles = (theme: Theme) =>
       flexShrink: 0,
       display: 'flex',
       alignItems: 'center',
-      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+      padding: theme.spacing(1, 2),
       backgroundColor: theme.palette.warning.main,
       color: theme.palette.text.primary,
 
       '& > svg': {
-        marginRight: theme.spacing.unit,
+        marginRight: theme.spacing(1),
       },
     },
   });

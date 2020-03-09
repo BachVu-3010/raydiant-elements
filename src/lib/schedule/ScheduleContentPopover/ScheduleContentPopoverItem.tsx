@@ -16,8 +16,8 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       ...buttonReset(),
-      width: theme.spacing.unit * 22,
-      height: theme.spacing.unit * 15.875,
+      width: theme.spacing(22),
+      height: theme.spacing(15.875),
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -37,7 +37,7 @@ const styles = (theme: Theme) =>
     },
 
     icon: {
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(1),
     },
 
     label: {

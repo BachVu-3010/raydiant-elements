@@ -4,9 +4,9 @@ import { createStyles } from '../withStyles';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
       '& > *:not(:last-child)': {
-        marginRight: theme.spacing.unit,
+        marginRight: theme.spacing(1),
       },
     },
   });

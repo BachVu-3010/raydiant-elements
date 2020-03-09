@@ -32,21 +32,21 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
-      ...marginBetweenChildrenHorizontal(theme.spacing.unit),
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+      ...marginBetweenChildrenHorizontal(theme.spacing(1)),
     },
     content: {
       flex: 1,
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit,
-      ...marginBetweenChildrenVertical(theme.spacing.unit * 1.5),
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
+      ...marginBetweenChildrenVertical(theme.spacing(1.5)),
     },
     date: {
-      width: theme.spacing.unit * 5,
+      width: theme.spacing(5),
     },
     dayOfMonth: {
-      fontSize: theme.spacing.unit * 4.5,
+      fontSize: theme.spacing(4.5),
       marginTop: 6,
       marginBottom: 2,
       fontWeight: 300,

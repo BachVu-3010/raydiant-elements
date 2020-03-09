@@ -15,7 +15,7 @@ export const withSequenceScheduleContext = <ComponentProps extends object>(
     ComponentProps & SequenceScheduleContextProps
   >,
 ) =>
-  class extends React.Component<ComponentProps> {
+  (class extends React.Component<ComponentProps> {
     render() {
       return (
         <SequenceScheduleContext.Consumer>
@@ -28,6 +28,6 @@ export const withSequenceScheduleContext = <ComponentProps extends object>(
         </SequenceScheduleContext.Consumer>
       );
     }
-  };
+  });
 
 export default SequenceScheduleContext;

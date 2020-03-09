@@ -22,11 +22,11 @@ const styles = (theme: Theme) =>
     warning: {
       display: 'flex',
       fontSize: theme.fontSizes.sm,
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
       lineHeight: 1.5,
     },
     icon: {
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
     },
   });
 

@@ -1,12 +1,15 @@
+import { Theme } from '../../../theme';
 import { createStyles } from '../../withStyles';
 
-const styles = () =>
+const styles = (theme: Theme) =>
   createStyles({
-    root: {            
-      "& > *": {
-        marginTop: '0px'
-      }
-    },    
+    root: {
+      fontSize: theme.fontSizes.md,
+
+      '& > *': {
+        marginTop: '0px',
+      },
+    },
   });
 
 export default styles;

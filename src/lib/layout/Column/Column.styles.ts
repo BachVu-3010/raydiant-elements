@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
-      ...marginBetweenChildrenVertical(theme.spacing.unit),
+      ...marginBetweenChildrenVertical(theme.spacing(1)),
       ['& > *']: {
         flexShrink: 0,
       },
@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
       width: 'auto',
     },
     doubleMargin: {
-      ...marginBetweenChildrenVertical(theme.spacing.unit * 2),
+      ...marginBetweenChildrenVertical(theme.spacing(2)),
     },
   });
 

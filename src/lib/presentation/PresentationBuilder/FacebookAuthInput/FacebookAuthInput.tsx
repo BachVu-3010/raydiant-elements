@@ -1,9 +1,9 @@
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 import Button from '../../../core/Button';
 import Icon from '../../../core/Icon';
 import withStyles, { createStyles, WithStyles } from '../../../core/withStyles';
-import createTheme from '../../../theme/createTheme';
+import createTheme, { Theme } from '../../../theme/createTheme';
 import OAuthInput, { OAuthInputProps } from '../OAuthInput';
 
 interface FacebookAuthInputProps
@@ -29,7 +29,7 @@ const FacebookAuthInput: React.SFC<FacebookAuthInputProps> = ({
   classes,
   ...props
 }) => (
-  <MuiThemeProvider
+  <ThemeProvider<Theme>
     theme={outerTheme =>
       createTheme({
         ...outerTheme,
@@ -54,7 +54,7 @@ const FacebookAuthInput: React.SFC<FacebookAuthInputProps> = ({
         </Button>
       )}
     </OAuthInput>
-  </MuiThemeProvider>
+  </ThemeProvider>
 );
 
 export default withStyles(styles)(FacebookAuthInput);

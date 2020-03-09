@@ -20,10 +20,10 @@ export const Radio: React.SFC<RadioProps> = ({ testId, classes, ...props }) => (
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      paddingTop: theme.spacing.unit / 2,
-      paddingRight: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit / 2,
-      paddingLeft: theme.spacing.unit * 2,
+      paddingTop: theme.spacing(0.5),
+      paddingRight: theme.spacing(1),
+      paddingBottom: theme.spacing(0.5),
+      paddingLeft: theme.spacing(2),
     },
     colorPrimary: {
       color: theme.palette.text.secondary,

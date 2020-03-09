@@ -12,8 +12,8 @@ const styles = (theme: Theme) =>
     root: {
       alignItems: 'center',
       justifyContent: 'center',
-      paddingRight: theme.spacing.unit * 2,
-      paddingLeft: theme.spacing.unit * 2,
+      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(2),
       flex: 1,
     },
   });

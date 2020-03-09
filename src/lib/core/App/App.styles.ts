@@ -20,6 +20,7 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
+      fontSize: theme.fontSizes.md,
     },
   });
 

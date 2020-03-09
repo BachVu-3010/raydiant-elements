@@ -7,8 +7,8 @@ const styles = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      padding: theme.spacing.unit * 2,
-      marginLeft: -theme.spacing.unit * 2,
+      padding: theme.spacing(2),
+      marginLeft: theme.spacing(-2),
       color: theme.menu.foreground,
 
       '& > svg': {

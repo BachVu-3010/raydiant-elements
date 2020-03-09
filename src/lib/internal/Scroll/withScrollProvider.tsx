@@ -16,7 +16,7 @@ export interface ScrollProviderState {
 const withScrollProvider = <ComponentProps extends object>(
   Component: React.ComponentType<ComponentProps & ScrollProviderProps>,
 ) =>
-  class extends React.Component<ComponentProps, ScrollProviderState> {
+  (class extends React.Component<ComponentProps, ScrollProviderState> {
     ref: React.RefObject<HTMLElement> = React.createRef();
 
     state: ScrollProviderState = {
@@ -62,6 +62,6 @@ const withScrollProvider = <ComponentProps extends object>(
         </ScrollContext.Provider>
       );
     }
-  };
+  });
 
 export default withScrollProvider;

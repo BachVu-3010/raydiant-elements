@@ -51,8 +51,8 @@ const styles = (theme: Theme) =>
       alignItems: 'flex-start',
     },
     label: {
-      marginTop: theme.spacing.unit / 8,
-      marginLeft: theme.spacing.unit,
+      marginTop: theme.spacing(0.125),
+      marginLeft: theme.spacing(1),
     },
     labelDisabled: {
       cursor: 'not-allowed',

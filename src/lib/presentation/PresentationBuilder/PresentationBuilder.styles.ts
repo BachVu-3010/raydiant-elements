@@ -10,9 +10,9 @@ const styles = (theme: Theme) =>
     },
 
     inputs: {
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
   });
 

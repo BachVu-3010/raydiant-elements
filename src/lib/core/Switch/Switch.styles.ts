@@ -10,8 +10,9 @@ const styles = (theme: Theme) =>
     },
     label: {
       fontFamily: theme.typography.fontFamily,
+      fontSize: theme.fontSizes.md,
       color: theme.switch.foreground,
-      marginLeft: theme.spacing.unit / 2,
+      marginLeft: theme.spacing(0.5),
     },
     labelDisabled: {
       color: theme.switch.foregroundMuted,
@@ -25,41 +26,41 @@ const styles = (theme: Theme) =>
       // MUI Switches have extra margins to compensate for the ripple effect. We position it
       // absolutely inside a container element with the correct width / height.
       position: 'absolute',
-      top: -14,
+      top: -9,
       left: -14,
     },
     switchBase: {
       color: theme.switch.barChecked,
 
-      '& $knob': {
+      '& $thumb': {
         color: theme.switch.knob,
       },
-      '& + $bar': {
+      '& + $track': {
         backgroundColor: theme.switch.bar,
         opacity: 1,
       },
       '&$checked': {
         color: theme.switch.barChecked,
 
-        '& + $bar': {
+        '& + $track': {
           backgroundColor: theme.switch.barChecked,
           opacity: 1,
         },
       },
       '&$disabled': {
-        '& $knob': {
+        '& $thumb': {
           color: theme.switch.knobMuted,
         },
-        '& + $bar': {
+        '& + $track': {
           backgroundColor: theme.switch.bar,
           opacity: 1,
         },
       },
     },
     checked: {},
-    bar: {},
+    track: {},
     disabled: {},
-    knob: {},
+    thumb: {},
   });
 
 export default styles;

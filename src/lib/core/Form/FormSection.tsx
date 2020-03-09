@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
     },
     noPaddingBottom: {
       paddingBottom: 0,

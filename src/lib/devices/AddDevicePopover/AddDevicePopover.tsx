@@ -8,7 +8,7 @@ import AddDevice, { AddDeviceMinHeight, AddDeviceProps } from '../AddDevice';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
     },
   });
 

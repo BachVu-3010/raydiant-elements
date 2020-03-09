@@ -12,7 +12,7 @@ interface ScheduleContentPopoverProps extends WithStyles<typeof styles> {
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 44,
+      width: theme.spacing(44),
       display: 'flex',
       flexWrap: 'wrap',
     },

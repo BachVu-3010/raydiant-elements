@@ -18,8 +18,8 @@ const styles = (theme: Theme) =>
     title: {
       color: theme.palette.text.primary,
       fontSize: theme.fontSizes.xl,
-      maxWidth: theme.spacing.unit * 80,
-      padding: theme.spacing.unit * 2,
+      maxWidth: theme.spacing(80),
+      padding: theme.spacing(2),
       textAlign: 'center',
     },
 

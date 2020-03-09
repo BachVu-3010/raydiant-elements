@@ -10,19 +10,12 @@ interface AllThemes {
 
 interface ThemeProviderProps {
   theme: AllThemes;
-  sheetsManager?: any;
 }
 
 export const ThemeContext = React.createContext<ThemeProviderProps>(null);
 
-const ThemeProvider: React.SFC<ThemeProviderProps> = ({
-  theme,
-  sheetsManager,
-  children,
-}) => (
-  <ThemeContext.Provider value={{ theme, sheetsManager }}>
-    {children}
-  </ThemeContext.Provider>
+const ThemeProvider: React.SFC<ThemeProviderProps> = ({ theme, children }) => (
+  <ThemeContext.Provider value={{ theme }}>{children}</ThemeContext.Provider>
 );
 
 export default ThemeProvider;

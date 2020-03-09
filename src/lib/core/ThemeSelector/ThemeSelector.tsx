@@ -1,4 +1,4 @@
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 import { ThemeContext } from '../ThemeProvider';
 
@@ -15,10 +15,8 @@ export const ThemeSelector: React.SFC<ThemeProps> = ({ color, children }) => {
 
   return (
     <ThemeContext.Consumer>
-      {({ theme, sheetsManager }) => (
-        <MuiThemeProvider theme={theme[color]} sheetsManager={sheetsManager}>
-          {children}
-        </MuiThemeProvider>
+      {({ theme }) => (
+        <ThemeProvider theme={theme[color]}>{children}</ThemeProvider>
       )}
     </ThemeContext.Consumer>
   );

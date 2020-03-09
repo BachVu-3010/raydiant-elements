@@ -7,6 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       ...tab(theme),
       color: theme.menu.foreground,
+      fontSize: theme.fontSizes.md,
     },
     active: {
       fontWeight: 500,

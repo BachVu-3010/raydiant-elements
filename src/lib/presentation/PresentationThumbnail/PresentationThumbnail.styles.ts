@@ -44,20 +44,20 @@ const styles = (theme: Theme) =>
 
     topLeft: {
       position: 'absolute',
-      top: theme.spacing.unit,
-      left: theme.spacing.unit,
+      top: theme.spacing(1),
+      left: theme.spacing(1),
     },
 
     topRight: {
       position: 'absolute',
-      top: theme.spacing.unit,
-      right: theme.spacing.unit,
+      top: theme.spacing(1),
+      right: theme.spacing(1),
     },
 
     bottomLeft: {
       position: 'absolute',
-      bottom: theme.spacing.unit,
-      left: theme.spacing.unit,
+      bottom: theme.spacing(1),
+      left: theme.spacing(1),
     },
 
     error: {
@@ -68,7 +68,7 @@ const styles = (theme: Theme) =>
       [theme.breakpoints.up('sm')]: {
         '& > svg': {
           flexShrink: 0,
-          marginRight: theme.spacing.unit / 2,
+          marginRight: theme.spacing(0.5),
         },
       },
     },

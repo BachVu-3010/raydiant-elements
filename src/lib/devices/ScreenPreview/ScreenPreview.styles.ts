@@ -10,14 +10,14 @@ const styles = (theme: Theme) =>
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-      marginLeft: theme.spacing.unit * 2,
-      marginRight: theme.spacing.unit * 2,
+      marginLeft: theme.spacing(2),
+      marginRight: theme.spacing(2),
 
       [theme.breakpoints.up('sm')]: {
-        marginTop: theme.spacing.unit * 4,
-        marginBottom: theme.spacing.unit * 4,
-        marginLeft: theme.spacing.unit * 4,
-        marginRight: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
+        marginBottom: theme.spacing(4),
+        marginLeft: theme.spacing(4),
+        marginRight: theme.spacing(4),
       },
     },
 
@@ -30,7 +30,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       height: '3rem',
-      marginTop: theme.spacing.unit * 2,
+      marginTop: theme.spacing(2),
     },
 
     screenName: {
@@ -38,7 +38,7 @@ const styles = (theme: Theme) =>
       color: theme.palette.text.primary,
       fontWeight: 400,
       marginTop: 0,
-      marginBottom: theme.spacing.unit * 2,
+      marginBottom: theme.spacing(2),
 
       [heightUpBp]: {
         fontSize: theme.fontSizes.xl,
@@ -49,7 +49,7 @@ const styles = (theme: Theme) =>
     presentationName: {
       color: theme.palette.text.primary,
       fontSize: theme.fontSizes.md,
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(1),
     },
 
     applicationName: {

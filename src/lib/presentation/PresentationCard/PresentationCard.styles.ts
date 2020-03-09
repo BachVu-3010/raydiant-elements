@@ -5,10 +5,10 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 16,
+      width: theme.spacing(16),
 
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing.unit * 24,
+        width: theme.spacing(24),
       },
     },
 
@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
     },
 
     name: {
-      marginTop: theme.spacing.unit,
+      marginTop: theme.spacing(1),
       fontSize: theme.fontSizes.sm,
       textAlign: 'center',
       ...textTruncate(),

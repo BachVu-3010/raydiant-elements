@@ -7,7 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       flexShrink: 0,
       background: theme.popover.headerBackground,
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
       borderBottom: `1px solid ${theme.popover.borderColor}`,
       minHeight: 56,
       display: 'flex',

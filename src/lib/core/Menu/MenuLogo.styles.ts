@@ -9,7 +9,7 @@ const styles = (theme: Theme) =>
       justifyContent: 'center',
       flexShrink: 0,
       height: '100%',
-      marginRight: theme.spacing.unit * 2,
+      marginRight: theme.spacing(2),
     },
   });
 

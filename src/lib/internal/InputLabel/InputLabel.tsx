@@ -22,8 +22,6 @@ const InputLabel: React.SFC<InputLabelProps> = ({
     classes={{
       root: classes.root,
       shrink: classes.shrink,
-    }}
-    FormLabelClasses={{
       focused: classes.focused,
       error: classes.error,
       disabled: classes.disabled,

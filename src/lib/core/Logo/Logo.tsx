@@ -25,4 +25,4 @@ export const Logo: React.SFC<LogoProps> = ({
   />
 );
 
-export default withStyles(styles)(withTheme()(Logo));
+export default withStyles(styles)(withTheme(Logo));

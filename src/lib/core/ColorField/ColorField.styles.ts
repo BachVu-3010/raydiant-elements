@@ -13,7 +13,7 @@ const styles = (theme: Theme) =>
     color: {
       width: 12,
       height: 12,
-      marginRight: theme.spacing.unit / 2,
+      marginRight: theme.spacing(0.5),
       borderRadius: 100,
       border: `1px solid ${theme.button.border}`,
     },
