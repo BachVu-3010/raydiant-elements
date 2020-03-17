@@ -39,7 +39,7 @@ const DeviceListAudioDevice: React.SFC<DeviceListAudioDevice> = ({
           />
         </Hidden>
         <div>
-          <div className={classes.name}>{device.name}</div>
+          <div className={classes.name}>{device.name} [audio mode]</div>
           <ConnectionStatus
             device={device}
             wifiStrength={wifiStrength}
