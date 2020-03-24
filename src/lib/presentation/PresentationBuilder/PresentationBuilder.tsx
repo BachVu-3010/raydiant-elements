@@ -25,6 +25,7 @@ import FacebookAuthInput from './FacebookAuthInput';
 import FileInput from './FileInput';
 import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
+import ImagePickerFieldInput from './ImagePickerFieldInput/ImagePickerFieldInput';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
 import PlaylistInput from './PlaylistInput';
@@ -348,7 +349,6 @@ export class PresentationBuilder extends React.Component<
       const propertyPath = [...path, property.name];
       const propertyTypeIndex = propertyTypeIndexes[property.type] || 0;
       propertyTypeIndexes[property.type] = propertyTypeIndex + 1;
-
       return this.renderInput(
         property,
         propertyTypeIndex,
@@ -487,6 +487,20 @@ export class PresentationBuilder extends React.Component<
               this.updatePresentation(path, newValue, property)
             }
             strings={strings}
+          />
+        );
+
+      case 'selectionWithImages':
+        return (
+          <ImagePickerFieldInput
+            key={key}
+            parentValue={parentValue}
+            value={value}
+            onBlur={this.handleBlur}
+            imagesUrl={property.images_url}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
           />
         );
 

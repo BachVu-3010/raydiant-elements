@@ -1,4 +1,3 @@
-import * as cn from 'classnames';
 import * as React from 'react';
 import {
   hasMissingChildValue,
@@ -6,43 +5,41 @@ import {
   sortChildrenBySelected,
 } from '../../helpers';
 import FormHelperText from '../../internal/FormHelperText';
+import Column from '../../layout/Column';
 import withStyles, { WithStyles } from '../withStyles';
-import styles from './MultiSelectField.styles';
-import MultiSelectFieldOption, {
-  MultiSelectFieldOptionProps,
-} from './MultiSelectFieldOption';
+import styles from './ImagePickerField.styles';
+import ImagePickerFieldOption, {
+  ImagePickerFieldOptionProps,
+} from './ImagePickerFieldOption';
 
-type MultiSelectFieldChild = React.ReactElement<MultiSelectFieldOptionProps>;
+type ImagePickerFieldChild = React.ReactElement<ImagePickerFieldOptionProps>;
 
-interface MultiSelectFieldProps extends WithStyles<typeof styles> {
-  label: string;
+interface ImagePickerFieldProps extends WithStyles<typeof styles> {
   value: string[];
-  disabled?: boolean;
   error?: boolean;
   helperText?: React.ReactNode;
   onChange: (value: string[]) => void;
   onBlur: (e: React.FocusEvent<any>) => void;
-  children?: MultiSelectFieldChild[];
+  children?: ImagePickerFieldChild[];
 }
 
-interface MultiSelectFieldState {
-  orderedChildren: MultiSelectFieldChild[];
+interface ImagePickerFieldState {
+  orderedChildren: ImagePickerFieldChild[];
 }
 
-export class MultiSelectField extends React.Component<
-  MultiSelectFieldProps,
-  MultiSelectFieldState
+export class ImagePickerField extends React.Component<
+  ImagePickerFieldProps,
+  ImagePickerFieldState
 > {
-  static defaultProps: Partial<MultiSelectFieldProps> = {
-    disabled: false,
+  static defaultProps: Partial<ImagePickerFieldProps> = {
     error: false,
     helperText: '',
     children: [],
   };
 
   static getDerivedStateFromProps(
-    props: MultiSelectFieldProps,
-    state: MultiSelectFieldState,
+    props: ImagePickerFieldProps,
+    state: ImagePickerFieldState,
   ) {
     // Only reorder children on mount and when the child options have changed.
     // We don't want to reorder as the user selects items.
@@ -56,33 +53,21 @@ export class MultiSelectField extends React.Component<
       : null;
   }
 
-  state: MultiSelectFieldState = {
+  state: ImagePickerFieldState = {
     orderedChildren: [],
   };
 
   render() {
-    const {
-      label,
-      value,
-      onChange,
-      disabled,
-      helperText,
-      error,
-      classes,
-      onBlur,
-    } = this.props;
-
+    const { value, onChange, helperText, error, onBlur } = this.props;
     const { orderedChildren } = this.state;
 
     return (
-      <div className={classes.root} onBlur={onBlur}>
-        <div className={cn(classes.label, error && classes.error)}>{label}</div>
-        <div className={cn(classes.items, disabled && classes.disabled)}>
+      <div onBlur={onBlur}>
+        <Column>
           {orderedChildren.map(child => {
             const isOptionSelected = isElementSelected(value, child);
             const optionValue = child.props.value;
             return React.cloneElement(child, {
-              disabled,
               checked: isOptionSelected,
               onClick: () => {
                 if (isOptionSelected) {
@@ -93,13 +78,13 @@ export class MultiSelectField extends React.Component<
               },
             });
           })}
-        </div>
-        <FormHelperText error={error}>{helperText}</FormHelperText>
+          <FormHelperText error={error}>{helperText}</FormHelperText>
+        </Column>
       </div>
     );
   }
 }
 
-export default Object.assign(withStyles(styles)(MultiSelectField), {
-  Option: MultiSelectFieldOption,
+export default Object.assign(withStyles(styles)(ImagePickerField), {
+  Option: ImagePickerFieldOption,
 });

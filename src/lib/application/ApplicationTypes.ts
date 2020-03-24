@@ -20,6 +20,11 @@ export interface SelectionOption {
   default?: boolean;
 }
 
+export interface Image {
+  thumbnailUrl: string;
+  id: string;
+}
+
 export interface PresentationProperty {
   type: string;
   name: string;
@@ -41,6 +46,8 @@ export interface PresentationProperty {
   properties?: PresentationProperty[];
   hide?: boolean;
   disable?: boolean;
+  // SelectionWithImages
+  images_url?: string;
 }
 
 export interface Strings {

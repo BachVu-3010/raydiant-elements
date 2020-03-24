@@ -39,6 +39,7 @@ module.exports = {
         getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Icon'),
+        getCorePath('ImagePickerField'),
         getCorePath('SVGIcon'),
         getCorePath('Link'),
         getCorePath('ListField'),

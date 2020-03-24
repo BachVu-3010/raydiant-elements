@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as A from '../../../application/ApplicationTypes';
 import MultiSelectField from '../../../core/MultiSelectField';
 import SelectField from '../../../core/SelectField';
+import replacePropNameWithValue from '../../../helpers/replacePropNameWithValue';
 import * as P from '../../PresentationTypes';
 
 interface SelectionInputProps {
@@ -75,13 +76,7 @@ class SelectionInput extends React.Component<
   async fetchOptions() {
     const { optionsUrl, parentValue } = this.props;
     const defaultErrorMessage = 'Failed to load options.';
-
-    // Replace {{propName}} with the prop values in the URL.
-    //   ie. ?access_token={{accessToken}} => ?access_token=abc123
-    const url = optionsUrl.replace(
-      /\{\{(.*?)\}\}/g,
-      (_, propName) => parentValue[propName] || '',
-    );
+    const url = replacePropNameWithValue(optionsUrl, parentValue);
 
     const resp = await fetch(url);
     if (resp.ok) {
