@@ -18,6 +18,7 @@ interface SelectProps extends WithStyles<typeof styles> {
   onBlur?: React.FocusEventHandler<any>;
   onFocus?: React.FocusEventHandler<any>;
   testId?: string;
+  native: boolean;
 }
 
 const Select: React.SFC<SelectProps> = ({
@@ -30,9 +31,10 @@ const Select: React.SFC<SelectProps> = ({
   onFocus,
   classes,
   testId,
+  native,
 }) => (
   <MUISelect
-    native
+    native={native}
     value={value}
     disabled={disabled}
     fullWidth={fullWidth}

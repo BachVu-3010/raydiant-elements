@@ -12,6 +12,7 @@ export interface Constraints {
 export interface SelectionOption {
   value: string;
   name?: string;
+  thumbnailUrl?: string;
   // Label is what remote options can send instead of name.
   // We should normalize on `label` in the future.
   label?: string;

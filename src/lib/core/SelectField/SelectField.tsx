@@ -4,6 +4,7 @@ import FormHelperText from '../../internal/FormHelperText';
 import InputBackground from '../../internal/InputBackground';
 import InputLabel from '../../internal/InputLabel';
 import Select from '../../internal/Select';
+import SelectFieldItem from './SelectFieldItem';
 
 interface SelectFieldProps {
   /** The label of the text field */
@@ -24,6 +25,7 @@ interface SelectFieldProps {
   children: React.ReactNode;
   shrink?: boolean;
   testId?: string;
+  native?: boolean;
 }
 
 export const SelectField: React.SFC<SelectFieldProps> = ({
@@ -41,6 +43,7 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
   children,
   shrink,
   testId,
+  native = true,
 }) => (
   <FormControl fullWidth error={error}>
     <InputBackground>
@@ -56,6 +59,7 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
         onChange={e => onChange(e.target.value)}
         onBlur={onBlur}
         testId={testId}
+        native={native}
       >
         {children}
       </Select>
@@ -64,4 +68,6 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
   </FormControl>
 );
 
-export default SelectField;
+export default Object.assign(SelectField, {
+  Item: SelectFieldItem,
+});

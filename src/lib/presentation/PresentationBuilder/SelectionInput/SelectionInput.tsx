@@ -127,6 +127,11 @@ class SelectionInput extends React.Component<
     }
   }
 
+  getLabel(option: A.SelectionOption) {
+    const { strings } = this.props;
+    return strings[option.name] || option.name || option.label;
+  }
+
   render() {
     const {
       label,
@@ -137,7 +142,6 @@ class SelectionInput extends React.Component<
       disabled,
       onChange,
       onBlur,
-      strings,
     } = this.props;
 
     const options = this.state.options || this.props.options;
@@ -162,7 +166,7 @@ class SelectionInput extends React.Component<
             <MultiSelectField.Option
               key={index}
               value={opt.value}
-              label={strings[opt.name] || opt.name || opt.label}
+              label={this.getLabel(opt)}
             />
           ))}
         </MultiSelectField>
@@ -171,6 +175,7 @@ class SelectionInput extends React.Component<
 
     // Ensure it's not an array to appease TS.
     const singleSelectValue = Array.isArray(value) ? value[0] : value;
+    const hasThumbnails = options.some(({ thumbnailUrl }) => !!thumbnailUrl);
 
     return (
       <SelectField
@@ -181,12 +186,23 @@ class SelectionInput extends React.Component<
         helperText={helperText}
         error={error}
         disabled={disabled}
+        native={!hasThumbnails}
       >
-        {options.map((opt, index) => (
-          <option key={index} value={opt.value}>
-            {strings[opt.name] || opt.name || opt.label}
-          </option>
-        ))}
+        {options.map((opt, index) =>
+          hasThumbnails ? (
+            <SelectField.Item
+              key={index}
+              value={opt.value}
+              thumbnailUrl={opt.thumbnailUrl}
+            >
+              {this.getLabel(opt)}
+            </SelectField.Item>
+          ) : (
+            <option key={index} value={opt.value}>
+              {this.getLabel(opt)}
+            </option>
+          ),
+        )}
       </SelectField>
     );
   }
