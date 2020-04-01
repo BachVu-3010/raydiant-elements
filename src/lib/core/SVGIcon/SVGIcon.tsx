@@ -4,28 +4,25 @@ import styles from './SVGIcon.styles';
 import svgs from './svgs';
 
 export type SVGIconOptions =
-    | 'wifiFull'
-    | 'wifiHigh'
-    | 'wifiMedium'
-    | 'wifiLow'
-    | 'wifiNone'
-    | 'ethernet'
-    ;
+  | 'wifiFull'
+  | 'wifiHigh'
+  | 'wifiMedium'
+  | 'wifiLow'
+  | 'wifiNone'
+  | 'ethernet';
 
 interface SVGIconProps extends WithStyles<typeof styles> {
-    /** Icon name */
-    icon: SVGIconOptions;
-    /** Icon title */
-    title?: string;
-    /** Additional classname */
-    className?: string;
+  /** Icon name */
+  icon: SVGIconOptions;
+  /** Icon title */
+  title?: string;
+  /** Additional classname */
+  className?: string;
 }
 
-export const SVGIcon: React.SFC<SVGIconProps> = ({
-    icon,
-}) => {
-    const svg = svgs[icon];
-    return svg;
+export const SVGIcon: React.SFC<SVGIconProps> = ({ icon }) => {
+  const svg = svgs[icon];
+  return svg;
 };
 
 export default withStyles(styles)(SVGIcon);

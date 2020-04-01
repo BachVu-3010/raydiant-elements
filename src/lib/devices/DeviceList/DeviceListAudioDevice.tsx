@@ -13,8 +13,10 @@ const audioDeviceThumbnailURL =
 
 export interface DeviceListAudioDevice extends WithStyles<typeof styles> {
   device: D.Device;
-  wifiStrength?: number;
+  signalStrength?: number;
+  isOnline?: boolean;
   isEthernet?: boolean;
+  isLTE?: boolean;
   onConnectivityWizard?: () => void;
   onSettings?: () => void;
   onClick?: () => void;
@@ -23,8 +25,10 @@ export interface DeviceListAudioDevice extends WithStyles<typeof styles> {
 const DeviceListAudioDevice: React.SFC<DeviceListAudioDevice> = ({
   classes,
   device,
-  wifiStrength,
+  signalStrength,
+  isOnline,
   isEthernet,
+  isLTE,
   onConnectivityWizard,
   onSettings,
   onClick,
@@ -42,8 +46,10 @@ const DeviceListAudioDevice: React.SFC<DeviceListAudioDevice> = ({
           <div className={classes.name}>{device.name} [audio mode]</div>
           <ConnectionStatus
             device={device}
-            wifiStrength={wifiStrength}
+            signalStrength={signalStrength}
+            isOnline={isOnline}
             isEthernet={isEthernet}
+            isLTE={isLTE}
             onConnectivityWizard={onConnectivityWizard}
           />
         </div>
