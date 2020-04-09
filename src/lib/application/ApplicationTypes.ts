@@ -38,6 +38,9 @@ export interface PresentationProperty {
   multiple?: boolean;
   options?: SelectionOption[];
   options_url?: string;
+  // Radio Selection
+  radioOptions?: SelectionOption[];
+  exclusive?: boolean;
   // OAuth
   auth_url?: string;
   verify_url?: string;
