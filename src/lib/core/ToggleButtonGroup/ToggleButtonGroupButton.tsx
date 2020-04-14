@@ -8,17 +8,18 @@ export interface ToggleButtonGroupButtonProps
   extends WithStyles<typeof styles> {
   value: string;
   icon?: React.ReactNode | IconOptions;
+  disabled?: boolean;
 }
 
 export const ToggleButtonGroupButton: React.FunctionComponent<
   ToggleButtonGroupButtonProps
 > = props => {
-  const { value, children, icon } = props;
+  const { value, children, icon, disabled } = props;
   const iconElement =
     typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
 
   return (
-    <MUIToggleButton {...props} value={value}>
+    <MUIToggleButton {...props} value={value} disabled={disabled}>
       {icon ? iconElement : children}
     </MUIToggleButton>
   );
@@ -30,6 +31,7 @@ const styles = () =>
       flexGrow: 1,
       flexBasis: 0,
       minWidth: 40,
+      textTransform: 'none',
     },
   });
 

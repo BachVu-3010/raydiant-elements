@@ -34,7 +34,11 @@ class ToggleButtonGroupInput extends React.Component<
         exclusive={exclusive}
       >
         {options.map((opt, index) => (
-          <ToggleButtonGroup.Button key={index} value={opt.value}>
+          <ToggleButtonGroup.Button
+            key={index}
+            value={opt.value}
+            disabled={opt.disabled}
+          >
             {opt.thumbnailUrl ? <img src={opt.thumbnailUrl} /> : opt.label}
           </ToggleButtonGroup.Button>
         ))}

@@ -19,6 +19,7 @@ export interface SelectionOption {
   // Default can be set by a remote options url to specify the default
   // value of the input.
   default?: boolean;
+  disabled?: boolean;
 }
 
 export interface Image {
