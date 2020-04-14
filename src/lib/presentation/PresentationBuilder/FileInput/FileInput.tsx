@@ -11,6 +11,7 @@ interface FileInputProps {
   };
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: T.FileUpload, file: File) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -21,6 +22,7 @@ const FileInput: React.SFC<FileInputProps> = ({
   constraints,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => {
@@ -38,6 +40,7 @@ const FileInput: React.SFC<FileInputProps> = ({
       value={fakeFileList}
       helperText={helperText}
       error={error}
+      disabled={disabled}
       accept={constraints['content-types']}
       onBlur={onBlur}
       onChange={fileList => {

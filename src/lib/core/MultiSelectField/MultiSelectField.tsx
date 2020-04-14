@@ -1,5 +1,10 @@
 import * as cn from 'classnames';
 import * as React from 'react';
+import {
+  hasMissingChildValue,
+  isElementSelected,
+  sortChildrenBySelected,
+} from '../../helpers';
 import FormHelperText from '../../internal/FormHelperText';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './MultiSelectField.styles';
@@ -23,48 +28,6 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
 interface MultiSelectFieldState {
   orderedChildren: MultiSelectFieldChild[];
 }
-
-const isSelected = (
-  value: string[],
-  child: React.ReactElement<MultiSelectFieldOptionProps>,
-) => {
-  const optionValue = child.props.value;
-  return value.includes(optionValue);
-};
-
-const sortChildrenBySelected = (
-  value: string[],
-  children: MultiSelectFieldChild[],
-) => {
-  // We need to cast to React.ReactElement<any> here because
-  // React.ReactChild does not allow us to access child.props.
-  const array = React.Children.toArray(children) as Array<
-    React.ReactElement<MultiSelectFieldOptionProps>
-  >;
-  // Move selected items to the top of the list.
-  return array.sort((childA, childB) => {
-    if (isSelected(value, childA) && !isSelected(value, childB)) {
-      return -1;
-    } else if (!isSelected(value, childA) && isSelected(value, childB)) {
-      return 1;
-    }
-    return 0;
-  });
-};
-
-const hasMissingChildValue = (
-  prevChildren: MultiSelectFieldChild[],
-  nextChildren: MultiSelectFieldChild[],
-) => {
-  if (prevChildren.length !== nextChildren.length) return true;
-
-  return prevChildren.some(child => {
-    const nextChildWithValue = nextChildren.find(
-      nextChild => nextChild.props.value === child.props.value,
-    );
-    return !nextChildWithValue;
-  });
-};
 
 export class MultiSelectField extends React.Component<
   MultiSelectFieldProps,
@@ -116,7 +79,7 @@ export class MultiSelectField extends React.Component<
         <div className={cn(classes.label, error && classes.error)}>{label}</div>
         <div className={cn(classes.items, disabled && classes.disabled)}>
           {orderedChildren.map(child => {
-            const isOptionSelected = isSelected(value, child);
+            const isOptionSelected = isElementSelected(value, child);
             const optionValue = child.props.value;
             return React.cloneElement(child, {
               disabled,

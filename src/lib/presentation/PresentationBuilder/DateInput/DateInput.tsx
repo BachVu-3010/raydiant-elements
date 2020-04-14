@@ -6,6 +6,7 @@ interface DateInputProps {
   value: string;
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -15,6 +16,7 @@ const DateInput: React.SFC<DateInputProps> = ({
   value,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => (
@@ -22,6 +24,7 @@ const DateInput: React.SFC<DateInputProps> = ({
     label={label}
     helperText={helperText}
     error={error}
+    disabled={disabled}
     value={value}
     onChange={onChange}
     onBlur={onBlur}

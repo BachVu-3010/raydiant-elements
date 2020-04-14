@@ -8,8 +8,8 @@ const styles = (theme: Theme) =>
       height: 40,
       minWidth: 92,
       fontSize: '1rem',
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
       borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
@@ -22,7 +22,7 @@ const styles = (theme: Theme) =>
       minWidth: 0,
     },
     buttonWithIconAndLabel: {
-      paddingLeft: theme.spacing.unit * 1.5,
+      paddingLeft: theme.spacing(1.5),
     },
     label: {
       fontWeight: 400,
@@ -31,12 +31,12 @@ const styles = (theme: Theme) =>
       whiteSpace: 'nowrap',
     },
     iconWithLabel: {
-      marginRight: theme.spacing.unit,
+      marginRight: theme.spacing(1),
     },
     iconWithLabelFullWidth: {
       position: 'absolute',
       top: 0,
-      left: theme.spacing.unit * 1.5,
+      left: theme.spacing(1.5),
       height: '100%',
     },
     default: {

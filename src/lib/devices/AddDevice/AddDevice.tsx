@@ -27,11 +27,11 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      paddingRight: theme.spacing.unit * 2,
+      paddingRight: theme.spacing(2),
 
       [heightUpBp]: {
         paddingRight: 0,
-        marginBottom: theme.spacing.unit * 2,
+        marginBottom: theme.spacing(2),
       },
     },
     form: {
@@ -70,7 +70,7 @@ const styles = (theme: Theme) =>
       justifyContent: 'center',
     },
     audioOnlyLabel: {
-      marginRight: theme.spacing.unit * 2,
+      marginRight: theme.spacing(2),
     },
   });
 

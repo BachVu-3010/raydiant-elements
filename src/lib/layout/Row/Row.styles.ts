@@ -7,7 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       display: 'flex',
       width: '100%',
-      ...marginBetweenChildrenHorizontal(theme.spacing.unit),
+      ...marginBetweenChildrenHorizontal(theme.spacing(1)),
     },
     clickable: {
       cursor: 'pointer',
@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
     },
     halfMargin: {
-      ...marginBetweenChildrenHorizontal(theme.spacing.unit / 2),
+      ...marginBetweenChildrenHorizontal(theme.spacing(0.5)),
     },
   });
 

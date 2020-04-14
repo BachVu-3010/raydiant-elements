@@ -6,6 +6,7 @@ interface BooleanInputProps {
   value: boolean;
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: boolean) => any;
   onBlur: () => any;
 }
@@ -13,12 +14,14 @@ interface BooleanInputProps {
 const BooleanInput: React.SFC<BooleanInputProps> = ({
   label,
   value,
+  disabled,
   helperText,
   onChange,
 }) => (
   <Switch
     label={label}
     checked={value}
+    disabled={disabled}
     onChange={onChange}
     helperText={helperText}
   />

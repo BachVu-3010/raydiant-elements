@@ -5,7 +5,6 @@ export interface Device {
   name: string;
   description: string;
   resinUuid: string;
-  isOnline: boolean;
   screenDimensions: string;
   screenOrientation: ScreenOrientation;
   playlistId: string | null;

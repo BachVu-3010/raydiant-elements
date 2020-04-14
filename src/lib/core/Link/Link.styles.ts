@@ -6,6 +6,7 @@ const styles = (theme: Theme) =>
     root: {
       color: theme.palette.text.link,
       textDecoration: 'none',
+      fontSize: 'inherit',
 
       '&:hover': {
         textDecoration: 'underline',

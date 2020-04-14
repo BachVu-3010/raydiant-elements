@@ -16,7 +16,7 @@ export interface PresentationListItemProps
   extends WithStyles,
     PresentationThumbnailProps {
   presentation: P.Presentation;
-  onRemove: () => void;
+  onRemove?: () => void;
   testId?: string;
 }
 
@@ -35,7 +35,7 @@ class PresentationListItem extends React.Component<PresentationListItemProps> {
       lockedMessage,
       testId,
     } = this.props;
-    const shouldShowRemove = !isLocked && selected;
+    const shouldShowRemove = selected && !isLocked && !!onRemove;
     return (
       <div
         className={cn(classes.root, selected && classes.selected)}

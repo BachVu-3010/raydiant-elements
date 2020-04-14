@@ -8,6 +8,7 @@ interface SoundZoneProps {
   soundZones: P.SoundZone[];
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -52,6 +53,7 @@ class SoundZone extends React.Component<SoundZoneProps> {
       soundZones,
       helperText,
       error,
+      disabled,
       onChange,
       onBlur,
     } = this.props;
@@ -69,6 +71,7 @@ class SoundZone extends React.Component<SoundZoneProps> {
         onBlur={onBlur}
         helperText={helperText}
         error={error}
+        disabled={disabled}
       >
         {options.map(opt => (
           <option key={opt.value} value={opt.value}>

@@ -39,6 +39,7 @@ module.exports = {
         getCorePath('FileDropper'),
         getCorePath('FileField'),
         getCorePath('Icon'),
+        getCorePath('ImagePickerField'),
         getCorePath('SVGIcon'),
         getCorePath('Link'),
         getCorePath('ListField'),
@@ -50,7 +51,6 @@ module.exports = {
         getCorePath('Popover'),
         getCorePath('RecurrenceSelector'),
         getCorePath('RadioGroup'),
-        getCorePath('RadioButtonGroup'),
         getCorePath('SelectField'),
         getCorePath('SuccessIcon'),
         getCorePath('Switch'),
@@ -58,6 +58,7 @@ module.exports = {
         getCorePath('TextField'),
         getCorePath('ThemeSelector'),
         getCorePath('TimeField'),
+        getCorePath('ToggleButtonGroup'),
       ],
     },
     {

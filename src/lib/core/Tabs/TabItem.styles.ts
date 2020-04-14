@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
     },
     icon: {
       color: theme.tab.foreground,
-      margin: `${theme.spacing.unit}px auto`,
+      margin: `${theme.spacing(1)}px auto`,
     },
     label: {
       color: theme.tab.foreground,

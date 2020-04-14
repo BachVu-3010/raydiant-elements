@@ -9,6 +9,7 @@ interface TextInputProps {
   };
   helperText: React.ReactNode;
   error?: boolean;
+  disabled?: boolean;
   onChange: (value: string) => any;
   onBlur: React.FocusEventHandler<any>;
 }
@@ -19,6 +20,7 @@ const TextInput: React.SFC<TextInputProps> = ({
   constraints,
   helperText,
   error,
+  disabled,
   onChange,
   onBlur,
 }) => (
@@ -30,6 +32,7 @@ const TextInput: React.SFC<TextInputProps> = ({
     onBlur={onBlur}
     helperText={helperText}
     error={error}
+    disabled={disabled}
     maxLength={constraints.maxlength}
   />
 );

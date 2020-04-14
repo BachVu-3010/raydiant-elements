@@ -43,11 +43,11 @@ export class DateField extends React.Component<DateFieldProps> {
         <MaterialDatePicker
           value={value}
           onChange={momentDate => onChange(momentDate.format(dateFormat))}
-          onBlur={onBlur}
           TextFieldComponent={(textFieldComponentProps: any) => (
             <TextField
               {...textFieldComponentProps}
               label={label}
+              onBlur={onBlur}
               helperText={helperText}
               error={error}
               testId={testId}

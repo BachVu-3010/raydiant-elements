@@ -11,7 +11,7 @@ const styles = (theme: Theme) =>
       whiteSpace: 'nowrap',
     },
     subtitle: {
-      marginLeft: theme.spacing.unit / 2,
+      marginLeft: theme.spacing(0.5),
       color: theme.palette.text.secondary,
       whiteSpace: 'nowrap',
     },

@@ -6,8 +6,8 @@ import Column from '../../layout/Column';
 import Row from '../../layout/Row/index';
 import * as S from '../../sequence/sequenceTypes';
 import Text from '../../typography/Text';
-import RadioButtonGroup from '../RadioButtonGroup';
 import SelectField from '../SelectField';
+import ToggleButtonGroup from '../ToggleButtonGroup';
 
 export interface RecurrenceSelectorProps extends WithStyles {
   onChange?: (recurrenceRule: S.RecurrenceRule) => any;
@@ -53,17 +53,17 @@ export class RecurrenceSelector extends React.Component<
     recurrenceRule: { ...initialValues, ...this.props.recurrenceRule },
   };
 
-  componentWillMount() {
-    this.props.onChange(this.state.recurrenceRule);
-  }
-
   updateRecurrenceRule = (recurrenceRule: Partial<S.RecurrenceRule>) => {
-    this.setState(
-      { recurrenceRule: { ...this.state.recurrenceRule, ...recurrenceRule } },
-      () => {
-        this.props.onChange(this.state.recurrenceRule);
-      },
-    );
+    const updatedRecurrenceRule = {
+      ...this.state.recurrenceRule,
+      ...recurrenceRule,
+    };
+
+    this.setState({
+      recurrenceRule: updatedRecurrenceRule,
+    });
+
+    this.props.onChange(updatedRecurrenceRule);
   };
 
   handleFrequencyChange = (value: S.Frequency) => {
@@ -155,19 +155,18 @@ export class RecurrenceSelector extends React.Component<
             </SelectField>
           )}
           {freq === S.Frequency.weekly && (
-            <RadioButtonGroup
+            <ToggleButtonGroup
+              value={byday}
               onChange={(value: Array<keyof typeof S.DaysOfWeek>) =>
                 this.updateRecurrenceRule({ byday: value })
               }
-              selectedValues={byday}
-              testId={`${testId}-byday`}
             >
               {Object.entries(S.DaysOfWeek).map(([value, label]) => (
-                <RadioButtonGroup.Option key={value} value={value}>
+                <ToggleButtonGroup.Button key={value} value={value}>
                   {label}
-                </RadioButtonGroup.Option>
+                </ToggleButtonGroup.Button>
               ))}
-            </RadioButtonGroup>
+            </ToggleButtonGroup>
           )}
         </div>
       </Column>

@@ -10,7 +10,14 @@ initialState = {
 <App>
   <DeviceList color="light">
     {devices.map(d => {
-      return (
+      return d.isAudioOnly ? (
+        <DeviceList.AudioDevice
+          key={d.id}
+          device={d}
+          wifiStrength={d.wifiStrength}
+          isEthernet={d.isEthernet}
+        />
+      ) : (
         <DeviceList.Device
           key={d.id}
           device={d}

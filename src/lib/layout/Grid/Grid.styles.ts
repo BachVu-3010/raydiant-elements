@@ -1,13 +1,11 @@
 import { createStyles } from '../../core/withStyles';
-import { scrollable } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      padding: theme.spacing.unit * 2,
-      ...scrollable(),
+      padding: theme.spacing(2),
     },
 
     grid: {
@@ -15,7 +13,7 @@ const styles = (theme: Theme) =>
       flexWrap: 'wrap',
       justifyContent: 'space-between',
       alignItems: 'center',
-      margin: -theme.spacing.unit,
+      margin: -theme.spacing(1),
     },
 
     center: {

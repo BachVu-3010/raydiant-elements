@@ -25,6 +25,7 @@ import FacebookAuthInput from './FacebookAuthInput';
 import FileInput from './FileInput';
 import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
+import ImagePickerFieldInput from './ImagePickerFieldInput/ImagePickerFieldInput';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
 import PlaylistInput from './PlaylistInput';
@@ -36,13 +37,26 @@ import SoundZoneInput from './SoundZoneInput';
 import StringInput from './StringInput';
 import TextInput from './TextInput';
 import ThemeInput from './ThemeInput';
-import { getErrorAtPath, isPathEqual } from './utilities';
+import ToggleButtonGroupInput from './ToggleButtonGroupInput/ToggleButtonGroupInput';
+import { getErrorAtPath, getPropertyAtPath, isPathEqual } from './utilities';
 import validatePresentation from './validatePresentation';
+
+// These are "fake" presentation properties for name and duration so they can
+// be treated the same as application variables when updating the presentation state.
+const namePath = ['name'];
+const durationPath = ['duration'];
+const nameProp = { type: 'string', name: 'name' };
+const durationProp = { type: 'number', name: 'duration' };
+
+interface SelectedPropertyPath {
+  propertyPath: P.Path;
+  selectedPath: P.Path;
+}
 
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
   initialPresentationState?: P.Presentation;
-  appVersion?: A.AppVersion;
+  appVersion?: A.ApplicationVersion;
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
   playlists?: P.Playlist[];
@@ -60,6 +74,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
     presentation: P.Presentation,
     fileUploads: FileUpload[],
   ) => void;
+  onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
   children?: (
     presentation: P.Presentation,
     errors: P.PresentationError[],
@@ -108,6 +123,7 @@ export class PresentationBuilder extends React.Component<
   };
 
   queuedPresentationPreview: P.Presentation | null = null;
+  selectedPropertyPaths: SelectedPropertyPath[] = [];
 
   componentDidMount() {
     const { presentation, appVersion } = this.props;
@@ -150,32 +166,34 @@ export class PresentationBuilder extends React.Component<
     //   ie. #applicationVariables.headingText=text => [['applicationVariables.headingText', 'SomeText'], ...]
     const hashParams = hash.split(/[&#]/).map(paramStr => paramStr.split('='));
 
-    appVersion.presentationProperties.forEach(property => {
-      // Don't support hash parameters for array and file properties.
-      if (property.type === 'array' || property.type === 'file') {
-        return;
+    hashParams.forEach(hashParam => {
+      if (hashParam.length !== 2) return;
+
+      const path: Path = hashParam[0].split('.').filter(pathPart => !!pathPart);
+      if (!path.length) return;
+
+      // Try to find the property at this path.
+      let property: A.PresentationProperty;
+      if (path[0] === 'applicationVariables') {
+        property = getPropertyAtPath(appVersion.presentationProperties, path);
+      } else if (isPathEqual(path, namePath)) {
+        property = nameProp;
+      } else if (isPathEqual(path, durationPath)) {
+        property = durationProp;
       }
 
-      const path = ['applicationVariables', property.name];
-      const pathStr = path.join('.');
-      const hashParamAtPath = hashParams.find(
-        ([hashPath]) => hashPath === pathStr,
-      );
-      if (hashParamAtPath) {
-        let newValue: any = decodeURIComponent(hashParamAtPath[1]);
-        if (property.type === 'boolean') {
-          if (newValue.toLowerCase() === 'false') {
-            newValue = false;
-          } else if (newValue.toLowerCase() === 'true') {
-            newValue = true;
-          } else {
-            newValue = undefined;
-          }
-        }
+      if (!property) return;
 
-        if (newValue !== undefined) {
-          this.updatePresentation(path, newValue, property, undefined, true);
-        }
+      let value: any = decodeURIComponent(hashParam[1]);
+      try {
+        value = JSON.parse(value);
+      } catch (err) {
+        // If we can't parse valid JSON, assume a string value is passed in.
+        // This allows the hash param to omit quotes (ie. #headingText=text)
+      }
+
+      if (value !== undefined) {
+        this.updatePresentation(path, value, property, undefined, true);
       }
     });
 
@@ -293,6 +311,33 @@ export class PresentationBuilder extends React.Component<
     return fileUploads;
   }
 
+  setSelectedPaths(propertyPath: P.Path, selectedPath: P.Path) {
+    const { onSelectedPathChange } = this.props;
+
+    if (!onSelectedPathChange) return;
+
+    let selectedPropertyAtPath = this.selectedPropertyPaths.find(
+      selectedPropertyPath =>
+        isPathEqual(selectedPropertyPath.propertyPath, propertyPath),
+    );
+
+    if (selectedPropertyAtPath) {
+      // Remove existing selected path at property.
+      this.selectedPropertyPaths = this.selectedPropertyPaths.filter(
+        selectedPropertyPath => selectedPropertyPath !== selectedPropertyAtPath,
+      );
+    }
+
+    selectedPropertyAtPath = { propertyPath, selectedPath };
+
+    this.selectedPropertyPaths = [
+      ...this.selectedPropertyPaths,
+      selectedPropertyAtPath,
+    ];
+
+    onSelectedPathChange(this.selectedPropertyPaths);
+  }
+
   renderApplicationVariables(
     appVars: P.ApplicationVariables,
     properties: A.PresentationProperty[],
@@ -305,7 +350,6 @@ export class PresentationBuilder extends React.Component<
       const propertyPath = [...path, property.name];
       const propertyTypeIndex = propertyTypeIndexes[property.type] || 0;
       propertyTypeIndexes[property.type] = propertyTypeIndex + 1;
-
       return this.renderInput(
         property,
         propertyTypeIndex,
@@ -342,6 +386,7 @@ export class PresentationBuilder extends React.Component<
     const key = property.name;
     const label = strings[property.name] || property.name;
     const constraints: A.Constraints = property.constraints || {};
+    const isDisabled = !!property.disable;
 
     const inputError = getErrorAtPath(errors, path);
     const hasError = !!inputError;
@@ -352,6 +397,10 @@ export class PresentationBuilder extends React.Component<
       inputError ? inputError : '',
     );
 
+    if (property.hide) {
+      return null;
+    }
+
     switch (property.type) {
       case 'string':
         return (
@@ -361,6 +410,7 @@ export class PresentationBuilder extends React.Component<
             value={value}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             constraints={constraints}
             onBlur={this.handleBlur}
             onChange={newValue =>
@@ -377,6 +427,7 @@ export class PresentationBuilder extends React.Component<
             value={value}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             constraints={constraints}
             onBlur={this.handleBlur}
             onChange={newValue =>
@@ -394,6 +445,7 @@ export class PresentationBuilder extends React.Component<
             defaultValue={property.default}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             constraints={constraints}
             onBlur={this.handleBlur}
             onChange={newValue =>
@@ -410,6 +462,7 @@ export class PresentationBuilder extends React.Component<
             value={value}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
@@ -429,11 +482,45 @@ export class PresentationBuilder extends React.Component<
             optionsUrl={property.options_url}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
             strings={strings}
+          />
+        );
+
+      case 'toggleButtonGroup':
+        return (
+          <ToggleButtonGroupInput
+            key={key}
+            label={label}
+            value={value}
+            options={property.options}
+            onBlur={this.handleBlur}
+            onChange={newValue => {
+              // Enforce at least one button to be active
+              if (newValue !== null) {
+                this.updatePresentation(path, newValue, property);
+              }
+            }}
+            exclusive={property.exclusive}
+            strings={strings}
+          />
+        );
+
+      case 'selectionWithImages':
+        return (
+          <ImagePickerFieldInput
+            key={key}
+            parentValue={parentValue}
+            value={value}
+            onBlur={this.handleBlur}
+            imagesUrl={property.images_url}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
           />
         );
 
@@ -445,6 +532,7 @@ export class PresentationBuilder extends React.Component<
             value={value}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
@@ -460,6 +548,7 @@ export class PresentationBuilder extends React.Component<
             value={value}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             constraints={constraints}
             onBlur={this.handleBlur}
             onChange={(newValue, file) =>
@@ -480,6 +569,7 @@ export class PresentationBuilder extends React.Component<
             verifyQsParam={property.verify_qs_param}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
@@ -498,6 +588,7 @@ export class PresentationBuilder extends React.Component<
             verifyQsParam={property.verify_qs_param}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
@@ -516,6 +607,7 @@ export class PresentationBuilder extends React.Component<
             verifyQsParam={property.verify_qs_param}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
@@ -531,6 +623,7 @@ export class PresentationBuilder extends React.Component<
             themes={themes}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(['themeId'], newValue, property)
@@ -547,6 +640,7 @@ export class PresentationBuilder extends React.Component<
             playlists={playlists}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             propertyTypeIndex={propertyTypeIndex}
             onBlur={this.handleBlur}
             onChange={newValue =>
@@ -566,6 +660,7 @@ export class PresentationBuilder extends React.Component<
             soundZones={soundZones}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
@@ -586,6 +681,7 @@ export class PresentationBuilder extends React.Component<
             properties={property.properties}
             helperText={helperText}
             error={hasError}
+            disabled={isDisabled}
             constraints={constraints}
             strings={strings}
             errors={errors}
@@ -604,6 +700,9 @@ export class PresentationBuilder extends React.Component<
                 )}
               </Column>
             )}
+            onSelectedPathChange={selectedPath =>
+              this.setSelectedPaths(path, selectedPath)
+            }
           />
         );
 
@@ -714,12 +813,6 @@ export class PresentationBuilder extends React.Component<
       ? validatePresentation(presentation, appVersion, minDuration)
       : [];
 
-    // These are "fake" presentation properties for name and duration so they can
-    // be treated the same as application variables when updating the presentation state.
-    const namePath = ['name'];
-    const durationPath = ['duration'];
-    const nameProp = { type: 'string', name: 'name' };
-    const durationProp = { type: 'number', name: 'duration' };
     const nameError = getErrorAtPath(errors, namePath);
     const durationError = getErrorAtPath(errors, durationPath);
 

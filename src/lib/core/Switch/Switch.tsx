@@ -40,8 +40,8 @@ export const Switch: React.SFC<SwitchProps> = ({
             classes={{
               switchBase: classes.switchBase,
               checked: classes.checked,
-              icon: classes.knob,
-              bar: classes.bar,
+              thumb: classes.thumb,
+              track: classes.track,
               disabled: classes.disabled,
             }}
             inputProps={{

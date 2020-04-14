@@ -1,8 +1,11 @@
+import { Theme } from '../../../theme';
 import { createStyles } from '../../withStyles';
 
-const styles = () =>
+const styles = (theme: Theme) =>
   createStyles({
-    root: {},
+    root: {
+      fontSize: theme.fontSizes.md,
+    },
   });
 
 export default styles;

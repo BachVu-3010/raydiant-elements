@@ -16,20 +16,20 @@ const styles = (theme: Theme) =>
       ...buttonReset(),
       flex: 1,
       minHeight: '1em',
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit / 2,
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(0.5),
     },
     icon: {
       height: 14,
       width: 'auto',
-      padding: `0 ${theme.spacing.unit}px`,
+      padding: theme.spacing(0, 1),
       cursor: 'move',
     },
     add: {
       ...buttonReset(),
       display: 'block',
       width: '100%',
-      padding: theme.spacing.unit * 2,
+      padding: theme.spacing(2),
     },
     addDisabled: {
       opacity: 0.5,
@@ -38,7 +38,7 @@ const styles = (theme: Theme) =>
     addIcon: {
       display: 'block',
       margin: '0 auto',
-      marginBottom: theme.spacing.unit / 2,
+      marginBottom: theme.spacing(0.5),
     },
     addLabel: {
       ...textTruncate(),

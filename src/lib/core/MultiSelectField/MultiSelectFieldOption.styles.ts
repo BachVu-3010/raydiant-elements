@@ -8,7 +8,7 @@ const styles = (theme: Theme) =>
       ...buttonReset(),
       boxSizing: 'border-box',
       width: '100%',
-      padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+      padding: theme.spacing(1, 2),
     },
     disabled: {
       cursor: 'not-allowed',

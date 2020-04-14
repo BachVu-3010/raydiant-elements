@@ -7,17 +7,17 @@ const styles = (theme: Theme) =>
       height: 20,
       display: 'flex',
       alignItems: 'center',
-      marginBottom: theme.spacing.unit / 2,
+      marginBottom: theme.spacing(0.5),
     },
     backIcon: {
       height: '100%',
       width: 16,
       marginLeft: -2, // Compensate for padding in SVG.
-      marginRight: theme.spacing.unit / 2,
+      marginRight: theme.spacing(0.5),
     },
     separator: {
-      marginLeft: theme.spacing.unit / 2,
-      marginRight: theme.spacing.unit / 2,
+      marginLeft: theme.spacing(0.5),
+      marginRight: theme.spacing(0.5),
     },
   });
 

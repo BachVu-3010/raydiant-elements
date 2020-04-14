@@ -15,8 +15,10 @@ export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   device: D.Device;
   playlists: D.Playlist[];
   thumbnail?: string;
-  wifiStrength?: number;
+  signalStrength?: number;
+  isOnline?: boolean;
   isEthernet?: boolean;
+  isLTE?: boolean;
   needsPublish?: boolean;
   disablePublish: boolean;
   onSelectPlaylist: (playlistId: string) => void;
@@ -32,8 +34,10 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
   classes,
   device,
   playlists,
-  wifiStrength,
+  signalStrength,
+  isOnline,
   isEthernet,
+  isLTE,
   needsPublish,
   disablePublish,
   onSelectPlaylist,
@@ -76,8 +80,10 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
 
       <ConnectionStatus
         device={device}
-        wifiStrength={wifiStrength}
+        signalStrength={signalStrength}
+        isOnline={isOnline}
         isEthernet={isEthernet}
+        isLTE={isLTE}
         onConnectivityWizard={onConnectivityWizard}
       />
     </Column>
@@ -89,8 +95,10 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   device,
   playlists,
   thumbnail,
-  wifiStrength,
+  signalStrength,
+  isOnline,
   isEthernet,
+  isLTE,
   needsPublish,
   disablePublish,
   onSelectPlaylist,
@@ -116,8 +124,10 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
           <div className={classes.name}>{device.name}</div>
           <ConnectionStatus
             device={device}
-            wifiStrength={wifiStrength}
+            signalStrength={signalStrength}
+            isOnline={isOnline}
             isEthernet={isEthernet}
+            isLTE={isLTE}
             onConnectivityWizard={onConnectivityWizard}
           />
         </div>

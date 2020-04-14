@@ -1,10 +1,14 @@
 import * as React from 'react';
 import * as T from '../../PresentationTypes';
 
-export interface InjectedSelectedPathProps {
+export interface InjectedProps {
   selectedPath: T.Path;
   prevSelectedPath: T.Path;
-  setSelectedPath: (path: T.Path) => any;
+  setSelectedPath: (path: T.Path) => void;
+}
+
+export interface AdditionalProps {
+  onSelectedPathChange: (path: T.Path) => void;
 }
 
 interface WithSelectedPathState {
@@ -19,15 +23,15 @@ interface WithSelectedPathState {
 type Omit<O, K> = Pick<O, Exclude<keyof O, K>>;
 type Subtract<O, K> = Omit<O, keyof K>;
 
-const SelectedPathContext = React.createContext<InjectedSelectedPathProps>(
-  null,
-);
+const SelectedPathContext = React.createContext<InjectedProps>(null);
 
 export default function withSelectedPath<OriginalProps extends {}>(
-  Component: React.ComponentType<OriginalProps & InjectedSelectedPathProps>,
-): React.ComponentClass<Subtract<OriginalProps, InjectedSelectedPathProps>> {
+  Component: React.ComponentType<OriginalProps & InjectedProps>,
+): React.ComponentClass<
+  Subtract<OriginalProps, InjectedProps> & AdditionalProps
+> {
   class WrappedComponent extends React.Component<
-    OriginalProps & InjectedSelectedPathProps,
+    OriginalProps & AdditionalProps,
     WithSelectedPathState
   > {
     state = {
@@ -40,6 +44,8 @@ export default function withSelectedPath<OriginalProps extends {}>(
         selectedPath,
         prevSelectedPath: state.selectedPath,
       }));
+
+      this.props.onSelectedPathChange(selectedPath);
     };
 
     render() {

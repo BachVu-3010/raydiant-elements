@@ -18,24 +18,24 @@ const styles = (theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       height: 192,
-      marginTop: theme.spacing.unit * 2,
+      marginTop: theme.spacing(2),
 
       [theme.breakpoints.up('sm')]: {
         flex: 1,
         height: 'auto',
-        margin: theme.spacing.unit * 2,
+        margin: theme.spacing(2),
       },
 
       [theme.breakpoints.up('md')]: {
-        margin: theme.spacing.unit * 4,
+        margin: theme.spacing(4),
       },
     },
 
     footer: {
       display: 'flex',
       alignItems: 'stretch',
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
     },
 
     app: {
@@ -47,8 +47,8 @@ const styles = (theme: Theme) =>
 
     appIcon: {
       flexShrink: 0,
-      height: theme.spacing.unit * 6,
-      width: theme.spacing.unit * 6,
+      height: theme.spacing(6),
+      width: theme.spacing(6),
       borderRadius: 10,
       overflow: 'hidden',
       marginRight: 12,
@@ -71,7 +71,7 @@ const styles = (theme: Theme) =>
     appDescription: {
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.fontSizes.sm,
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(1),
     },
   });
 

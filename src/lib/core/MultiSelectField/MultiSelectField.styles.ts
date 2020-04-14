@@ -12,7 +12,7 @@ const styles = (theme: Theme) =>
       // the user can scroll.
       height: 104,
       boxSizing: 'border-box',
-      padding: `${theme.spacing.unit}px 0px`,
+      padding: theme.spacing(1, 0),
       backgroundColor: theme.palette.background.inset,
       borderRadius: theme.borderRadius.sm,
       boxShadow: 'inset 0px 1px 5px rgba(0, 0, 0, 0.2)',
@@ -21,7 +21,7 @@ const styles = (theme: Theme) =>
     label: {
       fontSize: theme.fontSizes.sm,
       color: theme.palette.text.secondary,
-      marginBottom: theme.spacing.unit / 2,
+      marginBottom: theme.spacing(0.5),
     },
     disabled: {
       overflow: 'hidden',

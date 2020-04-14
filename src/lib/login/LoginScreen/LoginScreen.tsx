@@ -31,7 +31,7 @@ export const LoginScreen: React.SFC<LoginScreenProps> = ({
   </OneThirdLayout>
 );
 
-export default Object.assign(withStyles(styles)(withTheme()(LoginScreen)), {
+export default Object.assign(withStyles(styles)(withTheme(LoginScreen)), {
   Header: LoginScreenHeader,
   Content: LoginScreenContent,
 });

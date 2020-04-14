@@ -2,9 +2,6 @@
 initialState = {
   countries: ['US', 'CA'],
 };
-const onChange = e => {
-  setState({ [e.target.name]: e.target.value });
-};
 
 const countries = [
   { name: 'Australia', code: 'AU' },

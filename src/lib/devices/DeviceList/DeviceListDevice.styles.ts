@@ -5,21 +5,21 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       position: 'relative',
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
-      paddingTop: theme.spacing.unit,
-      paddingBottom: theme.spacing.unit,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(1),
       background: theme.palette.background.default,
       borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
 
       '&:first-child': {
-        borderTopLeftRadius: theme.spacing.unit,
-        borderTopRightRadius: theme.spacing.unit,
+        borderTopLeftRadius: theme.spacing(1),
+        borderTopRightRadius: theme.spacing(1),
       },
 
       '&:last-child': {
-        borderBottomLeftRadius: theme.spacing.unit,
-        borderBottomRightRadius: theme.spacing.unit,
+        borderBottomLeftRadius: theme.spacing(1),
+        borderBottomRightRadius: theme.spacing(1),
       },
 
       [theme.breakpoints.down('xs')]: {
@@ -53,7 +53,7 @@ const styles = (theme: Theme) =>
 
     name: {
       fontSize: theme.fontSizes.lg,
-      marginBottom: theme.spacing.unit,
+      marginBottom: theme.spacing(1),
 
       [theme.breakpoints.down('xs')]: {
         marginBottom: 0,

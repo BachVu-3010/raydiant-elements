@@ -6,8 +6,8 @@ const styles = (theme: Theme) =>
     root: {
       width: '100%',
       height: 68,
-      paddingLeft: theme.spacing.unit * 4,
-      paddingRight: theme.spacing.unit * 4,
+      paddingLeft: theme.spacing(4),
+      paddingRight: theme.spacing(4),
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
@@ -20,14 +20,14 @@ const styles = (theme: Theme) =>
         : '',
 
       [theme.breakpoints.down('xs')]: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2,
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
       },
     },
 
     condensed: {
-      paddingLeft: theme.spacing.unit * 2,
-      paddingRight: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
     },
 
     bottom: {

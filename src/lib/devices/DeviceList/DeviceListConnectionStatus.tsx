@@ -10,8 +10,10 @@ import * as D from '../DeviceTypes';
 
 interface ConnectionStatusProps {
   device: D.Device;
-  wifiStrength?: number;
+  signalStrength?: number;
   isEthernet?: boolean;
+  isLTE?: boolean;
+  isOnline?: boolean;
   onConnectivityWizard?: () => void;
 }
 
@@ -19,8 +21,10 @@ export const NEW_PLAYLIST_VALUE = 'new';
 
 const ConnectionStatus: React.SFC<ConnectionStatusProps> = ({
   device,
-  wifiStrength,
+  signalStrength,
   isEthernet,
+  isLTE,
+  isOnline,
   onConnectivityWizard,
 }) => {
   if (!device.resinUuid) {
@@ -29,15 +33,16 @@ const ConnectionStatus: React.SFC<ConnectionStatusProps> = ({
 
   return (
     <Row halfMargin center>
-      {device.isOnline ? <SuccessIcon /> : <AlertIcon />}
-      {device.isOnline && (
+      {isOnline ? <SuccessIcon /> : <AlertIcon />}
+      {isOnline && (
         <ConnectionIndicator
-          wifiStrength={wifiStrength}
+          signalStrength={signalStrength}
           isEthernet={isEthernet}
+          isLTE={isLTE}
         />
       )}
-      {device.isOnline ? <Text small>Online</Text> : <Text small>Offline</Text>}
-      {!device.isOnline && onConnectivityWizard && (
+      {isOnline ? <Text small>Online</Text> : <Text small>Offline</Text>}
+      {!isOnline && onConnectivityWizard && (
         <Text small>
           <Link onClick={stopPropagation(onConnectivityWizard)}>
             Need help?

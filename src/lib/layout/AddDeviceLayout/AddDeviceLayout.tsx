@@ -10,10 +10,10 @@ const styles = (theme: Theme) =>
       flex: 1,
       display: 'flex',
       flexDirection: 'column',
-      padding: `${theme.spacing.unit * 4}px ${theme.spacing.unit * 2}px`,
+      padding: `${theme.spacing(4)}px ${theme.spacing(2)}px`,
 
       [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing.unit * 4,
+        padding: theme.spacing(4),
         alignItems: 'center',
         justifyContent: 'center',
       },

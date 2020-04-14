@@ -5,11 +5,11 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       display: 'block',
-      paddingTop: theme.spacing.unit * 2,
-      paddingBottom: theme.spacing.unit * 2,
+      paddingTop: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
       [theme.breakpoints.up('sm')]: {
-        paddingLeft: theme.spacing.unit * 2,
-        paddingRight: theme.spacing.unit * 2,
+        paddingLeft: theme.spacing(2),
+        paddingRight: theme.spacing(2),
       },
     },
     inline: {

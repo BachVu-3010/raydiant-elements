@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
     assetContainer: {
       flex: 1,
       backgroundImage: theme.palette.background.gradient,
-      padding: theme.spacing.unit * 5,
+      padding: theme.spacing(5),
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',

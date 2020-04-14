@@ -18,12 +18,13 @@ const getUniquePresentationId = (presentationId: string, index: number) => {
 
 interface RenderProps<T extends P.Presentation> {
   presentation: T;
-  onRemove: () => void;
+  onRemove?: () => void;
   itemId: string;
 }
 
 export interface PresentationsListProps<T extends P.Presentation> {
   presentations?: T[];
+  disabled?: boolean;
   onOrderChange?: (
     presentations: string[],
     // passing the updated selected item id so that the
@@ -111,9 +112,21 @@ export class PresentationsList<
       onOrderChange(presentationIdsUpdated);
     });
   };
+
   render() {
-    const { children, presentations } = this.props;
+    const { children, presentations, disabled } = this.props;
     const { presentationIds } = this.state;
+
+    if (disabled) {
+      return presentationIds.map((id, i) => (
+        <div key={getUniquePresentationId(id, i)}>
+          {children({
+            presentation: presentations.find(p => p.id === id),
+            itemId: getUniquePresentationId(id, i),
+          })}
+        </div>
+      ));
+    }
 
     return (
       <DragDropContext

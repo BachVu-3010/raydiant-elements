@@ -1,8 +1,8 @@
-import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 import Button from '../../../core/Button';
 import withStyles, { createStyles, WithStyles } from '../../../core/withStyles';
-import createTheme from '../../../theme/createTheme';
+import createTheme, { Theme } from '../../../theme/createTheme';
 import OAuthInput, { OAuthInputProps } from '../OAuthInput';
 
 interface GoogleAuthInputProps
@@ -31,7 +31,7 @@ const GoogleAuthInput: React.SFC<GoogleAuthInputProps> = ({
   classes,
   ...props
 }) => (
-  <MuiThemeProvider
+  <ThemeProvider<Theme>
     theme={outerTheme =>
       createTheme({
         ...outerTheme,
@@ -54,7 +54,7 @@ const GoogleAuthInput: React.SFC<GoogleAuthInputProps> = ({
         </Button>
       )}
     </OAuthInput>
-  </MuiThemeProvider>
+  </ThemeProvider>
 );
 
 export default withStyles(styles)(GoogleAuthInput);

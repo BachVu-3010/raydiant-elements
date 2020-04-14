@@ -8,23 +8,26 @@ import * as A from '../ApplicationTypes';
 import ApplicationCTA from './ApplicationCTA';
 
 test('Should set test ids', () => {
-  const application1: A.AppVersion = {
+  const application1: A.Application = {
     id: 'id1',
-    name: 'name',
-    presentationProperties: [],
-    thumbnailUrl:
-      'https://apps-repository.staging.getmira.com/3390b318-e587-42ae-8dac-6bcb2c1c36be/1.3.3/thumbnail.svg',
-    strings: {
-      callToAction: 'Add Menu',
+    currentAppVersion: {
+      id: 'id1',
+      name: 'name',
+      presentationProperties: [],
+      thumbnailUrl:
+        'https://apps-repository.staging.getmira.com/3390b318-e587-42ae-8dac-6bcb2c1c36be/1.3.3/thumbnail.svg',
+      strings: {
+        callToAction: 'Add Menu',
+      },
     },
   };
 
-  const application2: A.AppVersion = {
+  const application2: A.Application = {
     ...application1,
     id: 'id2',
   };
 
-  const application3: A.AppVersion = {
+  const application3: A.Application = {
     ...application1,
     id: 'id3',
   };

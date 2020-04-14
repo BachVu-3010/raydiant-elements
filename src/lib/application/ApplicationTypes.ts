@@ -12,12 +12,18 @@ export interface Constraints {
 export interface SelectionOption {
   value: string;
   name?: string;
+  thumbnailUrl?: string;
   // Label is what remote options can send instead of name.
   // We should normalize on `label` in the future.
   label?: string;
   // Default can be set by a remote options url to specify the default
   // value of the input.
   default?: boolean;
+}
+
+export interface Image {
+  thumbnailUrl: string;
+  id: string;
 }
 
 export interface PresentationProperty {
@@ -32,6 +38,9 @@ export interface PresentationProperty {
   multiple?: boolean;
   options?: SelectionOption[];
   options_url?: string;
+  // Radio Selection
+  radioOptions?: SelectionOption[];
+  exclusive?: boolean;
   // OAuth
   auth_url?: string;
   verify_url?: string;
@@ -39,6 +48,10 @@ export interface PresentationProperty {
   // Array
   singular_name?: string;
   properties?: PresentationProperty[];
+  hide?: boolean;
+  disable?: boolean;
+  // SelectionWithImages
+  images_url?: string;
 }
 
 export interface Strings {
@@ -50,16 +63,22 @@ export interface Strings {
   [key: string]: string;
 }
 
-export interface AppVersion {
+export interface ApplicationVersion {
   id: string;
   name: string;
   presentationProperties: PresentationProperty[];
   strings: Strings;
   thumbnailUrl?: string;
   iconUrl?: string;
+  websiteUrl?: string;
   // configurable_duration is deprecated in favour of all Mira apps now being
   // dynamic duration (responsible for firing their own onComplete). We still
   // need to support it for legacy apps and embedded apps.
   hasConfigurableDuration?: boolean;
   embeddedUrlFormat?: string;
+}
+
+export interface Application {
+  id: string;
+  currentAppVersion: ApplicationVersion;
 }

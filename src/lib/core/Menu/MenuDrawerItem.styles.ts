@@ -7,7 +7,7 @@ const styles = (theme: Theme) =>
     root: {
       ...tab(theme),
       alignItems: 'flex-start',
-      padding: `${theme.spacing.unit * 1.5}px ${theme.spacing.unit * 10}px`,
+      padding: `${theme.spacing(1.5)}px ${theme.spacing(10)}px`,
       color: theme.menu.foreground,
       border: 0,
     },

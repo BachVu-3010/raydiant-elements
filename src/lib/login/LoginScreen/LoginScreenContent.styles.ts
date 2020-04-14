@@ -10,8 +10,8 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-between',
-      marginTop: theme.spacing.unit * 4,
-      marginBottom: theme.spacing.unit * 4,
+      marginTop: theme.spacing(4),
+      marginBottom: theme.spacing(4),
       ...scrollable(),
     },
   });

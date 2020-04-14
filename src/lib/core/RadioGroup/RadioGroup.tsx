@@ -25,7 +25,7 @@ export const RadioGroup: React.SFC<RadioGroupProps> = ({
   classes,
   testId,
 }) => (
-  <MUIFormControl component="fieldset">
+  <MUIFormControl>
     {label && (
       <MUIFormLabel component="legend" classes={{ root: classes.label }}>
         {label}
@@ -57,8 +57,8 @@ const styles = (theme: Theme) =>
       flexWrap: 'nowrap',
     },
     group: {
-      paddingTop: theme.spacing.unit / 2,
-      paddingBottom: theme.spacing.unit / 2,
+      paddingTop: theme.spacing(0.5),
+      paddingBottom: theme.spacing(0.5),
     },
   });
 

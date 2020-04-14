@@ -37,12 +37,12 @@ class SequenceScheduleMonth extends React.Component<
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      marginTop: theme.spacing.unit * 2,
-      marginBottom: theme.spacing.unit * 2,
+      marginTop: theme.spacing(2),
+      marginBottom: theme.spacing(2),
     },
     header: {
-      paddingLeft: theme.spacing.unit * 9,
-      paddingRight: theme.spacing.unit * 2,
+      paddingLeft: theme.spacing(9),
+      paddingRight: theme.spacing(2),
     },
   });
 

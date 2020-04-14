@@ -5,20 +5,20 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing.unit * 24,
+      width: theme.spacing(24),
     },
 
     smDownShrink: {
-      width: theme.spacing.unit * 16,
+      width: theme.spacing(16),
 
       [theme.breakpoints.up('sm')]: {
-        width: theme.spacing.unit * 24,
+        width: theme.spacing(24),
       },
     },
 
     auto: {
       width: '100%',
-      maxWidth: theme.spacing.unit * 24,
+      maxWidth: theme.spacing(24),
     },
 
     thumbnail: {
@@ -42,11 +42,17 @@ const styles = (theme: Theme) =>
       backgroundClip: 'padding-box',
     },
 
-    name: {
-      marginTop: theme.spacing.unit,
+    cta: {
+      marginTop: theme.spacing(1),
       fontSize: theme.fontSizes.sm,
       textAlign: 'center',
       ...textTruncate(),
+    },
+
+    website: {
+      marginTop: theme.spacing(1),
+      fontSize: theme.fontSizes.sm,
+      textAlign: 'center',
     },
   });
 

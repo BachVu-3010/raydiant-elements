@@ -26,7 +26,7 @@ const styles = (theme: Theme) =>
       width: '100%',
       textAlign: 'center',
       fontSize: theme.fontSizes.lg,
-      marginBottom: theme.spacing.unit * 4,
+      marginBottom: theme.spacing(4),
     },
 
     applications: {
@@ -36,7 +36,7 @@ const styles = (theme: Theme) =>
       justifyContent: 'center',
       alignItems: 'center',
       '& > *:not(:last-child)': {
-        marginBottom: theme.spacing.unit * 2,
+        marginBottom: theme.spacing(2),
       },
 
       [theme.breakpoints.up('sm')]: {
@@ -44,7 +44,7 @@ const styles = (theme: Theme) =>
         alignItems: 'center',
         '& > *:not(:last-child)': {
           marginBottom: 0,
-          marginRight: theme.spacing.unit * 4,
+          marginRight: theme.spacing(4),
         },
       },
     },
@@ -53,10 +53,10 @@ const styles = (theme: Theme) =>
       width: '100%',
       display: 'flex',
       justifyContent: 'center',
-      marginTop: theme.spacing.unit * 3,
+      marginTop: theme.spacing(3),
 
       [theme.breakpoints.up('sm')]: {
-        marginTop: theme.spacing.unit * 4,
+        marginTop: theme.spacing(4),
       },
     },
   });

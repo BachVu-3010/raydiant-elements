@@ -25,7 +25,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
-      padding: theme.spacing.unit * 4,
+      padding: theme.spacing(4),
     },
 
     border: {
