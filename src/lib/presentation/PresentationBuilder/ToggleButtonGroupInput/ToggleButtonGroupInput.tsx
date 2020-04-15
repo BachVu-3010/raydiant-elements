@@ -6,6 +6,8 @@ interface ToggleButtonGroupInputProps {
   label: string;
   value: string | string[];
   options?: A.SelectionOption[];
+  helperText?: React.ReactNode;
+  disabled?: boolean;
   onChange: (value: string | string[]) => any;
   onBlur: React.FocusEventHandler<any>;
   // TODO: Don't like that we need to pass in the strings object. Strings likely isn't
@@ -23,12 +25,13 @@ class ToggleButtonGroupInput extends React.Component<
   };
 
   render() {
-    const { label, value, onChange, onBlur, options, exclusive } = this.props;
+    const { label, value, helperText, disabled, onChange, onBlur, options, exclusive } = this.props;
 
     return (
       <ToggleButtonGroup
         label={label}
         value={value}
+        helperText={helperText}
         onChange={onChange}
         onBlur={onBlur}
         exclusive={exclusive}
@@ -37,7 +40,7 @@ class ToggleButtonGroupInput extends React.Component<
           <ToggleButtonGroup.Button
             key={index}
             value={opt.value}
-            disabled={opt.disabled}
+            disabled={disabled || opt.disabled}
           >
             {opt.thumbnailUrl ? <img src={opt.thumbnailUrl} /> : opt.label}
           </ToggleButtonGroup.Button>

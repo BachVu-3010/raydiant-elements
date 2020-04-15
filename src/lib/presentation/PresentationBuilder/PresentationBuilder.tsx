@@ -498,6 +498,8 @@ export class PresentationBuilder extends React.Component<
             label={label}
             value={value}
             options={property.options}
+            helperText={helperText}
+            disabled={isDisabled}
             onBlur={this.handleBlur}
             onChange={newValue => {
               // Enforce at least one button to be active

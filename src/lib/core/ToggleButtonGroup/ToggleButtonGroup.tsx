@@ -1,5 +1,6 @@
 import MUIToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import * as React from 'react';
+import FormHelperText from '../../internal/FormHelperText';
 import { Theme } from '../../theme';
 import withStyles, { createStyles, WithStyles } from '../withStyles';
 import ToggleButtonGroupButton from './ToggleButtonGroupButton';
@@ -8,6 +9,7 @@ interface ToggleButtonGroupProps extends WithStyles<typeof styles> {
   onChange: (value: string | string[]) => void;
   value: string | string[];
   label?: string;
+  helperText?: React.ReactNode;
   onBlur?: React.FocusEventHandler<any>;
   exclusive?: boolean;
 }
@@ -19,6 +21,7 @@ export const ToggleButtonGroup: React.FunctionComponent<
   value,
   onChange,
   label,
+  helperText,
   onBlur,
   classes,
   exclusive = false,
@@ -38,6 +41,7 @@ export const ToggleButtonGroup: React.FunctionComponent<
     >
       {children}
     </MUIToggleButtonGroup>
+    {!!helperText && <FormHelperText>{helperText}</FormHelperText>}
   </div>
 );
 
