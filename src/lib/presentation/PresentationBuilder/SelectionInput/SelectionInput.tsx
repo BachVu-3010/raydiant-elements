@@ -176,17 +176,18 @@ class SelectionInput extends React.Component<
     // Ensure it's not an array to appease TS.
     const singleSelectValue = Array.isArray(value) ? value[0] : value;
     const hasThumbnails = options.some(({ thumbnailUrl }) => !!thumbnailUrl);
-
+    const selectValue = singleSelectValue || (options[0] ? options[0].value : '');
     return (
       <SelectField
         label={label}
-        value={singleSelectValue || (options[0] ? options[0].value : '')}
+        value={selectValue}
         onChange={onChange}
         onBlur={onBlur}
         helperText={helperText}
         error={error}
         disabled={disabled}
         native={!hasThumbnails}
+        shrink={!!selectValue}
       >
         {options.map((opt, index) =>
           hasThumbnails ? (
