@@ -37,6 +37,7 @@ import SoundZoneInput from './SoundZoneInput';
 import StringInput from './StringInput';
 import TextInput from './TextInput';
 import ThemeInput from './ThemeInput';
+import ToggleButtonGroupInput from './ToggleButtonGroupInput/ToggleButtonGroupInput';
 import { getErrorAtPath, getPropertyAtPath, isPathEqual } from './utilities';
 import validatePresentation from './validatePresentation';
 
@@ -486,6 +487,25 @@ export class PresentationBuilder extends React.Component<
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
+            strings={strings}
+          />
+        );
+
+      case 'toggleButtonGroup':
+        return (
+          <ToggleButtonGroupInput
+            key={key}
+            label={label}
+            value={value}
+            options={property.options}
+            onBlur={this.handleBlur}
+            onChange={newValue => {
+              // Enforce at least one button to be active
+              if (newValue !== null) {
+                this.updatePresentation(path, newValue, property);
+              }
+            }}
+            exclusive={property.exclusive}
             strings={strings}
           />
         );
