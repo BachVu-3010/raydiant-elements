@@ -20,6 +20,7 @@ export interface SelectionOption {
   // value of the input.
   default?: boolean;
   disabled?: boolean;
+  validationErrorMessage?: string;
 }
 
 export interface Image {

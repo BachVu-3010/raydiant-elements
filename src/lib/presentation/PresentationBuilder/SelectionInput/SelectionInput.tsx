@@ -177,14 +177,20 @@ class SelectionInput extends React.Component<
     const singleSelectValue = Array.isArray(value) ? value[0] : value;
     const hasThumbnails = options.some(({ thumbnailUrl }) => !!thumbnailUrl);
     const selectValue = singleSelectValue || (options[0] ? options[0].value : '');
+
+    const chosenOption = selectValue ?
+        (options || []).find(option => option.value === selectValue)
+        : undefined;
+    const errorMessage = chosenOption ? chosenOption.validationErrorMessage : undefined;
+
     return (
       <SelectField
         label={label}
         value={selectValue}
         onChange={onChange}
         onBlur={onBlur}
-        helperText={helperText}
-        error={error}
+        helperText={errorMessage || helperText}
+        error={!!errorMessage || error}
         disabled={disabled}
         native={!hasThumbnails}
         shrink={!!selectValue}
