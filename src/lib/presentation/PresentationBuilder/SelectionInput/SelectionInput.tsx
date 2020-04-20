@@ -181,7 +181,8 @@ class SelectionInput extends React.Component<
     const chosenOption = selectValue ?
         (options || []).find(option => option.value === selectValue)
         : undefined;
-    const errorMessage = chosenOption ? chosenOption.validationErrorMessage : undefined;
+    const optionHelperText = chosenOption ? chosenOption.helperText : undefined;
+    const optionError = chosenOption ? chosenOption.error : false;
 
     return (
       <SelectField
@@ -189,8 +190,8 @@ class SelectionInput extends React.Component<
         value={selectValue}
         onChange={onChange}
         onBlur={onBlur}
-        helperText={errorMessage || helperText}
-        error={!!errorMessage || error}
+        helperText={optionHelperText || helperText}
+        error={optionError || error}
         disabled={disabled}
         native={!hasThumbnails}
         shrink={!!selectValue}
