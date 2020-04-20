@@ -21,6 +21,7 @@ export interface SelectionOption {
   default?: boolean;
   disabled?: boolean;
   helperText?: string;
+  helperLink?: string;
   error?: boolean;
 }
 

@@ -182,6 +182,10 @@ class SelectionInput extends React.Component<
         (options || []).find(option => option.value === selectValue)
         : undefined;
     const optionHelperText = chosenOption ? chosenOption.helperText : undefined;
+    const optionHelperLink = chosenOption ? chosenOption.helperLink : undefined;
+    const optionHelper = optionHelperLink ?
+        <a target='_blank' href={optionHelperLink}>{ optionHelperText || optionHelperLink }</a>
+        : optionHelperText;
     const optionError = chosenOption ? chosenOption.error : false;
 
     return (
@@ -190,7 +194,7 @@ class SelectionInput extends React.Component<
         value={selectValue}
         onChange={onChange}
         onBlur={onBlur}
-        helperText={optionHelperText || helperText}
+        helperText={optionHelper || helperText}
         error={optionError || error}
         disabled={disabled}
         native={!hasThumbnails}
