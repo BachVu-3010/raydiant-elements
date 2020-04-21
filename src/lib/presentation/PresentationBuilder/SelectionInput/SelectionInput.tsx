@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as A from '../../../application/ApplicationTypes';
+import Link from '../../../core/Link';
 import MultiSelectField from '../../../core/MultiSelectField';
 import SelectField from '../../../core/SelectField';
 import replacePropNameWithValue from '../../../helpers/replacePropNameWithValue';
@@ -184,7 +185,7 @@ class SelectionInput extends React.Component<
     const optionHelperText = chosenOption ? chosenOption.helperText : undefined;
     const optionHelperLink = chosenOption ? chosenOption.helperLink : undefined;
     const optionHelper = optionHelperLink ?
-        <a target='_blank' href={optionHelperLink}>{ optionHelperText || optionHelperLink }</a>
+        <Link target='_blank' href={optionHelperLink}>{ optionHelperText || optionHelperLink }</Link>
         : optionHelperText;
     const optionError = chosenOption ? chosenOption.error : false;
 
