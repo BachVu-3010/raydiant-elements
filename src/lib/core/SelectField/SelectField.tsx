@@ -64,7 +64,7 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
         {children}
       </Select>
     </InputBackground>
-    {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
   </FormControl>
 );
 

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as A from '../../../application/ApplicationTypes';
+import Link from '../../../core/Link';
 import MultiSelectField from '../../../core/MultiSelectField';
 import SelectField from '../../../core/SelectField';
 import replacePropNameWithValue from '../../../helpers/replacePropNameWithValue';
@@ -177,14 +178,25 @@ class SelectionInput extends React.Component<
     const singleSelectValue = Array.isArray(value) ? value[0] : value;
     const hasThumbnails = options.some(({ thumbnailUrl }) => !!thumbnailUrl);
     const selectValue = singleSelectValue || (options[0] ? options[0].value : '');
+
+    const chosenOption = selectValue ?
+        (options || []).find(option => option.value === selectValue)
+        : undefined;
+    const optionHelperText = chosenOption ? chosenOption.helperText : undefined;
+    const optionHelperLink = chosenOption ? chosenOption.helperLink : undefined;
+    const optionHelper = optionHelperLink ?
+        <Link target='_blank' href={optionHelperLink}>{ optionHelperText || optionHelperLink }</Link>
+        : optionHelperText;
+    const optionError = chosenOption ? chosenOption.error : false;
+
     return (
       <SelectField
         label={label}
         value={selectValue}
         onChange={onChange}
         onBlur={onBlur}
-        helperText={helperText}
-        error={error}
+        helperText={optionHelper || helperText}
+        error={optionError || error}
         disabled={disabled}
         native={!hasThumbnails}
         shrink={!!selectValue}

@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 export interface Constraints {
   // Mixing hyphen case, snake case and no case... :'(
   // TODO: Clean these up.
@@ -20,6 +22,9 @@ export interface SelectionOption {
   // value of the input.
   default?: boolean;
   disabled?: boolean;
+  helperText?: React.ReactNode;
+  helperLink?: string;
+  error?: boolean;
 }
 
 export interface Image {
