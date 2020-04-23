@@ -28,6 +28,7 @@ import hasPresentationChanged from './hasPresentationChanged';
 import ImagePickerFieldInput from './ImagePickerFieldInput/ImagePickerFieldInput';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
+import OneDriveAuthInput from './OneDriveAuthInput';
 import PlaylistInput from './PlaylistInput';
 import styles from './PresentationBuilder.styles';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
@@ -600,6 +601,25 @@ export class PresentationBuilder extends React.Component<
       case 'googleAuth':
         return (
           <GoogleAuthInput
+            key={key}
+            path={path}
+            label={label}
+            value={value}
+            authUrl={property.auth_url}
+            verifyUrl={property.verify_url}
+            verifyQsParam={property.verify_qs_param}
+            helperText={helperText}
+            error={hasError}
+            disabled={isDisabled}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
+          />
+        );
+
+      case 'onedriveAuth':
+        return (
+          <OneDriveAuthInput
             key={key}
             path={path}
             label={label}
