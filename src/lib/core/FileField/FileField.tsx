@@ -1,3 +1,4 @@
+import * as cn from 'classnames';
 import * as React from 'react';
 import Icon from '../Icon';
 import TextField from '../TextField';
@@ -71,7 +72,7 @@ export const FileField: React.SFC<FileFieldProps> = ({
       <input
         ref={fileInput}
         disabled={disabled}
-        className={classes.input}
+        className={cn(classes.input, value && classes.inputHasValue)}
         type="file"
         accept={accept.join(',')}
         multiple={multiple}

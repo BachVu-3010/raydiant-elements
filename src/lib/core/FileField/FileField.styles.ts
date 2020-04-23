@@ -14,6 +14,9 @@ const styles = createStyles({
     opacity: 0,
     cursor: 'pointer',
   },
+  inputHasValue: {
+    width: 'calc(100% - 40px)', // Adjust width to make room for remove button.
+  },
   clear: {
     ...buttonReset(),
   },
