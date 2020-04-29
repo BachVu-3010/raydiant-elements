@@ -64,7 +64,6 @@ export interface Strings {
   // TODO: This is the reason why we can't have a presentation property with the
   // name 'description' (or 'callToAction'). These should be fields on the actual
   // application_version table. We should just remove strings.
-  nameLabel?: string;
   callToAction?: string;
   description?: string;
   [key: string]: string;

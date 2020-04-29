@@ -46,7 +46,7 @@ import validatePresentation from './validatePresentation';
 // be treated the same as application variables when updating the presentation state.
 const namePath = ['name'];
 const durationPath = ['duration'];
-const nameProp = { type: 'string', name: 'nameLabel', defaultLabel: 'Name' };
+const nameProp = { type: 'string', name: 'name' };
 const durationProp = { type: 'number', name: 'duration' };
 
 interface SelectedPropertyPath {
@@ -835,14 +835,13 @@ export class PresentationBuilder extends React.Component<
       ? validatePresentation(presentation, appVersion, minDuration)
       : [];
 
-    const label = appVersion.strings[nameProp.name] || nameProp.defaultLabel;
     const nameError = getErrorAtPath(errors, namePath);
     const durationError = getErrorAtPath(errors, durationPath);
 
     return (
       <Column className={classes.inputs}>
         <TextField
-          label={label}
+          label="name"
           value={presentation.name}
           onChange={name => this.updatePresentation(namePath, name, nameProp)}
           helperText={this.renderInputHelperText(
