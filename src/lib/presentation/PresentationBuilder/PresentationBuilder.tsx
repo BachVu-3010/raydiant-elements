@@ -88,6 +88,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
 interface FileUpload {
   path: P.Path;
   file: File;
+  localUrl: string;
 }
 
 interface PresentationBuilderState {
@@ -136,6 +137,7 @@ export class PresentationBuilder extends React.Component<
 
   componentDidUpdate(prevProps: PresentationBuilderProps) {
     const { presentation, initialPresentationState } = this.props;
+
     if (!prevProps.presentation && presentation) {
       this.setState(
         {
@@ -146,16 +148,19 @@ export class PresentationBuilder extends React.Component<
       );
     }
 
-    // Below is only here because of MiraKit in order to re-render the preview
-    // when the values change outside of the form.
     if (
       prevProps.presentation &&
       presentation &&
       (prevProps.presentation.id !== presentation.id ||
+        // Below is only here because of MiraKit in order to re-render the preview
+        // when the values change outside of the form.
         Object.keys(prevProps.presentation.applicationVariables).length !==
           Object.keys(presentation.applicationVariables).length)
     ) {
-      this.setState({ presentation, previewPresentation: presentation });
+      this.setState({
+        presentation: initialPresentationState || presentation,
+        previewPresentation: initialPresentationState || presentation,
+      });
     }
   }
 
@@ -271,7 +276,7 @@ export class PresentationBuilder extends React.Component<
       }
 
       if (property.type === 'file') {
-        fileUploads = this.getFileUploads(path, file);
+        fileUploads = this.getFileUploads(path, file, value ? value.url : null);
       }
     }
 
@@ -288,7 +293,7 @@ export class PresentationBuilder extends React.Component<
     });
   }
 
-  getFileUploads(path: P.Path, file: File) {
+  getFileUploads(path: P.Path, file: File, localUrl: string) {
     const { fileUploads: previousFileUploads } = this.state;
     let fileUploads: FileUpload[];
 
@@ -299,11 +304,11 @@ export class PresentationBuilder extends React.Component<
       if (existingFileAtPath) {
         // Update file upload at path.
         fileUploads = previousFileUploads.map(f =>
-          f === existingFileAtPath ? { path, file } : f,
+          f === existingFileAtPath ? { path, file, localUrl } : f,
         );
       } else {
         // Add file upload.
-        fileUploads = [...previousFileUploads, { path, file }];
+        fileUploads = [...previousFileUploads, { path, file, localUrl }];
       }
     } else {
       fileUploads = previousFileUploads.filter(f => !isPathEqual(f.path, path));
