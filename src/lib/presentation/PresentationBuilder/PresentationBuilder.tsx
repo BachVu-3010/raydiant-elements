@@ -23,6 +23,7 @@ import BooleanInput from './BooleanInput';
 import DateInput from './DateInput';
 import FacebookAuthInput from './FacebookAuthInput';
 import FileInput from './FileInput';
+import getLocalUploads from './getLocalUploads';
 import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
 import ImagePickerFieldInput from './ImagePickerFieldInput/ImagePickerFieldInput';
@@ -62,7 +63,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   soundZones?: P.SoundZone[];
   playlists?: P.Playlist[];
   affectedDevices?: D.Device[];
-  localUploads?: P.LocalPresentationUpload[];
+  localUploads?: P.LocalUploadInProgress[];
   previewMode?: P.PreviewMode;
   header?: React.ReactNode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
@@ -74,7 +75,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   onDone?: () => void;
   onStateChange?: (
     presentation: P.Presentation,
-    fileUploads: FileUpload[],
+    localUploads: P.LocalUpload[],
   ) => void;
   onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
   children?: (
@@ -86,18 +87,11 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   onPlaylistCreate?: (path: P.Path) => void;
 }
 
-interface FileUpload {
-  path: P.Path;
-  file: File;
-  localUrl: string;
-}
-
 interface PresentationBuilderState {
   presentation?: P.Presentation;
   previewPresentation?: P.Presentation;
   validate: boolean;
   previewMode: P.PreviewMode;
-  fileUploads: FileUpload[];
   showAffectedDevices: boolean;
 }
 
@@ -122,12 +116,12 @@ export class PresentationBuilder extends React.Component<
       this.props.initialPresentationState || this.props.presentation,
     validate: false,
     previewMode: this.props.previewMode,
-    fileUploads: [],
     showAffectedDevices: false,
   };
 
   queuedPresentationPreview: P.Presentation | null = null;
   selectedPropertyPaths: SelectedPropertyPath[] = [];
+  fileBlobs: { [localUrl: string]: File } = {};
 
   componentDidMount() {
     const { presentation, appVersion } = this.props;
@@ -266,7 +260,7 @@ export class PresentationBuilder extends React.Component<
     );
 
     let shouldUpdatePreview = false;
-    let fileUploads = this.state.fileUploads;
+    // let fileUploads = this.state.fileUploads;
 
     if (errors.length === 0) {
       // Delay updating the preview for text and string inputs until onBlur.
@@ -280,14 +274,17 @@ export class PresentationBuilder extends React.Component<
         this.queuedPresentationPreview = null;
         shouldUpdatePreview = true;
       }
+    }
 
-      if (property.type === 'file') {
-        fileUploads = this.getFileUploads(path, file, value ? value.url : null);
-      }
+    if (file && value) {
+      this.fileBlobs[value.url] = file;
     }
 
     if (onStateChange) {
-      onStateChange(updatedPresentation, fileUploads);
+      onStateChange(
+        updatedPresentation,
+        getLocalUploads(updatedPresentation, appVersion, this.fileBlobs),
+      );
     }
 
     this.setState({
@@ -295,32 +292,7 @@ export class PresentationBuilder extends React.Component<
       previewPresentation: shouldUpdatePreview
         ? updatedPresentation
         : previewPresentation,
-      fileUploads,
     });
-  }
-
-  getFileUploads(path: P.Path, file: File, localUrl: string) {
-    const { fileUploads: previousFileUploads } = this.state;
-    let fileUploads: FileUpload[];
-
-    if (file) {
-      const existingFileAtPath = previousFileUploads.find(f =>
-        isPathEqual(f.path, path),
-      );
-      if (existingFileAtPath) {
-        // Update file upload at path.
-        fileUploads = previousFileUploads.map(f =>
-          f === existingFileAtPath ? { path, file, localUrl } : f,
-        );
-      } else {
-        // Add file upload.
-        fileUploads = [...previousFileUploads, { path, file, localUrl }];
-      }
-    } else {
-      fileUploads = previousFileUploads.filter(f => !isPathEqual(f.path, path));
-    }
-
-    return fileUploads;
   }
 
   setSelectedPaths(propertyPath: P.Path, selectedPath: P.Path) {
