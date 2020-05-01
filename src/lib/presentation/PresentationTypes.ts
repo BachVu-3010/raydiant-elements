@@ -55,3 +55,9 @@ export enum PreviewMode {
   Horizontal = 'horizontal',
   Vertical = 'vertical',
 }
+
+export interface LocalPresentationUpload {
+  path: Array<string | number>;
+  isUploading: boolean;
+  localUrl: string;
+}

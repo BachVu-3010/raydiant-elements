@@ -62,6 +62,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   soundZones?: P.SoundZone[];
   playlists?: P.Playlist[];
   affectedDevices?: D.Device[];
+  localUploads?: P.LocalPresentationUpload[];
   previewMode?: P.PreviewMode;
   header?: React.ReactNode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
@@ -109,6 +110,7 @@ export class PresentationBuilder extends React.Component<
     soundZones: [],
     playlists: [],
     affectedDevices: [],
+    localUploads: [],
     minDuration: 5,
     previewMode: P.PreviewMode.Horizontal,
   };
@@ -152,7 +154,11 @@ export class PresentationBuilder extends React.Component<
       prevProps.presentation &&
       presentation &&
       (prevProps.presentation.id !== presentation.id ||
-        // Below is only here because of MiraKit in order to re-render the preview
+        // Clear initial state when the Dashboard resets initial state. This
+        // fixes an issue where "Save" is not disabled after selecting a new
+        // file upload.
+        prevProps.initialPresentationState !== initialPresentationState ||
+        // This is only here because of RaydiantKit in order to re-render the preview
         // when the values change outside of the form.
         Object.keys(prevProps.presentation.applicationVariables).length !==
           Object.keys(presentation.applicationVariables).length)
@@ -808,10 +814,20 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderPreview() {
-    const { appVersion, children, minDuration } = this.props;
-    const { previewMode, previewPresentation } = this.state;
+    const { appVersion, children, minDuration, localUploads } = this.props;
+    const { previewMode } = this.state;
+    let { previewPresentation } = this.state;
 
     const isLoading = !appVersion || !previewPresentation;
+
+    // Inject local upload file URL's into the preview.
+    localUploads.forEach(({ path, localUrl }) => {
+      previewPresentation = immutable.set(
+        previewPresentation,
+        [...path, 'url'],
+        localUrl,
+      );
+    });
 
     return (
       <PresentationBuilderPreview
