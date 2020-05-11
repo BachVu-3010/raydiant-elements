@@ -247,7 +247,7 @@ export class PresentationBuilder extends React.Component<
     const { presentation, previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
-    const shouldDelete = value === null || value === undefined;
+    const shouldDelete = property.type === 'array' && (value === null || value === undefined);
     const updatedPresentation = shouldDelete
       ? immutable.del(presentation, path)
       : immutable.set(presentation, path, value);
