@@ -12,14 +12,11 @@ interface PresentationCardProps
   disabled?: boolean;
 }
 
-export const PresentationCard: React.SFC<PresentationCardProps> = ({
-  classes,
-  presentation,
-  disabled = false,
-  ...thumbnailProps
-}) => (
+export const PresentationCard: React.FunctionComponent<
+  PresentationCardProps
+> = ({ classes, presentation, disabled = false, ...thumbnailProps }, ref) => (
   <div className={cn(classes.root, disabled && classes.disabled)}>
-    <div className={classes.thumbnail}>
+    <div ref={ref} className={classes.thumbnail}>
       <PresentationThumbnail
         presentation={presentation}
         {...thumbnailProps}
@@ -30,4 +27,4 @@ export const PresentationCard: React.SFC<PresentationCardProps> = ({
   </div>
 );
 
-export default withStyles(styles)(PresentationCard);
+export default withStyles(styles)(React.forwardRef(PresentationCard));

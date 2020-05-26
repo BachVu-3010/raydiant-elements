@@ -6,14 +6,23 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      ...tab(theme, { border: true }),
+      position: 'relative',
+      ...tab(theme),
     },
     shrink: {
       flexGrow: 0,
     },
     active: {
       fontWeight: 500,
-      borderBottomColor: theme.tab.activeBorder,
+
+      '&:after': {
+        content: '" "',
+        position: 'absolute',
+        bottom: -1,
+        height: 3,
+        width: '100%',
+        backgroundColor: theme.tab.activeBorder,
+      },
     },
     icon: {
       color: theme.tab.foreground,

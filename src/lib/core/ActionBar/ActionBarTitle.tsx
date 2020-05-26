@@ -6,7 +6,7 @@ import styles from './ActionBarTitle.styles';
 
 export interface ActionBarTitleProps extends WithStyles<typeof styles> {
   /** The title of the title bar */
-  title: string;
+  title: React.ReactNode;
   /** Optional subtitle of the title bar */
   subtitle?: string;
 }

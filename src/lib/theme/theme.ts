@@ -3,6 +3,7 @@ import createTheme from './createTheme';
 const colors = {
   white: '#FFFFFF',
   grey: '#E3E3E2',
+  lightGrey: '#F0F0EE',
   limeGreen: '#28D972',
   skyBlue: '#009BD2',
   forestGreen: '#006D5D',
@@ -51,6 +52,7 @@ const common = {
     xxl: '6.25rem', // 100px
   },
   zIndex: {
+    shadow: 100,
     menu: 1000,
     modal: 2000,
     popover: 3000,
@@ -77,11 +79,15 @@ const common = {
       dark: '#f6aa14',
       contrastText: colors.white,
     },
-    divider: '#c6cedc',
+    divider: colors.grey,
+    action: {
+      selected: colors.lightGrey,
+      dropping: colors.skyBlue,
+    },
   },
   logo: {
     width: 122,
-    squareWidth: 30,
+    squareWidth: 20,
   },
   loginAsset: {
     default: 'https://assets.raydiant.com/raydiant-login-asset.png',
@@ -102,8 +108,8 @@ export const light = createTheme({
   palette: {
     ...common.palette,
     text: {
-      primary: 'rgba(0, 0, 0, 0.6)',
-      secondary: 'rgba(32, 32, 42, 0.6)',
+      primary: 'rgba(0, 0, 0, 0.87)',
+      secondary: 'rgba(0, 0, 0, 0.3)',
       link: colors.skyBlue,
       heading: colors.navy,
     },
@@ -111,7 +117,7 @@ export const light = createTheme({
       default: colors.white,
       gradient: '',
       inset: colors.grey,
-      paper: colors.grey,
+      paper: '#f3f4f6',
     },
   },
   logo: {
@@ -130,16 +136,17 @@ export const light = createTheme({
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
+    fabLabel: colors.navy,
   },
   input: {
     background: '#f3f4f6',
     foreground: 'rgba(41, 40, 52, 1)',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: colors.navy,
+    border: 'rgba(41, 40, 52, 0.6)',
   },
   checkbox: {
     background: colors.white,
-    backgroundChecked: common.palette.primary.main,
+    backgroundChecked: common.palette.progress.main,
     foreground: colors.white,
     border: '#303141',
     borderMuted: 'rgba(41, 40, 52, 0.5)',
@@ -168,6 +175,9 @@ export const light = createTheme({
     contentBackground: 'rgba(255, 255 ,255)',
     borderColor: '#cdd4e1',
     color: '#292834',
+  },
+  dropzone: {
+    border: colors.grey,
   },
 });
 
@@ -204,16 +214,17 @@ export const grey = createTheme({
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
+    fabLabel: colors.navy,
   },
   input: {
     background: colors.white,
     foreground: 'rgba(41, 40, 52, 1)',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: colors.navy,
+    border: 'rgba(41, 40, 52, 0.6)',
   },
   checkbox: {
     background: colors.white,
-    backgroundChecked: common.palette.primary.main,
+    backgroundChecked: common.palette.progress.main,
     foreground: colors.white,
     border: '#303141',
     borderMuted: 'rgba(41, 40, 52, 0.5)',
@@ -242,6 +253,9 @@ export const grey = createTheme({
     contentBackground: '#e8eaee',
     borderColor: '#cdd4e1',
     color: '#292834',
+  },
+  dropzone: {
+    border: colors.grey,
   },
 });
 
@@ -278,17 +292,18 @@ export const medium = createTheme({
     foregroundMuted: colors.navy,
     border: colors.navy,
     backgroundSelected: colors.navy,
+    fabLabel: colors.navy,
   },
   input: {
     background: colors.white,
     foreground: 'rgba(41, 40, 52, 1)',
     foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: colors.navy,
+    border: 'rgba(41, 40, 52, 0.6)',
   },
   checkbox: {
     background: 'rgba(255, 255, 255, 0.15)',
-    backgroundChecked: colors.white,
-    foreground: common.palette.primary.main,
+    backgroundChecked: common.palette.progress.main,
+    foreground: colors.white,
     border: colors.white,
     borderMuted: 'rgba(255, 255, 255, 0.5)',
   },
@@ -317,6 +332,9 @@ export const medium = createTheme({
     contentBackground: '#292834',
     borderColor: 'rgba(255, 255, 255, 0.15)',
     color: 'rgba(255, 255, 255)',
+  },
+  dropzone: {
+    border: colors.grey,
   },
 });
 
@@ -353,17 +371,18 @@ export const dark = createTheme({
     foregroundMuted: colors.white,
     border: colors.white,
     backgroundSelected: colors.white,
+    fabLabel: colors.white,
   },
   input: {
     background: 'rgba(255, 255, 255, 0.15)',
     foreground: colors.white,
     foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-    border: colors.white,
+    border: 'rgba(255, 255, 255, 0.5)',
   },
   checkbox: {
     background: 'rgba(255, 255, 255, 0.15)',
-    backgroundChecked: colors.white,
-    foreground: common.palette.primary.main,
+    backgroundChecked: common.palette.progress.main,
+    foreground: colors.white,
     border: colors.white,
     borderMuted: 'rgba(255, 255, 255, 0.5)',
   },
@@ -392,5 +411,8 @@ export const dark = createTheme({
     contentBackground: '#292834',
     borderColor: 'rgba(255, 255, 255, 0.15)',
     color: 'rgba(255, 255, 255)',
+  },
+  dropzone: {
+    border: colors.grey,
   },
 });

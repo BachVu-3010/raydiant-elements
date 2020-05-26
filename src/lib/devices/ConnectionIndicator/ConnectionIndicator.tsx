@@ -1,54 +1,55 @@
 import * as React from 'react';
 import Icon from '../../core/Icon';
 import SVGIcon from '../../core/SVGIcon';
+import withStyles, { WithStyles } from '../../core/withStyles';
+import styles from './ConnectionIndicator.styles';
 
-interface ConnectionIndicatorProps {
+interface ConnectionIndicatorProps extends WithStyles<typeof styles> {
   signalStrength?: number;
   isEthernet?: boolean;
   isLTE?: boolean;
 }
 
-class ConnectionIndicator extends React.Component<ConnectionIndicatorProps> {
-  render() {
-    const { signalStrength, isEthernet, isLTE } = this.props;
-    if (isEthernet) {
-      return <SVGIcon icon="ethernet" title="ethernet" />;
-    }
+const ConnectionIndicator: React.FunctionComponent<
+  ConnectionIndicatorProps
+> = ({ signalStrength, isEthernet, isLTE, classes }) => {
+  if (isEthernet) {
+    return <SVGIcon className={classes.root} icon="ethernet" />;
+  }
 
-    if (isLTE) {
-      if (signalStrength > 80) {
-        return <Icon icon="lteFull" />;
-      }
-      if (signalStrength > 40) {
-        return <Icon icon="lteMedium" />;
-      }
-      if (signalStrength > 0) {
-        return <Icon icon="lteLow" />;
-      }
-      if (signalStrength === 0) {
-        return <Icon icon="lteNone" />;
-      }
-    }
-
+  if (isLTE) {
     if (signalStrength > 80) {
-      return <SVGIcon icon="wifiFull" title="wifiFull" />;
+      return <Icon className={classes.root} icon="lteFull" />;
     }
-    if (signalStrength > 50) {
-      return <SVGIcon icon="wifiHigh" title="wifiHigh" />;
-    }
-    if (signalStrength > 20) {
-      return <SVGIcon icon="wifiMedium" title="wifiMedium" />;
+    if (signalStrength > 40) {
+      return <Icon className={classes.root} icon="lteMedium" />;
     }
     if (signalStrength > 0) {
-      return <SVGIcon icon="wifiLow" title="wifiMedium" />;
+      return <Icon className={classes.root} icon="lteLow" />;
     }
     if (signalStrength === 0) {
-      return <SVGIcon icon="wifiNone" title="wifiNone" />;
+      return <Icon className={classes.root} icon="lteNone" />;
     }
-    // TODO: Unknown connection status, possibly still fetching or failed.
-    // Consider showing a loading indicator.
-    return <SVGIcon icon="wifiNone" title="wifiNone" />;
   }
-}
 
-export default ConnectionIndicator;
+  if (signalStrength > 80) {
+    return <SVGIcon className={classes.root} icon="wifiFull" />;
+  }
+  if (signalStrength > 50) {
+    return <SVGIcon className={classes.root} icon="wifiHigh" />;
+  }
+  if (signalStrength > 20) {
+    return <SVGIcon className={classes.root} icon="wifiMedium" />;
+  }
+  if (signalStrength > 0) {
+    return <SVGIcon className={classes.root} icon="wifiLow" />;
+  }
+  if (signalStrength === 0) {
+    return <SVGIcon className={classes.root} icon="wifiNone" />;
+  }
+  // TODO: Unknown connection status, possibly still fetching or failed.
+  // Consider showing a loading indicator.
+  return <SVGIcon icon="wifiNone" />;
+};
+
+export default withStyles(styles)(ConnectionIndicator);

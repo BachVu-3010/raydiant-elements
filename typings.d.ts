@@ -32,3 +32,5 @@ declare module 'is-touch-device' {
   const isTouchDeviceExport: IsTouchDevice;
   export = isTouchDeviceExport;
 }
+
+declare module '@material-ui/lab/esm/TreeView/TreeViewContext';

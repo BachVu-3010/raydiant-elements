@@ -1,5 +1,5 @@
 import { createStyles } from '../../core/withStyles';
-import { responsiveContainer, scrollable } from '../../mixins';
+import { responsiveContainer } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
@@ -7,11 +7,11 @@ const styles = (theme: Theme) =>
     root: {
       flex: 1,
       width: '100%',
+      height: '100%',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      ...scrollable(),
       ...responsiveContainer(theme),
     },
 

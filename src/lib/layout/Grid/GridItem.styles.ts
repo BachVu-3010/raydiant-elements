@@ -3,10 +3,13 @@ import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
-      // We need to use padding (instead of margin) so that our grid
-      // calculations include the gutter size.
-      padding: theme.spacing(1),
+    isDragging: {
+      opacity: 0.4,
+    },
+
+    isOver: {
+      backgroundColor: theme.palette.action.selected,
+      borderRadius: theme.borderRadius.sm,
     },
   });
 

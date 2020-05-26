@@ -7,8 +7,8 @@ const styles = (theme: Theme) =>
     root: {
       ...tabContainer(theme),
       width: '100%',
-      borderTop: theme.tab.border ? `1px solid transparent` : null,
-      borderBottom: theme.tab.border ? `1px solid ${theme.tab.border}` : null,
+      borderTop: `1px solid transparent`,
+      borderBottom: `1px solid ${theme.palette.action.selected}`,
     },
     inline: {
       width: 'auto',

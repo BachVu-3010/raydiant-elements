@@ -23,6 +23,9 @@ const styles = (theme: Theme) =>
     halfMargin: {
       ...marginBetweenChildrenHorizontal(theme.spacing(0.5)),
     },
+    doubleMargin: {
+      ...marginBetweenChildrenHorizontal(theme.spacing(2)),
+    },
   });
 
 export default styles;

@@ -16,6 +16,10 @@ const styles = (theme: Theme) =>
         maxWidth: 425,
       },
     },
+
+    border: {
+      borderLeft: `1px solid ${theme.palette.divider}`,
+    },
   });
 
 export default styles;

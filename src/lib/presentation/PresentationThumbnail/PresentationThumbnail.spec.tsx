@@ -40,6 +40,5 @@ test('Should set test ids', () => {
   );
 
   expect(wrapper.find(testSelector('testId'))).toHaveLength(1);
-  expect(wrapper.find(testSelector('testId-select'))).toHaveLength(1);
   expect(wrapper.find('button' + testSelector('testId-edit'))).toHaveLength(1);
 });

@@ -46,3 +46,24 @@
   </Text>
 </Column>
 ```
+
+### Editable
+
+```js
+initialState = {
+  text: 'Here is some text',
+  title: 'Title',
+};
+
+<Column>
+  <Text editable value={state.text} onChange={text => setState({ text })} />
+
+  <Title>
+    <Text
+      editable
+      value={state.title}
+      onChange={title => setState({ title })}
+    />
+  </Title>
+</Column>;
+```

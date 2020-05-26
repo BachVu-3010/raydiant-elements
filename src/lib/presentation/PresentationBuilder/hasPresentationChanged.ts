@@ -30,6 +30,13 @@ const hasAppVarChanges = (
           return true;
         }
       }
+    } else if (prop.type === 'selection' && prop.multiple) {
+      const prevArray = prevAppVar || [];
+      const nextArray = nextAppVar || [];
+
+      if (prevArray.length !== nextArray.length) {
+        return true;
+      }
     } else if (prevAppVar !== nextAppVar) {
       return true;
     }

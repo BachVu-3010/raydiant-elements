@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
       paddingBottom: theme.spacing(1),
       borderBottom: '1px solid transparent',
       '&:not(:last-child)': {
-        borderBottomColor: theme.popover.borderColor,
+        borderBottomColor: theme.palette.action.selected,
       },
       minHeight: 68,
     },

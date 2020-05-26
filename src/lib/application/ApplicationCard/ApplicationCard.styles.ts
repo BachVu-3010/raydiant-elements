@@ -26,7 +26,7 @@ const styles = (theme: Theme) =>
       position: 'relative',
       width: '100%',
       paddingTop: `${100 / (16 / 9)}%`, // Preserve a 16:9 aspect ratio
-      boxShadow: theme.shadows[1],
+      boxShadow: theme.shadows[3],
     },
 
     image: {

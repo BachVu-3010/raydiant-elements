@@ -14,6 +14,7 @@ import AffectedScreensPopover from '../../devices/AffectedScreensPopover';
 import * as D from '../../devices/DeviceTypes';
 import Column from '../../layout/Column';
 import Hidden from '../../layout/Hidden';
+import Scrollable from '../../layout/Scrollable';
 import OneThirdLayout from '../../layout/OneThirdLayout';
 import Spacer from '../../layout/Spacer';
 import Text from '../../typography/Text';
@@ -62,8 +63,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
   playlists?: P.Playlist[];
-  affectedDevices?: D.Device[];
   localUploads?: P.LocalUploadInProgress[];
+  affectedDevices?: D.AffectedDevice[];
   previewMode?: P.PreviewMode;
   header?: React.ReactNode;
   // minDuration is used by legacy apps with configurable_duration = true and embedded apps.
@@ -878,7 +879,6 @@ export class PresentationBuilder extends React.Component<
 
   render() {
     const {
-      classes,
       presentation: originalPresentation,
       appVersion,
       onSave,
@@ -899,15 +899,17 @@ export class PresentationBuilder extends React.Component<
     return (
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
-          <div className={classes.scroll}>
+          <Scrollable>
             <Hidden smUp>{this.renderPreview()}</Hidden>
             <Form.Section>
               {onBack && (
-                <Button
-                  icon="arrowLeft"
-                  label={backToLabel || 'Back'}
-                  onClick={onBack}
-                />
+                <Hidden xsDown>
+                  <Button
+                    icon="arrowLeft"
+                    label={backToLabel || 'Back'}
+                    onClick={onBack}
+                  />
+                </Hidden>
               )}
 
               <Text muted>Presentation Details</Text>
@@ -916,9 +918,9 @@ export class PresentationBuilder extends React.Component<
             </Form.Section>
 
             {!isLoading && this.renderForm()}
-          </div>
+          </Scrollable>
           {!isLoading && this.renderWarnings()}
-          <ActionBar condensed bottom color="light">
+          <ActionBar condensed color="light">
             <Spacer />
             {onDone && (
               <Button
@@ -956,5 +958,5 @@ export class PresentationBuilder extends React.Component<
 
 export default withThemeSelector(
   withStyles(styles)(PresentationBuilder),
-  'grey',
+  'light',
 );

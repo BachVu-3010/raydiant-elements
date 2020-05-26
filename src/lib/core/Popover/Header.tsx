@@ -6,12 +6,12 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       flexShrink: 0,
-      background: theme.popover.headerBackground,
+      backgroundColor: theme.palette.background.default,
       padding: theme.spacing(2),
-      borderBottom: `1px solid ${theme.popover.borderColor}`,
       minHeight: 56,
       display: 'flex',
       alignItems: 'center',
+      borderBottom: `1px solid ${theme.palette.action.selected}`,
     },
   });
 

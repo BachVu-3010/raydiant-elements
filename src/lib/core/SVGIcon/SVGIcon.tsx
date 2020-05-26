@@ -12,16 +12,12 @@ export type SVGIconOptions =
   | 'ethernet';
 
 interface SVGIconProps extends WithStyles<typeof styles> {
-  /** Icon name */
   icon: SVGIconOptions;
-  /** Icon title */
-  title?: string;
-  /** Additional classname */
   className?: string;
 }
 
-export const SVGIcon: React.SFC<SVGIconProps> = ({ icon }) => {
-  const svg = svgs[icon];
+export const SVGIcon: React.SFC<SVGIconProps> = ({ icon, ...props }) => {
+  const svg = svgs[icon](props);
   return svg;
 };
 

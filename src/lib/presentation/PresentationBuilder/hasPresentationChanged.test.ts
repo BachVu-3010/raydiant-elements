@@ -156,3 +156,49 @@ test('Should return false for equal array', () => {
     ),
   ).toEqual(false);
 });
+
+test('Should return true for multi select change', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { selection: [] } },
+    {
+      presentationProperties: [
+        {
+          name: 'selection',
+          type: 'selection',
+          multiple: true,
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { selection: ['a'] } },
+      appVersion,
+    ),
+  ).toEqual(true);
+});
+
+test('Should return false for equal multi select', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { selection: ['a'] } },
+    {
+      presentationProperties: [
+        {
+          name: 'selection',
+          type: 'selection',
+          multiple: true,
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { selection: ['a'] } },
+      appVersion,
+    ),
+  ).toEqual(false);
+});

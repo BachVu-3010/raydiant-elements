@@ -10,7 +10,7 @@ const styles = (theme: Theme) =>
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
       background: theme.palette.background.default,
-      borderBottom: '1px solid rgba(0, 0, 0, 0.2)',
+      borderBottom: `1px solid ${theme.palette.action.selected}`,
 
       '&:first-child': {
         borderTopLeftRadius: theme.spacing(1),

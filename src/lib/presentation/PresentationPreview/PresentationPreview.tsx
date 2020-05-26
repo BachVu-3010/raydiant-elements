@@ -34,6 +34,8 @@ export class PresentationPreview extends React.Component<
   }
 
   updateBounds = () => {
+    if (!this.previewRef) return;
+
     const {
       width: containerWidth,
       height: containerHeight,

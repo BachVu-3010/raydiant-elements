@@ -3,6 +3,7 @@ import * as isTouchDevice from 'is-touch-device';
 import * as React from 'react';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
+import Scrollable from '../../layout/Scrollable';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
@@ -66,7 +67,7 @@ export class PlaylistThumbnail extends React.Component<
     const shouldShowControls = hasControls && (showControls || isHover);
     const shouldShowEdit = onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
-    const shouldShowOverlay = shouldShowControls || selected;
+    const shouldShowOverlay = showControls || selected;
 
     // Don't attached mouse over / leave for touch devices.
     const shouldAddMouseEvents = !isTouchDevice();
@@ -98,15 +99,21 @@ export class PlaylistThumbnail extends React.Component<
           </div>
         )}
         {shouldShowSelect && (
-          <div className={classes.topLeft}>
-            <Checkbox
-              round
-              checked={selected}
-              onChange={onSelect}
-              onClick={stopPropagation()}
-              testId={testId ? `${testId}-select` : ''}
-            />
-          </div>
+          <Scrollable.VisibilitySensor>
+            {({ visibilityRef, isVisible }) => (
+              <div ref={visibilityRef} className={classes.topLeft}>
+                {isVisible && (
+                  <Checkbox
+                    round
+                    checked={selected}
+                    onChange={onSelect}
+                    onClick={stopPropagation()}
+                    testId={testId ? `${testId}-select` : ''}
+                  />
+                )}
+              </div>
+            )}
+          </Scrollable.VisibilitySensor>
         )}
       </div>
     );

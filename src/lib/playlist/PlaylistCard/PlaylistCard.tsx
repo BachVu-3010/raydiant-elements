@@ -14,18 +14,16 @@ interface PlaylistCardProps
   noShrink?: boolean;
 }
 
-export const PlaylistCard: React.SFC<PlaylistCardProps> = ({
-  classes,
-  playlist,
-  noShrink,
-  ...thumbnailProps
-}) => (
+export const PlaylistCard: React.SFC<PlaylistCardProps> = (
+  { classes, playlist, noShrink, ...thumbnailProps },
+  ref,
+) => (
   <div className={cn(classes.root, noShrink && classes.noShrink)}>
-    <div className={classes.thumbnail}>
+    <div ref={ref} className={classes.thumbnail}>
       <PlaylistThumbnail {...thumbnailProps} />
     </div>
     <div className={classes.name}>{playlist.name}</div>
   </div>
 );
 
-export default withStyles(styles)(PlaylistCard);
+export default withStyles(styles)(React.forwardRef(PlaylistCard));

@@ -13,9 +13,8 @@ const isRenderFn = (value: any): value is RenderFn =>
 
 export interface MenuLogoProps extends WithStyles<typeof styles> {
   square?: boolean;
-  /** Set href to render  */
   href?: string;
-  /** Called when the menu item is clicked */
+  width?: string | number;
   onClick?: () => any;
   children?: React.ReactNode | RenderFn;
 }
@@ -23,6 +22,7 @@ export interface MenuLogoProps extends WithStyles<typeof styles> {
 export const MenuLogo: React.SFC<MenuLogoProps> = ({
   square = false,
   href,
+  width,
   onClick,
   classes,
   children,
@@ -30,13 +30,13 @@ export const MenuLogo: React.SFC<MenuLogoProps> = ({
   if (isRenderFn(children)) {
     return children({
       className: classes.root,
-      Logo: <Logo square={square} />,
+      Logo: <Logo square={square} width={width} />,
     });
   }
 
   return (
     <a href={href} onClick={preventDefault(onClick)} className={classes.root}>
-      <Logo square={square} />
+      <Logo square={square} width={width} />
     </a>
   );
 };

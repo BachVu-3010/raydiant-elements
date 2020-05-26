@@ -10,6 +10,7 @@ interface RowProps extends WithStyles<typeof styles> {
   inline?: boolean;
   center?: boolean;
   halfMargin?: boolean;
+  doubleMargin?: boolean;
   onClick?: () => void;
 }
 
@@ -17,6 +18,7 @@ export const Row: React.SFC<RowProps> = ({
   className,
   inline,
   halfMargin,
+  doubleMargin,
   center,
   classes,
   children,
@@ -29,6 +31,7 @@ export const Row: React.SFC<RowProps> = ({
         inline && classes.inline,
         center && classes.center,
         halfMargin && classes.halfMargin,
+        doubleMargin && classes.doubleMargin,
         onClick && classes.clickable,
         className,
       )}

@@ -27,27 +27,33 @@ export const ApplicationCTA: React.SFC<ApplicationCTAProps> = ({
     <div className={classes.container}>
       <div className={classes.title}>{title}</div>
       <div className={classes.applications}>
-        <ApplicationCard
-          auto
-          application={applications[0]}
-          onClick={() => onApplicationClick(applications[0].id)}
-          smDownShrink={false}
-          testId={testId ? `${testId}-${applications[0].id}` : ''}
-        />
-        <ApplicationCard
-          auto
-          application={applications[1]}
-          onClick={() => onApplicationClick(applications[1].id)}
-          smDownShrink={false}
-          testId={testId ? `${testId}-${applications[1].id}` : ''}
-        />
-        <ApplicationCard
-          auto
-          application={applications[2]}
-          onClick={() => onApplicationClick(applications[2].id)}
-          smDownShrink={false}
-          testId={testId ? `${testId}-${applications[2].id}` : ''}
-        />
+        {applications[0] && (
+          <ApplicationCard
+            auto
+            application={applications[0]}
+            onClick={() => onApplicationClick(applications[0].id)}
+            smDownShrink={false}
+            testId={testId ? `${testId}-${applications[0].id}` : ''}
+          />
+        )}
+        {applications[1] && (
+          <ApplicationCard
+            auto
+            application={applications[1]}
+            onClick={() => onApplicationClick(applications[1].id)}
+            smDownShrink={false}
+            testId={testId ? `${testId}-${applications[1].id}` : ''}
+          />
+        )}
+        {applications[2] && (
+          <ApplicationCard
+            auto
+            application={applications[2]}
+            onClick={() => onApplicationClick(applications[2].id)}
+            smDownShrink={false}
+            testId={testId ? `${testId}-${applications[2].id}` : ''}
+          />
+        )}
       </div>
       <div className={classes.actions}>
         <Button

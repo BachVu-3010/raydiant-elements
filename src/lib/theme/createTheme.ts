@@ -41,6 +41,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       foregroundMuted: string;
       border: string;
       backgroundSelected: string;
+      fabLabel: string;
     };
     input: {
       background: string;
@@ -88,6 +89,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       xs: number;
       sm: number;
       md: number;
+    };
+    dropzone: {
+      border: string;
     };
   }
   interface ThemeOptions {
@@ -127,6 +131,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       foregroundMuted: string;
       border: string;
       backgroundSelected: string;
+      fabLabel: string;
     };
     input: {
       background: string;
@@ -175,6 +180,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       sm: number;
       md: number;
     };
+    dropzone: {
+      border: string;
+    };
   }
 }
 
@@ -187,6 +195,10 @@ declare module '@material-ui/core/styles/createPalette' {
   interface TypeText {
     link: string;
     heading: string;
+  }
+
+  interface TypeAction {
+    dropping: string;
   }
 
   interface Palette {
@@ -202,6 +214,7 @@ declare module '@material-ui/core/styles/createPalette' {
 
 declare module '@material-ui/core/styles/zIndex' {
   interface ZIndex {
+    shadow: number;
     menu: number;
     modal: number;
     popover: number;

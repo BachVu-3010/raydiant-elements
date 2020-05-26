@@ -12,6 +12,7 @@ import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
+import Scrollable from '../../layout/Scrollable';
 import * as T from '../PresentationTypes';
 import styles from './PresentationThumbnail.styles';
 
@@ -93,8 +94,7 @@ export class PresentationThumbnail extends React.Component<
     const shouldShowError = hasError && !shouldShowSelect;
     const shouldShowLock = isLocked && shouldShowControls;
     const shouldShowProgress = isLoading;
-    const shouldShowOverlay =
-      shouldShowControls || hasError || isLoading || selected;
+    const shouldShowOverlay = showControls || hasError || isLoading || selected;
 
     // Don't attached mouse over / leave for touch devices.
     const shouldAddMouseEvents = !isTouchDevice();
@@ -183,15 +183,21 @@ export class PresentationThumbnail extends React.Component<
           </div>
         )}
         {shouldShowSelect && (
-          <div className={classes.topLeft}>
-            <Checkbox
-              round
-              checked={selected}
-              onChange={onSelect}
-              onClick={stopPropagation()}
-              testId={testId ? `${testId}-select` : ''}
-            />
-          </div>
+          <Scrollable.VisibilitySensor>
+            {({ visibilityRef, isVisible }) => (
+              <div ref={visibilityRef} className={classes.topLeft}>
+                {isVisible && (
+                  <Checkbox
+                    round
+                    checked={selected}
+                    onChange={onSelect}
+                    onClick={stopPropagation()}
+                    testId={testId ? `${testId}-select` : ''}
+                  />
+                )}
+              </div>
+            )}
+          </Scrollable.VisibilitySensor>
         )}
       </div>
     );

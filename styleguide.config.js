@@ -13,6 +13,7 @@ const getSchedulePath = componentPathGetter('schedule');
 const getSequencePath = componentPathGetter('sequence');
 const getTypographyPath = componentPathGetter('typography');
 const getPlaylistPath = componentPathGetter('playlist');
+const getFolderPath = componentPathGetter('folder');
 
 module.exports = {
   title: 'Raydiant Elements',
@@ -35,6 +36,7 @@ module.exports = {
         getCorePath('ColorField'),
         getCorePath('DateField'),
         getCorePath('Divider'),
+        getCorePath('DropZone'),
         getCorePath('ExpansionPanel'),
         getCorePath('FileDropper'),
         getCorePath('FileField'),
@@ -49,6 +51,7 @@ module.exports = {
         getCorePath('MultiSelectField'),
         getCorePath('NumberField'),
         getCorePath('Popover'),
+        getCorePath('PrimaryActionButton'),
         getCorePath('RecurrenceSelector'),
         getCorePath('RadioGroup'),
         getCorePath('SelectField'),
@@ -59,6 +62,7 @@ module.exports = {
         getCorePath('ThemeSelector'),
         getCorePath('TimeField'),
         getCorePath('ToggleButtonGroup'),
+        getCorePath('TreeView'),
       ],
     },
     {
@@ -111,6 +115,10 @@ module.exports = {
     {
       name: 'Playlist',
       components: () => [getPlaylistPath('PlaylistCard')],
+    },
+    {
+      name: 'Folder',
+      components: () => [getFolderPath('FolderCard')],
     },
     {
       name: 'Schedule',

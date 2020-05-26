@@ -54,13 +54,9 @@ const styles = (theme: Theme) =>
     },
     underline: {
       '&:before': {
-        borderBottomLeftRadius: theme.borderRadius.sm,
-        borderBottomRightRadius: theme.borderRadius.sm,
         borderBottomColor: theme.input.border,
       },
       '&:after': {
-        borderBottomLeftRadius: theme.borderRadius.sm,
-        borderBottomRightRadius: theme.borderRadius.sm,
         borderBottomColor: theme.input.border,
       },
     },

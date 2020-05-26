@@ -10,6 +10,8 @@ const styles = (theme: Theme) =>
       position: 'relative',
       cursor: 'pointer',
       padding: theme.spacing(1, 2),
+      borderTop: `1px solid transparent`,
+      borderBottom: `1px solid ${theme.palette.action.selected}`,
     },
     topLeft: {
       position: 'absolute',
@@ -33,8 +35,9 @@ const styles = (theme: Theme) =>
       ...textTruncate(),
     },
     selected: {
-      background: theme.palette.background.paper,
+      background: theme.palette.action.selected,
       boxShadow: theme.shadows[1],
+      borderBottom: `1px solid transparent`,
     },
   });
 

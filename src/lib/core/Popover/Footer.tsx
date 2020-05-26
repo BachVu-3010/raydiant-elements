@@ -14,7 +14,7 @@ const styles = (theme: Theme) =>
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
       borderBottom: '1px solid transparent',
-      borderTop: `1px solid ${theme.popover.borderColor}`,
+      borderTop: `1px solid ${theme.palette.action.selected}`,
       minHeight: 68,
     },
     row: {
