@@ -284,3 +284,134 @@ initialState = {
   </Modal>
 </App>;
 ```
+
+### OAuth buttons
+```js
+const OAuthInput = require('./OAuthInput/OAuthInput.tsx').default;
+const OneDriveAuthInput = require('./OneDriveAuthInput/OneDriveAuthInput.tsx').default;
+const FacebookAuthInput = require('./FacebookAuthInput/FacebookAuthInput.tsx').default;
+const GoogleAuthInput = require('./GoogleAuthInput/GoogleAuthInput.tsx').default;
+const PosterMyWallAuthInput = require('./PosterMyWallAuthInput/PosterMyWallAuthInput.tsx').default;
+
+
+initialState = {
+  disabled: false
+};
+
+<App>
+  <Column>
+    <OneThirdLayout>
+      <Column>
+        <Row>
+          <OneThirdLayout.ColumnSmall>
+            <OAuthInput
+              label='connect to Provider'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <OAuthInput
+              label='connect to Provider'
+              previewUsername='Test Name'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <OAuthInput
+              label='connect to Provider'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+        </Row>
+        <Row>
+          <OneThirdLayout.ColumnSmall>
+            <OneDriveAuthInput
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <OneDriveAuthInput
+              previewUsername='Test Name'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <OneDriveAuthInput
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+        </Row>
+        <Row>
+          <OneThirdLayout.ColumnSmall>
+            <FacebookAuthInput
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <FacebookAuthInput
+              previewUsername='Test Name'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <FacebookAuthInput
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+        </Row>
+        <Row>
+          <OneThirdLayout.ColumnSmall>
+            <GoogleAuthInput
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <GoogleAuthInput
+              previewUsername='Test Name'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <GoogleAuthInput
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+        </Row>
+        <Row>
+          <OneThirdLayout.ColumnSmall>
+            <PosterMyWallAuthInput
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <PosterMyWallAuthInput
+              previewUsername='Test Name'
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
+            <PosterMyWallAuthInput
+              value='access-token'
+              disabled={state.disabled}
+            />
+          </OneThirdLayout.ColumnSmall>
+        </Row>
+      </Column>
+    </OneThirdLayout>
+    <Switch
+      label='Disable'
+      checked={state.disabled}
+      onChange={disabled => setState({ disabled })}
+    />
+  </Column>
+</App>;
+```

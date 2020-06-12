@@ -1,9 +1,7 @@
-import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
-import Button from '../../../core/Button';
 import Icon from '../../../core/Icon';
 import withStyles, { createStyles, WithStyles } from '../../../core/withStyles';
-import createTheme, { Theme } from '../../../theme/createTheme';
+import createTheme from '../../../theme/createTheme';
 import OAuthInput, { OAuthInputProps } from '../OAuthInput';
 
 interface FacebookAuthInputProps
@@ -12,6 +10,7 @@ interface FacebookAuthInputProps
 
 const styles = createStyles({
   icon: {
+    color: '#ffffff',
     position: 'absolute',
     top: 0,
     left: 6,
@@ -19,17 +18,18 @@ const styles = createStyles({
     display: 'flex',
     alignItems: 'center',
     '& > svg': {
-      height: 26,
-      width: 26,
+      height: 24,
+      width: 24,
     },
-  },
+  }
 });
 
 const FacebookAuthInput: React.SFC<FacebookAuthInputProps> = ({
   classes,
   ...props
 }) => (
-  <ThemeProvider<Theme>
+  <OAuthInput
+    {...props}
     theme={outerTheme =>
       createTheme({
         ...outerTheme,
@@ -37,24 +37,24 @@ const FacebookAuthInput: React.SFC<FacebookAuthInputProps> = ({
           ...outerTheme.palette,
           primary: {
             main: '#4267B2',
-            dark: '#3a5b9c',
+            dark: '#35528E',
             contrastText: '#ffffff',
           },
         },
+        button: {
+          ...outerTheme.button,
+          background: '#9BAED4',
+          foregroundMuted: '#ffffff',
+        },
       })
     }
-  >
-    <OAuthInput {...props}>
-      {({ onClick }) => (
-        <Button fullWidth color="primary" onClick={onClick}>
-          <div className={classes.icon}>
-            <Icon icon="facebook" />
-          </div>
-          Log In with Facebook
-        </Button>
-      )}
-    </OAuthInput>
-  </ThemeProvider>
+    label='connect to Facebook'
+    icon={(
+      <div className={classes.icon}>
+        <Icon icon='facebook' />
+      </div>
+    )}
+  />
 );
 
 export default withStyles(styles)(FacebookAuthInput);

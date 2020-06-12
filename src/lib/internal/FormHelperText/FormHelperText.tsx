@@ -5,10 +5,12 @@ import styles from './FormHelperText.styles';
 
 interface FormHelperTextProps extends WithStyles<typeof styles> {
   error?: boolean;
+  disabled?: boolean;
 }
 
 const FormHelperText: React.SFC<FormHelperTextProps> = ({
   error,
+  disabled,
   children,
   classes,
 }) => (
@@ -16,6 +18,7 @@ const FormHelperText: React.SFC<FormHelperTextProps> = ({
     className={classes.root}
     classes={{ error: classes.error }}
     error={error}
+    disabled={disabled}
   >
     {children}
   </MUIFormHelperText>

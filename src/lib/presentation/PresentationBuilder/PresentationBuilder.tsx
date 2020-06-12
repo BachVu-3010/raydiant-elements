@@ -32,6 +32,7 @@ import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
 import OneDriveAuthInput from './OneDriveAuthInput';
 import PlaylistInput from './PlaylistInput';
+import PosterMyWallAuthInput from './PosterMyWallAuthInput';
 import styles from './PresentationBuilder.styles';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
 import PresentationBuilderWarning from './PresentationBuilderWarning';
@@ -604,6 +605,25 @@ export class PresentationBuilder extends React.Component<
       case 'onedriveAuth':
         return (
           <OneDriveAuthInput
+            key={key}
+            path={path}
+            label={label}
+            value={value}
+            authUrl={property.auth_url}
+            verifyUrl={property.verify_url}
+            verifyQsParam={property.verify_qs_param}
+            helperText={helperText}
+            error={hasError}
+            disabled={isDisabled}
+            onChange={newValue =>
+              this.updatePresentation(path, newValue, property)
+            }
+          />
+        );
+
+      case 'postermywallAuth':
+        return (
+          <PosterMyWallAuthInput
             key={key}
             path={path}
             label={label}

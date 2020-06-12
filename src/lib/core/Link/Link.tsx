@@ -26,6 +26,8 @@ interface LinkProps extends WithStyles<typeof styles> {
   color?: string;
   /** Set true if link is active */
   active?: boolean;
+  /** Set true if link is disabled or not */
+  disabled?: boolean;
   /** Show underline, currently only used by the website */
   underline?: boolean;
   children?: React.ReactNode | RenderFn;
@@ -35,6 +37,7 @@ export const Link: React.SFC<LinkProps> = ({
   href = 'javascript:;',
   fullWidth = false,
   active = false,
+  disabled= false,
   color,
   target,
   onClick,
@@ -61,10 +64,11 @@ export const Link: React.SFC<LinkProps> = ({
         fullWidth && classes.fullWidth,
         active && classes.active,
         underline && classes.underline,
+        disabled && classes.disabled,
       )}
       href={href}
       target={target}
-      onClick={onClick && preventDefault(onClick)}
+      onClick={disabled ? preventDefault(null) : (onClick && preventDefault(onClick))}
       style={{ color }}
       {...testAttr(testId)}
     >

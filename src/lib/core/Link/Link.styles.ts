@@ -22,6 +22,13 @@ const styles = (theme: Theme) =>
     underline: {
       textDecoration: 'underline',
     },
+    disabled: {
+      opacity: 0.5,
+      cursor: 'default',
+      '&:hover': {
+        textDecoration: 'none',
+      },
+    }
   });
 
 export default styles;

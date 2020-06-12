@@ -1,8 +1,6 @@
-import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
-import Button from '../../../core/Button';
 import withStyles, { createStyles, WithStyles } from '../../../core/withStyles';
-import createTheme, { Theme } from '../../../theme/createTheme';
+import createTheme from '../../../theme/createTheme';
 import OAuthInput, { OAuthInputProps } from '../OAuthInput';
 
 interface GoogleAuthInputProps
@@ -31,30 +29,28 @@ const GoogleAuthInput: React.SFC<GoogleAuthInputProps> = ({
   classes,
   ...props
 }) => (
-  <ThemeProvider<Theme>
+  <OAuthInput
+    {...props}
     theme={outerTheme =>
       createTheme({
         ...outerTheme,
         palette: {
           ...outerTheme.palette,
           primary: {
-            main: '#ffffff',
-            dark: '#f2f2f2',
+            main: '#FFFFFF',
+            dark: '#F2F2F2',
             contrastText: '#757575',
           },
         },
+        button: {
+          ...outerTheme.button,
+          background: '#F9FAFB',
+        },
       })
     }
-  >
-    <OAuthInput {...props}>
-      {({ onClick }) => (
-        <Button fullWidth color="primary" onClick={onClick}>
-          <div className={classes.icon} />
-          Log In with Google
-        </Button>
-      )}
-    </OAuthInput>
-  </ThemeProvider>
+    label='connect to Google'
+    icon={<div className={classes.icon} />}
+  />
 );
 
 export default withStyles(styles)(GoogleAuthInput);
