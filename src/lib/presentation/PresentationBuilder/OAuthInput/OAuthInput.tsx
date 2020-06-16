@@ -161,17 +161,19 @@ class OAuthInput extends React.Component<OAuthInputProps & WithStyles<typeof sty
 
     return (
       <ThemeProvider<Theme> theme={theme}>
-        <Button
-          fullWidth
-          color={loggedIn && !disabled ? 'default' : 'primary'}
-          onClick={loggedIn ? null : this.authRedirect}
-          disabled={disabled || loggedIn}
-          classes={{ button: disabled ? classes.disabled : (loggedIn ? classes.loggedIn : classes.default) }}
-        >
-          <span className={classes.label}>{buttonLabel}</span>
-          {icon}
-        </Button>
-        {helperContent && <FormHelperText error={hasError} disabled={disabled}>{helperContent}</FormHelperText>}
+        <div>
+          <Button
+            fullWidth
+            color={loggedIn && !disabled ? 'default' : 'primary'}
+            onClick={loggedIn ? null : this.authRedirect}
+            disabled={disabled || loggedIn}
+            classes={{ button: disabled ? classes.disabled : (loggedIn ? classes.loggedIn : classes.default) }}
+          >
+            <span className={classes.label}>{buttonLabel}</span>
+            {icon}
+          </Button>
+          {helperContent && <FormHelperText error={hasError} disabled={disabled}>{helperContent}</FormHelperText>}
+        </div>
       </ThemeProvider>
     );
   }
