@@ -34,3 +34,9 @@ declare module 'is-touch-device' {
 }
 
 declare module '@material-ui/lab/esm/TreeView/TreeViewContext';
+
+declare module 'lodash.isequal' {
+  type IsEqual<T = any> = (value: T, other: T) => boolean;
+  const isEqualExport: IsEqual;
+  export = isEqualExport;
+}

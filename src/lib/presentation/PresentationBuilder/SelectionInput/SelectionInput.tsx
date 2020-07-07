@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as isEqual from 'lodash.isequal';
 import * as A from '../../../application/ApplicationTypes';
 import Link from '../../../core/Link';
 import MultiSelectField from '../../../core/MultiSelectField';
@@ -65,16 +66,17 @@ class SelectionInput extends React.Component<
       // Re-fetch options when one of the properties that the options url
       // depends on has changed.
       const shouldFetchOptions = dependsOn.some(
-        propName => parentValue[propName] !== prevProps.parentValue[propName],
+        propName => !isEqual(parentValue[propName], prevProps.parentValue[propName]),
       );
 
       if (shouldFetchOptions) {
-        this.fetchOptions();
+        // When parent value is changed, set the value of current element back to default
+        this.fetchOptions(true);
       }
     }
   }
 
-  async fetchOptions() {
+  async fetchOptions(forceDefaultValues=false) {
     const { optionsUrl, parentValue } = this.props;
     const defaultErrorMessage = 'Failed to load options.';
     const url = replacePropNameWithValue(optionsUrl, parentValue);
@@ -85,7 +87,7 @@ class SelectionInput extends React.Component<
         const options = await resp.json();
         // Set the default value before the options. This fixes an issue with
         // multi-selects not ordering the selected items to the top of the list.
-        this.checkDefaultOptions(options);
+        this.checkDefaultOptions(options, forceDefaultValues);
         this.setState({ options });
       } catch (err) {
         this.setState({ optionsError: defaultErrorMessage });
@@ -100,18 +102,17 @@ class SelectionInput extends React.Component<
     }
   }
 
-  checkDefaultOptions(options: A.SelectionOption[]) {
+  checkDefaultOptions(options: A.SelectionOption[], forceDefaultValues: boolean) {
     const { value, multiple, onChange } = this.props;
     const isValueUnset = value === null || value === undefined;
     const hasOptions = options.length > 0;
 
     const isValueInOptions = multiple
       ? Array.isArray(value) &&
-        value.length > 0 &&
         value.every(v => options.some(opt => opt.value === v))
       : options.some(opt => opt.value === value);
 
-    const shouldSetValueToDefault = isValueUnset || !isValueInOptions;
+    const shouldSetValueToDefault = isValueUnset || !isValueInOptions || forceDefaultValues;
 
     if (shouldSetValueToDefault && hasOptions) {
       const defaultValue = options
