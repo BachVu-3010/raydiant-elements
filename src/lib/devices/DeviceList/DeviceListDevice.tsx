@@ -13,7 +13,8 @@ import PlaylistSelector from './DeviceListPlaylistSelector';
 
 export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   device: D.Device;
-  playlists: D.Playlist[];
+  playlistsByOwner: D.PlaylistsByOwner;
+  currentUserProfileId: string;
   thumbnail?: string;
   signalStrength?: number;
   isOnline?: boolean;
@@ -33,7 +34,8 @@ export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
 const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
   classes,
   device,
-  playlists,
+  playlistsByOwner,
+  currentUserProfileId,
   signalStrength,
   isOnline,
   isEthernet,
@@ -47,8 +49,6 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
   onConnectivityWizard,
   onSettings,
 }) => {
-  const playlist = playlists.find(pl => pl.id === device.playlistId);
-
   return (
     <Column className={classes.root}>
       <Row center>
@@ -61,8 +61,9 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
 
       <Row center>
         <PlaylistSelector
-          value={playlist ? playlist.id : ''}
-          playlists={playlists}
+          value={device.playlistId}
+          playlistsByOwner={playlistsByOwner}
+          currentUserProfileId={currentUserProfileId}
           onSelectPlaylist={onSelectPlaylist}
           onEditPlaylist={onEditPlaylist}
           onCreatePlaylist={onCreatePlaylist}
@@ -93,7 +94,8 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
 const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   classes,
   device,
-  playlists,
+  playlistsByOwner,
+  currentUserProfileId,
   thumbnail,
   signalStrength,
   isOnline,
@@ -109,8 +111,6 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
   onSettings,
   onClick,
 }) => {
-  const playlist = playlists.find(pl => pl.id === device.playlistId);
-
   return (
     <Row className={classes.root} center onClick={onClick}>
       <Row className={classes.deviceInfo} center>
@@ -134,8 +134,9 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
       </Row>
 
       <PlaylistSelector
-        value={playlist ? playlist.id : ''}
-        playlists={playlists}
+        value={device.playlistId}
+        playlistsByOwner={playlistsByOwner}
+        currentUserProfileId={currentUserProfileId}
         onSelectPlaylist={onSelectPlaylist}
         onEditPlaylist={onEditPlaylist}
         onCreatePlaylist={onCreatePlaylist}
