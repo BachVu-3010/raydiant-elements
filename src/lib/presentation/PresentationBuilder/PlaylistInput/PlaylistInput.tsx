@@ -8,7 +8,8 @@ interface PlaylistInputProps {
   label: string;
   value: string;
   propertyTypeIndex: number;
-  playlists: P.Playlist[];
+  playlistsByOwner: P.PlaylistsByOwner;
+  currentUserProfileId: string;
   helperText: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
@@ -24,40 +25,56 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
   onChangeTimeout: number;
 
   componentDidMount() {
-    this.checkDefaultValue();
+    const { playlistsByOwner } = this.props;
+    const allPlaylists = this.getAllPlaylists(playlistsByOwner);
+    this.checkDefaultValue(allPlaylists);
   }
 
   componentDidUpdate(prevProps: PlaylistInputProps) {
-    const { playlists } = this.props;
+    const { playlistsByOwner } = this.props;
+
+    const allPlaylists = this.getAllPlaylists(playlistsByOwner);
+    const allPrevPlaylists = this.getAllPlaylists(prevProps.playlistsByOwner);
 
     const didPlaylistsChange =
-      playlists.length !== prevProps.playlists.length ||
-      playlists.some((p, i) => p.id !== prevProps.playlists[i].id);
+      allPlaylists.length !== allPrevPlaylists.length ||
+      allPlaylists.some((p, i) => p.id !== allPrevPlaylists[i].id);
 
     if (didPlaylistsChange) {
-      this.checkDefaultValue();
+      this.checkDefaultValue(allPlaylists);
     }
   }
 
-  checkDefaultValue() {
-    const { value, propertyTypeIndex, playlists, onChange } = this.props;
+  getAllPlaylists(playlistsById: P.PlaylistsByOwner) {
+    const allPlaylists: P.Playlist[] = [];
+    Object.values(playlistsById).forEach(({ playlists }) => {
+      allPlaylists.push(...playlists);
+    });
+    return allPlaylists;
+  }
+
+  checkDefaultValue(allPlaylists: P.Playlist[]) {
+    const { value, propertyTypeIndex, onChange } = this.props;
     // Set default playlist if one doesn't exist. Uses propertyTypeIndex to pick
     // another playlist when there are multiple zones.
-    if (playlists.length > 0 && (!value || !this.isValueInPlaylists())) {
+    if (
+      allPlaylists.length > 0 &&
+      (!value || !this.isValueInPlaylists(allPlaylists))
+    ) {
       this.onChangeTimeout = setTimeout(() => {
         // This ensures we pick the second playlist as the default for zone2 of MZ
         // if there is more than one user playlist.
         const defaultPlaylistIndex = Math.min(
           propertyTypeIndex,
-          playlists.length - 1,
+          allPlaylists.length - 1,
         );
-        onChange(playlists[defaultPlaylistIndex].id);
+        onChange(allPlaylists[defaultPlaylistIndex].id);
       });
     }
   }
 
-  isValueInPlaylists() {
-    const { value, playlists } = this.props;
+  isValueInPlaylists(playlists: P.Playlist[]) {
+    const { value } = this.props;
     return !!playlists.map(pl => pl.id).includes(value);
   }
 
@@ -78,7 +95,8 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
     const {
       label,
       value,
-      playlists,
+      playlistsByOwner,
+      currentUserProfileId,
       helperText,
       error,
       disabled,
@@ -87,14 +105,17 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
       onCreate,
     } = this.props;
 
-    const options = playlists.map(pl => ({
-      value: pl.id,
-      name: pl.name,
-    }));
+    const myGroup = playlistsByOwner[currentUserProfileId];
+    const otherGroups = Object.values(playlistsByOwner).filter(
+      group => group.profile.id !== currentUserProfileId,
+    );
 
-    const valueOrDefault = value || (options[0] ? options[0].value : '');
+    const totalPlaylists = Object.values(playlistsByOwner).reduce(
+      (a, b) => a + b.playlists.length,
+      0,
+    );
 
-    if (onCreate && !playlists.length) {
+    if (onCreate && totalPlaylists === 0) {
       return (
         <Button
           color="primary"
@@ -104,6 +125,12 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
         />
       );
     }
+
+    const valueOrDefault =
+      value ||
+      (totalPlaylists !== 0
+        ? this.getAllPlaylists(playlistsByOwner)[0].id
+        : '');
 
     return (
       <Row>
@@ -124,12 +151,24 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
               </option>
             </>
           )}
-          {options.map(opt => (
-            <option key={opt.value} value={opt.value}>
-              {opt.name}
+
+          {myGroup.playlists.map(pl => (
+            <option key={pl.id} value={pl.id}>
+              {pl.name}
             </option>
           ))}
-          {options.length === 0 && <option disabled>No playlists found</option>}
+
+          {otherGroups.map(({ profile, playlists }) => (
+            <optgroup key={profile.id} label={profile.name}>
+              {playlists.map(pl => (
+                <option key={pl.id} value={pl.id}>
+                  {pl.name}
+                </option>
+              ))}
+            </optgroup>
+          ))}
+
+          {totalPlaylists === 0 && <option disabled>No playlists found</option>}
         </SelectField>
         {onEdit && (
           <Button

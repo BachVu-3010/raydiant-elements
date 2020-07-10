@@ -64,7 +64,8 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   appVersion?: A.ApplicationVersion;
   themes?: P.Theme[];
   soundZones?: P.SoundZone[];
-  playlists?: P.Playlist[];
+  playlistsByOwner?: P.PlaylistsByOwner;
+  currentUserProfileId: string;
   localUploads?: P.LocalUploadInProgress[];
   affectedDevices?: D.AffectedDevice[];
   previewMode?: P.PreviewMode;
@@ -106,7 +107,7 @@ export class PresentationBuilder extends React.Component<
   static defaultProps: Partial<PresentationBuilderProps> = {
     themes: [],
     soundZones: [],
-    playlists: [],
+    playlistsByOwner: {},
     affectedDevices: [],
     localUploads: [],
     minDuration: 5,
@@ -252,7 +253,8 @@ export class PresentationBuilder extends React.Component<
     const { presentation, previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
-    const shouldDelete = property.type === 'array' && (value === null || value === undefined);
+    const shouldDelete =
+      property.type === 'array' && (value === null || value === undefined);
     const updatedPresentation = shouldDelete
       ? immutable.del(presentation, path)
       : immutable.set(presentation, path, value);
@@ -381,7 +383,8 @@ export class PresentationBuilder extends React.Component<
     const {
       themes,
       soundZones,
-      playlists,
+      playlistsByOwner,
+      currentUserProfileId,
       onPlaylistEdit,
       onPlaylistCreate,
     } = this.props;
@@ -681,7 +684,8 @@ export class PresentationBuilder extends React.Component<
             key={key}
             label={label}
             value={value}
-            playlists={playlists}
+            playlistsByOwner={playlistsByOwner}
+            currentUserProfileId={currentUserProfileId}
             helperText={helperText}
             error={hasError}
             disabled={isDisabled}
