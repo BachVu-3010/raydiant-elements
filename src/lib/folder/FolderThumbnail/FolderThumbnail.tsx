@@ -32,7 +32,7 @@ export const FolderThumbnail: React.SFC<FolderThumbnailPropsWithStyles> = ({
   const hasControls = !!onSelect;
   const shouldShowControls = hasControls && showControls;
   const shouldShowSelect = (onSelect && shouldShowControls) || selected;
-  const shouldShowOverlay = showControls || selected || isHover;
+  const shouldShowOverlay = shouldShowControls || selected || isHover;
 
   // Don't attached mouse over / leave for touch devices.
   const shouldAddMouseEvents = !isTouchDevice();

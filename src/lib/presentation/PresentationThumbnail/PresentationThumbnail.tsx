@@ -94,7 +94,8 @@ export class PresentationThumbnail extends React.Component<
     const shouldShowError = hasError && !shouldShowSelect;
     const shouldShowLock = isLocked && shouldShowControls;
     const shouldShowProgress = isLoading;
-    const shouldShowOverlay = showControls || hasError || isLoading || selected;
+    const shouldShowOverlay =
+      shouldShowControls || hasError || isLoading || selected;
 
     // Don't attached mouse over / leave for touch devices.
     const shouldAddMouseEvents = !isTouchDevice();

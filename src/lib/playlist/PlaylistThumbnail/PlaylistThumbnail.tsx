@@ -67,7 +67,7 @@ export class PlaylistThumbnail extends React.Component<
     const shouldShowControls = hasControls && (showControls || isHover);
     const shouldShowEdit = onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
-    const shouldShowOverlay = showControls || selected;
+    const shouldShowOverlay = shouldShowControls || selected;
 
     // Don't attached mouse over / leave for touch devices.
     const shouldAddMouseEvents = !isTouchDevice();
