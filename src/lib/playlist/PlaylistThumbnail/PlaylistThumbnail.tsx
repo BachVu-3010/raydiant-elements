@@ -64,7 +64,7 @@ export class PlaylistThumbnail extends React.Component<
 
     const imageUrl = 'https://assets.raydiant.com/playlist-thumbnail.svg';
     const hasControls = onEdit || onSelect;
-    const shouldShowControls = hasControls && (showControls || isHover);
+    const shouldShowControls = showControls || (hasControls && isHover);
     const shouldShowEdit = onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowOverlay = shouldShowControls || selected;

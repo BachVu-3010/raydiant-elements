@@ -35,7 +35,7 @@ class PresentationListItem extends React.Component<PresentationListItemProps> {
       lockedMessage,
       testId,
     } = this.props;
-    const shouldShowRemove = selected && !isLocked && !!onRemove;
+    const shouldShowRemove = selected && !!onRemove;
     return (
       <div
         className={cn(classes.root, selected && classes.selected)}

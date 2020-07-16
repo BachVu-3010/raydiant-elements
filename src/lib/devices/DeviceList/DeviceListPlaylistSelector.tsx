@@ -11,9 +11,9 @@ interface PlaylistSelectorProps extends WithStyles<typeof styles> {
   value: string;
   playlistsByOwner: D.PlaylistsByOwner;
   currentUserProfileId: string;
-  onSelectPlaylist: (playlistId: string) => void;
-  onEditPlaylist: (playlistId: string) => void;
-  onCreatePlaylist: () => void;
+  onSelectPlaylist?: (playlistId: string) => void;
+  onEditPlaylist?: (playlistId: string) => void;
+  onCreatePlaylist?: () => void;
 }
 
 export const NEW_PLAYLIST_VALUE = 'new';
@@ -28,38 +28,47 @@ const PlaylistSelector: React.SFC<PlaylistSelectorProps> = ({
   onSelectPlaylist,
 }) => {
   const myGroup = playlistsByOwner[currentUserProfileId];
-  const otherGroups = Object.values(playlistsByOwner).filter(
-    group => group.profile.id !== currentUserProfileId,
+  const allGroups = Object.values(playlistsByOwner);
+
+  const allPlaylists = allGroups.reduce(
+    (a, b) => {
+      a.push(...b.playlists);
+      return a;
+    },
+    [] as D.Playlist[],
   );
 
-  const totalPlaylists = Object.values(playlistsByOwner).reduce(
-    (a, b) => a + b.playlists.length,
-    0,
-  );
+  const selectedPlaylist = allPlaylists.find(pl => pl.id === value);
+  const playlistIsDeleted = value && !selectedPlaylist;
+  const shouldAddEmptyOption = !value || playlistIsDeleted;
+  const shouldDisabledSelect = !onSelectPlaylist;
 
   return (
     <div className={classes.root} onClick={stopPropagation()}>
-      {totalPlaylists === 0 ? (
-        <Button
-          fullWidth
-          color="primary"
-          label="Create a Playlist"
-          onClick={onCreatePlaylist}
-        />
+      {allPlaylists.length === 0 ? (
+        onCreatePlaylist && (
+          <Button
+            fullWidth
+            color="primary"
+            label="Create a Playlist"
+            onClick={onCreatePlaylist}
+          />
+        )
       ) : (
         <Row>
           <SelectField
-            label={value ? 'Playlist' : 'Select a playlist'}
-            value={value}
+            label={shouldAddEmptyOption ? 'Select a playlist' : 'Playlist'}
+            value={playlistIsDeleted ? '' : value}
+            disabled={shouldDisabledSelect}
             onChange={playlistId => {
-              if (playlistId === NEW_PLAYLIST_VALUE) {
+              if (playlistId === NEW_PLAYLIST_VALUE && onCreatePlaylist) {
                 onCreatePlaylist();
-              } else {
+              } else if (onSelectPlaylist) {
                 onSelectPlaylist(playlistId);
               }
             }}
           >
-            {!value && <option value="" />}
+            {shouldAddEmptyOption && <option value="" />}
             <option value={NEW_PLAYLIST_VALUE}>New Empty Playlist</option>
             <option value="new-separator" disabled>
               --------------------------
@@ -71,21 +80,30 @@ const PlaylistSelector: React.SFC<PlaylistSelectorProps> = ({
               </option>
             ))}
 
-            {otherGroups.map(({ profile, playlists }) => (
-              <optgroup key={profile.id} label={profile.name}>
-                {playlists.map(pl => (
-                  <option key={pl.id} value={pl.id}>
-                    {pl.name}
-                  </option>
-                ))}
-              </optgroup>
-            ))}
+            {allGroups.map(({ profile, playlists }) => {
+              if (profile.id === myGroup.profile.id) {
+                return null;
+              }
+
+              return (
+                <optgroup key={profile.id} label={profile.name}>
+                  {playlists.map(pl => (
+                    <option key={pl.id} value={pl.id}>
+                      {pl.name}
+                    </option>
+                  ))}
+                </optgroup>
+              );
+            })}
           </SelectField>
-          <Button
-            icon="edit"
-            disabled={!value}
-            onClick={() => onEditPlaylist(value)}
-          />
+
+          {onEditPlaylist && (
+            <Button
+              icon="edit"
+              disabled={shouldAddEmptyOption}
+              onClick={() => onEditPlaylist(value)}
+            />
+          )}
         </Row>
       )}
     </div>

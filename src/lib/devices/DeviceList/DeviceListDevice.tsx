@@ -22,10 +22,10 @@ export interface DeviceListDeviceProps extends WithStyles<typeof styles> {
   isLTE?: boolean;
   needsPublish?: boolean;
   disablePublish: boolean;
-  onSelectPlaylist: (playlistId: string) => void;
-  onEditPlaylist: (playlistId: string) => void;
-  onCreatePlaylist: () => void;
-  onPublish: () => void;
+  onSelectPlaylist?: (playlistId: string) => void;
+  onEditPlaylist?: (playlistId: string) => void;
+  onCreatePlaylist?: () => void;
+  onPublish?: () => void;
   onConnectivityWizard?: () => void;
   onSettings?: () => void;
   onClick?: () => void;
@@ -69,7 +69,7 @@ const DeviceListDeviceMobile: React.SFC<DeviceListDeviceProps> = ({
           onCreatePlaylist={onCreatePlaylist}
         />
 
-        {needsPublish && (
+        {needsPublish && onPublish && (
           <Button
             color="progress"
             icon="publish"
@@ -143,7 +143,7 @@ const DeviceListDeviceDesktop: React.SFC<DeviceListDeviceProps> = ({
       />
 
       <Row className={classes.deviceActions} center>
-        {needsPublish && (
+        {needsPublish && onPublish && (
           <Button
             color="progress"
             icon="publish"

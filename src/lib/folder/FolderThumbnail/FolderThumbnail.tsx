@@ -30,7 +30,7 @@ export const FolderThumbnail: React.SFC<FolderThumbnailPropsWithStyles> = ({
 }) => {
   const [isHover, setHover] = React.useState(false);
   const hasControls = !!onSelect;
-  const shouldShowControls = hasControls && showControls;
+  const shouldShowControls = showControls || (hasControls && isHover);
   const shouldShowSelect = (onSelect && shouldShowControls) || selected;
   const shouldShowOverlay = shouldShowControls || selected || isHover;
 
