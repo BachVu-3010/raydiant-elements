@@ -82,6 +82,7 @@ export interface ApplicationVersion {
   // need to support it for legacy apps and embedded apps.
   hasConfigurableDuration?: boolean;
   embeddedUrlFormat?: string;
+  sourceUrl?: string;
 }
 
 export interface Application {

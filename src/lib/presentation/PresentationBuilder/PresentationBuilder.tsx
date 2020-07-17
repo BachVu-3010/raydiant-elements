@@ -774,7 +774,7 @@ export class PresentationBuilder extends React.Component<
 
     const warnings = [];
 
-    if (appVersion.embeddedUrlFormat) {
+    if (appVersion.embeddedUrlFormat && !appVersion.sourceUrl) {
       warnings.push('Preview not available for this application');
     }
 
