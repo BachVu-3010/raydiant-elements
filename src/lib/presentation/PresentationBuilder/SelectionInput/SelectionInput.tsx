@@ -79,7 +79,7 @@ class SelectionInput extends React.Component<
   async fetchOptions(forceDefaultValues=false) {
     const { optionsUrl, parentValue } = this.props;
     const defaultErrorMessage = 'Failed to load options.';
-    const url = replacePropNameWithValue(optionsUrl, parentValue);
+    const url = replacePropNameWithValue(optionsUrl, parentValue, true);
 
     const resp = await fetch(url);
     if (resp.ok) {
