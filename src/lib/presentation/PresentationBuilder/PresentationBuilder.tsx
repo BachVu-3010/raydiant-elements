@@ -908,13 +908,18 @@ export class PresentationBuilder extends React.Component<
       header,
       onDone,
       didSave,
+      minDuration,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
     const isLoading = !originalPresentation || !presentation || !appVersion;
+    const isNewAndValid =
+      presentation &&
+      !presentation.id &&
+      validatePresentation(presentation, appVersion, minDuration).length === 0;
     const shouldDisableSave =
       isLoading ||
-      !hasPresentationChanged(originalPresentation, presentation, appVersion);
+      (!hasPresentationChanged(originalPresentation, presentation, appVersion) && !isNewAndValid);
     const shouldDisableDone = shouldDisableSave && !didSave;
     return (
       <OneThirdLayout>
