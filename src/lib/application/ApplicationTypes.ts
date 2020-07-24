@@ -9,6 +9,10 @@ export interface Constraints {
   min?: number;
   max?: number;
   max_items?: number;
+  format?: {
+    regex: string;
+    errorMessage: string;
+  },
 }
 
 export interface SelectionOption {

@@ -21,6 +21,7 @@ const defaultProps = () => ({
       },
       datetime: '2020-02-02',
       string: 'string',
+      stringFormat: '',
       array: [{ array2: [{ string: 'string' }] }],
     },
   },
@@ -54,6 +55,12 @@ const defaultProps = () => ({
         name: 'string',
         type: 'string',
         constraints: { maxlength: 10 },
+      },
+      {
+        name: 'stringFormat',
+        type: 'string',
+        optional: true,
+        constraints: { format: { regex: '[a-zA-Z]+', errorMessage: 'alphabet only' } },
       },
       {
         name: 'array',
@@ -162,6 +169,18 @@ test('Should return error for string type with value greater than maxlength', ()
   const errors = validatePresentation(presentation, appVersion, minDuration);
   expect(errors.length).toEqual(1);
   expect(errors[0].path).toEqual(['applicationVariables', 'string']);
+});
+
+test('Should return error for string type with value does not match the format', () => {
+  const { presentation, appVersion, minDuration } = defaultProps();
+  presentation.applicationVariables.stringFormat = '01234567890';
+  const errors = validatePresentation(presentation, appVersion, minDuration);
+  expect(errors.length).toEqual(1);
+  expect(errors[0].path).toEqual(['applicationVariables', 'stringFormat']);
+  expect(errors[0].message).toEqual('alphabet only');
+
+  presentation.applicationVariables.stringFormat = '';
+  expect(validatePresentation(presentation, appVersion, minDuration).length).toEqual(0);
 });
 
 test('Should return error for text type with value greater than maxlength', () => {

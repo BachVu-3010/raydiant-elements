@@ -59,6 +59,18 @@ function validate(
       }
     }
 
+    if (prop.type === 'string' && hasValue) {
+      if (
+        constraints.format !== undefined &&
+        !(new RegExp(constraints.format.regex)).test(value)
+      ) {
+        errors.push({
+          path: [...path, prop.name],
+          message: constraints.format.errorMessage,
+        });
+      }
+    }
+
     if (prop.type === 'array' && hasValue) {
       // Recursively validate each item in the array.
       (value as any[]).forEach((itemValue, index) => {
