@@ -27,7 +27,8 @@ const styles = (theme: Theme) =>
     switchContainer: {
       position: 'relative',
       height: 20,
-      width: 46,
+      width: 42,
+      flexShrink: 0,
     },
 
     switchInner: {
