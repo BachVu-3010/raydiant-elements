@@ -94,7 +94,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       borderBottomWidth: 1,
       borderBottomStyle: 'solid',
-      borderBottomColor: theme.palette.divider,
+      borderBottomColor: theme.divider.secondary,
       ['&:first-child']: {
         borderTopLeftRadius: 2,
         borderTopRightRadius: 2,

@@ -4,6 +4,7 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     input: {
+      width: '100%',
       color: 'inherit',
       fontSize: 'inherit',
       backgroundColor: 'inherit',
@@ -12,6 +13,10 @@ const styles = (theme: Theme) =>
       outline: 0,
       border: 0,
       borderBottom: `1px dashed ${theme.input.border}`,
+
+      '&:focus': {
+        borderBottom: `1px dashed ${theme.input.focusedBorder}`,
+      },
     },
   });
 

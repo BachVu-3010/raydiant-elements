@@ -838,9 +838,7 @@ export class PresentationBuilder extends React.Component<
     }
 
     return warnings.map((warning, i) => (
-      <PresentationBuilderWarning key={i} color="light">
-        {warning}
-      </PresentationBuilderWarning>
+      <PresentationBuilderWarning key={i}>{warning}</PresentationBuilderWarning>
     ));
   }
 
@@ -993,7 +991,7 @@ export class PresentationBuilder extends React.Component<
             {!isLoading && this.renderForm()}
           </Scrollable>
           {!isLoading && this.renderWarnings()}
-          <ActionBar condensed color="light">
+          <ActionBar condensed>
             <Spacer />
             {onDone && (
               <Button
@@ -1029,7 +1027,4 @@ export class PresentationBuilder extends React.Component<
   }
 }
 
-export default withThemeSelector(
-  withStyles(styles)(PresentationBuilder),
-  'light',
-);
+export default withThemeSelector(withStyles(styles)(PresentationBuilder));

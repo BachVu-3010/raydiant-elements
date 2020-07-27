@@ -1,27 +1,31 @@
 import { createStyles } from '../../core/withStyles';
-import { tab } from '../../mixins';
 import { Theme } from '../../theme';
 
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      ...tab(theme),
       position: 'relative',
+      cursor: 'pointer',
+      textDecoration: 'none',
+      outline: 'none',
       color: theme.menu.foreground,
-      fontSize: theme.fontSizes.md,
+      fontSize: theme.fontSizes.sm,
+      padding: theme.spacing(1, 0),
+
+      '& + &': {
+        marginLeft: theme.spacing(4),
+      },
     },
 
     active: {
-      fontWeight: 500,
-
       '&:after': {
         content: '" "',
         position: 'absolute',
         bottom: 0,
-        left: theme.spacing(2),
-        right: theme.spacing(2),
+        left: 0,
+        right: 0,
         height: 3,
-        backgroundColor: theme.menu.foreground,
+        backgroundColor: theme.menu.underline,
         borderRadius: theme.borderRadius.md,
       },
     },

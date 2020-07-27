@@ -1,34 +1,46 @@
-import MUICheckbox from '@material-ui/core/Checkbox';
+import CheckIcon from '@material-ui/icons/Check';
+import MUIPaper from '@material-ui/core/Paper';
 import cn from 'classnames';
 import * as React from 'react';
 import { testAttr } from '../../helpers';
-import Icon from '../Icon';
-import withStyles, { WithStyles } from '../withStyles';
-import styles from './Checkbox.styles';
+import useStyles from './Checkbox.styles';
 
-interface CheckboxProps extends WithStyles<typeof styles> {
+interface CheckboxProps {
   checked: boolean;
   label?: string;
   round?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
+  className?: string;
   testId?: string;
 }
 
 export const Checkbox: React.SFC<CheckboxProps> = ({
+  className,
   checked,
   label,
-  round,
+  // TODO:
+  // round,
   disabled,
-  classes,
   onClick,
   onChange,
   testId,
 }) => {
+  const classes = useStyles();
+
   const checkbox = (
-    <span className={classes.checkboxContainer}>
-      <MUICheckbox
+    <MUIPaper
+      className={cn(
+        classes.inputContainer,
+        disabled && classes.disabled,
+        className,
+      )}
+      elevation={checked ? 1 : 0}
+    >
+      <input
+        type="checkbox"
+        className={classes.input}
         checked={checked}
         disabled={disabled}
         onChange={e => {
@@ -36,45 +48,19 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
             onChange(e.target.checked);
           }
         }}
-        onClick={!label ? onClick : null}
-        color="primary"
-        icon={
-          <div
-            className={cn(
-              classes.iconContainer,
-              disabled && classes.iconDisabled,
-              round && classes.round,
-            )}
-          />
-        }
-        checkedIcon={
-          <div
-            className={cn(
-              classes.iconContainer,
-              classes.iconChecked,
-              disabled && classes.iconDisabled,
-              disabled && classes.iconCheckedDisabled,
-              round && classes.round,
-            )}
-          >
-            <Icon icon="checkmark" className={classes.icon} />
-          </div>
-        }
-        classes={{ root: classes.checkbox }}
-        inputProps={{
-          ...(testAttr(testId) as any),
-        }}
+        onClick={!label && onClick}
+        {...testAttr(testId)}
       />
-    </span>
+      <div className={cn(classes.checkbox, checked && classes.checked)}>
+        {checked && <CheckIcon className={classes.icon} />}
+      </div>
+    </MUIPaper>
   );
 
   if (label) {
     return (
       <label
-        className={cn(
-          classes.labelContainer,
-          disabled && classes.labelDisabled,
-        )}
+        className={cn(classes.labelContainer, disabled && classes.disabled)}
         onClick={onClick}
       >
         {checkbox}
@@ -86,4 +72,4 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   return checkbox;
 };
 
-export default withStyles(styles)(Checkbox);
+export default Checkbox;

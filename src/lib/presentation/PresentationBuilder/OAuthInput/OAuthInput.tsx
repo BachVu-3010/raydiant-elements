@@ -11,7 +11,7 @@ export interface OAuthInputProps {
   label: string;
   value: string;
   helperText: React.ReactNode;
-  theme?: (outerTheme: Theme) => Theme,
+  theme?: (outerTheme: Theme) => Theme;
   path: T.Path;
   error?: boolean;
   disabled?: boolean;
@@ -45,28 +45,32 @@ const styles = createStyles({
     width: '100%',
     padding: '0 30px',
     overflow: 'hidden',
-    textOverflow: 'ellipsis'
-  }
+    textOverflow: 'ellipsis',
+  },
 });
 
-class OAuthInput extends React.Component<OAuthInputProps & WithStyles<typeof styles>, OAuthInputState> {
+class OAuthInput extends React.Component<
+  OAuthInputProps & WithStyles<typeof styles>,
+  OAuthInputState
+> {
   static defaultProps = {
-    theme: (outerTheme: Theme) => createTheme({
-      ...outerTheme,
-      palette: {
-        ...outerTheme.palette,
-        primary: {
-          main: '#003670',
-          dark: '#002B5A',
-          contrastText: '#ffffff',
+    theme: (outerTheme: Theme) =>
+      createTheme({
+        ...outerTheme,
+        palette: {
+          ...outerTheme.palette,
+          primary: {
+            main: '#003670',
+            dark: '#002B5A',
+            contrastText: '#ffffff',
+          },
         },
-      },
-      button: {
-        ...outerTheme.button,
-        background: '#7A93B2',
-        foregroundMuted: '#ffffff',
-      },
-    })
+        button: {
+          ...outerTheme.button,
+          background: '#7A93B2',
+          foregroundMuted: '#ffffff',
+        },
+      }),
   };
 
   state = {
@@ -120,7 +124,7 @@ class OAuthInput extends React.Component<OAuthInputProps & WithStyles<typeof sty
     const { verifyUrl, verifyQsParam, previewUsername } = this.props;
 
     if (previewUsername) {
-      this.setState(({ username: previewUsername, verifyFailed: false }));
+      this.setState({ username: previewUsername, verifyFailed: false });
       return;
     }
 
@@ -143,7 +147,11 @@ class OAuthInput extends React.Component<OAuthInputProps & WithStyles<typeof sty
     const { username, verifyFailed } = this.state;
 
     if (username) {
-      return <Link onClick={this.logout} disabled={disabled}>Log out</Link>;
+      return (
+        <Link onClick={this.logout} disabled={disabled}>
+          Log out
+        </Link>
+      );
     } else if (verifyFailed) {
       return 'account not connected, please try again.';
     }
@@ -167,12 +175,22 @@ class OAuthInput extends React.Component<OAuthInputProps & WithStyles<typeof sty
             color={loggedIn && !disabled ? 'default' : 'primary'}
             onClick={loggedIn ? null : this.authRedirect}
             disabled={disabled || loggedIn}
-            classes={{ button: disabled ? classes.disabled : (loggedIn ? classes.loggedIn : classes.default) }}
+            classes={{
+              button: disabled
+                ? classes.disabled
+                : loggedIn
+                ? classes.loggedIn
+                : classes.default,
+            }}
           >
             <span className={classes.label}>{buttonLabel}</span>
             {icon}
           </Button>
-          {helperContent && <FormHelperText error={hasError} disabled={disabled}>{helperContent}</FormHelperText>}
+          {helperContent && (
+            <FormHelperText error={hasError} disabled={disabled}>
+              {helperContent}
+            </FormHelperText>
+          )}
         </div>
       </ThemeProvider>
     );

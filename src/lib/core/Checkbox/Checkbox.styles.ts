@@ -1,63 +1,94 @@
+import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
-import { createStyles } from '../withStyles';
 
-const styles = (theme: Theme) =>
+export default makeStyles((theme: Theme) =>
   createStyles({
-    root: {},
-    checkboxContainer: {
+    inputContainer: {
       position: 'relative',
-      display: 'inline-block',
-      width: 20,
-      height: 20,
+      width: 18,
+      height: 18,
+
+      '&:hover $checkbox': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.background}`,
+      },
+
+      '&:hover $checkbox$disabled': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.border}`,
+      },
+
+      '&:hover $checkbox$disabled&checked': {
+        boxShadow: 'none',
+      },
     },
+
+    labelContainer: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      alignItems: 'center',
+
+      '&:hover $checkbox': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.background}`,
+      },
+
+      '&:hover $checkbox$disabled': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.border}`,
+      },
+
+      '&:hover $checkbox$disabled&checked': {
+        boxShadow: 'none',
+      },
+    },
+
+    label: {
+      marginLeft: theme.spacing(1),
+    },
+
+    input: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      opacity: 0,
+      cursor: 'pointer',
+    },
+
     checkbox: {
-      padding: 0,
-      color: theme.checkbox.backgroundChecked,
-    },
-    iconContainer: {
-      width: 20,
-      height: 20,
-      backgroundColor: theme.checkbox.background,
-      border: `1px solid ${theme.checkbox.border}`,
-      borderRadius: theme.borderRadius.sm,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      pointerEvents: 'none',
+      borderRadius: theme.borderRadius.xs,
+      background: 'transparent',
+      boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.border}`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
+      cursor: 'pointer',
     },
-    iconDisabled: {
-      background: 'transparent',
-      borderColor: theme.checkbox.borderMuted,
-      cursor: 'not-allowed',
+
+    checked: {
+      background: theme.checkbox.background,
+      boxShadow: 'none',
     },
-    round: {
-      borderRadius: '100%',
-    },
-    iconChecked: {
-      backgroundColor: theme.checkbox.backgroundChecked,
-      borderColor: theme.checkbox.backgroundChecked,
-    },
-    iconCheckedDisabled: {
-      backgroundColor: theme.checkbox.borderMuted,
-      borderColor: theme.checkbox.borderMuted,
-    },
+
     icon: {
-      height: '100%',
-      width: '100%',
+      fontSize: theme.fontSizes.md,
       color: theme.checkbox.foreground,
     },
-    labelContainer: {
-      cursor: 'pointer',
-      display: 'flex',
-      alignItems: 'flex-start',
-    },
-    label: {
-      marginTop: theme.spacing(0.125),
-      marginLeft: theme.spacing(1),
-    },
-    labelDisabled: {
-      cursor: 'not-allowed',
-      color: theme.palette.text.secondary,
-    },
-  });
 
-export default styles;
+    disabled: {
+      opacity: 0.5,
+
+      '& $checkbox': {
+        cursor: 'not-allowed',
+      },
+      '& $input': {
+        cursor: 'not-allowed',
+      },
+    },
+  }),
+);

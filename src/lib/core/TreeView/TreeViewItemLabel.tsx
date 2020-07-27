@@ -1,5 +1,4 @@
 import ButtonBase from '@material-ui/core/ButtonBase';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import { useTheme } from '@material-ui/core/styles';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
@@ -9,6 +8,7 @@ import withStyles, { WithStyles } from '../../core/withStyles';
 import Spacer from '../../layout/Spacer';
 import { Theme } from '../../theme';
 import styles from './TreeViewItemLabel.styles';
+import CircularProgress from '../CircularProgress';
 
 export interface TreeViewItemLabelProps extends WithStyles<typeof styles> {
   icon: React.ReactNode;

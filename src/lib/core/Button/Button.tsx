@@ -29,25 +29,29 @@ interface ButtonProps extends WithStyles<typeof styles> {
   testId?: string;
 }
 
-export const Button: React.SFC<ButtonProps> = ({
-  label,
-  icon,
-  color = 'default',
-  hideBorder = false,
-  disabled = false,
-  type = 'button',
-  fullWidth = false,
-  children,
-  onClick = () => {
-    return;
+export const Button: React.SFC<ButtonProps> = (
+  {
+    label,
+    icon,
+    color = 'default',
+    hideBorder = false,
+    disabled = false,
+    type = 'button',
+    fullWidth = false,
+    children,
+    onClick = () => {
+      return;
+    },
+    classes,
+    testId,
   },
-  classes,
-  testId,
-}) => {
+  ref,
+) => {
   const hasIcon = !!icon;
   const hasLabel = !!label || !!children;
   return (
     <MUIButton
+      ref={ref}
       variant={color === 'default' ? 'text' : 'contained'}
       disabled={disabled}
       type={type}
@@ -83,4 +87,4 @@ export const Button: React.SFC<ButtonProps> = ({
   );
 };
 
-export default withStyles(styles)(Button);
+export default withStyles(styles)(React.forwardRef(Button));

@@ -6,10 +6,15 @@ const styles = (theme: Theme) =>
     root: {
       lineHeight: 1.5,
       marginTop: theme.spacing(0.5),
-      color: theme.input.foregroundMuted,
+      fontSize: theme.fontSizes.xs,
+      color: theme.palette.text.secondary,
 
       '&$error': {
-        color: theme.palette.text.primary,
+        color: theme.palette.error.main,
+      },
+
+      '& a': {
+        color: theme.palette.text.secondary,
       },
     },
 

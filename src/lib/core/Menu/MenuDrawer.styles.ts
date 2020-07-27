@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
     },
     drawer: {
       padding: theme.spacing(3, 0),
-      backgroundColor: theme.menu.background,
+      backgroundColor: theme.palette.background.default,
       boxShadow: theme.modal.shadow,
     },
   });

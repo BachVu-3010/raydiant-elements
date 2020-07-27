@@ -8,7 +8,7 @@ import Spacer from '../../layout/Spacer';
 import PresentationThumbnail from '../../presentation/PresentationThumbnail';
 import { PresentationThumbnailProps } from '../../presentation/PresentationThumbnail/PresentationThumbnail';
 import * as P from '../../presentation/PresentationTypes';
-import Heading1 from '../../typography/Heading1';
+import Heading2 from '../../typography/Heading2';
 import Text from '../../typography/Text';
 import styles from './PresentationListItem.styles';
 
@@ -55,7 +55,7 @@ class PresentationListItem extends React.Component<PresentationListItemProps> {
             />
           </div>
           <div className={classes.presentationDetails}>
-            <Heading1 ellipsis>{presentation.name}</Heading1>
+            <Heading2 ellipsis>{presentation.name}</Heading2>
             <Text muted>{presentation.applicationName}</Text>
           </div>
           <Spacer />

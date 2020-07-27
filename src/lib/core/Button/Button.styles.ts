@@ -6,10 +6,9 @@ const styles = (theme: Theme) =>
     button: {
       position: 'relative',
       height: 40,
-      minWidth: 92,
       fontSize: '1rem',
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
       borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
@@ -22,12 +21,14 @@ const styles = (theme: Theme) =>
       minWidth: 0,
     },
     buttonWithIconAndLabel: {
-      paddingLeft: theme.spacing(1.5),
+      paddingLeft: theme.spacing(2),
     },
     label: {
-      fontWeight: 400,
-      textTransform: 'none',
-      letterSpacing: 0.3,
+      fontWeight: 600,
+      textTransform: 'uppercase',
+      letterSpacing: 1.42,
+      lineHeight: 1.11,
+      fontSize: theme.fontSizes.xs,
       whiteSpace: 'nowrap',
     },
     iconWithLabel: {
@@ -43,8 +44,12 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.button.background,
       color: theme.button.foreground,
       borderColor: theme.button.border,
+
       '&:disabled, &:disabled:hover': {
-        color: theme.button.foregroundMuted,
+        backgroundColor: theme.button.background,
+        color: theme.button.foreground,
+        opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     primary: {
@@ -58,6 +63,7 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     destructive: {
@@ -71,6 +77,7 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.error.main,
         color: theme.palette.error.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     progress: {
@@ -84,6 +91,7 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.progress.main,
         color: theme.palette.progress.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     hideBorder: {

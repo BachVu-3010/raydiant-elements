@@ -18,7 +18,7 @@ const styles = (theme: Theme) =>
     },
 
     border: {
-      borderLeft: `1px solid ${theme.palette.divider}`,
+      borderLeft: `1px solid ${theme.divider.secondary}`,
     },
   });
 

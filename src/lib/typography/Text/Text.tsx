@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Typography, { TypographyStyleProps } from '../../internal/Typography';
+import Typography, { TypographyProps } from '../../internal/Typography';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import styles from './Text.styles';
 
-interface TextProps extends TypographyStyleProps, WithStyles<typeof styles> {
+interface TextProps extends TypographyProps, WithStyles<typeof styles> {
   editable?: boolean;
   value?: string;
   maxWidth?: string | number;

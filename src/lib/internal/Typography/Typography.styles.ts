@@ -6,7 +6,7 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       lineHeight: 1.5,
-      color: theme.palette.text.primary,
+      color: 'inherit',
       marginTop: 0,
       marginBottom: 0,
     },
@@ -33,6 +33,9 @@ const styles = (theme: Theme) =>
     },
     xxlarge: {
       fontSize: theme.fontSizes.xxl,
+    },
+    xxxlarge: {
+      fontSize: theme.fontSizes.xxxl,
     },
     bold: {
       fontWeight: 500,

@@ -41,7 +41,7 @@ const styles = (theme: Theme) =>
       marginBottom: theme.spacing(2),
 
       [heightUpBp]: {
-        fontSize: theme.fontSizes.xl,
+        fontSize: theme.fontSizes.xxl,
         fontWeight: 300,
       },
     },

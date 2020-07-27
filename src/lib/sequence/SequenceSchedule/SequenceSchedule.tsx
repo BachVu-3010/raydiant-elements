@@ -85,7 +85,7 @@ const styles = (theme: Theme) =>
       paddingBottom: theme.spacing(1),
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
-      borderBottomColor: theme.palette.divider,
+      borderBottomColor: theme.divider.secondary,
       borderBottomStyle: 'solid',
       borderBottomWidth: 1,
       background: theme.palette.background.default,
