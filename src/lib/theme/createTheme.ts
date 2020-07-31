@@ -67,6 +67,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     modal: {
       overlayBackground: string;
       shadow: string;
+      maxWidth?: number | string;
+      maxHeight?: number | string;
     };
     tab: {
       foreground: string;
@@ -157,6 +159,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     modal: {
       overlayBackground: string;
       shadow: string;
+      maxWidth?: number | string;
+      maxHeight?: number | string;
     };
     tab: {
       foreground: string;

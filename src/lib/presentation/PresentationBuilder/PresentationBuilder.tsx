@@ -28,6 +28,7 @@ import getLocalUploads from './getLocalUploads';
 import GoogleAuthInput from './GoogleAuthInput';
 import hasPresentationChanged from './hasPresentationChanged';
 import ImagePickerFieldInput from './ImagePickerFieldInput/ImagePickerFieldInput';
+import ModalButton from './ModalButton';
 import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
 import OneDriveAuthInput from './OneDriveAuthInput';
@@ -95,6 +96,7 @@ interface PresentationBuilderState {
   validate: boolean;
   previewMode: P.PreviewMode;
   showAffectedDevices: boolean;
+  ignoredApplicationVariables: P.ApplicationVariables;
 }
 
 export class PresentationBuilder extends React.Component<
@@ -119,6 +121,7 @@ export class PresentationBuilder extends React.Component<
     validate: false,
     previewMode: this.props.previewMode,
     showAffectedDevices: false,
+    ignoredApplicationVariables: {},
   };
 
   queuedPresentationPreview: P.Presentation | null = null;
@@ -295,6 +298,21 @@ export class PresentationBuilder extends React.Component<
         ? updatedPresentation
         : previewPresentation,
     });
+  }
+
+  updateIgnoredApplicationVariables(
+    path: P.Path,
+    value: any,
+  ) {
+    const { ignoredApplicationVariables } = this.state;
+
+    if (path.length > 0) {
+      const varPath = path[0] === 'applicationVariables' ? path.slice(1) : path;
+
+      const newIgnoredApplicationVariables = immutable.set(ignoredApplicationVariables, varPath, value);
+
+      this.setState({ ignoredApplicationVariables: newIgnoredApplicationVariables });
+    }
   }
 
   setSelectedPaths(propertyPath: P.Path, selectedPath: P.Path) {
@@ -732,6 +750,22 @@ export class PresentationBuilder extends React.Component<
           />
         );
 
+      case 'modal':
+        return (
+          <ModalButton
+            key={key}
+            label={label}
+            sourceUrl={property.sourceUrl}
+            backgroundColor={property.backgroundColor}
+            hoveredBackgroundColor={property.hoveredBackgroundColor}
+            textColor={property.textColor}
+            parentValue={parentValue}
+            helperText={helperText}
+            disabled={isDisabled}
+            onChange={(newValue) => this.updateIgnoredApplicationVariables(path, newValue)}
+          />
+        );
+
       default:
         return null;
     }
@@ -808,7 +842,7 @@ export class PresentationBuilder extends React.Component<
 
   renderPreview() {
     const { appVersion, children, minDuration, localUploads } = this.props;
-    const { previewMode } = this.state;
+    const { previewMode, ignoredApplicationVariables } = this.state;
     let { previewPresentation } = this.state;
 
     const isLoading = !appVersion || !previewPresentation;
@@ -821,6 +855,13 @@ export class PresentationBuilder extends React.Component<
         localUrl,
       );
     });
+
+    if (previewPresentation) {
+      previewPresentation.applicationVariables = {
+        ...previewPresentation.applicationVariables,
+        ...ignoredApplicationVariables,
+      };
+    }
 
     return (
       <PresentationBuilderPreview

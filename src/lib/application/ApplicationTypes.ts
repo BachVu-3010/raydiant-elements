@@ -62,6 +62,11 @@ export interface PresentationProperty {
   disable?: boolean;
   // SelectionWithImages
   images_url?: string;
+  // ModalButton
+  sourceUrl?: string;
+  backgroundColor?: string;
+  hoveredBackgroundColor?: string;
+  textColor?: string;
 }
 
 export interface Strings {

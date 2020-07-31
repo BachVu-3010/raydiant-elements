@@ -415,3 +415,46 @@ initialState = {
   </Column>
 </App>;
 ```
+
+### Modal button
+```js
+const ModalButton = require('./ModalButton/ModalButton.tsx').default;
+initialState = {
+  disabled: false
+};
+<App>
+  <Column>
+    <Row>
+      <OneThirdLayout.ColumnSmall>
+        <ModalButton 
+          label='Open modal'
+          onChange={(value) => console.log(value)} 
+          disabled={state.disabled}
+        />
+      </OneThirdLayout.ColumnSmall>
+      <OneThirdLayout.ColumnSmall>
+        <ModalButton 
+          label='Open modal with customized button colors'
+          onChange={(value) => console.log(value)} 
+          backgroundColor='#3FBCE7'
+          hoveredBackgroundColor='#3296B9'
+          disabled={state.disabled}
+        />
+      </OneThirdLayout.ColumnSmall>
+      <OneThirdLayout.ColumnSmall>
+        <ModalButton 
+          label='Open modal with helper text'
+          onChange={(value) => console.log(value)}
+          disabled={state.disabled}
+          helperText="Click me to open a modal"
+        />
+      </OneThirdLayout.ColumnSmall>
+    </Row>
+    <Switch
+      label='Disable'
+      checked={state.disabled}
+      onChange={disabled => setState({ disabled })}
+    />
+  </Column>
+</App>;
+```
