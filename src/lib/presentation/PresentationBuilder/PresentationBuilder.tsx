@@ -857,10 +857,13 @@ export class PresentationBuilder extends React.Component<
     });
 
     if (previewPresentation) {
-      previewPresentation.applicationVariables = {
-        ...previewPresentation.applicationVariables,
-        ...ignoredApplicationVariables,
-      };
+      previewPresentation = {
+        ...previewPresentation,
+        applicationVariables: {
+          ...previewPresentation.applicationVariables,
+          ...ignoredApplicationVariables,
+        }
+      }
     }
 
     return (

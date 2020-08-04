@@ -81,6 +81,20 @@ function validate(
         ]);
       });
     }
+
+    if (prop.type === 'file' && hasValue) {
+      if (
+        value['content-type'] &&
+        constraints['content-types'] &&
+        constraints['content-types'].length > 0 &&
+        !constraints['content-types'].includes(value['content-type'])
+      ) {
+        errors.push({
+          path: [...path, prop.name],
+          message: `Oops! Invalid file type`,
+        });
+      }
+    }
   });
 }
 
