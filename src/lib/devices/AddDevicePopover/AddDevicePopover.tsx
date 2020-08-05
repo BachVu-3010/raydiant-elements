@@ -31,6 +31,7 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
   classes,
   testId,
   hideAudioOnly,
+  loading,
 }) => {
   const popoverProps = {
     open,
@@ -47,6 +48,7 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
         error={error}
         testId={testId}
         hideAudioOnly={hideAudioOnly}
+        loading={loading}
       />
     </div>
   );
