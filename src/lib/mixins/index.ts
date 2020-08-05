@@ -4,6 +4,7 @@ import { Theme } from '../theme';
 
 export const buttonReset = (): React.CSSProperties => ({
   fontSize: 'inherit',
+  fontFamily: 'inherit',
   color: 'inherit',
   textAlign: 'left',
   padding: 0,
