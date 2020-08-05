@@ -8,6 +8,7 @@ export default makeStyles((theme: Theme) =>
       border: `1px solid ${theme.actionBar.border}`,
       padding: theme.spacing(0.5, 1),
       borderRadius: theme.borderRadius.sm,
+      height: 32,
     },
   }),
 );
