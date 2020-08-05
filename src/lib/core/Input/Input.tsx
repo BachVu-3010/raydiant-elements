@@ -92,7 +92,6 @@ export const Input: React.FunctionComponent<InputProps> = ({
     icon && classes.inputWithIcon,
     error && classes.error,
     disabled && classes.disabled,
-    multiline && classes.multiline,
   );
 
   const renderInput = (ref?: any, maskedInputProps?: any) => {
@@ -107,22 +106,22 @@ export const Input: React.FunctionComponent<InputProps> = ({
           {...inputProps}
         />
       );
+    } else {
+      inputEl = (
+        <input
+          className={inputClassName}
+          ref={ref}
+          {...inputProps}
+          {...maskedInputProps}
+        />
+      );
     }
-
-    inputEl = (
-      <input
-        className={inputClassName}
-        ref={ref}
-        {...inputProps}
-        {...maskedInputProps}
-      />
-    );
 
     const iconEl =
       typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
 
     return (
-      <div className={classes.root}>
+      <div className={cn(classes.root, multiline && classes.multiline)}>
         {inputEl}
         {iconEl && <div className={classes.icon}>{iconEl}</div>}
       </div>

@@ -138,7 +138,6 @@ export class RecurrenceSelector extends React.Component<
                   bymonthday: value ? [parseInt(value, 10)] : [],
                 })
               }
-              shrink
               testId={`${testId}-bymonthday`}
             >
               <option key="Use start date" value="">

@@ -1,10 +1,9 @@
-import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
-import FormHelperText from '../../internal/FormHelperText';
-import InputBackground from '../../internal/InputBackground';
-import InputLabel from '../../internal/InputLabel';
-import Select from '../../internal/Select';
+import InputHelperText from '../InputHelperText';
+import InputLabel from '../InputLabel';
+import Select from '../Select';
 import SelectFieldItem from './SelectFieldItem';
+import useStyles from './SelectField.styles';
 
 interface SelectFieldProps {
   /** The label of the text field */
@@ -23,12 +22,12 @@ interface SelectFieldProps {
   onBlur?: React.FocusEventHandler<any>;
   /** The <option>s of the select */
   children: React.ReactNode;
-  shrink?: boolean;
   testId?: string;
   native?: boolean;
+  maxWidth?: string | number;
 }
 
-export const SelectField: React.SFC<SelectFieldProps> = ({
+export const SelectField: React.FunctionComponent<SelectFieldProps> = ({
   label,
   value = '',
   error = false,
@@ -41,32 +40,37 @@ export const SelectField: React.SFC<SelectFieldProps> = ({
     return;
   },
   children,
-  shrink,
   testId,
   native = true,
-}) => (
-  <FormControl fullWidth error={error}>
-    <InputBackground>
-      {label && (
-        <InputLabel error={error} disabled={disabled} shrink={shrink}>
-          {label}
-        </InputLabel>
-      )}
+  maxWidth,
+}) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root} style={{ maxWidth }}>
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
+
       <Select
         fullWidth
         value={value}
         disabled={disabled}
-        onChange={e => onChange(e.target.value)}
+        onChange={onChange}
         onBlur={onBlur}
         testId={testId}
         native={native}
       >
         {children}
       </Select>
-    </InputBackground>
-    {helperText && <FormHelperText error={error}>{helperText}</FormHelperText>}
-  </FormControl>
-);
+
+      {helperText && (
+        <InputHelperText indent error={error} disabled={disabled}>
+          {helperText}
+        </InputHelperText>
+      )}
+    </div>
+  );
+};
 
 export default Object.assign(SelectField, {
   Item: SelectFieldItem,

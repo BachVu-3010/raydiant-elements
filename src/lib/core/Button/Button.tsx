@@ -7,10 +7,11 @@ import withStyles, { WithStyles } from '../withStyles';
 import styles from './Button.styles';
 
 interface ButtonProps extends WithStyles<typeof styles> {
+  className?: string;
   /** The button's label */
   label?: React.ReactNode;
   /** The button's icon */
-  icon?: IconOptions;
+  icon?: IconOptions | React.ReactNode;
   /** The button's color */
   color?: 'default' | 'primary' | 'progress' | 'destructive';
   /** Set to true to disable the button */
@@ -31,6 +32,7 @@ interface ButtonProps extends WithStyles<typeof styles> {
 
 export const Button: React.SFC<ButtonProps> = (
   {
+    className,
     label,
     icon,
     color = 'default',
@@ -39,9 +41,7 @@ export const Button: React.SFC<ButtonProps> = (
     type = 'button',
     fullWidth = false,
     children,
-    onClick = () => {
-      return;
-    },
+    onClick,
     classes,
     testId,
   },
@@ -49,6 +49,9 @@ export const Button: React.SFC<ButtonProps> = (
 ) => {
   const hasIcon = !!icon;
   const hasLabel = !!label || !!children;
+  const iconEl =
+    typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
+
   return (
     <MUIButton
       ref={ref}
@@ -68,19 +71,22 @@ export const Button: React.SFC<ButtonProps> = (
           color === 'primary' && classes.primary,
           color === 'destructive' && classes.destructive,
           color === 'progress' && classes.progress,
+          className,
         ),
         label: classes.label,
       }}
       {...testAttr(testId)}
     >
       {icon && (
-        <Icon
-          icon={icon}
+        <div
           className={cn(
+            classes.icon,
             hasLabel && classes.iconWithLabel,
             fullWidth && classes.iconWithLabelFullWidth,
           )}
-        />
+        >
+          {iconEl}
+        </div>
       )}
       {label || children}
     </MUIButton>

@@ -12,6 +12,7 @@ const isRenderFn = (value: any): value is RenderFn =>
   typeof value === 'function';
 
 interface LinkProps extends WithStyles<typeof styles> {
+  className?: string;
   /** The href of the link */
   href?: string;
   /** The target of the link */
@@ -33,6 +34,7 @@ interface LinkProps extends WithStyles<typeof styles> {
 }
 
 export const Link: React.SFC<LinkProps> = ({
+  className,
   href = 'javascript:;',
   fullWidth = false,
   active = false,
@@ -51,6 +53,7 @@ export const Link: React.SFC<LinkProps> = ({
         classes.root,
         fullWidth && classes.fullWidth,
         underline && classes.underline,
+        className,
       ),
       activeClassName: classes.active,
     });
@@ -64,6 +67,7 @@ export const Link: React.SFC<LinkProps> = ({
         active && classes.active,
         disabled && classes.disabled,
         underline && classes.underline,
+        className,
       )}
       href={href}
       target={target}

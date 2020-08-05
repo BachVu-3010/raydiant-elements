@@ -11,7 +11,7 @@ export default makeStyles((theme: Theme) =>
       letterSpacing: 2,
       textTransform: 'uppercase',
       marginTop: 0,
-      marginBottom: theme.spacing(4),
+      marginBottom: theme.spacing(2),
     },
 
     overline: {

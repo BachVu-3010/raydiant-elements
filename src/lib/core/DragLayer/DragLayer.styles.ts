@@ -6,7 +6,7 @@ export default (_: Theme) =>
     root: {
       position: 'fixed',
       pointerEvents: 'none',
-      zIndex: 100,
+      zIndex: 9999, // Should always be on top
       left: 0,
       top: 0,
       right: 0,

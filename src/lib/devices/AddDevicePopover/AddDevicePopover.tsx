@@ -34,8 +34,8 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
 }) => {
   const popoverProps = {
     open,
-    anchor: ['top', 'right'] as [YPosition, XPosition],
-    to: ['bottom', 'right'] as [YPosition, XPosition],
+    anchor: ['top', 'left'] as [YPosition, XPosition],
+    to: ['bottom', 'left'] as [YPosition, XPosition],
     onOverlayClick: onClose,
   };
 

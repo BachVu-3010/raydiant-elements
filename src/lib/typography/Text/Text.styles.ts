@@ -7,6 +7,7 @@ const styles = (theme: Theme) =>
       width: '100%',
       color: 'inherit',
       fontSize: 'inherit',
+      fontFamily: 'inherit',
       backgroundColor: 'inherit',
       letterSpacing: 'inherit',
       lineHeight: 1.25,

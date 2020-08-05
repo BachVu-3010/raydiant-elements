@@ -4,15 +4,17 @@ import * as React from 'react';
 import useStyles from './ActionBarAction.styles';
 
 export interface ActionBarActionProps {
+  className?: string;
   icon: React.ReactNode;
   label?: React.ReactNode;
+  fullWidth?: boolean;
   selected?: boolean;
   disabled?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
 export const ActionBarAction: React.SFC<ActionBarActionProps> = (
-  { icon, label, selected, disabled, onClick },
+  { className, icon, label, fullWidth, selected, disabled, onClick },
   ref,
 ) => {
   const classes = useStyles();
@@ -25,7 +27,12 @@ export const ActionBarAction: React.SFC<ActionBarActionProps> = (
     <ButtonBase
       ref={ref}
       disableRipple
-      className={cn(classes.root, disabled && classes.disabled)}
+      className={cn(
+        classes.root,
+        disabled && classes.disabled,
+        fullWidth && classes.fullWidth,
+        className,
+      )}
       disabled={disabled}
       onClick={onClick}
     >

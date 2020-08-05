@@ -16,7 +16,7 @@ const styles = (theme: Theme) =>
       padding: theme.spacing(0, 4),
 
       [theme.breakpoints.down('xs')]: {
-        padding: theme.spacing(0),
+        padding: theme.spacing(0, 1),
       },
     },
     shadow: {

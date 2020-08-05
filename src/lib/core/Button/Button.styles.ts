@@ -19,17 +19,22 @@ const styles = (theme: Theme) =>
     },
     buttonOnlyIcon: {
       minWidth: 0,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
     },
     buttonWithIconAndLabel: {
       paddingLeft: theme.spacing(2),
     },
     label: {
-      fontWeight: 600,
-      textTransform: 'uppercase',
-      letterSpacing: 1.42,
-      lineHeight: 1.11,
-      fontSize: theme.fontSizes.xs,
+      fontWeight: 400,
+      textTransform: 'none',
+      letterSpacing: 0.29,
+      fontSize: theme.fontSizes.sm,
       whiteSpace: 'nowrap',
+    },
+    icon: {
+      display: 'flex',
+      alignItems: 'center',
     },
     iconWithLabel: {
       marginRight: theme.spacing(1),
@@ -39,6 +44,8 @@ const styles = (theme: Theme) =>
       top: 0,
       left: theme.spacing(1.5),
       height: '100%',
+      display: 'flex',
+      alignItems: 'center',
     },
     default: {
       backgroundColor: theme.button.background,

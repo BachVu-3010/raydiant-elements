@@ -5,14 +5,13 @@ import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import * as React from 'react';
 import * as cn from 'classnames';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import Spacer from '../../layout/Spacer';
 import { Theme } from '../../theme';
 import styles from './TreeViewItemLabel.styles';
 import CircularProgress from '../CircularProgress';
 
 export interface TreeViewItemLabelProps extends WithStyles<typeof styles> {
   icon: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
   indent?: number;
   isExpandable?: boolean;
   isExpanded?: boolean;
@@ -53,7 +52,6 @@ export const TreeViewItemLabel: React.FunctionComponent<
         {icon}
       </div>
       <div className={classes.labelText}>{label}</div>
-      <Spacer />
       {isLoading && <CircularProgress size={12} />}
       {isExpandable && (
         <ButtonBase

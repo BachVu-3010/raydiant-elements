@@ -4,9 +4,9 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      color: theme.palette.text.primary,
+      color: theme.palette.text.secondary,
       fontSize: theme.fontSizes.xl,
-      fontWeight: 400,
+      fontWeight: 300,
       lineHeight: 1.09,
       letterSpacing: 0.25,
     },

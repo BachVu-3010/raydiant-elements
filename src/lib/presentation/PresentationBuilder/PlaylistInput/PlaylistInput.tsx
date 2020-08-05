@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Button from '../../../core/Button';
 import SelectField from '../../../core/SelectField';
+import InputHelperText from '../../../core/InputHelperText';
 import Row from '../../../layout/Row';
 import * as P from '../../PresentationTypes';
 
@@ -171,11 +172,15 @@ class PlaylistInput extends React.Component<PlaylistInputProps> {
           {totalPlaylists === 0 && <option disabled>No playlists found</option>}
         </SelectField>
         {onEdit && (
-          <Button
-            icon="edit"
-            disabled={disabled}
-            onClick={() => onEdit(valueOrDefault)}
-          />
+          <div>
+            {/* Aligns button with select */}
+            <InputHelperText>&nbsp;</InputHelperText>
+            <Button
+              icon="edit"
+              disabled={disabled}
+              onClick={() => onEdit(valueOrDefault)}
+            />
+          </div>
         )}
       </Row>
     );

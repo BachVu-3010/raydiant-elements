@@ -35,12 +35,20 @@ export default makeStyles((theme: Theme) =>
       letterSpacing: 1.42,
       textTransform: 'uppercase',
       fontSize: theme.fontSizes.xxs,
-      padding: theme.spacing(1, 2),
+      padding: theme.spacing(1, 4),
       color: theme.palette.text.secondary,
       opacity: 0.5,
 
       '&:hover, &:focus': {
         opacity: 1,
+      },
+
+      '& svg': {
+        fontSize: 24,
+      },
+
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(1, 2),
       },
     },
   }),

@@ -1,10 +1,10 @@
 import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
 
-export default makeStyles((theme: Theme) =>
+export default makeStyles((_: Theme) =>
   createStyles({
     root: {
-      backgroundColor: theme.palette.background.default,
+      width: '100%',
     },
   }),
 );

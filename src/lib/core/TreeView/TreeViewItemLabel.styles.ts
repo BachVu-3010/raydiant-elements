@@ -6,10 +6,10 @@ export default (theme: Theme) =>
   createStyles({
     root: {
       letterSpacing: 0.29,
+      minHeight: 32,
       borderBottom: `1px solid ${theme.palette.action.selected}`,
-      padding: theme.spacing(0.5, 2),
+      padding: theme.spacing(0.5, 1),
       paddingRight: theme.spacing(0.5),
-      marginLeft: theme.spacing(2),
       display: 'flex',
       alignItems: 'center',
     },
@@ -29,8 +29,9 @@ export default (theme: Theme) =>
     },
 
     labelText: {
-      userSelect: 'text',
       ...textTruncate(),
+      userSelect: 'text',
+      flex: 1,
     },
 
     iconContainer: {

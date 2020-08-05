@@ -48,8 +48,8 @@ const common = {
     sm: '0.907rem', // 12.7 px
     md: '1.057rem', // 14.8px
     lg: '1.207rem', // 16.9px
-    xl: '1.507rem', // 21.1px
-    xxl: '2.85rem', // 35.9px
+    xl: '1.5rem', // 21px
+    xxl: '2.564rem', // 35.9px
     xxxl: '6.25rem', // 100px
   },
   zIndex: {
@@ -66,7 +66,7 @@ const common = {
       contrastText: colors.white,
     },
     error: {
-      main: '#eb5843',
+      main: '#b00020',
       dark: '#e54734',
       contrastText: colors.white,
     },
@@ -76,12 +76,12 @@ const common = {
       contrastText: colors.navy,
     },
     warning: {
-      main: '#f8b91c',
+      main: '#edde4f',
       dark: '#f6aa14',
       contrastText: colors.white,
     },
     action: {
-      selected: 'rgba(0, 0, 0, 0.05)',
+      selected: 'rgba(0, 0, 0, 0.07)',
       dropping: colors.skyBlue,
     },
   },
@@ -175,7 +175,7 @@ export const light = createTheme({
   actionBar: {
     foreground: 'rgba(0, 0, 0, 0.32)',
     selectedForeground: 'rgba(0, 0, 0, 0.6)',
-    background: colors.lightGrey,
+    background: colors.white,
     border: 'rgba(0, 0, 0, 0.2)',
   },
   popover: {
@@ -335,7 +335,7 @@ export const grey = createTheme({
   actionBar: {
     foreground: 'rgba(0, 0, 0, 0.32)',
     selectedForeground: 'rgba(0, 0, 0, 0.6)',
-    background: colors.lightGrey,
+    background: colors.grey,
     border: 'rgba(0, 0, 0, 0.2)',
   },
   popover: {
@@ -359,13 +359,13 @@ export const dark = createTheme({
     ...common.palette,
     text: {
       primary: colors.white,
-      secondary: colors.grey,
+      secondary: 'rgba(255, 255, 255, 0.6)',
       link: colors.white,
       headingPrimary: colors.skyBlue,
       headingSecondary: colors.white,
     },
     background: {
-      default: colors.navy,
+      default: '#00588b',
       gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
       inset: '#171828',
       paper: colors.white,
@@ -415,7 +415,7 @@ export const dark = createTheme({
   actionBar: {
     foreground: 'rgba(0, 0, 0, 0.32)',
     selectedForeground: 'rgba(0, 0, 0, 0.6)',
-    background: colors.lightGrey,
+    background: 'rgba(255, 255, 255, 0.8)',
     border: 'rgba(0, 0, 0, 0.2)',
   },
   // TODO: needs tweaking
@@ -426,7 +426,7 @@ export const dark = createTheme({
     color: 'rgba(255, 255, 255)',
   },
   dropzone: {
-    border: colors.grey,
+    border: 'rgba(255, 255, 255, 0.6)',
   },
   collapsableSelect: {
     background: 'rgba(255, 255, 255, 0.15)',

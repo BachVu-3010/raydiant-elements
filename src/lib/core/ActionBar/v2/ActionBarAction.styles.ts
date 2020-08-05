@@ -7,12 +7,25 @@ export default makeStyles((theme: Theme) =>
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      justifyContent: 'flex-start',
       color: theme.actionBar.foreground,
+
+      '&:hover $label': {
+        color: theme.actionBar.selectedForeground,
+      },
+    },
+
+    fullWidth: {
+      width: '100%',
     },
 
     disabled: {
       opacity: 0.4,
       cursor: 'not-allowed',
+
+      '&:hover $label': {
+        color: theme.actionBar.foreground,
+      },
     },
 
     label: {

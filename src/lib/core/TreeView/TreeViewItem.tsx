@@ -18,7 +18,7 @@ import TreeViewItemLabel from './TreeViewItemLabel';
 export interface TreeViewItemProps {
   nodeId: string;
   icon: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
   expandable?: boolean;
   draggable?: boolean;
   isLoading?: boolean;
@@ -105,6 +105,7 @@ export const TreeViewItem: React.FunctionComponent<
     collect: (monitor: DropTargetMonitor) => {
       const item = monitor.getItem() as DragItem | null;
       if (!item) return { isOver: false };
+
       return {
         isOver: monitor.isOver({ shallow: true }) && onCanDrop(item.stack),
       };
