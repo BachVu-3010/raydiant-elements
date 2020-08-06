@@ -45,6 +45,8 @@ export default makeStyles((theme: Theme) =>
       top: 0,
       right: 0,
       color: theme.actionBar.foreground,
+
+      [theme.breakpoints.down('sm')]: {},
     },
   }),
 );

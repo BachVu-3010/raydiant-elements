@@ -8,7 +8,6 @@ import CircularProgress from '../../core/CircularProgress';
 import Icon from '../../core/Icon';
 import Popover from '../../core/Popover';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
 import Row from '../../layout/Row';
 import Spacer from '../../layout/Spacer';
@@ -205,7 +204,4 @@ export class PresentationThumbnail extends React.Component<
   }
 }
 
-export default withThemeSelector(
-  withStyles(styles)(PresentationThumbnail),
-  'dark',
-);
+export default withStyles(styles)(PresentationThumbnail);

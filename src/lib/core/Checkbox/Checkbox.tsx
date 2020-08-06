@@ -20,8 +20,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   className,
   checked,
   label,
-  // TODO:
-  // round,
+  round,
   disabled,
   onClick,
   onChange,
@@ -34,9 +33,10 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
       className={cn(
         classes.inputContainer,
         disabled && classes.disabled,
+        round && classes.round,
         className,
       )}
-      elevation={checked ? 1 : 0}
+      elevation={1}
     >
       <input
         type="checkbox"

@@ -5,7 +5,6 @@ import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
 import Scrollable from '../../layout/Scrollable';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
 import styles from './PlaylistThumbnail.styles';
 
@@ -120,4 +119,4 @@ export class PlaylistThumbnail extends React.Component<
   }
 }
 
-export default withThemeSelector(withStyles(styles)(PlaylistThumbnail), 'dark');
+export default withStyles(styles)(PlaylistThumbnail);

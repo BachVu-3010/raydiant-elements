@@ -4,7 +4,6 @@ import * as isTouchDevice from 'is-touch-device';
 import Checkbox from '../../core/Checkbox';
 import Scrollable from '../../layout/Scrollable';
 import withStyles, { WithStyles } from '../../core/withStyles';
-import withThemeSelector from '../../core/withThemeSelector';
 import { stopPropagation, testAttr } from '../../helpers';
 import styles from './FolderThumbnail.styles';
 
@@ -73,4 +72,4 @@ export const FolderThumbnail: React.SFC<FolderThumbnailPropsWithStyles> = ({
   );
 };
 
-export default withThemeSelector(withStyles(styles)(FolderThumbnail), 'dark');
+export default withStyles(styles)(FolderThumbnail);

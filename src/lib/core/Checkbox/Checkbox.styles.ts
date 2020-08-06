@@ -7,6 +7,7 @@ export default makeStyles((theme: Theme) =>
       position: 'relative',
       width: 18,
       height: 18,
+      background: 'transparent',
 
       '&:hover $checkbox': {
         boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.background}`,
@@ -18,6 +19,24 @@ export default makeStyles((theme: Theme) =>
 
       '&:hover $checkbox$disabled&checked': {
         boxShadow: 'none',
+      },
+    },
+
+    round: {
+      borderRadius: 100,
+
+      '&:hover $checkbox': {
+        boxShadow: `inset 0px 0px 0px 2px #ffffff`,
+      },
+      '&:hover $checkbox$checked': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.dark}`,
+      },
+
+      '&:hover $checkbox$disabled': {
+        boxShadow: `inset 0px 0px 0px 2px #f6f6f6`,
+      },
+      '&:hover $checkbox$disabled$checked': {
+        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
       },
     },
 
@@ -68,16 +87,30 @@ export default makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
+
+      '$round &': {
+        borderRadius: 100,
+        boxShadow: `inset 0px 0px 0px 2px #fff`,
+      },
     },
 
     checked: {
       background: theme.checkbox.background,
       boxShadow: 'none',
+
+      '$round &': {
+        background: theme.palette.progress.main,
+        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
+      },
     },
 
     icon: {
       fontSize: theme.fontSizes.md,
       color: theme.checkbox.foreground,
+
+      '$round &': {
+        color: '#fff',
+      },
     },
 
     disabled: {
