@@ -46,7 +46,7 @@ export const Text: React.FunctionComponent<TextProps> = (
     );
   }
 
-  return <Typography {...props}>{children}</Typography>;
+  return <Typography {...props}>{children || value}</Typography>;
 };
 
 export default withStyles(styles)(React.forwardRef(Text));
