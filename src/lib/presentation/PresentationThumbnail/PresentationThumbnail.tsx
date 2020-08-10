@@ -125,7 +125,7 @@ export class PresentationThumbnail extends React.Component<
         {shouldShowOverlay && <div className={classes.overlay} />}
         {shouldShowProgress && (
           <div className={classes.topRight}>
-            <CircularProgress />
+            <CircularProgress color="light" />
           </div>
         )}
         {shouldShowError && (

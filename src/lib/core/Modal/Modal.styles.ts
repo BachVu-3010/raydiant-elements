@@ -20,6 +20,7 @@ const styles = (theme: Theme) =>
       position: 'relative',
       zIndex: theme.zIndex.modal + 10,
       display: 'flex',
+      flexDirection: 'column',
       width: '100%',
       height: '100%',
       maxWidth: theme.modal.maxWidth || 1020,
