@@ -991,7 +991,7 @@ export class PresentationBuilder extends React.Component<
             {!isLoading && this.renderForm()}
           </Scrollable>
           {!isLoading && this.renderWarnings()}
-          <ActionBar condensed>
+          <ActionBar condensed color="light">
             <Spacer />
             {onDone && (
               <Button

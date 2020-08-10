@@ -95,9 +95,9 @@ export const Grid: React.FunctionComponent<GridProps> = ({
   };
 
   const isBackgroundTarget = (event: MouseEvent) => {
-    const classList = (event.target as HTMLDivElement)
-      .getAttribute('class')
-      .split(' ');
+    const classList = (
+      (event.target as HTMLDivElement).getAttribute('class') || ''
+    ).split(' ');
 
     return classList.some(c =>
       [classes.root, classes.dropzone, classes.grid, classes.gridItem].includes(

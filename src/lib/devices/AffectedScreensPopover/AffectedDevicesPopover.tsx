@@ -1,5 +1,5 @@
+import ErrorIcon from '@material-ui/icons/Error';
 import * as React from 'react';
-import AlertIcon from '../../core/AlertIcon';
 import Button from '../../core/Button';
 import Popover from '../../core/Popover';
 import withStyles, { createStyles, WithStyles } from '../../core/withStyles';
@@ -26,7 +26,9 @@ const styles = (theme: Theme) =>
       lineHeight: 1.5,
     },
     icon: {
-      marginRight: theme.spacing(1),
+      color: theme.palette.warning.main,
+      backgroundColor: theme.palette.primary.main,
+      borderRadius: 100,
     },
   });
 
@@ -35,6 +37,7 @@ export const AffectedDevicesPopover: React.SFC<AffectedDevicesPopoverProps> = ({
   open,
   onClose,
   testId,
+  classes,
 }) => {
   const screensText = devices.length === 1 ? 'this screen' : 'these screens';
   return (
@@ -46,18 +49,18 @@ export const AffectedDevicesPopover: React.SFC<AffectedDevicesPopoverProps> = ({
     >
       <Popover.Header>
         <Row halfMargin>
-          <AlertIcon color="warning" />
+          <ErrorIcon className={classes.icon} />
           <Text small>
             Saving these changes will overwrite content on {screensText}
           </Text>
+          <Hidden smDown>
+            <Button
+              label="Got it"
+              onClick={onClose}
+              testId={testId ? `${testId}-ok` : ''}
+            />
+          </Hidden>
         </Row>
-        <Hidden smDown>
-          <Button
-            label="Got it"
-            onClick={onClose}
-            testId={testId ? `${testId}-ok` : ''}
-          />
-        </Hidden>
       </Popover.Header>
       <Popover.Body>
         {devices.map(device => (

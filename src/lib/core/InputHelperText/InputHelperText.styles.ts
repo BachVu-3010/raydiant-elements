@@ -12,10 +12,6 @@ const styles = (theme: Theme) =>
       '&$error': {
         color: theme.palette.error.main,
       },
-
-      '& a': {
-        color: theme.palette.text.secondary,
-      },
     },
 
     error: {},

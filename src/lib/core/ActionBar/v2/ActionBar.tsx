@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as cn from 'classnames';
-import Row from '../../../layout/Row';
 import useStyles from './ActionBar.styles';
 import ActionBarAction from './ActionBarAction';
 import ActionBarSelect from './ActionBarSelect';
@@ -16,7 +15,7 @@ export const ActionBar: React.FunctionComponent<ActionBarProps> = ({
   children,
 }) => {
   const classes = useStyles();
-  return <Row className={cn(classes.root, className)}>{children}</Row>;
+  return <div className={cn(classes.root, className)}>{children}</div>;
 };
 
 export default Object.assign(ActionBar, {

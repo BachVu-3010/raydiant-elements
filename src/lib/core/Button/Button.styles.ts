@@ -101,6 +101,23 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+    light: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      color: 'rgba(255, 255, 255, 1)',
+      borderColor: 'rgba(255, 255, 255, 1)',
+      boxShadow: 'none',
+
+      '&:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        boxShadow: 'none',
+      },
+      '&:disabled, &:disabled:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        color: 'rgba(255, 255, 255, 1)',
+        opacity: 0.5,
+        cursor: 'not-allowed',
+      },
+    },
     hideBorder: {
       border: 0,
 

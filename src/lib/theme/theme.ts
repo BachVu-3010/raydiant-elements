@@ -93,7 +93,7 @@ const common = {
     default: 'https://assets.raydiant.com/raydiant-login-asset.png',
   },
   modal: {
-    overlayBackground: 'rgba(0, 0, 0, 0.1)',
+    overlayBackground: 'rgba(0, 0, 0, 0.25)',
     shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
     background: colors.lightGrey,
     foreground: 'rgba(0, 0, 0, 0.6)',
@@ -149,7 +149,7 @@ export const light = createTheme({
     fabLabel: colors.navy,
   },
   input: {
-    background: 'rgba(227, 227, 226, 0.4)',
+    background: 'rgba(227, 227, 227, 0.4)',
     foreground: 'rgba(0, 0, 0, 0.87)',
     border: 'rgba(0, 0, 0, 0.2)',
     focusedBorder: 'rgba(0, 0, 0, 0.6)',
@@ -229,7 +229,7 @@ export const lightGrey = createTheme({
     fabLabel: colors.navy,
   },
   input: {
-    background: 'rgba(227, 227, 226, 0.4)',
+    background: 'rgba(227, 227, 227, 0.4)',
     foreground: 'rgba(0, 0, 0, 0.87)',
     border: 'rgba(0, 0, 0, 0.2)',
     focusedBorder: 'rgba(0, 0, 0, 0.6)',
@@ -320,7 +320,7 @@ export const grey = createTheme({
     foreground: colors.white,
   },
   switch: {
-    bar: colors.grey,
+    bar: 'rgba(32, 32, 42, 0.2)',
     barChecked: common.palette.progress.main,
     knob: colors.white,
   },

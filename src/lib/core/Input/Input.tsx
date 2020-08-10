@@ -9,7 +9,7 @@ export interface InputProps {
   /** The value of the field */
   value?: string;
   /** The type of input */
-  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url';
+  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url' | 'number';
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */
@@ -18,6 +18,10 @@ export interface InputProps {
   maxWidth?: number;
   /** Set the max character length of the input */
   maxLength?: number;
+  /** Set the max numner of the input when type is number */
+  max?: number;
+  /** Set the min numner of the input when type is number */
+  min?: number;
   /** Set to true to display as a textarea */
   multiline?: boolean;
   /** The height of the textarea */
@@ -51,6 +55,7 @@ export interface InputProps {
   onClick?: (event: React.MouseEvent<any>) => any;
   /** The test id of the input */
   testId?: string;
+  inputProps?: any;
 }
 
 export const Input: React.FunctionComponent<InputProps> = ({
@@ -59,6 +64,8 @@ export const Input: React.FunctionComponent<InputProps> = ({
   error = false,
   disabled = false,
   maxLength,
+  max,
+  min,
   multiline = false,
   multilineHeight,
   autoFocus = false,
@@ -79,6 +86,8 @@ export const Input: React.FunctionComponent<InputProps> = ({
     disabled,
     value,
     maxLength,
+    max,
+    min,
     onBlur,
     onFocus,
     autoFocus,

@@ -91,6 +91,7 @@ export class PlaylistThumbnail extends React.Component<
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
           >
             <Button
+              color="light"
               icon="edit"
               onClick={stopPropagation(onEdit)}
               testId={testId ? `${testId}-edit` : ''}

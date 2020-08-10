@@ -5,7 +5,7 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      lineHeight: 1.5,
+      lineHeight: 'inherit',
       color: 'inherit',
       marginTop: 0,
       marginBottom: 0,

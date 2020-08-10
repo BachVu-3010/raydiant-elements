@@ -6,7 +6,7 @@ const styles = (theme: Theme) =>
     inputs: {
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
-      marginBottom: theme.spacing(2),
+      paddingBottom: theme.spacing(2),
     },
   });
 

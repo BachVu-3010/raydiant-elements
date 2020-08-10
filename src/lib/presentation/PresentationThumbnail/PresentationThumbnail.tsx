@@ -84,10 +84,11 @@ export class PresentationThumbnail extends React.Component<
 
     const imageUrl =
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
-    const hasControls = onEdit || onSelect;
+    const hasControls = onEdit || onSelect || lockedMessage;
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
-    const shouldShowControls = showControls || (hasControls && isHover);
+    const shouldShowControls =
+      showControls || (hasControls && isHover) || editPopoverOpen;
     const shouldShowEdit = !isLocked && onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowError = hasError && !shouldShowSelect;
@@ -138,6 +139,7 @@ export class PresentationThumbnail extends React.Component<
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
           >
             <Button
+              color="light"
               icon="edit"
               onClick={stopPropagation(onEdit)}
               testId={testId ? `${testId}-edit` : ''}
@@ -148,13 +150,14 @@ export class PresentationThumbnail extends React.Component<
           <div className={classes.topLeft}>
             <Popover.Anchor>
               <Button
+                color="light"
                 icon="lock"
                 onClick={stopPropagation(() => {
                   this.setState({ editPopoverOpen: true });
                 })}
               />
               <Popover
-                color="grey"
+                color="light"
                 open={editPopoverOpen}
                 anchor={['top', 'left']}
                 to={['bottom', 'left']}
@@ -173,9 +176,9 @@ export class PresentationThumbnail extends React.Component<
                   <Spacer />
                   <Button
                     label="Got It"
-                    onClick={() => {
+                    onClick={stopPropagation(() => {
                       this.setState({ editPopoverOpen: false });
-                    }}
+                    })}
                   />
                 </Popover.Footer>
               </Popover>

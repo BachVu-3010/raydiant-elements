@@ -5,7 +5,7 @@ import useStyles from './ActionBarAction.styles';
 
 export interface ActionBarActionProps {
   className?: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
   label?: React.ReactNode;
   fullWidth?: boolean;
   selected?: boolean;

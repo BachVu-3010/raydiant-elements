@@ -9,6 +9,7 @@ export default makeStyles((theme: Theme) =>
       alignItems: 'center',
       justifyContent: 'flex-start',
       color: theme.actionBar.foreground,
+      minHeight: 23, // Fix alignment when there is no icon
 
       '&:hover $label': {
         color: theme.actionBar.selectedForeground,

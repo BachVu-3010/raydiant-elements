@@ -13,7 +13,7 @@ interface ButtonProps extends WithStyles<typeof styles> {
   /** The button's icon */
   icon?: IconOptions | React.ReactNode;
   /** The button's color */
-  color?: 'default' | 'primary' | 'progress' | 'destructive';
+  color?: 'default' | 'primary' | 'progress' | 'destructive' | 'light';
   /** Set to true to disable the button */
   disabled?: boolean;
   /** Set to true to make the button expand to it's container */
@@ -71,6 +71,7 @@ export const Button: React.SFC<ButtonProps> = (
           color === 'primary' && classes.primary,
           color === 'destructive' && classes.destructive,
           color === 'progress' && classes.progress,
+          color === 'light' && classes.light,
           className,
         ),
         label: classes.label,
