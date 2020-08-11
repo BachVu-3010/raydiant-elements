@@ -32,7 +32,7 @@ class ModalButton extends React.Component<
     label: '',
     sourceUrl: '',
   };
-  
+
   state = {
     open: false
   };
@@ -46,11 +46,6 @@ class ModalButton extends React.Component<
       this.close();
       this.props.onChange({ open: false, ...payload });
     }
-  };
-
-  handleOverlayClick = () => {
-    this.close();
-    this.props.onChange({ open: false });
   };
 
   handleOnclick = () => {
@@ -101,7 +96,7 @@ class ModalButton extends React.Component<
           />
           {helperText && <FormHelperText disabled={disabled}>{helperText}</FormHelperText>}
         </div>
-        <Modal open={this.state.open} onOverlayClick={this.handleOverlayClick}>
+        <Modal open={this.state.open}>
           <EmbeddedFrame src={url} onMessage={this.handleMessage}/>
         </Modal>
       </ThemeProvider>
