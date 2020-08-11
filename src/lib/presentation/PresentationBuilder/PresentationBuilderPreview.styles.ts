@@ -5,10 +5,13 @@ const styles = (theme: Theme) =>
   createStyles({
     root: {
       flex: 1,
-      display: 'flex',
-      flexDirection: 'column',
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
+
+      [theme.breakpoints.up('sm')]: {
+        display: 'flex',
+        flexDirection: 'column',
+      },
     },
 
     preview: {

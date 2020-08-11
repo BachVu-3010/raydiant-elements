@@ -302,18 +302,21 @@ export class PresentationBuilder extends React.Component<
     });
   }
 
-  updateIgnoredApplicationVariables(
-    path: P.Path,
-    value: any,
-  ) {
+  updateIgnoredApplicationVariables(path: P.Path, value: any) {
     const { ignoredApplicationVariables } = this.state;
 
     if (path.length > 0) {
       const varPath = path[0] === 'applicationVariables' ? path.slice(1) : path;
 
-      const newIgnoredApplicationVariables = immutable.set(ignoredApplicationVariables, varPath, value);
+      const newIgnoredApplicationVariables = immutable.set(
+        ignoredApplicationVariables,
+        varPath,
+        value,
+      );
 
-      this.setState({ ignoredApplicationVariables: newIgnoredApplicationVariables });
+      this.setState({
+        ignoredApplicationVariables: newIgnoredApplicationVariables,
+      });
     }
   }
 
@@ -766,7 +769,9 @@ export class PresentationBuilder extends React.Component<
             parentValue={parentValue}
             helperText={helperText}
             disabled={isDisabled}
-            onChange={(newValue) => this.updateIgnoredApplicationVariables(path, newValue)}
+            onChange={newValue =>
+              this.updateIgnoredApplicationVariables(path, newValue)
+            }
           />
         );
 
@@ -864,8 +869,8 @@ export class PresentationBuilder extends React.Component<
         applicationVariables: {
           ...previewPresentation.applicationVariables,
           ...ignoredApplicationVariables,
-        }
-      }
+        },
+      };
     }
 
     return (
@@ -965,7 +970,12 @@ export class PresentationBuilder extends React.Component<
       validatePresentation(presentation, appVersion, minDuration).length === 0;
     const shouldDisableSave =
       isLoading ||
-      (!hasPresentationChanged(originalPresentation, presentation, appVersion) && !isNewAndValid);
+      (!hasPresentationChanged(
+        originalPresentation,
+        presentation,
+        appVersion,
+      ) &&
+        !isNewAndValid);
     const shouldDisableDone = shouldDisableSave && !didSave;
     return (
       <OneThirdLayout>

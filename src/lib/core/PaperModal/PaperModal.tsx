@@ -5,6 +5,8 @@ import MUIPaperModal, {
 import Grow from '@material-ui/core/Grow';
 import * as cn from 'classnames';
 import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { AppContext } from '../App';
 import withThemeSelector from '../withThemeSelector';
 import PaperModalBody from './PaperModalBody';
 import useStyles from './PaperModal.styles';
@@ -27,6 +29,8 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
   const [animateOut, setAnimateOut] = React.useState<boolean>(false);
   const isOpen = !animateOut && open;
 
+  const { modalRoot } = React.useContext(AppContext);
+
   const closeModal = React.useCallback(
     () => {
       setAnimateOut(true);
@@ -34,7 +38,7 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
     [setAnimateOut],
   );
 
-  return (
+  return ReactDOM.createPortal(
     <Grow
       in={isOpen}
       style={{ transformOrigin: 'center bottom' }}
@@ -55,7 +59,8 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
         </div>
         {children}
       </MUIPaperModal>
-    </Grow>
+    </Grow>,
+    modalRoot,
   );
 };
 
