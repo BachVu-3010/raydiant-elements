@@ -92,6 +92,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       xs: number;
       sm: number;
       md: number;
+      lg: number;
     };
     dropzone: {
       border: string;
@@ -196,6 +197,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       xs: number;
       sm: number;
       md: number;
+      lg: number;
     };
     dropzone: {
       border: string;

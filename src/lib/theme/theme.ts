@@ -102,6 +102,7 @@ const common = {
     xs: 2,
     sm: 4,
     md: 6,
+    lg: 12,
   },
   divider: {
     primary: 'rgba(0,0,0, 0.6)',

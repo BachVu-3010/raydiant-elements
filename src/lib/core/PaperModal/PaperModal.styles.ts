@@ -10,6 +10,7 @@ export default makeStyles((theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       display: 'flex',
       flexDirection: 'column',
+      borderRadius: theme.borderRadius.lg,
 
       [theme.breakpoints.down('xs')]: {
         top: '0 !important',
