@@ -71,9 +71,11 @@ export const marginBetweenChildrenHorizontal = (
 ): CSSProperties => ({
   '& > :not(:first-child)': {
     marginLeft: margin,
+    marginTop: 0,
   },
   '& > :not(:last-child)': {
     marginRight: margin,
+    marginBottom: 0,
   },
 });
 
@@ -82,8 +84,10 @@ export const marginBetweenChildrenVertical = (
 ): CSSProperties => ({
   '& > :not(:first-child)': {
     marginTop: margin,
+    marginLeft: 0,
   },
   '& > :not(:last-child)': {
     marginBottom: margin,
+    marginRight: 0,
   },
 });
