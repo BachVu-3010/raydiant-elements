@@ -13,7 +13,7 @@ export default makeStyles((theme: Theme) =>
       height: 32,
 
       [theme.breakpoints.down('sm')]: {
-        height: 48,
+        height: 40,
         justifyContent: 'space-between',
       },
 

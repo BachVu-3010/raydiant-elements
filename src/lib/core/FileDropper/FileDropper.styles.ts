@@ -25,6 +25,7 @@ const styles = (theme: Theme) =>
 
     overlay: {
       zIndex: theme.zIndex.fileDropper,
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
   });
 

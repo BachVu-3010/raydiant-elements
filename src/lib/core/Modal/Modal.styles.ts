@@ -28,8 +28,9 @@ const styles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
-      borderRadius: theme.borderRadius.sm,
+      borderRadius: theme.borderRadius.md,
       boxShadow: theme.modal.shadow,
+      overflow: 'hidden',
     },
 
     overlay: {
