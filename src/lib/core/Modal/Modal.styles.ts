@@ -30,7 +30,6 @@ const styles = (theme: Theme) =>
       color: theme.palette.text.primary,
       borderRadius: theme.borderRadius.md,
       boxShadow: theme.modal.shadow,
-      overflow: 'hidden',
     },
 
     overlay: {
