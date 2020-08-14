@@ -81,6 +81,10 @@ const styles = (theme: Theme) =>
         display: 'block',
       },
     },
+
+    lock: {
+      color: '#ffffff',
+    },
   });
 
 export default styles;

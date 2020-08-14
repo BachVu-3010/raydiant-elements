@@ -32,7 +32,6 @@ class PresentationListItem extends React.Component<PresentationListItemProps> {
       isLoading,
       hasError,
       isLocked,
-      lockedMessage,
       testId,
     } = this.props;
     const shouldShowRemove = selected && !!onRemove;
@@ -51,7 +50,6 @@ class PresentationListItem extends React.Component<PresentationListItemProps> {
               onEdit={selected && onEdit}
               showControls={selected}
               isLocked={isLocked}
-              lockedMessage={lockedMessage}
             />
           </div>
           <div className={classes.presentationDetails}>

@@ -1,3 +1,4 @@
+import HttpsIcon from '@material-ui/icons/Https';
 import * as cn from 'classnames';
 import * as isTouchDevice from 'is-touch-device';
 import * as React from 'react';
@@ -5,12 +6,8 @@ import AlertIcon from '../../core/AlertIcon';
 import Button from '../../core/Button';
 import Checkbox from '../../core/Checkbox';
 import CircularProgress from '../../core/CircularProgress';
-import Icon from '../../core/Icon';
-import Popover from '../../core/Popover';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import { stopPropagation, testAttr } from '../../helpers';
-import Row from '../../layout/Row';
-import Spacer from '../../layout/Spacer';
 import Scrollable from '../../layout/Scrollable';
 import * as T from '../PresentationTypes';
 import styles from './PresentationThumbnail.styles';
@@ -26,7 +23,6 @@ export interface PresentationThumbnailProps {
   errorMessage?: string;
   isLoading?: boolean;
   isLocked?: boolean;
-  lockedMessage?: React.ReactNode;
   testId?: string;
 }
 
@@ -77,14 +73,13 @@ export class PresentationThumbnail extends React.Component<
       onSelect,
       onClick,
       isLocked,
-      lockedMessage,
       testId,
     } = this.props;
     const { isHover, editPopoverOpen } = this.state;
 
     const imageUrl =
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
-    const hasControls = onEdit || onSelect || lockedMessage;
+    const hasControls = onEdit || onSelect || isLocked;
     const shouldShowIcon =
       presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
     const shouldShowControls =
@@ -134,6 +129,7 @@ export class PresentationThumbnail extends React.Component<
             <span className={classes.errorMessage}>{errorMessage}</span>
           </div>
         )}
+
         {shouldShowEdit && (
           <div
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
@@ -146,43 +142,15 @@ export class PresentationThumbnail extends React.Component<
             />
           </div>
         )}
+
         {shouldShowLock && (
-          <div className={classes.topLeft}>
-            <Popover.Anchor>
-              <Button
-                color="light"
-                icon="lock"
-                onClick={stopPropagation(() => {
-                  this.setState({ editPopoverOpen: true });
-                })}
-              />
-              <Popover
-                color="light"
-                open={editPopoverOpen}
-                anchor={['top', 'left']}
-                to={['bottom', 'left']}
-                width="auto"
-                onOverlayClick={() => {
-                  this.setState({ editPopoverOpen: false });
-                }}
-              >
-                <Popover.Header>
-                  <Row>
-                    <Icon icon="lock" />
-                    <div style={{ width: 220 }}>{lockedMessage}</div>
-                  </Row>
-                </Popover.Header>
-                <Popover.Footer>
-                  <Spacer />
-                  <Button
-                    label="Got It"
-                    onClick={stopPropagation(() => {
-                      this.setState({ editPopoverOpen: false });
-                    })}
-                  />
-                </Popover.Footer>
-              </Popover>
-            </Popover.Anchor>
+          <div
+            className={cn(
+              classes.lock,
+              shouldShowSelect ? classes.topRight : classes.topLeft,
+            )}
+          >
+            <HttpsIcon />
           </div>
         )}
         {shouldShowSelect && (
