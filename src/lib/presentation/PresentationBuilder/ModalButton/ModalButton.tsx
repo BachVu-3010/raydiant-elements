@@ -42,9 +42,14 @@ class ModalButton extends React.Component<
   };
 
   handleMessage = (type: string, payload: object) => {
-    if (type === 'close') {
-      this.close();
-      this.props.onChange({ open: false, ...payload });
+    switch (type) {
+      case 'update':
+        this.props.onChange({ open: this.state.open, value: payload });
+        break;
+      case 'close':
+        this.close();
+        this.props.onChange({ open: false, value: payload });
+        break;
     }
   };
 
