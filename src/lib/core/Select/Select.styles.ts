@@ -42,7 +42,7 @@ export default makeStyles((theme: Theme) =>
 
     icon: {
       height: '100%',
-      top: 0,
+      top: 8,
       right: theme.spacing(1.5),
     },
   }),

@@ -11,9 +11,7 @@ const styles = (theme: Theme) =>
       color: theme.palette.text.primary,
 
       [theme.breakpoints.up('sm')]: {
-        width: '33.333%',
-        minWidth: 324,
-        maxWidth: 425,
+        width: 414,
       },
     },
 

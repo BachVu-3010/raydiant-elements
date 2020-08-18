@@ -1,3 +1,4 @@
+import HttpsIcon from '@material-ui/icons/Https';
 import * as cn from 'classnames';
 import * as isTouchDevice from 'is-touch-device';
 import * as React from 'react';
@@ -10,6 +11,7 @@ import styles from './PlaylistThumbnail.styles';
 
 export interface PlaylistThumbnailProps {
   selected?: boolean;
+  isLocked?: boolean;
   onEdit?: () => any;
   onSelect?: (selected: boolean) => any;
   onClick?: () => any;
@@ -53,6 +55,7 @@ export class PlaylistThumbnail extends React.Component<
     const {
       classes,
       selected,
+      isLocked,
       showControls,
       onEdit,
       onSelect,
@@ -64,7 +67,7 @@ export class PlaylistThumbnail extends React.Component<
     const imageUrl = 'https://assets.raydiant.com/playlist-thumbnail.svg';
     const hasControls = onEdit || onSelect;
     const shouldShowControls = showControls || (hasControls && isHover);
-    const shouldShowEdit = onEdit && shouldShowControls;
+    const shouldShowEdit = !isLocked && onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowOverlay = shouldShowControls || selected;
 
@@ -85,7 +88,9 @@ export class PlaylistThumbnail extends React.Component<
             backgroundImage: `url(${imageUrl})`,
           }}
         />
+
         {shouldShowOverlay && <div className={classes.overlay} />}
+
         {shouldShowEdit && (
           <div
             className={shouldShowSelect ? classes.topRight : classes.topLeft}
@@ -98,6 +103,13 @@ export class PlaylistThumbnail extends React.Component<
             />
           </div>
         )}
+
+        {isLocked && (
+          <div className={classes.lock}>
+            <HttpsIcon fontSize="inherit" />
+          </div>
+        )}
+
         {shouldShowSelect && (
           <Scrollable.VisibilitySensor>
             {({ visibilityRef, isVisible }) => (

@@ -83,7 +83,17 @@ const styles = (theme: Theme) =>
     },
 
     lock: {
+      fontSize: 16,
       color: '#ffffff',
+      backgroundColor: 'rgba(0,0,0,0.8)',
+      padding: theme.spacing(1),
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 100,
+      position: 'absolute',
+      bottom: theme.spacing(0.5),
+      left: theme.spacing(0.5),
     },
   });
 

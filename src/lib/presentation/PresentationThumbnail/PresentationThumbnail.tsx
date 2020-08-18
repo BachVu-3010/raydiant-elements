@@ -79,15 +79,16 @@ export class PresentationThumbnail extends React.Component<
 
     const imageUrl =
       presentation.thumbnailUrl || presentation.applicationThumbnailUrl;
-    const hasControls = onEdit || onSelect || isLocked;
+    const hasControls = onEdit || onSelect;
     const shouldShowIcon =
-      presentation.hasDynamicThumbnails && presentation.thumbnailUrl;
+      presentation.hasDynamicThumbnails &&
+      presentation.thumbnailUrl &&
+      !isLocked;
     const shouldShowControls =
       showControls || (hasControls && isHover) || editPopoverOpen;
     const shouldShowEdit = !isLocked && onEdit && shouldShowControls;
     const shouldShowSelect = (onSelect && shouldShowControls) || selected;
     const shouldShowError = hasError && !shouldShowSelect;
-    const shouldShowLock = isLocked && shouldShowControls;
     const shouldShowProgress = isLoading;
     const shouldShowOverlay =
       shouldShowControls || hasError || isLoading || selected;
@@ -109,6 +110,7 @@ export class PresentationThumbnail extends React.Component<
             backgroundImage: `url(${imageUrl})`,
           }}
         />
+
         {shouldShowIcon && (
           <div
             className={cn(classes.icon, classes.bottomLeft)}
@@ -117,7 +119,9 @@ export class PresentationThumbnail extends React.Component<
             }}
           />
         )}
+
         {shouldShowOverlay && <div className={classes.overlay} />}
+
         {shouldShowProgress && (
           <div className={classes.topRight}>
             <CircularProgress color="light" />
@@ -143,16 +147,12 @@ export class PresentationThumbnail extends React.Component<
           </div>
         )}
 
-        {shouldShowLock && (
-          <div
-            className={cn(
-              classes.lock,
-              shouldShowSelect ? classes.topRight : classes.topLeft,
-            )}
-          >
-            <HttpsIcon />
+        {isLocked && (
+          <div className={classes.lock}>
+            <HttpsIcon fontSize="inherit" />
           </div>
         )}
+
         {shouldShowSelect && (
           <Scrollable.VisibilitySensor>
             {({ visibilityRef, isVisible }) => (

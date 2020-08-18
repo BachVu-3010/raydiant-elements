@@ -1,190 +1,183 @@
+import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import * as React from 'react';
-import Button from '../../../core/Button';
-import SelectField from '../../../core/SelectField';
-import InputHelperText from '../../../core/InputHelperText';
+import cn from 'classnames';
+import PlaylistEditIcon from '../../../icons/PlaylistEdit';
+import InputLabel from '../../../core/InputLabel';
 import Row from '../../../layout/Row';
+import { makeStyles, createStyles } from '../../../styles';
+import { Theme } from '../../../theme';
+import { buttonReset } from '../../../mixins';
 import * as P from '../../PresentationTypes';
+import { isPathEqual } from '../utilities';
 
 interface PlaylistInputProps {
   label: string;
   value: string;
+  path: P.Path;
   propertyTypeIndex: number;
-  playlistsByOwner: P.PlaylistsByOwner;
-  currentUserProfileId: string;
+  selectedPlaylistPath: P.Path;
+  playlists: P.Playlist[];
   helperText: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
   onChange: (value: string) => any;
-  onBlur: React.FocusEventHandler<any>;
+  onSelect?: () => Promise<string>;
   onEdit?: (value: string) => void;
-  onCreate?: () => void;
 }
 
-export const NEW_PLAYLIST_VALUE = 'new';
+const useStyles = makeStyles((theme: Theme) => {
+  const lightNavy = '#225887';
 
-class PlaylistInput extends React.Component<PlaylistInputProps> {
-  onChangeTimeout: number;
+  return createStyles({
+    actions: {
+      padding: theme.spacing(0.5, 1),
+      marginLeft: theme.spacing(-1),
+      marginRight: theme.spacing(-1),
+      width: `calc(100% + ${theme.spacing(2)}px)`,
+      borderRadius: theme.borderRadius.sm,
+      fontSize: 24, // Sets icon size.
 
-  componentDidMount() {
-    const { playlistsByOwner } = this.props;
-    const allPlaylists = this.getAllPlaylists(playlistsByOwner);
-    this.checkDefaultValue(allPlaylists);
-  }
+      [theme.breakpoints.down('xs')]: {
+        padding: theme.spacing(2, 1),
+      },
+    },
 
-  componentDidUpdate(prevProps: PlaylistInputProps) {
-    const { playlistsByOwner } = this.props;
+    action: {
+      ...buttonReset(),
+      marginTop: 2, // Align with settings icon
+      display: 'flex',
+      color: lightNavy,
 
-    const allPlaylists = this.getAllPlaylists(playlistsByOwner);
-    const allPrevPlaylists = this.getAllPlaylists(prevProps.playlistsByOwner);
+      '&:hover': {
+        color: '#003670',
+      },
 
-    const didPlaylistsChange =
-      allPlaylists.length !== allPrevPlaylists.length ||
-      allPlaylists.some((p, i) => p.id !== allPrevPlaylists[i].id);
+      [theme.breakpoints.down('xs')]: {
+        marginTop: 0,
+      },
+    },
 
-    if (didPlaylistsChange) {
-      this.checkDefaultValue(allPlaylists);
-    }
-  }
+    selected: {
+      boxShadow: `0px 0px 0px 3px ${lightNavy}`,
+    },
 
-  getAllPlaylists(playlistsById: P.PlaylistsByOwner) {
-    const allPlaylists: P.Playlist[] = [];
-    Object.values(playlistsById).forEach(({ playlists }) => {
-      allPlaylists.push(...playlists);
-    });
-    return allPlaylists;
-  }
+    disabled: {
+      cursor: 'not-allowed',
+      color: 'rgba(0, 0, 0, 0.2)',
 
-  checkDefaultValue(allPlaylists: P.Playlist[]) {
-    const { value, propertyTypeIndex, onChange } = this.props;
-    // Set default playlist if one doesn't exist. Uses propertyTypeIndex to pick
-    // another playlist when there are multiple zones.
-    if (
-      allPlaylists.length > 0 &&
-      (!value || !this.isValueInPlaylists(allPlaylists))
-    ) {
-      this.onChangeTimeout = setTimeout(() => {
-        // This ensures we pick the second playlist as the default for zone2 of MZ
-        // if there is more than one user playlist.
-        const defaultPlaylistIndex = Math.min(
-          propertyTypeIndex,
-          allPlaylists.length - 1,
-        );
-        onChange(allPlaylists[defaultPlaylistIndex].id);
-      });
-    }
-  }
+      '&:hover': {
+        color: 'rgba(0, 0, 0, 0.2)',
+      },
+    },
 
-  isValueInPlaylists(playlists: P.Playlist[]) {
-    const { value } = this.props;
-    return !!playlists.map(pl => pl.id).includes(value);
-  }
+    editPlaylistIcon: {
+      // Fix size / alignment.
+      transform: 'scale(1.25)',
+      marginTop: 2,
+    },
 
-  componentWillUnmount() {
-    clearTimeout(this.onChangeTimeout);
-  }
+    playlist: {
+      marginLeft: theme.spacing(2),
+      fontSize: theme.fontSizes.xl,
+      fontWeight: 300,
+      color: theme.palette.text.secondary,
+    },
 
-  handleChange = (value: string) => {
-    const { onChange, onCreate } = this.props;
-    if (value === NEW_PLAYLIST_VALUE) {
-      onCreate();
-    } else {
-      onChange(value);
-    }
-  };
+    playlistLabel: {
+      fontSize: theme.fontSizes.sm,
+      color: theme.palette.text.secondary,
+      marginTop: theme.spacing(0.5),
+    },
+  });
+});
 
-  render() {
-    const {
-      label,
-      value,
-      playlistsByOwner,
-      currentUserProfileId,
-      helperText,
-      error,
-      disabled,
-      onBlur,
-      onEdit,
-      onCreate,
-    } = this.props;
+const PlaylistInput: React.FC<PlaylistInputProps> = ({
+  label,
+  value,
+  path,
+  playlists,
+  selectedPlaylistPath,
+  error,
+  disabled,
+  helperText,
+  onSelect,
+  onChange,
+  onEdit,
+}) => {
+  const classes = useStyles();
+  const playlist = playlists.find(pl => pl.id === value);
+  const isSelected = isPathEqual(selectedPlaylistPath, path);
 
-    const myGroup = playlistsByOwner[currentUserProfileId];
-    const otherGroups = Object.values(playlistsByOwner).filter(
-      group => group.profile.id !== currentUserProfileId,
-    );
+  const handlePlaylistSelect = React.useCallback(
+    async () => {
+      // We still want the playlist input to call onChange in order to update the preview. To do this,
+      // onSelect returns a promise that will resolve to the selected playlist id or empty if the user
+      // did not select anything.
+      const playlistId = await onSelect();
+      if (playlistId) {
+        onChange(playlistId);
+      }
+    },
+    [onSelect],
+  );
 
-    const totalPlaylists = Object.values(playlistsByOwner).reduce(
-      (a, b) => a + b.playlists.length,
-      0,
-    );
+  // We are assuming this is editable because the presentation builder cannot
+  // currently be opened unless the current user has edit permissions. Hardcoding
+  // for now but the presentation builder component needs to be rethought if we
+  // want to avoid duplicating Dashboard permissions logic in raydiant-elements.
+  const isEditable = true;
 
-    if (onCreate && totalPlaylists === 0) {
-      return (
-        <Button
-          color="primary"
-          label={`Create a Playlist for ${label}`}
-          onClick={onCreate}
-          disabled={disabled}
-        />
-      );
-    }
+  const handlePlaylistClick = React.useCallback(
+    () => {
+      if (playlist && isEditable) {
+        onEdit(value);
+      } else if (!playlist && isEditable) {
+        handlePlaylistSelect();
+      }
+    },
+    [onEdit, onclick, isEditable],
+  );
 
-    const valueOrDefault =
-      value ||
-      (totalPlaylists !== 0
-        ? this.getAllPlaylists(playlistsByOwner)[0].id
-        : '');
+  return (
+    <div>
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
 
-    return (
-      <Row>
-        <SelectField
-          label={label}
-          value={valueOrDefault}
-          onChange={this.handleChange}
-          onBlur={onBlur}
-          helperText={helperText}
-          error={error}
-          disabled={disabled}
+      <Row className={cn(classes.actions, isSelected && classes.selected)}>
+        <button className={classes.action} disabled={!isEditable}>
+          <LocalLibraryIcon
+            fontSize="inherit"
+            className={cn(!isEditable && classes.disabled)}
+            onClick={handlePlaylistSelect}
+          />
+        </button>
+        <button
+          className={classes.action}
+          disabled={!isEditable}
+          onClick={handlePlaylistClick}
         >
-          {onCreate && (
-            <>
-              <option value={NEW_PLAYLIST_VALUE}>New Empty Playlist</option>
-              <option value="new-separator" disabled>
-                --------------------------
-              </option>
-            </>
-          )}
+          <PlaylistEditIcon
+            fontSize="inherit"
+            className={cn(
+              !isEditable && classes.disabled,
+              classes.editPlaylistIcon,
+            )}
+          />
+          <div
+            className={classes.playlist}
+            style={{ cursor: isEditable ? 'pointer' : 'not-allowed' }}
+          >
+            {playlist ? playlist.name : 'Assign a playlist'}
 
-          {myGroup.playlists.map(pl => (
-            <option key={pl.id} value={pl.id}>
-              {pl.name}
-            </option>
-          ))}
-
-          {otherGroups.map(({ profile, playlists }) => (
-            <optgroup key={profile.id} label={profile.name}>
-              {playlists.map(pl => (
-                <option key={pl.id} value={pl.id}>
-                  {pl.name}
-                </option>
-              ))}
-            </optgroup>
-          ))}
-
-          {totalPlaylists === 0 && <option disabled>No playlists found</option>}
-        </SelectField>
-        {onEdit && (
-          <div>
-            {/* Aligns button with select */}
-            <InputHelperText>&nbsp;</InputHelperText>
-            <Button
-              icon="edit"
-              disabled={disabled}
-              onClick={() => onEdit(valueOrDefault)}
-            />
+            <div className={classes.playlistLabel}>
+              {helperText || `${label}'s playlist`}
+            </div>
           </div>
-        )}
+        </button>
       </Row>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default PlaylistInput;

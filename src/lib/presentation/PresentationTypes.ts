@@ -67,10 +67,3 @@ export interface LocalUpload {
   file: File;
   localUrl: string;
 }
-
-export interface PlaylistsByOwner {
-  [profileId: string]: {
-    profile: { id: string; name: string };
-    playlists: Playlist[];
-  };
-}
