@@ -53,9 +53,14 @@ class ModalButton extends React.Component<
     }
   };
 
-  handleOnclick = () => {
+  handleOnClick = () => {
     this.setState({ open: true });
     this.props.onChange({ open: true });
+  };
+
+  handleOverlayClick = () => {
+    this.close();
+    this.props.onChange({ open: false });
   };
 
   render() {
@@ -69,7 +74,6 @@ class ModalButton extends React.Component<
       hoveredBackgroundColor,
       textColor
     } = this.props;
-
 
     const theme = (outerTheme: Theme) => createTheme({
       ...outerTheme,
@@ -97,11 +101,11 @@ class ModalButton extends React.Component<
             color='primary'
             label={label}
             disabled={disabled}
-            onClick={this.handleOnclick}
+            onClick={this.handleOnClick}
           />
           {helperText && <FormHelperText disabled={disabled}>{helperText}</FormHelperText>}
         </div>
-        <Modal open={this.state.open}>
+        <Modal open={this.state.open} onOverlayClick={this.handleOverlayClick}>
           <EmbeddedFrame src={url} onMessage={this.handleMessage}/>
         </Modal>
       </ThemeProvider>
