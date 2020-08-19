@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) => {
 
   return createStyles({
     actions: {
+      alignItems: 'flex-start',
       padding: theme.spacing(0.5, 1),
       marginLeft: theme.spacing(-1),
       marginRight: theme.spacing(-1),
@@ -81,6 +82,7 @@ const useStyles = makeStyles((theme: Theme) => {
       fontSize: theme.fontSizes.xl,
       fontWeight: 300,
       color: theme.palette.text.secondary,
+      wordBreak: 'break-all',
     },
 
     playlistLabel: {
