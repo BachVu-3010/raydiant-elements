@@ -55,8 +55,8 @@ const common = {
   zIndex: {
     shadow: 100,
     menu: 1000,
-    modal: 2000,
-    popover: 3000,
+    modal: 1100,
+    popover: 1300,
     fileDropper: 4000,
   },
   palette: {
