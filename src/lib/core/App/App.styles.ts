@@ -11,7 +11,7 @@ const styles = (theme: Theme) =>
         fontFamily: theme.typography.fontFamily,
       },
       strong: {
-        fontWeight: 600,
+        fontWeight: 500,
       },
     },
     // Casting to `any` because the createStyles type doesn't support arrays but in actually does
