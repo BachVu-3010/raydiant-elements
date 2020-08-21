@@ -12,12 +12,14 @@ const styles = (theme: Theme) =>
       border: `2px solid ${theme.button.foreground}`,
     },
     error: {
-      color: theme.palette.error.contrastText,
-      backgroundColor: theme.palette.error.main,
+      color: theme.palette.error.main,
+      backgroundColor: '#fff',
+      borderRadius: 100,
     },
     warning: {
-      color: theme.palette.warning.contrastText,
-      backgroundColor: theme.palette.warning.main,
+      color: theme.palette.warning.main,
+      backgroundColor: '#000',
+      borderRadius: 100,
     },
   });
 
