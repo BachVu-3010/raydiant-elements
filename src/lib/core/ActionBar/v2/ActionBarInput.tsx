@@ -9,6 +9,7 @@ export interface ActionBarInputProps {
   type?: string;
   disabled?: boolean;
   maxWidth?: string | number;
+  autoFocus?: boolean;
   onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
   onChange?: (value: string) => void;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
@@ -21,6 +22,7 @@ export const ActionBarInput: React.FunctionComponent<ActionBarInputProps> = ({
   type,
   disabled,
   maxWidth,
+  autoFocus,
   onClick,
   onChange,
   onBlur,
@@ -42,6 +44,7 @@ export const ActionBarInput: React.FunctionComponent<ActionBarInputProps> = ({
           }
         }}
         onBlur={onBlur}
+        autoFocus={autoFocus}
       />
       {icon && <div className={classes.icon}>{icon}</div>}
     </div>
