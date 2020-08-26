@@ -12,7 +12,7 @@ export default makeStyles((theme: Theme) =>
     input: {
       width: '100%',
       height: '100%',
-      padding: theme.spacing(2),
+      padding: theme.spacing(1, 2),
       fontSize: theme.fontSizes.md,
       color: theme.input.foreground,
       backgroundColor: theme.input.background,

@@ -9,7 +9,16 @@ export interface InputProps {
   /** The value of the field */
   value?: string;
   /** The type of input */
-  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url' | 'number';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'tel'
+    | 'search'
+    | 'url'
+    | 'number'
+    | 'time'
+    | 'date';
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */

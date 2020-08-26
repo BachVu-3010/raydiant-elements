@@ -11,7 +11,15 @@ export interface TextFieldProps {
   /** The value of the field */
   value?: string;
   /** The type of input */
-  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'tel'
+    | 'search'
+    | 'url'
+    | 'time'
+    | 'date';
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */
