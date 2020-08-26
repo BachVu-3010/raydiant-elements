@@ -12,6 +12,10 @@ export const buttonReset = (): CSSProperties => ({
   border: 'none',
   cursor: 'pointer',
   outline: 'none',
+  textTransform: 'inherit',
+  fontWeight: 'inherit',
+  letterSpacing: 'inherit',
+  lineHeight: 'inherit',
 });
 
 export const textTruncate = (): CSSProperties => ({

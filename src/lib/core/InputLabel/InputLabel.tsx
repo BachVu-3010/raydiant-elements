@@ -3,11 +3,13 @@ import * as React from 'react';
 import useStyles from './InputLabel.styles';
 
 interface InputLabelProps {
+  className?: string;
   disabled?: boolean;
   error?: boolean;
 }
 
 const InputLabel: React.SFC<InputLabelProps> = ({
+  className,
   disabled = false,
   error = false,
   children,
@@ -16,6 +18,7 @@ const InputLabel: React.SFC<InputLabelProps> = ({
   return (
     <label
       className={cn(
+        className,
         classes.root,
         disabled && classes.disabled,
         error && classes.error,
