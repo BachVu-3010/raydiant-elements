@@ -6,7 +6,7 @@ import InputLabel from '../../../core/InputLabel';
 import Row from '../../../layout/Row';
 import { makeStyles, createStyles } from '../../../styles';
 import { Theme } from '../../../theme';
-import { buttonReset } from '../../../mixins';
+import { buttonReset, textTruncate } from '../../../mixins';
 import * as P from '../../PresentationTypes';
 import { isPathEqual } from '../utilities';
 
@@ -45,16 +45,12 @@ const useStyles = makeStyles((theme: Theme) => {
 
     action: {
       ...buttonReset(),
-      marginTop: 2, // Align with settings icon
+      overflow: 'hidden',
       display: 'flex',
       color: lightNavy,
 
       '&:hover': {
         color: '#003670',
-      },
-
-      [theme.breakpoints.down('xs')]: {
-        marginTop: 0,
       },
     },
 
@@ -74,15 +70,21 @@ const useStyles = makeStyles((theme: Theme) => {
     editPlaylistIcon: {
       // Fix size / alignment.
       transform: 'scale(1.25)',
-      marginTop: 2,
     },
 
     playlist: {
+      ...textTruncate(),
       marginLeft: theme.spacing(2),
       fontSize: theme.fontSizes.xl,
       fontWeight: 300,
       color: theme.palette.text.secondary,
       wordBreak: 'break-all',
+      lineHeight: 1.09,
+      letterSpacing: 0.25,
+
+      [theme.breakpoints.down('xs')]: {
+        fontSize: theme.fontSizes.lg,
+      },
     },
 
     playlistLabel: {
