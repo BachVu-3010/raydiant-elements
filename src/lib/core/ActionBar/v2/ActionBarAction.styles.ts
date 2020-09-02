@@ -31,7 +31,7 @@ export default makeStyles((theme: Theme) =>
 
     label: {
       marginLeft: theme.spacing(0.8),
-      fontWeight: 700,
+      fontWeight: 600,
       lineHeight: 1.11,
       letterSpacing: 1.42,
       textTransform: 'uppercase',
