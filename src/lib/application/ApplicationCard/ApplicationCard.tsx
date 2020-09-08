@@ -10,7 +10,6 @@ interface ApplicationCardProps extends WithStyles<typeof styles> {
   application: A.Application;
   onClick?: () => void;
   auto?: boolean;
-  smDownShrink?: boolean;
   testId?: string;
 }
 
@@ -19,7 +18,6 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
   application,
   onClick,
   auto = false,
-  smDownShrink = true,
   testId,
 }) => {
   const {
@@ -32,13 +30,7 @@ export const ApplicationCard: React.SFC<ApplicationCardProps> = ({
   const cta = strings.callToAction || name;
 
   return (
-    <div
-      className={cn(
-        classes.root,
-        auto && classes.auto,
-        smDownShrink && classes.smDownShrink,
-      )}
-    >
+    <div className={cn(classes.root, auto && classes.auto)}>
       <button
         className={classes.thumbnail}
         onClick={onClick}

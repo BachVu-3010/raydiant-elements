@@ -34,11 +34,17 @@ export interface Presentation {
 export interface Theme {
   id: string;
   name: string;
+  resource: {
+    deletedAt: string | null;
+  };
 }
 
 export interface Playlist {
   id: string;
   name: string;
+  resource: {
+    deletedAt: string | null;
+  };
 }
 
 export interface SoundZone {

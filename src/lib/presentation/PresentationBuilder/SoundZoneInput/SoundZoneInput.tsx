@@ -58,9 +58,15 @@ class SoundZone extends React.Component<SoundZoneProps> {
       onBlur,
     } = this.props;
 
-    const options = soundZones.map(soundZone => ({
-      value: soundZone.id,
-      name: soundZone.name,
+    const soundZone = soundZones.find(sz => sz.id === value);
+    // Assume the soundzone was assigned by an admin if there is a soundzone id but we can't
+    // find it in the current user's soundzones. This is a workaround, ideally the API would return
+    // the basic information about the assigned soundzone if the current user doesn't have access to it.
+    const isAdminAssigned = value && !soundZone;
+
+    const options = soundZones.map(sz => ({
+      value: sz.id,
+      name: sz.name,
     }));
 
     return (
@@ -73,6 +79,9 @@ class SoundZone extends React.Component<SoundZoneProps> {
         error={error}
         disabled={disabled}
       >
+        {isAdminAssigned && (
+          <option value={value}> Administrator assigned sound zone</option>
+        )}
         {options.map(opt => (
           <option key={opt.value} value={opt.value}>
             {opt.name}

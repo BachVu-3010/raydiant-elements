@@ -19,7 +19,7 @@ export default makeStyles((theme: Theme) =>
         width: '100vw !important',
         // This is a hack to fix a bug in iOS where fixed position elements are renderered
         // below the bottom action bar.
-        paddingBottom: 44,
+        paddingBottom: 60,
       },
     },
 

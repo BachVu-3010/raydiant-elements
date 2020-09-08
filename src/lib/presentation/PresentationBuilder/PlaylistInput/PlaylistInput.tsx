@@ -109,8 +109,18 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
   onEdit,
 }) => {
   const classes = useStyles();
-  const playlist = playlists.find(pl => pl.id === value);
   const isSelected = isPathEqual(selectedPlaylistPath, path);
+
+  const playlist = playlists.find(pl => pl.id === value);
+  const isDeleted = playlist && !!playlist.resource.deletedAt;
+  // Assume the playlist was assigned by an admin if there is a playlist id but we can't
+  // find it in the current user's playlists. This is a workaround, ideally the API would return
+  // the basic information about the assigned playlist if the current user doesn't have access to it.
+  const isAdminAssigned = value && !playlist;
+  // It would be better to use the same permission logic in the Dashboard to determine but want to avoid
+  // the duplicating permission functions in elements. For now, assume that the user does not have access
+  // to edit this playlist if it is not provided.
+  const isEditable = !isDeleted && !isAdminAssigned;
 
   const handlePlaylistSelect = React.useCallback(
     async () => {
@@ -125,12 +135,6 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
     [onSelect],
   );
 
-  // We are assuming this is editable because the presentation builder cannot
-  // currently be opened unless the current user has edit permissions. Hardcoding
-  // for now but the presentation builder component needs to be rethought if we
-  // want to avoid duplicating Dashboard permissions logic in raydiant-elements.
-  const isEditable = true;
-
   const handlePlaylistClick = React.useCallback(
     () => {
       if (playlist && isEditable) {
@@ -142,6 +146,15 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
     [onEdit, onclick, isEditable],
   );
 
+  let playlistLabel = '';
+  if (playlist && !isDeleted) {
+    playlistLabel = playlist.name;
+  } else if (isAdminAssigned) {
+    playlistLabel = 'Administrator assigned playlist';
+  } else {
+    playlistLabel = 'Assign a playlist';
+  }
+
   return (
     <div>
       <InputLabel error={error} disabled={disabled}>
@@ -149,12 +162,8 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
       </InputLabel>
 
       <Row className={cn(classes.actions, isSelected && classes.selected)}>
-        <button className={classes.action} disabled={!isEditable}>
-          <LocalLibraryIcon
-            fontSize="inherit"
-            className={cn(!isEditable && classes.disabled)}
-            onClick={handlePlaylistSelect}
-          />
+        <button className={classes.action}>
+          <LocalLibraryIcon fontSize="inherit" onClick={handlePlaylistSelect} />
         </button>
         <button
           className={classes.action}
@@ -172,7 +181,7 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
             className={classes.playlist}
             style={{ cursor: isEditable ? 'pointer' : 'not-allowed' }}
           >
-            {playlist ? playlist.name : 'Assign a playlist'}
+            {playlistLabel}
 
             <div className={classes.playlistLabel}>
               {helperText || `${label}'s playlist`}
