@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "raydiant-elements",
-  "version": "0.8.14-enterprise-r2.25",
+  "version": "0.8.14-enterprise-r2.26",
   "scripts": {
     "start": "tsc && styleguidist server --config styleguide.config.js",
     "tsc": "tsc",
