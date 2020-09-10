@@ -2,7 +2,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import * as React from 'react';
 import { ThemeContext } from '../ThemeProvider';
 
-export type ThemeType = 'light' | 'grey' | 'medium' | 'dark';
+export type ThemeType = 'light' | 'lightGrey' | 'grey' | 'dark';
 
 export interface ThemeProps {
   color?: ThemeType;

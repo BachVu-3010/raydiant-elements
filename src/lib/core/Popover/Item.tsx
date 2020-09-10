@@ -18,7 +18,6 @@ const styles = (theme: Theme) =>
       '&:not(:last-child)': {
         borderBottomColor: theme.palette.action.selected,
       },
-      minHeight: 68,
     },
     cursorPointer: {
       cursor: 'pointer',

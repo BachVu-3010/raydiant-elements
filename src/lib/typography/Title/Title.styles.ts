@@ -1,22 +1,21 @@
-import { createStyles } from '../../core/withStyles';
+import { createStyles, makeStyles } from '../../styles';
 import { Theme } from '../../theme';
 
-const styles = (theme: Theme) =>
+export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      color: theme.palette.text.primary,
-      fontSize: theme.fontSizes.xl,
-      marginTop: theme.spacing(2),
+      color: theme.palette.text.headingPrimary,
+      fontSize: theme.fontSizes.xxl,
       fontWeight: 300,
-      lineHeight: 1.25,
+      lineHeight: 1,
       outline: 0,
       border: 0,
       borderBottom: `1px dashed transparent`,
+      margin: 0,
     },
 
     editable: {
       borderBottomColor: theme.input.border,
     },
-  });
-
-export default styles;
+  }),
+);

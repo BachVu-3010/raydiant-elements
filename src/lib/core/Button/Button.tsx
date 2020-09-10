@@ -7,12 +7,13 @@ import withStyles, { WithStyles } from '../withStyles';
 import styles from './Button.styles';
 
 interface ButtonProps extends WithStyles<typeof styles> {
+  className?: string;
   /** The button's label */
   label?: React.ReactNode;
   /** The button's icon */
-  icon?: IconOptions;
+  icon?: IconOptions | React.ReactNode;
   /** The button's color */
-  color?: 'default' | 'primary' | 'progress' | 'destructive';
+  color?: 'default' | 'primary' | 'progress' | 'destructive' | 'light';
   /** Set to true to disable the button */
   disabled?: boolean;
   /** Set to true to make the button expand to it's container */
@@ -29,25 +30,31 @@ interface ButtonProps extends WithStyles<typeof styles> {
   testId?: string;
 }
 
-export const Button: React.SFC<ButtonProps> = ({
-  label,
-  icon,
-  color = 'default',
-  hideBorder = false,
-  disabled = false,
-  type = 'button',
-  fullWidth = false,
-  children,
-  onClick = () => {
-    return;
+export const Button: React.SFC<ButtonProps> = (
+  {
+    className,
+    label,
+    icon,
+    color = 'default',
+    hideBorder = false,
+    disabled = false,
+    type = 'button',
+    fullWidth = false,
+    children,
+    onClick,
+    classes,
+    testId,
   },
-  classes,
-  testId,
-}) => {
+  ref,
+) => {
   const hasIcon = !!icon;
   const hasLabel = !!label || !!children;
+  const iconEl =
+    typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
+
   return (
     <MUIButton
+      ref={ref}
       variant={color === 'default' ? 'text' : 'contained'}
       disabled={disabled}
       type={type}
@@ -64,23 +71,27 @@ export const Button: React.SFC<ButtonProps> = ({
           color === 'primary' && classes.primary,
           color === 'destructive' && classes.destructive,
           color === 'progress' && classes.progress,
+          color === 'light' && classes.light,
+          className,
         ),
         label: classes.label,
       }}
       {...testAttr(testId)}
     >
       {icon && (
-        <Icon
-          icon={icon}
+        <div
           className={cn(
+            classes.icon,
             hasLabel && classes.iconWithLabel,
             fullWidth && classes.iconWithLabelFullWidth,
           )}
-        />
+        >
+          {iconEl}
+        </div>
       )}
       {label || children}
     </MUIButton>
   );
 };
 
-export default withStyles(styles)(Button);
+export default withStyles(styles)(React.forwardRef(Button));

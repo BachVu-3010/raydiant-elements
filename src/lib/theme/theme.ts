@@ -1,12 +1,12 @@
 import createTheme from './createTheme';
 
 const colors = {
-  white: '#FFFFFF',
-  grey: '#E3E3E2',
-  lightGrey: '#F0F0EE',
-  limeGreen: '#28D972',
-  skyBlue: '#009BD2',
-  forestGreen: '#006D5D',
+  white: '#ffffff',
+  grey: '#e3e3e2',
+  lightGrey: '#f8f8f8',
+  limeGreen: '#28d972',
+  skyBlue: '#009bd2',
+  forestGreen: '#006d5d',
   navy: '#003670',
   yellow: '#edde4f',
 };
@@ -45,17 +45,18 @@ const common = {
   fontSizes: {
     xxs: '0.643rem', // 9 px
     xs: '0.786rem', // 11 px
-    sm: '0.857rem', // 12 px
-    md: '1rem', // 14px
-    lg: '1.143rem', // 16px
-    xl: '2.857rem', // 40px
-    xxl: '6.25rem', // 100px
+    sm: '0.907rem', // 12.7 px
+    md: '1.057rem', // 14.8px
+    lg: '1.207rem', // 16.9px
+    xl: '1.5rem', // 21px
+    xxl: '2.564rem', // 35.9px
+    xxxl: '6.25rem', // 100px
   },
   zIndex: {
     shadow: 100,
     menu: 1000,
-    modal: 2000,
-    popover: 3000,
+    modal: 1100,
+    popover: 1300,
     fileDropper: 4000,
   },
   palette: {
@@ -65,7 +66,7 @@ const common = {
       contrastText: colors.white,
     },
     error: {
-      main: '#eb5843',
+      main: '#b00020',
       dark: '#e54734',
       contrastText: colors.white,
     },
@@ -75,13 +76,12 @@ const common = {
       contrastText: colors.navy,
     },
     warning: {
-      main: '#f8b91c',
+      main: '#edde4f',
       dark: '#f6aa14',
       contrastText: colors.white,
     },
-    divider: colors.grey,
     action: {
-      selected: colors.lightGrey,
+      selected: 'rgba(0, 0, 0, 0.07)',
       dropping: colors.skyBlue,
     },
   },
@@ -93,13 +93,24 @@ const common = {
     default: 'https://assets.raydiant.com/raydiant-login-asset.png',
   },
   modal: {
-    overlayBackground: 'rgba(0, 0, 0, 0.5)',
+    overlayBackground: 'rgba(0, 0, 0, 0.25)',
     shadow: '0 4px 10px 0 rgba(0, 0, 0, 0.29)',
+    background: colors.lightGrey,
+    foreground: 'rgba(0, 0, 0, 0.6)',
   },
   borderRadius: {
-    xs: 0,
+    xs: 2,
     sm: 4,
     md: 6,
+    lg: 12,
+  },
+  divider: {
+    primary: 'rgba(0,0,0, 0.6)',
+    secondary: 'rgba(0,0,0, 0.2)',
+  },
+  avatar: {
+    background: '#82d4ed',
+    foreground: colors.navy,
   },
 };
 
@@ -108,10 +119,11 @@ export const light = createTheme({
   palette: {
     ...common.palette,
     text: {
-      primary: 'rgba(0, 0, 0, 0.87)',
-      secondary: 'rgba(0, 0, 0, 0.3)',
+      primary: 'rgba(0, 0, 0, 0.6)',
+      secondary: 'rgba(32, 32, 42, 0.6)',
       link: colors.skyBlue,
-      heading: colors.navy,
+      headingPrimary: colors.navy,
+      headingSecondary: 'rgba(0, 0, 0, 0.87)',
     },
     background: {
       default: colors.white,
@@ -126,38 +138,32 @@ export const light = createTheme({
     squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
   },
   menu: {
-    background: colors.white,
     foreground: colors.navy,
-    border: colors.navy,
+    underline: colors.navy,
   },
   button: {
     background: 'transparent',
     foreground: colors.navy,
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    foregroundMuted: 'rgba(0, 0, 0, 0.2)',
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
   },
   input: {
-    background: '#f3f4f6',
-    foreground: 'rgba(41, 40, 52, 1)',
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: 'rgba(41, 40, 52, 0.6)',
+    background: 'rgba(227, 227, 227, 0.4)',
+    foreground: 'rgba(0, 0, 0, 0.87)',
+    border: 'rgba(0, 0, 0, 0.2)',
+    focusedBorder: 'rgba(0, 0, 0, 0.6)',
   },
   checkbox: {
-    background: colors.white,
-    backgroundChecked: common.palette.progress.main,
+    border: 'rgba(0, 0, 0, 0.6)',
+    background: 'rgba(0, 0, 0, 0.8)',
     foreground: colors.white,
-    border: '#303141',
-    borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
-    bar: '#C8C9CC',
+    bar: colors.grey,
     barChecked: common.palette.progress.main,
     knob: colors.white,
-    knobMuted: '#b1b1b1',
-    foreground: '#292834',
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
   },
   tab: {
     foreground: '#292834',
@@ -165,10 +171,13 @@ export const light = createTheme({
     activeBorder: common.palette.primary.main,
   },
   progress: {
-    background: common.palette.primary.main,
+    background: colors.skyBlue,
   },
   actionBar: {
-    border: '#c6cedc',
+    foreground: 'rgba(0, 0, 0, 0.32)',
+    selectedForeground: 'rgba(0, 0, 0, 0.6)',
+    background: colors.white,
+    border: 'rgba(0, 0, 0, 0.2)',
   },
   popover: {
     headerBackground: '#e8eaee',
@@ -178,6 +187,90 @@ export const light = createTheme({
   },
   dropzone: {
     border: colors.grey,
+  },
+  collapsableSelect: {
+    background: colors.lightGrey,
+    border: 'rgba(0, 0, 0, 0.2)',
+  },
+});
+
+export const lightGrey = createTheme({
+  ...common,
+  palette: {
+    ...common.palette,
+    text: {
+      primary: 'rgba(0, 0, 0, 0.6)',
+      secondary: 'rgba(32, 32, 42, 0.6)',
+      link: colors.skyBlue,
+      headingPrimary: colors.navy,
+      headingSecondary: 'rgba(0, 0, 0, 0.87)',
+    },
+    background: {
+      default: colors.lightGrey,
+      gradient: '',
+      inset: colors.grey,
+      paper: colors.white,
+    },
+  },
+  logo: {
+    ...common.logo,
+    src: 'https://assets.raydiant.com/raydiant-logo-sky-blue.svg',
+    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
+  },
+  menu: {
+    foreground: colors.navy,
+    underline: colors.navy,
+  },
+  button: {
+    background: 'transparent',
+    foreground: colors.navy,
+    foregroundMuted: 'rgba(0, 0, 0, 0.2)',
+    border: colors.navy,
+    backgroundSelected: colors.limeGreen,
+    fabLabel: colors.navy,
+  },
+  input: {
+    background: 'rgba(227, 227, 227, 0.4)',
+    foreground: 'rgba(0, 0, 0, 0.87)',
+    border: 'rgba(0, 0, 0, 0.2)',
+    focusedBorder: 'rgba(0, 0, 0, 0.6)',
+  },
+  checkbox: {
+    border: 'rgba(0, 0, 0, 0.6)',
+    background: 'rgba(0, 0, 0, 0.8)',
+    foreground: colors.white,
+  },
+  switch: {
+    bar: colors.grey,
+    barChecked: common.palette.progress.main,
+    knob: colors.white,
+  },
+  tab: {
+    foreground: '#292834',
+    border: '#c6cedc',
+    activeBorder: common.palette.primary.main,
+  },
+  progress: {
+    background: colors.skyBlue,
+  },
+  actionBar: {
+    foreground: 'rgba(0, 0, 0, 0.32)',
+    selectedForeground: 'rgba(0, 0, 0, 0.6)',
+    background: colors.lightGrey,
+    border: 'rgba(0, 0, 0, 0.2)',
+  },
+  popover: {
+    headerBackground: '#e8eaee',
+    contentBackground: 'rgba(255, 255 ,255)',
+    borderColor: '#cdd4e1',
+    color: '#292834',
+  },
+  dropzone: {
+    border: colors.grey,
+  },
+  collapsableSelect: {
+    background: colors.white,
+    border: 'rgba(0, 0, 0, 0.2)',
   },
 });
 
@@ -189,10 +282,11 @@ export const grey = createTheme({
       primary: 'rgba(0, 0, 0, 0.6)',
       secondary: 'rgba(32, 32, 42, 0.6)',
       link: colors.skyBlue,
-      heading: colors.navy,
+      headingPrimary: colors.navy,
+      headingSecondary: 'rgba(0, 0, 0, 0.87)',
     },
     background: {
-      default: '#f3f4f6',
+      default: colors.grey,
       gradient: '',
       inset: '#d8d8d8',
       paper: colors.white,
@@ -204,14 +298,13 @@ export const grey = createTheme({
     squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
   },
   menu: {
-    background: colors.grey,
     foreground: colors.navy,
-    border: colors.navy,
+    underline: colors.skyBlue,
   },
   button: {
     background: 'transparent',
     foreground: colors.navy,
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
+    foregroundMuted: 'rgba(0, 0, 0, 0.2)',
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
@@ -219,23 +312,18 @@ export const grey = createTheme({
   input: {
     background: colors.white,
     foreground: 'rgba(41, 40, 52, 1)',
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: 'rgba(41, 40, 52, 0.6)',
+    border: 'rgba(0, 0, 0, 0.2)',
+    focusedBorder: 'rgba(0, 0, 0, 0.6)',
   },
   checkbox: {
-    background: colors.white,
-    backgroundChecked: common.palette.progress.main,
+    border: 'rgba(0, 0, 0, 0.6)',
+    background: 'rgba(0, 0, 0, 0.8)',
     foreground: colors.white,
-    border: '#303141',
-    borderMuted: 'rgba(41, 40, 52, 0.5)',
   },
   switch: {
-    bar: '#C8C9CC',
+    bar: 'rgba(32, 32, 42, 0.2)',
     barChecked: common.palette.progress.main,
     knob: colors.white,
-    knobMuted: '#b1b1b1',
-    foreground: '#292834',
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
   },
   tab: {
     foreground: '#292834',
@@ -243,10 +331,13 @@ export const grey = createTheme({
     activeBorder: common.palette.primary.main,
   },
   progress: {
-    background: common.palette.primary.main,
+    background: colors.skyBlue,
   },
   actionBar: {
-    border: '#c6cedc',
+    foreground: 'rgba(0, 0, 0, 0.32)',
+    selectedForeground: 'rgba(0, 0, 0, 0.6)',
+    background: colors.grey,
+    border: 'rgba(0, 0, 0, 0.2)',
   },
   popover: {
     headerBackground: 'rgba(255, 255 ,255)',
@@ -257,84 +348,9 @@ export const grey = createTheme({
   dropzone: {
     border: colors.grey,
   },
-});
-
-export const medium = createTheme({
-  ...common,
-  palette: {
-    ...common.palette,
-    text: {
-      primary: colors.navy,
-      secondary: colors.navy,
-      link: colors.white,
-      heading: colors.white,
-    },
-    background: {
-      default: colors.skyBlue,
-      gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
-      inset: '#171828',
-      paper: colors.white,
-    },
-  },
-  logo: {
-    ...common.logo,
-    src: 'https://assets.raydiant.com/raydiant-logo-navy.svg',
-    squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-navy.svg',
-  },
-  menu: {
-    background: colors.skyBlue,
-    foreground: colors.navy,
-    border: colors.navy,
-  },
-  button: {
-    background: 'transparent',
-    foreground: colors.navy,
-    foregroundMuted: colors.navy,
-    border: colors.navy,
-    backgroundSelected: colors.navy,
-    fabLabel: colors.navy,
-  },
-  input: {
-    background: colors.white,
-    foreground: 'rgba(41, 40, 52, 1)',
-    foregroundMuted: 'rgba(41, 40, 52, 0.6)',
-    border: 'rgba(41, 40, 52, 0.6)',
-  },
-  checkbox: {
-    background: 'rgba(255, 255, 255, 0.15)',
-    backgroundChecked: common.palette.progress.main,
-    foreground: colors.white,
-    border: colors.white,
-    borderMuted: 'rgba(255, 255, 255, 0.5)',
-  },
-  switch: {
-    bar: 'rgba(255, 255, 255, 0.2)',
-    barChecked: common.palette.progress.main,
-    knob: colors.white,
-    knobMuted: '#b1b1b1',
-    foreground: colors.white,
-    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
-  },
-  tab: {
-    foreground: colors.white,
-    border: '',
-    activeBorder: colors.white,
-  },
-  progress: {
-    background: colors.white,
-  },
-  actionBar: {
-    border: 'rgba(255, 255, 255, 0.15)',
-  },
-  // TODO: needs tweaking
-  popover: {
-    headerBackground: '#292834',
-    contentBackground: '#292834',
-    borderColor: 'rgba(255, 255, 255, 0.15)',
-    color: 'rgba(255, 255, 255)',
-  },
-  dropzone: {
-    border: colors.grey,
+  collapsableSelect: {
+    background: colors.lightGrey,
+    border: 'rgba(0, 0, 0, 0.2)',
   },
 });
 
@@ -344,12 +360,13 @@ export const dark = createTheme({
     ...common.palette,
     text: {
       primary: colors.white,
-      secondary: colors.grey,
+      secondary: 'rgba(255, 255, 255, 0.6)',
       link: colors.white,
-      heading: colors.skyBlue,
+      headingPrimary: colors.skyBlue,
+      headingSecondary: colors.white,
     },
     background: {
-      default: colors.navy,
+      default: '#00588b',
       gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
       inset: '#171828',
       paper: colors.white,
@@ -361,9 +378,8 @@ export const dark = createTheme({
     squareSrc: 'https://assets.raydiant.com/raydiant-logo-square-sky-blue.svg',
   },
   menu: {
-    background: colors.navy,
     foreground: colors.white,
-    border: colors.skyBlue,
+    underline: colors.skyBlue,
   },
   button: {
     background: 'transparent',
@@ -376,23 +392,18 @@ export const dark = createTheme({
   input: {
     background: 'rgba(255, 255, 255, 0.15)',
     foreground: colors.white,
-    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
     border: 'rgba(255, 255, 255, 0.5)',
+    focusedBorder: 'rgba(255, 255, 255, 0.6)',
   },
   checkbox: {
     background: 'rgba(255, 255, 255, 0.15)',
-    backgroundChecked: common.palette.progress.main,
     foreground: colors.white,
     border: colors.white,
-    borderMuted: 'rgba(255, 255, 255, 0.5)',
   },
   switch: {
     bar: 'rgba(255, 255, 255, 0.2)',
     barChecked: common.palette.progress.main,
     knob: colors.white,
-    knobMuted: '#b1b1b1',
-    foreground: colors.white,
-    foregroundMuted: 'rgba(255, 255, 255, 0.5)',
   },
   tab: {
     foreground: colors.white,
@@ -403,7 +414,10 @@ export const dark = createTheme({
     background: colors.white,
   },
   actionBar: {
-    border: 'rgba(255, 255, 255, 0.15)',
+    foreground: 'rgba(0, 0, 0, 0.32)',
+    selectedForeground: 'rgba(0, 0, 0, 0.6)',
+    background: 'rgba(255, 255, 255, 0.8)',
+    border: 'rgba(0, 0, 0, 0.2)',
   },
   // TODO: needs tweaking
   popover: {
@@ -413,6 +427,10 @@ export const dark = createTheme({
     color: 'rgba(255, 255, 255)',
   },
   dropzone: {
-    border: colors.grey,
+    border: 'rgba(255, 255, 255, 0.6)',
+  },
+  collapsableSelect: {
+    background: 'rgba(255, 255, 255, 0.15)',
+    border: 'rgba(255, 255, 255, 0.15)',
   },
 });

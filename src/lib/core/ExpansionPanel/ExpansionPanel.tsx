@@ -23,12 +23,12 @@ export const ExpansionPanel: React.SFC<ExpansionPanelProps> = ({
   },
   classes,
 }) => {
-
   return (
     <MUIExpansionPanel
       elevation={raised ? 1 : 0}
       disabled={disabled}
       onChange={onChange}
+      TransitionProps={{ unmountOnExit: true }}
       classes={{
         root: cn(classes.expansionPanel),
       }}

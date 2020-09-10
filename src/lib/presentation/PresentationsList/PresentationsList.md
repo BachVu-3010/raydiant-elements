@@ -51,7 +51,6 @@ initialState = {
         isLoading={presentation.isLoading}
         hasError={presentation.hasError}
         isLocked={presentation.isLocked}
-        lockedMessage="Contact your administrator to update this content."
         onEdit={() => this.editPresentation(device.id, presentation.id)}
         onClick={() =>
           setState(({ selectedItemId }) => ({

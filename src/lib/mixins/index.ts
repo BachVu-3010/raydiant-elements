@@ -1,9 +1,9 @@
 import { CSSProperties } from '@material-ui/core/styles/withStyles';
-import * as React from 'react';
 import { Theme } from '../theme';
 
-export const buttonReset = (): React.CSSProperties => ({
+export const buttonReset = (): CSSProperties => ({
   fontSize: 'inherit',
+  fontFamily: 'inherit',
   color: 'inherit',
   textAlign: 'left',
   padding: 0,
@@ -12,15 +12,19 @@ export const buttonReset = (): React.CSSProperties => ({
   border: 'none',
   cursor: 'pointer',
   outline: 'none',
+  textTransform: 'inherit',
+  fontWeight: 'inherit',
+  letterSpacing: 'inherit',
+  lineHeight: 'inherit',
 });
 
-export const textTruncate = (): React.CSSProperties => ({
+export const textTruncate = (): CSSProperties => ({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
 });
 
-export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
+export const responsiveContainer = (theme: Theme): CSSProperties => ({
   width: '100%',
   padding: theme.spacing(4),
 
@@ -30,14 +34,14 @@ export const responsiveContainer = (theme: Theme): React.CSSProperties => ({
   },
 });
 
-export const tabContainer = (theme: Theme): React.CSSProperties => ({
+export const tabContainer = (theme: Theme): CSSProperties => ({
   display: 'flex',
   width: '100%',
   minHeight: 68,
   background: theme.palette.background.default,
 });
 
-export const scrollable = (): React.CSSProperties => ({
+export const scrollable = (): CSSProperties => ({
   overflowY: 'auto',
   WebkitOverflowScrolling: 'touch',
 });
@@ -45,7 +49,7 @@ export const scrollable = (): React.CSSProperties => ({
 export const tab = (
   theme: Theme,
   opts: { border: boolean } = { border: false },
-): React.CSSProperties => ({
+): CSSProperties => ({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -71,9 +75,11 @@ export const marginBetweenChildrenHorizontal = (
 ): CSSProperties => ({
   '& > :not(:first-child)': {
     marginLeft: margin,
+    marginTop: 0,
   },
   '& > :not(:last-child)': {
     marginRight: margin,
+    marginBottom: 0,
   },
 });
 
@@ -82,8 +88,10 @@ export const marginBetweenChildrenVertical = (
 ): CSSProperties => ({
   '& > :not(:first-child)': {
     marginTop: margin,
+    marginLeft: 0,
   },
   '& > :not(:last-child)': {
     marginBottom: margin,
+    marginRight: 0,
   },
 });

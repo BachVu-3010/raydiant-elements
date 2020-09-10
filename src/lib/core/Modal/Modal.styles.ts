@@ -20,6 +20,7 @@ const styles = (theme: Theme) =>
       position: 'relative',
       zIndex: theme.zIndex.modal + 10,
       display: 'flex',
+      flexDirection: 'column',
       width: '100%',
       height: '100%',
       maxWidth: theme.modal.maxWidth || 1020,
@@ -27,7 +28,7 @@ const styles = (theme: Theme) =>
       fontFamily: theme.typography.fontFamily,
       background: theme.palette.background.default,
       color: theme.palette.text.primary,
-      borderRadius: theme.borderRadius.sm,
+      borderRadius: theme.borderRadius.md,
       boxShadow: theme.modal.shadow,
     },
 

@@ -23,10 +23,18 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
   onChange,
   onBlur,
 }) => {
-  const options = themes.map(theme => ({
-    value: theme.id,
-    name: theme.name,
-  }));
+  const theme = themes.find(pl => pl.id === value);
+  // Assume the theme was assigned by an admin if there is a theme id but we can't
+  // find it in the current user's themes. This is a workaround, ideally the API would return
+  // the basic information about the assigned theme if the current user doesn't have access to it.
+  const isAdminAssigned = value && !theme;
+
+  const options = themes
+    .filter(t => !t.resource.deletedAt)
+    .map(t => ({
+      value: t.id,
+      name: t.name,
+    }));
 
   return (
     <SelectField
@@ -38,6 +46,9 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
       error={error}
       disabled={disabled}
     >
+      {isAdminAssigned && (
+        <option value={value}> Administrator assigned theme</option>
+      )}
       {options.map(opt => (
         <option key={opt.value} value={opt.value}>
           {opt.name}

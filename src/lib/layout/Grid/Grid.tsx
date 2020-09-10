@@ -12,6 +12,7 @@ import GridItemDraggable from './GridItemDraggable';
 import GridContext from './GridContext';
 
 export interface GridProps extends WithStyles<typeof styles> {
+  className?: string;
   selected?: string[];
   selectable?: boolean;
   paddingTop?: boolean;
@@ -29,6 +30,7 @@ interface XYPosition {
 }
 
 export const Grid: React.FunctionComponent<GridProps> = ({
+  className,
   selected,
   containerRef,
   paddingTop = true,
@@ -93,9 +95,9 @@ export const Grid: React.FunctionComponent<GridProps> = ({
   };
 
   const isBackgroundTarget = (event: MouseEvent) => {
-    const classList = (event.target as HTMLDivElement)
-      .getAttribute('class')
-      .split(' ');
+    const classList = (
+      (event.target as HTMLDivElement).getAttribute('class') || ''
+    ).split(' ');
 
     return classList.some(c =>
       [classes.root, classes.dropzone, classes.grid, classes.gridItem].includes(
@@ -346,7 +348,11 @@ export const Grid: React.FunctionComponent<GridProps> = ({
     >
       <div
         ref={rootRef}
-        className={cn(classes.root, paddingTop && classes.paddingTop)}
+        className={cn(
+          classes.root,
+          paddingTop && classes.paddingTop,
+          className,
+        )}
       >
         <div
           ref={selectionDragRef}

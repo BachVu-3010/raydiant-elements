@@ -18,8 +18,9 @@ import TreeViewItemLabel from './TreeViewItemLabel';
 export interface TreeViewItemProps {
   nodeId: string;
   icon: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
   expandable?: boolean;
+  draggable?: boolean;
   isLoading?: boolean;
   onExpansion?: (expanded: boolean) => void;
   onDrop?: (nodeIds: string[]) => void;
@@ -40,10 +41,11 @@ export const TreeViewItem: React.FunctionComponent<
   label,
   indent = 0,
   expandable = false,
+  draggable = false,
   isLoading = false,
   onExpansion,
   onDrop,
-  onCanDrop = () => true,
+  onCanDrop = () => !!onDrop,
   classes,
   children,
 }) => {
@@ -103,6 +105,7 @@ export const TreeViewItem: React.FunctionComponent<
     collect: (monitor: DropTargetMonitor) => {
       const item = monitor.getItem() as DragItem | null;
       if (!item) return { isOver: false };
+
       return {
         isOver: monitor.isOver({ shallow: true }) && onCanDrop(item.stack),
       };
@@ -112,7 +115,9 @@ export const TreeViewItem: React.FunctionComponent<
   return (
     <MUITreeItem
       ref={ref => {
-        dragRef(ref);
+        if (draggable) {
+          dragRef(ref);
+        }
         if (onDrop) {
           dropRef(ref);
         }

@@ -20,6 +20,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       lg: string;
       xl: string;
       xxl: string;
+      xxxl: string;
     };
     logo: {
       src: string;
@@ -31,9 +32,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       default: string;
     };
     menu: {
-      background: string;
       foreground: string;
-      border: string;
+      underline: string;
+      drawerBackground: string;
     };
     button: {
       background: string;
@@ -46,29 +47,26 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     input: {
       background: string;
       foreground: string;
-      foregroundMuted: string;
       border: string;
+      focusedBorder: string;
     };
     checkbox: {
       background: string;
-      backgroundChecked: string;
       foreground: string;
       border: string;
-      borderMuted: string;
     };
     switch: {
       bar: string;
       barChecked: string;
       knob: string;
-      knobMuted: string;
-      foreground: string;
-      foregroundMuted: string;
     };
     modal: {
       overlayBackground: string;
       shadow: string;
       maxWidth?: number | string;
       maxHeight?: number | string;
+      background: string;
+      foreground: string;
     };
     tab: {
       foreground: string;
@@ -79,6 +77,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       background: string;
     };
     actionBar: {
+      foreground: string;
+      selectedForeground: string;
+      background: string;
       border: string;
     };
     popover: {
@@ -91,8 +92,21 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       xs: number;
       sm: number;
       md: number;
+      lg: number;
     };
     dropzone: {
+      border: string;
+    };
+    divider: {
+      primary: string;
+      secondary: string;
+    };
+    avatar: {
+      background: string;
+      foreground: string;
+    };
+    collapsableSelect: {
+      background: string;
       border: string;
     };
   }
@@ -112,6 +126,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       lg: string;
       xl: string;
       xxl: string;
+      xxxl: string;
     };
     logo: {
       src: string;
@@ -123,9 +138,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       default: string;
     };
     menu: {
-      background: string;
       foreground: string;
-      border: string;
+      underline: string;
     };
     button: {
       background: string;
@@ -138,29 +152,26 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     input: {
       background: string;
       foreground: string;
-      foregroundMuted: string;
       border: string;
+      focusedBorder: string;
     };
     checkbox: {
       background: string;
-      backgroundChecked: string;
       foreground: string;
       border: string;
-      borderMuted: string;
     };
     switch: {
       bar: string;
       barChecked: string;
       knob: string;
-      knobMuted: string;
-      foreground: string;
-      foregroundMuted: string;
     };
     modal: {
       overlayBackground: string;
       shadow: string;
       maxWidth?: number | string;
       maxHeight?: number | string;
+      background: string;
+      foreground: string;
     };
     tab: {
       foreground: string;
@@ -171,6 +182,9 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       background: string;
     };
     actionBar: {
+      foreground: string;
+      selectedForeground: string;
+      background: string;
       border: string;
     };
     popover: {
@@ -183,8 +197,21 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       xs: number;
       sm: number;
       md: number;
+      lg: number;
     };
     dropzone: {
+      border: string;
+    };
+    divider: {
+      primary: string;
+      secondary: string;
+    };
+    avatar: {
+      background: string;
+      foreground: string;
+    };
+    collapsableSelect: {
+      background: string;
       border: string;
     };
   }
@@ -198,7 +225,8 @@ declare module '@material-ui/core/styles/createPalette' {
 
   interface TypeText {
     link: string;
-    heading: string;
+    headingPrimary: string;
+    headingSecondary: string;
   }
 
   interface TypeAction {

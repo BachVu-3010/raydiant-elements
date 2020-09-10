@@ -3,7 +3,9 @@ import * as React from 'react';
 import withStyles, { WithStyles } from '../../core/withStyles';
 import styles from './Typography.styles';
 
-export interface TypographyStyleProps {
+export interface TypographyProps {
+  className?: string;
+  tag?: string;
   center?: boolean;
   ellipsis?: boolean;
   muted?: boolean;
@@ -15,13 +17,9 @@ export interface TypographyStyleProps {
   large?: boolean;
   xlarge?: boolean;
   xxlarge?: boolean;
+  xxxlarge?: boolean;
   strikethrough?: boolean;
   bold?: boolean;
-}
-
-export interface TypographyProps extends TypographyStyleProps {
-  className?: string;
-  tag?: string;
 }
 
 export const Typography: React.FunctionComponent<
@@ -38,6 +36,7 @@ export const Typography: React.FunctionComponent<
   large,
   xlarge,
   xxlarge,
+  xxxlarge,
   strikethrough,
   children,
   classes,
@@ -59,6 +58,7 @@ export const Typography: React.FunctionComponent<
       large && classes.large,
       xlarge && classes.xlarge,
       xxlarge && classes.xxlarge,
+      xxxlarge && classes.xxxlarge,
       strikethrough && classes.strikethrough,
       bold && classes.bold,
       className,

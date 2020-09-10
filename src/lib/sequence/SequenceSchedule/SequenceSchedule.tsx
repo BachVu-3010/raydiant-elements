@@ -78,17 +78,15 @@ const styles = (theme: Theme) =>
       flexDirection: 'column',
       flex: 1,
       overflow: 'hidden',
-      background: theme.palette.background.paper,
     },
     currentMonthHeader: {
       paddingTop: theme.spacing(1),
       paddingBottom: theme.spacing(1),
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
-      borderBottomColor: theme.palette.divider,
+      borderBottomColor: theme.divider.secondary,
       borderBottomStyle: 'solid',
       borderBottomWidth: 1,
-      background: theme.palette.background.default,
     },
     months: {
       ...scrollable(),

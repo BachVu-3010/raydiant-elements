@@ -6,14 +6,14 @@ const styles = (theme: Theme) =>
     root: {
       flexShrink: 0,
       display: 'flex',
-      alignItems: 'center',
       padding: theme.spacing(1, 2),
       backgroundColor: theme.palette.warning.main,
       color: theme.palette.text.primary,
+    },
 
-      '& > svg': {
-        marginRight: theme.spacing(1),
-      },
+    icon: {
+      marginTop: 2,
+      marginRight: theme.spacing(1),
     },
   });
 

@@ -5,7 +5,8 @@ import {
   isElementSelected,
   sortChildrenBySelected,
 } from '../../helpers';
-import FormHelperText from '../../internal/FormHelperText';
+import InputLabel from '../InputLabel';
+import InputHelperText from '../InputHelperText';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './MultiSelectField.styles';
 import MultiSelectFieldOption, {
@@ -76,7 +77,7 @@ export class MultiSelectField extends React.Component<
 
     return (
       <div className={classes.root} onBlur={onBlur}>
-        <div className={cn(classes.label, error && classes.error)}>{label}</div>
+        <InputLabel error={error}>{label}</InputLabel>
         <div className={cn(classes.items, disabled && classes.disabled)}>
           {orderedChildren.map(child => {
             const isOptionSelected = isElementSelected(value, child);
@@ -94,7 +95,7 @@ export class MultiSelectField extends React.Component<
             });
           })}
         </div>
-        <FormHelperText error={error}>{helperText}</FormHelperText>
+        <InputHelperText error={error}>{helperText}</InputHelperText>
       </div>
     );
   }

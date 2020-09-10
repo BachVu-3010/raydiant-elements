@@ -6,13 +6,13 @@ const styles = (theme: Theme) =>
     root: {
       left: 10,
       transform: 'translate(0, 14px) scale(1)',
-      color: theme.input.foregroundMuted,
+      color: theme.palette.text.secondary,
 
       '&$focused': {
         color: theme.input.foreground,
       },
       '&$disabled': {
-        color: theme.input.foregroundMuted,
+        color: theme.palette.text.secondary,
       },
       '&$error': {
         color: theme.palette.error.main,

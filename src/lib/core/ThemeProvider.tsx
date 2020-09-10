@@ -3,8 +3,8 @@ import { Theme } from '../theme';
 
 interface AllThemes {
   light: Theme;
+  lightGrey: Theme;
   grey: Theme;
-  medium: Theme;
   dark: Theme;
 }
 

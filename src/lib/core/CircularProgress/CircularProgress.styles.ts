@@ -6,6 +6,10 @@ const styles = (theme: Theme) =>
     root: {
       color: theme.progress.background,
     },
+
+    light: {
+      color: '#ffffff',
+    },
   });
 
 export default styles;

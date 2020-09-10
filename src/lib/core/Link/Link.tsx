@@ -12,6 +12,7 @@ const isRenderFn = (value: any): value is RenderFn =>
   typeof value === 'function';
 
 interface LinkProps extends WithStyles<typeof styles> {
+  className?: string;
   /** The href of the link */
   href?: string;
   /** The target of the link */
@@ -28,23 +29,23 @@ interface LinkProps extends WithStyles<typeof styles> {
   active?: boolean;
   /** Set true if link is disabled or not */
   disabled?: boolean;
-  /** Show underline, currently only used by the website */
   underline?: boolean;
   children?: React.ReactNode | RenderFn;
 }
 
 export const Link: React.SFC<LinkProps> = ({
+  className,
   href = 'javascript:;',
   fullWidth = false,
   active = false,
-  disabled= false,
+  disabled = false,
+  underline = false,
   color,
   target,
   onClick,
   children,
   classes,
   testId,
-  underline,
 }) => {
   if (isRenderFn(children)) {
     return children({
@@ -52,6 +53,7 @@ export const Link: React.SFC<LinkProps> = ({
         classes.root,
         fullWidth && classes.fullWidth,
         underline && classes.underline,
+        className,
       ),
       activeClassName: classes.active,
     });
@@ -63,12 +65,15 @@ export const Link: React.SFC<LinkProps> = ({
         classes.root,
         fullWidth && classes.fullWidth,
         active && classes.active,
-        underline && classes.underline,
         disabled && classes.disabled,
+        underline && classes.underline,
+        className,
       )}
       href={href}
       target={target}
-      onClick={disabled ? preventDefault(null) : (onClick && preventDefault(onClick))}
+      onClick={
+        disabled ? preventDefault(null) : onClick && preventDefault(onClick)
+      }
       style={{ color }}
       {...testAttr(testId)}
     >

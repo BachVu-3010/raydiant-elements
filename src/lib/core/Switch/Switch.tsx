@@ -2,7 +2,7 @@ import MUISwitch from '@material-ui/core/Switch';
 import cn from 'classnames';
 import * as React from 'react';
 import { testAttr } from '../../helpers';
-import FormHelperText from '../../internal/FormHelperText';
+import InputLabel from '../InputLabel';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './Switch.styles';
 
@@ -30,7 +30,8 @@ export const Switch: React.SFC<SwitchProps> = ({
   testId,
 }) => (
   <div className={classes.root}>
-    <label className={classes.control}>
+    <InputLabel disabled={disabled}>{label}</InputLabel>
+    <div className={classes.control}>
       <span className={classes.switchContainer}>
         <span className={classes.switchInner}>
           <MUISwitch
@@ -38,12 +39,14 @@ export const Switch: React.SFC<SwitchProps> = ({
             disabled={disabled}
             onChange={e => onChange(e.target.checked)}
             classes={{
+              root: classes.switchRoot,
               switchBase: classes.switchBase,
               checked: classes.checked,
               thumb: classes.thumb,
               track: classes.track,
               disabled: classes.disabled,
             }}
+            focusVisibleClassName={classes.focusVisible}
             inputProps={{
               ...(testAttr(testId) as React.InputHTMLAttributes<
                 HTMLInputElement
@@ -52,13 +55,12 @@ export const Switch: React.SFC<SwitchProps> = ({
           />
         </span>
       </span>
-      {label && (
+      {helperText && (
         <span className={cn(classes.label, disabled && classes.labelDisabled)}>
-          {label}
+          {helperText}
         </span>
       )}
-    </label>
-    {helperText && <FormHelperText>{helperText}</FormHelperText>}
+    </div>
   </div>
 );
 

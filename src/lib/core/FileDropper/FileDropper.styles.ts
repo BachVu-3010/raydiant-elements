@@ -17,7 +17,7 @@ const styles = (theme: Theme) =>
 
     title: {
       color: theme.palette.text.primary,
-      fontSize: theme.fontSizes.xl,
+      fontSize: theme.fontSizes.xxl,
       maxWidth: theme.spacing(80),
       padding: theme.spacing(2),
       textAlign: 'center',
@@ -25,6 +25,7 @@ const styles = (theme: Theme) =>
 
     overlay: {
       zIndex: theme.zIndex.fileDropper,
+      backgroundColor: 'rgba(0, 0, 0, 0.6)',
     },
   });
 

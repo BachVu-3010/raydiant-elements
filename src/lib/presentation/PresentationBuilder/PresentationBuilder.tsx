@@ -33,6 +33,7 @@ import NumberInput from './NumberInput';
 import OAuthInput from './OAuthInput';
 import OneDriveAuthInput from './OneDriveAuthInput';
 import PlaylistInput from './PlaylistInput';
+import PlaylistInputLegacy from './PlaylistInput/PlaylistInputLegacy';
 import PosterMyWallAuthInput from './PosterMyWallAuthInput';
 import styles from './PresentationBuilder.styles';
 import PresentationBuilderPreview from './PresentationBuilderPreview';
@@ -73,6 +74,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   minDuration?: number;
   didSave?: boolean;
   backToLabel?: string;
+  selectedPlaylistPath?: P.Path;
   onBack?: () => void;
   onSave?: () => void;
   onDone?: () => void;
@@ -88,6 +90,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   ) => React.ReactNode;
   onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
   onPlaylistCreate?: (path: P.Path) => void;
+  onPlaylistSelect?: (path: P.Path) => Promise<string>;
 }
 
 interface PresentationBuilderState {
@@ -252,7 +255,8 @@ export class PresentationBuilder extends React.Component<
     const { presentation, previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
-    const shouldDelete = property.type === 'array' && (value === null || value === undefined);
+    const shouldDelete =
+      property.type === 'array' && (value === null || value === undefined);
     const updatedPresentation = shouldDelete
       ? immutable.del(presentation, path)
       : immutable.set(presentation, path, value);
@@ -300,18 +304,21 @@ export class PresentationBuilder extends React.Component<
     });
   }
 
-  updateIgnoredApplicationVariables(
-    path: P.Path,
-    value: any,
-  ) {
+  updateIgnoredApplicationVariables(path: P.Path, value: any) {
     const { ignoredApplicationVariables } = this.state;
 
     if (path.length > 0) {
       const varPath = path[0] === 'applicationVariables' ? path.slice(1) : path;
 
-      const newIgnoredApplicationVariables = immutable.set(ignoredApplicationVariables, varPath, value);
+      const newIgnoredApplicationVariables = immutable.set(
+        ignoredApplicationVariables,
+        varPath,
+        value,
+      );
 
-      this.setState({ ignoredApplicationVariables: newIgnoredApplicationVariables });
+      this.setState({
+        ignoredApplicationVariables: newIgnoredApplicationVariables,
+      });
     }
   }
 
@@ -382,8 +389,10 @@ export class PresentationBuilder extends React.Component<
       themes,
       soundZones,
       playlists,
+      selectedPlaylistPath,
       onPlaylistEdit,
       onPlaylistCreate,
+      onPlaylistSelect,
     } = this.props;
     const { presentation } = this.state;
 
@@ -406,7 +415,7 @@ export class PresentationBuilder extends React.Component<
     }
 
     switch (property.type) {
-      case 'string':
+      case 'string': {
         return (
           <StringInput
             key={key}
@@ -422,8 +431,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'text':
+      case 'text': {
         return (
           <TextInput
             key={key}
@@ -439,8 +449,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'number':
+      case 'number': {
         return (
           <NumberInput
             key={key}
@@ -457,8 +468,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'boolean':
+      case 'boolean': {
         return (
           <BooleanInput
             key={key}
@@ -473,8 +485,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'selection':
+      case 'selection': {
         return (
           <SelectionInput
             key={key}
@@ -494,8 +507,9 @@ export class PresentationBuilder extends React.Component<
             strings={strings}
           />
         );
+      }
 
-      case 'toggleButtonGroup':
+      case 'toggleButtonGroup': {
         return (
           <ToggleButtonGroupInput
             key={key}
@@ -515,8 +529,9 @@ export class PresentationBuilder extends React.Component<
             strings={strings}
           />
         );
+      }
 
-      case 'selectionWithImages':
+      case 'selectionWithImages': {
         return (
           <ImagePickerFieldInput
             key={key}
@@ -529,8 +544,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'date':
+      case 'date': {
         return (
           <DateInput
             key={key}
@@ -545,8 +561,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'file':
+      case 'file': {
         return (
           <FileInput
             key={key}
@@ -562,8 +579,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'oAuth':
+      case 'oAuth': {
         return (
           <OAuthInput
             key={key}
@@ -581,8 +599,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'facebookAuth':
+      case 'facebookAuth': {
         return (
           <FacebookAuthInput
             key={key}
@@ -600,8 +619,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'googleAuth':
+      case 'googleAuth': {
         return (
           <GoogleAuthInput
             key={key}
@@ -619,8 +639,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'onedriveAuth':
+      case 'onedriveAuth': {
         return (
           <OneDriveAuthInput
             key={key}
@@ -638,8 +659,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'postermywallAuth':
+      case 'postermywallAuth': {
         return (
           <PosterMyWallAuthInput
             key={key}
@@ -657,8 +679,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'theme':
+      case 'theme': {
         return (
           <ThemeInput
             key={key}
@@ -674,28 +697,53 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'playlist':
+      case 'playlist': {
+        if (!onPlaylistSelect) {
+          // If onPlaylistSelect is not provided then use the legacy playlist input.
+          // This is to only here to support the RaydiantKit Simulator
+          return (
+            <PlaylistInputLegacy
+              key={key}
+              label={label}
+              value={value}
+              playlists={playlists}
+              helperText={helperText}
+              error={hasError}
+              disabled={isDisabled}
+              propertyTypeIndex={propertyTypeIndex}
+              onBlur={this.handleBlur}
+              onChange={newValue =>
+                this.updatePresentation(path, newValue, property)
+              }
+              onEdit={playlistId => onPlaylistEdit(playlistId, path)}
+              onCreate={() => onPlaylistCreate(path)}
+            />
+          );
+        }
         return (
           <PlaylistInput
             key={key}
             label={label}
             value={value}
+            path={path}
             playlists={playlists}
             helperText={helperText}
             error={hasError}
             disabled={isDisabled}
             propertyTypeIndex={propertyTypeIndex}
-            onBlur={this.handleBlur}
+            selectedPlaylistPath={selectedPlaylistPath}
             onChange={newValue =>
               this.updatePresentation(path, newValue, property)
             }
             onEdit={playlistId => onPlaylistEdit(playlistId, path)}
-            onCreate={() => onPlaylistCreate(path)}
+            onSelect={() => onPlaylistSelect(path)}
           />
         );
+      }
 
-      case 'soundZone':
+      case 'soundZone': {
         return (
           <SoundZoneInput
             key={key}
@@ -711,8 +759,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'array':
+      case 'array': {
         const singularLabel =
           strings[property.singular_name] || property.singular_name;
         return (
@@ -749,8 +798,9 @@ export class PresentationBuilder extends React.Component<
             }
           />
         );
+      }
 
-      case 'modal':
+      case 'modal': {
         return (
           <ModalButton
             key={key}
@@ -762,9 +812,12 @@ export class PresentationBuilder extends React.Component<
             parentValue={parentValue}
             helperText={helperText}
             disabled={isDisabled}
-            onChange={(newValue) => this.updateIgnoredApplicationVariables(path, newValue)}
+            onChange={newValue =>
+              this.updateIgnoredApplicationVariables(path, newValue)
+            }
           />
         );
+      }
 
       default:
         return null;
@@ -789,9 +842,10 @@ export class PresentationBuilder extends React.Component<
       );
     } else if (property.helper_text) {
       helperText = strings[property.helper_text] || property.helper_text;
-    } else if (path.length <= 2) {
+    } else if (path.length <= 2 && property.type !== 'playlist') {
       // Inputs should always account for helper text spacing even if there isn't
-      // any helper text displayed but only at the root (when path <= 2).
+      // any helper text displayed but only at the root (when path <= 2) or unless
+      // its a playlist type.
       helperText = ' ';
     }
 
@@ -834,9 +888,7 @@ export class PresentationBuilder extends React.Component<
     }
 
     return warnings.map((warning, i) => (
-      <PresentationBuilderWarning key={i} color="light">
-        {warning}
-      </PresentationBuilderWarning>
+      <PresentationBuilderWarning key={i}>{warning}</PresentationBuilderWarning>
     ));
   }
 
@@ -862,8 +914,8 @@ export class PresentationBuilder extends React.Component<
         applicationVariables: {
           ...previewPresentation.applicationVariables,
           ...ignoredApplicationVariables,
-        }
-      }
+        },
+      };
     }
 
     return (
@@ -963,7 +1015,12 @@ export class PresentationBuilder extends React.Component<
       validatePresentation(presentation, appVersion, minDuration).length === 0;
     const shouldDisableSave =
       isLoading ||
-      (!hasPresentationChanged(originalPresentation, presentation, appVersion) && !isNewAndValid);
+      (!hasPresentationChanged(
+        originalPresentation,
+        presentation,
+        appVersion,
+      ) &&
+        !isNewAndValid);
     const shouldDisableDone = shouldDisableSave && !didSave;
     return (
       <OneThirdLayout>
@@ -1025,7 +1082,4 @@ export class PresentationBuilder extends React.Component<
   }
 }
 
-export default withThemeSelector(
-  withStyles(styles)(PresentationBuilder),
-  'light',
-);
+export default withThemeSelector(withStyles(styles)(PresentationBuilder));

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import isElementSelected from './isElementSelected';
 const sortChildrenBySelected = (
-  value: string[],
+  value: string | string[],
   children: Array<React.ReactElement<any>>,
 ) => {
   // We need to cast to React.ReactElement<any> here because

@@ -10,6 +10,12 @@ const styles = (theme: Theme) =>
       body: {
         fontFamily: theme.typography.fontFamily,
       },
+      strong: {
+        fontWeight: 500,
+      },
+      button: {
+        fontFamily: theme.typography.fontFamily,
+      },
     },
     // Casting to `any` because the createStyles type doesn't support arrays but in actually does
     '@font-face': theme.fontFaces as any,
@@ -18,7 +24,6 @@ const styles = (theme: Theme) =>
       height: '100%',
       display: 'flex',
       flexDirection: 'column',
-      backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
       fontSize: theme.fontSizes.md,
     },

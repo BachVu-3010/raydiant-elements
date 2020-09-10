@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Switch from '../../../core/Switch';
+import InputHelperText from '../../../core/InputHelperText';
 
 interface BooleanInputProps {
   label: string;
@@ -18,13 +19,16 @@ const BooleanInput: React.SFC<BooleanInputProps> = ({
   helperText,
   onChange,
 }) => (
-  <Switch
-    label={label}
-    checked={value}
-    disabled={disabled}
-    onChange={onChange}
-    helperText={helperText}
-  />
+  <div>
+    <Switch
+      label={label}
+      checked={value}
+      disabled={disabled}
+      onChange={onChange}
+      helperText={helperText}
+    />
+    <InputHelperText>&nbsp;</InputHelperText>
+  </div>
 );
 
 export default BooleanInput;

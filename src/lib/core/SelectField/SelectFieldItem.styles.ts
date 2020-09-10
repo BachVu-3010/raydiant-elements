@@ -1,13 +1,12 @@
+import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
-import { createStyles } from '../withStyles';
 
-const styles = (theme: Theme) =>
+export default makeStyles((theme: Theme) =>
   createStyles({
     thumbnail: {
       marginRight: theme.spacing(1),
       height: 20,
       width: 20,
     },
-  });
-
-export default styles;
+  }),
+);

@@ -50,7 +50,7 @@ const styles = (theme: Theme) =>
       zIndex: 1,
     },
     disabled: {
-      color: theme.input.foregroundMuted,
+      color: theme.palette.text.secondary,
     },
     underline: {
       '&:before': {

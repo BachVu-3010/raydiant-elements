@@ -8,7 +8,10 @@ export interface AnchorProps extends WithStyles<typeof styles> {
 
 const styles = () =>
   createStyles({
-    root: { position: 'relative', display: 'inline-block' },
+    root: {
+      position: 'relative',
+      display: 'inline-flex',
+    },
     fullWidth: {
       display: 'block',
     },

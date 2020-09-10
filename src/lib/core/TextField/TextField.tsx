@@ -1,12 +1,9 @@
-import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
-import MaskedInput from 'react-text-mask';
-import { testAttr } from '../../helpers';
-import FormHelperText from '../../internal/FormHelperText';
-import Input from '../../internal/Input';
-import InputBackground from '../../internal/InputBackground';
-import InputLabel from '../../internal/InputLabel';
-import Icon, { IconOptions } from '../Icon';
+import InputHelperText from '../InputHelperText';
+import InputLabel from '../InputLabel';
+import Input from '../Input';
+import { IconOptions } from '../Icon';
+import useStyles from './TextField.styles';
 
 export interface TextFieldProps {
   /** The label of the field */
@@ -14,7 +11,15 @@ export interface TextFieldProps {
   /** The value of the field */
   value?: string;
   /** The type of input */
-  type?: 'text' | 'email' | 'password' | 'tel' | 'search' | 'url';
+  type?:
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'tel'
+    | 'search'
+    | 'url'
+    | 'time'
+    | 'date';
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */
@@ -76,66 +81,48 @@ export const TextField: React.SFC<TextFieldProps> = ({
   maskPlaceholderChar = '_',
   keepCharPositions = false,
   pipe,
-  onChange = () => {
-    return;
-  },
+  onChange,
   onBlur,
   onFocus,
   onClick,
   testId,
 }) => {
-  const commonProps = {
-    type: mask ? 'text' : type,
-    multiline: mask ? false : multiline,
-    multilineHeight,
-    fullWidth: true,
-    disabled,
-    value,
-    icon: typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon,
-    onBlur,
-    onFocus,
-  };
-
-  const commonInputProps = {
-    maxLength: String(maxLength),
-    autoFocus,
-    ...testAttr(testId),
-    onClick,
-  };
+  const classes = useStyles();
 
   return (
-    <FormControl fullWidth error={error} style={{ maxWidth }}>
-      <InputBackground multiline={multiline}>
-        <InputLabel error={error} disabled={disabled}>
-          {label}
-        </InputLabel>
-        {mask ? (
-          <MaskedInput
-            placeholder=""
-            mask={mask}
-            guide={maskGuide}
-            placeholderChar={maskPlaceholderChar}
-            pipe={pipe}
-            keepCharPositions={keepCharPositions}
-            onChange={e => onChange(e.target.value)}
-            render={(ref, inputProps) => (
-              <Input
-                {...commonProps}
-                inputRef={ref as any}
-                inputProps={{ ...inputProps, ...commonInputProps }}
-              />
-            )}
-          />
-        ) : (
-          <Input
-            {...commonProps}
-            onChange={e => onChange(e.target.value)}
-            inputProps={commonInputProps}
-          />
-        )}
-      </InputBackground>
-      {helperText && <FormHelperText>{helperText}</FormHelperText>}
-    </FormControl>
+    <div className={classes.root} style={{ maxWidth }}>
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
+
+      <Input
+        type={type}
+        icon={icon}
+        multiline={multiline}
+        multilineHeight={multilineHeight}
+        mask={mask}
+        maskGuide={maskGuide}
+        maskPlaceholderChar={maskPlaceholderChar}
+        keepCharPositions={keepCharPositions}
+        pipe={pipe}
+        value={value}
+        maxLength={maxLength}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        autoFocus={autoFocus}
+        onChange={onChange}
+        onClick={onClick}
+        disabled={disabled}
+        error={error}
+        testId={testId}
+      />
+
+      {helperText && (
+        <InputHelperText indent error={error} disabled={disabled}>
+          {helperText}
+        </InputHelperText>
+      )}
+    </div>
   );
 };
 

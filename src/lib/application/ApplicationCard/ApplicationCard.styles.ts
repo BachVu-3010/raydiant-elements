@@ -5,11 +5,7 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      width: theme.spacing(24),
-    },
-
-    smDownShrink: {
-      width: theme.spacing(16),
+      width: theme.spacing(18),
 
       [theme.breakpoints.up('sm')]: {
         width: theme.spacing(24),

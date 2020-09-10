@@ -31,11 +31,12 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
   classes,
   testId,
   hideAudioOnly,
+  loading,
 }) => {
   const popoverProps = {
     open,
-    anchor: ['top', 'right'] as [YPosition, XPosition],
-    to: ['bottom', 'right'] as [YPosition, XPosition],
+    anchor: ['top', 'left'] as [YPosition, XPosition],
+    to: ['bottom', 'left'] as [YPosition, XPosition],
     onOverlayClick: onClose,
   };
 
@@ -47,6 +48,7 @@ export const AddDevicePopover: React.SFC<AddDevicePopoverProps> = ({
         error={error}
         testId={testId}
         hideAudioOnly={hideAudioOnly}
+        loading={loading}
       />
     </div>
   );

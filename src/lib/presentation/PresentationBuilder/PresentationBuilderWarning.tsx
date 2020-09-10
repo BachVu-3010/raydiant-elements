@@ -10,7 +10,7 @@ const PresentationBuilderWarning: React.SFC<
   PresentationBuilderWarningProps
 > = ({ classes, children }) => (
   <div className={classes.root}>
-    <AlertIcon color="default" />
+    <AlertIcon color="default" className={classes.icon} />
     {children}
   </div>
 );

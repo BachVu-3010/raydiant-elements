@@ -3,6 +3,7 @@ import * as immutable from 'object-path-immutable';
 import * as React from 'react';
 import { spring, TransitionMotion } from 'react-motion';
 import * as A from '../../../application/ApplicationTypes';
+import InputLabel from '../../../core/InputLabel';
 import Breadcrumb from '../../../core/Breadcrumb';
 import Button from '../../../core/Button';
 import ListField from '../../../core/ListField';
@@ -176,15 +177,17 @@ class ArrayInput extends React.Component<ArrayInputProps, ArrayInputState> {
     });
 
     return (
-      <Breadcrumb
-        onBack={() =>
-          // If there are >= two crumbs, back will navigate to the 2nd last crumb.
-          // Otherwise it will navigate to the root crumb.
-          setSelectedPath(crumbs[crumbs.length - 2] || [])
-        }
-      >
-        {crumbEls}
-      </Breadcrumb>
+      <InputLabel>
+        <Breadcrumb
+          onBack={() =>
+            // If there are >= two crumbs, back will navigate to the 2nd last crumb.
+            // Otherwise it will navigate to the root crumb.
+            setSelectedPath(crumbs[crumbs.length - 2] || [])
+          }
+        >
+          {crumbEls}
+        </Breadcrumb>
+      </InputLabel>
     );
   }
 

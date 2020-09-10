@@ -6,10 +6,9 @@ const styles = (theme: Theme) =>
     button: {
       position: 'relative',
       height: 40,
-      minWidth: 92,
       fontSize: '1rem',
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(2),
+      paddingLeft: theme.spacing(3),
+      paddingRight: theme.spacing(3),
       borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
@@ -20,15 +19,22 @@ const styles = (theme: Theme) =>
     },
     buttonOnlyIcon: {
       minWidth: 0,
+      paddingLeft: theme.spacing(2),
+      paddingRight: theme.spacing(2),
     },
     buttonWithIconAndLabel: {
-      paddingLeft: theme.spacing(1.5),
+      paddingLeft: theme.spacing(2),
     },
     label: {
       fontWeight: 400,
       textTransform: 'none',
-      letterSpacing: 0.3,
+      letterSpacing: 0.29,
+      fontSize: theme.fontSizes.sm,
       whiteSpace: 'nowrap',
+    },
+    icon: {
+      display: 'flex',
+      alignItems: 'center',
     },
     iconWithLabel: {
       marginRight: theme.spacing(1),
@@ -38,13 +44,19 @@ const styles = (theme: Theme) =>
       top: 0,
       left: theme.spacing(1.5),
       height: '100%',
+      display: 'flex',
+      alignItems: 'center',
     },
     default: {
       backgroundColor: theme.button.background,
       color: theme.button.foreground,
       borderColor: theme.button.border,
+
       '&:disabled, &:disabled:hover': {
-        color: theme.button.foregroundMuted,
+        backgroundColor: theme.button.background,
+        color: theme.button.foreground,
+        opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     primary: {
@@ -58,6 +70,7 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     destructive: {
@@ -71,6 +84,7 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.error.main,
         color: theme.palette.error.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     progress: {
@@ -84,6 +98,24 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.progress.main,
         color: theme.palette.progress.contrastText,
         opacity: 0.5,
+        cursor: 'not-allowed',
+      },
+    },
+    light: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      color: 'rgba(255, 255, 255, 1)',
+      borderColor: 'rgba(255, 255, 255, 1)',
+      boxShadow: 'none',
+
+      '&:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0.15)',
+        boxShadow: 'none',
+      },
+      '&:disabled, &:disabled:hover': {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        color: 'rgba(255, 255, 255, 1)',
+        opacity: 0.5,
+        cursor: 'not-allowed',
       },
     },
     hideBorder: {

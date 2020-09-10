@@ -1,7 +1,7 @@
 import * as React from 'react';
+import Popover from '@material-ui/core/Popover';
 import ChromePicker from 'react-color/lib/Chrome';
 import Button from '../Button';
-import Popover from '../Popover';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './ColorField.styles';
 
@@ -17,6 +17,8 @@ interface ColorFieldProps extends WithStyles<typeof styles> {
   testId?: string;
   /** Called when the value changes */
   onChange?: (value: string) => any;
+  /** Called when the picker is closed */
+  onClose?: () => any;
 }
 
 interface ColorFieldState {
@@ -43,7 +45,12 @@ export class ColorField extends React.Component<
     onChange: () => {
       return;
     },
+    onClose: () => {
+      return;
+    },
   };
+
+  buttonRef = React.createRef<HTMLElement | null>();
 
   state = {
     open: false,
@@ -54,7 +61,9 @@ export class ColorField extends React.Component<
   };
 
   closePicker = () => {
+    const { onClose } = this.props;
     this.setState({ open: false });
+    onClose();
   };
 
   handleChange = ({ rgb, hex }: Color) => {
@@ -73,33 +82,39 @@ export class ColorField extends React.Component<
       classes,
       testId,
     } = this.props;
+
     const { open } = this.state;
+
     return (
       <div className={classes.root}>
-        <Popover.Anchor fullWidth={fullWidth}>
-          <Button
-            disabled={disabled}
-            onClick={this.openPicker}
-            fullWidth={fullWidth}
-            testId={testId}
-          >
-            <div className={classes.color} style={{ backgroundColor: value }} />
-            {children || label}
-          </Button>
-          <Popover
-            anchor={['top', 'left']}
-            to={['bottom', 'left']}
-            open={open}
-            height="auto"
-            width="auto"
-            onOverlayClick={this.closePicker}
-          >
-            <ChromePicker
-              color={value || 'transparent'}
-              onChange={this.handleChange}
-            />
-          </Popover>
-        </Popover.Anchor>
+        <Button
+          ref={this.buttonRef}
+          disabled={disabled}
+          fullWidth={fullWidth}
+          onClick={this.openPicker}
+          testId={testId}
+        >
+          <div className={classes.color} style={{ backgroundColor: value }} />
+          {children || label}
+        </Button>
+        <Popover
+          open={open}
+          anchorEl={this.buttonRef.current}
+          onClose={this.closePicker}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        >
+          <ChromePicker
+            color={value || 'transparent'}
+            onChange={this.handleChange}
+          />
+        </Popover>
       </div>
     );
   }

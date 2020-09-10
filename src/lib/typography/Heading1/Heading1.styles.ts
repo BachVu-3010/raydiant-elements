@@ -4,10 +4,11 @@ import { Theme } from '../../theme';
 const styles = (theme: Theme) =>
   createStyles({
     root: {
-      color: theme.palette.text.primary,
-      fontSize: theme.fontSizes.lg,
-      fontWeight: 500,
-      lineHeight: 1.5,
+      color: theme.palette.text.secondary,
+      fontSize: theme.fontSizes.xl,
+      fontWeight: 300,
+      lineHeight: 1.09,
+      letterSpacing: 0.25,
     },
   });
 

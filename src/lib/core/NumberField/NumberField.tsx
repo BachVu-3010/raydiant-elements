@@ -1,9 +1,9 @@
-import FormControl from '@material-ui/core/FormControl';
 import * as React from 'react';
-import FormHelperText from '../../internal/FormHelperText';
-import Input from '../../internal/Input';
-import InputBackground from '../../internal/InputBackground';
-import InputLabel from '../../internal/InputLabel';
+import { makeStyles, createStyles } from '../../styles';
+import { Theme } from '../../theme';
+import InputHelperText from '../InputHelperText';
+import InputLabel from '../InputLabel';
+import Input from '../Input';
 
 interface NumberFieldProps {
   /** The label of the text field */
@@ -26,6 +26,14 @@ interface NumberFieldProps {
   onBlur?: React.FocusEventHandler<any>;
 }
 
+const useStyles = makeStyles((_: Theme) =>
+  createStyles({
+    root: {
+      width: '100%',
+    },
+  }),
+);
+
 export const NumberField: React.SFC<NumberFieldProps> = ({
   label,
   value = null,
@@ -40,27 +48,32 @@ export const NumberField: React.SFC<NumberFieldProps> = ({
   onBlur = () => {
     return;
   },
-}) => (
-  <FormControl fullWidth error={error}>
-    <InputBackground>
+}) => {
+  const classes = useStyles();
+  return (
+    <div className={classes.root}>
       <InputLabel error={error} disabled={disabled}>
         {label}
       </InputLabel>
+
       <Input
-        fullWidth
-        value={value !== null ? String(value) : ''}
         type="number"
-        disabled={disabled}
-        onChange={e => onChange(parseInt(e.target.value, 10))}
+        value={value !== null ? String(value) : ''}
         onBlur={onBlur}
-        inputProps={{
-          min: min !== null ? String(min) : '',
-          max: max !== null ? String(max) : '',
-        }}
+        onChange={v => onChange(parseInt(v, 10))}
+        disabled={disabled}
+        error={error}
+        min={min}
+        max={max}
       />
-    </InputBackground>
-    {helperText && <FormHelperText>{helperText}</FormHelperText>}
-  </FormControl>
-);
+
+      {helperText && (
+        <InputHelperText indent error={error} disabled={disabled}>
+          {helperText}
+        </InputHelperText>
+      )}
+    </div>
+  );
+};
 
 export default NumberField;

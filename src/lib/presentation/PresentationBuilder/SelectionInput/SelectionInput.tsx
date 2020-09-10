@@ -66,7 +66,8 @@ class SelectionInput extends React.Component<
       // Re-fetch options when one of the properties that the options url
       // depends on has changed.
       const shouldFetchOptions = dependsOn.some(
-        propName => !isEqual(parentValue[propName], prevProps.parentValue[propName]),
+        propName =>
+          !isEqual(parentValue[propName], prevProps.parentValue[propName]),
       );
 
       if (shouldFetchOptions) {
@@ -76,7 +77,7 @@ class SelectionInput extends React.Component<
     }
   }
 
-  async fetchOptions(forceDefaultValues=false) {
+  async fetchOptions(forceDefaultValues = false) {
     const { optionsUrl, parentValue } = this.props;
     const defaultErrorMessage = 'Failed to load options.';
     const url = replacePropNameWithValue(optionsUrl, parentValue, true);
@@ -102,7 +103,10 @@ class SelectionInput extends React.Component<
     }
   }
 
-  checkDefaultOptions(options: A.SelectionOption[], forceDefaultValues: boolean) {
+  checkDefaultOptions(
+    options: A.SelectionOption[],
+    forceDefaultValues: boolean,
+  ) {
     const { value, multiple, onChange } = this.props;
     const isValueUnset = value === null || value === undefined;
     const hasOptions = options.length > 0;
@@ -112,7 +116,8 @@ class SelectionInput extends React.Component<
         value.every(v => options.some(opt => opt.value === v))
       : options.some(opt => opt.value === value);
 
-    const shouldSetValueToDefault = isValueUnset || !isValueInOptions || forceDefaultValues;
+    const shouldSetValueToDefault =
+      isValueUnset || !isValueInOptions || forceDefaultValues;
 
     if (shouldSetValueToDefault && hasOptions) {
       const defaultValue = options
@@ -178,16 +183,21 @@ class SelectionInput extends React.Component<
     // Ensure it's not an array to appease TS.
     const singleSelectValue = Array.isArray(value) ? value[0] : value;
     const hasThumbnails = options.some(({ thumbnailUrl }) => !!thumbnailUrl);
-    const selectValue = singleSelectValue || (options[0] ? options[0].value : '');
+    const selectValue =
+      singleSelectValue || (options[0] ? options[0].value : '');
 
-    const chosenOption = selectValue ?
-        (options || []).find(option => option.value === selectValue)
-        : undefined;
+    const chosenOption = selectValue
+      ? (options || []).find(option => option.value === selectValue)
+      : undefined;
     const optionHelperText = chosenOption ? chosenOption.helperText : undefined;
     const optionHelperLink = chosenOption ? chosenOption.helperLink : undefined;
-    const optionHelper = optionHelperLink ?
-        <Link target='_blank' href={optionHelperLink}>{ optionHelperText || optionHelperLink }</Link>
-        : optionHelperText;
+    const optionHelper = optionHelperLink ? (
+      <Link target="_blank" href={optionHelperLink}>
+        {optionHelperText || optionHelperLink}
+      </Link>
+    ) : (
+      optionHelperText
+    );
     const optionError = chosenOption ? chosenOption.error : false;
 
     return (
@@ -200,7 +210,6 @@ class SelectionInput extends React.Component<
         error={optionError || error}
         disabled={disabled}
         native={!hasThumbnails}
-        shrink={!!selectValue}
       >
         {options.map((opt, index) =>
           hasThumbnails ? (

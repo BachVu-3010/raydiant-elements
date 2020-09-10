@@ -1,16 +1,17 @@
+import * as cn from 'classnames';
 import * as React from 'react';
-import withStyles, { WithStyles } from '../../core/withStyles';
-import Typography from '../../internal/Typography';
-import styles from './Title.styles';
+import useStyles from './Title.styles';
 
-interface TitleProps extends WithStyles<typeof styles> {}
+export interface TitleProps {
+  className?: string;
+}
 
-export const Title: React.SFC<TitleProps> = ({ classes, children }) => {
-  return (
-    <Typography tag="h1" className={classes.root}>
-      {children}
-    </Typography>
-  );
+export const Title: React.FunctionComponent<TitleProps> = ({
+  className,
+  children,
+}) => {
+  const classes = useStyles();
+  return <h1 className={cn(classes.root, className)}>{children}</h1>;
 };
 
-export default withStyles(styles)(Title);
+export default Title;

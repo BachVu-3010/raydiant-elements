@@ -9,6 +9,7 @@ const styles = (theme: Theme) =>
       alignItems: 'flex-start',
       padding: `${theme.spacing(1.5)}px ${theme.spacing(10)}px`,
       color: theme.menu.foreground,
+      fontSize: theme.fontSizes.sm,
       border: 0,
     },
     active: {
