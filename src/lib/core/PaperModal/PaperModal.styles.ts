@@ -17,9 +17,12 @@ export default makeStyles((theme: Theme) =>
         left: '0 !important',
         height: '100vh !important',
         width: '100vw !important',
-        // This is a hack to fix a bug in iOS where fixed position elements are renderered
-        // below the bottom action bar.
-        paddingBottom: 60,
+        borderRadius: 0,
+
+        // Fix for fixed position elements on iOS Safari being covered by the bottom action bar.
+        '&': {
+          height: '-webkit-fill-available !important',
+        },
       },
     },
 
