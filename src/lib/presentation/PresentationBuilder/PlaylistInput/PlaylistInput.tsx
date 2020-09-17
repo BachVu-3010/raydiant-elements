@@ -1,7 +1,7 @@
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import * as React from 'react';
 import cn from 'classnames';
 import PlaylistEditIcon from '../../../icons/PlaylistEdit';
+import OpenLibraryIcon from '../../../icons/OpenLibrary';
 import InputLabel from '../../../core/InputLabel';
 import Row from '../../../layout/Row';
 import { makeStyles, createStyles } from '../../../styles';
@@ -29,6 +29,14 @@ const useStyles = makeStyles((theme: Theme) => {
   const lightNavy = '#225887';
 
   return createStyles({
+    selected: {
+      boxShadow: `0px 0px 0px 3px ${lightNavy}`,
+
+      '& $selectPlaylist': {
+        color: theme.palette.primary.main,
+      },
+    },
+
     actions: {
       alignItems: 'flex-start',
       padding: theme.spacing(0.5, 1),
@@ -45,27 +53,47 @@ const useStyles = makeStyles((theme: Theme) => {
 
     action: {
       ...buttonReset(),
+      position: 'relative',
       overflow: 'hidden',
       display: 'flex',
-      color: lightNavy,
+      color: theme.palette.text.secondary,
+      padding: theme.spacing(1),
 
       '&:hover': {
-        color: '#003670',
+        color: theme.palette.primary.main,
       },
-    },
 
-    selected: {
-      boxShadow: `0px 0px 0px 3px ${lightNavy}`,
-    },
-
-    disabled: {
-      cursor: 'not-allowed',
-      color: 'rgba(0, 0, 0, 0.2)',
-
-      '&:hover': {
+      '&:disabled': {
+        cursor: 'not-allowed',
         color: 'rgba(0, 0, 0, 0.2)',
+
+        '&:hover': {
+          color: 'rgba(0, 0, 0, 0.2)',
+        },
       },
     },
+
+    iconWithLabel: {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+
+      '& > label': {
+        marginTop: theme.spacing(0.5),
+        fontSize: theme.fontSizes.xxs,
+        letterSpacing: 0.06,
+      },
+    },
+
+    publishLock: {
+      fontSize: 24, // Sets settings icon size
+    },
+
+    editPlaylist: {
+      flex: 1,
+    },
+
+    selectPlaylist: {},
 
     editPlaylistIcon: {
       // Fix size / alignment.
@@ -77,8 +105,6 @@ const useStyles = makeStyles((theme: Theme) => {
       marginLeft: theme.spacing(2),
       fontSize: theme.fontSizes.xl,
       fontWeight: 300,
-      color: theme.palette.text.secondary,
-      wordBreak: 'break-all',
       lineHeight: 1.09,
       letterSpacing: 0.25,
 
@@ -162,7 +188,45 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
       </InputLabel>
 
       <Row className={cn(classes.actions, isSelected && classes.selected)}>
-        <button className={classes.action}>
+        <button
+          className={cn(classes.action, classes.editPlaylist)}
+          disabled={!isEditable}
+          onClick={handlePlaylistClick}
+        >
+          <div className={classes.iconWithLabel}>
+            <PlaylistEditIcon
+              fontSize="inherit"
+              className={cn(classes.editPlaylistIcon)}
+            />
+            <label>edit</label>
+          </div>
+
+          <div className={classes.playlist}>
+            {playlistLabel}
+            <div className={classes.playlistLabel}>
+              {helperText || `${label}'s playlist`}
+            </div>
+          </div>
+        </button>
+
+        <button
+          className={cn(
+            classes.action,
+            classes.selectPlaylist,
+            'tour-device-playlist-select',
+          )}
+          disabled={!isEditable}
+        >
+          <div className={classes.iconWithLabel}>
+            <OpenLibraryIcon
+              fontSize="inherit"
+              onClick={handlePlaylistSelect}
+            />
+            <label>playlists</label>
+          </div>
+        </button>
+
+        {/* <button className={classes.action}>
           <LocalLibraryIcon fontSize="inherit" onClick={handlePlaylistSelect} />
         </button>
         <button
@@ -187,7 +251,7 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
               {helperText || `${label}'s playlist`}
             </div>
           </div>
-        </button>
+        </button>*/}
       </Row>
     </div>
   );
