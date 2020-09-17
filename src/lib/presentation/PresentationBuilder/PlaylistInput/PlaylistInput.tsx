@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme: Theme) => {
       alignItems: 'center',
 
       '& > label': {
-        marginTop: theme.spacing(0.5),
+        marginTop: theme.spacing(0.25),
         fontSize: theme.fontSizes.xxs,
         letterSpacing: 0.06,
       },
