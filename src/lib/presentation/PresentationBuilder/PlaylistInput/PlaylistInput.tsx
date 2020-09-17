@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme: Theme) => {
       flexDirection: 'column',
       alignItems: 'center',
 
-      '& > label': {
+      '& > span': {
         marginTop: theme.spacing(0.25),
         fontSize: theme.fontSizes.xxs,
         letterSpacing: 0.06,
@@ -198,7 +198,7 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
               fontSize="inherit"
               className={cn(classes.editPlaylistIcon)}
             />
-            <label>edit</label>
+            <span>edit</span>
           </div>
 
           <div className={classes.playlist}>
@@ -216,42 +216,13 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
             'tour-device-playlist-select',
           )}
           disabled={!isEditable}
+          onClick={handlePlaylistSelect}
         >
           <div className={classes.iconWithLabel}>
-            <OpenLibraryIcon
-              fontSize="inherit"
-              onClick={handlePlaylistSelect}
-            />
-            <label>playlists</label>
+            <OpenLibraryIcon fontSize="inherit" />
+            <span>playlists</span>
           </div>
         </button>
-
-        {/* <button className={classes.action}>
-          <LocalLibraryIcon fontSize="inherit" onClick={handlePlaylistSelect} />
-        </button>
-        <button
-          className={classes.action}
-          disabled={!isEditable}
-          onClick={handlePlaylistClick}
-        >
-          <PlaylistEditIcon
-            fontSize="inherit"
-            className={cn(
-              !isEditable && classes.disabled,
-              classes.editPlaylistIcon,
-            )}
-          />
-          <div
-            className={classes.playlist}
-            style={{ cursor: isEditable ? 'pointer' : 'not-allowed' }}
-          >
-            {playlistLabel}
-
-            <div className={classes.playlistLabel}>
-              {helperText || `${label}'s playlist`}
-            </div>
-          </div>
-        </button>*/}
       </Row>
     </div>
   );
