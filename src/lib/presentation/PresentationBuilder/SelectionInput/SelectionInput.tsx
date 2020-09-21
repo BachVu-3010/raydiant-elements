@@ -45,8 +45,18 @@ class SelectionInput extends React.Component<
   };
 
   componentDidMount() {
-    if (this.props.optionsUrl) {
-      this.fetchOptions();
+    const { optionsUrl, parentValue } = this.props;
+
+    if (optionsUrl) {
+      const dependentProps = this.getDependentProps();
+      // All dependencies must be not be undefined in order to fetch options.
+      const shouldFetchOptions =
+        dependentProps.length > 0 &&
+        dependentProps.every(propName => parentValue[propName] !== undefined);
+
+      if (shouldFetchOptions) {
+        this.fetchOptions();
+      }
     }
   }
 
@@ -54,30 +64,48 @@ class SelectionInput extends React.Component<
     const { optionsUrl, parentValue } = this.props;
 
     if (optionsUrl) {
-      // Find the prop names that the URL depends on.
-      const dependsOn: string[] = [];
-      optionsUrl.replace(/\{\{(.*?)\}\}/g, (token, propName) => {
-        dependsOn.push(propName);
-        // We need to return something to appease TS but we don't actually
-        // use the result of the replace.
-        return token;
-      });
-
       // Re-fetch options when one of the properties that the options url
       // depends on has changed.
-      const shouldFetchOptions = dependsOn.some(
-        propName =>
-          !isEqual(parentValue[propName], prevProps.parentValue[propName]),
+      const updatedDependentProps = this.getUpdatedDependentProps(
+        prevProps.parentValue,
       );
+
+      // All updated dependencies must be not be undefined in order to fetch options.
+      const shouldFetchOptions =
+        updatedDependentProps.length > 0 &&
+        updatedDependentProps.every(
+          propName => parentValue[propName] !== undefined,
+        );
 
       if (shouldFetchOptions) {
         // When parent value is changed, set the value of current element back to default
-        this.fetchOptions(true);
+        this.fetchOptions();
       }
     }
   }
 
-  async fetchOptions(forceDefaultValues = false) {
+  getDependentProps() {
+    const { optionsUrl } = this.props;
+    // Find the prop names that the URL depends on.
+    const dependsOn: string[] = [];
+    optionsUrl.replace(/\{\{(.*?)\}\}/g, (token, propName) => {
+      dependsOn.push(propName);
+      // We need to return something to appease TS but we don't actually
+      // use the result of the replace.
+      return token;
+    });
+
+    return dependsOn;
+  }
+
+  getUpdatedDependentProps(prevParentValue: P.ApplicationVariables) {
+    const { parentValue } = this.props;
+    return this.getDependentProps().filter(
+      propName => !isEqual(parentValue[propName], prevParentValue[propName]),
+    );
+  }
+
+  async fetchOptions() {
     const { optionsUrl, parentValue } = this.props;
     const defaultErrorMessage = 'Failed to load options.';
     const url = replacePropNameWithValue(optionsUrl, parentValue, true);
@@ -88,7 +116,7 @@ class SelectionInput extends React.Component<
         const options = await resp.json();
         // Set the default value before the options. This fixes an issue with
         // multi-selects not ordering the selected items to the top of the list.
-        this.checkDefaultOptions(options, forceDefaultValues);
+        this.checkDefaultOptions(options);
         this.setState({ options });
       } catch (err) {
         this.setState({ optionsError: defaultErrorMessage });
@@ -103,10 +131,7 @@ class SelectionInput extends React.Component<
     }
   }
 
-  checkDefaultOptions(
-    options: A.SelectionOption[],
-    forceDefaultValues: boolean,
-  ) {
+  checkDefaultOptions(options: A.SelectionOption[]) {
     const { value, multiple, onChange } = this.props;
     const isValueUnset = value === null || value === undefined;
     const hasOptions = options.length > 0;
@@ -116,8 +141,7 @@ class SelectionInput extends React.Component<
         value.every(v => options.some(opt => opt.value === v))
       : options.some(opt => opt.value === value);
 
-    const shouldSetValueToDefault =
-      isValueUnset || !isValueInOptions || forceDefaultValues;
+    const shouldSetValueToDefault = isValueUnset || !isValueInOptions;
 
     if (shouldSetValueToDefault && hasOptions) {
       const defaultValue = options
