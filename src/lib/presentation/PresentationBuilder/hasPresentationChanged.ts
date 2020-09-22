@@ -1,20 +1,34 @@
 import * as A from '../../application/ApplicationTypes';
 import * as P from '../PresentationTypes';
+import { isPathEqual } from './utilities';
+
+const getFileUrl = (
+  fileProp: any,
+  path: P.Path,
+  localUploads: P.LocalUploadInProgress[],
+): string => {
+  const localUpload = localUploads.find(lu => isPathEqual(lu.path, path));
+  if (localUpload) return localUpload.localUrl;
+  return fileProp ? fileProp.url || '' : '';
+};
 
 const hasAppVarChanges = (
   properties: A.PresentationProperty[],
   prevAppVars: P.ApplicationVariables,
   nextAppVars: P.ApplicationVariables,
+  localUploads: P.LocalUploadInProgress[],
+  path: P.Path,
 ): boolean => {
   for (const prop of properties) {
     const prevAppVar = prevAppVars[prop.name];
     const nextAppVar = nextAppVars[prop.name];
+    const propPath = [...path, prop.name];
 
     if (prop.type === 'file') {
-      const prevFile = prevAppVar || { url: '' };
-      const nextFile = nextAppVar || { url: '' };
+      const prevFileUrl = getFileUrl(prevAppVar, propPath, localUploads);
+      const nextFileUrl = getFileUrl(nextAppVar, propPath, localUploads);
 
-      if (prevFile.url !== nextFile.url) {
+      if (prevFileUrl !== nextFileUrl) {
         return true;
       }
     } else if (prop.type === 'array') {
@@ -26,7 +40,15 @@ const hasAppVarChanges = (
       }
 
       for (let i = 0; i < nextArray.length; i += 1) {
-        if (hasAppVarChanges(prop.properties, prevAppVar[i], nextAppVar[i])) {
+        if (
+          hasAppVarChanges(
+            prop.properties,
+            prevAppVar[i],
+            nextAppVar[i],
+            localUploads,
+            [...propPath, i],
+          )
+        ) {
           return true;
         }
       }
@@ -48,6 +70,7 @@ export default function hasPresentationChanged(
   prevPres: P.Presentation,
   nextPres: P.Presentation,
   appVersion: A.ApplicationVersion,
+  localUploads: P.LocalUploadInProgress[] = [],
 ) {
   // Enable save when new application version is released.
   if (appVersion.id !== nextPres.appVersionId) {
@@ -70,5 +93,7 @@ export default function hasPresentationChanged(
     appVersion.presentationProperties,
     prevPres.applicationVariables,
     nextPres.applicationVariables,
+    localUploads,
+    ['applicationVariables'],
   );
 }

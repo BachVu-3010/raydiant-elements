@@ -857,6 +857,7 @@ export class PresentationBuilder extends React.Component<
       presentation: originalPresentation,
       appVersion,
       affectedDevices,
+      localUploads,
     } = this.props;
     const { presentation } = this.state;
 
@@ -874,7 +875,12 @@ export class PresentationBuilder extends React.Component<
 
     if (
       affectedDevices.length &&
-      hasPresentationChanged(originalPresentation, presentation, appVersion)
+      hasPresentationChanged(
+        originalPresentation,
+        presentation,
+        appVersion,
+        localUploads,
+      )
     ) {
       const count = affectedDevices.length;
       warnings.push(
@@ -1005,6 +1011,7 @@ export class PresentationBuilder extends React.Component<
       onDone,
       didSave,
       minDuration,
+      localUploads,
     } = this.props;
     const { presentation, showAffectedDevices } = this.state;
 
@@ -1019,6 +1026,7 @@ export class PresentationBuilder extends React.Component<
         originalPresentation,
         presentation,
         appVersion,
+        localUploads,
       ) &&
         !isNewAndValid);
     const shouldDisableDone = shouldDisableSave && !didSave;
