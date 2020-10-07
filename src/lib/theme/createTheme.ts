@@ -58,6 +58,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     switch: {
       bar: string;
       barChecked: string;
+      barCheckedDisabled: string;
       knob: string;
     };
     modal: {
@@ -163,6 +164,7 @@ declare module '@material-ui/core/styles/createMuiTheme' {
     switch: {
       bar: string;
       barChecked: string;
+      barCheckedDisabled: string;
       knob: string;
     };
     modal: {

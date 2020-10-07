@@ -13,15 +13,15 @@ const styles = (theme: Theme) =>
       flexDirection: 'row',
     },
 
-    label: {
+    helper: {
       fontFamily: theme.typography.fontFamily,
       fontSize: theme.fontSizes.sm,
       color: theme.palette.text.primary,
       marginLeft: theme.spacing(1),
     },
 
-    labelDisabled: {
-      opacity: 0,
+    helperDisabled: {
+      opacity: 0.5,
     },
 
     switchContainer: {
@@ -69,6 +69,11 @@ const styles = (theme: Theme) =>
         '& + $track': {
           backgroundColor: theme.switch.barChecked,
           opacity: 1,
+        },
+        '&$disabled': {
+          '& + $track': {
+            backgroundColor: theme.switch.barCheckedDisabled,
+          },
         },
       },
       '&$disabled': {

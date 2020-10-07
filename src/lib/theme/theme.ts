@@ -163,6 +163,7 @@ export const light = createTheme({
   switch: {
     bar: colors.grey,
     barChecked: common.palette.progress.main,
+    barCheckedDisabled: '#B6F2C5',
     knob: colors.white,
   },
   tab: {
@@ -243,6 +244,7 @@ export const lightGrey = createTheme({
   switch: {
     bar: colors.grey,
     barChecked: common.palette.progress.main,
+    barCheckedDisabled: '#B6F2C5',
     knob: colors.white,
   },
   tab: {
@@ -323,6 +325,7 @@ export const grey = createTheme({
   switch: {
     bar: 'rgba(32, 32, 42, 0.2)',
     barChecked: common.palette.progress.main,
+    barCheckedDisabled: '#B6F2C5',
     knob: colors.white,
   },
   tab: {
@@ -403,6 +406,7 @@ export const dark = createTheme({
   switch: {
     bar: 'rgba(255, 255, 255, 0.2)',
     barChecked: common.palette.progress.main,
+    barCheckedDisabled: '#B6F2C5',
     knob: colors.white,
   },
   tab: {

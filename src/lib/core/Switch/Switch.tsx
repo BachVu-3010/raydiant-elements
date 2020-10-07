@@ -56,7 +56,7 @@ export const Switch: React.SFC<SwitchProps> = ({
         </span>
       </span>
       {helperText && (
-        <span className={cn(classes.label, disabled && classes.labelDisabled)}>
+        <span className={cn(classes.helper, disabled && classes.helperDisabled)}>
           {helperText}
         </span>
       )}

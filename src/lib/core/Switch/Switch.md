@@ -1,17 +1,37 @@
 ```js
 initialState = {
   checked: false,
+  disabled: false,
 };
 
-<Row inline>
-  <Switch checked={state.checked} onChange={checked => setState({ checked })} />
-  <Switch disabled />
+<Column>
+  <Row inline>
+    <Switch disabled={state.disabled} checked={state.checked} onChange={checked => setState({ checked })} />
+    <Switch 
+      disabled={state.disabled}
+      checked={state.checked}
+      onChange={checked => setState({ checked })}
+      label="Label"
+    />
+    <Switch 
+      disabled={state.disabled}
+      checked={state.checked}
+      onChange={checked => setState({ checked })}
+      label="Helper Text" 
+      helperText="Helper Text"
+    />
+    <Switch 
+      disabled={state.disabled}
+      checked={state.checked}
+      onChange={checked => setState({ checked })}
+      label="Helper Link"
+      helperText={<a href="www.lvh.me" target="_blank" >Helper Link</a>}
+    />
+  </Row>
   <Switch
-    checked={state.checked}
-    onChange={checked => setState({ checked })}
-    label="Label"
+    label='Disable'
+    checked={state.disabled}
+    onChange={disabled => setState({ disabled })}
   />
-  <Switch disabled label="Label" />
-  <Switch disabled label="Label" helperText="Some helper text" />
-</Row>;
+</Column>
 ```
