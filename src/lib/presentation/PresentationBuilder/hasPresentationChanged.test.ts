@@ -180,6 +180,29 @@ test('Should return true for multi select change', () => {
   ).toEqual(true);
 });
 
+test('Should return true for multi select change with same selected items length', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { selection: ['a', 'b'] } },
+    {
+      presentationProperties: [
+        {
+          name: 'selection',
+          type: 'selection',
+          multiple: true,
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { selection: ['a', 'c'] } },
+      appVersion,
+    ),
+  ).toEqual(true);
+});
+
 test('Should return false for equal multi select', () => {
   const { presentation, appVersion } = defaultProps(
     { applicationVariables: { selection: ['a'] } },
@@ -198,6 +221,29 @@ test('Should return false for equal multi select', () => {
     hasPresentationChanged(
       presentation,
       { ...presentation, applicationVariables: { selection: ['a'] } },
+      appVersion,
+    ),
+  ).toEqual(false);
+});
+
+test('Should return false for equal multi select by ignoring order', () => {
+  const { presentation, appVersion } = defaultProps(
+    { applicationVariables: { selection: ['a', 'b'] } },
+    {
+      presentationProperties: [
+        {
+          name: 'selection',
+          type: 'selection',
+          multiple: true,
+        },
+      ],
+    },
+  );
+
+  expect(
+    hasPresentationChanged(
+      presentation,
+      { ...presentation, applicationVariables: { selection: ['b', 'a'] } },
       appVersion,
     ),
   ).toEqual(false);

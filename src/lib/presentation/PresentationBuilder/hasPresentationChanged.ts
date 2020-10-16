@@ -56,7 +56,10 @@ const hasAppVarChanges = (
       const prevArray = prevAppVar || [];
       const nextArray = nextAppVar || [];
 
-      if (prevArray.length !== nextArray.length) {
+      if (
+        prevArray.length !== nextArray.length ||
+        prevArray.some((value: any) => !nextArray.includes(value))
+      ) {
         return true;
       }
     } else if (prevAppVar !== nextAppVar) {
