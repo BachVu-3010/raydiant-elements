@@ -62,7 +62,7 @@ function validate(
     if (prop.type === 'string' && hasValue) {
       if (
         constraints.format !== undefined &&
-        !(new RegExp(constraints.format.regex)).test(value)
+        !new RegExp(constraints.format.regex).test(value)
       ) {
         errors.push({
           path: [...path, prop.name],
@@ -109,7 +109,7 @@ export default function validatePresentation(
   validate(presentation, [{ name: 'name', type: 'string' }], errors, []);
 
   // Only validate duration for configurable duration apps.
-  if (appVersion.hasConfigurableDuration) {
+  if (appVersion.configurableDuration) {
     validate(
       presentation,
       [{ name: 'duration', type: 'number', constraints: { min: minDuration } }],

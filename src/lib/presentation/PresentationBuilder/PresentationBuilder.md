@@ -210,7 +210,7 @@ const appVersion = {
     subitem: 'Sub Item',
     subitems: 'Sub Items',
   },
-  hasConfigurableDuration: false,
+  configurableDuration: false,
 };
 
 const themes = [
@@ -286,16 +286,20 @@ initialState = {
 ```
 
 ### OAuth buttons
+
 ```js
 const OAuthInput = require('./OAuthInput/OAuthInput.tsx').default;
-const OneDriveAuthInput = require('./OneDriveAuthInput/OneDriveAuthInput.tsx').default;
-const FacebookAuthInput = require('./FacebookAuthInput/FacebookAuthInput.tsx').default;
-const GoogleAuthInput = require('./GoogleAuthInput/GoogleAuthInput.tsx').default;
-const PosterMyWallAuthInput = require('./PosterMyWallAuthInput/PosterMyWallAuthInput.tsx').default;
-
+const OneDriveAuthInput = require('./OneDriveAuthInput/OneDriveAuthInput.tsx')
+  .default;
+const FacebookAuthInput = require('./FacebookAuthInput/FacebookAuthInput.tsx')
+  .default;
+const GoogleAuthInput = require('./GoogleAuthInput/GoogleAuthInput.tsx')
+  .default;
+const PosterMyWallAuthInput = require('./PosterMyWallAuthInput/PosterMyWallAuthInput.tsx')
+  .default;
 
 initialState = {
-  disabled: false
+  disabled: false,
 };
 
 <App>
@@ -304,103 +308,83 @@ initialState = {
       <Column>
         <Row>
           <OneThirdLayout.ColumnSmall>
-            <OAuthInput
-              label='connect to Provider'
-              disabled={state.disabled}
-            />
+            <OAuthInput label="connect to Provider" disabled={state.disabled} />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
             <OAuthInput
-              label='connect to Provider'
-              previewUsername='Test Name'
-              value='access-token'
+              label="connect to Provider"
+              previewUsername="Test Name"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
             <OAuthInput
-              label='connect to Provider'
-              value='access-token'
+              label="connect to Provider"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
         </Row>
         <Row>
           <OneThirdLayout.ColumnSmall>
-            <OneDriveAuthInput
-              disabled={state.disabled}
-            />
+            <OneDriveAuthInput disabled={state.disabled} />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
             <OneDriveAuthInput
-              previewUsername='Test Name'
-              value='access-token'
+              previewUsername="Test Name"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
-            <OneDriveAuthInput
-              value='access-token'
-              disabled={state.disabled}
-            />
+            <OneDriveAuthInput value="access-token" disabled={state.disabled} />
           </OneThirdLayout.ColumnSmall>
         </Row>
         <Row>
           <OneThirdLayout.ColumnSmall>
+            <FacebookAuthInput disabled={state.disabled} />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
             <FacebookAuthInput
+              previewUsername="Test Name"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
-            <FacebookAuthInput
-              previewUsername='Test Name'
-              value='access-token'
-              disabled={state.disabled}
-            />
-          </OneThirdLayout.ColumnSmall>
-          <OneThirdLayout.ColumnSmall>
-            <FacebookAuthInput
-              value='access-token'
-              disabled={state.disabled}
-            />
+            <FacebookAuthInput value="access-token" disabled={state.disabled} />
           </OneThirdLayout.ColumnSmall>
         </Row>
         <Row>
           <OneThirdLayout.ColumnSmall>
+            <GoogleAuthInput disabled={state.disabled} />
+          </OneThirdLayout.ColumnSmall>
+          <OneThirdLayout.ColumnSmall>
             <GoogleAuthInput
+              previewUsername="Test Name"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
-            <GoogleAuthInput
-              previewUsername='Test Name'
-              value='access-token'
-              disabled={state.disabled}
-            />
-          </OneThirdLayout.ColumnSmall>
-          <OneThirdLayout.ColumnSmall>
-            <GoogleAuthInput
-              value='access-token'
-              disabled={state.disabled}
-            />
+            <GoogleAuthInput value="access-token" disabled={state.disabled} />
           </OneThirdLayout.ColumnSmall>
         </Row>
         <Row>
+          <OneThirdLayout.ColumnSmall>
+            <PosterMyWallAuthInput disabled={state.disabled} />
+          </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
             <PosterMyWallAuthInput
+              previewUsername="Test Name"
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
           <OneThirdLayout.ColumnSmall>
             <PosterMyWallAuthInput
-              previewUsername='Test Name'
-              value='access-token'
-              disabled={state.disabled}
-            />
-          </OneThirdLayout.ColumnSmall>
-          <OneThirdLayout.ColumnSmall>
-            <PosterMyWallAuthInput
-              value='access-token'
+              value="access-token"
               disabled={state.disabled}
             />
           </OneThirdLayout.ColumnSmall>
@@ -408,7 +392,7 @@ initialState = {
       </Column>
     </OneThirdLayout>
     <Switch
-      label='Disable'
+      label="Disable"
       checked={state.disabled}
       onChange={disabled => setState({ disabled })}
     />
@@ -417,11 +401,12 @@ initialState = {
 ```
 
 ### Modal button
+
 ```js
 const ModalButton = require('./ModalButton/ModalButton.tsx').default;
 initialState = {
   disabled: false,
-  sourceUrl: ''
+  sourceUrl: '',
 };
 
 <App>
@@ -429,39 +414,39 @@ initialState = {
     <Row>
       <OneThirdLayout.ColumnSmall>
         <ModalButton
-          label='Open modal'
+          label="Open modal"
           sourceUrl={state.sourceUrl}
-          onChange={(value) => console.log(value)}
+          onChange={value => console.log(value)}
           disabled={state.disabled}
         />
       </OneThirdLayout.ColumnSmall>
       <OneThirdLayout.ColumnSmall>
         <ModalButton
-          label='Open modal with customized button colors'
+          label="Open modal with customized button colors"
           sourceUrl={state.sourceUrl}
-          onChange={(value) => console.log(value)}
-          backgroundColor='#3FBCE7'
-          hoveredBackgroundColor='#3296B9'
+          onChange={value => console.log(value)}
+          backgroundColor="#3FBCE7"
+          hoveredBackgroundColor="#3296B9"
           disabled={state.disabled}
         />
       </OneThirdLayout.ColumnSmall>
       <OneThirdLayout.ColumnSmall>
         <ModalButton
-          label='Open modal with helper text'
+          label="Open modal with helper text"
           sourceUrl={state.sourceUrl}
-          onChange={(value) => console.log(value)}
+          onChange={value => console.log(value)}
           disabled={state.disabled}
           helperText="Click me to open a modal"
         />
       </OneThirdLayout.ColumnSmall>
     </Row>
     <TextField
-      label='Source URL'
+      label="Source URL"
       value={state.sourceUrl}
       onChange={sourceUrl => setState({ sourceUrl })}
     />
     <Switch
-      label='Disable'
+      label="Disable"
       checked={state.disabled}
       onChange={disabled => setState({ disabled })}
     />

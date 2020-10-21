@@ -30,7 +30,7 @@ const defaultProps = () => ({
     name: 'application',
     thumbnailUrl: 'thumb',
     iconUrl: 'icon',
-    hasConfigurableDuration: true,
+    configurableDuration: true,
     presentationProperties: [
       { name: 'boolean', type: 'boolean' },
       { name: 'number', type: 'number', constraints: { min: 0, max: 10 } },
@@ -60,7 +60,9 @@ const defaultProps = () => ({
         name: 'stringFormat',
         type: 'string',
         optional: true,
-        constraints: { format: { regex: '[a-zA-Z]+', errorMessage: 'alphabet only' } },
+        constraints: {
+          format: { regex: '[a-zA-Z]+', errorMessage: 'alphabet only' },
+        },
       },
       {
         name: 'array',
@@ -112,7 +114,7 @@ test('Should return error for duration below minumum duration', () => {
 
 test('Should not validate duration for dynamic duration', () => {
   const { presentation, appVersion, minDuration } = defaultProps();
-  appVersion.hasConfigurableDuration = false;
+  appVersion.configurableDuration = false;
   delete presentation.duration;
   const errors = validatePresentation(presentation, appVersion, minDuration);
   expect(errors).toEqual([]);
@@ -180,7 +182,9 @@ test('Should return error for string type with value does not match the format',
   expect(errors[0].message).toEqual('alphabet only');
 
   presentation.applicationVariables.stringFormat = '';
-  expect(validatePresentation(presentation, appVersion, minDuration).length).toEqual(0);
+  expect(
+    validatePresentation(presentation, appVersion, minDuration).length,
+  ).toEqual(0);
 });
 
 test('Should return error for text type with value greater than maxlength', () => {

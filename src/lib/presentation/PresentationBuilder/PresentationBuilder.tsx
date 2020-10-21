@@ -978,7 +978,7 @@ export class PresentationBuilder extends React.Component<
           errors,
         )}
 
-        {appVersion.hasConfigurableDuration && (
+        {appVersion.configurableDuration && (
           <NumberField
             label="Duration"
             value={presentation.duration}
