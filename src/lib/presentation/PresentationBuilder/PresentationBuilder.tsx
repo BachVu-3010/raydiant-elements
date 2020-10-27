@@ -251,7 +251,7 @@ export class PresentationBuilder extends React.Component<
     file?: File,
     forceFlush?: boolean,
   ) {
-    const { onStateChange, appVersion, minDuration } = this.props;
+    const { onStateChange, appVersion } = this.props;
     const { presentation, previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
@@ -261,28 +261,17 @@ export class PresentationBuilder extends React.Component<
       ? immutable.del(presentation, path)
       : immutable.set(presentation, path, value);
 
-    // Only call onChange and update the preview with valid presentations.
-    const errors = validatePresentation(
-      updatedPresentation,
-      appVersion,
-      minDuration,
-    );
-
     let shouldUpdatePreview = false;
-    // let fileUploads = this.state.fileUploads;
-
-    if (errors.length === 0) {
-      // Delay updating the preview for text and string inputs until onBlur.
-      if (
-        (property.type === 'string' || property.type === 'text') &&
-        !forceFlush
-      ) {
-        this.queuedPresentationPreview = updatedPresentation;
-      } else {
-        // Clear any queued preview updates because we're about to update.
-        this.queuedPresentationPreview = null;
-        shouldUpdatePreview = true;
-      }
+    // Delay updating the preview for text and string inputs until onBlur.
+    if (
+      (property.type === 'string' || property.type === 'text') &&
+      !forceFlush
+    ) {
+      this.queuedPresentationPreview = updatedPresentation;
+    } else {
+      // Clear any queued preview updates because we're about to update.
+      this.queuedPresentationPreview = null;
+      shouldUpdatePreview = true;
     }
 
     if (file && value) {

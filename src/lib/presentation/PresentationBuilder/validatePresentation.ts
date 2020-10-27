@@ -8,6 +8,10 @@ function validate(
   path: P.Path,
 ) {
   properties.forEach(prop => {
+    if (prop.hide) {
+      return;
+    }
+
     const value = appVars[prop.name];
     const constraints = prop.constraints || {};
     const isRequired = !prop.optional && prop.type !== 'theme';
