@@ -5,12 +5,16 @@ const styles = createStyles({
   root: {
     position: 'relative',
   },
+  inputWrapper: {
+    position: 'relative',
+    overflow: 'hidden',
+  },
   input: {
     position: 'absolute',
-    top: 0,
+    top: -21, // to hide the browse button inside the file
     left: 0,
     width: '100%',
-    height: '3rem',
+    height: 'calc(3rem + 21px)',
     opacity: 0,
     cursor: 'pointer',
   },
@@ -19,6 +23,9 @@ const styles = createStyles({
   },
   clear: {
     ...buttonReset(),
+  },
+  disabled: {
+    cursor: 'not-allowed',
   },
 });
 

@@ -1,7 +1,9 @@
 import * as cn from 'classnames';
 import * as React from 'react';
 import Icon from '../Icon';
-import TextField from '../TextField';
+import InputLabel from '../InputLabel';
+import Input from '../Input';
+import InputHelperText from '../InputHelperText';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './FileField.styles';
 
@@ -54,31 +56,42 @@ export const FileField: React.SFC<FileFieldProps> = ({
 
   return (
     <div className={classes.root}>
-      <TextField
-        label={label}
-        value={getFileNames(value)}
-        error={error}
-        helperText={helperText}
-        disabled={disabled}
-        icon={
-          shouldShowClear && (
-            <button className={classes.clear} onClick={() => onClear()}>
-              <Icon icon="remove" />
-            </button>
-          )
-        }
-        onFocus={() => fileInput.current.focus()}
-      />
-      <input
-        ref={fileInput}
-        disabled={disabled}
-        className={cn(classes.input, value && classes.inputHasValue)}
-        type="file"
-        accept={accept.join(',')}
-        multiple={multiple}
-        onChange={e => onChange(e.target.files)}
-        onBlur={onBlur}
-      />
+      <InputLabel error={error} disabled={disabled}>
+        {label}
+      </InputLabel>
+
+      <div className={classes.inputWrapper}>
+        <Input
+          type="text"
+          icon={
+            shouldShowClear && (
+              <button className={classes.clear} onClick={() => onClear()}>
+                <Icon icon="remove" />
+              </button>
+            )
+          }
+          value={getFileNames(value)}
+          onFocus={() => fileInput.current.focus()}
+          disabled={disabled}
+          error={error}
+        />
+        <input
+          ref={fileInput}
+          disabled={disabled}
+          className={cn(classes.input, value && classes.inputHasValue, disabled && classes.disabled)}
+          type="file"
+          title="" // hide hover tooltip
+          accept={accept.join(',')}
+          multiple={multiple}
+          onChange={e => onChange(e.target.files)}
+          onBlur={onBlur}
+        />
+      </div>
+      {helperText && (
+        <InputHelperText indent error={error} disabled={disabled}>
+          {helperText}
+        </InputHelperText>
+      )}
     </div>
   );
 };
