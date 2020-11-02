@@ -31,6 +31,7 @@ class ToggleButtonGroupInput extends React.Component<
       <ToggleButtonGroup
         label={label}
         value={value}
+        disabled={disabled}
         helperText={helperText}
         onChange={onChange}
         onBlur={onBlur}

@@ -32,6 +32,11 @@ const styles = () =>
       flexBasis: 0,
       minWidth: 40,
       textTransform: 'none',
+
+      '&:disabled': {
+        cursor: 'not-allowed',
+        pointerEvents: 'auto',
+      }
     },
   });
 

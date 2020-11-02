@@ -26,6 +26,7 @@ initialState = {
   arrowPosition1: 'arrow-down',
   dayOfWeek: ['SU'],
   dayOfWeek1: ['MO'],
+  source: 'google',
 };
 
 <Column>
@@ -78,6 +79,22 @@ initialState = {
       value={state.imageSize}
       onChange={imageSize => setState({ imageSize })}
       label="Text"
+      helperText="Helper text"
+      exclusive
+    >
+      <ToggleButtonGroup.Button key={1} value="fit">
+        Fit
+      </ToggleButtonGroup.Button>
+      <ToggleButtonGroup.Button key={2} value="fill">
+        Fill
+      </ToggleButtonGroup.Button>
+    </ToggleButtonGroup>
+
+    <ToggleButtonGroup
+      value={state.imageSize}
+      onChange={imageSize => setState({ imageSize })}
+      label="Helper Link"
+      helperText={<Link href="https://google.com">Helper link</Link>}
       exclusive
     >
       <ToggleButtonGroup.Button key={1} value="fit">
@@ -111,6 +128,39 @@ initialState = {
           {label}
         </ToggleButtonGroup.Button>
       ))}
+    </ToggleButtonGroup>
+  </Row>
+  <Row inline>
+    <ToggleButtonGroup
+      value={state.source}
+      onChange={value => setState({ source: value })}
+      label="Disabled select with helper link"
+      disabled
+      helperText={<Link href="https://google.com">Helper link</Link>}
+      exclusive
+    >
+      <ToggleButtonGroup.Button key={1} value="google">
+        Google Drive
+      </ToggleButtonGroup.Button>
+      <ToggleButtonGroup.Button key={2} value="onedrive">
+        OneDrive
+      </ToggleButtonGroup.Button>
+    </ToggleButtonGroup>
+
+    <ToggleButtonGroup
+      value={state.source}
+      onChange={value => setState({ source: value })}
+      label="Disabled select with helper text"
+      disabled
+      helperText="Helper text"
+      exclusive
+    >
+      <ToggleButtonGroup.Button key={1} value="google">
+        Google Drive
+      </ToggleButtonGroup.Button>
+      <ToggleButtonGroup.Button key={2} value="onedrive">
+        OneDrive
+      </ToggleButtonGroup.Button>
     </ToggleButtonGroup>
   </Row>
 </Column>;
