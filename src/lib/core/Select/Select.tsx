@@ -1,6 +1,7 @@
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MUISelect from '@material-ui/core/Select';
 import * as React from 'react';
+import cn from 'classnames';
 import { testAttr } from '../../helpers';
 import useStyles from './Select.styles';
 
@@ -43,7 +44,7 @@ const Select: React.SFC<SelectProps> = ({
       onFocus={onFocus}
       classes={{
         select: classes.select,
-        icon: classes.icon,
+        icon: cn(classes.icon, disabled && classes.iconDisabled),
       }}
       inputProps={{ ...testAttr(testId) }}
     >

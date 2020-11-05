@@ -38,6 +38,11 @@ export default makeStyles((theme: Theme) =>
         borderRadius: theme.borderRadius.sm,
         backgroundColor: theme.palette.background.default,
       },
+
+      '&:disabled': {
+        opacity: 0.5,
+        cursor: 'not-allowed',
+      },
     },
 
     icon: {
@@ -45,5 +50,8 @@ export default makeStyles((theme: Theme) =>
       top: 0,
       right: theme.spacing(1.5),
     },
+    iconDisabled: {
+      opacity: 0.5,
+    }
   }),
 );
