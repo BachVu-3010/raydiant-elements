@@ -94,7 +94,6 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
 }
 
 interface PresentationBuilderState {
-  presentation?: P.Presentation;
   previewPresentation?: P.Presentation;
   validate: boolean;
   previewMode: P.PreviewMode;
@@ -117,10 +116,7 @@ export class PresentationBuilder extends React.Component<
   };
 
   state: PresentationBuilderState = {
-    presentation:
-      this.props.initialPresentationState || this.props.presentation,
-    previewPresentation:
-      this.props.initialPresentationState || this.props.presentation,
+    previewPresentation: this.props.presentation,
     validate: false,
     previewMode: this.props.previewMode,
     showAffectedDevices: false,
@@ -140,35 +136,26 @@ export class PresentationBuilder extends React.Component<
   }
 
   componentDidUpdate(prevProps: PresentationBuilderProps) {
-    const { presentation, initialPresentationState } = this.props;
+    const { presentation, appVersion } = this.props;
 
     if (!prevProps.presentation && presentation) {
-      this.setState(
-        {
-          presentation: initialPresentationState || presentation,
-          previewPresentation: initialPresentationState || presentation,
-        },
-        this.checkHashParams,
-      );
+      this.setState({ previewPresentation: presentation });
+    }
+
+    if (presentation && appVersion) {
+      this.checkHashParams();
     }
 
     if (
       prevProps.presentation &&
       presentation &&
       (prevProps.presentation.id !== presentation.id ||
-        // Clear initial state when the Dashboard resets initial state. This
-        // fixes an issue where "Save" is not disabled after selecting a new
-        // file upload.
-        prevProps.initialPresentationState !== initialPresentationState ||
         // This is only here because of RaydiantKit in order to re-render the preview
         // when the values change outside of the form.
         Object.keys(prevProps.presentation.applicationVariables).length !==
           Object.keys(presentation.applicationVariables).length)
     ) {
-      this.setState({
-        presentation: initialPresentationState || presentation,
-        previewPresentation: initialPresentationState || presentation,
-      });
+      this.setState({ previewPresentation: presentation });
     }
   }
 
@@ -217,9 +204,7 @@ export class PresentationBuilder extends React.Component<
   }
 
   validate() {
-    const { appVersion, minDuration } = this.props;
-    const { presentation } = this.state;
-
+    const { appVersion, minDuration, presentation } = this.props;
     this.setState({ validate: true });
     return validatePresentation(presentation, appVersion, minDuration);
   }
@@ -251,8 +236,8 @@ export class PresentationBuilder extends React.Component<
     file?: File,
     forceFlush?: boolean,
   ) {
-    const { onStateChange, appVersion } = this.props;
-    const { presentation, previewPresentation } = this.state;
+    const { onStateChange, appVersion, presentation } = this.props;
+    const { previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
     const shouldDelete =
@@ -286,7 +271,6 @@ export class PresentationBuilder extends React.Component<
     }
 
     this.setState({
-      presentation: updatedPresentation,
       previewPresentation: shouldUpdatePreview
         ? updatedPresentation
         : previewPresentation,
@@ -375,6 +359,7 @@ export class PresentationBuilder extends React.Component<
     errors?: P.PresentationError[],
   ): React.ReactNode {
     const {
+      presentation,
       themes,
       soundZones,
       playlists,
@@ -383,8 +368,6 @@ export class PresentationBuilder extends React.Component<
       onPlaylistCreate,
       onPlaylistSelect,
     } = this.props;
-    const { presentation } = this.state;
-
     const key = property.name;
     const label = strings[property.name] || property.name;
     const constraints: A.Constraints = property.constraints || {};
@@ -843,12 +826,12 @@ export class PresentationBuilder extends React.Component<
 
   renderWarnings() {
     const {
-      presentation: originalPresentation,
+      initialPresentationState,
+      presentation,
       appVersion,
       affectedDevices,
       localUploads,
     } = this.props;
-    const { presentation } = this.state;
 
     const warnings = [];
 
@@ -856,7 +839,7 @@ export class PresentationBuilder extends React.Component<
       warnings.push('Preview not available for this application');
     }
 
-    if (originalPresentation.appVersionId !== appVersion.id) {
+    if (initialPresentationState.appVersionId !== appVersion.id) {
       warnings.push(
         'Saving will update content to the newer version of the app, and may cause visual changes.',
       );
@@ -865,7 +848,7 @@ export class PresentationBuilder extends React.Component<
     if (
       affectedDevices.length &&
       hasPresentationChanged(
-        originalPresentation,
+        initialPresentationState,
         presentation,
         appVersion,
         localUploads,
@@ -933,8 +916,8 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderForm() {
-    const { classes, appVersion, minDuration } = this.props;
-    const { presentation, validate } = this.state;
+    const { classes, appVersion, minDuration, presentation } = this.props;
+    const { validate } = this.state;
 
     const errors = validate
       ? validatePresentation(presentation, appVersion, minDuration)
@@ -990,7 +973,8 @@ export class PresentationBuilder extends React.Component<
 
   render() {
     const {
-      presentation: originalPresentation,
+      initialPresentationState,
+      presentation,
       appVersion,
       onSave,
       affectedDevices,
@@ -1002,23 +986,31 @@ export class PresentationBuilder extends React.Component<
       minDuration,
       localUploads,
     } = this.props;
-    const { presentation, showAffectedDevices } = this.state;
+    const { showAffectedDevices } = this.state;
 
-    const isLoading = !originalPresentation || !presentation || !appVersion;
-    const isNewAndValid =
+    const isLoading = !initialPresentationState || !presentation || !appVersion;
+
+    const isValid =
       presentation &&
-      !presentation.id &&
       validatePresentation(presentation, appVersion, minDuration).length === 0;
+
+    const isNew = presentation && !presentation.id;
+
+    // Disabled save if we're still loading, if the presentation is invalid or if
+    // we're editing an existing presentation and there are no changes.
     const shouldDisableSave =
       isLoading ||
-      (!hasPresentationChanged(
-        originalPresentation,
-        presentation,
-        appVersion,
-        localUploads,
-      ) &&
-        !isNewAndValid);
+      !isValid ||
+      (!isNew &&
+        !hasPresentationChanged(
+          initialPresentationState,
+          presentation,
+          appVersion,
+          localUploads,
+        ));
+
     const shouldDisableDone = shouldDisableSave && !didSave;
+
     return (
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
