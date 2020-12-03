@@ -85,7 +85,6 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
   children?: (
     presentation: P.Presentation,
-    errors: P.PresentationError[],
     previewMode: P.PreviewMode,
   ) => React.ReactNode;
   onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
@@ -149,11 +148,17 @@ export class PresentationBuilder extends React.Component<
     if (
       prevProps.presentation &&
       presentation &&
-      (prevProps.presentation.id !== presentation.id ||
-        // This is only here because of RaydiantKit in order to re-render the preview
-        // when the values change outside of the form.
-        Object.keys(prevProps.presentation.applicationVariables).length !==
-          Object.keys(presentation.applicationVariables).length)
+      prevProps.presentation.id !== presentation.id
+      // Commenting the below check out because it causes the preview to render when typing
+      // into a property that was just added via conditional controls (ie. qr code url). This
+      // started happening after updating the Dashboard to use the new playlist renderer code.
+      // We'll need to find a better fix for the below issue (if it still exists) but leaving this
+      // check in as documentation for when we update RaydiantKit to the latest playlist renderer.
+      //
+      // This is only here because of RaydiantKit in order to re-render the preview
+      // when the values change outside of the form.
+      // || Object.keys(prevProps.presentation.applicationVariables).length !==
+      //   Object.keys(presentation.applicationVariables).length
     ) {
       this.setState({ previewPresentation: presentation });
     }
@@ -835,10 +840,6 @@ export class PresentationBuilder extends React.Component<
 
     const warnings = [];
 
-    if (appVersion.embeddedUrlFormat && !appVersion.sourceUrl) {
-      warnings.push('Preview not available for this application');
-    }
-
     if (initialPresentationState.appVersionId !== appVersion.id) {
       warnings.push(
         'Saving will update content to the newer version of the app, and may cause visual changes.',
@@ -871,7 +872,7 @@ export class PresentationBuilder extends React.Component<
   }
 
   renderPreview() {
-    const { appVersion, children, minDuration, localUploads } = this.props;
+    const { appVersion, children, localUploads } = this.props;
     const { previewMode, ignoredApplicationVariables } = this.state;
     let { previewPresentation } = this.state;
 
@@ -905,12 +906,7 @@ export class PresentationBuilder extends React.Component<
           this.setState({ previewMode: value })
         }
       >
-        {!isLoading &&
-          children(
-            previewPresentation,
-            validatePresentation(previewPresentation, appVersion, minDuration),
-            previewMode,
-          )}
+        {!isLoading && children(previewPresentation, previewMode)}
       </PresentationBuilderPreview>
     );
   }
@@ -986,7 +982,7 @@ export class PresentationBuilder extends React.Component<
       minDuration,
       localUploads,
     } = this.props;
-    const { showAffectedDevices } = this.state;
+    const { showAffectedDevices, validate } = this.state;
 
     const isLoading = !initialPresentationState || !presentation || !appVersion;
 
@@ -996,11 +992,11 @@ export class PresentationBuilder extends React.Component<
 
     const isNew = presentation && !presentation.id;
 
-    // Disabled save if we're still loading, if the presentation is invalid or if
+    // Disabled save if we're still loading, if the presentation is invalid (after save) or if
     // we're editing an existing presentation and there are no changes.
     const shouldDisableSave =
       isLoading ||
-      !isValid ||
+      (validate && !isValid) ||
       (!isNew &&
         !hasPresentationChanged(
           initialPresentationState,
