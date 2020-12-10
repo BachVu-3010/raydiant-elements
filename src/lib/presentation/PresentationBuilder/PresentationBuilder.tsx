@@ -242,7 +242,7 @@ export class PresentationBuilder extends React.Component<
     file?: File,
     forceFlush?: boolean,
   ) {
-    const { onStateChange, appVersion, presentation } = this.props;
+    const { onStateChange, appVersion, presentation, minDuration } = this.props;
     const { previewPresentation } = this.state;
 
     // Remove the value if null or undefined for array inputs.
@@ -254,16 +254,25 @@ export class PresentationBuilder extends React.Component<
 
     let shouldUpdatePreview = false;
 
-    // Delay updating the preview for text and string inputs until onBlur.
-    if (
-      (property.type === 'string' || property.type === 'text') &&
-      !forceFlush
-    ) {
-      this.queuedPresentationPreview = updatedPresentation;
-    } else {
-      // Clear any queued preview updates because we're about to update.
-      this.queuedPresentationPreview = null;
-      shouldUpdatePreview = true;
+    const errors = validatePresentation(
+      updatedPresentation,
+      appVersion,
+      minDuration,
+    );
+
+    // Don't update the preview if there are any errors.
+    if (errors.length === 0) {
+      // Delay updating the preview for text and string inputs until onBlur.
+      if (
+        (property.type === 'string' || property.type === 'text') &&
+        !forceFlush
+      ) {
+        this.queuedPresentationPreview = updatedPresentation;
+      } else {
+        // Clear any queued preview updates because we're about to update.
+        this.queuedPresentationPreview = null;
+        shouldUpdatePreview = true;
+      }
     }
 
     if (file && value) {
@@ -873,8 +882,8 @@ export class PresentationBuilder extends React.Component<
     ));
   }
 
-  renderPreview(errors: P.PresentationError[]) {
-    const { appVersion, children, localUploads } = this.props;
+  renderPreview() {
+    const { appVersion, children, localUploads, minDuration } = this.props;
     const { previewMode, ignoredApplicationVariables } = this.state;
     let { previewPresentation } = this.state;
 
@@ -899,6 +908,10 @@ export class PresentationBuilder extends React.Component<
       };
     }
 
+    const previewErrors = previewPresentation
+      ? validatePresentation(previewPresentation, appVersion, minDuration)
+      : [];
+
     return (
       <PresentationBuilderPreview
         color="dark"
@@ -908,7 +921,8 @@ export class PresentationBuilder extends React.Component<
           this.setState({ previewMode: value })
         }
       >
-        {!isLoading && children(previewPresentation, previewMode, errors)}
+        {!isLoading &&
+          children(previewPresentation, previewMode, previewErrors)}
       </PresentationBuilderPreview>
     );
   }
@@ -1009,7 +1023,7 @@ export class PresentationBuilder extends React.Component<
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
           <Scrollable>
-            <Hidden smUp>{this.renderPreview(errors)}</Hidden>
+            <Hidden smUp>{this.renderPreview()}</Hidden>
             <Form.Section>
               {onBack && (
                 <Hidden xsDown>
@@ -1058,7 +1072,7 @@ export class PresentationBuilder extends React.Component<
         </OneThirdLayout.ColumnSmall>
 
         <OneThirdLayout.ColumnLarge>
-          {this.renderPreview(errors)}
+          {this.renderPreview()}
         </OneThirdLayout.ColumnLarge>
       </OneThirdLayout>
     );
