@@ -987,15 +987,14 @@ export class PresentationBuilder extends React.Component<
       ? validatePresentation(presentation, appVersion, minDuration)
       : [];
 
-    const isValid = errors.length === 0;
-
+    const formErrors = validate ? errors : [];
     const isNew = presentation && !presentation.id;
 
     // Disabled save if we're still loading, if the presentation is invalid (after save) or if
     // we're editing an existing presentation and there are no changes.
     const shouldDisableSave =
       isLoading ||
-      (validate && !isValid) ||
+      formErrors.length > 0 ||
       (!isNew &&
         !hasPresentationChanged(
           initialPresentationState,
@@ -1027,7 +1026,7 @@ export class PresentationBuilder extends React.Component<
               {header && <div>{header}</div>}
             </Form.Section>
 
-            {!isLoading && this.renderForm(errors)}
+            {!isLoading && this.renderForm(formErrors)}
           </Scrollable>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed color="light">
