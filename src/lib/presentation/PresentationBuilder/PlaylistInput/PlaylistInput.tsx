@@ -147,6 +147,7 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
   // the duplicating permission functions in elements. For now, assume that the user does not have access
   // to edit this playlist if it is not provided.
   const isEditable = !isDeleted && !isAdminAssigned;
+  const isSelectable = !isAdminAssigned;
 
   const handlePlaylistSelect = React.useCallback(
     async () => {
@@ -215,7 +216,7 @@ const PlaylistInput: React.FC<PlaylistInputProps> = ({
             classes.selectPlaylist,
             'tour-device-playlist-select',
           )}
-          disabled={!isEditable}
+          disabled={!isSelectable}
           onClick={handlePlaylistSelect}
         >
           <div className={classes.iconWithLabel}>
