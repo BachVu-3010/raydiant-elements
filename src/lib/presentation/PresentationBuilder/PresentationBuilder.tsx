@@ -86,6 +86,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
   children?: (
     presentation: P.Presentation,
     previewMode: P.PreviewMode,
+    errors: P.PresentationError[],
   ) => React.ReactNode;
   onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
   onPlaylistCreate?: (path: P.Path) => void;
@@ -252,6 +253,7 @@ export class PresentationBuilder extends React.Component<
       : immutable.set(presentation, path, value);
 
     let shouldUpdatePreview = false;
+
     // Delay updating the preview for text and string inputs until onBlur.
     if (
       (property.type === 'string' || property.type === 'text') &&
@@ -871,7 +873,7 @@ export class PresentationBuilder extends React.Component<
     ));
   }
 
-  renderPreview() {
+  renderPreview(errors: P.PresentationError[]) {
     const { appVersion, children, localUploads } = this.props;
     const { previewMode, ignoredApplicationVariables } = this.state;
     let { previewPresentation } = this.state;
@@ -906,18 +908,13 @@ export class PresentationBuilder extends React.Component<
           this.setState({ previewMode: value })
         }
       >
-        {!isLoading && children(previewPresentation, previewMode)}
+        {!isLoading && children(previewPresentation, previewMode, errors)}
       </PresentationBuilderPreview>
     );
   }
 
-  renderForm() {
-    const { classes, appVersion, minDuration, presentation } = this.props;
-    const { validate } = this.state;
-
-    const errors = validate
-      ? validatePresentation(presentation, appVersion, minDuration)
-      : [];
+  renderForm(errors: P.PresentationError[]) {
+    const { classes, appVersion, presentation } = this.props;
 
     const nameError = getErrorAtPath(errors, namePath);
     const durationError = getErrorAtPath(errors, durationPath);
@@ -986,9 +983,11 @@ export class PresentationBuilder extends React.Component<
 
     const isLoading = !initialPresentationState || !presentation || !appVersion;
 
-    const isValid =
-      presentation &&
-      validatePresentation(presentation, appVersion, minDuration).length === 0;
+    const errors = presentation
+      ? validatePresentation(presentation, appVersion, minDuration)
+      : [];
+
+    const isValid = errors.length === 0;
 
     const isNew = presentation && !presentation.id;
 
@@ -1011,7 +1010,7 @@ export class PresentationBuilder extends React.Component<
       <OneThirdLayout>
         <OneThirdLayout.ColumnSmall>
           <Scrollable>
-            <Hidden smUp>{this.renderPreview()}</Hidden>
+            <Hidden smUp>{this.renderPreview(errors)}</Hidden>
             <Form.Section>
               {onBack && (
                 <Hidden xsDown>
@@ -1028,7 +1027,7 @@ export class PresentationBuilder extends React.Component<
               {header && <div>{header}</div>}
             </Form.Section>
 
-            {!isLoading && this.renderForm()}
+            {!isLoading && this.renderForm(errors)}
           </Scrollable>
           {!isLoading && this.renderWarnings()}
           <ActionBar condensed color="light">
@@ -1060,7 +1059,7 @@ export class PresentationBuilder extends React.Component<
         </OneThirdLayout.ColumnSmall>
 
         <OneThirdLayout.ColumnLarge>
-          {this.renderPreview()}
+          {this.renderPreview(errors)}
         </OneThirdLayout.ColumnLarge>
       </OneThirdLayout>
     );
