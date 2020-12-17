@@ -50,9 +50,7 @@ class SelectionInput extends React.Component<
     if (optionsUrl) {
       const dependentProps = this.getDependentProps();
       // All dependencies must be not be undefined in order to fetch options.
-      const shouldFetchOptions =
-        dependentProps.length > 0 &&
-        dependentProps.every(propName => parentValue[propName] !== undefined);
+      const shouldFetchOptions = dependentProps.every(propName => parentValue[propName] !== undefined);
 
       if (shouldFetchOptions) {
         this.fetchOptions();
