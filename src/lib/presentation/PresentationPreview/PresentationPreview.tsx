@@ -1,114 +1,144 @@
+import * as React from 'react';
 import * as cn from 'classnames';
 import * as debounce from 'debounce';
-import * as React from 'react';
-import withStyles, { WithStyles } from '../../core/withStyles';
-import * as T from '../PresentationTypes';
-import styles from './PresentationPreview.styles';
+import { ApplicationVersion } from '../../application/ApplicationTypes';
+import Tabs from '../../core/Tabs/Tabs';
+import Hidden from '../../layout/Hidden';
+import { PreviewMode } from '../PresentationTypes';
+import useStyles from './PresentationPreview.styles';
 
-interface PresentationPreviewProps extends WithStyles<typeof styles> {
-  previewMode: T.PreviewMode;
-  error?: React.ReactNode;
+interface PresentationPreviewProps {
+  previewMode: PreviewMode;
+  appVersion?: ApplicationVersion;
   showBorder?: boolean;
+  children: React.ReactNode;
+  onPreviewModeChange?: (previewMode: PreviewMode) => any;
 }
 
-interface PresentationPreviewState {
-  containerWidth: number;
-  containerHeight: number;
-}
+const PresentationPreview = ({
+  appVersion,
+  previewMode,
+  showBorder,
+  children,
+  onPreviewModeChange,
+}: PresentationPreviewProps) => {
+  const classes = useStyles();
 
-export class PresentationPreview extends React.Component<
-  PresentationPreviewProps,
-  PresentationPreviewState
-> {
-  previewRef: HTMLElement;
-  updateBoundsDebounced: any;
+  // Refs
 
-  state = {
-    containerWidth: 0,
-    containerHeight: 0,
-  };
+  const previewRef = React.useRef<HTMLDivElement | null>(null);
 
-  constructor(props: PresentationPreviewProps) {
-    super(props);
-    this.updateBoundsDebounced = debounce(this.updateBounds, 20);
-  }
+  // State
 
-  updateBounds = () => {
-    if (!this.previewRef) return;
+  const [dimensions, setDimensions] = React.useState<{
+    width: number;
+    height: number;
+  }>({
+    width: 0,
+    height: 0,
+  });
 
-    const {
-      width: containerWidth,
-      height: containerHeight,
-    } = this.previewRef.getBoundingClientRect();
+  // Callbacks
 
-    this.setState({ containerWidth, containerHeight });
-  };
+  const calculateDimensions = React.useCallback(
+    () => {
+      if (!previewRef.current) return;
+      setDimensions(previewRef.current.getBoundingClientRect());
+    },
+    [setDimensions],
+  );
 
-  componentDidMount() {
-    window.addEventListener('resize', this.updateBoundsDebounced);
-    window.addEventListener('orientationchange', this.updateBoundsDebounced);
-  }
+  // Effects
 
-  componentDidUpdate(prevProps: PresentationPreviewProps) {
-    if (prevProps.previewMode !== this.props.previewMode) {
-      this.updateBounds();
-    }
-  }
+  // Calculate initial dimensions
+  React.useLayoutEffect(calculateDimensions, []);
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.updateBoundsDebounced);
-    window.removeEventListener('orientationchange', this.updateBoundsDebounced);
-  }
+  // Re-calculate on window resize
+  React.useEffect(
+    () => {
+      const calculateDebounced = debounce(calculateDimensions);
+      window.addEventListener('resize', calculateDebounced);
+      window.addEventListener('orientationchange', calculateDebounced);
+      return () => {
+        window.removeEventListener('resize', calculateDebounced);
+        window.removeEventListener('orientationchange', calculateDebounced);
+      };
+    },
+    [calculateDimensions],
+  );
 
-  initPreview = (el: HTMLElement) => {
-    this.previewRef = el;
-    if (this.previewRef) {
-      this.updateBounds();
-    }
-  };
+  // Render
 
-  render() {
-    const { showBorder, previewMode, children, classes, error } = this.props;
-    const { containerWidth, containerHeight } = this.state;
+  const isLandscape = previewMode === PreviewMode.Horizontal;
+  const width = isLandscape ? 1920 : 1080;
+  const height = isLandscape ? 1080 : 1920;
+  const scaleX = dimensions.width / width;
+  const scaleY = dimensions.height / height;
+  const scale = Math.min(scaleX, scaleY);
+  const marginTop = -(height / 2) * scale;
+  const marginLeft = -(width / 2) * scale;
 
-    const isLandscape = previewMode === T.PreviewMode.Horizontal;
-    const width = isLandscape ? 1920 : 1080;
-    const height = isLandscape ? 1080 : 1920;
-    const scaleX = containerWidth / width;
-    const scaleY = containerHeight / height;
-    const scale = Math.min(scaleX, scaleY);
-    const marginTop = -(height / 2) * scale;
-    const marginLeft = -(width / 2) * scale;
-    const layoutProps = error
-      ? {
-          width: width * scale,
-          height: height * scale,
-          marginTop,
-          marginLeft,
-        }
-      : {
-          width,
-          height,
-          marginTop,
-          marginLeft,
-          transform: `scale(${scale})`,
-        };
-
-    return (
-      <div ref={this.initPreview} className={classes.root}>
-        <div
-          className={cn(
-            classes.preview,
-            showBorder && classes.border,
-            error && classes.error,
-          )}
-          style={layoutProps}
-        >
-          {error || children}
+  return (
+    <div className={classes.root}>
+      <div className={classes.main}>
+        <div ref={previewRef} className={classes.previewContainer}>
+          <div
+            className={cn(classes.preview, showBorder && classes.previewBorder)}
+            style={{
+              width,
+              height,
+              marginTop,
+              marginLeft,
+              transform: `scale(${scale})`,
+            }}
+          >
+            {children}
+          </div>
         </div>
       </div>
-    );
-  }
-}
+      <div className={classes.footer}>
+        {appVersion && (
+          <div className={classes.app}>
+            <div
+              className={classes.appIcon}
+              style={{
+                backgroundImage: appVersion.iconUrl
+                  ? `url(${appVersion.iconUrl})`
+                  : '',
+              }}
+            />
+            {appVersion.name && (
+              <div>
+                <div className={classes.appName}>{appVersion.name}</div>
+                <div className={classes.appDescription}>
+                  {/* This is the reason why we can't have a presentation property with the name 'description' */}
+                  {appVersion.strings.description}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+        {onPreviewModeChange && (
+          <Hidden smDown>
+            <Tabs inline>
+              <Tabs.Item
+                icon="horizontalScreen"
+                label="Horizontal"
+                active={previewMode === PreviewMode.Horizontal}
+                onClick={() => onPreviewModeChange(PreviewMode.Horizontal)}
+              />
+              <Tabs.Item
+                icon="verticalScreen"
+                label="Vertical"
+                active={previewMode === PreviewMode.Vertical}
+                onClick={() => onPreviewModeChange(PreviewMode.Vertical)}
+              />
+            </Tabs>
+          </Hidden>
+        )}
+      </div>
+    </div>
+  );
+};
 
-export default withStyles(styles)(PresentationPreview);
+export default PresentationPreview;

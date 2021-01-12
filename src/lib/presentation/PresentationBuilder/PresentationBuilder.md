@@ -288,14 +288,15 @@ initialState = {
 ### OAuth buttons
 
 ```js
-const OAuthInput = require('./OAuthInput/OAuthInput.tsx').default;
-const OneDriveAuthInput = require('./OneDriveAuthInput/OneDriveAuthInput.tsx')
+const OAuthInput = require('../PresentationForm/inputs/OAuthInput/OAuthInput.tsx')
   .default;
-const FacebookAuthInput = require('./FacebookAuthInput/FacebookAuthInput.tsx')
+const OneDriveAuthInput = require('../PresentationForm/inputs/OneDriveAuthInput/OneDriveAuthInput.tsx')
   .default;
-const GoogleAuthInput = require('./GoogleAuthInput/GoogleAuthInput.tsx')
+const FacebookAuthInput = require('../PresentationForm/inputs/FacebookAuthInput/FacebookAuthInput.tsx')
   .default;
-const PosterMyWallAuthInput = require('./PosterMyWallAuthInput/PosterMyWallAuthInput.tsx')
+const GoogleAuthInput = require('../PresentationForm/inputs/GoogleAuthInput/GoogleAuthInput.tsx')
+  .default;
+const PosterMyWallAuthInput = require('../PresentationForm/inputs/PosterMyWallAuthInput/PosterMyWallAuthInput.tsx')
   .default;
 
 initialState = {
@@ -403,7 +404,8 @@ initialState = {
 ### Modal button
 
 ```js
-const ModalButton = require('./ModalButton/ModalButton.tsx').default;
+const ModalButton = require('../PresentationForm/inputs/ModalButton/ModalButton.tsx')
+  .default;
 initialState = {
   disabled: false,
   sourceUrl: '',

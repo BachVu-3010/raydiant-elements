@@ -7,6 +7,7 @@ const styles = (theme: Theme) =>
       backgroundColor: theme.palette.background.default,
       color: theme.palette.text.primary,
       width: '100%',
+      height: '100%',
     },
   });
 

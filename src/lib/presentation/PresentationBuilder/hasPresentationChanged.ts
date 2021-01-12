@@ -1,6 +1,6 @@
 import * as A from '../../application/ApplicationTypes';
 import * as P from '../PresentationTypes';
-import { isPathEqual } from './utilities';
+import { isPathEqual } from '../PresentationForm/utilities';
 
 const getFileUrl = (
   fileProp: any,

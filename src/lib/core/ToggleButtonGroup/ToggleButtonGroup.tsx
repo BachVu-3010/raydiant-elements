@@ -12,7 +12,6 @@ interface ToggleButtonGroupProps extends WithStyles<typeof styles> {
   label?: string;
   disabled?: boolean;
   helperText?: React.ReactNode;
-  onBlur?: React.FocusEventHandler<any>;
   exclusive?: boolean;
 }
 
@@ -25,19 +24,15 @@ export const ToggleButtonGroup: React.FunctionComponent<
   label,
   disabled = false,
   helperText,
-  onBlur,
   classes,
   exclusive = false,
 }) => (
   <div className={classes.root}>
-    <InputLabel disabled={disabled}>
-      {label}
-    </InputLabel>
+    <InputLabel disabled={disabled}>{label}</InputLabel>
     <MUIToggleButtonGroup
       size="small"
       value={value}
       exclusive={exclusive}
-      onBlur={onBlur}
       onChange={(_, updatedValue) => {
         if (onChange) {
           onChange(updatedValue);
