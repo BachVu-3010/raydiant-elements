@@ -24,7 +24,7 @@ import Text from '../../typography/Text';
 import * as P from '../PresentationTypes';
 import PresentationForm from '../PresentationForm';
 import PresentationPreview from '../PresentationPreview';
-import validatePresentation from '../PresentationForm/validatePresentation';
+import validatePresentation from './validatePresentation';
 import hasPresentationChanged from './hasPresentationChanged';
 import styles from './PresentationBuilder.styles';
 
@@ -69,7 +69,6 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
 interface PresentationBuilderState {
   previewPresentation?: P.Presentation;
   validate: boolean;
-  formErrors: P.PresentationError[];
   previewMode: P.PreviewMode;
   showAffectedDevices: boolean;
 }
@@ -91,7 +90,6 @@ export class PresentationBuilder extends React.Component<
   state: PresentationBuilderState = {
     previewPresentation: this.props.presentation,
     validate: false,
-    formErrors: [],
     previewMode: this.props.previewMode,
     showAffectedDevices: false,
   };
@@ -249,10 +247,16 @@ export class PresentationBuilder extends React.Component<
       onPlaylistSelect,
       onStateChange,
     } = this.props;
-    const { showAffectedDevices, validate, formErrors } = this.state;
+    const { showAffectedDevices, validate } = this.state;
 
     const isLoading = !initialPresentationState || !presentation || !appVersion;
     const isNew = presentation && !presentation.id;
+
+    // Don't update the preview if there are any errors.
+
+    const formErrors = validate
+      ? validatePresentation(presentation, appVersion, minDuration)
+      : [];
 
     // Disabled save if we're still loading, if the presentation is invalid (after save) or if
     // we're editing an existing presentation and there are no changes.
@@ -292,10 +296,9 @@ export class PresentationBuilder extends React.Component<
 
             {!isLoading && (
               <PresentationForm
-                validate={validate}
                 presentation={presentation}
                 appVersion={appVersion}
-                minDuration={minDuration}
+                errors={formErrors}
                 themes={themes}
                 soundZones={soundZones}
                 playlists={playlists}
@@ -303,14 +306,17 @@ export class PresentationBuilder extends React.Component<
                 onPlaylistEdit={onPlaylistEdit}
                 onPlaylistCreate={onPlaylistCreate}
                 onPlaylistSelect={onPlaylistSelect}
-                onChange={state => {
-                  this.setState({
-                    previewPresentation: state.previewPresentation,
-                    formErrors: state.errors,
-                  });
+                onChange={(updatedPresentation, updatedLocalUploads) => {
+                  onStateChange(updatedPresentation, updatedLocalUploads);
 
-                  if (onStateChange) {
-                    onStateChange(state.presentation, state.localUploads);
+                  const updateErrors = validatePresentation(
+                    updatedPresentation,
+                    appVersion,
+                    minDuration,
+                  );
+
+                  if (updateErrors.length === 0) {
+                    this.setState({ previewPresentation: updatedPresentation });
                   }
                 }}
                 onSelectedPathChange={onSelectedPathChange}

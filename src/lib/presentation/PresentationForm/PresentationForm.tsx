@@ -3,11 +3,24 @@ import * as immutable from 'object-path-immutable';
 import Column from '../../layout/Column';
 import TextField from '../../core/TextField';
 import NumberField from '../../core/NumberField';
-import * as A from '../../application/ApplicationTypes';
-import * as P from '../PresentationTypes';
+import {
+  ApplicationVersion,
+  PresentationProperty,
+  Strings,
+  Constraints,
+} from '../../application/ApplicationTypes';
+import {
+  Presentation,
+  Theme,
+  SoundZone,
+  Playlist,
+  Path,
+  LocalUpload,
+  PresentationError,
+  ApplicationVariables,
+} from '../PresentationTypes';
 import useStyles from './PresentationForm.styles';
 import PresentationFormHelperText from './PresentationFormHelperText';
-import validatePresentation from './validatePresentation';
 import getLocalUploads from './getLocalUploads';
 import { getErrorAtPath, isPathEqual, getPropertyAtPath } from './utilities';
 // Inputs
@@ -39,46 +52,38 @@ const durationPath = ['duration'];
 const nameProp = { type: 'string', name: 'name' };
 const durationProp = { type: 'number', name: 'duration' };
 
-export interface PresentationFormProps {
-  presentation: P.Presentation;
-  appVersion: A.ApplicationVersion;
-  minDuration: number;
-  validate?: boolean;
-  themes?: P.Theme[]; // This prop is only used by the legacy theme input.
-  soundZones?: P.SoundZone[];
-  playlists?: P.Playlist[];
-  selectedPlaylistPath?: P.Path;
-  onChange: (
-    {
-      presentation,
-      previewPresentation,
-      localUploads,
-      errors,
-    }: {
-      presentation: P.Presentation;
-      previewPresentation: P.Presentation;
-      localUploads: P.LocalUpload[];
-      errors: P.PresentationError[];
-    },
-  ) => void;
+export interface PresentationFormProps<P, A, T, S, PL> {
+  presentation: P;
+  appVersion: A;
+  errors: PresentationError[];
+  themes?: T[]; // This prop is only used by the legacy theme input.
+  soundZones?: S[];
+  playlists?: PL[];
+  selectedPlaylistPath?: Path;
+  onChange: (presentation: P, localUploads: LocalUpload[]) => void;
   onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
-  onPlaylistEdit?: (playlistId: string, path: P.Path) => void;
-  onPlaylistCreate?: (path: P.Path) => void;
-  onPlaylistSelect?: (path: P.Path) => Promise<string>;
-  onThemeEdit?: (themeId: string, path: P.Path) => void;
-  onThemeSelect?: (path: P.Path) => Promise<string>;
+  onPlaylistEdit?: (playlistId: string, path: Path) => void;
+  onPlaylistCreate?: (path: Path) => void;
+  onPlaylistSelect?: (path: Path) => Promise<string>;
+  onThemeEdit?: (themeId: string, path: Path) => void;
+  onThemeSelect?: (path: Path) => Promise<string>;
 }
 
 interface SelectedPropertyPath {
-  propertyPath: P.Path;
-  selectedPath: P.Path;
+  propertyPath: Path;
+  selectedPath: Path;
 }
 
-const PresentationForm = ({
-  validate,
+const PresentationForm = <
+  P extends Presentation,
+  A extends ApplicationVersion,
+  T extends Theme,
+  S extends SoundZone,
+  PL extends Playlist
+>({
   presentation,
   appVersion,
-  minDuration,
+  errors,
   themes,
   soundZones,
   playlists,
@@ -88,7 +93,7 @@ const PresentationForm = ({
   onPlaylistEdit,
   onPlaylistCreate,
   onPlaylistSelect,
-}: PresentationFormProps) => {
+}: PresentationFormProps<P, A, T, S, PL>) => {
   const classes = useStyles();
 
   // Refs
@@ -97,23 +102,13 @@ const PresentationForm = ({
 
   const selectedPropertyPathsRef = React.useRef<SelectedPropertyPath[]>([]);
 
-  // Memoizers
-
-  const errors = React.useMemo(
-    () =>
-      validate
-        ? validatePresentation(presentation, appVersion, minDuration)
-        : [],
-    [validate, presentation, appVersion, minDuration],
-  );
-
   // Callbacks
 
   const updatePresentation = React.useCallback(
     (
-      path: P.Path,
+      path: Path,
       value: any,
-      property: A.PresentationProperty,
+      property: PresentationProperty,
       file?: File,
       // forceFlush?: boolean,
     ) => {
@@ -129,33 +124,16 @@ const PresentationForm = ({
         fileBlobsRef.current[value.url] = file;
       }
 
-      // Don't update the preview if there are any errors.
-      const updateErrors = validatePresentation(
+      onChange(
         updatedPresentation,
-        appVersion,
-        minDuration,
+        getLocalUploads(updatedPresentation, appVersion, fileBlobsRef.current),
       );
-
-      const shouldUpdatePreview = updateErrors.length === 0;
-
-      onChange({
-        presentation: updatedPresentation,
-        previewPresentation: shouldUpdatePreview
-          ? updatedPresentation
-          : presentation,
-        localUploads: getLocalUploads(
-          updatedPresentation,
-          appVersion,
-          fileBlobsRef.current,
-        ),
-        errors,
-      });
     },
-    [presentation, appVersion, minDuration, onChange],
+    [presentation, appVersion, onChange],
   );
 
   const setSelectedPaths = React.useCallback(
-    (propertyPath: P.Path, selectedPath: P.Path) => {
+    (propertyPath: Path, selectedPath: Path) => {
       if (!onSelectedPathChange) return;
 
       let selectedPropertyAtPath = selectedPropertyPathsRef.current.find(
@@ -205,7 +183,7 @@ const PresentationForm = ({
         if (!path.length) return;
 
         // Try to find the property at this path.
-        let property: A.PresentationProperty;
+        let property: PresentationProperty;
         if (path[0] === 'applicationVariables') {
           property = getPropertyAtPath(appVersion.presentationProperties, path);
         } else if (isPathEqual(path, namePath)) {
@@ -242,10 +220,10 @@ const PresentationForm = ({
   const durationError = getErrorAtPath(errors, durationPath);
 
   const renderApplicationVariables = (
-    appVars: P.ApplicationVariables,
-    properties: A.PresentationProperty[],
-    path: P.Path,
-    strings: A.Strings,
+    appVars: ApplicationVariables,
+    properties: PresentationProperty[],
+    path: Path,
+    strings: Strings,
   ) => {
     const propertyTypeIndexes: { [key: string]: number } = {};
     const formInputs = properties.map(property => {
@@ -268,16 +246,16 @@ const PresentationForm = ({
   };
 
   const renderInput = (
-    property: A.PresentationProperty,
+    property: PresentationProperty,
     propertyTypeIndex: number,
     value: any = property.default,
     parentValue: any,
-    path: P.Path,
-    strings: A.Strings,
+    path: Path,
+    strings: Strings,
   ): React.ReactNode => {
     const key = property.name;
     const label = strings[property.name] || property.name;
-    const constraints: A.Constraints = property.constraints || {};
+    const constraints: Constraints = property.constraints || {};
     const isDisabled = !!property.disable;
 
     const inputError = getErrorAtPath(errors, path);

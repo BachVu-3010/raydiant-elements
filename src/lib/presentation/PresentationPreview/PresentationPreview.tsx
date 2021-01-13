@@ -4,11 +4,12 @@ import * as debounce from 'debounce';
 import { ApplicationVersion } from '../../application/ApplicationTypes';
 import Tabs from '../../core/Tabs/Tabs';
 import Hidden from '../../layout/Hidden';
+import Spacer from '../../layout/Spacer';
 import { PreviewMode } from '../PresentationTypes';
 import useStyles from './PresentationPreview.styles';
 
 interface PresentationPreviewProps {
-  previewMode: PreviewMode;
+  previewMode: string;
   appVersion?: ApplicationVersion;
   showBorder?: boolean;
   children: React.ReactNode;
@@ -69,7 +70,7 @@ const PresentationPreview = ({
 
   // Render
 
-  const isLandscape = previewMode === PreviewMode.Horizontal;
+  const isLandscape = previewMode !== PreviewMode.Vertical;
   const width = isLandscape ? 1920 : 1080;
   const height = isLandscape ? 1080 : 1920;
   const scaleX = dimensions.width / width;
@@ -97,7 +98,7 @@ const PresentationPreview = ({
         </div>
       </div>
       <div className={classes.footer}>
-        {appVersion && (
+        {appVersion ? (
           <div className={classes.app}>
             <div
               className={classes.appIcon}
@@ -117,6 +118,8 @@ const PresentationPreview = ({
               </div>
             )}
           </div>
+        ) : (
+          <Spacer />
         )}
         {onPreviewModeChange && (
           <Hidden smDown>
