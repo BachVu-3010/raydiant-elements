@@ -44,15 +44,20 @@ const PresentationPreview = ({
   const calculateDimensions = React.useCallback(
     () => {
       if (!previewRef.current) return;
-      setDimensions(previewRef.current.getBoundingClientRect());
+      const rect = previewRef.current.getBoundingClientRect();
+      const width = Math.ceil(rect.width);
+      const height = Math.ceil(rect.height);
+      if (width !== dimensions.width || height !== dimensions.height) {
+        setDimensions({ width, height });
+      }
     },
-    [setDimensions],
+    [dimensions, setDimensions],
   );
 
   // Effects
 
   // Calculate initial dimensions
-  React.useLayoutEffect(calculateDimensions, []);
+  React.useLayoutEffect(calculateDimensions);
 
   // Re-calculate on window resize
   React.useEffect(
