@@ -44,10 +44,13 @@ const PresentationPreview = ({
     () => {
       if (!previewRef.current) return;
       const rect = previewRef.current.getBoundingClientRect();
-      const width = Math.ceil(rect.width);
-      const height = Math.ceil(rect.height);
-      if (width !== dimensions.width || height !== dimensions.height) {
-        setDimensions({ width, height });
+      const previewWidth = Math.ceil(rect.width);
+      const previewHeight = Math.ceil(rect.height);
+      if (
+        previewWidth !== dimensions.width ||
+        previewHeight !== dimensions.height
+      ) {
+        setDimensions({ width: previewWidth, height: previewHeight });
       }
     },
     [dimensions, setDimensions],
