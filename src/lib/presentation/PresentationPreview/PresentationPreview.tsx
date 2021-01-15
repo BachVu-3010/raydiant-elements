@@ -4,7 +4,6 @@ import * as debounce from 'debounce';
 import { ApplicationVersion } from '../../application/ApplicationTypes';
 import Tabs from '../../core/Tabs/Tabs';
 import Hidden from '../../layout/Hidden';
-import Spacer from '../../layout/Spacer';
 import { PreviewMode } from '../PresentationTypes';
 import useStyles from './PresentationPreview.styles';
 
@@ -103,7 +102,7 @@ const PresentationPreview = ({
         </div>
       </div>
       <div className={classes.footer}>
-        {appVersion ? (
+        {appVersion && (
           <div className={classes.app}>
             <div
               className={classes.appIcon}
@@ -123,9 +122,23 @@ const PresentationPreview = ({
               </div>
             )}
           </div>
-        ) : (
-          <Spacer />
         )}
+
+        {/* Render placeholder content when app version is not set but we need to show the preview mode tabs. 
+        This fixes and issue where the preview changes size while loading the presentation page. */}
+        {!appVersion && onPreviewModeChange && (
+          <div className={classes.app}>
+            <div
+              className={classes.appIcon}
+              style={{ backgroundColor: 'transparent' }}
+            />
+            <div>
+              <div className={classes.appName} />
+              <div className={classes.appDescription} />
+            </div>
+          </div>
+        )}
+
         {onPreviewModeChange && (
           <Hidden smDown>
             <Tabs inline>
