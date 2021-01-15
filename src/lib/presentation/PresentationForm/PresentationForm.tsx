@@ -261,14 +261,16 @@ const PresentationForm = <
     const inputError = getErrorAtPath(errors, path);
     const hasError = !!inputError;
 
-    const helperText = (
-      <PresentationFormHelperText
-        property={property}
-        path={path}
-        error={inputError}
-        strings={strings}
-      />
-    );
+    // Render the component inline by calling the function instead of using JSX.
+    // This causes `null` to be returned instead of an empty <PresentationFormHelperText />
+    // element. Some inputs (ie. PlaylistInput) provide their own default helperText if not set
+    // for the input and rely `null` being returned here.
+    const helperText = PresentationFormHelperText({
+      property,
+      path,
+      strings,
+      error: inputError,
+    });
 
     if (property.hide) {
       return null;
