@@ -18,8 +18,8 @@ interface ThemeInputProps {
   error?: boolean;
   disabled?: boolean;
   onChange: (value: string) => void;
-  onEdit: (value: string) => void;
-  onManage: () => void;
+  onEdit?: (value: string) => void;
+  onManage?: () => void;
   onAdd: () => void;
 }
 
@@ -69,7 +69,8 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
       <ActionBar className={classes.actions}>
         <ActionBar.Action
           icon={<EditIcon />}
-          onClick={() => onEdit(selectedThemeId)}
+          disabled={!onEdit}
+          onClick={() => onEdit && onEdit(selectedThemeId)}
         />
         <ActionBar.Action icon={<ManageMultipleIcon />} onClick={onManage} />
         <ActionBar.Action icon={<AddCircleIcon />} onClick={onAdd} />

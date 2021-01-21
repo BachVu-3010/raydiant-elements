@@ -515,7 +515,7 @@ const PresentationForm = <
       }
 
       case 'theme': {
-        if (!onThemeEdit || !onThemeAdd || !onThemeManage) {
+        if (!onThemeAdd) {
           // This is to only here to support the RaydiantKit Simulator
           return (
             <ThemeInputLegacy
