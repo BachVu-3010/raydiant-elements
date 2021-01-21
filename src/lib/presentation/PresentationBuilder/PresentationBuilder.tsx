@@ -246,6 +246,7 @@ export class PresentationBuilder extends React.Component<
       onPlaylistCreate,
       onPlaylistSelect,
       onStateChange,
+      classes,
     } = this.props;
     const { showAffectedDevices, validate } = this.state;
 
@@ -296,6 +297,7 @@ export class PresentationBuilder extends React.Component<
 
             {!isLoading && (
               <PresentationForm
+                className={classes.inputs}
                 presentation={presentation}
                 appVersion={appVersion}
                 errors={formErrors}

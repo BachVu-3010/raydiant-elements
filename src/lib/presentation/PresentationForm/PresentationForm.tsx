@@ -19,7 +19,6 @@ import {
   PresentationError,
   ApplicationVariables,
 } from '../PresentationTypes';
-import useStyles from './PresentationForm.styles';
 import PresentationFormHelperText from './PresentationFormHelperText';
 import getLocalUploads from './getLocalUploads';
 import { getErrorAtPath, isPathEqual, getPropertyAtPath } from './utilities';
@@ -43,6 +42,7 @@ import SoundZoneInput from './inputs/SoundZoneInput';
 import StringInput from './inputs/StringInput';
 import TextInput from './inputs/TextInput';
 import ThemeInput from './inputs/ThemeInput';
+import ThemeInputLegacy from './inputs/ThemeInput/ThemeInputLegacy';
 import ToggleButtonGroupInput from './inputs/ToggleButtonGroupInput';
 
 // These are "fake" presentation properties for name and duration so they can
@@ -53,6 +53,7 @@ const nameProp = { type: 'string', name: 'name' };
 const durationProp = { type: 'number', name: 'duration' };
 
 export interface PresentationFormProps<P, A, T, S, PL> {
+  className?: string;
   presentation: P;
   appVersion: A;
   errors: PresentationError[];
@@ -65,8 +66,9 @@ export interface PresentationFormProps<P, A, T, S, PL> {
   onPlaylistEdit?: (playlistId: string, path: Path) => void;
   onPlaylistCreate?: (path: Path) => void;
   onPlaylistSelect?: (path: Path) => Promise<string>;
-  onThemeEdit?: (themeId: string, path: Path) => void;
-  onThemeSelect?: (path: Path) => Promise<string>;
+  onThemeEdit?: (themeId: string) => void;
+  onThemeManage?: () => void;
+  onThemeAdd?: () => void;
 }
 
 interface SelectedPropertyPath {
@@ -81,6 +83,7 @@ const PresentationForm = <
   S extends SoundZone,
   PL extends Playlist
 >({
+  className,
   presentation,
   appVersion,
   errors,
@@ -93,9 +96,10 @@ const PresentationForm = <
   onPlaylistEdit,
   onPlaylistCreate,
   onPlaylistSelect,
+  onThemeEdit,
+  onThemeManage,
+  onThemeAdd,
 }: PresentationFormProps<P, A, T, S, PL>) => {
-  const classes = useStyles();
-
   // Refs
 
   const fileBlobsRef = React.useRef<{ [localUrl: string]: File }>({});
@@ -511,6 +515,24 @@ const PresentationForm = <
       }
 
       case 'theme': {
+        if (!onThemeEdit || !onThemeAdd || !onThemeManage) {
+          // This is to only here to support the RaydiantKit Simulator
+          return (
+            <ThemeInputLegacy
+              key={key}
+              label={label}
+              value={presentation.themeId}
+              themes={themes}
+              helperText={helperText}
+              error={hasError}
+              disabled={isDisabled}
+              onChange={newValue =>
+                updatePresentation(['themeId'], newValue, property)
+              }
+            />
+          );
+        }
+
         return (
           <ThemeInput
             key={key}
@@ -523,13 +545,16 @@ const PresentationForm = <
             onChange={newValue =>
               updatePresentation(['themeId'], newValue, property)
             }
+            onEdit={onThemeEdit}
+            onManage={onThemeManage}
+            onAdd={onThemeAdd}
           />
         );
       }
 
       case 'playlist': {
-        if (!onPlaylistSelect) {
-          // If onPlaylistSelect is not provided then use the legacy playlist input.
+        if (!onPlaylistEdit) {
+          // If onPlaylistEdit is not provided then use the legacy playlist input.
           // This is to only here to support the RaydiantKit Simulator
           return (
             <PlaylistInputLegacy
@@ -646,7 +671,7 @@ const PresentationForm = <
   };
 
   return (
-    <Column className={classes.inputs}>
+    <Column className={className}>
       <TextField
         label="name"
         value={presentation.name}
