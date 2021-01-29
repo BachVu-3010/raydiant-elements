@@ -7,9 +7,10 @@ import useStyles from './Checkbox.styles';
 
 interface CheckboxProps {
   checked: boolean;
-  label?: string;
+  label?: React.ReactNode;
   round?: boolean;
   disabled?: boolean;
+  small?: boolean;
   onChange?: (checked: boolean) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
   className?: string;
@@ -22,6 +23,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   label,
   round,
   disabled,
+  small,
   onClick,
   onChange,
   testId,
@@ -34,9 +36,10 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
         classes.inputContainer,
         disabled && classes.disabled,
         round && classes.round,
+        small && classes.small,
         className,
       )}
-      elevation={1}
+      elevation={0}
     >
       <input
         type="checkbox"
@@ -64,7 +67,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
         onClick={onClick}
       >
         {checkbox}
-        <span className={classes.label}>{label}</span>
+        <div className={classes.label}>{label}</div>
       </label>
     );
   }

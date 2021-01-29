@@ -156,8 +156,8 @@ export const light = createTheme({
     focusedBorder: 'rgba(0, 0, 0, 0.6)',
   },
   checkbox: {
-    border: 'rgba(0, 0, 0, 0.6)',
-    background: 'rgba(0, 0, 0, 0.8)',
+    border: 'rgba(0, 0, 0, 0.4)',
+    background: 'rgba(0, 0, 0, 0.6)',
     foreground: colors.white,
   },
   switch: {
@@ -237,8 +237,8 @@ export const lightGrey = createTheme({
     focusedBorder: 'rgba(0, 0, 0, 0.6)',
   },
   checkbox: {
-    border: 'rgba(0, 0, 0, 0.6)',
-    background: 'rgba(0, 0, 0, 0.8)',
+    border: 'rgba(0, 0, 0, 0.4)',
+    background: 'rgba(0, 0, 0, 0.6)',
     foreground: colors.white,
   },
   switch: {
@@ -318,7 +318,7 @@ export const grey = createTheme({
     focusedBorder: 'rgba(0, 0, 0, 0.6)',
   },
   checkbox: {
-    border: 'rgba(0, 0, 0, 0.6)',
+    border: 'rgba(0, 0, 0, 0.4)',
     background: 'rgba(0, 0, 0, 0.8)',
     foreground: colors.white,
   },

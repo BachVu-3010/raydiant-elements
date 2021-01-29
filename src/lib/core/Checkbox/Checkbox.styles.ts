@@ -40,11 +40,17 @@ export default makeStyles((theme: Theme) =>
       },
     },
 
+    small: {
+      width: 14,
+      height: 14,
+    },
+
     labelContainer: {
       width: '100%',
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+      cursor: 'pointer',
 
       '&:hover $checkbox': {
         boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.background}`,
