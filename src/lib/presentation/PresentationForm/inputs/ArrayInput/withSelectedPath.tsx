@@ -8,7 +8,7 @@ export interface InjectedProps {
 }
 
 export interface AdditionalProps {
-  onSelectedPathChange: (path: T.Path) => void;
+  onInputStateChange: (state: { [key: string]: any }) => void;
 }
 
 interface WithSelectedPathState {
@@ -45,7 +45,7 @@ export default function withSelectedPath<OriginalProps extends {}>(
         prevSelectedPath: state.selectedPath,
       }));
 
-      this.props.onSelectedPathChange(selectedPath);
+      this.props.onInputStateChange({ selectedPath });
     };
 
     render() {

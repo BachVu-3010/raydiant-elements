@@ -18,6 +18,7 @@ import {
   LocalUpload,
   PresentationError,
   ApplicationVariables,
+  BuilderState,
 } from '../PresentationTypes';
 import PresentationFormHelperText from './PresentationFormHelperText';
 import getLocalUploads from './getLocalUploads';
@@ -62,18 +63,14 @@ export interface PresentationFormProps<P, A, T, S, PL> {
   playlists?: PL[];
   selectedPlaylistPath?: Path;
   onChange: (presentation: P, localUploads: LocalUpload[]) => void;
-  onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
+  onBuilderStateChange?: (builderState: BuilderState) => void;
+  builderState?: BuilderState;
   onPlaylistEdit?: (playlistId: string, path: Path) => void;
   onPlaylistCreate?: (path: Path) => void;
   onPlaylistSelect?: (path: Path) => Promise<string>;
   onThemeEdit?: (themeId: string) => void;
   onThemeManage?: () => void;
   onThemeAdd?: () => void;
-}
-
-interface SelectedPropertyPath {
-  propertyPath: Path;
-  selectedPath: Path;
 }
 
 const PresentationForm = <
@@ -92,7 +89,8 @@ const PresentationForm = <
   playlists,
   selectedPlaylistPath,
   onChange,
-  onSelectedPathChange,
+  onBuilderStateChange,
+  builderState,
   onPlaylistEdit,
   onPlaylistCreate,
   onPlaylistSelect,
@@ -103,8 +101,6 @@ const PresentationForm = <
   // Refs
 
   const fileBlobsRef = React.useRef<{ [localUrl: string]: File }>({});
-
-  const selectedPropertyPathsRef = React.useRef<SelectedPropertyPath[]>([]);
 
   // Callbacks
 
@@ -136,33 +132,27 @@ const PresentationForm = <
     [presentation, appVersion, onChange],
   );
 
-  const setSelectedPaths = React.useCallback(
-    (propertyPath: Path, selectedPath: Path) => {
-      if (!onSelectedPathChange) return;
+  const setInputState = React.useCallback(
+    (path, state) => {
+      if (!onBuilderStateChange) return;
 
-      let selectedPropertyAtPath = selectedPropertyPathsRef.current.find(
-        selectedPropertyPath =>
-          isPathEqual(selectedPropertyPath.propertyPath, propertyPath),
+      const inputFound = builderState.inputs.find(i =>
+        isPathEqual(i.path, path),
       );
+      const updatedInputs = inputFound
+        ? builderState.inputs.map(i =>
+            isPathEqual(i.path, path)
+              ? { path, state: { ...inputFound.state, ...state } }
+              : i,
+          )
+        : [...builderState.inputs, { path, state }];
 
-      if (selectedPropertyAtPath) {
-        // Remove existing selected path at property.
-        selectedPropertyPathsRef.current = selectedPropertyPathsRef.current.filter(
-          selectedPropertyPath =>
-            selectedPropertyPath !== selectedPropertyAtPath,
-        );
-      }
-
-      selectedPropertyAtPath = { propertyPath, selectedPath };
-
-      selectedPropertyPathsRef.current = [
-        ...selectedPropertyPathsRef.current,
-        selectedPropertyAtPath,
-      ];
-
-      onSelectedPathChange(selectedPropertyPathsRef.current);
+      onBuilderStateChange({
+        ...builderState,
+        inputs: updatedInputs,
+      });
     },
-    [],
+    [onBuilderStateChange, builderState],
   );
 
   // Effects
@@ -636,9 +626,9 @@ const PresentationForm = <
                 )}
               </Column>
             )}
-            onSelectedPathChange={selectedPath =>
-              setSelectedPaths(path, selectedPath)
-            }
+            onInputStateChange={state => {
+              setInputState(path, state);
+            }}
           />
         );
       }

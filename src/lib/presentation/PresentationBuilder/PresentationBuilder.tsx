@@ -28,11 +28,6 @@ import validatePresentation from './validatePresentation';
 import hasPresentationChanged from './hasPresentationChanged';
 import styles from './PresentationBuilder.styles';
 
-interface SelectedPropertyPath {
-  propertyPath: P.Path;
-  selectedPath: P.Path;
-}
-
 interface PresentationBuilderProps extends WithStyles<typeof styles> {
   presentation?: P.Presentation;
   initialPresentationState?: P.Presentation;
@@ -56,7 +51,7 @@ interface PresentationBuilderProps extends WithStyles<typeof styles> {
     presentation: P.Presentation,
     localUploads: P.LocalUpload[],
   ) => void;
-  onSelectedPathChange?: (selectedPaths: SelectedPropertyPath[]) => void;
+  onBuilderStateChange?: (builderState: P.BuilderState) => void;
   children?: (
     presentation: P.Presentation,
     errors: P.PresentationError[],
@@ -94,7 +89,6 @@ export class PresentationBuilder extends React.Component<
     showAffectedDevices: false,
   };
 
-  selectedPropertyPaths: SelectedPropertyPath[] = [];
   fileBlobs: { [localUrl: string]: File } = {};
 
   componentDidUpdate(prevProps: PresentationBuilderProps) {
@@ -241,7 +235,7 @@ export class PresentationBuilder extends React.Component<
       soundZones,
       playlists,
       selectedPlaylistPath,
-      onSelectedPathChange,
+      onBuilderStateChange,
       onPlaylistEdit,
       onPlaylistCreate,
       onPlaylistSelect,
@@ -321,7 +315,7 @@ export class PresentationBuilder extends React.Component<
                     this.setState({ previewPresentation: updatedPresentation });
                   }
                 }}
-                onSelectedPathChange={onSelectedPathChange}
+                onBuilderStateChange={onBuilderStateChange}
               />
             )}
           </Scrollable>

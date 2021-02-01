@@ -73,3 +73,11 @@ export interface LocalUpload {
   file: File;
   localUrl: string;
 }
+export interface BuilderState {
+  inputs: InputState[];
+}
+
+export interface InputState {
+  path: Path;
+  state: any;
+}
