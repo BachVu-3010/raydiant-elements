@@ -51,7 +51,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
             onChange(e.target.checked);
           }
         }}
-        onClick={!label && onClick}
+        onClick={!label ? onClick : undefined}
         {...testAttr(testId)}
       />
       <div className={cn(classes.checkbox, checked && classes.checked)}>
