@@ -57,6 +57,7 @@ export interface PresentationFormProps<P, A, T, S, PL> {
   className?: string;
   presentation: P;
   appVersion: A;
+  themeOptions?: React.ReactNode;
   errors: PresentationError[];
   themes?: T[]; // This prop is only used by the legacy theme input.
   soundZones?: S[];
@@ -97,6 +98,7 @@ const PresentationForm = <
   onThemeEdit,
   onThemeManage,
   onThemeAdd,
+  themeOptions,
 }: PresentationFormProps<P, A, T, S, PL>) => {
   // Refs
 
@@ -505,7 +507,7 @@ const PresentationForm = <
       }
 
       case 'theme': {
-        if (!onThemeAdd) {
+        if (!themeOptions) {
           // This is to only here to support the RaydiantKit Simulator
           return (
             <ThemeInputLegacy
@@ -528,7 +530,7 @@ const PresentationForm = <
             key={key}
             label={label}
             value={presentation.themeId}
-            themes={themes}
+            themeOptions={themeOptions}
             helperText={helperText}
             error={hasError}
             disabled={isDisabled}

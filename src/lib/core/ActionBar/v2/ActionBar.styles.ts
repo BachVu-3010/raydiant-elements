@@ -18,11 +18,11 @@ export default makeStyles((theme: Theme) =>
       },
 
       '& > :not(:first-child)': {
-        paddingLeft: theme.spacing(1.5),
+        marginLeft: theme.spacing(1.5),
       },
 
       '& > :not(:last-child)': {
-        paddingRight: theme.spacing(1.5),
+        marginRight: theme.spacing(1.5),
       },
     },
   }),

@@ -22,7 +22,8 @@ export default makeStyles((theme: Theme) =>
       height: '100%',
       boxSizing: 'border-box',
       padding: theme.spacing(0, 2),
-
+      display: 'flex',
+      alignItems: 'center',
       fontSize: theme.fontSizes.md,
       color: theme.input.foreground,
       backgroundColor: theme.palette.background.default,
@@ -52,6 +53,6 @@ export default makeStyles((theme: Theme) =>
     },
     iconDisabled: {
       opacity: 0.5,
-    }
+    },
   }),
 );

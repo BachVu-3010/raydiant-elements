@@ -56,7 +56,7 @@ export default makeStyles((theme: Theme) =>
       borderTop: `1px solid ${theme.divider.secondary}`,
     },
 
-    gutterBottom: { marginBottom: theme.spacing(2) },
+    gutterBottom: { marginBottom: theme.spacing(1.5) },
     gutterTop: { marginTop: theme.spacing(2) },
   }),
 );

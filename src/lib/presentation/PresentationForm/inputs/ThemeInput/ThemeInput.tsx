@@ -8,12 +8,11 @@ import InputLabel from '../../../../core/InputLabel';
 import Select from '../../../../core/Select';
 import ActionBar from '../../../../core/ActionBar/v2';
 import ManageMultipleIcon from '../../../../icons/ManageMultiple';
-import * as P from '../../../PresentationTypes';
 
 interface ThemeInputProps {
   label: string;
   value: string;
-  themes: P.Theme[];
+  themeOptions: React.ReactNode;
   helperText: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
@@ -34,7 +33,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ThemeInput: React.SFC<ThemeInputProps> = ({
   label,
   value,
-  themes,
+  themeOptions,
   helperText,
   error,
   disabled,
@@ -44,21 +43,6 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
   onAdd,
 }) => {
   const classes = useStyles();
-
-  const theme = themes.find(pl => pl.id === value);
-  // Assume the theme was assigned by an admin if there is a theme id but we can't
-  // find it in the current user's themes. This is a workaround, ideally the API would return
-  // the basic information about the assigned theme if the current user doesn't have access to it.
-  const isAdminAssigned = value && !theme;
-
-  const options = themes
-    .filter(t => !t.resource.deletedAt)
-    .map(t => ({
-      value: t.id,
-      name: t.name,
-    }));
-
-  const selectedThemeId = value || (options[0] ? options[0].value : '');
 
   return (
     <div>
@@ -70,7 +54,7 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
         <ActionBar.Action
           icon={<EditIcon />}
           disabled={!onEdit}
-          onClick={() => onEdit && onEdit(selectedThemeId)}
+          onClick={() => onEdit && onEdit(value)}
         />
         <ActionBar.Action icon={<ManageMultipleIcon />} onClick={onManage} />
         <ActionBar.Action icon={<AddCircleIcon />} onClick={onAdd} />
@@ -78,19 +62,12 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
 
       <Select
         fullWidth
-        value={selectedThemeId}
+        value={value}
         onChange={onChange}
         disabled={disabled}
-        native={true}
+        native={false}
       >
-        {isAdminAssigned && (
-          <option value={value}> Administrator assigned theme</option>
-        )}
-        {options.map(opt => (
-          <option key={opt.value} value={opt.value}>
-            {opt.name}
-          </option>
-        ))}
+        {themeOptions}
       </Select>
 
       {helperText && (
