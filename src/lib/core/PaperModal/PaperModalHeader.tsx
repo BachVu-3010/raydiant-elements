@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: theme.spacing(1, 4),
       paddingTop: 0,
-      marginBottom: theme.spacing(3),
       borderBottom: `1px solid ${theme.divider.secondary}`,
     },
   }),

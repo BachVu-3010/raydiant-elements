@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme: Theme) =>
     root: {
       padding: theme.spacing(1, 4),
 
+      '&:first-child': {
+        paddingTop: theme.spacing(4),
+      },
+
       '&:last-child': {
         paddingBottom: theme.spacing(4),
       },
