@@ -7,6 +7,7 @@ export default makeStyles((theme: Theme) =>
       position: 'relative',
       width: 18,
       height: 18,
+      flexShrink: 0,
       background: 'transparent',
 
       '&:hover $checkbox': {
@@ -67,6 +68,7 @@ export default makeStyles((theme: Theme) =>
 
     label: {
       marginLeft: theme.spacing(1),
+      overflow: 'hidden', // To allow for text ellipsis
     },
 
     input: {
