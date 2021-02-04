@@ -42,7 +42,8 @@ export default makeStyles((theme: Theme) =>
       letterSpacing: 1.42,
       textTransform: 'uppercase',
       fontSize: theme.fontSizes.xxs,
-      padding: theme.spacing(1, 4),
+      padding: theme.spacing(0.5, 4),
+      paddingBottom: 0,
       color: theme.palette.text.secondary,
       opacity: 0.5,
 
@@ -51,7 +52,7 @@ export default makeStyles((theme: Theme) =>
       },
 
       '& svg': {
-        fontSize: 24,
+        fontSize: 20,
       },
 
       [theme.breakpoints.down('xs')]: {

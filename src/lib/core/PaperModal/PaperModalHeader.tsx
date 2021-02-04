@@ -3,15 +3,15 @@ import * as React from 'react';
 import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
 
-export interface PaperModalBodyProps {
+export interface PaperModalHeaderProps {
   className?: string;
   children: React.ReactNode;
 }
 
-export const PaperModalBody = ({
+export const PaperModalHeader = ({
   className,
   children,
-}: PaperModalBodyProps) => {
+}: PaperModalHeaderProps) => {
   const classes = useStyles();
   return <div className={cn(classes.root, className)}>{children}</div>;
 };
@@ -20,16 +20,11 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       padding: theme.spacing(1, 4),
-
-      '&:last-child': {
-        paddingBottom: theme.spacing(4),
-      },
-
-      [theme.breakpoints.down('xs')]: {
-        padding: theme.spacing(1, 2),
-      },
+      paddingTop: 0,
+      marginBottom: theme.spacing(3),
+      borderBottom: `1px solid ${theme.divider.secondary}`,
     },
   }),
 );
 
-export default PaperModalBody;
+export default PaperModalHeader;

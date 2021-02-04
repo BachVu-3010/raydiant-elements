@@ -9,6 +9,7 @@ import * as ReactDOM from 'react-dom';
 import { AppContext } from '../App';
 import withThemeSelector from '../withThemeSelector';
 import PaperModalBody from './PaperModalBody';
+import PaperModalHeader from './PaperModalHeader';
 import useStyles from './PaperModal.styles';
 
 export interface PaperModalProps extends MUIPaperProps {
@@ -54,7 +55,8 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
       >
         <div className={classes.header}>
           <button className={classes.close} onClick={closeModal}>
-            Close <CloseIcon />
+            <CloseIcon />
+            Close
           </button>
         </div>
         {children}
@@ -65,5 +67,6 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
 };
 
 export default Object.assign(withThemeSelector(PaperModal), {
+  Header: PaperModalHeader,
   Body: PaperModalBody,
 });
