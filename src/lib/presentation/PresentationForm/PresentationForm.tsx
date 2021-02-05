@@ -157,6 +157,16 @@ const PresentationForm = <
     [onBuilderStateChange, builderState],
   );
 
+  const getInputStateAtPath = React.useCallback(
+    (path: Path) => {
+      const input = builderState.inputs.find(i => {
+        return isPathEqual(path, i.path);
+      });
+      return input && input.state;
+    },
+    [builderState],
+  );
+
   // Effects
 
   // Check hash params for updated properties.
