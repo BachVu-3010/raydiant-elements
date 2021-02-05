@@ -52,6 +52,7 @@ export default makeStyles((theme: Theme) =>
       flexDirection: 'row',
       alignItems: 'center',
       cursor: 'pointer',
+      overflow: 'hidden', // To allow for text ellipsis
 
       '&:hover $checkbox': {
         boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.background}`,
