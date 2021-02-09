@@ -1,123 +1,96 @@
 import * as React from 'react';
+import * as Color from 'color';
 import Popover from '@material-ui/core/Popover';
-import ChromePicker from 'react-color/lib/Chrome';
-import Button from '../Button';
-import withStyles, { WithStyles } from '../withStyles';
-import styles from './ColorField.styles';
+import ColorPicker from '../ColorPicker';
+import InputLabel from '../InputLabel';
+import { makeStyles, createStyles } from '../../styles';
+import { Theme } from '../../theme';
+import { buttonReset } from '../../mixins';
 
-interface ColorFieldProps extends WithStyles<typeof styles> {
-  /** The label of the field */
+export interface ColorFieldProps {
   label?: React.ReactNode;
-  /** The value of the field */
   value?: string;
-  /** Set to true to disable in the input */
   disabled?: boolean;
-  /** Set to true to make the button expand to it's container */
-  fullWidth?: boolean;
-  testId?: string;
-  /** Called when the value changes */
-  onChange?: (value: string) => any;
-  /** Called when the picker is closed */
-  onClose?: () => any;
+  onChange?: (value: string) => void;
+  onClose?: () => void;
 }
 
-interface ColorFieldState {
-  open: boolean;
-}
+export const ColorField = ({
+  label,
+  value,
+  onChange,
+  onClose,
+}: ColorFieldProps) => {
+  const classes = useStyles();
 
-interface Color {
-  hex: string;
-  rgb: {
-    r: number;
-    g: number;
-    b: number;
-    a: number;
-  };
-}
+  // State
 
-export class ColorField extends React.Component<
-  ColorFieldProps,
-  ColorFieldState
-> {
-  static defaultProps = {
-    error: false,
-    disabled: false,
-    onChange: () => {
-      return;
+  const [isColorSelectorOpen, setIsColorSelectorOpen] = React.useState(false);
+
+  // Refs
+
+  const colorSelectorRef = React.useRef<HTMLButtonElement | null>(null);
+
+  // Memoizers
+
+  const styles = React.useMemo(
+    () => {
+      const color = Color(value);
+      const isDark = color.isDark();
+
+      return {
+        backgroundColor: value,
+        color: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)',
+      };
     },
-    onClose: () => {
-      return;
+    [value],
+  );
+
+  return (
+    <div className={classes.root}>
+      <InputLabel>{label}</InputLabel>
+      <button
+        ref={colorSelectorRef}
+        className={classes.button}
+        style={styles}
+        onClick={() => setIsColorSelectorOpen(true)}
+      >
+        {value}
+      </button>
+
+      <Popover
+        anchorEl={colorSelectorRef.current}
+        open={isColorSelectorOpen}
+        onClose={() => setIsColorSelectorOpen(false)}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'center',
+        }}
+      >
+        <ColorPicker value={value} onChange={onChange} onClose={onClose} />
+      </Popover>
+    </div>
+  );
+};
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {},
+
+    button: {
+      ...buttonReset(),
+      cursor: 'pointer',
+      width: '100%',
+      height: 40,
+      padding: theme.spacing(1, 2),
+      fontSize: theme.fontSizes.md,
+      borderRadius: theme.borderRadius.sm,
     },
-  };
+  }),
+);
 
-  buttonRef = React.createRef<HTMLElement | null>();
-
-  state = {
-    open: false,
-  };
-
-  openPicker = () => {
-    this.setState({ open: true });
-  };
-
-  closePicker = () => {
-    const { onClose } = this.props;
-    this.setState({ open: false });
-    onClose();
-  };
-
-  handleChange = ({ rgb, hex }: Color) => {
-    const { onChange } = this.props;
-    // Call onChange with an rgba string is there is opacity, otherwise return hex.
-    onChange(rgb.a ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${rgb.a})` : hex);
-  };
-
-  render() {
-    const {
-      children,
-      label,
-      fullWidth,
-      value,
-      disabled,
-      classes,
-      testId,
-    } = this.props;
-
-    const { open } = this.state;
-
-    return (
-      <div className={classes.root}>
-        <Button
-          ref={this.buttonRef}
-          disabled={disabled}
-          fullWidth={fullWidth}
-          onClick={this.openPicker}
-          testId={testId}
-        >
-          <div className={classes.color} style={{ backgroundColor: value }} />
-          {children || label}
-        </Button>
-        <Popover
-          open={open}
-          anchorEl={this.buttonRef.current}
-          onClose={this.closePicker}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        >
-          <ChromePicker
-            color={value || 'transparent'}
-            onChange={this.handleChange}
-          />
-        </Popover>
-      </div>
-    );
-  }
-}
-
-export default withStyles(styles)(ColorField);
+export default ColorField;

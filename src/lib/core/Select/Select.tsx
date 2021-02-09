@@ -1,11 +1,13 @@
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MUISelect from '@material-ui/core/Select';
+import * as cn from 'classnames';
 import * as React from 'react';
-import cn from 'classnames';
 import { testAttr } from '../../helpers';
 import useStyles from './Select.styles';
 
 interface SelectProps {
+  className?: string;
+  classes?: React.ComponentProps<typeof MUISelect>['classes'];
   value?: string;
   disabled?: boolean;
   fullWidth?: boolean;
@@ -19,6 +21,8 @@ interface SelectProps {
 }
 
 const Select: React.SFC<SelectProps> = ({
+  className,
+  classes: classOverrides = {},
   value,
   disabled = false,
   fullWidth = false,
@@ -33,7 +37,7 @@ const Select: React.SFC<SelectProps> = ({
 
   return (
     <MUISelect
-      className={classes.root}
+      className={cn(classes.root, className)}
       native={native}
       value={value}
       disabled={disabled}
@@ -43,8 +47,12 @@ const Select: React.SFC<SelectProps> = ({
       onBlur={onBlur}
       onFocus={onFocus}
       classes={{
-        select: classes.select,
-        icon: cn(classes.icon, disabled && classes.iconDisabled),
+        ...classOverrides,
+        select: cn(classes.select, classOverrides.select),
+        icon: cn(
+          classes.icon,
+          disabled && classes.iconDisabled && classOverrides.icon,
+        ),
       }}
       inputProps={{ ...testAttr(testId) }}
     >
