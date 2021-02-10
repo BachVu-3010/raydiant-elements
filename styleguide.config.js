@@ -100,6 +100,7 @@ module.exports = {
       components: () => [
         getPresentationPath('PresentationBuilder'),
         getPresentationPath('PresentationCard'),
+        getPresentationPath('PresentationForm'),
         getPresentationPath('PresentationPreview'),
         getPresentationPath('PresentationThumbnail'),
         getPresentationPath('PresentationsList'),

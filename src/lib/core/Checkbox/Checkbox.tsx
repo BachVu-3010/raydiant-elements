@@ -14,6 +14,7 @@ interface CheckboxProps {
   small?: boolean;
   onChange?: (checked: boolean) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
+  onCheckboxClick?: (e: React.MouseEvent<any>) => void;
   className?: string;
   testId?: string;
 }
@@ -27,6 +28,7 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   disabled,
   small,
   onClick,
+  onCheckboxClick,
   onChange,
   testId,
 }) => {
@@ -54,7 +56,10 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
             onChange(e.target.checked);
           }
         }}
-        onClick={!label ? onClick : undefined}
+        onClick={(e) => {
+          if (onCheckboxClick) onCheckboxClick(e);
+          else if (!label && onClick) onClick(e);
+        }}
         {...testAttr(testId)}
       />
       <div className={cn(

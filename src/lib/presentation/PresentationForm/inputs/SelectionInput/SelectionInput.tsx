@@ -6,14 +6,18 @@ import MultiSelectField from '../../../../core/MultiSelectField';
 import SelectField from '../../../../core/SelectField';
 import replacePropNameWithValue from '../../../../helpers/replacePropNameWithValue';
 import * as P from '../../../PresentationTypes';
+import {MultiSelectFieldSortOption} from '../../../../core/MultiSelectField/MultiSelectField';
 
 interface SelectionInputProps {
   label: string;
   value: string | string[];
   multiple?: boolean;
   searchable?: boolean;
+  selectable?: boolean;
   options?: A.SelectionOption[];
+  onInputStateChange: (state: any) => void;
   optionsUrl?: string;
+  sortable?: MultiSelectFieldSortOption[],
   helperText?: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
@@ -22,6 +26,7 @@ interface SelectionInputProps {
   // the correct way to i18n and we should remove it in the future.
   strings: A.Strings;
   parentValue: P.ApplicationVariables;
+  inputState: any,
 }
 
 interface SelectionInputState {
@@ -170,10 +175,14 @@ class SelectionInput extends React.Component<
       value,
       multiple,
       searchable,
+      selectable,
+      onInputStateChange,
+      sortable,
       helperText,
       error,
       disabled,
       onChange,
+      inputState,
     } = this.props;
 
     const options = this.state.options || this.props.options;
@@ -184,6 +193,8 @@ class SelectionInput extends React.Component<
         ? value
         : Array.from(value || []);
 
+      const selectedOptionValue = inputState && inputState.selectedOption && inputState.selectedOption.value
+
       return (
         <MultiSelectField
           label={label}
@@ -193,12 +204,18 @@ class SelectionInput extends React.Component<
           disabled={disabled}
           searchable={searchable}
           onChange={onChange}
+          sortable={sortable}
         >
           {options.map((opt, index) => (
             <MultiSelectField.Option
               key={index}
               value={opt.value}
               label={this.getLabel(opt)}
+              rightLabel={opt.rightLabel}
+              selected={selectable && (selectedOptionValue === opt.value)}
+              onSelect={selectable && (
+                (option: A.SelectionOption) => onInputStateChange({ selectedOption: option })
+              )}
             />
           ))}
         </MultiSelectField>

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { MultiSelectFieldSortOption } from '../core/MultiSelectField';
 
 export interface Constraints {
   // Mixing hyphen case, snake case and no case... :'(
@@ -22,6 +23,7 @@ export interface SelectionOption {
   // Label is what remote options can send instead of name.
   // We should normalize on `label` in the future.
   label?: string;
+  rightLabel?: string;
   // Default can be set by a remote options url to specify the default
   // value of the input.
   default?: boolean;
@@ -47,8 +49,10 @@ export interface PresentationProperty {
   // Selection
   multiple?: boolean;
   searchable?: boolean;
+  selectable?: boolean;
   options?: SelectionOption[];
   options_url?: string;
+  sortable?: MultiSelectFieldSortOption[];
   // Radio Selection
   radioOptions?: SelectionOption[];
   exclusive?: boolean;

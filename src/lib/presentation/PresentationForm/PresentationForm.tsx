@@ -157,15 +157,15 @@ const PresentationForm = <
     [onBuilderStateChange, builderState],
   );
 
-  // const getInputStateAtPath = React.useCallback(
-  //   (path: Path) => {
-  //     const input = builderState.inputs.find(i => {
-  //       return isPathEqual(path, i.path);
-  //     });
-  //     return input && input.state;
-  //   },
-  //   [builderState],
-  // );
+  const getInputStateAtPath = React.useCallback(
+    (path: Path) => {
+      const input = builderState.inputs.find(i => {
+        return isPathEqual(path, i.path);
+      });
+      return input && input.state;
+    },
+    [builderState],
+  );
 
   // Effects
 
@@ -352,6 +352,8 @@ const PresentationForm = <
             parentValue={parentValue}
             multiple={property.multiple}
             searchable={property.searchable}
+            selectable={property.selectable}
+            sortable={property.sortable}
             options={property.options}
             optionsUrl={property.options_url}
             helperText={helperText}
@@ -359,6 +361,10 @@ const PresentationForm = <
             disabled={isDisabled}
             onChange={newValue => updatePresentation(path, newValue, property)}
             strings={strings}
+            inputState={getInputStateAtPath(path)}
+            onInputStateChange={state => {
+              setInputState(path, state);
+            }}
           />
         );
       }

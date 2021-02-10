@@ -86,6 +86,7 @@ export default makeStyles((theme: Theme) =>
       height: '100%',
       opacity: 0,
       cursor: 'pointer',
+      margin: 0,
     },
 
     checkbox: {

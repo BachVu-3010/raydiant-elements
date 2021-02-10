@@ -12,7 +12,24 @@ import styles from './MultiSelectField.styles';
 import MultiSelectFieldOption, {
   MultiSelectFieldOptionProps,
 } from './MultiSelectFieldOption';
-import SearchBox, {DEFAULT_SORT_MODE, SortMode, SortType} from './SearchBox';
+import MultiSelectFieldSearchBox from './MultiSelectFieldSearchBox';
+
+export enum MultiSelectFieldSortBy {default = 'default', label = 'label', rightLabel = 'rightLabel'}
+export type MultiSelectFieldSortType = 'string' | 'number' | 'boolean'
+
+export interface MultiSelectFieldSortMode {
+  label: string,
+  by: MultiSelectFieldSortBy,
+  type?: MultiSelectFieldSortType,
+  isReverseSort: boolean,
+}
+
+export interface MultiSelectFieldSortOption {
+  label: string,
+  by: MultiSelectFieldSortBy,
+  type?: MultiSelectFieldSortType,
+  defaultDirection?: 'asc' | 'desc',
+}
 
 export type MultiSelectFieldChild = React.ReactElement<MultiSelectFieldOptionProps>;
 
@@ -22,6 +39,7 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
   disabled?: boolean;
   searchable?: boolean;
   error?: boolean;
+  sortable?: MultiSelectFieldSortOption[],
   helperText?: React.ReactNode;
   onChange: (value: string[]) => void;
   onBlur: (e: React.FocusEvent<any>) => void;
@@ -31,7 +49,18 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
 interface MultiSelectFieldState {
   orderedChildren: MultiSelectFieldChild[];
   searchTerm: string;
-  sortMode: SortMode;
+  sortMode?: MultiSelectFieldSortMode;
+}
+
+const toNumber = (value: string) => {
+  const numberString = (value || '').split('').filter(c => c.match(/[.0-9]/g)).join('');
+  return parseFloat(numberString);
+}
+
+const applyOrder = (children: MultiSelectFieldChild[], orderedChildren: MultiSelectFieldChild[]) => {
+  return orderedChildren.map(
+    (child : MultiSelectFieldChild) => children.find(c => c.props.value === child.props.value)
+  ).filter(c => c);
 }
 
 export class MultiSelectField extends React.Component<
@@ -44,6 +73,7 @@ export class MultiSelectField extends React.Component<
     error: false,
     helperText: '',
     children: [],
+    sortable: [],
   };
 
   static getDerivedStateFromProps(
@@ -57,24 +87,49 @@ export class MultiSelectField extends React.Component<
       props.children,
     );
 
-    return shouldSortChildren
-      ? { orderedChildren: sortChildrenBySelected(props.value, props.children) }
-      : null;
+    if (shouldSortChildren) {
+      return { orderedChildren: sortChildrenBySelected(props.value, props.children) };
+    } else {
+      return { orderedChildren: applyOrder(props.children, state.orderedChildren) };
+    }
   }
 
   state: MultiSelectFieldState = {
     orderedChildren: [],
     searchTerm: '',
-    sortMode: DEFAULT_SORT_MODE,
   };
+
+  sortWith = (
+    getter: (c: MultiSelectFieldChild) => string,
+    sortType: MultiSelectFieldSortType,
+  ) => (c1: MultiSelectFieldChild, c2: MultiSelectFieldChild) => {
+    const value1 = getter(c1);
+    const value2 = getter(c2);
+
+    if (sortType === 'number') {
+      const number1 = toNumber(String(value1));
+      const number2 = toNumber(String(value2));
+      return (isNaN(number1) || number1 > number2) ? 1 : -1;
+    } else if (sortType === 'boolean') {
+      return (value1 > value2) ? 1 : -1;
+    }
+    return (value1 || '').localeCompare(value2|| '')
+  }
 
   sortChildren = () => {
     const { sortMode } = this.state;
-    // avoid mutating the orderedChildren in state
+    if (!sortMode) {
+        return this.state.orderedChildren;
+    }
+
     const orderedChildren = [...this.state.orderedChildren];
-    if (sortMode.type === SortType.Name) {
+    if (sortMode.by === MultiSelectFieldSortBy.label) {
       orderedChildren.sort(
-        (c1, c2) => (c1.props.label || '').localeCompare(c2.props.label || '')
+        this.sortWith((c: MultiSelectFieldChild) => c.props.label, sortMode.type)
+      );
+    } else if (sortMode.by === MultiSelectFieldSortBy.rightLabel) {
+      orderedChildren.sort(
+        this.sortWith((c: MultiSelectFieldChild) => c.props.rightLabel, sortMode.type)
       );
     }
     if (sortMode.isReverseSort) {
@@ -94,6 +149,7 @@ export class MultiSelectField extends React.Component<
       error,
       classes,
       onBlur,
+      sortable,
     } = this.props;
     const { searchTerm } = this.state;
 
@@ -109,11 +165,12 @@ export class MultiSelectField extends React.Component<
         <InputLabel error={error}>{label}</InputLabel>
         <div className={cn(classes.contentWrapper, {[classes.withSearch]: searchable})}>
           { searchable && (
-            <SearchBox
+            <MultiSelectFieldSearchBox
               value={value}
               options={orderedChildren}
               searchTerm={searchTerm}
               disabled={disabled}
+              sortable={sortable}
               onChange={onChange}
               onSearchChange={newSearchTerm => this.setState({searchTerm: newSearchTerm})}
               onSortChange={(newSortMode) => this.setState({sortMode: newSortMode})}

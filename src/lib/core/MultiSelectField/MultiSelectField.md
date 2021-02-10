@@ -1,7 +1,9 @@
 ```jsx
 initialState = {
   countries: ['US', 'CA'],
+  countriesWithPopulation: ['US', 'CA'],
   cities: ['NY'],
+  selectedOptionValue: '',
 };
 
 const countries = [
@@ -16,6 +18,15 @@ const countries = [
   },
   { name: 'Sweden', code: 'SE' },
   { name: 'United States', code: 'US' },
+];
+
+const countriesWithPopulation = [
+  { name: 'Australia', code: 'AU', population: 'Unknown' },
+  { name: 'Canada', code: 'CA', population: '37.59M' },
+  { name: 'China', code: 'CN', population: '1398M' },
+  { name: 'Mexico', code: 'MX', population: '127.6M' },
+  { name: 'Sweden', code: 'SE', population: '10.23M' },
+  { name: 'United States', code: 'US', population: '328.2M' },
 ];
 
 const cities = [
@@ -127,6 +138,224 @@ const cities = [
               key={c.code}
               value={c.code}
               label={c.name}
+            />
+          ))}
+        </MultiSelectField>
+      </Row>
+    )}
+    {!state.destroy && (
+      <Row>
+        <MultiSelectField
+          label="Countries with search"
+          searchable
+          value={state.countries}
+          onChange={countries => setState({ countries })}
+          sortable={[
+            { label: 'Default', by: 'default' }, 
+            { label: 'Name', by: 'label' }, 
+          ]}
+        >
+          {countries.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="disabled with search"
+          searchable
+          disabled
+          value={state.countries}
+          onChange={countries => setState({ countries })}
+          sortable={[
+            { label: 'Default', by: 'default' }, 
+            { label: 'Name', by: 'label' }, 
+          ]}
+        >
+          {countries.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+            />
+          ))}
+        </MultiSelectField>
+      </Row>
+    )}
+    {!state.destroy && (
+      <Row>
+        <MultiSelectField
+          label="Countries without sortable"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="Countries with population"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sortable={[
+            { label: 'Default', by: 'default' }, 
+            { label: 'Name', by: 'label' }, 
+            { label: 'Population', by: 'rightLabel' }, 
+          ]}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="Countries with numeric population"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sortable={[
+            { label: 'Default', by: 'default' }, 
+            { label: 'Name', by: 'label' }, 
+            { label: 'Population', by: 'rightLabel', type: 'number' }, 
+          ]}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+      </Row>
+    )}
+    {!state.destroy && (
+      <Row>
+        <MultiSelectField
+          label="Sort Option Position"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sortable={[
+            { label: 'Name', by: 'label' }, 
+            { label: 'Population', by: 'rightLabel' }, 
+            { label: 'Default', by: 'default' }, 
+          ]}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="Sort Default Direction"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sortable={[
+            { label: 'Desc Default', by: 'default', defaultDirection: 'desc' }, 
+            { label: 'Asc Name', by: 'label', }, 
+            { label: 'Desc Population', by: 'rightLabel', type: 'number', defaultDirection: 'desc' }, 
+          ]}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="Two sort options for one field"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sortable={[
+            { label: 'Default', by: 'default' }, 
+            { label: 'Name', by: 'label' }, 
+            { label: 'Population', by: 'rightLabel' }, 
+            { label: 'Numeric Population', by: 'rightLabel', type: 'number' }, 
+          ]}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+            />
+          ))}
+        </MultiSelectField>
+      </Row>
+    )}
+    {!state.destroy && (
+      <Row>
+        <MultiSelectField
+          label="Countries with Selected State"
+          searchable
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sorting={{
+            default: { name: 'Default' },
+            label: { name: 'Name' },
+            rightLabel: { name: 'Population', isNumeric: true }
+          }}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+              selected={c.code === state.selectedOptionValue}
+              onSelect={(option) => {
+                setState({ selectedOptionValue: option.value });
+              }}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="Selected State & Disabled"
+          searchable
+          disabled
+          value={state.countriesWithPopulation}
+          onChange={countriesWithPopulation => setState({ countriesWithPopulation })}
+          sorting={{
+            default: { name: 'Default' },
+            label: { name: 'Name' },
+            rightLabel: { name: 'Population', isNumeric: true }
+          }}
+        >
+          {countriesWithPopulation.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+              rightLabel={c.population}
+              selected={c.code === state.selectedOptionValue}
+              onSelect={(option) => {
+                setState({ selectedOptionValue: option.value });
+              }}
             />
           ))}
         </MultiSelectField>
