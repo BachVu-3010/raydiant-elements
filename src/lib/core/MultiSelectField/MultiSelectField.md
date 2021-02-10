@@ -1,6 +1,7 @@
 ```jsx
 initialState = {
   countries: ['US', 'CA'],
+  cities: ['NY'],
 };
 
 const countries = [
@@ -17,10 +18,29 @@ const countries = [
   { name: 'United States', code: 'US' },
 ];
 
+const cities = [
+  { name: 'New York', code: 'NY' },
+  { name: 'Washington', code: 'WA' },
+  { name: 'California', code: 'CA' },
+];
+
 <App>
   <Column>
     {!state.destroy && (
       <Row>
+        <MultiSelectField
+          label="Cities"
+          value={state.cities}
+          onChange={cities => setState({ cities })}
+        >
+          {cities.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+            />
+          ))}
+        </MultiSelectField>
         <MultiSelectField
           label="Countries"
           value={state.countries}
@@ -67,6 +87,39 @@ const countries = [
           label="Countries"
           value={state.countries}
           disabled
+          onChange={countries => setState({ countries })}
+        >
+          {countries.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+            />
+          ))}
+        </MultiSelectField>
+      </Row>
+    )}
+    {!state.destroy && (
+      <Row>
+        <MultiSelectField
+          label="Countries with search"
+          searchable
+          value={state.countries}
+          onChange={countries => setState({ countries })}
+        >
+          {countries.map(c => (
+            <MultiSelectField.Option
+              key={c.code}
+              value={c.code}
+              label={c.name}
+            />
+          ))}
+        </MultiSelectField>
+        <MultiSelectField
+          label="disabled with search"
+          searchable
+          disabled
+          value={state.countries}
           onChange={countries => setState({ countries })}
         >
           {countries.map(c => (

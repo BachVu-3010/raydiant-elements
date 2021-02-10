@@ -15,6 +15,17 @@ initialState = {
     onChange={checked => setState({ checked })}
   />
   <Checkbox round disabled checked={state.checked} />
+  <Checkbox
+    indeterminate
+    checked={state.checked}
+  />
+  <Checkbox indeterminate disabled checked={state.checked} />
+  <Checkbox
+    round
+    indeterminate
+    checked={state.checked}
+  />
+  <Checkbox indeterminate round disabled checked={state.checked} />
 </Row>;
 ```
 

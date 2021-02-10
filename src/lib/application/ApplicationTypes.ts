@@ -46,6 +46,7 @@ export interface PresentationProperty {
   optional?: boolean;
   // Selection
   multiple?: boolean;
+  searchable?: boolean;
   options?: SelectionOption[];
   options_url?: string;
   // Radio Selection

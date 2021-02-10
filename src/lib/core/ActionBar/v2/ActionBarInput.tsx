@@ -3,6 +3,7 @@ import * as React from 'react';
 import useStyles from './ActionBarInput.styles';
 
 export interface ActionBarInputProps {
+  className?: string;
   icon?: React.ReactNode;
   label?: string;
   value?: string;
@@ -16,6 +17,7 @@ export interface ActionBarInputProps {
 }
 
 export const ActionBarInput: React.FunctionComponent<ActionBarInputProps> = ({
+  className,
   icon,
   label,
   value,
@@ -30,7 +32,7 @@ export const ActionBarInput: React.FunctionComponent<ActionBarInputProps> = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root} style={{ maxWidth }}>
+    <div className={cn(classes.root, className)} style={{ maxWidth }}>
       <input
         className={cn(classes.input, icon && classes.inputWithIcon)}
         placeholder={label}

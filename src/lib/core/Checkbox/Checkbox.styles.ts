@@ -21,6 +21,12 @@ export default makeStyles((theme: Theme) =>
       '&:hover $checkbox$disabled&checked': {
         boxShadow: 'none',
       },
+
+      '&$indeterminate': {
+        background: theme.palette.background.default,
+        overflow: 'hidden',
+        borderRadius: 2,
+      }
     },
 
     round: {
@@ -111,16 +117,20 @@ export default makeStyles((theme: Theme) =>
         background: theme.palette.progress.main,
         boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
       },
-    },
 
-    icon: {
-      fontSize: theme.fontSizes.md,
-      color: theme.checkbox.foreground,
-
-      '$round &': {
-        color: '#fff',
+      '&$indeterminate' : {
+        background: theme.checkbox.foreground,
+        width: 24,
+        height: 24,
+        top: -3,
+        left: -3,
+        '&:hover': {
+          boxShadow: 'none',
+        }
       },
     },
+
+    indeterminate: {},
 
     disabled: {
       opacity: 0.5,

@@ -351,6 +351,7 @@ const PresentationForm = <
             value={value}
             parentValue={parentValue}
             multiple={property.multiple}
+            searchable={property.searchable}
             options={property.options}
             optionsUrl={property.options_url}
             helperText={helperText}

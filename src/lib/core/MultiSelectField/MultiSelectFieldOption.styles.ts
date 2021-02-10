@@ -8,10 +8,13 @@ const styles = (theme: Theme) =>
       ...buttonReset(),
       boxSizing: 'border-box',
       width: '100%',
-      padding: theme.spacing(1, 2),
+      padding: theme.spacing(0, 4),
     },
     disabled: {
       cursor: 'not-allowed',
+    },
+    checkboxLabel: {
+      alignItems: 'flex-start',
     },
   });
 

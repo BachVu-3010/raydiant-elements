@@ -12,13 +12,15 @@ import styles from './MultiSelectField.styles';
 import MultiSelectFieldOption, {
   MultiSelectFieldOptionProps,
 } from './MultiSelectFieldOption';
+import SearchBox, {DEFAULT_SORT_MODE, SortMode, SortType} from './SearchBox';
 
-type MultiSelectFieldChild = React.ReactElement<MultiSelectFieldOptionProps>;
+export type MultiSelectFieldChild = React.ReactElement<MultiSelectFieldOptionProps>;
 
 interface MultiSelectFieldProps extends WithStyles<typeof styles> {
   label: string;
   value: string[];
   disabled?: boolean;
+  searchable?: boolean;
   error?: boolean;
   helperText?: React.ReactNode;
   onChange: (value: string[]) => void;
@@ -28,6 +30,8 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
 
 interface MultiSelectFieldState {
   orderedChildren: MultiSelectFieldChild[];
+  searchTerm: string;
+  sortMode: SortMode;
 }
 
 export class MultiSelectField extends React.Component<
@@ -36,6 +40,7 @@ export class MultiSelectField extends React.Component<
 > {
   static defaultProps: Partial<MultiSelectFieldProps> = {
     disabled: false,
+    searchable: false,
     error: false,
     helperText: '',
     children: [],
@@ -59,6 +64,23 @@ export class MultiSelectField extends React.Component<
 
   state: MultiSelectFieldState = {
     orderedChildren: [],
+    searchTerm: '',
+    sortMode: DEFAULT_SORT_MODE,
+  };
+
+  sortChildren = () => {
+    const { sortMode } = this.state;
+    // avoid mutating the orderedChildren in state
+    const orderedChildren = [...this.state.orderedChildren];
+    if (sortMode.type === SortType.Name) {
+      orderedChildren.sort(
+        (c1, c2) => (c1.props.label || '').localeCompare(c2.props.label || '')
+      );
+    }
+    if (sortMode.isReverseSort) {
+      orderedChildren.reverse();
+    }
+    return orderedChildren;
   };
 
   render() {
@@ -67,33 +89,53 @@ export class MultiSelectField extends React.Component<
       value,
       onChange,
       disabled,
+      searchable,
       helperText,
       error,
       classes,
       onBlur,
     } = this.props;
+    const { searchTerm } = this.state;
 
-    const { orderedChildren } = this.state;
+    let orderedChildren = this.sortChildren();
+    if (searchable && searchTerm) {
+      orderedChildren = orderedChildren.filter(
+        child => (child.props.label || '').toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    }
 
     return (
       <div className={classes.root} onBlur={onBlur}>
         <InputLabel error={error}>{label}</InputLabel>
-        <div className={cn(classes.items, disabled && classes.disabled)}>
-          {orderedChildren.map(child => {
-            const isOptionSelected = isElementSelected(value, child);
-            const optionValue = child.props.value;
-            return React.cloneElement(child, {
-              disabled,
-              checked: isOptionSelected,
-              onClick: () => {
-                if (isOptionSelected) {
-                  onChange(value.filter(item => item !== optionValue));
-                } else {
-                  onChange([...value, optionValue]);
-                }
-              },
-            });
-          })}
+        <div className={cn(classes.contentWrapper, {[classes.withSearch]: searchable})}>
+          { searchable && (
+            <SearchBox
+              value={value}
+              options={orderedChildren}
+              searchTerm={searchTerm}
+              disabled={disabled}
+              onChange={onChange}
+              onSearchChange={newSearchTerm => this.setState({searchTerm: newSearchTerm})}
+              onSortChange={(newSortMode) => this.setState({sortMode: newSortMode})}
+            />
+          ) }
+          <div className={cn(classes.items, disabled && classes.disabled)}>
+            {orderedChildren.map(child => {
+              const isOptionSelected = isElementSelected(value, child);
+              const optionValue = child.props.value;
+              return React.cloneElement(child, {
+                disabled,
+                checked: isOptionSelected,
+                onClick: () => {
+                  if (isOptionSelected) {
+                    onChange(value.filter(item => item !== optionValue));
+                  } else {
+                    onChange([...value, optionValue]);
+                  }
+                },
+              });
+            })}
+          </div>
         </div>
         <InputHelperText error={error}>{helperText}</InputHelperText>
       </div>

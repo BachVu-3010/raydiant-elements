@@ -10,17 +10,26 @@ const styles = (theme: Theme) =>
     items: {
       // A magic number so we partially show the 3rd item to indicate that
       // the user can scroll.
-      height: 104,
+      maxHeight: 212,
+      minHeight: 104,
       boxSizing: 'border-box',
-      padding: theme.spacing(1, 0),
-      backgroundColor: theme.palette.background.inset,
-      borderRadius: theme.borderRadius.sm,
-      boxShadow: 'inset 0px 1px 5px rgba(0, 0, 0, 0.2)',
+      padding: theme.spacing(1),
       ...scrollable(),
     },
     disabled: {
       overflow: 'hidden',
     },
+    contentWrapper: {
+      backgroundColor: theme.palette.background.default,
+      borderRadius: theme.borderRadius.lg,
+      boxShadow: `0px 3px 9px ${theme.palette.divider}`,
+
+      '&$withSearch': {
+        paddingTop: theme.spacing(1),
+      },
+    },
+
+    withSearch: {},
   });
 
 export default styles;

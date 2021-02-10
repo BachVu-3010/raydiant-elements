@@ -11,6 +11,7 @@ interface SelectionInputProps {
   label: string;
   value: string | string[];
   multiple?: boolean;
+  searchable?: boolean;
   options?: A.SelectionOption[];
   optionsUrl?: string;
   helperText?: React.ReactNode;
@@ -34,6 +35,7 @@ class SelectionInput extends React.Component<
 > {
   static defaultProps = {
     multiple: false,
+    searchable: false,
     options: [] as A.SelectionOption[],
     optionsUrl: '',
   };
@@ -167,6 +169,7 @@ class SelectionInput extends React.Component<
       label,
       value,
       multiple,
+      searchable,
       helperText,
       error,
       disabled,
@@ -188,6 +191,7 @@ class SelectionInput extends React.Component<
           helperText={helperText}
           error={error}
           disabled={disabled}
+          searchable={searchable}
           onChange={onChange}
         >
           {options.map((opt, index) => (

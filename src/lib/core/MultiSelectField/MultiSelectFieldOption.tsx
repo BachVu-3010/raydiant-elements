@@ -26,6 +26,7 @@ const MultiSelectFieldOption: React.SFC<MultiSelectFieldOptionProps> = ({
     disabled={disabled}
   >
     <Checkbox
+      className={classes.checkboxLabel}
       disabled={disabled}
       checked={checked}
       label={label}
