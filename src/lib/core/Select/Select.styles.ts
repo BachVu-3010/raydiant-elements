@@ -20,7 +20,6 @@ export default makeStyles((theme: Theme) =>
     select: {
       width: '100%',
       height: '100%',
-      lineHeight: '40px',
       boxSizing: 'border-box',
       padding: theme.spacing(0, 2),
       display: 'flex',
