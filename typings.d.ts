@@ -1,4 +1,5 @@
-declare module 'react-color/lib/Chrome';
+declare module 'react-color';
+declare module 'react-color/*';
 
 // Workaround for https://github.com/mariocasciaro/object-path-immutable/issues/35.
 // Not submitting a PR with this because it's not the full fix. We'd need to export

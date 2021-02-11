@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as Color from 'color';
+import * as tinycolor from 'tinycolor2';
 import Popover from '@material-ui/core/Popover';
 import ColorPicker from '../ColorPicker';
 import InputLabel from '../InputLabel';
@@ -42,7 +42,7 @@ export const ColorField = ({
         };
       }
 
-      const color = Color(value);
+      const color = tinycolor(value);
       const isDark = color.isDark();
 
       return {
@@ -78,7 +78,11 @@ export const ColorField = ({
           horizontal: 'center',
         }}
       >
-        <ColorPicker value={value} onChange={onChange} onClose={onClose} />
+        <ColorPicker
+          value={value}
+          onChange={onChange}
+          onClose={() => setIsColorSelectorOpen(false)}
+        />
       </Popover>
     </div>
   );

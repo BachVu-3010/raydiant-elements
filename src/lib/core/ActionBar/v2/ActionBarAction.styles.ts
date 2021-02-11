@@ -41,5 +41,25 @@ export default makeStyles((theme: Theme) =>
     labelSelected: {
       color: theme.actionBar.selectedForeground,
     },
+
+    icon: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+
+    default: {},
+
+    primary: {
+      color: theme.palette.primary.main,
+    },
+
+    success: {
+      color: theme.palette.success.main,
+    },
+
+    error: {
+      color: theme.palette.error.main,
+    },
   }),
 );
