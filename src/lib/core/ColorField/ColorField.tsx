@@ -35,12 +35,19 @@ export const ColorField = ({
 
   const styles = React.useMemo(
     () => {
+      if (!value) {
+        return {
+          backgroundColor: 'inherit',
+          color: 'inherit',
+        };
+      }
+
       const color = Color(value);
       const isDark = color.isDark();
 
       return {
         backgroundColor: value,
-        color: isDark ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)',
+        color: isDark ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)',
       };
     },
     [value],
