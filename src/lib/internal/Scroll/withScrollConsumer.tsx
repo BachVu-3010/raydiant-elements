@@ -4,7 +4,7 @@ import ScrollContext, { ScrollConsumerProps } from './ScrollContext';
 const withScrollConsumer = <ComponentProps extends object>(
   Component: React.ComponentType<ComponentProps & ScrollConsumerProps>,
 ) =>
-  (class extends React.Component<ComponentProps> {
+  class extends React.Component<ComponentProps> {
     render() {
       return (
         <ScrollContext.Consumer>
@@ -20,6 +20,6 @@ const withScrollConsumer = <ComponentProps extends object>(
         </ScrollContext.Consumer>
       );
     }
-  });
+  };
 
 export default withScrollConsumer;

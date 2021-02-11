@@ -36,7 +36,7 @@ const styles = () =>
       '&:disabled': {
         cursor: 'not-allowed',
         pointerEvents: 'auto',
-      }
+      },
     },
   });
 

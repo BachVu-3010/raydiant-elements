@@ -3,7 +3,7 @@ import * as React from 'react';
 import Checkbox from '../Checkbox';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './MultiSelectFieldOption.styles';
-import {SelectionOption} from '../../application/ApplicationTypes';
+import { SelectionOption } from '../../application/ApplicationTypes';
 
 export interface MultiSelectFieldOptionProps extends WithStyles<typeof styles> {
   value: string;
@@ -30,7 +30,7 @@ const MultiSelectFieldOption: React.SFC<MultiSelectFieldOptionProps> = ({
 }) => (
   <button
     className={cn(classes.root, disabled && classes.disabled)}
-    onClick={(e) => {
+    onClick={e => {
       e.preventDefault();
       if (onSelect) {
         onSelect({ value, label, rightLabel });
@@ -44,20 +44,23 @@ const MultiSelectFieldOption: React.SFC<MultiSelectFieldOptionProps> = ({
       className={classes.checkboxLabel}
       disabled={disabled}
       checked={checked}
-      label={(
-        <span className={cn(classes.label, {[classes.selected]: selected} )}>
-          {
-            // fix label highlighted state
-            // The width is 0 when no label and rightLabel
-            label ? label : <>&nbsp;</>
-          }
-          {rightLabel && <span className={classes.rightLabel}>{rightLabel}</span>}
+      label={
+        <span className={cn(classes.label, { [classes.selected]: selected })}>
+          {// fix label highlighted state
+          // The width is 0 when no label and rightLabel
+          label ? label : <>&nbsp;</>}
+          {rightLabel && (
+            <span className={classes.rightLabel}>{rightLabel}</span>
+          )}
         </span>
-      )}
-      onCheckboxClick={onSelect && ((e) => {
-        e.stopPropagation();
-        onClick();
-      })}
+      }
+      onCheckboxClick={
+        onSelect &&
+        (e => {
+          e.stopPropagation();
+          onClick();
+        })
+      }
     />
   </button>
 );

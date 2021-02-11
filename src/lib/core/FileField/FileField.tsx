@@ -78,7 +78,11 @@ export const FileField: React.SFC<FileFieldProps> = ({
         <input
           ref={fileInput}
           disabled={disabled}
-          className={cn(classes.input, value && classes.inputHasValue, disabled && classes.disabled)}
+          className={cn(
+            classes.input,
+            value && classes.inputHasValue,
+            disabled && classes.disabled,
+          )}
           type="file"
           title="" // hide hover tooltip
           accept={accept.join(',')}

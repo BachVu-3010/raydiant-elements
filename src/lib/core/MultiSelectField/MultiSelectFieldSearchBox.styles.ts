@@ -22,8 +22,8 @@ const styles = (theme: Theme) =>
         color: theme.palette.text.primary,
         '&::placeholder': {
           color: theme.palette.text.secondary,
-        }
-      }
+        },
+      },
     },
     searchIcon: {
       color: theme.palette.text.primary,

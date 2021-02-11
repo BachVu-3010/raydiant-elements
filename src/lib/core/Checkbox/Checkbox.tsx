@@ -22,7 +22,7 @@ interface CheckboxProps {
 export const Checkbox: React.SFC<CheckboxProps> = ({
   className,
   checked,
-  indeterminate= false,
+  indeterminate = false,
   label,
   round,
   disabled,
@@ -56,18 +56,22 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
             onChange(e.target.checked);
           }
         }}
-        onClick={(e) => {
+        onClick={e => {
           if (onCheckboxClick) onCheckboxClick(e);
           else if (!label && onClick) onClick(e);
         }}
         {...testAttr(testId)}
       />
-      <div className={cn(
-        classes.checkbox,
-        (checked || indeterminate) && classes.checked,
-        indeterminate && classes.indeterminate,
-      )}>
-        {(checked || indeterminate) && <CheckboxIcon indeterminate={indeterminate} round={round} />}
+      <div
+        className={cn(
+          classes.checkbox,
+          (checked || indeterminate) && classes.checked,
+          indeterminate && classes.indeterminate,
+        )}
+      >
+        {(checked || indeterminate) && (
+          <CheckboxIcon indeterminate={indeterminate} round={round} />
+        )}
       </div>
     </MUIPaper>
   );
@@ -75,7 +79,11 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   if (label) {
     return (
       <label
-        className={cn(classes.labelContainer, disabled && classes.disabled, className)}
+        className={cn(
+          classes.labelContainer,
+          disabled && classes.disabled,
+          className,
+        )}
         onClick={onClick}
       >
         {checkbox}

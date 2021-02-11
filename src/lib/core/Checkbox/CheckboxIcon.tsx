@@ -15,10 +15,12 @@ const CheckIcon: React.FC<CheckIconProps> = ({
   round = false,
 }) => {
   const classes = useStyles();
-  const className = cn(classes.icon, {[classes.indeterminate]: indeterminate});
+  const className = cn(classes.icon, {
+    [classes.indeterminate]: indeterminate,
+  });
 
   if (indeterminate) {
-    if (round) return <RoundIndeterminateCheck className={className} /> ;
+    if (round) return <RoundIndeterminateCheck className={className} />;
     return <IndeterminateCheck className={className} />;
   }
   return <Check className={className} />;

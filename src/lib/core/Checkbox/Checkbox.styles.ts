@@ -26,7 +26,7 @@ export default makeStyles((theme: Theme) =>
         background: theme.palette.background.default,
         overflow: 'hidden',
         borderRadius: 2,
-      }
+      },
     },
 
     round: {
@@ -119,7 +119,7 @@ export default makeStyles((theme: Theme) =>
         boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
       },
 
-      '&$indeterminate' : {
+      '&$indeterminate': {
         background: theme.checkbox.foreground,
         width: 24,
         height: 24,
@@ -127,7 +127,7 @@ export default makeStyles((theme: Theme) =>
         left: -3,
         '&:hover': {
           boxShadow: 'none',
-        }
+        },
       },
     },
 
