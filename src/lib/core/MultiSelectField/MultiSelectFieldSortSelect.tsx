@@ -13,14 +13,17 @@ interface MultiSelectFieldSortSelectProps {
   onSelect: (newSortMode: MultiSelectFieldSortMode) => void;
 }
 
-const MultiSelectFieldSortSelect: React.SFC<MultiSelectFieldSortSelectProps> = ({
-  sortMode,
-  sortOption,
-  onSelect,
-}) => {
-  const selected = sortMode && sortMode.by === sortOption.by && sortMode.label === sortOption.label;
-  const isReverted = selected ? sortMode.isReverseSort : sortOption.defaultDirection === 'desc';
-  const sortLabel =  sortOption && sortOption.label;
+const MultiSelectFieldSortSelect: React.SFC<
+  MultiSelectFieldSortSelectProps
+> = ({ sortMode, sortOption, onSelect }) => {
+  const selected =
+    sortMode &&
+    sortMode.by === sortOption.by &&
+    sortMode.label === sortOption.label;
+  const isReverted = selected
+    ? sortMode.isReverseSort
+    : sortOption.defaultDirection === 'desc';
+  const sortLabel = sortOption && sortOption.label;
 
   if (!sortLabel) {
     return null;
@@ -36,11 +39,13 @@ const MultiSelectFieldSortSelect: React.SFC<MultiSelectFieldSortSelectProps> = (
           label: sortOption.label,
           by: sortOption.by,
           type: sortOption.type,
-          isReverseSort: selected ? !sortMode.isReverseSort : sortOption.defaultDirection === 'desc',
+          isReverseSort: selected
+            ? !sortMode.isReverseSort
+            : sortOption.defaultDirection === 'desc',
         });
       }}
     />
-  )
-}
+  );
+};
 
 export default MultiSelectFieldSortSelect;

@@ -1,3 +1,5 @@
-import MultiSelectField, { MultiSelectFieldSortOption } from './MultiSelectField';
+import MultiSelectField, {
+  MultiSelectFieldSortOption,
+} from './MultiSelectField';
 export default MultiSelectField;
 export { MultiSelectFieldSortOption };

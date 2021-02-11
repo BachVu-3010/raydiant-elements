@@ -6,7 +6,7 @@ import MultiSelectField from '../../../../core/MultiSelectField';
 import SelectField from '../../../../core/SelectField';
 import replacePropNameWithValue from '../../../../helpers/replacePropNameWithValue';
 import * as P from '../../../PresentationTypes';
-import {MultiSelectFieldSortOption} from '../../../../core/MultiSelectField/MultiSelectField';
+import { MultiSelectFieldSortOption } from '../../../../core/MultiSelectField/MultiSelectField';
 
 interface SelectionInputProps {
   label: string;
@@ -17,7 +17,7 @@ interface SelectionInputProps {
   options?: A.SelectionOption[];
   onInputStateChange: (state: any) => void;
   optionsUrl?: string;
-  sortable?: MultiSelectFieldSortOption[],
+  sortable?: MultiSelectFieldSortOption[];
   helperText?: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
@@ -26,7 +26,7 @@ interface SelectionInputProps {
   // the correct way to i18n and we should remove it in the future.
   strings: A.Strings;
   parentValue: P.ApplicationVariables;
-  inputState: any,
+  inputState: any;
 }
 
 interface SelectionInputState {
@@ -77,11 +77,14 @@ class SelectionInput extends React.Component<
       );
 
       // All updated dependencies must be not be undefined in order to fetch options.
-      const shouldFetchOptions =
+      const updatedDependentPropsChanged =
         updatedDependentProps.length > 0 &&
         updatedDependentProps.every(
           propName => parentValue[propName] !== undefined,
         );
+      const optionsUrlChanged = prevProps.optionsUrl !== optionsUrl;
+      const shouldFetchOptions =
+        updatedDependentPropsChanged || optionsUrlChanged;
 
       if (shouldFetchOptions) {
         // When parent value is changed, set the value of current element back to default
@@ -193,7 +196,10 @@ class SelectionInput extends React.Component<
         ? value
         : Array.from(value || []);
 
-      const selectedOptionValue = inputState && inputState.selectedOption && inputState.selectedOption.value
+      const selectedOptionValue =
+        inputState &&
+        inputState.selectedOption &&
+        inputState.selectedOption.value;
 
       return (
         <MultiSelectField
@@ -212,10 +218,12 @@ class SelectionInput extends React.Component<
               value={opt.value}
               label={this.getLabel(opt)}
               rightLabel={opt.rightLabel}
-              selected={selectable && (selectedOptionValue === opt.value)}
-              onSelect={selectable && (
-                (option: A.SelectionOption) => onInputStateChange({ selectedOption: option })
-              )}
+              selected={selectable && selectedOptionValue === opt.value}
+              onSelect={
+                selectable &&
+                ((option: A.SelectionOption) =>
+                  onInputStateChange({ selectedOption: option }))
+              }
             />
           ))}
         </MultiSelectField>

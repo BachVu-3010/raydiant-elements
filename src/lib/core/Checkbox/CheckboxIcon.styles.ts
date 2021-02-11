@@ -13,7 +13,7 @@ export default makeStyles((theme: Theme) =>
         color: '#fff',
       },
 
-      '&$indeterminate' : {
+      '&$indeterminate': {
         color: theme.checkbox.background,
         width: 24,
         height: 24,

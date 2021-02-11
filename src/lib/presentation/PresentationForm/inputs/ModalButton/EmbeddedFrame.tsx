@@ -12,14 +12,15 @@ interface EmbeddedFrameMessageEvent extends MessageEvent {
     type: string;
     payload: object;
     namespace: string;
-  }
+  };
 }
 
 class EmbeddedFrame extends React.Component<
-  EmbeddedFrameProps, EmbeddedFrameState
+  EmbeddedFrameProps,
+  EmbeddedFrameState
 > {
   static defaultProps = {};
-  
+
   componentDidMount(): void {
     window.addEventListener('message', this.receiveMessage, false);
   }
@@ -46,7 +47,7 @@ class EmbeddedFrame extends React.Component<
 
     return (
       <iframe
-        title='embedded-frame'
+        title="embedded-frame"
         src={src}
         style={{ width: '100%', height: '100%', border: 0 }}
       />

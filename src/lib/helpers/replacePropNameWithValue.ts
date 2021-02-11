@@ -5,11 +5,14 @@ import * as P from '../../lib/presentation/PresentationTypes';
 const replacePropNameWithValue = (
   url: string,
   parentValue: P.ApplicationVariables,
-  encodeURI= false,
+  encodeURI = false,
 ) => {
   return url.replace(
     /\{\{(.*?)\}\}/g,
-    (_, propName) => (encodeURI ? encodeURIComponent(parentValue[propName]) : parentValue[propName]) || '',
+    (_, propName) =>
+      (encodeURI
+        ? encodeURIComponent(parentValue[propName])
+        : parentValue[propName]) || '',
   );
 };
 export default replacePropNameWithValue;
