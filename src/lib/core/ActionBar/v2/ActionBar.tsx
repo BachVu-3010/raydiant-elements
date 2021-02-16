@@ -8,14 +8,26 @@ import ActionBarInput from './ActionBarInput';
 
 interface ActionBarProps {
   className?: string;
+  variant?: '' | 'footer';
 }
 
 export const ActionBar: React.FunctionComponent<ActionBarProps> = ({
   className,
+  variant = '',
   children,
 }) => {
   const classes = useStyles();
-  return <div className={cn(classes.root, className)}>{children}</div>;
+  return (
+    <div
+      className={cn(
+        classes.root,
+        variant === 'footer' && classes.footer,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
 };
 
 export default Object.assign(ActionBar, {

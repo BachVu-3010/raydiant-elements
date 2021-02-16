@@ -1,5 +1,6 @@
 import { makeStyles, createStyles } from '../../../styles';
 import { Theme } from '../../../theme';
+import { actionBarHeight } from '../ActionBar.styles';
 
 export default makeStyles((theme: Theme) =>
   createStyles({
@@ -24,6 +25,16 @@ export default makeStyles((theme: Theme) =>
       '& > :not(:last-child)': {
         marginRight: theme.spacing(1.5),
       },
+    },
+
+    footer: {
+      height: actionBarHeight, // Remove when the v1 ActionBar is deprecated
+      borderRadius: 0,
+      borderLeft: 0,
+      borderRight: 0,
+      borderBottom: 0,
+      justifyContent: 'space-around',
+      padding: theme.spacing(1, 2),
     },
   }),
 );
