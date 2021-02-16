@@ -108,6 +108,8 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
 
   // Render
 
+  const isDirty = originalValue.current !== value;
+
   return (
     <div className={classes.root}>
       <Column>
@@ -155,6 +157,7 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
           icon={<CheckCircleIcon />}
           color="success"
           label="Done"
+          disabled={!isDirty}
           onClick={onClose}
         />
       </Row>

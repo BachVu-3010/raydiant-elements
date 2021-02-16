@@ -53,6 +53,20 @@ export const ColorField = ({
     [value],
   );
 
+  // Callbacks
+
+  const handleClose = React.useCallback(
+    () => {
+      setIsColorSelectorOpen(false);
+      if (onClose) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
+
+  // Render
+
   return (
     <div className={classes.root}>
       <InputLabel>{label}</InputLabel>
@@ -68,7 +82,7 @@ export const ColorField = ({
       <Popover
         anchorEl={colorSelectorRef.current}
         open={isColorSelectorOpen}
-        onClose={() => setIsColorSelectorOpen(false)}
+        onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'center',
@@ -78,11 +92,7 @@ export const ColorField = ({
           horizontal: 'center',
         }}
       >
-        <ColorPicker
-          value={value}
-          onChange={onChange}
-          onClose={() => setIsColorSelectorOpen(false)}
-        />
+        <ColorPicker value={value} onChange={onChange} onClose={handleClose} />
       </Popover>
     </div>
   );
