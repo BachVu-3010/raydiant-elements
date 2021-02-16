@@ -1,6 +1,7 @@
 import * as React from 'react';
 import EditIcon from '@material-ui/icons/Edit';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import Tooltip from '@material-ui/core/Tooltip';
 import { makeStyles, createStyles } from '../../../../styles';
 import { Theme } from '../../../../theme';
 import InputHelperText from '../../../../core/InputHelperText';
@@ -16,6 +17,8 @@ interface ThemeInputProps {
   helperText: React.ReactNode;
   error?: boolean;
   disabled?: boolean;
+  addDisabled?: boolean;
+  addDisabledMessage?: React.ReactNode;
   onChange: (value: string) => void;
   onEdit?: (value: string) => void;
   onManage?: () => void;
@@ -37,6 +40,8 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
   helperText,
   error,
   disabled,
+  addDisabled,
+  addDisabledMessage,
   onChange,
   onEdit,
   onManage,
@@ -57,7 +62,20 @@ const ThemeInput: React.SFC<ThemeInputProps> = ({
           onClick={() => onEdit && onEdit(value)}
         />
         <ActionBar.Action icon={<ManageMultipleIcon />} onClick={onManage} />
-        <ActionBar.Action icon={<AddCircleIcon />} onClick={onAdd} />
+
+        {addDisabled ? (
+          <Tooltip title={addDisabledMessage} arrow>
+            <span>
+              <ActionBar.Action
+                icon={<AddCircleIcon />}
+                onClick={onAdd}
+                disabled={addDisabled}
+              />
+            </span>
+          </Tooltip>
+        ) : (
+          <ActionBar.Action icon={<AddCircleIcon />} onClick={onAdd} />
+        )}
       </ActionBar>
 
       <Select

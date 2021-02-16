@@ -63,9 +63,11 @@ export interface PresentationFormProps<P, A, T, S, PL> {
   soundZones?: S[];
   playlists?: PL[];
   selectedPlaylistPath?: Path;
+  builderState?: BuilderState;
+  newThemeDisabled?: boolean;
+  newThemeDisabledMessage?: React.ReactNode;
   onChange: (presentation: P, localUploads: LocalUpload[]) => void;
   onBuilderStateChange?: (builderState: BuilderState) => void;
-  builderState?: BuilderState;
   onPlaylistEdit?: (playlistId: string, path: Path) => void;
   onPlaylistCreate?: (path: Path) => void;
   onPlaylistSelect?: (path: Path) => Promise<string>;
@@ -89,9 +91,11 @@ const PresentationForm = <
   soundZones,
   playlists,
   selectedPlaylistPath,
+  builderState,
+  newThemeDisabled,
+  newThemeDisabledMessage,
   onChange,
   onBuilderStateChange,
-  builderState,
   onPlaylistEdit,
   onPlaylistCreate,
   onPlaylistSelect,
@@ -551,6 +555,8 @@ const PresentationForm = <
             helperText={helperText}
             error={hasError}
             disabled={isDisabled}
+            addDisabled={newThemeDisabled}
+            addDisabledMessage={newThemeDisabledMessage}
             onChange={newValue =>
               updatePresentation(['themeId'], newValue, property)
             }
