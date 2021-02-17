@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as tinycolor from 'tinycolor2';
-import Paper from '@material-ui/core/Paper';
 import { Hue, Saturation } from 'react-color/lib/components/common';
 import ChromePointer from 'react-color/lib/components/chrome/ChromePointer';
 import ChromePointerCircle from 'react-color/lib/components/chrome/ChromePointerCircle';
@@ -39,49 +38,74 @@ export interface ColorPickerProps {
 export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
   const classes = useStyles();
 
-  // State
-
-  const [hex, setHex] = React.useState(tinycolor(value).toHexString());
-
-  const [opacity, setOpacity] = React.useState(
-    tinycolor(value).getAlpha() * 100,
-  );
-
   // Refs
 
-  const originalValue = React.useRef(value);
+  const originalColor = React.useRef(tinycolor(value));
+
+  // State
+
+  const [hex, setHex] = React.useState(originalColor.current.toHex());
+  const [hsl, setHsl] = React.useState(originalColor.current.toHsl());
+  const [hsv, setHsv] = React.useState(originalColor.current.toHsv());
+  const [opacity, setOpacity] = React.useState(
+    originalColor.current.getAlpha() * 100,
+  );
 
   // Memoizers
 
-  const { hsl, hsv } = React.useMemo(
+  const updatedColor = React.useMemo(
     () => {
       const color = tinycolor(hex);
       color.setAlpha(opacity / 100);
-      return {
-        hsl: color.toHsl(),
-        hsv: color.toHsv(),
-      };
+      return color;
     },
     [hex, opacity],
   );
 
+  const isDirty = React.useMemo(
+    () => {
+      return (
+        updatedColor.toHex() !== originalColor.current.toHex() ||
+        updatedColor.getAlpha() !== originalColor.current.getAlpha()
+      );
+    },
+    [updatedColor],
+  );
+
   // Callbacks
 
-  const handleSaturationChange = React.useCallback((updatedHsv: HSV) => {
-    const color = tinycolor(updatedHsv);
-    setHex(color.toHexString());
-  }, []);
+  const handleColorChange = React.useCallback((data: HSV | HSL | string) => {
+    const color = tinycolor(data);
 
-  const handleHueChange = React.useCallback((updatedHsl: HSL) => {
-    const color = tinycolor(updatedHsl);
-    setHex(color.toHexString());
+    const updatedHsl = color.toHsl();
+    const updatedHsv = color.toHsv();
+    const updatedHex = color.toHex();
+
+    if (typeof data === 'string') {
+      // Hex text field was updated, always save current value in state.
+      setHex(data);
+      // Don't update the sliders if the color isn't valid.
+      if (color.isValid()) {
+        setHsl(updatedHsl);
+        setHsv(updatedHsv);
+      }
+    } else {
+      // The sliders were updated, reset the hue value from data to fix an issue
+      // where the hue slider doesn't update when the color is #ffffff.
+      updatedHsl.h = data.h;
+      updatedHsv.h = data.h;
+      setHsl(updatedHsl);
+      setHsv(updatedHsv);
+      setHex(updatedHex);
+    }
   }, []);
 
   const handleCancel = React.useCallback(
     () => {
-      const color = tinycolor(originalValue.current);
-      setHex(color.toHexString());
-      setOpacity(color.getAlpha() * 100);
+      setHex(originalColor.current.toHex());
+      setHsl(originalColor.current.toHsl());
+      setHsv(originalColor.current.toHsv());
+      setOpacity(originalColor.current.getAlpha() * 100);
       onClose();
     },
     [onChange, onClose],
@@ -92,23 +116,18 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
   // Trigger onChange handler when hex or opacity changes.
   React.useEffect(
     () => {
-      const color = tinycolor(hex);
-      color.setAlpha(opacity / 100);
-
-      if (color.isValid()) {
-        if (color.getAlpha() < 1) {
-          onChange(color.toRgbString());
+      if (updatedColor.isValid()) {
+        if (updatedColor.getAlpha() < 1) {
+          onChange(updatedColor.toRgbString());
         } else {
-          onChange(color.toHexString());
+          onChange(updatedColor.toHexString());
         }
       }
     },
-    [hex, opacity, onChange],
+    [updatedColor, opacity, onChange],
   );
 
   // Render
-
-  const isDirty = originalValue.current !== value;
 
   return (
     <div className={classes.root}>
@@ -118,7 +137,7 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
             hsl={hsl}
             hsv={hsv}
             pointer={ChromePointerCircle}
-            onChange={handleSaturationChange}
+            onChange={handleColorChange}
           />
         </div>
 
@@ -129,12 +148,12 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
               hsl={hsl}
               hsv={hsv}
               pointer={ChromePointer}
-              onChange={handleHueChange}
+              onChange={handleColorChange}
             />
           </div>
         </div>
 
-        <TextField label="Hex" value={hex} onChange={setHex} />
+        <TextField label="Hex" value={hex} onChange={handleColorChange} />
 
         <NumberField
           label="Opacity"
