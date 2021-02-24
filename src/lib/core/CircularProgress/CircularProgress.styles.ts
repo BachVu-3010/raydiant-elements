@@ -3,12 +3,16 @@ import { createStyles } from '../withStyles';
 
 const styles = (theme: Theme) =>
   createStyles({
-    root: {
+    default: {
       color: theme.progress.background,
     },
 
     light: {
       color: '#ffffff',
+    },
+
+    inherit: {
+      color: 'inherit',
     },
   });
 

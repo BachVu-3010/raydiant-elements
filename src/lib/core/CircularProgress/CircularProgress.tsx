@@ -9,7 +9,7 @@ interface CircularProgressProps extends WithStyles<typeof styles> {
   min?: number;
   max?: number;
   size?: number;
-  color?: 'default' | 'light';
+  color?: 'default' | 'light' | 'inherit';
 }
 
 export const CircularProgress: React.SFC<CircularProgressProps> = ({
@@ -21,7 +21,7 @@ export const CircularProgress: React.SFC<CircularProgressProps> = ({
   classes,
 }) => (
   <MUICircularProgress
-    className={cn(classes.root, color === 'light' && classes.light)}
+    className={classes[color]}
     size={size}
     variant={value !== undefined ? 'determinate' : 'indeterminate'}
     value={((value - min) * 100) / (max - min)}
