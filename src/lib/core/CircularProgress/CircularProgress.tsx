@@ -1,6 +1,5 @@
 import MUICircularProgress from '@material-ui/core/CircularProgress';
 import * as React from 'react';
-import cn from 'classnames';
 import withStyles, { WithStyles } from '../withStyles';
 import styles from './CircularProgress.styles';
 
