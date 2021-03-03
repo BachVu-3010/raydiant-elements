@@ -50,6 +50,8 @@ export default makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[1],
       transformOrigin: 'top left',
       overflow: 'hidden',
+      // Ensure the preview is 1080p regardless of border width.
+      boxSizing: 'content-box',
     },
 
     previewBorder: {
