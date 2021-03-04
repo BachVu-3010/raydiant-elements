@@ -1,6 +1,8 @@
 import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
 
+export const previewBorderWidth = 8;
+
 export default makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -50,12 +52,10 @@ export default makeStyles((theme: Theme) =>
       boxShadow: theme.shadows[1],
       transformOrigin: 'top left',
       overflow: 'hidden',
-      // Ensure the preview is 1080p regardless of border width.
-      boxSizing: 'content-box',
     },
 
     previewBorder: {
-      border: '8px solid #0f0f14',
+      border: `${previewBorderWidth}px solid #0f0f14`,
     },
 
     footer: {

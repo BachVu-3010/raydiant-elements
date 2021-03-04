@@ -5,7 +5,7 @@ import { ApplicationVersion } from '../../application/ApplicationTypes';
 import Tabs from '../../core/Tabs/Tabs';
 import Hidden from '../../layout/Hidden';
 import { PreviewMode } from '../PresentationTypes';
-import useStyles from './PresentationPreview.styles';
+import useStyles, { previewBorderWidth } from './PresentationPreview.styles';
 
 interface PresentationPreviewProps {
   previewMode: string;
@@ -78,8 +78,11 @@ const PresentationPreview = ({
   // Render
 
   const isLandscape = previewMode !== PreviewMode.Vertical;
-  const width = isLandscape ? 1920 : 1080;
-  const height = isLandscape ? 1080 : 1920;
+  // To ensure the preview content is 1920x1080 we need to compensate for
+  // the border width around the preview.
+  const frameSize = showBorder ? previewBorderWidth * 2 : 0;
+  const width = (isLandscape ? 1920 : 1080) + frameSize;
+  const height = (isLandscape ? 1080 : 1920) + frameSize;
   const scaleX = dimensions.width / width;
   const scaleY = dimensions.height / height;
   const scale = Math.min(scaleX, scaleY);
