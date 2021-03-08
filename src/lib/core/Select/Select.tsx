@@ -18,6 +18,8 @@ interface SelectProps {
   onFocus?: React.FocusEventHandler<any>;
   testId?: string;
   native?: boolean;
+  displayEmpty?: boolean;
+  renderValue?: (value: any) => React.ReactNode;
 }
 
 const Select: React.SFC<SelectProps> = ({
@@ -32,6 +34,8 @@ const Select: React.SFC<SelectProps> = ({
   onFocus,
   testId,
   native = true,
+  displayEmpty,
+  renderValue,
 }) => {
   const classes = useStyles();
 
@@ -55,6 +59,8 @@ const Select: React.SFC<SelectProps> = ({
         ),
       }}
       inputProps={{ ...testAttr(testId) }}
+      displayEmpty={displayEmpty}
+      renderValue={renderValue}
     >
       {children}
     </MUISelect>

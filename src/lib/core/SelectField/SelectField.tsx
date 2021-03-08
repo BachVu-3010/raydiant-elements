@@ -25,6 +25,8 @@ interface SelectFieldProps {
   testId?: string;
   native?: boolean;
   maxWidth?: string | number;
+  displayEmpty?: boolean;
+  renderValue?: (value: any) => React.ReactNode;
 }
 
 export const SelectField: React.FunctionComponent<SelectFieldProps> = ({
@@ -43,6 +45,8 @@ export const SelectField: React.FunctionComponent<SelectFieldProps> = ({
   testId,
   native = true,
   maxWidth,
+  displayEmpty,
+  renderValue,
 }) => {
   const classes = useStyles();
   return (
@@ -59,6 +63,8 @@ export const SelectField: React.FunctionComponent<SelectFieldProps> = ({
         onBlur={onBlur}
         testId={testId}
         native={native}
+        displayEmpty={displayEmpty}
+        renderValue={renderValue}
       >
         {children}
       </Select>
