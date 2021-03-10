@@ -19,6 +19,10 @@ export interface InputProps {
     | 'number'
     | 'time'
     | 'date';
+  /** The placeholder text */
+  placeholder?: string;
+  /** Set to true to display a readOnly input */
+  readOnly?: boolean;
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */
@@ -67,33 +71,40 @@ export interface InputProps {
   inputProps?: any;
 }
 
-export const Input: React.FunctionComponent<InputProps> = ({
-  value = '',
-  type = 'text',
-  error = false,
-  disabled = false,
-  maxLength,
-  max,
-  min,
-  multiline = false,
-  multilineHeight,
-  autoFocus = false,
-  icon = null,
-  mask,
-  maskGuide = false,
-  maskPlaceholderChar = '_',
-  keepCharPositions = false,
-  pipe,
-  onChange,
-  onBlur,
-  onFocus,
-  onClick,
-  testId,
-}) => {
+export const Input: React.FunctionComponent<InputProps> = (
+  {
+    value = '',
+    type = 'text',
+    placeholder,
+    readOnly,
+    error = false,
+    disabled = false,
+    maxLength,
+    max,
+    min,
+    multiline = false,
+    multilineHeight,
+    autoFocus = false,
+    icon = null,
+    mask,
+    maskGuide = false,
+    maskPlaceholderChar = '_',
+    keepCharPositions = false,
+    pipe,
+    onChange,
+    onBlur,
+    onFocus,
+    onClick,
+    testId,
+  },
+  ref,
+) => {
   const inputProps = {
     type: mask ? 'text' : type,
     disabled,
     value,
+    placeholder,
+    readOnly,
     maxLength,
     max,
     min,
@@ -112,14 +123,24 @@ export const Input: React.FunctionComponent<InputProps> = ({
     disabled && classes.disabled,
   );
 
-  const renderInput = (ref?: any, maskedInputProps?: any) => {
+  const handleChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+      if (onChange) {
+        onChange(e.target.value);
+      }
+    },
+    [onChange],
+  );
+
+  const renderInput = (refOrMaskedRef?: any, maskedInputProps?: any) => {
     let inputEl: React.ReactElement<any> = null;
 
     if (multiline && !mask) {
       inputEl = (
         <textarea
+          ref={refOrMaskedRef}
           className={inputClassName}
-          onChange={e => onChange(e.target.value)}
+          onChange={handleChange}
           style={{ height: multilineHeight }}
           {...inputProps}
         />
@@ -128,7 +149,7 @@ export const Input: React.FunctionComponent<InputProps> = ({
       inputEl = (
         <input
           className={inputClassName}
-          ref={ref}
+          ref={refOrMaskedRef}
           {...inputProps}
           {...maskedInputProps}
         />
@@ -155,16 +176,16 @@ export const Input: React.FunctionComponent<InputProps> = ({
         placeholderChar={maskPlaceholderChar}
         pipe={pipe}
         keepCharPositions={keepCharPositions}
-        onChange={e => onChange(e.target.value)}
+        onChange={handleChange}
         render={renderInput}
       />
     );
   }
 
-  return renderInput(undefined, {
+  return renderInput(ref, {
     onChange: (e: React.ChangeEvent<HTMLInputElement>) =>
       onChange(e.target.value),
   });
 };
 
-export default Input;
+export default React.forwardRef(Input);

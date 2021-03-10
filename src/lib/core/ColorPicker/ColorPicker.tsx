@@ -108,7 +108,7 @@ export const ColorPicker = ({ value, onChange, onClose }: ColorPickerProps) => {
       setOpacity(originalColor.current.getAlpha() * 100);
       onClose();
     },
-    [onChange, onClose],
+    [onClose],
   );
 
   // Effects

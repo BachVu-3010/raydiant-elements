@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "raydiant-elements",
-  "version": "0.12.12",
+  "version": "0.12.13",
   "scripts": {
     "start": "tsc && styleguidist server --config styleguide.config.js",
     "tsc": "tsc",
@@ -20,6 +20,7 @@
     "@material-ui/core": "4.9.5",
     "@material-ui/icons": "4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.47",
+    "@material-ui/pickers": "^3.2.10",
     "@material-ui/styles": "4.9.14",
     "classnames": "^2.2.6",
     "debounce": "^1.2.0",

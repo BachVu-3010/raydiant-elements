@@ -20,6 +20,10 @@ export interface TextFieldProps {
     | 'url'
     | 'time'
     | 'date';
+  /** The placeholder text */
+  placeholder?: string;
+  /** Set to true to display a readOnly input */
+  readOnly?: boolean;
   /** Set to true to display input with error */
   error?: boolean;
   /** Set to true to disable the input */
@@ -63,30 +67,35 @@ export interface TextFieldProps {
   testId?: string;
 }
 
-export const TextField: React.SFC<TextFieldProps> = ({
-  label,
-  value = '',
-  type = 'text',
-  error = false,
-  disabled = false,
-  maxWidth,
-  maxLength,
-  multiline = false,
-  multilineHeight,
-  autoFocus = false,
-  helperText = '',
-  icon = null,
-  mask,
-  maskGuide = false,
-  maskPlaceholderChar = '_',
-  keepCharPositions = false,
-  pipe,
-  onChange,
-  onBlur,
-  onFocus,
-  onClick,
-  testId,
-}) => {
+export const TextField: React.SFC<TextFieldProps> = (
+  {
+    label,
+    value = '',
+    type = 'text',
+    placeholder,
+    readOnly = false,
+    error = false,
+    disabled = false,
+    maxWidth,
+    maxLength,
+    multiline = false,
+    multilineHeight,
+    autoFocus = false,
+    helperText = '',
+    icon = null,
+    mask,
+    maskGuide = false,
+    maskPlaceholderChar = '_',
+    keepCharPositions = false,
+    pipe,
+    onChange,
+    onBlur,
+    onFocus,
+    onClick,
+    testId,
+  },
+  ref,
+) => {
   const classes = useStyles();
 
   return (
@@ -96,7 +105,10 @@ export const TextField: React.SFC<TextFieldProps> = ({
       </InputLabel>
 
       <Input
+        ref={ref}
         type={type}
+        readOnly={readOnly}
+        placeholder={placeholder}
         icon={icon}
         multiline={multiline}
         multilineHeight={multilineHeight}
@@ -126,4 +138,4 @@ export const TextField: React.SFC<TextFieldProps> = ({
   );
 };
 
-export default TextField;
+export default React.forwardRef(TextField);
