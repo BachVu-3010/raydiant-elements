@@ -70,10 +70,10 @@ export const DateField = ({
 
   const handleClose = React.useCallback(
     () => {
-      setDate(moment(value));
+      setDate(valueToMoment);
       setOpen(false);
     },
-    [value],
+    [valueToMoment],
   );
 
   const handleDone = React.useCallback(
