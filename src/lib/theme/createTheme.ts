@@ -43,6 +43,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       border: string;
       backgroundSelected: string;
       fabLabel: string;
+      backgroundDisabled: string;
+      foregroundDisabled: string;
     };
     input: {
       background: string;
@@ -149,6 +151,8 @@ declare module '@material-ui/core/styles/createMuiTheme' {
       border: string;
       backgroundSelected: string;
       fabLabel: string;
+      backgroundDisabled: string;
+      foregroundDisabled: string;
     };
     input: {
       background: string;

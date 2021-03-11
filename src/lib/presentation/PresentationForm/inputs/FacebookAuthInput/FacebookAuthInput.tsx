@@ -14,10 +14,6 @@ interface FacebookAuthInputProps
 const styles = createStyles({
   icon: {
     color: '#ffffff',
-    position: 'absolute',
-    top: 0,
-    left: 6,
-    bottom: 0,
     display: 'flex',
     alignItems: 'center',
     '& > svg': {
@@ -51,7 +47,7 @@ const FacebookAuthInput: React.SFC<FacebookAuthInputProps> = ({
         },
       })
     }
-    label="connect to Facebook"
+    label="Connect to Facebook"
     icon={
       <div className={classes.icon}>
         <Icon icon="facebook" />

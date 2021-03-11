@@ -14,10 +14,6 @@ interface OneDriveAuthInputProps
 const styles = createStyles({
   icon: {
     color: '#ffffff',
-    position: 'absolute',
-    top: 0,
-    left: 6,
-    bottom: 0,
     height: '100%',
     width: 36,
     display: 'flex',
@@ -53,7 +49,7 @@ const OneDriveAuthInput: React.SFC<OneDriveAuthInputProps> = ({
         },
       })
     }
-    label="connect to OneDrive"
+    label="Connect to OneDrive"
     icon={
       <div className={classes.icon}>
         <Icon icon="onedrive" />

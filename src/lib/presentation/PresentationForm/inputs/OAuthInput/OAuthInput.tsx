@@ -156,7 +156,7 @@ class OAuthInput extends React.Component<
         </Link>
       );
     } else if (verifyFailed) {
-      return 'account not connected, please try again.';
+      return 'Account not connected, please try again.';
     }
 
     return helperText;
@@ -167,7 +167,7 @@ class OAuthInput extends React.Component<
     const { username, verifyFailed } = this.state;
     const hasError = error || verifyFailed;
     const loggedIn = !!username;
-    const buttonLabel = loggedIn ? `logged in as ${username}` : label;
+    const buttonLabel = loggedIn ? `Logged in as ${username}` : label;
     const helperContent = this.getHelperContent();
 
     return (
@@ -178,6 +178,8 @@ class OAuthInput extends React.Component<
             color={loggedIn && !disabled ? 'default' : 'primary'}
             onClick={loggedIn ? null : this.authRedirect}
             disabled={disabled || loggedIn}
+            label={buttonLabel}
+            icon={icon}
             classes={{
               button: disabled
                 ? classes.disabled
@@ -185,10 +187,7 @@ class OAuthInput extends React.Component<
                 ? classes.loggedIn
                 : classes.default,
             }}
-          >
-            <span className={classes.label}>{buttonLabel}</span>
-            {icon}
-          </Button>
+          />
           {helperContent && (
             <FormHelperText error={hasError} disabled={disabled}>
               {helperContent}

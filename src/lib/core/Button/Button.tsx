@@ -12,6 +12,8 @@ interface ButtonProps extends WithStyles<typeof styles> {
   label?: React.ReactNode;
   /** The button's icon */
   icon?: IconOptions | React.ReactNode;
+  /** Set the icon alignment relative to the label */
+  iconAlignment?: 'start' | 'end';
   /** The button's color */
   color?: 'default' | 'primary' | 'progress' | 'destructive' | 'light';
   /** Set to true to disable the button */
@@ -35,6 +37,7 @@ export const Button: React.SFC<ButtonProps> = (
     className,
     label,
     icon,
+    iconAlignment = 'end',
     color = 'default',
     hideBorder = false,
     disabled = false,
@@ -49,8 +52,23 @@ export const Button: React.SFC<ButtonProps> = (
 ) => {
   const hasIcon = !!icon;
   const hasLabel = !!label || !!children;
-  const iconEl =
-    typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
+
+  const iconEl = hasIcon && (
+    <div
+      className={cn(
+        classes.icon,
+        hasLabel && classes.iconWithLabel,
+        fullWidth && classes.iconWithLabelFullWidth,
+      )}
+    >
+      {typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon}
+    </div>
+  );
+
+  let contents = [label || children, iconEl];
+  if (iconAlignment === 'start') {
+    contents = contents.reverse();
+  }
 
   return (
     <MUIButton
@@ -65,6 +83,9 @@ export const Button: React.SFC<ButtonProps> = (
           classes.button,
           hasIcon && !hasLabel && classes.buttonOnlyIcon,
           hasIcon && hasLabel && classes.buttonWithIconAndLabel,
+          iconAlignment === 'start'
+            ? classes.iconAlignStart
+            : classes.iconAlignEnd,
           fullWidth && classes.buttonFullWidth,
           hideBorder && classes.hideBorder,
           color === 'default' && classes.default,
@@ -78,18 +99,8 @@ export const Button: React.SFC<ButtonProps> = (
       }}
       {...testAttr(testId)}
     >
-      {icon && (
-        <div
-          className={cn(
-            classes.icon,
-            hasLabel && classes.iconWithLabel,
-            fullWidth && classes.iconWithLabelFullWidth,
-          )}
-        >
-          {iconEl}
-        </div>
-      )}
-      {label || children}
+      {contents[0]}
+      {contents[1]}
     </MUIButton>
   );
 };

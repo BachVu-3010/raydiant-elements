@@ -13,10 +13,6 @@ interface PosterMyWallAuthInputProps
 const styles = createStyles({
   icon: {
     color: '#ffffff',
-    position: 'absolute',
-    top: 0,
-    left: 6,
-    bottom: 0,
     height: '100%',
     width: 24,
     display: 'flex',
@@ -53,7 +49,7 @@ const PosterMyWallAuthInput: React.SFC<PosterMyWallAuthInputProps> = ({
         },
       })
     }
-    label="connect to PosterMyWall"
+    label="Connect to PosterMyWall"
     icon={<div className={classes.icon} />}
   />
 );

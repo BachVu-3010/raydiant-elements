@@ -12,10 +12,6 @@ interface GoogleAuthInputProps
 
 const styles = createStyles({
   icon: {
-    position: 'absolute',
-    top: 0,
-    left: 6,
-    bottom: 0,
     height: '100%',
     width: 26,
     display: 'flex',
@@ -51,7 +47,7 @@ const GoogleAuthInput: React.SFC<GoogleAuthInputProps> = ({
         },
       })
     }
-    label="connect to Google"
+    label="Connect to Google"
     icon={<div className={classes.icon} />}
   />
 );

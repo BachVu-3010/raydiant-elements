@@ -22,30 +22,48 @@ const styles = (theme: Theme) =>
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
     },
-    buttonWithIconAndLabel: {
-      paddingLeft: theme.spacing(2),
-    },
+    buttonWithIconAndLabel: {},
     label: {
       fontWeight: 400,
       textTransform: 'none',
       letterSpacing: 0.29,
-      fontSize: theme.fontSizes.sm,
+      fontSize: theme.fontSizes.xs,
       whiteSpace: 'nowrap',
     },
     icon: {
       display: 'flex',
       alignItems: 'center',
     },
-    iconWithLabel: {
-      marginRight: theme.spacing(1),
-    },
+    iconWithLabel: {},
     iconWithLabelFullWidth: {
       position: 'absolute',
       top: 0,
-      left: theme.spacing(1.5),
+
       height: '100%',
       display: 'flex',
       alignItems: 'center',
+    },
+    iconAlignStart: {
+      '&$buttonWithIconAndLabel': {
+        paddingLeft: theme.spacing(1),
+      },
+      '& $iconWithLabel': {
+        marginRight: theme.spacing(1),
+      },
+      '& $iconWithLabelFullWidth': {
+        left: theme.spacing(1),
+      },
+    },
+    iconAlignEnd: {
+      '&$buttonWithIconAndLabel': {
+        paddingRight: theme.spacing(1),
+      },
+      '& $iconWithLabel': {
+        marginLeft: theme.spacing(1),
+      },
+      '& $iconWithLabelFullWidth': {
+        right: theme.spacing(1),
+      },
     },
     default: {
       backgroundColor: theme.button.background,
@@ -67,9 +85,8 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.primary.dark,
       },
       '&:disabled, &:disabled:hover': {
-        backgroundColor: theme.palette.primary.main,
-        color: theme.palette.primary.contrastText,
-        opacity: 0.5,
+        backgroundColor: theme.button.backgroundDisabled,
+        color: theme.button.foregroundDisabled,
         cursor: 'not-allowed',
       },
     },
@@ -81,9 +98,8 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.error.dark,
       },
       '&:disabled, &:disabled:hover': {
-        backgroundColor: theme.palette.error.main,
-        color: theme.palette.error.contrastText,
-        opacity: 0.5,
+        backgroundColor: theme.button.backgroundDisabled,
+        color: theme.button.foregroundDisabled,
         cursor: 'not-allowed',
       },
     },
@@ -95,9 +111,8 @@ const styles = (theme: Theme) =>
         backgroundColor: theme.palette.progress.dark,
       },
       '&:disabled, &:disabled:hover': {
-        backgroundColor: theme.palette.progress.main,
-        color: theme.palette.progress.contrastText,
-        opacity: 0.5,
+        backgroundColor: theme.button.backgroundDisabled,
+        color: theme.button.foregroundDisabled,
         cursor: 'not-allowed',
       },
     },
@@ -112,9 +127,8 @@ const styles = (theme: Theme) =>
         boxShadow: 'none',
       },
       '&:disabled, &:disabled:hover': {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-        color: 'rgba(255, 255, 255, 1)',
-        opacity: 0.5,
+        backgroundColor: theme.button.backgroundDisabled,
+        color: theme.button.foregroundDisabled,
         cursor: 'not-allowed',
       },
     },

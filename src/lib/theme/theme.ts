@@ -148,6 +148,8 @@ export const light = createTheme({
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
+    backgroundDisabled: '#9e9e9e',
+    foregroundDisabled: 'rgba(0, 0, 0, 0.38)',
   },
   input: {
     background: 'rgba(227, 227, 227, 0.4)',
@@ -229,6 +231,8 @@ export const lightGrey = createTheme({
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
+    backgroundDisabled: '#9e9e9e',
+    foregroundDisabled: 'rgba(0, 0, 0, 0.38)',
   },
   input: {
     background: 'rgba(227, 227, 227, 0.4)',
@@ -310,6 +314,8 @@ export const grey = createTheme({
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
+    backgroundDisabled: '#9e9e9e',
+    foregroundDisabled: 'rgba(0, 0, 0, 0.38)',
   },
   input: {
     background: colors.white,
@@ -391,6 +397,8 @@ export const dark = createTheme({
     border: colors.white,
     backgroundSelected: colors.white,
     fabLabel: colors.white,
+    backgroundDisabled: '#9e9e9e',
+    foregroundDisabled: 'rgba(0, 0, 0, 0.38)',
   },
   input: {
     background: 'rgba(255, 255, 255, 0.15)',
