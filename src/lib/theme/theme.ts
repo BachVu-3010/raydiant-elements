@@ -8,6 +8,7 @@ const colors = {
   skyBlue: '#009bd2',
   forestGreen: '#006d5d',
   navy: '#003670',
+  darkNavy: '#00588b',
   yellow: '#edde4f',
 };
 
@@ -142,7 +143,7 @@ export const light = createTheme({
     underline: colors.navy,
   },
   button: {
-    background: 'transparent',
+    background: colors.white,
     foreground: colors.navy,
     foregroundMuted: 'rgba(0, 0, 0, 0.2)',
     border: colors.navy,
@@ -225,7 +226,7 @@ export const lightGrey = createTheme({
     underline: colors.navy,
   },
   button: {
-    background: 'transparent',
+    background: colors.lightGrey,
     foreground: colors.navy,
     foregroundMuted: 'rgba(0, 0, 0, 0.2)',
     border: colors.navy,
@@ -308,7 +309,7 @@ export const grey = createTheme({
     underline: colors.skyBlue,
   },
   button: {
-    background: 'transparent',
+    background: colors.grey,
     foreground: colors.navy,
     foregroundMuted: 'rgba(0, 0, 0, 0.2)',
     border: colors.navy,
@@ -375,7 +376,7 @@ export const dark = createTheme({
       headingSecondary: colors.white,
     },
     background: {
-      default: '#00588b',
+      default: colors.darkNavy,
       gradient: 'linear-gradient(178deg, #3d3d4e, #20202a);',
       inset: '#171828',
       paper: colors.white,
@@ -391,7 +392,7 @@ export const dark = createTheme({
     underline: colors.skyBlue,
   },
   button: {
-    background: 'transparent',
+    background: colors.darkNavy,
     foreground: colors.white,
     foregroundMuted: colors.white,
     border: colors.white,
