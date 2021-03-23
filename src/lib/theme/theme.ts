@@ -68,7 +68,7 @@ const common = {
     },
     error: {
       main: '#b00020',
-      dark: '#e54734',
+      dark: '#9c001c',
       contrastText: colors.white,
     },
     progress: {
