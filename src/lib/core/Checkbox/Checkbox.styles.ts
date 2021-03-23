@@ -31,19 +31,31 @@ export default makeStyles((theme: Theme) =>
 
     round: {
       borderRadius: 100,
+      boxShadow: theme.shadows[3],
+
+      '& $checkbox': {
+        borderRadius: 100,
+        border: `2px solid #ffffff`,
+        boxShadow:
+          'inset 0px 3px 3px -2px rgba(0,0,0,0.2),' +
+          'inset 0px 3px 4px 0px rgba(0,0,0,0.14)',
+      },
 
       '&:hover $checkbox': {
-        boxShadow: `inset 0px 0px 0px 2px #ffffff`,
-      },
-      '&:hover $checkbox$checked': {
-        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.dark}`,
+        boxShadow:
+          'inset 0px 3px 3px -2px rgba(0,0,0,0.2),' +
+          'inset 0px 3px 4px 0px rgba(0,0,0,0.14),' +
+          'inset 0px 1px 8px 0px rgba(0,0,0,0.12)',
       },
 
-      '&:hover $checkbox$disabled': {
-        boxShadow: `inset 0px 0px 0px 2px #f6f6f6`,
+      '& $checkbox$checked': {
+        background: theme.palette.progress.main,
+        border: 'none',
+        boxShadow: 'none',
       },
-      '&:hover $checkbox$disabled$checked': {
-        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
+
+      '&:hover $checkbox$checked': {
+        boxShadow: 'none',
       },
     },
 
@@ -98,26 +110,15 @@ export default makeStyles((theme: Theme) =>
       pointerEvents: 'none',
       borderRadius: theme.borderRadius.xs,
       background: 'transparent',
-      boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.border}`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
       cursor: 'pointer',
-
-      '$round &': {
-        borderRadius: 100,
-        boxShadow: `inset 0px 0px 0px 2px #fff`,
-      },
     },
 
     checked: {
       background: theme.checkbox.background,
       boxShadow: 'none',
-
-      '$round &': {
-        background: theme.palette.progress.main,
-        boxShadow: `inset 0px 0px 0px 2px ${theme.palette.progress.main}`,
-      },
 
       '&$indeterminate': {
         background: theme.checkbox.foreground,
