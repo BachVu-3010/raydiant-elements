@@ -16,6 +16,8 @@ interface ButtonProps extends WithStyles<typeof styles> {
   iconAlignment?: 'start' | 'end';
   /** The button's color */
   color?: 'default' | 'primary' | 'progress' | 'destructive' | 'light';
+  /** The size of the button */
+  size?: 'small' | 'default';
   /** Set to true to disable the button */
   disabled?: boolean;
   /** Set to true to make the button expand to it's container */
@@ -39,6 +41,7 @@ export const Button: React.SFC<ButtonProps> = (
     icon,
     iconAlignment = 'end',
     color = 'default',
+    size = 'default',
     hideBorder = false,
     disabled = false,
     type = 'button',
@@ -73,7 +76,7 @@ export const Button: React.SFC<ButtonProps> = (
   return (
     <MUIButton
       ref={ref}
-      variant={color === 'default' ? 'text' : 'contained'}
+      variant="contained"
       disabled={disabled}
       type={type}
       fullWidth={fullWidth}
@@ -93,6 +96,7 @@ export const Button: React.SFC<ButtonProps> = (
           color === 'destructive' && classes.destructive,
           color === 'progress' && classes.progress,
           color === 'light' && classes.light,
+          size === 'small' && classes.small,
           className,
         ),
         label: classes.label,

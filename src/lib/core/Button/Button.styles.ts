@@ -12,17 +12,23 @@ const styles = (theme: Theme) =>
       borderRadius: theme.borderRadius.sm,
       border: '1px solid transparent',
       flexShrink: 0,
+      boxShadow: theme.shadows[1],
     },
+
     buttonFullWidth: {
       width: '100%',
       flexShrink: 1,
+      paddingLeft: theme.spacing(1),
     },
+
     buttonOnlyIcon: {
       minWidth: 0,
       paddingLeft: theme.spacing(2),
       paddingRight: theme.spacing(2),
     },
+
     buttonWithIconAndLabel: {},
+
     label: {
       fontWeight: 400,
       textTransform: 'none',
@@ -30,11 +36,14 @@ const styles = (theme: Theme) =>
       fontSize: theme.fontSizes.xs,
       whiteSpace: 'nowrap',
     },
+
     icon: {
       display: 'flex',
       alignItems: 'center',
     },
+
     iconWithLabel: {},
+
     iconWithLabelFullWidth: {
       position: 'absolute',
       top: 0,
@@ -43,6 +52,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
     },
+
     iconAlignStart: {
       '&$buttonWithIconAndLabel': {
         paddingLeft: theme.spacing(1),
@@ -54,6 +64,7 @@ const styles = (theme: Theme) =>
         left: theme.spacing(1),
       },
     },
+
     iconAlignEnd: {
       '&$buttonWithIconAndLabel': {
         paddingRight: theme.spacing(1),
@@ -62,9 +73,10 @@ const styles = (theme: Theme) =>
         marginLeft: theme.spacing(1),
       },
       '& $iconWithLabelFullWidth': {
-        right: theme.spacing(1),
+        right: theme.spacing(0.5),
       },
     },
+
     default: {
       backgroundColor: theme.button.background,
       color: theme.button.foreground,
@@ -77,6 +89,7 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+
     primary: {
       backgroundColor: theme.palette.primary.main,
       color: theme.palette.primary.contrastText,
@@ -90,6 +103,7 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+
     destructive: {
       backgroundColor: theme.palette.error.main,
       color: theme.palette.error.contrastText,
@@ -103,6 +117,7 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+
     progress: {
       backgroundColor: theme.palette.progress.main,
       color: theme.palette.progress.contrastText,
@@ -116,6 +131,7 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+
     light: {
       backgroundColor: 'rgba(255, 255, 255, 0)',
       color: 'rgba(255, 255, 255, 1)',
@@ -132,6 +148,7 @@ const styles = (theme: Theme) =>
         cursor: 'not-allowed',
       },
     },
+
     hideBorder: {
       border: 0,
 
@@ -141,6 +158,10 @@ const styles = (theme: Theme) =>
       '&:disabled, &:disabled:hover': {
         border: 0,
       },
+    },
+
+    small: {
+      height: 32,
     },
   });
 
