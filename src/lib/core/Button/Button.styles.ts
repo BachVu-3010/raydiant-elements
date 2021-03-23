@@ -19,6 +19,7 @@ const styles = (theme: Theme) =>
       width: '100%',
       flexShrink: 1,
       paddingLeft: theme.spacing(1),
+      paddingRight: theme.spacing(1),
     },
 
     buttonOnlyIcon: {
