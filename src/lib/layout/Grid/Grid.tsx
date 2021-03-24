@@ -305,11 +305,14 @@ export const Grid: React.FunctionComponent<GridProps> = ({
       window.addEventListener('resize', updateWidthsDebounced);
       window.addEventListener('orientationchange', updateWidthsDebounced);
 
-      updateWidths();
+      // Using requestAnimationFrame fixes a bug where navigating back to the Library after editing
+      // calculates layout using a grid width that is larger than it really is.
+      const raf = requestAnimationFrame(updateWidths);
 
       return () => {
         window.removeEventListener('resize', updateWidthsDebounced);
         window.removeEventListener('orientationchange', updateWidthsDebounced);
+        cancelAnimationFrame(raf);
       };
     },
     [childrenCount === 0],

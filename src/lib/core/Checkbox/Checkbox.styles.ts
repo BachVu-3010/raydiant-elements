@@ -49,7 +49,7 @@ export default makeStyles((theme: Theme) =>
       },
 
       '& $checkbox$checked': {
-        background: theme.palette.progress.main,
+        background: '#000000',
         border: 'none',
         boxShadow: 'none',
       },
