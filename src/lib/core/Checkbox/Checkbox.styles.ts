@@ -110,6 +110,7 @@ export default makeStyles((theme: Theme) =>
       pointerEvents: 'none',
       borderRadius: theme.borderRadius.xs,
       background: 'transparent',
+      boxShadow: `inset 0px 0px 0px 2px ${theme.checkbox.border}`,
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
