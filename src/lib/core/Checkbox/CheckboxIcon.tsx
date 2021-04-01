@@ -20,10 +20,14 @@ const CheckIcon: React.FC<CheckIconProps> = ({
   });
 
   if (indeterminate) {
-    if (round) return <RoundIndeterminateCheck className={className} />;
-    return <IndeterminateCheck className={className} />;
+    if (round) {
+      return (
+        <RoundIndeterminateCheck className={className} fontSize="inherit" />
+      );
+    }
+    return <IndeterminateCheck className={className} fontSize="inherit" />;
   }
-  return <Check className={className} />;
+  return <Check className={className} fontSize="inherit" />;
 };
 
 export default CheckIcon;

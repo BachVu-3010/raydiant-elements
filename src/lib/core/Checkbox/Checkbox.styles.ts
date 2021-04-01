@@ -7,6 +7,7 @@ export default makeStyles((theme: Theme) =>
       position: 'relative',
       width: 18,
       height: 18,
+      fontSize: theme.fontSizes.md,
       flexShrink: 0,
       background: 'transparent',
 
@@ -57,11 +58,6 @@ export default makeStyles((theme: Theme) =>
       '&:hover $checkbox$checked': {
         boxShadow: 'none',
       },
-    },
-
-    small: {
-      width: 14,
-      height: 14,
     },
 
     labelContainer: {

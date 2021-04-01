@@ -6,7 +6,6 @@ export default makeStyles((theme: Theme) =>
     indeterminate: {},
 
     icon: {
-      fontSize: theme.fontSizes.md,
       color: theme.checkbox.foreground,
 
       '$round &': {
@@ -15,8 +14,8 @@ export default makeStyles((theme: Theme) =>
 
       '&$indeterminate': {
         color: theme.checkbox.background,
-        width: 24,
-        height: 24,
+        width: '100%',
+        height: '100%',
       },
     },
   }),

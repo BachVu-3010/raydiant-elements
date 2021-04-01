@@ -11,7 +11,6 @@ interface CheckboxProps {
   indeterminate?: boolean;
   round?: boolean;
   disabled?: boolean;
-  small?: boolean;
   onChange?: (checked: boolean) => void;
   onClick?: (e: React.MouseEvent<any>) => void;
   onCheckboxClick?: (e: React.MouseEvent<any>) => void;
@@ -26,7 +25,6 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   label,
   round,
   disabled,
-  small,
   onClick,
   onCheckboxClick,
   onChange,
@@ -37,12 +35,11 @@ export const Checkbox: React.SFC<CheckboxProps> = ({
   const checkbox = (
     <MUIPaper
       className={cn(
-        !label && className,
         classes.inputContainer,
         disabled && classes.disabled,
         round && classes.round,
-        small && classes.small,
         indeterminate && classes.indeterminate,
+        !label && className,
       )}
       elevation={0}
     >
