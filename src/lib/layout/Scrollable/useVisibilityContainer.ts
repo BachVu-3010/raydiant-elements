@@ -91,13 +91,15 @@ const useVisibilityContainer = (opts: VisibilityContainerOptions = {}) => {
     window.addEventListener('orientation', checkVisibility, false);
 
     return () => {
-      containerRef.current.removeEventListener(
-        'scroll',
-        checkVisibility,
-        false,
-      );
-      window.removeEventListener('resize', checkVisibility, false);
-      window.removeEventListener('orientation', checkVisibility, false);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener(
+          'scroll',
+          checkVisibility,
+          false,
+        );
+        window.removeEventListener('resize', checkVisibility, false);
+        window.removeEventListener('orientation', checkVisibility, false);
+      }
     };
   }, []);
 
