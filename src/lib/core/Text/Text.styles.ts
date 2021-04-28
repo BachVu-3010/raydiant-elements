@@ -21,6 +21,14 @@ const styles = (theme: Theme) =>
         borderBottom: `1px dashed ${theme.input.focusedBorder}`,
       },
     },
+
+    error: {
+      borderBottomColor: theme.palette.error.main,
+
+      '&:focus': {
+        borderBottom: `1px dashed ${theme.palette.error.dark}`,
+      },
+    },
   });
 
 export default styles;
