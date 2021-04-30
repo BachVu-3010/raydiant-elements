@@ -122,8 +122,7 @@ const PresentationPreview = ({
               <div>
                 <div className={classes.appName}>{appVersion.name}</div>
                 <div className={classes.appDescription}>
-                  {/* This is the reason why we can't have a presentation property with the name 'description' */}
-                  {appVersion.strings.description}
+                  {appVersion.description || appVersion.strings.description}
                 </div>
               </div>
             )}

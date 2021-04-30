@@ -13,6 +13,7 @@ test('Should set test ids', () => {
     currentAppVersion: {
       id: 'id1',
       name: 'name',
+      description: 'description',
       presentationProperties: [],
       thumbnailUrl:
         'https://apps-repository.staging.getmira.com/3390b318-e587-42ae-8dac-6bcb2c1c36be/1.3.3/thumbnail.svg',

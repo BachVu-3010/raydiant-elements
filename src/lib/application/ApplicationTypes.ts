@@ -86,6 +86,7 @@ export interface Strings {
 export interface ApplicationVersion {
   id: string;
   name: string;
+  description: string;
   presentationProperties: PresentationProperty[];
   strings: Strings;
   thumbnailUrl?: string;

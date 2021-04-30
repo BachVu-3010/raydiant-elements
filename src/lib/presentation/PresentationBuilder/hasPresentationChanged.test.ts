@@ -16,6 +16,7 @@ const defaultProps = (presentation = {}, appVersion = {}) => ({
   appVersion: {
     id: 'b',
     name: 'appVersion',
+    description: 'description',
     presentationProperties: [] as A.PresentationProperty[],
     strings: {},
     ...appVersion,

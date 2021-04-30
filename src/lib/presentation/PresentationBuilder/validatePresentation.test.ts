@@ -28,6 +28,7 @@ const defaultProps = () => ({
   appVersion: {
     id: 'b',
     name: 'application',
+    description: 'description',
     thumbnailUrl: 'thumb',
     iconUrl: 'icon',
     configurableDuration: true,
