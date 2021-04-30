@@ -160,7 +160,10 @@ export const Input: React.FunctionComponent<InputProps> = (
       typeof icon === 'string' ? <Icon icon={icon as IconOptions} /> : icon;
 
     return (
-      <div className={cn(classes.root, multiline && classes.multiline)}>
+      <div
+        className={cn(classes.root, multiline && classes.multiline)}
+        style={{ minHeight: multiline ? multilineHeight : 'none' }}
+      >
         {inputEl}
         {iconEl && <div className={classes.icon}>{iconEl}</div>}
       </div>
