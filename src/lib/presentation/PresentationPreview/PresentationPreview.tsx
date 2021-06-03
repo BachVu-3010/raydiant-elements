@@ -8,10 +8,10 @@ import { PreviewMode } from '../PresentationTypes';
 import useStyles, { previewBorderWidth } from './PresentationPreview.styles';
 
 interface PresentationPreviewProps {
-  previewMode: string;
+  previewMode?: string;
   appVersion?: ApplicationVersion;
   showBorder?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   onPreviewModeChange?: (previewMode: PreviewMode) => any;
 }
 
