@@ -8,6 +8,7 @@ const styles = (theme: Theme) =>
       display: 'flex',
       flexDirection: 'column',
       width: '100%',
+      minHeight: 0, // Fixes an issue where Scrollabe inside Column cause Column to overlow.
       ...marginBetweenChildrenVertical(theme.spacing(1)),
       ['& > *']: {
         flexShrink: 0,

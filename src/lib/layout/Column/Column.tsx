@@ -10,19 +10,15 @@ interface ColumnProps extends WithStyles<typeof styles> {
   inline?: boolean;
   doubleMargin?: boolean;
   flex?: number;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler;
 }
 
-export const Column: React.SFC<ColumnProps> = ({
-  className,
-  inline,
-  doubleMargin,
-  flex,
-  classes,
-  children,
-  onClick,
-}) => (
+export const Column: React.SFC<ColumnProps> = (
+  { className, inline, doubleMargin, flex, classes, children, onClick },
+  ref,
+) => (
   <div
+    ref={ref}
     className={cn(
       classes.root,
       inline && classes.inline,
@@ -37,4 +33,4 @@ export const Column: React.SFC<ColumnProps> = ({
   </div>
 );
 
-export default withStyles(styles)(Column);
+export default withStyles(styles)(React.forwardRef(Column));

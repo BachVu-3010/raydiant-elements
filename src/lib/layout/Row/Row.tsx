@@ -11,21 +11,25 @@ interface RowProps extends WithStyles<typeof styles> {
   center?: boolean;
   halfMargin?: boolean;
   doubleMargin?: boolean;
-  onClick?: () => void;
+  onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
-export const Row: React.SFC<RowProps> = ({
-  className,
-  inline,
-  halfMargin,
-  doubleMargin,
-  center,
-  classes,
-  children,
-  onClick,
-}) => {
+export const Row: React.SFC<RowProps> = (
+  {
+    className,
+    inline,
+    halfMargin,
+    doubleMargin,
+    center,
+    classes,
+    children,
+    onClick,
+  },
+  ref,
+) => {
   return (
     <div
+      ref={ref}
       className={cn(
         classes.root,
         inline && classes.inline,
@@ -42,4 +46,4 @@ export const Row: React.SFC<RowProps> = ({
   );
 };
 
-export default withStyles(styles)(Row);
+export default withStyles(styles)(React.forwardRef(Row));
