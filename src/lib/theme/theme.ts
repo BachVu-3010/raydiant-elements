@@ -71,6 +71,11 @@ const common = {
       dark: '#9c001c',
       contrastText: colors.white,
     },
+    success: {
+      main: '#28d972',
+      dark: '#1FAD5A',
+      contrastText: colors.white,
+    },
     progress: {
       main: colors.limeGreen,
       dark: colors.limeGreen,
@@ -82,7 +87,7 @@ const common = {
       contrastText: colors.white,
     },
     action: {
-      selected: 'rgba(0, 0, 0, 0.07)',
+      selected: '#e7e7e7',
       dropping: colors.skyBlue,
     },
   },
