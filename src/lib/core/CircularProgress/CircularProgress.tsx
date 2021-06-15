@@ -8,7 +8,15 @@ interface CircularProgressProps extends WithStyles<typeof styles> {
   min?: number;
   max?: number;
   size?: number;
-  color?: 'default' | 'light' | 'inherit';
+  color?:
+    | 'default'
+    | 'light'
+    | 'inherit'
+    | 'primary'
+    | 'error'
+    | 'success'
+    | 'muted';
+  className?: string;
 }
 
 export const CircularProgress: React.SFC<CircularProgressProps> = ({
