@@ -28,8 +28,14 @@ export default makeStyles((theme: Theme) =>
 
     header: {
       display: 'flex',
-      flexDirection: 'row',
-      justifyContent: 'flex-end',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+
+    title: {
+      // Align with close button.
+      paddingLeft: theme.spacing(4),
+      paddingTop: theme.spacing(0.75),
     },
 
     close: {

@@ -8,19 +8,25 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { AppContext } from '../App';
 import withThemeSelector from '../withThemeSelector';
+import Text from '../Text';
 import PaperModalBody from './PaperModalBody';
 import PaperModalHeader from './PaperModalHeader';
+import PaperModalFooter from './PaperModalFooter';
 import useStyles from './PaperModal.styles';
 
 export interface PaperModalProps extends MUIPaperProps {
   className?: string;
+  title?: string;
+  showClose?: boolean;
   open?: boolean;
   onClose?: () => void;
 }
 
 export const PaperModal: React.SFC<PaperModalProps> = ({
   elevation = 3,
+  title,
   open,
+  showClose = true,
   className,
   children,
   onClose,
@@ -54,10 +60,17 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
         {...paperModalProps}
       >
         <div className={classes.header}>
-          <button className={classes.close} onClick={closeModal}>
-            <CloseIcon />
-            Close
-          </button>
+          {title && (
+            <Text small muted ellipsis className={classes.title}>
+              {title}
+            </Text>
+          )}
+          {showClose && (
+            <button className={classes.close} onClick={closeModal}>
+              <CloseIcon />
+              Close
+            </button>
+          )}
         </div>
         {children}
       </MUIPaperModal>
@@ -69,4 +82,5 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
 export default Object.assign(withThemeSelector(PaperModal), {
   Header: PaperModalHeader,
   Body: PaperModalBody,
+  Footer: PaperModalFooter,
 });
