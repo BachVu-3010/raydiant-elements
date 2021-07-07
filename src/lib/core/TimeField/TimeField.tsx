@@ -37,24 +37,6 @@ export const TimeField: React.SFC<TimeFieldProps> = ({
     error={error}
     testId={testId}
   />
-
-  // <FormControl fullWidth={fullWidth} error={error}>
-  //     <InputLabel error={error} disabled={disabled}>
-  //       {label}
-  //     </InputLabel>
-  //     <Input
-  //       fullWidth
-  //       type="time"
-  //       value={value}
-  //       onChange={e => onChange(e.target.value)}
-  //       onBlur={onBlur}
-  //       inputProps={{
-  //         ...testAttr(testId),
-  //       }}
-  //       disabled={disabled}
-  //     />
-  //   {helperText && <FormHelperText>{helperText}</FormHelperText>}
-  // </FormControl>
 );
 
 export default TimeField;
