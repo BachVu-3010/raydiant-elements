@@ -28,6 +28,9 @@ interface DateFieldProps {
   testId?: string;
 }
 
+const valueToMoment = (value: string | null) =>
+  value === null ? moment() : moment(value);
+
 export const DateField = ({
   value,
   onChange,
@@ -43,14 +46,11 @@ export const DateField = ({
 }: DateFieldProps) => {
   const classes = useStyles();
 
-  const valueToMoment = React.useCallback(
-    () => (value === null ? moment() : moment(value)),
-    [],
-  );
-
   // State
 
-  const [date, setDate] = React.useState<moment.Moment>(valueToMoment);
+  const [date, setDate] = React.useState<moment.Moment>(() =>
+    valueToMoment(value),
+  );
   const [open, setOpen] = React.useState(false);
 
   // Refs
@@ -70,10 +70,10 @@ export const DateField = ({
 
   const handleClose = React.useCallback(
     () => {
-      setDate(valueToMoment);
+      setDate(valueToMoment(value));
       setOpen(false);
     },
-    [valueToMoment],
+    [value],
   );
 
   const handleDone = React.useCallback(
@@ -89,9 +89,9 @@ export const DateField = ({
   // Update state when value changes.
   React.useEffect(
     () => {
-      setDate(valueToMoment);
+      setDate(valueToMoment(value));
     },
-    [valueToMoment],
+    [value],
   );
 
   return (
