@@ -9,6 +9,7 @@ import * as ReactDOM from 'react-dom';
 import { AppContext } from '../App';
 import withThemeSelector from '../withThemeSelector';
 import Text from '../Text';
+import Spacer from '../../layout/Spacer';
 import PaperModalBody from './PaperModalBody';
 import PaperModalHeader from './PaperModalHeader';
 import PaperModalFooter from './PaperModalFooter';
@@ -65,6 +66,7 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
               {title}
             </Text>
           )}
+          <Spacer />
           {showClose && (
             <button className={classes.close} onClick={closeModal}>
               <CloseIcon />

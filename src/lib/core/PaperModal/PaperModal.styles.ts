@@ -36,6 +36,10 @@ export default makeStyles((theme: Theme) =>
       // Align with close button.
       paddingLeft: theme.spacing(4),
       paddingTop: theme.spacing(0.75),
+
+      [theme.breakpoints.down('xs')]: {
+        paddingLeft: theme.spacing(1),
+      },
     },
 
     close: {
