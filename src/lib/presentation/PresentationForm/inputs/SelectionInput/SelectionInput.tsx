@@ -209,6 +209,7 @@ class SelectionInput extends React.Component<
           error={error}
           disabled={disabled}
           searchable={searchable}
+          selectable={selectable}
           onChange={onChange}
           sortable={sortable}
         >

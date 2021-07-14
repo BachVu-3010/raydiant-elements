@@ -14,6 +14,8 @@ const styles = (theme: Theme) =>
       minHeight: 104,
       boxSizing: 'border-box',
       padding: theme.spacing(1),
+      display: 'flex',
+      flexDirection: 'column',
       ...scrollable(),
     },
     disabled: {

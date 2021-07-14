@@ -10,6 +10,7 @@ export interface MultiSelectFieldOptionProps extends WithStyles<typeof styles> {
   label: string;
   rightLabel?: string;
   // These props are injected by the parent MultiSelectField.
+  selectable?: boolean;
   disabled?: boolean;
   checked?: boolean;
   selected?: boolean;
@@ -21,6 +22,7 @@ const MultiSelectFieldOption: React.SFC<MultiSelectFieldOptionProps> = ({
   value,
   label,
   rightLabel,
+  selectable = false,
   disabled = false,
   checked = false,
   selected = false,
@@ -45,13 +47,15 @@ const MultiSelectFieldOption: React.SFC<MultiSelectFieldOptionProps> = ({
       disabled={disabled}
       checked={checked}
       label={
-        <span className={cn(classes.label, { [classes.selected]: selected })}>
-          {// fix label highlighted state
-          // The width is 0 when no label and rightLabel
-          label ? label : <>&nbsp;</>}
-          {rightLabel && (
-            <span className={classes.rightLabel}>{rightLabel}</span>
-          )}
+        <span
+          className={cn(classes.label, { 
+            [classes.selected]: selected,
+            [classes.labelButton]: checked && selectable && !disabled,
+          })}
+        >
+          {/* fix label highlighted state, the height is 0 when no label and rightLabel */}
+          <span className={classes.leftLabel}>{label || <>&nbsp;</>}</span> 
+          {rightLabel && <span className={classes.rightLabel}>{rightLabel}</span>}
         </span>
       }
       onCheckboxClick={

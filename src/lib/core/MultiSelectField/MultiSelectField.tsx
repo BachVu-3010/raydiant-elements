@@ -44,6 +44,7 @@ interface MultiSelectFieldProps extends WithStyles<typeof styles> {
   value: string[];
   disabled?: boolean;
   searchable?: boolean;
+  selectable?: boolean;
   error?: boolean;
   sortable?: MultiSelectFieldSortOption[];
   helperText?: React.ReactNode;
@@ -167,6 +168,7 @@ export class MultiSelectField extends React.Component<
       label,
       value,
       onChange,
+      selectable,
       disabled,
       searchable,
       helperText,
@@ -216,6 +218,7 @@ export class MultiSelectField extends React.Component<
               const optionValue = child.props.value;
               return React.cloneElement(child, {
                 disabled,
+                selectable,
                 checked: isOptionSelected,
                 onClick: () => {
                   if (isOptionSelected) {
