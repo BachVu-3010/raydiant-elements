@@ -6,6 +6,7 @@ import useStyles from './ActionBarAction.styles';
 export interface ActionBarActionProps {
   className?: string;
   color?: 'default' | 'success' | 'primary' | 'error';
+  variant?: 'default' | 'vertical';
   icon?: React.ReactNode;
   label?: React.ReactNode;
   fullWidth?: boolean;
@@ -15,7 +16,17 @@ export interface ActionBarActionProps {
 }
 
 export const ActionBarAction: React.SFC<ActionBarActionProps> = (
-  { className, color, icon, label, fullWidth, selected, disabled, onClick },
+  {
+    className,
+    color,
+    variant,
+    icon,
+    label,
+    fullWidth,
+    selected,
+    disabled,
+    onClick,
+  },
   ref,
 ) => {
   const classes = useStyles();
@@ -32,6 +43,7 @@ export const ActionBarAction: React.SFC<ActionBarActionProps> = (
         classes.root,
         disabled && classes.disabled,
         fullWidth && classes.fullWidth,
+        variant === 'vertical' && classes.vertical,
         className,
       )}
       disabled={disabled}

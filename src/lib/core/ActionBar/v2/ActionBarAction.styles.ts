@@ -16,6 +16,15 @@ export default makeStyles((theme: Theme) =>
       },
     },
 
+    vertical: {
+      flexDirection: 'column',
+
+      '& $label': {
+        marginLeft: 0,
+        marginTop: theme.spacing(1),
+      },
+    },
+
     fullWidth: {
       width: '100%',
     },

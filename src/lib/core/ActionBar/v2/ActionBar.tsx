@@ -8,12 +8,14 @@ import ActionBarInput from './ActionBarInput';
 
 interface ActionBarProps {
   className?: string;
-  variant?: '' | 'footer';
+  variant?: 'default' | 'footer' | 'floating' | 'floating-actions';
+  size?: 'default' | 'large';
 }
 
 export const ActionBar: React.FunctionComponent<ActionBarProps> = ({
   className,
-  variant = '',
+  variant = 'default',
+  size = 'default',
   children,
 }) => {
   const classes = useStyles();
@@ -22,6 +24,8 @@ export const ActionBar: React.FunctionComponent<ActionBarProps> = ({
       className={cn(
         classes.root,
         variant === 'footer' && classes.footer,
+        variant === 'floating' && classes.floating,
+        size === 'large' && classes.large,
         className,
       )}
     >

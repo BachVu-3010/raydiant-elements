@@ -36,5 +36,18 @@ export default makeStyles((theme: Theme) =>
       justifyContent: 'space-around',
       padding: theme.spacing(1, 2),
     },
+
+    floating: {
+      height: 64,
+      border: 0,
+      justifyContent: 'space-around',
+      boxShadow: theme.shadows[2],
+    },
+
+    large: {
+      height: 104,
+      borderRadius: theme.borderRadius.lg,
+      padding: theme.spacing(0.5, 4),
+    },
   }),
 );
