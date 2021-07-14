@@ -32,12 +32,14 @@ type RenderFunction = ((
 
 export interface ScrollableProps extends WithStyles<typeof styles> {
   className?: string;
+  shadowClassName?: string;
   buffer?: number;
   children?: React.ReactNode | RenderFunction;
 }
 
 export const Scrollable: React.FunctionComponent<ScrollableProps> = ({
   className,
+  shadowClassName,
   buffer,
   children,
   classes,
@@ -57,13 +59,21 @@ export const Scrollable: React.FunctionComponent<ScrollableProps> = ({
       }}
     >
       <div className={cn(classes.root, className)}>
-        <ScrollableShadow scrollRef={containerRef} position="top" />
+        <ScrollableShadow
+          scrollRef={containerRef}
+          position="top"
+          className={shadowClassName}
+        />
         <div ref={containerRef} className={classes.scroll}>
           {typeof children === 'function'
             ? (children as RenderFunction)(containerRef)
             : children}
         </div>
-        <ScrollableShadow scrollRef={containerRef} position="bottom" />
+        <ScrollableShadow
+          scrollRef={containerRef}
+          position="bottom"
+          className={shadowClassName}
+        />
       </div>
     </ScrollableContext.Provider>
   );

@@ -42,11 +42,12 @@ const styles = (theme: Theme) =>
 export interface ScrollableShadowProps extends WithStyles<typeof styles> {
   scrollRef: React.RefObject<HTMLElement>;
   position: 'top' | 'bottom';
+  className?: string;
 }
 
 export const ScrollableShadow: React.FunctionComponent<
   ScrollableShadowProps
-> = ({ scrollRef, position, classes }) => {
+> = ({ scrollRef, position, className, classes }) => {
   const [canScroll, setCanScroll] = React.useState(false);
   const checkScroll = () => {
     if (!scrollRef.current) return;
@@ -81,6 +82,7 @@ export const ScrollableShadow: React.FunctionComponent<
         classes.root,
         classes[position],
         canScroll && classes.slideIn,
+        className,
       )}
     />
   );
