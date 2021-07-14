@@ -154,7 +154,7 @@ export const light = createTheme({
     border: colors.navy,
     backgroundSelected: colors.limeGreen,
     fabLabel: colors.navy,
-    backgroundDisabled: '#9e9e9e',
+    backgroundDisabled: '#cccccc',
     foregroundDisabled: 'rgba(0, 0, 0, 0.38)',
   },
   input: {
