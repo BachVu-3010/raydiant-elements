@@ -13,6 +13,7 @@ import Spacer from '../../layout/Spacer';
 import PaperModalBody from './PaperModalBody';
 import PaperModalHeader from './PaperModalHeader';
 import PaperModalFooter from './PaperModalFooter';
+import PaperModalClose from './PaperModalClose';
 import useStyles from './PaperModal.styles';
 
 export interface PaperModalProps extends MUIPaperProps {
@@ -68,10 +69,10 @@ export const PaperModal: React.SFC<PaperModalProps> = ({
           )}
           <Spacer />
           {showClose && (
-            <button className={classes.close} onClick={closeModal}>
+            <PaperModalClose onClick={closeModal}>
               <CloseIcon />
               Close
-            </button>
+            </PaperModalClose>
           )}
         </div>
         {children}

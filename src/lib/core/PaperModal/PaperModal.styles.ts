@@ -1,6 +1,5 @@
 import { makeStyles, createStyles } from '../../styles';
 import { Theme } from '../../theme';
-import { buttonReset } from '../../mixins';
 
 export default makeStyles((theme: Theme) =>
   createStyles({
@@ -39,34 +38,6 @@ export default makeStyles((theme: Theme) =>
 
       [theme.breakpoints.down('xs')]: {
         paddingLeft: theme.spacing(1),
-      },
-    },
-
-    close: {
-      ...buttonReset(),
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-      fontWeight: 600,
-      lineHeight: 1.11,
-      letterSpacing: 1.42,
-      textTransform: 'uppercase',
-      fontSize: theme.fontSizes.xxs,
-      padding: theme.spacing(0.75, 4),
-      paddingBottom: 0,
-      color: theme.palette.text.secondary,
-      opacity: 0.5,
-
-      '&:hover, &:focus': {
-        opacity: 1,
-      },
-
-      '& svg': {
-        fontSize: 20,
-      },
-
-      [theme.breakpoints.down('xs')]: {
-        padding: theme.spacing(1),
       },
     },
   }),
