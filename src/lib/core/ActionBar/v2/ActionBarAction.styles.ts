@@ -27,6 +27,7 @@ export default makeStyles((theme: Theme) =>
 
     fullWidth: {
       width: '100%',
+      justifyContent: 'center',
     },
 
     disabled: {
@@ -69,6 +70,10 @@ export default makeStyles((theme: Theme) =>
 
     error: {
       color: theme.palette.error.main,
+    },
+
+    primaryText: {
+      color: theme.palette.text.primary,
     },
   }),
 );

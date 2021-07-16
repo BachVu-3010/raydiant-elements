@@ -5,7 +5,7 @@ import useStyles from './ActionBarAction.styles';
 
 export interface ActionBarActionProps {
   className?: string;
-  color?: 'default' | 'success' | 'primary' | 'error';
+  color?: 'default' | 'success' | 'primary' | 'error' | 'primaryText';
   variant?: 'default' | 'vertical';
   icon?: React.ReactNode;
   label?: React.ReactNode;
