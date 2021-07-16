@@ -69,6 +69,7 @@ export interface InputProps {
   /** The test id of the input */
   testId?: string;
   inputProps?: any;
+  className?: string;
 }
 
 export const Input: React.FunctionComponent<InputProps> = (
@@ -96,6 +97,7 @@ export const Input: React.FunctionComponent<InputProps> = (
     onFocus,
     onClick,
     testId,
+    className,
   },
   ref,
 ) => {
@@ -121,6 +123,7 @@ export const Input: React.FunctionComponent<InputProps> = (
     icon && classes.inputWithIcon,
     error && classes.error,
     disabled && classes.disabled,
+    className,
   );
 
   const handleChange = React.useCallback(
